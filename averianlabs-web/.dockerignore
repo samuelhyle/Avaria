@@ -1,0 +1,44 @@
+# Build artefacts
+.next/
+out/
+dist/
+build/
+coverage/
+
+# Dependencies (re-installed inside the image)
+node_modules/
+
+# Tests / dev artefacts
+tests/test-results/
+tests/playwright-report/
+tests/blob-report/
+.playwright/
+.lighthouseci/
+
+# Source control
+.git/
+.gitignore
+.gitattributes
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Env files — baked in at runtime via secrets, never via image layers
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+
+# Misc
+.cache/
+.turbo/
+.eslintcache
+*.tsbuildinfo
