@@ -18,3 +18,10 @@ test-results/
 *.tsbuildinfo
 next-env.d.ts
 .next-verify/
+.netlify/
+.netlify-state.json
+.netlify-deploy/
+.api-demo-backup/
+.studio-demo-backup/
+.routes-demo-backup/
+.next-demo/
