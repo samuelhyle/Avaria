@@ -464,7 +464,14 @@
     },
     "send": "Skicka",
     "stop": "Stoppa",
-    "ageRequired": "Bekräfta först att du är 18+."
+    "ageRequired": "Bekräfta först att du är 18+.",
+    "errorRateLimitTitle": "Ta det lite lugnt",
+    "errorRateLimitBody": "Du skickade flera meddelanden snabbt i rad. Averia är redo om ungefär en minut.",
+    "errorOfflineTitle": "Averia är offline",
+    "errorOfflineBody": "Chatten är inte konfigurerad just nu (MINIMAX_API_KEY saknas eller rate-limit är aktivt).",
+    "errorInvalidTitle": "Kunde inte skickä meddelandet",
+    "errorInvalidBody": "Rensa konversationen och försök igen.",
+    "errorServerBody": "Averia stötte på ett problem på vår sida. Försök igen om en stund."
   },
   "glossary": {
     "title": "Glossary",

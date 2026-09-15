@@ -57,6 +57,8 @@ export interface AveriaChat {
   submit: (text: string) => void
   stop: () => void
   reset: () => void
+  /** Re-send the last user message. Preserves conversation context. */
+  retry: () => void
   /** Mark a proposed action as confirmed or dismissed in the local transcript. */
   resolveAction: (messageId: string, action: ProposedAction, state: ActionResolution) => void
   /** Track thumbs state locally so the UI reflects the choice immediately. */
@@ -170,7 +172,13 @@ export function useAveriaChat({
           })
 
           if (!res.ok) {
-            throw new Error(`Chat failed (${res.status})`)
+            // Try to extract the server-side error code so the UI can show a
+            // specific message (rate-limit vs. config vs. generic).
+            let bodyText = ""
+            try {
+              bodyText = await res.text()
+            } catch {}
+            throw classifyHttpError(res.status, bodyText)
           }
 
           const reader = res.body?.getReader()
@@ -208,7 +216,7 @@ export function useAveriaChat({
           setMessages((prev) =>
             prev.map((m) =>
               m.id === assistantId && m.content === ""
-                ? { ...m, content: "_Averia couldn't respond. Try again._" }
+                ? { ...m, content: placeholderForError(e) }
                 : m,
             ),
           )
@@ -223,6 +231,10 @@ export function useAveriaChat({
           setMessages((prev) =>
             prev.map((m) => (m.id === aid ? { ...m, content: m.content + msg.delta } : m)),
           )
+        } else if (msg.type === "thinking") {
+          // Hook intentionally a no-op — `isLoading` already drives the spinner,
+          // and `toolTrace` (below) shows the actual tool chips. Keep the event
+          // on the wire for parity with server logs.
         } else if (msg.type === "citations") {
           const cur = extrasRef.current.get(aid) ?? {}
           extrasRef.current.set(aid, { ...cur, citations: msg.citations })
@@ -279,6 +291,24 @@ export function useAveriaChat({
     setConversationId(null)
   }, [])
 
+  /**
+   * Re-send the last user message. Preserves the conversation context so
+   * the user doesn't lose their place after a transient failure.
+   */
+  const retry = useCallback(() => {
+    if (isLoading) return
+    const lastUser = [...messages].reverse().find((m) => m.role === "user")
+    if (!lastUser) {
+      reset()
+      return
+    }
+    // Drop the empty assistant placeholder and any partial error state, then
+    // resubmit. The hook is idempotent on submit().
+    setMessages((prev) => prev.filter((m) => !(m.role === "assistant" && m.content === "")))
+    setError(null)
+    submit(lastUser.content)
+  }, [isLoading, messages, reset, submit])
+
   const resolveAction = useCallback(
     (messageId: string, action: ProposedAction, state: ActionResolution) => {
       const cur = extrasRef.current.get(messageId) ?? {}
@@ -316,11 +346,66 @@ export function useAveriaChat({
     submit,
     stop,
     reset,
+    retry,
     resolveAction,
     setFeedback,
   }
 }
 
 type AgentEventWire = import("@/lib/ai/types/events").AgentEvent
+
+/**
+ * Map an HTTP failure to a friendly, user-actionable Error. The caller can
+ * inspect `e.name` to choose between showing "rate limited", "try again", or
+ * "Averia is offline".
+ */
+function classifyHttpError(status: number, body: string): Error {
+  let code = "unknown"
+  try {
+    const parsed = JSON.parse(body) as { code?: string; message?: string }
+    if (parsed?.code) code = parsed.code
+  } catch {
+    // Body wasn't JSON — fall through with code "unknown".
+  }
+  if (status === 429 || code === "rate_limited") {
+    const e = new Error("You're sending messages a bit fast. Please slow down and try again in a minute.")
+    e.name = "rate_limited"
+    return e
+  }
+  if (status === 503 || code === "provider_unavailable") {
+    const e = new Error("Averia is offline right now. Set MINIMAX_API_KEY to enable the chat.")
+    e.name = "provider_unavailable"
+    return e
+  }
+  if (status === 400 || code === "invalid_request") {
+    const e = new Error("That message couldn't be sent. Try clearing the conversation and sending again.")
+    e.name = "invalid_request"
+    return e
+  }
+  if (status >= 500) {
+    const e = new Error("Averia hit a server problem. Please try again in a moment.")
+    e.name = "server_error"
+    return e
+  }
+  const e = new Error(`Chat failed (${status})`)
+  e.name = code
+  return e
+}
+
+/** Italic placeholder shown when the assistant bubble is empty after an error. */
+function placeholderForError(err: Error): string {
+  switch (err.name) {
+    case "rate_limited":
+      return "_Slow down a touch — Averia's rate limit kicked in. Try again in a minute._"
+    case "provider_unavailable":
+      return "_Averia is offline. Check that MINIMAX_API_KEY is configured._"
+    case "invalid_request":
+      return "_That message couldn't be sent. Clear the conversation and try again._"
+    case "server_error":
+      return "_Averia hit a problem on our side. Try again in a moment._"
+    default:
+      return "_Averia didn't respond just now. Try again in a moment._"
+  }
+}
 
 export type { CartItem }

@@ -484,7 +484,14 @@
     },
     "send": "Verzenden",
     "stop": "Stoppen",
-    "ageRequired": "Bevestig eerst dat je 18+ bent."
+    "ageRequired": "Bevestig eerst dat je 18+ bent.",
+    "errorRateLimitTitle": "Even geduld",
+    "errorRateLimitBody": "Je hebt een paar berichten snel achter elkaar gestuurd. Averia is over ongeveer een minuut weer beschikbaar.",
+    "errorOfflineTitle": "Averia is offline",
+    "errorOfflineBody": "De chat is nu niet geconfigureerd (MINIMAX_API_KEY ontbreekt of limiet bereikt).",
+    "errorInvalidTitle": "Bericht kon niet worden verzonden",
+    "errorInvalidBody": "Wis het gesprek en probeer opnieuw.",
+    "errorServerBody": "Averia ondervond een probleem aan onze kant. Probeer het zo opnieuw."
   },
   "community": {
     "signInToPost": "Sign in to post",

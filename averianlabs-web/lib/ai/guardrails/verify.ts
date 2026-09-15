@@ -36,10 +36,27 @@ const MEDICAL_PATTERNS: RegExp[] = [
   /\bfor (preventing|curing|healing)\b/i,
 ]
 
-const SKU_PATTERN = /\b([A-Z]{2,5}-\d{2,4})\b/g
-/** Matches "€39.90", "39,90 €", "EUR 49.00", "$12.50", "$12". */
+/**
+ * Catalog SKU format: 2–6 uppercase letters, optional digits in the prefix,
+ * then a hyphen and 1–4 digits. Examples: `BPC-157`, `BPC157-5`,
+ * `BACW-10`, `GHKCU-50`, `NAD-1000`, `CJC-1`, `MT2-10`.
+ *
+ * Also matches the peptide name part of common name-like codes (e.g. when
+ * the model paraphrases "BPC-157"). We intentionally keep the digit-tail
+ * loose so `CJC-1` (1-digit vials) and `NAD-1000` (4-digit mg) both fit.
+ * Blend SKUs (`BPC-TB-10`) have a second hyphen — matched by BLEND_SKU_PATTERN.
+ */
+const SKU_PATTERN = /\b([A-Z]{2,6}[A-Z0-9]{0,4}-\d{1,4})\b/g
+const BLEND_SKU_PATTERN = /\b([A-Z]{2,6}[A-Z0-9]{0,2}-[A-Z]{2,6}[A-Z0-9]{0,2}-\d{1,4})\b/g
+/**
+ * Matches `€39.90`, `39,90 €`, `EUR 49.00`, `$12.50`, `$12`, `$12.50 today`.
+ * At least one currency marker is required (prefix or suffix) to avoid
+ * matching arbitrary bare numbers.
+ */
 const PRICE_PATTERN =
-  /(?:€|EUR|\$|USD|£|GBP)?\s*(\d{1,5}(?:[.,]\d{1,2})?)\s*(?:€|EUR|\$|USD|£|GBP)/g
+  /(?:€|EUR|\$|USD|£|GBP)?\s*(\d{1,5}(?:[.,]\d{1,2})?)\s*(?:€|EUR|\$|USD|£|GBP)?/g
+/** Sanity-check that at least one currency marker was actually consumed. */
+const PRICE_HAS_CURRENCY = /(?:€|EUR|\$|USD|£|GBP)/
 
 /** Tolerate ±5% — accounts for currency-conversion rounding. */
 const PRICE_TOLERANCE = 0.05
@@ -64,13 +81,42 @@ function priceToCents(raw: string): number | null {
 }
 
 export function extractSkus(text: string): string[] {
-  const matches = text.match(SKU_PATTERN)
-  return matches ? Array.from(new Set(matches)) : []
+  // Blend SKUs first (they're longer and more specific); the generic
+  // SKU_PATTERN would otherwise also extract a substring like "TB-10".
+  const blendMatches = text.match(BLEND_SKU_PATTERN) ?? []
+  // Strip blend matches from the text before the generic pass so we don't
+  // double-count. `BPC-TB-10` becomes a placeholder so `BPC-157` wouldn't
+  // be mis-extracted from it (the prefix `BPC` has no digit-tail anyway).
+  let scrubbed = text
+  for (const m of blendMatches) scrubbed = scrubbed.split(m).join("\u0000")
+  const matches = scrubbed.match(SKU_PATTERN) ?? []
+  // Defensive: a SKU that appears as a substring of a blend SKU should not
+  // be re-listed (e.g. `TB-10` inside `BPC-TB-10`). Replace those with empty
+  // before deduping.
+  const seen = new Set<string>()
+  const out: string[] = []
+  for (const m of blendMatches) {
+    if (!seen.has(m)) {
+      seen.add(m)
+      out.push(m)
+    }
+  }
+  for (const m of matches) {
+    if (m.includes("\u0000")) continue
+    if (!seen.has(m)) {
+      seen.add(m)
+      out.push(m)
+    }
+  }
+  return out
 }
 
 export function extractPrices(text: string): Array<{ sku?: string; cents: number; raw: string }> {
   const results: Array<{ sku?: string; cents: number; raw: string }> = []
   for (const m of text.matchAll(PRICE_PATTERN)) {
+    // At least one currency marker must appear in the matched span — otherwise
+    // we'd extract every bare integer (e.g. "10 vials", "5 stars").
+    if (!PRICE_HAS_CURRENCY.test(m[0])) continue
     const cents = priceToCents(m[1] ?? "")
     if (cents === null) continue
     // Heuristic: if a SKU appears within ~50 chars before the price, link them.

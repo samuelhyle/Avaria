@@ -178,6 +178,10 @@ export async function runAgent(input: AgentInput, sink: AgentSink): Promise<void
   for (let step = 0; step < MAX_STEPS; step++) {
     if (input.signal?.aborted) return
 
+    // Emit a thinking event so the UI can show "Averia is thinking..." even
+    // before the first content delta lands.
+    sink.enqueue({ type: "thinking", step })
+
     const textParts: string[] = []
     const toolCalls = new Map<string, { name: string; argsJson: string }>()
     const pendingOrder: string[] = []
@@ -270,6 +274,17 @@ export async function runAgent(input: AgentInput, sink: AgentSink): Promise<void
     }
 
     if (lastFinishReason !== "tool_calls") break
+  }
+
+  // Edge case: the model returned only tool calls and never produced a final
+  // text answer (e.g. truncated, or finished with finish_reason="tool_calls"
+  // and MAX_STEPS was hit). Surface a friendly fallback so the user isn't
+  // left staring at an empty bubble.
+  if (finalText.trim().length === 0) {
+    const fallback =
+      "I gathered the information I needed but didn't summarise it cleanly. Could you rephrase your question, or ask me to break it down into smaller steps?"
+    sink.enqueue({ type: "text", delta: fallback })
+    finalText = fallback
   }
 
   if (needsFooter && !finalText.includes("Research use only")) {

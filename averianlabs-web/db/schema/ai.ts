@@ -25,14 +25,14 @@ import {
   uniqueIndex,
 } from "drizzle-orm/pg-core"
 
-/** pgvector type. `dimensions` is set to 1024 by default; override via env. */
+/** pgvector type. `dimensions` defaults to EMBEDDING_DIM; override via env. */
 const pgVector = customType<{
   data: number[]
   driverData: string
   config: { dimensions?: number }
 }>({
   dataType(config) {
-    const dims = config?.dimensions ?? 1024
+    const dims = config?.dimensions ?? EMBEDDING_DIM
     return `vector(${dims})`
   },
   toDriver(value: number[]) {
@@ -53,7 +53,12 @@ const tsVector = customType<{ data: string; driverData: string }>({
   },
 })
 
-export const EMBEDDING_DIM = 1024
+/**
+ * Embedding dimensionality. Drives the pgvector column width AND the local
+ * fallback model (all-MiniLM-L6-v2, 384-dim). When switching models, bump
+ * this constant and add a migration that drops + recreates `embedding`.
+ */
+export const EMBEDDING_DIM = 384
 
 export const aiDocuments = pgTable(
   "ai_documents",

@@ -484,7 +484,14 @@
     },
     "send": "Senden",
     "stop": "Stoppen",
-    "ageRequired": "Bitte bestätige zuerst, dass du 18+ bist."
+    "ageRequired": "Bitte bestätige zuerst, dass du 18+ bist.",
+    "errorRateLimitTitle": "Einen Moment bitte",
+    "errorRateLimitBody": "Du hast mehrere Nachrichten schnell hintereinander gesendet. Averia ist in etwa einer Minute bereit.",
+    "errorOfflineTitle": "Averia ist offline",
+    "errorOfflineBody": "Der Chat ist momentan nicht konfiguriert (MINIMAX_API_KEY fehlt oder Rate-Limit aktiv).",
+    "errorInvalidTitle": "Nachricht konnte nicht gesendet werden",
+    "errorInvalidBody": "Lösche die Unterhaltung und versuche es erneut.",
+    "errorServerBody": "Auf unserer Seite ist ein Fehler aufgetreten. Bitte in einem Moment erneut versuchen."
   },
   "community": {
     "signInToPost": "Sign in to post",

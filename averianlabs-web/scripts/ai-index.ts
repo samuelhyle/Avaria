@@ -3,6 +3,7 @@
  * tables. Idempotent; safe to run on every deploy.
  */
 
+import { localEmbedderStatus } from "@/lib/ai/providers/local-embeddings"
 import { indexAll } from "@/lib/ai/rag/indexer"
 
 async function main() {
@@ -21,10 +22,16 @@ async function main() {
     `[ai-index] done · docs=${report.documents} chunks=${report.chunks} embedded=${report.embedded} skipped=${report.skippedEmbeddings} in ${report.durationMs}ms`,
   )
   if (report.skippedEmbeddings > 0) {
-    console.error(
-      `[ai-index] ${report.skippedEmbeddings} chunk(s) were written WITHOUT embeddings — vector search will miss them. Check MiniMax embeddings access/quota and re-run.`,
+    const local = localEmbedderStatus()
+    if (local.error) {
+      console.error(
+        `[ai-index] ${report.skippedEmbeddings} chunk(s) were written WITHOUT embeddings — local embedder failed: ${local.error}. Vector search will miss them.`,
+      )
+      process.exit(1)
+    }
+    console.warn(
+      `[ai-index] ${report.skippedEmbeddings} chunk(s) were written WITHOUT embeddings — MiniMax rate-limited and local embedder returned no vector for them. Vector search will miss them, but BM25 retrieval still works.`,
     )
-    process.exit(1)
   }
   process.exit(0)
 }

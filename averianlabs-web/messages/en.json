@@ -385,6 +385,13 @@
     "greetingSub": "I can help browse the catalog, check COA details, compare products, or assist with an order.",
     "errorTitle": "Something went wrong",
     "errorBody": "Averia didn't respond just now. Try again in a moment.",
+    "errorRateLimitTitle": "Slow down a moment",
+    "errorRateLimitBody": "You've sent a few messages in quick succession. Averia will be ready in about a minute.",
+    "errorOfflineTitle": "Averia is offline",
+    "errorOfflineBody": "The chat is not configured right now (MINIMAX_API_KEY missing or rate-limited upstream).",
+    "errorInvalidTitle": "Couldn't send that message",
+    "errorInvalidBody": "Try clearing the conversation and sending again.",
+    "errorServerBody": "Averia hit a problem on our side. Please try again in a moment.",
     "retry": "Try again",
     "consent": {
       "title": "Remember this conversation?",
