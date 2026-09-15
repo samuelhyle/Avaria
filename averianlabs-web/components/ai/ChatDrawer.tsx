@@ -132,8 +132,8 @@ export function ChatDrawer({
               <div className="mx-4 mb-2 flex items-start gap-2 rounded-[var(--radius)] border border-danger/30 bg-danger/5 px-3 py-2 text-xs text-danger">
                 <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
                 <div className="flex-1">
-                  <p className="font-medium">{t("errorTitle")}</p>
-                  <p className="opacity-80">{t("errorBody")}</p>
+                  <p className="font-medium">{errorTitleFor(t, error)}</p>
+                  <p className="opacity-80">{errorBodyFor(t, error)}</p>
                 </div>
                 {onRetry ? (
                   <button
@@ -178,4 +178,32 @@ function EmptyState({ onPrompt }: { onPrompt?: (prompt: string) => void }) {
       {onPrompt ? <QuickActions onSelect={onPrompt} /> : null}
     </div>
   )
+}
+
+function errorTitleFor(t: ReturnType<typeof useTranslations>, err: Error): string {
+  switch (err.name) {
+    case "rate_limited":
+      return t("errorRateLimitTitle")
+    case "provider_unavailable":
+      return t("errorOfflineTitle")
+    case "invalid_request":
+      return t("errorInvalidTitle")
+    default:
+      return t("errorTitle")
+  }
+}
+
+function errorBodyFor(t: ReturnType<typeof useTranslations>, err: Error): string {
+  switch (err.name) {
+    case "rate_limited":
+      return t("errorRateLimitBody")
+    case "provider_unavailable":
+      return t("errorOfflineBody")
+    case "invalid_request":
+      return t("errorInvalidBody")
+    case "server_error":
+      return t("errorServerBody")
+    default:
+      return t("errorBody")
+  }
 }

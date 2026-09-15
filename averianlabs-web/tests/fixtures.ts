@@ -17,7 +17,10 @@ type Fixtures = {
 export const test = base.extend<Fixtures>({
   cleanPage: async ({ context, page }, use) => {
     await context.addCookies([AGE_GATE_COOKIE])
-    await page.goto("/en", { waitUntil: "domcontentloaded" })
+    // Wait for networkidle so lazy-imported widgets (Averia chat, search
+    // palette) have time to mount. `domcontentloaded` fires before the
+    // requestIdleCallback-triggered dynamic imports resolve.
+    await page.goto("/en", { waitUntil: "networkidle" })
     await page.evaluate(() => {
       try {
         localStorage.clear()

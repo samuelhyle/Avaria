@@ -37,10 +37,10 @@ export async function embedBatch(
     const start = b * batchSize
     const slice = inputs.slice(start, start + batchSize)
     let attempt = 0
-    let vectors: number[][] | null = null
+    let vectors: Array<number[] | null> | null = null
     let lastError: unknown = null
 
-    while (attempt <= maxRetries && vectors === null) {
+    while (attempt <= maxRetries && (vectors === null || vectors.every((v) => v === null))) {
       try {
         vectors = await Promise.race([
           embedTexts(slice),
@@ -51,16 +51,22 @@ export async function embedBatch(
         lastError = err
         vectors = null
       }
-      if (vectors === null && attempt < maxRetries) {
-        // Wait 65s + 5s buffer for the next RPM window.
+      if ((vectors === null || vectors.every((v) => v === null)) && attempt < maxRetries) {
+        // Wait 65s + 5s buffer for the next RPM window before retrying.
         await sleep(65_000)
       }
       attempt++
     }
 
-    if (vectors) {
+    if (vectors && vectors.some((v) => v !== null)) {
       for (let i = 0; i < slice.length; i++) {
         results[start + i] = vectors[i] ?? null
+      }
+      const missing = vectors.filter((v) => v === null).length
+      if (missing > 0) {
+        console.warn(
+          `[embedBatch] batch ${b + 1}/${totalBatches} — ${missing}/${slice.length} chunks missing embeddings`,
+        )
       }
     } else {
       console.warn(

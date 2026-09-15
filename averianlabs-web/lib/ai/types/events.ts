@@ -45,6 +45,7 @@ export type AgentEvent =
   | { type: "tool-result"; id: string; name: string; content: unknown }
   | { type: "action"; action: ProposedAction }
   | { type: "conversation"; id: string }
+  | { type: "thinking"; step: number }
   | {
       type: "done"
       usage: { tokensIn: number; tokensOut: number; latencyMs: number }

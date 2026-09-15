@@ -21,6 +21,9 @@ import { toast } from "sonner"
 
 export interface ChatWidgetProps {
   locale: string
+  /** When true (Netlify static demo), short-circuit submissions so the
+   *  chat UX still appears but Averia is presented as offline. */
+  demoMode?: boolean
 }
 
 const AGE_COOKIE = "averianlabs-age-confirmed"
@@ -30,7 +33,7 @@ function isAgeConfirmed(): boolean {
   return document.cookie.split("; ").some((c) => c.startsWith(`${AGE_COOKIE}=`))
 }
 
-export function ChatWidget({ locale }: ChatWidgetProps) {
+export function ChatWidget({ locale, demoMode = false }: ChatWidgetProps) {
   const t = useTranslations("averia")
   const [open, setOpen] = useState(false)
   const [unread, setUnread] = useState(false)
@@ -39,6 +42,17 @@ export function ChatWidget({ locale }: ChatWidgetProps) {
   const context = usePageContext({ itemCount: cartCount })
   const cartAdd = useCart((s) => s.add)
   const cartRemove = useCart((s) => s.remove)
+
+  // In demo mode we inject a permanent provider_unavailable error so the
+  // widget renders the "Averia is offline" state from the very first
+  // send, instead of trying to POST to a non-existent /api/ai/chat.
+  const demoError = demoMode
+    ? (() => {
+        const e = new Error("Averia is offline right now. Set MINIMAX_API_KEY to enable the chat.")
+        e.name = "provider_unavailable"
+        return e
+      })()
+    : null
 
   const chat = useAveriaChat({
     locale,
@@ -96,7 +110,7 @@ export function ChatWidget({ locale }: ChatWidgetProps) {
   }
 
   const handleRetry = () => {
-    chat.reset()
+    chat.retry()
   }
 
   const handleConfirmAction = useCallback(
@@ -177,7 +191,7 @@ export function ChatWidget({ locale }: ChatWidgetProps) {
         onSubmit={(text) => chat.submit(text)}
         onStop={chat.stop}
         isLoading={chat.isLoading}
-        error={chat.error ?? undefined}
+        error={(demoError ?? chat.error) ?? undefined}
         onRetry={handleRetry}
         onQuickPrompt={handleQuickPrompt}
         onConfirmAction={handleConfirmAction}

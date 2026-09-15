@@ -13,7 +13,10 @@ const ChatWidget = dynamic(
  * doesn't compete with hydration and LCP on first load.
  *
  * Pass `demoMode` from a server component — `BUILD_MODE` isn't surfaced to
- * the browser at runtime.
+ * the browser at runtime. In demo mode the widget is still mounted (so
+ * visitors can see the chat UX), but submission will hit a 404 and the
+ * widget renders the friendly "Averia is offline" state from the
+ * error-classification layer.
  */
 export function LazyChatWidget({
   locale,
@@ -22,14 +25,14 @@ export function LazyChatWidget({
   locale: string
   demoMode?: boolean
 }) {
-  if (demoMode) return null
-
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    const w = window as Window & {
+    // `requestIdleCallback`/`cancelIdleCallback` aren't in the default DOM
+    // types in TS 5.7; widen locally so we can feature-detect at runtime.
+    const w = window as unknown as {
       requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number
-      cancelIdleCallback?: (id: number) => void
+      cancelIdleCallback?: (id: number) => number
     }
 
     if (typeof w.requestIdleCallback === "function") {
@@ -42,5 +45,5 @@ export function LazyChatWidget({
   }, [])
 
   if (!ready) return null
-  return <ChatWidget locale={locale} />
+  return <ChatWidget locale={locale} demoMode={demoMode} />
 }

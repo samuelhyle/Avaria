@@ -464,7 +464,14 @@
     },
     "send": "Lähetä",
     "stop": "Pysäytä",
-    "ageRequired": "Vahvista ensin, että olet 18+."
+    "ageRequired": "Vahvista ensin, että olet 18+.",
+    "errorRateLimitTitle": "Hetki hidastusta",
+    "errorRateLimitBody": "Lähetit useita viestejä nopeasti. Averia on valmis noin minuutin kuluttua.",
+    "errorOfflineTitle": "Averia ei ole käytettävissä",
+    "errorOfflineBody": "Keskustelua ei ole määritetty (MINIMAX_API_KEY puuttuu tai ylävirran rajoitus on voimassa).",
+    "errorInvalidTitle": "Viestin lähetys epäonnistui",
+    "errorInvalidBody": "Tyhjennä keskustelu ja yritä lähettää uudelleen.",
+    "errorServerBody": "Averia kohtasi ongelman palvelimella. Yritä hetken kuluttua uudelleen."
   },
   "admin": {
     "dashboard": "Hallintapaneeli",
