@@ -11,8 +11,19 @@ const ChatWidget = dynamic(
 /**
  * Defers the chat bundle (motion + markdown) until the browser is idle so it
  * doesn't compete with hydration and LCP on first load.
+ *
+ * Pass `demoMode` from a server component — `BUILD_MODE` isn't surfaced to
+ * the browser at runtime.
  */
-export function LazyChatWidget({ locale }: { locale: string }) {
+export function LazyChatWidget({
+  locale,
+  demoMode = false,
+}: {
+  locale: string
+  demoMode?: boolean
+}) {
+  if (demoMode) return null
+
   const [ready, setReady] = useState(false)
 
   useEffect(() => {

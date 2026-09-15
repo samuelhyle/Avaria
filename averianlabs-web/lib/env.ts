@@ -6,6 +6,10 @@ import { z } from "zod"
 const isBuildPhase = process.env.NEXT_PHASE === "phase-production-build"
 const isProduction = process.env.NODE_ENV === "production" && !isBuildPhase
 
+// The static Netlify demo build (BUILD_MODE=demo) skips every external
+// integration, so the env validator must accept an entirely empty config.
+const isDemoBuild = process.env.BUILD_MODE === "demo"
+
 const emptyToUndefined = (env: unknown): Record<string, unknown> => {
   const source = (env ?? {}) as Record<string, string | undefined>
   const out: Record<string, unknown> = {}
@@ -15,7 +19,8 @@ const emptyToUndefined = (env: unknown): Record<string, unknown> => {
   return out
 }
 
-const requiredInProduction = (schema: z.ZodString) => (isProduction ? schema : schema.optional())
+const requiredInProduction = (schema: z.ZodString) =>
+  isProduction && !isDemoBuild ? schema : schema.optional()
 
 const serverSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),

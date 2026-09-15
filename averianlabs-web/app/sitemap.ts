@@ -3,6 +3,8 @@ import { listGlossaryTerms } from "@/lib/glossary"
 import { locales } from "@/lib/i18n/config"
 import type { MetadataRoute } from "next"
 
+export const dynamic = "force-static"
+
 const SITE = "https://averianlabs.eu"
 
 function localeAlternates(path: string) {

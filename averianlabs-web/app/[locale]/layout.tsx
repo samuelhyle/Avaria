@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/layout/ThemeProvider"
 import { VercelInsights } from "@/components/layout/VercelInsights"
 import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/seo/JsonLd"
 import { Toaster } from "@/components/ui/Toaster"
+import { isDemoBuild } from "@/lib/demo"
 import { isLocale } from "@/lib/i18n/config"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
@@ -78,15 +79,24 @@ export async function generateMetadata({
       siteName: "AverianLabs",
       title: t("title"),
       description: t("description"),
-      images: [{ url: "/api/og/default", width: 1200, height: 630, alt: t("title") }],
+      images: [
+        {
+          url: isDemoBuild() ? "/og-default.svg" : "/api/og/default",
+          width: 1200,
+          height: 630,
+          alt: t("title"),
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: t("title"),
       description: t("description"),
-      images: ["/api/og/default"],
+      images: [isDemoBuild() ? "/og-default.svg" : "/api/og/default"],
     },
-    robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
+    robots: isDemoBuild()
+      ? { index: false, follow: false, googleBot: { index: false, follow: false } }
+      : { index: true, follow: true, googleBot: { index: true, follow: true } },
     icons: {
       icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
     },
@@ -141,7 +151,7 @@ export default async function LocaleLayout({
                 <PostHogProvider />
               </Suspense>
               <Toaster />
-              <LazyChatWidget locale={locale} />
+              <LazyChatWidget locale={locale} demoMode={isDemoBuild()} />
               <VercelInsights />
             </NextIntlClientProvider>
           </MotionProvider>
