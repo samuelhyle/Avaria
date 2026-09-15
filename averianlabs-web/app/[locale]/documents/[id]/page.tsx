@@ -39,6 +39,9 @@ const TYPE_ICON: Record<string, typeof FlaskConical> = {
 
 export const revalidate = 3600
 
+// Demo builds skip DB-backed dynamic routes; production runs them on-demand.
+export const generateStaticParams = () => []
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, id } = await params
   const doc = await getDocumentById(id).catch(() => null)

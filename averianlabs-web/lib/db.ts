@@ -8,22 +8,43 @@ declare global {
   var __averianlabsPg: ReturnType<typeof postgres> | undefined
 }
 
-// Throws in production when DATABASE_URL is missing or malformed.
-const env = getServerEnv()
-const url = env.DATABASE_URL
+// `next build` evaluates server modules before the runtime env is injected.
+// Relax required env vars during the build phase so pre-rendering can run.
+const isDemoBuild = process.env.BUILD_MODE === "demo"
 
-// Neon/pgBouncer pooled endpoints run in transaction mode, which does not
-// support session-level prepared statements. Serverless instances also must
-// keep their connection count tiny. Direct connections can hold a real pool.
-const isPooled = Boolean(url && (url.includes("-pooler") || url.includes("pgbouncer")))
+function buildClient(): ReturnType<typeof postgres> {
+  // Throws in production when DATABASE_URL is missing or malformed.
+  const env = getServerEnv()
+  const url = env.DATABASE_URL
 
-const clientConfig = isPooled
-  ? { max: 1, idle_timeout: 20, max_lifetime: 60 * 30, connect_timeout: 10, prepare: false }
-  : { max: 10, idle_timeout: 30, max_lifetime: 60 * 30, connect_timeout: 10 }
+  // Neon/pgBouncer pooled endpoints run in transaction mode, which does not
+  // support session-level prepared statements. Serverless instances also must
+  // keep their connection count tiny. Direct connections can hold a real pool.
+  const isPooled = Boolean(url && (url.includes("-pooler") || url.includes("pgbouncer")))
+
+  const clientConfig = isPooled
+    ? { max: 1, idle_timeout: 20, max_lifetime: 60 * 30, connect_timeout: 10, prepare: false }
+    : { max: 10, idle_timeout: 30, max_lifetime: 60 * 30, connect_timeout: 10 }
+
+  // In demo mode we hand back a Postgres client pointed at an obviously
+  // unreachable address. The client is created lazily (no socket yet) and
+  // any query that actually tries to use it will fail loudly with a
+  // connection error — preferable to silent hangs.
+  if (!url) {
+    if (isDemoBuild) {
+      return postgres("postgres://demo:disabled@127.0.0.1:1/demo", {
+        max: 0,
+        connect_timeout: 1,
+      })
+    }
+    return postgres("", { max: 0 })
+  }
+
+  return postgres(url, clientConfig)
+}
 
 const client =
-  globalThis.__averianlabsPg ??
-  (url ? postgres(url, clientConfig) : (postgres("", { max: 0 }) as ReturnType<typeof postgres>))
+  globalThis.__averianlabsPg ?? buildClient()
 
 if (process.env.NODE_ENV !== "production") {
   globalThis.__averianlabsPg = client

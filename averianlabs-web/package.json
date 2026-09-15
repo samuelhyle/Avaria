@@ -25,6 +25,7 @@
     "ai:index": "tsx --env-file-if-exists=.env.local scripts/ai-index.ts",
     "ai:eval": "tsx --env-file-if-exists=.env.local scripts/ai-eval.ts",
     "studio": "sanity dev --project-path sanity",
+    "build:demo": "./scripts/build-demo.sh",
     "postinstall": "lefthook install || true"
   },
   "dependencies": {

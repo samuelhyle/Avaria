@@ -1,7 +1,8 @@
 import { GlossaryTermJsonLd } from "@/components/seo/JsonLd"
 import { Badge } from "@/components/ui/Badge"
 import { Container } from "@/components/ui/Container"
-import { CATEGORY_LABELS, getGlossaryTermBySlug } from "@/lib/glossary"
+import { CATEGORY_LABELS, getGlossaryTermBySlug, listGlossaryTerms } from "@/lib/glossary"
+import { isDemoBuild } from "@/lib/demo"
 import { ArrowLeft, BookText } from "lucide-react"
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
@@ -11,6 +12,15 @@ import { notFound } from "next/navigation"
 
 interface Props {
   params: Promise<{ locale: string; term: string }>
+}
+
+// In demo mode we pre-render every fixture term × locale. In production this
+// is empty (Sanity-backed pages fall through to on-demand rendering).
+export async function generateStaticParams() {
+  if (!isDemoBuild()) return []
+  const terms = await listGlossaryTerms().catch(() => [])
+  const locales = ["en", "fi", "de", "sv", "nl"]
+  return terms.flatMap((t) => locales.map((locale) => ({ locale, term: t.slug })))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

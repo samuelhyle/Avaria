@@ -2,11 +2,14 @@
  * Glossary data layer — Sanity-backed.
  *
  * Provides typed query helpers for glossary terms. Falls back gracefully
- * to an empty list when Sanity is not configured so the UI never crashes
- * (useful during local dev without Sanity creds).
+ * to a static demo fixture set when Sanity is not configured, so the UI
+ * never crashes (useful during local dev without Sanity creds and for
+ * the static Netlify demo build).
  */
+import { DEMO_GLOSSARY } from "@/lib/demo/fixtures"
+import { demoCache } from "@/lib/demo/cache"
+import { isDemoBuild } from "@/lib/demo"
 import { sanity } from "@/sanity/client"
-import { unstable_cache } from "next/cache"
 
 export type GlossaryCategory =
   | "analytical"
@@ -41,11 +44,12 @@ const FRAGMENT = /* groq */ `
 `
 
 function isConfigured(): boolean {
-  return Boolean(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID)
+  return Boolean(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) && !isDemoBuild()
 }
 
-export const listGlossaryTerms = unstable_cache(
+export const listGlossaryTerms = demoCache(
   async (): Promise<GlossaryTermRecord[]> => {
+    if (isDemoBuild()) return DEMO_GLOSSARY
     if (!isConfigured()) return []
     try {
       return await sanity.fetch<GlossaryTermRecord[]>(
@@ -59,8 +63,9 @@ export const listGlossaryTerms = unstable_cache(
   { revalidate: 3600, tags: ["glossary"] },
 )
 
-export const getGlossaryTermBySlug = unstable_cache(
+export const getGlossaryTermBySlug = demoCache(
   async (slug: string): Promise<GlossaryTermRecord | null> => {
+    if (isDemoBuild()) return DEMO_GLOSSARY.find((t) => t.slug === slug) ?? null
     if (!isConfigured()) return null
     try {
       const result = await sanity.fetch<GlossaryTermRecord | null>(

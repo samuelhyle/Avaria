@@ -10,8 +10,10 @@
  *   3. The fallback in `listPosts()` (returns []) handles empty Sanity
  */
 
+import { demoCache } from "@/lib/demo/cache"
+import { isDemoBuild } from "@/lib/demo"
+import { DEMO_POSTS } from "@/lib/demo/fixtures"
 import { sanity } from "@/sanity/client"
-import { unstable_cache } from "next/cache"
 
 export interface BlogPostRecord {
   slug: string
@@ -32,7 +34,7 @@ export interface BlogPostRecord {
 }
 
 function isConfigured(): boolean {
-  return Boolean(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID)
+  return Boolean(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) && !isDemoBuild()
 }
 
 const POSTS_QUERY = /* groq */ `
@@ -65,8 +67,9 @@ const POST_BY_SLUG_QUERY = /* groq */ `
   }
 `
 
-export const listPosts = unstable_cache(
+export const listPosts = demoCache(
   async (): Promise<BlogPostRecord[]> => {
+    if (isDemoBuild()) return DEMO_POSTS
     if (!isConfigured()) return []
     try {
       return await sanity.fetch<BlogPostRecord[]>(POSTS_QUERY)
@@ -78,8 +81,9 @@ export const listPosts = unstable_cache(
   { revalidate: 3600, tags: ["blog"] },
 )
 
-export const getPostBySlug = unstable_cache(
+export const getPostBySlug = demoCache(
   async (slug: string): Promise<BlogPostRecord | null> => {
+    if (isDemoBuild()) return DEMO_POSTS.find((p) => p.slug === slug) ?? null
     if (!isConfigured()) return null
     try {
       const r = await sanity.fetch<BlogPostRecord | null>(POST_BY_SLUG_QUERY, { slug })
@@ -92,8 +96,9 @@ export const getPostBySlug = unstable_cache(
   { revalidate: 3600, tags: ["blog"] },
 )
 
-export const getAuthorPosts = unstable_cache(
+export const getAuthorPosts = demoCache(
   async (authorSlug: string): Promise<BlogPostRecord[]> => {
+    if (isDemoBuild()) return DEMO_POSTS.filter((p) => p.authorSlug === authorSlug)
     if (!isConfigured()) return []
     try {
       return await sanity.fetch<BlogPostRecord[]>(

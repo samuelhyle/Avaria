@@ -1,5 +1,8 @@
 export const revalidate = 300
 
+// Demo builds skip DB-backed dynamic routes; production runs them on-demand.
+export const generateStaticParams = () => []
+
 import { ItemListJsonLd } from "@/components/seo/JsonLd"
 import { Badge } from "@/components/ui/Badge"
 import { Container } from "@/components/ui/Container"
