@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils/cn"
 import { AlertCircle, RefreshCw, Trash2, X } from "lucide-react"
 import { AnimatePresence, motion } from "motion/react"
 import { useTranslations } from "next-intl"
+import { useRef } from "react"
 
 export interface ChatDrawerProps {
   open: boolean
@@ -46,7 +47,8 @@ export function ChatDrawer({
   onFeedback,
 }: ChatDrawerProps) {
   const t = useTranslations("averia")
-  const containerRef = useOverlay<HTMLElement>({ open, onClose })
+  const inputRef = useRef<HTMLTextAreaElement>(null)
+  const containerRef = useOverlay<HTMLElement>({ open, onClose, initialFocusRef: inputRef })
 
   return (
     <AnimatePresence>
@@ -71,6 +73,7 @@ export function ChatDrawer({
             role="dialog"
             aria-modal="true"
             aria-label={t("title")}
+            aria-describedby="averia-drawer-description"
             initial={{ y: 32, opacity: 0, scale: 0.98 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 32, opacity: 0, scale: 0.98 }}
@@ -80,6 +83,9 @@ export function ChatDrawer({
               "md:ml-auto md:max-w-md md:rounded-l-[var(--radius-lg)] md:border md:border-line md:border-r-0",
             )}
           >
+            <p id="averia-drawer-description" className="sr-only">
+              {t("greetingSub")}
+            </p>
             <header className="flex items-center justify-between border-b border-line bg-surface-2/50 px-4 py-3">
               <div className="flex items-center gap-2.5">
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent/10 text-accent">
@@ -150,6 +156,7 @@ export function ChatDrawer({
             ) : null}
 
             <ChatInput
+              ref={inputRef}
               value={input}
               onChange={setInput}
               onSubmit={onSubmit}

@@ -401,6 +401,7 @@
     "close": "Sluiten",
     "clearConversation": "Gesprek wissen",
     "inputPlaceholder": "Vraag over producten, COA, reconstitutie…",
+    "charCounter": "{count} / {max}",
     "greeting": "Hallo — ik ben Averia.",
     "greetingSub": "Ik kan je helpen de catalogus te verkennen, COA's te controleren, producten te vergelijken of te helpen met een bestelling.",
     "errorTitle": "Er ging iets mis",

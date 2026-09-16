@@ -25,7 +25,9 @@ import { getAdminOrNull } from "@/lib/admin/guard"
 import { type AgentEvent, type PersistedMessage, runAgent } from "@/lib/ai/agent/loop"
 import { preflightInput } from "@/lib/ai/guardrails/input"
 import { verifyResponse } from "@/lib/ai/guardrails/verify"
+import { isValidAnonId, signAnonId } from "@/lib/ai/memory/anon"
 import { getAnonFromRequest, getConsentFromRequest } from "@/lib/ai/memory/consent"
+import { ANON_COOKIE } from "@/lib/ai/memory/cookies"
 import {
   type ConversationOwner,
   appendMessages,
@@ -80,6 +82,10 @@ const bodySchema = z.object({
   // resolves ownership via owner+locale and may ignore this id if the
   // session is anonymous, has no consent, or the row was deleted.
   conversationId: z.string().min(1).max(128).optional(),
+  // Raw UUID minted by the client on first visit. The server signs it and
+  // returns it as a Set-Cookie header on this response so the very next
+  // request can verify ownership without a separate identity round-trip.
+  anonId: z.string().uuid().optional(),
   noRetrieve: z.boolean().optional(),
   noPersist: z.boolean().optional(),
 })
@@ -183,7 +189,15 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   const consent = getConsentFromRequest(request)
-  const anonId = getAnonFromRequest(request)
+  // Prefer the signed cookie; fall back to a client-provided raw UUID on
+  // the very first turn (the client may post before its identity round-trip
+  // completes — this avoids dropping the first message's owner).
+  const cookieAnonId = getAnonFromRequest(request)
+  const bodyAnonId = parsed.anonId && isValidAnonId(parsed.anonId) ? parsed.anonId : null
+  const anonId = cookieAnonId ?? bodyAnonId
+  // If we adopted the body-provided id, mint + attach the signed cookie so
+  // subsequent requests don't depend on this fallback again.
+  const mintedCookie = !cookieAnonId && bodyAnonId ? signAnonId(bodyAnonId) : null
 
   // Resolve owner.
   const owner: ConversationOwner | null =
@@ -379,11 +393,25 @@ export async function POST(request: Request): Promise<Response> {
     },
   })
 
-  return new Response(stream, {
-    headers: {
-      "content-type": "text/event-stream; charset=utf-8",
-      "cache-control": "no-cache, no-transform",
-      "x-accel-buffering": "no",
-    },
-  })
+  const headers: Record<string, string> = {
+    "content-type": "text/event-stream; charset=utf-8",
+    "cache-control": "no-cache, no-transform",
+    "x-accel-buffering": "no",
+  }
+  if (mintedCookie) {
+    // Server-side fallback path: client posted `anonId` but the cookie
+    // round-trip hadn't completed yet. Set it now so future requests from
+    // this browser arrive signed.
+    const cookieAttrs = [
+      `${ANON_COOKIE}=${encodeURIComponent(mintedCookie)}`,
+      "Path=/",
+      "Max-Age=31536000",
+      "SameSite=Lax",
+      "HttpOnly",
+    ]
+    if (process.env.NODE_ENV === "production") cookieAttrs.push("Secure")
+    headers["set-cookie"] = cookieAttrs.join("; ")
+  }
+
+  return new Response(stream, { headers })
 }

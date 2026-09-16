@@ -381,6 +381,7 @@
     "close": "Stäng",
     "clearConversation": "Rensa konversation",
     "inputPlaceholder": "Fråga om produkter, COA, rekonstitution…",
+    "charCounter": "{count} / {max}",
     "greeting": "Hej — jag är Averia.",
     "greetingSub": "Jag kan hjälpa dig att utforska katalogen, kontrollera COA-data, jämföra produkter eller hjälpa till med en beställning.",
     "errorTitle": "Något gick fel",
@@ -469,7 +470,7 @@
     "errorRateLimitBody": "Du skickade flera meddelanden snabbt i rad. Averia är redo om ungefär en minut.",
     "errorOfflineTitle": "Averia är offline",
     "errorOfflineBody": "Chatten är inte konfigurerad just nu (MINIMAX_API_KEY saknas eller rate-limit är aktivt).",
-    "errorInvalidTitle": "Kunde inte skickä meddelandet",
+    "errorInvalidTitle": "Kunde inte skicka meddelandet",
     "errorInvalidBody": "Rensa konversationen och försök igen.",
     "errorServerBody": "Averia stötte på ett problem på vår sida. Försök igen om en stund."
   },

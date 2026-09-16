@@ -381,6 +381,7 @@
     "close": "Close",
     "clearConversation": "Clear conversation",
     "inputPlaceholder": "Ask about products, COAs, reconstitution…",
+    "charCounter": "{count} / {max}",
     "greeting": "Hi — I'm Averia.",
     "greetingSub": "I can help browse the catalog, check COA details, compare products, or assist with an order.",
     "errorTitle": "Something went wrong",

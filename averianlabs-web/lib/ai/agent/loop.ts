@@ -32,6 +32,11 @@ import {
 } from "@/lib/ai/providers/minimax"
 import { retrieveContext } from "@/lib/ai/rag/retrieval"
 import {
+  applyToolCallDelta,
+  createAssembler,
+  finalizeAssembler,
+} from "@/lib/ai/streaming/tool-call-assembler"
+import {
   type ProposedAction,
   type ToolContext,
   listToolDefinitions,
@@ -183,8 +188,9 @@ export async function runAgent(input: AgentInput, sink: AgentSink): Promise<void
     sink.enqueue({ type: "thinking", step })
 
     const textParts: string[] = []
-    const toolCalls = new Map<string, { name: string; argsJson: string }>()
-    const pendingOrder: string[] = []
+    // Streamed tool-call deltas are routed by index — see
+    // lib/ai/streaming/tool-call-assembler.ts for the why.
+    const assembler = createAssembler()
 
     for await (const chunk of streamMinimaxChat({
       messages: chatMessages,
@@ -201,23 +207,7 @@ export async function runAgent(input: AgentInput, sink: AgentSink): Promise<void
       }
       if (d.tool_calls) {
         for (const tc of d.tool_calls) {
-          if (tc.id) {
-            toolCalls.set(tc.id, {
-              name: tc.function?.name ?? "",
-              argsJson: tc.function?.arguments ?? "",
-            })
-            if (!pendingOrder.includes(tc.id)) pendingOrder.push(tc.id)
-          } else {
-            // Delta without id — append to the most recent in-flight call.
-            const last = pendingOrder[pendingOrder.length - 1]
-            if (last) {
-              const prev = toolCalls.get(last)
-              if (prev && tc.function?.arguments) {
-                prev.argsJson += tc.function.arguments
-                if (tc.function?.name) prev.name = tc.function.name
-              }
-            }
-          }
+          applyToolCallDelta(assembler, tc)
         }
       }
     }
@@ -226,13 +216,7 @@ export async function runAgent(input: AgentInput, sink: AgentSink): Promise<void
     finalText += assistantText
     totalTokensOut += estimateTokens(assistantText, input.locale)
 
-    const assembled = pendingOrder
-      .map((id) => {
-        const tc = toolCalls.get(id)
-        if (!tc) return null
-        return { id, name: tc.name, argsJson: tc.argsJson }
-      })
-      .filter((tc): tc is { id: string; name: string; argsJson: string } => Boolean(tc))
+    const assembled = finalizeAssembler(assembler)
 
     if (assembled.length === 0) break
 

@@ -7,12 +7,14 @@
  *   - An anonymous visitor ID (cookie + localStorage)
  *   - Consent state (opt-in for conversation persistence)
  *   - Conversation ID round-trip with the server
- *   - All 7 SSE event types from the agent loop
+ *   - All SSE event types from the agent loop (text / thinking / citations /
+ *     tool-call / tool-result / action / conversation / done / error)
  */
 
 import { getConsentState, getOrCreateAnonId, setConsentState } from "@/lib/ai/memory/consent-client"
+import { parseSseStream } from "@/lib/ai/streaming/sse"
 import type { ChatContext, ChatMessage, CitationRef } from "@/lib/ai/types"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 import {
   type ActionResolution,
@@ -96,10 +98,36 @@ export function useAveriaChat({
   const [error, setError] = useState<Error | null>(null)
   const [consent, setConsentStateHook] = useState<"accepted" | "declined" | "unset">("unset")
   const [conversationId, setConversationId] = useState<string | null>(null)
+  // Bumped every time an extras ref mutates, so the memoized `enrichedMessages`
+  // can pick up citations / toolTrace / proposedActions / feedback changes.
+  const [extrasVersion, setExtrasVersion] = useState(0)
+  const bumpExtras = useCallback(() => setExtrasVersion((v) => v + 1), [])
 
   const abortRef = useRef<AbortController | null>(null)
   const extrasRef = useRef<Map<string, AssistantExtras>>(new Map())
   const anonIdRef = useRef<string>("")
+
+  // Refs for the values that change between renders but should NOT cause
+  // `submit` / `retry` to be re-created. We mutate them in render (cheap,
+  // synchronous, no re-render). Consumers that pass fresh `cart` /
+  // `context` / `locale` props on every render would otherwise trigger
+  // exponential churn down the tree.
+  const messagesRef = useRef<ChatMessageWithExtras[]>(messages)
+  const conversationIdRef = useRef<string | null>(conversationId)
+  const localeRef = useRef<string>(locale)
+  const contextRef = useRef<AveriaChatInput["context"]>(context)
+  const cartRef = useRef<AveriaChatInput["cart"]>(cart)
+  const onSendRef = useRef<AveriaChatInput["onSend"]>(onSend)
+  const onErrorRef = useRef<AveriaChatInput["onError"]>(onError)
+  const onConversationStartRef = useRef<AveriaChatInput["onConversationStart"]>(onConversationStart)
+  messagesRef.current = messages
+  conversationIdRef.current = conversationId
+  localeRef.current = locale
+  contextRef.current = context
+  cartRef.current = cart
+  onSendRef.current = onSend
+  onErrorRef.current = onError
+  onConversationStartRef.current = onConversationStart
 
   // Hydrate consent + anon ID on first render.
   useEffect(() => {
@@ -122,164 +150,150 @@ export function useAveriaChat({
     setIsLoading(false)
   }, [])
 
-  const submit = useCallback(
-    (text: string) => {
-      const trimmed = text.trim()
-      if (!trimmed) return
+  const submit = useCallback((text: string) => {
+    const trimmed = text.trim()
+    if (!trimmed) return
 
-      abortRef.current?.abort()
-      const controller = new AbortController()
-      abortRef.current = controller
+    abortRef.current?.abort()
+    const controller = new AbortController()
+    abortRef.current = controller
 
-      const userMsg: ChatMessageWithExtras = {
-        id: makeId(),
-        role: "user",
-        content: trimmed,
-        createdAt: new Date().toISOString(),
-      }
-      const assistantId = makeId()
-      const assistantMsg: ChatMessageWithExtras = {
-        id: assistantId,
-        role: "assistant",
-        content: "",
-        createdAt: new Date().toISOString(),
-      }
+    const userMsg: ChatMessageWithExtras = {
+      id: makeId(),
+      role: "user",
+      content: trimmed,
+      createdAt: new Date().toISOString(),
+    }
+    const assistantId = makeId()
+    const assistantMsg: ChatMessageWithExtras = {
+      id: assistantId,
+      role: "assistant",
+      content: "",
+      createdAt: new Date().toISOString(),
+    }
 
-      setMessages((prev) => [...prev, userMsg, assistantMsg])
-      setInput("")
-      setIsLoading(true)
-      setError(null)
-      onSend?.(trimmed)
+    setMessages((prev) => [...prev, userMsg, assistantMsg])
+    setInput("")
+    setIsLoading(true)
+    setError(null)
+    onSendRef.current?.(trimmed)
 
-      const history = [...messages, userMsg]
-        .filter((m) => m.content.trim().length > 0)
-        .slice(-40)
-        .map((m) => ({ id: m.id, role: m.role, content: m.content }))
+    const history = [...messagesRef.current, userMsg]
+      .filter((m) => m.content.trim().length > 0)
+      .slice(-40)
+      .map((m) => ({ id: m.id, role: m.role, content: m.content }))
 
-      void (async () => {
-        try {
-          const res = await fetch("/api/ai/chat", {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify({
-              messages: history,
-              locale,
-              context,
-              cart: cart ?? [],
-              conversationId: conversationId ?? undefined,
-            }),
-            signal: controller.signal,
-          })
+    void (async () => {
+      try {
+        const res = await fetch("/api/ai/chat", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            messages: history,
+            locale: localeRef.current,
+            context: contextRef.current,
+            cart: cartRef.current ?? [],
+            conversationId: conversationIdRef.current ?? undefined,
+            // Server signs this and attaches it as `Set-Cookie: averia_anon`
+            // on the response. Falls back to the existing cookie when this
+            // is omitted; either path is fine server-side.
+            anonId:
+              anonIdRef.current && anonIdRef.current !== "ssr" ? anonIdRef.current : undefined,
+          }),
+          signal: controller.signal,
+        })
 
-          if (!res.ok) {
-            // Try to extract the server-side error code so the UI can show a
-            // specific message (rate-limit vs. config vs. generic).
-            let bodyText = ""
-            try {
-              bodyText = await res.text()
-            } catch {}
-            throw classifyHttpError(res.status, bodyText)
-          }
-
-          const reader = res.body?.getReader()
-          if (!reader) throw new Error("No stream")
-
-          const decoder = new TextDecoder()
-          let buffer = ""
-
-          while (true) {
-            const { done, value } = await reader.read()
-            if (done) break
-            buffer += decoder.decode(value, { stream: true })
-            let nl = buffer.indexOf("\n\n")
-            while (nl !== -1) {
-              const event = buffer.slice(0, nl).trim()
-              buffer = buffer.slice(nl + 2)
-              if (!event.startsWith("data:")) continue
-              const payload = event.slice(5).trim()
-              if (!payload) continue
-              try {
-                const msg = JSON.parse(payload) as AgentEventWire
-                handleWireEvent(msg, assistantId)
-              } catch (parseErr) {
-                if (parseErr instanceof Error && parseErr.message.startsWith("Chat failed"))
-                  throw parseErr
-              }
-              nl = buffer.indexOf("\n\n")
-            }
-          }
-        } catch (err) {
-          if (controller.signal.aborted) return
-          const e = err instanceof Error ? err : new Error("Unknown chat error")
-          setError(e)
-          onError?.(e)
-          setMessages((prev) =>
-            prev.map((m) =>
-              m.id === assistantId && m.content === ""
-                ? { ...m, content: placeholderForError(e) }
-                : m,
-            ),
-          )
-        } finally {
-          if (abortRef.current === controller) abortRef.current = null
-          setIsLoading(false)
+        if (!res.ok) {
+          // Try to extract the server-side error code so the UI can show a
+          // specific message (rate-limit vs. config vs. generic).
+          let bodyText = ""
+          try {
+            bodyText = await res.text()
+          } catch {}
+          throw classifyHttpError(res.status, bodyText)
         }
-      })()
 
-      function handleWireEvent(msg: AgentEventWire, aid: string) {
-        if (msg.type === "text") {
-          setMessages((prev) =>
-            prev.map((m) => (m.id === aid ? { ...m, content: m.content + msg.delta } : m)),
-          )
-        } else if (msg.type === "thinking") {
-          // Hook intentionally a no-op — `isLoading` already drives the spinner,
-          // and `toolTrace` (below) shows the actual tool chips. Keep the event
-          // on the wire for parity with server logs.
-        } else if (msg.type === "citations") {
-          const cur = extrasRef.current.get(aid) ?? {}
-          extrasRef.current.set(aid, { ...cur, citations: msg.citations })
-          setMessages((prev) => [...prev])
-        } else if (msg.type === "tool-call") {
-          const cur = extrasRef.current.get(aid) ?? {}
-          const trace = [...(cur.toolTrace ?? []), { id: msg.id, name: msg.name, args: msg.args }]
-          extrasRef.current.set(aid, { ...cur, toolTrace: trace })
-          setMessages((prev) => [...prev])
-        } else if (msg.type === "tool-result") {
-          const cur = extrasRef.current.get(aid) ?? {}
-          const trace = (cur.toolTrace ?? []).map((t) =>
-            t.id === msg.id ? { ...t, result: msg.content } : t,
-          )
-          extrasRef.current.set(aid, { ...cur, toolTrace: trace })
-          setMessages((prev) => [...prev])
-        } else if (msg.type === "action") {
-          const cur = extrasRef.current.get(aid) ?? {}
-          const actions = [...(cur.proposedActions ?? []), msg.action]
-          extrasRef.current.set(aid, { ...cur, proposedActions: actions })
-          setMessages((prev) => [...prev])
-        } else if (msg.type === "conversation") {
-          if (!conversationId) {
-            setConversationId(msg.id)
-            onConversationStart?.(msg.id)
+        const stream = res.body
+        if (!stream) throw new Error("No stream")
+
+        for await (const event of parseSseStream(stream)) {
+          try {
+            handleWireEvent(event, assistantId)
+          } catch (parseErr) {
+            if (parseErr instanceof Error && parseErr.message.startsWith("Chat failed"))
+              throw parseErr
           }
-        } else if (msg.type === "done") {
-          // Adopt the server-persisted assistant message id so feedback maps to
-          // a real row. Extras must be keyed the same way.
-          if (msg.messageId && msg.messageId !== aid) {
-            const extras = extrasRef.current.get(aid)
-            if (extras) {
-              extrasRef.current.set(msg.messageId, extras)
-              extrasRef.current.delete(aid)
-            }
-            const serverId = msg.messageId
-            setMessages((prev) => prev.map((m) => (m.id === aid ? { ...m, id: serverId } : m)))
-          }
-        } else if (msg.type === "error") {
-          throw new Error(msg.message)
         }
+      } catch (err) {
+        if (controller.signal.aborted) return
+        const e = err instanceof Error ? err : new Error("Unknown chat error")
+        setError(e)
+        onErrorRef.current?.(e)
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === assistantId && m.content === ""
+              ? { ...m, content: placeholderForError(e) }
+              : m,
+          ),
+        )
+      } finally {
+        if (abortRef.current === controller) abortRef.current = null
+        setIsLoading(false)
       }
-    },
-    [cart, context, conversationId, locale, messages, onConversationStart, onError, onSend],
-  )
+    })()
+
+    function handleWireEvent(msg: AgentEventWire, aid: string) {
+      if (msg.type === "text") {
+        setMessages((prev) =>
+          prev.map((m) => (m.id === aid ? { ...m, content: m.content + msg.delta } : m)),
+        )
+      } else if (msg.type === "thinking") {
+        // Hook intentionally a no-op — `isLoading` already drives the spinner,
+        // and `toolTrace` (below) shows the actual tool chips. Keep the event
+        // on the wire for parity with server logs.
+      } else if (msg.type === "citations") {
+        const cur = extrasRef.current.get(aid) ?? {}
+        extrasRef.current.set(aid, { ...cur, citations: msg.citations })
+        bumpExtras()
+      } else if (msg.type === "tool-call") {
+        const cur = extrasRef.current.get(aid) ?? {}
+        const trace = [...(cur.toolTrace ?? []), { id: msg.id, name: msg.name, args: msg.args }]
+        extrasRef.current.set(aid, { ...cur, toolTrace: trace })
+        bumpExtras()
+      } else if (msg.type === "tool-result") {
+        const cur = extrasRef.current.get(aid) ?? {}
+        const trace = (cur.toolTrace ?? []).map((t) =>
+          t.id === msg.id ? { ...t, result: msg.content } : t,
+        )
+        extrasRef.current.set(aid, { ...cur, toolTrace: trace })
+        bumpExtras()
+      } else if (msg.type === "action") {
+        const cur = extrasRef.current.get(aid) ?? {}
+        const actions = [...(cur.proposedActions ?? []), msg.action]
+        extrasRef.current.set(aid, { ...cur, proposedActions: actions })
+        bumpExtras()
+      } else if (msg.type === "conversation") {
+        if (!conversationIdRef.current) {
+          setConversationId(msg.id)
+          onConversationStartRef.current?.(msg.id)
+        }
+      } else if (msg.type === "done") {
+        // Adopt the server-persisted assistant message id so feedback maps to
+        // a real row. Extras must be keyed the same way.
+        if (msg.messageId && msg.messageId !== aid) {
+          const extras = extrasRef.current.get(aid)
+          if (extras) {
+            extrasRef.current.set(msg.messageId, extras)
+            extrasRef.current.delete(aid)
+          }
+          const serverId = msg.messageId
+          setMessages((prev) => prev.map((m) => (m.id === aid ? { ...m, id: serverId } : m)))
+        }
+      } else if (msg.type === "error") {
+        throw new Error(msg.message)
+      }
+    }
+  }, [])
 
   const reset = useCallback(() => {
     abortRef.current?.abort()
@@ -297,7 +311,7 @@ export function useAveriaChat({
    */
   const retry = useCallback(() => {
     if (isLoading) return
-    const lastUser = [...messages].reverse().find((m) => m.role === "user")
+    const lastUser = [...messagesRef.current].reverse().find((m) => m.role === "user")
     if (!lastUser) {
       reset()
       return
@@ -307,7 +321,7 @@ export function useAveriaChat({
     setMessages((prev) => prev.filter((m) => !(m.role === "assistant" && m.content === "")))
     setError(null)
     submit(lastUser.content)
-  }, [isLoading, messages, reset, submit])
+  }, [isLoading, reset, submit])
 
   const resolveAction = useCallback(
     (messageId: string, action: ProposedAction, state: ActionResolution) => {
@@ -317,22 +331,29 @@ export function useAveriaChat({
         ...cur,
         resolvedActions: { ...(cur.resolvedActions ?? {}), [key]: state },
       })
-      setMessages((prev) => [...prev])
+      bumpExtras()
     },
-    [],
+    [bumpExtras],
   )
 
-  const setFeedback = useCallback((messageId: string, feedback: "up" | "down") => {
-    const cur = extrasRef.current.get(messageId) ?? {}
-    extrasRef.current.set(messageId, { ...cur, feedback })
-    setMessages((prev) => [...prev])
-  }, [])
+  const setFeedback = useCallback(
+    (messageId: string, feedback: "up" | "down") => {
+      const cur = extrasRef.current.get(messageId) ?? {}
+      extrasRef.current.set(messageId, { ...cur, feedback })
+      bumpExtras()
+    },
+    [bumpExtras],
+  )
 
-  const enrichedMessages = messages.map((m) => {
-    const extra = extrasRef.current.get(m.id)
-    if (!extra) return m
-    return { ...m, ...extra } as ChatMessageWithExtras
-  })
+  const enrichedMessages = useMemo(
+    () =>
+      messages.map((m) => {
+        const extra = extrasRef.current.get(m.id)
+        if (!extra) return m
+        return { ...m, ...extra } as ChatMessageWithExtras
+      }),
+    [messages, extrasVersion],
+  )
 
   return {
     messages: enrichedMessages,

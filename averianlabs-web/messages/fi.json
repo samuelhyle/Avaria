@@ -381,6 +381,7 @@
     "close": "Sulje",
     "clearConversation": "Tyhjennä keskustelu",
     "inputPlaceholder": "Kysy tuotteista, analyysitodistuksista, liuotuksesta…",
+    "charCounter": "{count} / {max}",
     "greeting": "Hei — olen Averia.",
     "greetingSub": "Voin auttaa selaamaan valikoimaa, tarkistamaan analyysitodistuksen tietoja, vertailemaan tuotteita tai hoitamaan tilauksen.",
     "errorTitle": "Jotain meni pieleen",

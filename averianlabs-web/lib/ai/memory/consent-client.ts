@@ -4,29 +4,21 @@
  * The chat widget reads/writes these via `localStorage` and `document.cookie`.
  * The cookie is the source of truth for the server (route handlers), the
  * localStorage value is used as a fast client cache for the anon id.
+ *
+ * The signed cookie itself is now minted server-side from the chat request
+ * (see `app/api/ai/chat/route.ts`) — the client just sends the raw UUID it
+ * generated and the response carries `Set-Cookie: averia_anon=…`. This
+ * eliminates the previous race where the chat request could arrive before
+ * the identity round-trip had resolved.
  */
 
 import { CONSENT_COOKIE } from "@/lib/ai/memory/cookies"
 
 const ANON_LS_KEY = "averia:anon"
-const PROVISIONED_KEY = "averia:identity-provisioned"
 
 function uuid(): string {
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) return crypto.randomUUID()
   return `anon-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`
-}
-
-/** Asks the server to issue a signed, httpOnly identity cookie. */
-async function provisionAnonIdentity(id: string): Promise<void> {
-  try {
-    await fetch("/api/ai/identity", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ anonId: id }),
-    })
-  } catch {
-    // Non-blocking: chat still works without persisted anonymous identity.
-  }
 }
 
 export function getOrCreateAnonId(): string {
@@ -36,14 +28,6 @@ export function getOrCreateAnonId(): string {
   if (!id) {
     id = uuid()
     window.localStorage.setItem(ANON_LS_KEY, id)
-    void provisionAnonIdentity(id)
-    return id
-  }
-
-  // Existing visitors may hold an unsigned cookie from before signing shipped.
-  if (!window.sessionStorage.getItem(PROVISIONED_KEY)) {
-    window.sessionStorage.setItem(PROVISIONED_KEY, "1")
-    void provisionAnonIdentity(id)
   }
   return id
 }

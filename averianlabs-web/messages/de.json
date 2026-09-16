@@ -401,6 +401,7 @@
     "close": "Schließen",
     "clearConversation": "Unterhaltung löschen",
     "inputPlaceholder": "Fragen zu Produkten, COA, Rekonstitution…",
+    "charCounter": "{count} / {max}",
     "greeting": "Hallo — ich bin Averia.",
     "greetingSub": "Ich helfe beim Stöbern im Katalog, beim Prüfen von COAs, beim Vergleichen von Produkten oder bei Bestellungen.",
     "errorTitle": "Etwas ist schiefgelaufen",
