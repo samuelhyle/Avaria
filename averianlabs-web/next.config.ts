@@ -90,7 +90,21 @@ const config: NextConfig = isDemoBuild
       reactStrictMode: true,
       poweredByHeader: false,
       typescript: { ignoreBuildErrors: false },
-      serverExternalPackages: ["postgres", "argon2"],
+      // Native / heavy modules that shouldn't be bundled into the server
+      // handler. Netlify's deploy upload rejected ___netlify-server-handler
+      // because the App Router bundle included the ONNX runtime, three.js,
+      // PDF viewer, etc. Marking these as external lets Node load them at
+      // runtime from the function's `node_modules/` instead of inlining them.
+      // Anything that's only used client-side (three, drei, react-pdf) is
+      // additionally excluded from file tracing below — those are pulled
+      // into SSR by accident via shared utilities.
+      serverExternalPackages: [
+        "postgres",
+        "argon2",
+        "@huggingface/transformers",
+        "onnxruntime-node",
+        "sharp",
+      ],
       // Standalone output is only used for the Docker production image
       // (see `Dockerfile`). The Netlify plugin needs the regular
       // `.next/server` tree to package route handlers as Functions.
@@ -99,6 +113,28 @@ const config: NextConfig = isDemoBuild
       // clobber a running dev server's `.next` cache.
       distDir: process.env.NEXT_DIST_DIR ?? ".next",
       outputFileTracingRoot: process.cwd(),
+      // Strip client-only bundles from the server trace. These reach the
+      // server bundle via the `react-three/*` `assistant` page and the
+      // Sanity Studio. Each is megabytes of JS that never executes on the
+      // server but inflates ___netlify-server-handler past Netlify's
+      // deploy-upload body limit. pnpm flattens everything under
+      // `node_modules/.pnpm/<name>@<version>/node_modules/<name>/`, so the
+      // glob must include `.pnpm/`.
+      outputFileTracingExcludes: {
+      "*": [
+        "node_modules/.pnpm/@react-three+fiber*/**",
+        "node_modules/.pnpm/@react-three+drei*/**",
+        "node_modules/.pnpm/@react-three+postprocessing*/**",
+        "node_modules/.pnpm/three*/**",
+        "node_modules/.pnpm/postprocessing*/**",
+        "node_modules/.pnpm/react-pdf*/**",
+        "node_modules/.pnpm/pdfjs-dist*/**",
+        "node_modules/.pnpm/@huggingface+transformers*/**",
+        "node_modules/.pnpm/onnxruntime-node*/**",
+        "node_modules/.pnpm/@img+sharp*/**",
+        "node_modules/.pnpm/@img+colour*/**",
+      ],
+      },
       experimental: {
         serverActions: { bodySizeLimit: "2mb" },
       },
@@ -137,18 +173,27 @@ const config: NextConfig = isDemoBuild
       },
     }
 
-export default isDemoBuild
-  ? withNextIntl(config)
-  : withSentryConfig(withNextIntl(config), {
-      org: process.env.SENTRY_ORG,
-      project: process.env.SENTRY_PROJECT,
-      silent: !process.env.CI,
-      widenClientFileUpload: true,
-      // Upload hidden source maps only when a token is available; local/CI builds
-      // without Sentry credentials skip the upload instead of failing.
-      sourcemaps: {
-        disable: !process.env.SENTRY_AUTH_TOKEN,
-        deleteSourcemapsAfterUpload: true,
-      },
-      tunnelRoute: "/api/sentry-tunnel",
-    })
+// Sentry's `withSentryConfig` wrapper injects ~30 files worth of build
+// tooling into the server bundle. The Netlify plugin can't split the
+// monolithic `___netlify-server-handler` (App Router limitation), so the
+// wrapper pushes the bundle past Netlify's deploy-upload body limit when
+// Sentry is configured. On Netlify, skip the wrapper and rely on the
+// `/api/sentry-tunnel` route + server-side console logging instead.
+const maybeWithSentry = (cfg: NextConfig): NextConfig =>
+  isNetlifyDeploy
+    ? cfg
+    : withSentryConfig(cfg, {
+        org: process.env.SENTRY_ORG,
+        project: process.env.SENTRY_PROJECT,
+        silent: !process.env.CI,
+        widenClientFileUpload: true,
+        // Upload hidden source maps only when a token is available; local/CI builds
+        // without Sentry credentials skip the upload instead of failing.
+        sourcemaps: {
+          disable: !process.env.SENTRY_AUTH_TOKEN,
+          deleteSourcemapsAfterUpload: true,
+        },
+        tunnelRoute: "/api/sentry-tunnel",
+      })
+
+export default isDemoBuild ? withNextIntl(config) : maybeWithSentry(withNextIntl(config))

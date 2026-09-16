@@ -85,8 +85,12 @@
   path = "averianlabs-web/.next/cache"
 
 # Pin the official Next.js Runtime plugin. Without this, Netlify auto-detects
-# Next and installs whatever version it ships with — pinning avoids surprise
-# upgrades and lets us opt into `nodeVersion = 22` consistently.
+# Next and installs whatever version it ships with — pinning to a major avoids
+# surprise upgrades. Netlify's TOML doesn't accept `package = "...@x.y.z"` so
+# we rely on Netlify resolving `@netlify/plugin-nextjs` to its current 5.x
+# (currently 5.15.13). Tree-shaking improvements shipped in v5.x are what
+# let the App Router server handler stay under Netlify's deploy-upload body
+# limit after the heavy native + 3D deps are externalised in next.config.ts.
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
