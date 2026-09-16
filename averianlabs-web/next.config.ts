@@ -63,6 +63,14 @@ const securityHeaders = [
   { key: "Content-Security-Policy", value: csp },
 ]
 
+// Netlify's Next.js Runtime plugin bundles each route handler as a Netlify
+// Function from the standard `.next/server/app/*` tree. It does NOT support
+// `output: "standalone"` — when that flag is set, the plugin doesn't pick up
+// per-route handlers and the deploy lands on a blank page (everything 404s
+// or hits the default error route). Netlify always exports `NETLIFY=true`,
+// so we drop standalone there and rely on the plugin's own bundler.
+const isNetlifyDeploy = process.env.NETLIFY === "true"
+
 const config: NextConfig = isDemoBuild
   ? {
       // Static-export demo build for Netlify. Drops every runtime feature
@@ -83,7 +91,10 @@ const config: NextConfig = isDemoBuild
       poweredByHeader: false,
       typescript: { ignoreBuildErrors: false },
       serverExternalPackages: ["postgres", "argon2"],
-      output: "standalone",
+      // Standalone output is only used for the Docker production image
+      // (see `Dockerfile`). The Netlify plugin needs the regular
+      // `.next/server` tree to package route handlers as Functions.
+      ...(isNetlifyDeploy ? {} : { output: "standalone" as const }),
       // Allow verification builds to use a separate directory so they don't
       // clobber a running dev server's `.next` cache.
       distDir: process.env.NEXT_DIST_DIR ?? ".next",
