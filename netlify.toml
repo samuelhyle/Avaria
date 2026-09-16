@@ -46,9 +46,15 @@
 [build]
   base    = "averianlabs-web"
   command = "pnpm install --frozen-lockfile && pnpm build"
-  # The Next.js Runtime plugin manages the publish directory itself; setting
-  # it explicitly here would override the plugin's output and break the
-  # Functions / Edge / Static routing. Leave it unset.
+  # The Next.js Runtime plugin reads .next/server/app/* for routes, packages
+  # .next/static as static assets, and writes Functions to
+  # .netlify/functions-internal/. Setting `publish = ".next"` tells Netlify
+  # where the plugin's static output lives; it MUST differ from `base`,
+  # otherwise the plugin errors with:
+  #   "Your publish directory cannot be the same as the base directory of your site."
+  # (We have to set it explicitly here because the Netlify UI has a stale
+  # `publish` value pointing at the base directory — TOML overrides UI.)
+  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "22"
