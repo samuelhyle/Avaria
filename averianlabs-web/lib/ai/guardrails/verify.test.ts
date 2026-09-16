@@ -1,5 +1,5 @@
+import { extractPrices, extractSkus, verifyResponse } from "@/lib/ai/guardrails/verify"
 import { describe, expect, it } from "vitest"
-import { extractSkus, extractPrices, verifyResponse } from "@/lib/ai/guardrails/verify"
 
 describe("guardrails/verify — extractSkus", () => {
   it("matches canonical peptide-name SKUs like BPC-157", () => {

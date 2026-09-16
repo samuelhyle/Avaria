@@ -1,19 +1,23 @@
 #!/usr/bin/env bash
-# Build the static Netlify demo (no DB, no auth, no Stripe, no Sanity).
+# Build the *static* marketing/demo bundle for local preview only.
 #
-# Output: .next/ → out/  (publish this directory to Netlify)
+# Output: .next-demo/ → out/  (a fully static site, no Node server)
 #
 # Usage:
 #   ./scripts/build-demo.sh                 # build only
 #   ./scripts/build-demo.sh --serve         # build + serve out/ on :3001
 #
-# The script forces BUILD_MODE=demo and a clean .next so the static export
-# doesn't clobber a running dev server's cache. It also:
+# This is intentionally separate from the production Netlify deploy, which
+# runs the full Next.js app (`pnpm build` + `@netlify/plugin-nextjs`) so that
+# `app/api/` and route handlers like `/api/ai/chat` work at runtime. Use
+# this script only when you want a no-server preview (e.g. design QA,
+# screenshots, marketing review). It forces BUILD_MODE=demo and:
 #   - patches `export const dynamic = "force-dynamic"` route-segment configs
 #     (which `output: "export"` rejects) and restores them afterwards
 #   - moves `app/api/` aside because API routes are incompatible with
 #     `output: "export"` — they require a server runtime that the demo
 #     doesn't provide
+#   - sets `Cache-Control: noindex` so the bundle can't be confused with prod
 
 set -euo pipefail
 

@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation"
 import { isDemoBuild } from "@/lib/demo"
 import Link from "next/link"
+import { redirect } from "next/navigation"
 
 const LOCALES = [
   { code: "en", label: "English" },
@@ -24,8 +24,8 @@ export default function RootPage() {
             Pick a language
           </h1>
           <p className="mt-3 text-sm text-ink-muted">
-            This is the static demo build. Auth, cart checkout, community, and live integrations
-            are disabled. Marketing, catalogue, blog, and glossary are pre-rendered.
+            This is the static demo build. Auth, cart checkout, community, and live integrations are
+            disabled. Marketing, catalogue, blog, and glossary are pre-rendered.
           </p>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2">
             {LOCALES.map(({ code, label }) => (
@@ -41,7 +41,10 @@ export default function RootPage() {
             ))}
           </ul>
           <p className="mt-8 text-3xs text-ink-subtle">
-            Default: <Link href="/en/" className="underline hover:text-accent">/en/</Link>
+            Default:{" "}
+            <Link href="/en/" className="underline hover:text-accent">
+              /en/
+            </Link>
           </p>
         </div>
       </main>

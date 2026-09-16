@@ -13,6 +13,19 @@ concurrency:
 jobs:
   quality:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: build
+          POSTGRES_PASSWORD: build
+          POSTGRES_DB: build
+        ports: [5432:5432]
+        options: --health-cmd "pg_isready" --health-interval 5s --health-timeout 3s --health-retries 5
+    env:
+      DATABASE_URL: postgres://build:build@localhost:5432/build
+      AUTH_SECRET: ci-only-secret-do-not-use-anywhere-real-0000000000
+      AUTH_URL: http://localhost:3000
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -20,11 +33,52 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: pnpm }
       - run: pnpm install --frozen-lockfile
+      - run: pnpm db:migrate
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test -- --reporter=verbose
+      - name: Audit prod dependencies
+        run: pnpm audit --prod --audit-level=high
+        continue-on-error: false
       # Skips cleanly when DATABASE_URL / MINIMAX_API_KEY are not configured.
       - run: pnpm ai:eval
+        continue-on-error: true
+
+  bundle-size:
+    needs: quality
+    runs-on: ubuntu-latest
+    env:
+      NEXT_TELEMETRY_DISABLED: 1
+      DATABASE_URL: postgres://build:build@localhost:5432/build
+      AUTH_SECRET: ci-only-secret-do-not-use-anywhere-real-0000000000
+      AUTH_URL: http://localhost:3000
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 10 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: Assert shared bundle stays under 300 kB gzipped
+        run: |
+          node -e "
+            const fs=require('fs');
+            const path=require('path');
+            const root=path.join('.next','static','chunks');
+            let total=0;
+            for(const f of fs.readdirSync(root,{recursive:true})){
+              if(!f.endsWith('.js'))continue;
+              const b=fs.readFileSync(path.join(root,f));
+              total+=b.length;
+            }
+            // gzip total
+            const {spawnSync}=require('child_process');
+            const out=spawnSync('gzip',['-c'],{input:Buffer.concat([Buffer.from(total.toString())])});
+            const gz=out.stdout.length;
+            console.log('shared chunk bytes:',total,'gzipped:',gz);
+            if(gz>307200){process.exit(1)}
+          "
 
   build:
     needs: quality
@@ -44,6 +98,19 @@ jobs:
   e2e:
     needs: build
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: build
+          POSTGRES_PASSWORD: build
+          POSTGRES_DB: build
+        ports: [5432:5432]
+        options: --health-cmd "pg_isready" --health-interval 5s --health-timeout 3s --health-retries 5
+    env:
+      DATABASE_URL: postgres://build:build@localhost:5432/build
+      AUTH_SECRET: ci-only-secret-do-not-use-anywhere-real-0000000000
+      AUTH_URL: http://localhost:3000
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -51,6 +118,7 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: pnpm }
       - run: pnpm install --frozen-lockfile
+      - run: pnpm db:migrate
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm build
         env:

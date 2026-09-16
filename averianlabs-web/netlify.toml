@@ -1,26 +1,32 @@
-# Netlify config for the AverianLabs static demo.
+# Netlify config for the AverianLabs Next.js app.
 #
 # Build pipeline:
 #   1. `pnpm install`         – restore deps
-#   2. `pnpm build:demo`      – runs ./scripts/build-demo.sh, which forces
-#                               BUILD_MODE=demo and `next build` with
-#                               `output: "export"`. The script writes the
-#                               static site to ./out.
+#   2. `pnpm build`           – standard `next build`; the Next.js Runtime
+#                               plugin below packages the result into Netlify
+#                               Functions + Edge Functions automatically.
 #
-# The deploy publishes ./out and serves it with Netlify's CDN. There are no
-# Functions, no Edge Functions, and no background workers — purely static.
+# `app/api/` ships intact — route handlers run as Node Functions and read
+# secrets (`MINIMAX_API_KEY`, etc.) from Netlify env vars at invocation
+# time. Never put server-only secrets in `NEXT_PUBLIC_*`, in this file,
+# or in `.env*` committed to git; set them under
+#   Site settings → Environment variables → Production / Preview / Branch
+# and the Netlify Next.js plugin will surface them to the function runtime.
 
 [build]
   base    = "averianlabs-web"
-  command = "pnpm install --frozen-lockfile && pnpm build:demo"
-  publish = "out"
+  # `BUILD_MODE` is intentionally not set here so the non-demo branch of
+  # `next.config.ts` runs (`output: "standalone"` → bundled into Functions
+  # by the plugin). The static demo build still exists for local preview:
+  #   pnpm build:demo --serve
+  # but it is no longer what we publish.
+  command = "pnpm install --frozen-lockfile && pnpm build"
+  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "22"
   PNPM_VERSION = "10"
-  # The build script sets BUILD_MODE=demo and NODE_ENV=production itself, but
-  # we declare them here so Netlify's deploy context inherits the same intent.
-  BUILD_MODE = "demo"
+  # Declared explicitly so the deploy context matches the local intent.
   NODE_ENV = "production"
   NEXT_TELEMETRY_DISABLED = "1"
 
@@ -28,170 +34,19 @@
 [[cache]]
   path = "averianlabs-web/node_modules/.pnpm-store"
 
-# Locale-prefix rewrite: the production app uses middleware to 307 → /en/...
-# when a request hits a non-locale path. The static demo can't run middleware
-# at request time, so we replicate the same behaviour with Netlify's redirect
-# engine. Bare paths redirect to the user's preferred locale (default /en/);
-# every other top-level path gets the same prefix.
-[[redirects]]
-  from = "/"
-  to   = "/en/"
-  status = 302
-  conditions = { Language = ["en"] }
+# Pin the official Next.js Runtime plugin. Without this, Netlify auto-detects
+# Next and installs whatever version it ships with — pinning avoids surprise
+# upgrades and lets us opt into `nodeVersion = 22` consistently.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
-[[redirects]]
-  from = "/"
-  to   = "/fi/"
-  status = 302
-  conditions = { Language = ["fi"] }
+# Locale-prefix redirect: the production app uses middleware to 307 → /en/...
+# when a request hits a non-locale path. With the Next.js Runtime the
+# middleware executes server-side per request, so we no longer need the
+# static-export rewrite engine that the previous demo required. Root only.
 
-[[redirects]]
-  from = "/"
-  to   = "/de/"
-  status = 302
-  conditions = { Language = ["de"] }
-
-[[redirects]]
-  from = "/"
-  to   = "/sv/"
-  status = 302
-  conditions = { Language = ["sv"] }
-
-[[redirects]]
-  from = "/"
-  to   = "/nl/"
-  status = 302
-  conditions = { Language = ["nl"] }
-
-# Catch-all: any bare path that didn't match a known locale → /<defaultLocale>.
-# Each top-level route we ship in demo gets the same 302 prefix. Static asset
-# extensions are skipped because Next emits real files for them.
-[[redirects]]
-  from = "/about"
-  to   = "/en/about"
-  status = 302
-
-[[redirects]]
-  from = "/faq"
-  to   = "/en/faq"
-  status = 302
-
-[[redirects]]
-  from = "/quality"
-  to   = "/en/quality"
-  status = 302
-
-[[redirects]]
-  from = "/shop"
-  to   = "/en/shop"
-  status = 302
-
-[[redirects]]
-  from = "/blog"
-  to   = "/en/blog"
-  status = 302
-
-[[redirects]]
-  from = "/glossary"
-  to   = "/en/glossary"
-  status = 302
-
-[[redirects]]
-  from = "/lab-tests"
-  to   = "/en/lab-tests"
-  status = 302
-
-[[redirects]]
-  from = "/peptide-calculator"
-  to   = "/en/peptide-calculator"
-  status = 302
-
-[[redirects]]
-  from = "/wishlist"
-  to   = "/en/wishlist"
-  status = 302
-
-[[redirects]]
-  from = "/compare"
-  to   = "/en/compare"
-  status = 302
-
-[[redirects]]
-  from = "/coa"
-  to   = "/en/coa"
-  status = 302
-
-[[redirects]]
-  from = "/rewards"
-  to   = "/en/rewards"
-  status = 302
-
-[[redirects]]
-  from = "/contact"
-  to   = "/en/contact"
-  status = 302
-
-[[redirects]]
-  from = "/partner"
-  to   = "/en/partner"
-  status = 302
-
-[[redirects]]
-  from = "/assistant"
-  to   = "/en/assistant"
-  status = 302
-
-[[redirects]]
-  from = "/community/rules"
-  to   = "/en/community/rules"
-  status = 302
-
-[[redirects]]
-  from = "/legal/cookies"
-  to   = "/en/legal/cookies"
-  status = 302
-
-[[redirects]]
-  from = "/legal/privacy"
-  to   = "/en/legal/privacy"
-  status = 302
-
-[[redirects]]
-  from = "/legal/terms"
-  to   = "/en/legal/terms"
-  status = 302
-
-[[redirects]]
-  from = "/legal/research-disclaimer"
-  to   = "/en/legal/research-disclaimer"
-  status = 302
-
-[[redirects]]
-  from = "/support/shipping-returns"
-  to   = "/en/support/shipping-returns"
-  status = 302
-
-[[redirects]]
-  from = "/forgot-password"
-  to   = "/en/forgot-password"
-  status = 302
-
-[[redirects]]
-  from = "/reset-password"
-  to   = "/en/reset-password"
-  status = 302
-
-[[redirects]]
-  from = "/register"
-  to   = "/en/register"
-  status = 302
-
-[[redirects]]
-  from = "/checkout/cart"
-  to   = "/en/checkout/cart"
-  status = 302
-
-# Noindex headers on every response (the demo must not be indexed).
+# Noindex headers on every response (the Netlify deploy is still a
+# preview/demo — the canonical site is Vercel).
 [[headers]]
   for = "/*"
   [headers.values]

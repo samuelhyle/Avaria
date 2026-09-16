@@ -1,6 +1,7 @@
 import { NewsletterForm } from "@/components/home/NewsletterForm"
 import { Logo } from "@/components/layout/Logo"
 import { Container } from "@/components/ui/Container"
+import { getLegalIdentity } from "@/lib/legal"
 import { FlaskConical, Github, Linkedin, Lock, ShieldCheck, Truck, Twitter } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import Link from "next/link"
@@ -11,6 +12,7 @@ interface FooterProps {
 
 export async function Footer({ locale }: FooterProps) {
   const t = await getTranslations("footer")
+  const legal = getLegalIdentity()
 
   const cols = [
     {
@@ -118,9 +120,18 @@ export async function Footer({ locale }: FooterProps) {
           </div>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-ink-muted">
             <span>
-              © {year} AverianLabs Oy · {t("rightsReserved", { year })}
+              © {year} {legal.companyName} · {t("rightsReserved", { year })}
             </span>
-            <span className="font-mono">VAT: FI-pending</span>
+            <span className="font-mono">
+              Y-tunnus {legal.businessId} · VAT {legal.vatId}
+            </span>
+            <address className="not-italic">
+              <a href={`mailto:${legal.contactEmail}`} className="hover:text-ink hover:underline">
+                {legal.contactEmail}
+              </a>
+              {" · "}
+              {legal.addressLine1}, {legal.addressLine2}
+            </address>
           </div>
         </div>
       </Container>

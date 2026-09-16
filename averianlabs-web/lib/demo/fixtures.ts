@@ -1,3 +1,4 @@
+import type { AuthorRecord } from "@/lib/blog/authors"
 /**
  * Static fixtures used when `BUILD_MODE=demo`.
  *
@@ -8,7 +9,6 @@
  * not the full editorial surface.
  */
 import type { BlogPostRecord } from "@/lib/blog/posts"
-import type { AuthorRecord } from "@/lib/blog/authors"
 import type { GlossaryTermRecord } from "@/lib/glossary/sanity"
 
 export const DEMO_AUTHORS: AuthorRecord[] = [
@@ -71,8 +71,7 @@ export const DEMO_POSTS: BlogPostRecord[] = [
   {
     slug: "ghk-cu-copper",
     title: "GHK-Cu and the renaissance of copper-peptide cosmetic research",
-    excerpt:
-      "From 1973 to 2026 — the rediscovery of a tripeptide that was always quietly working.",
+    excerpt: "From 1973 to 2026 — the rediscovery of a tripeptide that was always quietly working.",
     tag: "Cosmetic",
     publishedAt: "2026-06-18",
     readMin: 6,
@@ -85,8 +84,7 @@ export const DEMO_POSTS: BlogPostRecord[] = [
   {
     slug: "tb-500-thymosin",
     title: "TB-500 fragment: what Thymosin β4 actually does in actin sequestration",
-    excerpt:
-      "The actin-binding story behind the most-studied tissue-recovery peptide fragment.",
+    excerpt: "The actin-binding story behind the most-studied tissue-recovery peptide fragment.",
     tag: "Recovery",
     publishedAt: "2026-06-02",
     readMin: 7,
@@ -170,7 +168,8 @@ export const DEMO_GLOSSARY: GlossaryTermRecord[] = [
     term: "Cold chain",
     slug: "cold-chain",
     category: "logistics",
-    shortDefinition: "Temperature-controlled shipping and storage; required for most lyophilized peptides.",
+    shortDefinition:
+      "Temperature-controlled shipping and storage; required for most lyophilized peptides.",
     body: [],
   },
   {
