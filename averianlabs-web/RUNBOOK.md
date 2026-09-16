@@ -9,6 +9,7 @@ incident and the last thing to update before a release.
 |---|---|---|---|---|
 | Production | Vercel | https://averianlabs.eu | Neon primary | Single-region (Vercel default); auto-scale. |
 | Staging | Vercel preview | https://staging.averianlabs.eu | Neon branch (copy of prod, reset weekly) | Created on every push to `main`. |
+| Preview | Netlify | https://<site>.netlify.app | Optional (Neon if configured) | Runs the same `output: "standalone"` Next.js app via `@netlify/plugin-nextjs`. Gracefully degrades when `DATABASE_URL` / `AUTH_SECRET` / Stripe are not set — see README "Netlify deployment (graceful degradation)". Created on every push to `demo`. |
 | Local | Docker compose | http://localhost:3000 | `averianlabs:averianlabs@postgres:5432` | Used for reproductions; matches prod schema. |
 
 ## Contacts
@@ -103,7 +104,7 @@ Then run any schema-related fixes manually (Vercel doesn't run down-migrations).
    matching Preview / Branch values if they exist), then redeploy. The
    lefthook `secret-guard` hook rejects any commit that stages a non-empty
    value, so this rotation never writes the key to git. After redeploy,
-   `curl -fs https://<netlify-url>/api/health | jq .checks.env` must return
+   `curl -fs https://<netlify-url>/api/health | jq .checks.minimax` must return
    `true` and `/api/ai/chat` must answer a 1-token probe without 503.
 
 ### Restore the database

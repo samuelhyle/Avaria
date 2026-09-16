@@ -1,8 +1,7 @@
 import { users } from "@/db/schema"
 import { TOKEN_TTL_MS, createToken, tokenIdentifiers } from "@/lib/auth/tokens"
-import { db } from "@/lib/db"
+import { db, isDatabaseConfigured } from "@/lib/db"
 import { passwordResetHtml, sendEmail } from "@/lib/email"
-import { getServerEnv } from "@/lib/env"
 import { locales } from "@/lib/i18n/config"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
@@ -21,6 +20,10 @@ export async function POST(req: Request) {
   const ok = NextResponse.json({ ok: true })
 
   if (!ipLimit.success) return ok
+  // Always return the same response — no account enumeration. When the
+  // deployment has no database configured, the route still answers `ok`
+  // so the form UX is identical to a successful submission.
+  if (!isDatabaseConfigured()) return ok
 
   let body: unknown
   try {
@@ -43,13 +46,12 @@ export async function POST(req: Request) {
   })
   if (!user?.passwordHash || user.deletedAt) return ok
 
-  const env = getServerEnv()
-  if (env.RESEND_API_KEY) {
+  if (process.env.RESEND_API_KEY?.trim()) {
     const token = await createToken(
       tokenIdentifiers.passwordReset(email),
       TOKEN_TTL_MS.passwordReset,
     )
-    const origin = env.AUTH_URL ?? new URL(req.url).origin
+    const origin = process.env.AUTH_URL?.trim() || new URL(req.url).origin
     const url = `${origin}/${parsed.data.locale}/reset-password?token=${encodeURIComponent(token)}&email=${encodeURIComponent(email)}`
     await sendEmail({
       to: email,

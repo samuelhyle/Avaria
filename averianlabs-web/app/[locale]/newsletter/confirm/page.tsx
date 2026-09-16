@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button"
 import { Container } from "@/components/ui/Container"
 import { newsletterSubscribers } from "@/db/schema"
 import { hashToken } from "@/lib/auth/tokens"
-import { db } from "@/lib/db"
+import { db, isDatabaseConfigured } from "@/lib/db"
 import { and, eq, gt } from "drizzle-orm"
 import { AlertTriangle, CheckCircle2 } from "lucide-react"
 import type { Metadata } from "next"
@@ -26,36 +26,42 @@ export default async function NewsletterConfirmPage({ params, searchParams }: Pr
   setRequestLocale(locale)
   const t = await getTranslations("newsletter")
 
-  let state: "success" | "invalid" | "missing" = "missing"
-  if (token && rawEmail) {
-    const email = rawEmail.trim().toLowerCase()
-    const [subscriber] = await db
-      .select({ id: newsletterSubscribers.id })
-      .from(newsletterSubscribers)
-      .where(
-        and(
-          eq(newsletterSubscribers.email, email),
-          eq(newsletterSubscribers.confirmToken, hashToken(token)),
-          eq(newsletterSubscribers.status, "pending"),
-          gt(newsletterSubscribers.confirmExpiresAt, new Date()),
-        ),
-      )
-      .limit(1)
+  let state: "success" | "invalid" | "missing" | "unavailable" = "missing"
+  if (!isDatabaseConfigured()) {
+    state = "unavailable"
+  } else if (token && rawEmail) {
+    try {
+      const email = rawEmail.trim().toLowerCase()
+      const [subscriber] = await db
+        .select({ id: newsletterSubscribers.id })
+        .from(newsletterSubscribers)
+        .where(
+          and(
+            eq(newsletterSubscribers.email, email),
+            eq(newsletterSubscribers.confirmToken, hashToken(token)),
+            eq(newsletterSubscribers.status, "pending"),
+            gt(newsletterSubscribers.confirmExpiresAt, new Date()),
+          ),
+        )
+        .limit(1)
 
-    if (subscriber) {
-      await db
-        .update(newsletterSubscribers)
-        .set({
-          status: "confirmed",
-          confirmedAt: new Date(),
-          confirmToken: null,
-          confirmExpiresAt: null,
-          updatedAt: new Date(),
-        })
-        .where(eq(newsletterSubscribers.id, subscriber.id))
-      state = "success"
-    } else {
-      state = "invalid"
+      if (subscriber) {
+        await db
+          .update(newsletterSubscribers)
+          .set({
+            status: "confirmed",
+            confirmedAt: new Date(),
+            confirmToken: null,
+            confirmExpiresAt: null,
+            updatedAt: new Date(),
+          })
+          .where(eq(newsletterSubscribers.id, subscriber.id))
+        state = "success"
+      } else {
+        state = "invalid"
+      }
+    } catch {
+      state = "unavailable"
     }
   }
 
@@ -64,7 +70,9 @@ export default async function NewsletterConfirmPage({ params, searchParams }: Pr
       ? t("confirmSuccess")
       : state === "invalid"
         ? t("confirmInvalid")
-        : t("confirmMissing")
+        : state === "unavailable"
+          ? "This deployment doesn't have a database configured."
+          : t("confirmMissing")
 
   return (
     <Container size="narrow" className="py-16">

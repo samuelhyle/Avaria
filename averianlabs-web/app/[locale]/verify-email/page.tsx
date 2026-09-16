@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button"
 import { Container } from "@/components/ui/Container"
 import { users } from "@/db/schema"
 import { consumeToken, tokenIdentifiers } from "@/lib/auth/tokens"
-import { db } from "@/lib/db"
+import { db, isDatabaseConfigured } from "@/lib/db"
 import { eq } from "drizzle-orm"
 import { AlertTriangle, CheckCircle2 } from "lucide-react"
 import type { Metadata } from "next"
@@ -26,19 +26,25 @@ export default async function VerifyEmailPage({ params, searchParams }: Props) {
   setRequestLocale(locale)
   const t = await getTranslations("auth")
 
-  let state: "success" | "invalid" | "missing" = "missing"
-  if (token && rawEmail) {
-    const email = rawEmail.trim().toLowerCase()
-    const valid = await consumeToken(tokenIdentifiers.emailVerification(email), token)
-    if (valid) {
-      const updated = await db
-        .update(users)
-        .set({ emailVerifiedAt: new Date(), updatedAt: new Date() })
-        .where(eq(users.email, email))
-        .returning({ id: users.id })
-      state = updated.length > 0 ? "success" : "invalid"
-    } else {
-      state = "invalid"
+  let state: "success" | "invalid" | "missing" | "unavailable" = "missing"
+  if (!isDatabaseConfigured()) {
+    state = "unavailable"
+  } else if (token && rawEmail) {
+    try {
+      const email = rawEmail.trim().toLowerCase()
+      const valid = await consumeToken(tokenIdentifiers.emailVerification(email), token)
+      if (valid) {
+        const updated = await db
+          .update(users)
+          .set({ emailVerifiedAt: new Date(), updatedAt: new Date() })
+          .where(eq(users.email, email))
+          .returning({ id: users.id })
+        state = updated.length > 0 ? "success" : "invalid"
+      } else {
+        state = "invalid"
+      }
+    } catch {
+      state = "unavailable"
     }
   }
 
@@ -47,7 +53,9 @@ export default async function VerifyEmailPage({ params, searchParams }: Props) {
       ? t("verifySuccess")
       : state === "invalid"
         ? t("verifyInvalid")
-        : t("verifyMissing")
+        : state === "unavailable"
+          ? "This deployment doesn't have a database configured."
+          : t("verifyMissing")
 
   return (
     <Container size="narrow" className="py-16">

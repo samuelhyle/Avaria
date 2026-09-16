@@ -18,6 +18,12 @@ import type { FeatureExtractionPipeline } from "@huggingface/transformers"
 
 const MODEL_ID = "Xenova/all-MiniLM-L6-v2"
 const EXPECTED_DIM = 384
+// The model download from the HuggingFace Hub + ONNX warm-up takes ~9s on
+// a warm cache and can take much longer in cold environments (e.g. Netlify
+// functions without persistent storage, where the first request downloads the
+// model). We give the loader a generous budget, then fall back to no-RAG so
+// chat requests never hang.
+const PIPELINE_LOAD_TIMEOUT_MS = 20_000
 
 interface LocalEmbedderState {
   pipeline: FeatureExtractionPipeline | null
@@ -43,7 +49,14 @@ async function getPipeline(): Promise<FeatureExtractionPipeline> {
       const { pipeline } = await import("@huggingface/transformers")
       // q8 quantization drops the model to ~23 MB and is fast on CPU;
       // quality loss vs. fp32 is negligible for retrieval.
-      const p = await pipeline("feature-extraction", MODEL_ID, { dtype: "q8" })
+      const loadPromise = pipeline("feature-extraction", MODEL_ID, { dtype: "q8" })
+      const timeoutPromise = new Promise<never>((_resolve, reject) =>
+        setTimeout(
+          () => reject(new Error(`local embedder load timed out after ${PIPELINE_LOAD_TIMEOUT_MS}ms`)),
+          PIPELINE_LOAD_TIMEOUT_MS,
+        ),
+      )
+      const p = await Promise.race<FeatureExtractionPipeline>([loadPromise, timeoutPromise])
       state.pipeline = p
       return p
     } catch (err) {

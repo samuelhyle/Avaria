@@ -1,6 +1,6 @@
 import { users } from "@/db/schema"
 import { consumeToken, tokenIdentifiers } from "@/lib/auth/tokens"
-import { db } from "@/lib/db"
+import { db, isDatabaseConfigured } from "@/lib/db"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { hash } from "argon2"
@@ -15,6 +15,13 @@ const bodySchema = z.object({
 })
 
 export async function POST(req: Request) {
+  if (!isDatabaseConfigured()) {
+    return NextResponse.json(
+      { error: "Authentication is not available on this deployment." },
+      { status: 503 },
+    )
+  }
+
   const ip = clientIp(req)
   const limit = await rateLimit(`reset:ip:${ip}`, { limit: 10, window: "1 h" })
   if (!limit.success) {

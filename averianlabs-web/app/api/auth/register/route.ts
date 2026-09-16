@@ -1,8 +1,7 @@
 import { users } from "@/db/schema"
 import { TOKEN_TTL_MS, createToken, tokenIdentifiers } from "@/lib/auth/tokens"
-import { db } from "@/lib/db"
+import { db, isDatabaseConfigured } from "@/lib/db"
 import { sendEmail, verifyEmailHtml } from "@/lib/email"
-import { getServerEnv } from "@/lib/env"
 import { locales } from "@/lib/i18n/config"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
@@ -19,6 +18,13 @@ const bodySchema = z.object({
 })
 
 export async function POST(req: Request) {
+  if (!isDatabaseConfigured()) {
+    return NextResponse.json(
+      { error: "Authentication is not available on this deployment." },
+      { status: 503 },
+    )
+  }
+
   const ip = clientIp(req)
   const limit = await rateLimit(`register:ip:${ip}`, { limit: 5, window: "1 h" })
   if (!limit.success) {
@@ -38,7 +44,7 @@ export async function POST(req: Request) {
   }
 
   const email = parsed.data.email.trim().toLowerCase()
-  const env = getServerEnv()
+  const resendKey = process.env.RESEND_API_KEY?.trim()
 
   const existing = await db.query.users.findFirst({
     where: eq(users.email, email),
@@ -61,12 +67,12 @@ export async function POST(req: Request) {
     role: "customer",
   })
 
-  if (env.RESEND_API_KEY) {
+  if (resendKey) {
     const token = await createToken(
       tokenIdentifiers.emailVerification(email),
       TOKEN_TTL_MS.emailVerification,
     )
-    const origin = env.AUTH_URL ?? new URL(req.url).origin
+    const origin = process.env.AUTH_URL?.trim() || new URL(req.url).origin
     const url = `${origin}/${parsed.data.locale}/verify-email?token=${encodeURIComponent(token)}&email=${encodeURIComponent(email)}`
     await sendEmail({
       to: email,

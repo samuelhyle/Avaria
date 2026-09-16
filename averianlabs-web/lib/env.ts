@@ -1,15 +1,12 @@
 import { z } from "zod"
 
-// `next build` evaluates server modules before the runtime env is injected
-// (e.g. the Docker builder only passes a placeholder DATABASE_URL). Relax the
-// production-only requirements during the build phase; runtime still enforces.
-const isBuildPhase = process.env.NEXT_PHASE === "phase-production-build"
-const isProduction = process.env.NODE_ENV === "production" && !isBuildPhase
-
-// The static Netlify demo build (BUILD_MODE=demo) skips every external
-// integration, so the env validator must accept an entirely empty config.
-const isDemoBuild = process.env.BUILD_MODE === "demo"
-
+// All keys are intentionally optional. Server modules that need a particular
+// secret (lib/db.ts for DATABASE_URL, lib/auth/index.ts for AUTH_SECRET/AUTH_URL,
+// lib/payments/*, …) read it lazily and fail closed at the call site with a
+// readable error. This lets the marketing/catalog/AI-chat site stay live on
+// hosts where not every integration is configured (e.g. a Netlify preview
+// without Stripe / Sanity / Postgres) instead of crashing the whole server
+// bundle at module load.
 const emptyToUndefined = (env: unknown): Record<string, unknown> => {
   const source = (env ?? {}) as Record<string, string | undefined>
   const out: Record<string, unknown> = {}
@@ -19,26 +16,17 @@ const emptyToUndefined = (env: unknown): Record<string, unknown> => {
   return out
 }
 
-const requiredInProduction = (schema: z.ZodString) =>
-  isProduction && !isDemoBuild ? schema : schema.optional()
-
 const serverSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
 
-  DATABASE_URL: requiredInProduction(z.string().min(1, "DATABASE_URL is required in production")),
-
-  AUTH_SECRET: requiredInProduction(
-    z.string().min(32, "AUTH_SECRET must be at least 32 characters"),
-  ),
-  // Required in production so Auth.js derives canonical URLs from it rather
-  // than from client-supplied Host headers.
-  AUTH_URL: requiredInProduction(
-    z.string().url("AUTH_URL must be a valid URL, e.g. https://averianlabs.eu"),
-  ),
+  AUTH_SECRET: z.string().min(1).optional(),
+  AUTH_URL: z.string().url().optional(),
   AUTH_GOOGLE_ID: z.string().min(1).optional(),
   AUTH_GOOGLE_SECRET: z.string().min(1).optional(),
 
-  CRON_SECRET: z.string().min(16, "CRON_SECRET must be at least 16 characters").optional(),
+  DATABASE_URL: z.string().min(1).optional(),
+
+  CRON_SECRET: z.string().min(16).optional(),
 
   STRIPE_SECRET_KEY: z.string().min(1).optional(),
   STRIPE_WEBHOOK_SECRET: z.string().min(1).optional(),

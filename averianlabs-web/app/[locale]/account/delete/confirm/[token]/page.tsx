@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/Badge"
 import { Container } from "@/components/ui/Container"
 import { gdprRequests } from "@/db/schema"
 import { getCurrentMember } from "@/lib/community"
-import { db } from "@/lib/db"
+import { db, isDatabaseConfigured } from "@/lib/db"
 import { confirmDeleteRequest } from "@/lib/gdpr"
 import { and, eq, gt } from "drizzle-orm"
 import { AlertTriangle, CheckCircle2 } from "lucide-react"
@@ -26,6 +26,20 @@ export default async function ConfirmDeletePage({ params }: Props) {
   setRequestLocale(locale)
   const t = await getTranslations("gdpr")
   const member = await getCurrentMember()
+
+  if (!isDatabaseConfigured()) {
+    return (
+      <Container size="narrow" className="py-16">
+        <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-8 text-center">
+          <AlertTriangle className="mx-auto mb-3 h-6 w-6 text-warn" />
+          <h1 className="text-xl font-semibold text-ink">Account deletion is unavailable</h1>
+          <p className="mt-2 text-sm text-ink-muted">
+            This deployment doesn't have a database configured.
+          </p>
+        </div>
+      </Container>
+    )
+  }
 
   // Find the pending request matching this token.
   const [request] = await db
