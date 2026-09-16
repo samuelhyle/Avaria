@@ -43,8 +43,7 @@ function buildClient(): ReturnType<typeof postgres> {
   return postgres(url, clientConfig)
 }
 
-const client =
-  globalThis.__averianlabsPg ?? buildClient()
+const client = globalThis.__averianlabsPg ?? buildClient()
 
 if (process.env.NODE_ENV !== "production") {
   globalThis.__averianlabsPg = client

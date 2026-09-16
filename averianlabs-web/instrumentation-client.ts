@@ -20,6 +20,4 @@ if (dsn && process.env.BUILD_MODE !== "demo") {
 }
 
 export const onRouterTransitionStart =
-  process.env.BUILD_MODE === "demo"
-    ? () => {}
-    : Sentry.captureRouterTransitionStart
+  process.env.BUILD_MODE === "demo" ? () => {} : Sentry.captureRouterTransitionStart

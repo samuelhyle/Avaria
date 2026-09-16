@@ -5,8 +5,13 @@
  * upsert without bursting the upstream rate limit. One request carries a whole
  * batch of chunks; requests are spaced to respect MiniMax's 1 RPM embedding
  * limit.
+ *
+ * When the provider's rate-limit cooldown is active (i.e. we're using the
+ * local fallback), the inter-batch delay is skipped — local inference is
+ * CPU-bound and benefits from no pause.
  */
 
+import { _embedCooldownDeadline } from "@/lib/ai/providers/minimax"
 import { embedTexts } from "@/lib/ai/providers/minimax"
 
 export interface BatchOptions {
@@ -77,10 +82,17 @@ export async function embedBatch(
 
     const done = b === totalBatches - 1
     if (!done) {
-      console.log(
-        `[embedBatch] batch ${b + 1}/${totalBatches} done; waiting ${delayMs / 1000}s for RPM window...`,
-      )
-      await sleep(delayMs)
+      // Skip the throttle entirely when we've already moved to the local
+      // fallback — local inference is CPU-bound and the pause only slows
+      // the indexer without giving the upstream quota time to recover.
+      if (_embedCooldownDeadline() > Date.now()) {
+        console.log(`[embedBatch] batch ${b + 1}/${totalBatches} done (local fallback active)`)
+      } else {
+        console.log(
+          `[embedBatch] batch ${b + 1}/${totalBatches} done; waiting ${delayMs / 1000}s for RPM window...`,
+        )
+        await sleep(delayMs)
+      }
     }
   }
   return results

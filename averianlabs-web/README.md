@@ -110,3 +110,27 @@ See `.env.example` for the full list.
 | Sanity reindex webhook | `POST /api/webhooks/sanity` with header `x-sanity-secret: $SANITY_WEBHOOK_SECRET`; filter `_type in ["glossaryTerm","post"]` |
 
 Embedding requests are batched (16 texts/request) and spaced for MiniMax's 1 RPM limit — a full index is a handful of requests instead of one per chunk.
+
+### Setting the MiniMax API key on Netlify
+
+The Netlify deploy runs the full Next.js app via `@netlify/plugin-nextjs`,
+so `app/api/ai/chat` executes as a Node Function. Set the key under
+**Site settings → Environment variables** in three scopes (Production /
+Preview / Branch deploys) — the value is read at function invocation, never
+written to the bundle, and never visible to the browser:
+
+| Scope | When it applies |
+|---|---|
+| Production | The live Netlify URL (main branch). |
+| Preview | Every pull-request deploy. Use a separate, rate-limited key so PR forks can't burn your credits. |
+| Branch | Any non-main branch with `Branch deploys` enabled (e.g. `feature/*`). |
+
+After saving, redeploy. Verify with `curl -fs https://<netlify-url>/api/health`
+` — a successful response with `checks.env: true` confirms the function
+runtime can read it. The chat widget's `/api/ai/chat` will return 503
+`provider_unavailable` until the key is set.
+
+**Never** commit `MINIMAX_API_KEY=…` with a non-empty value; the lefthook
+pre-commit `secret-guard` rejects such diffs before they land. The
+placeholder line in `.env.example` (`MINIMAX_API_KEY=""`) is allowed and
+documents the variable name without leaking a real key.

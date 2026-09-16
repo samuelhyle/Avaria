@@ -191,7 +191,7 @@ export function ChatWidget({ locale, demoMode = false }: ChatWidgetProps) {
         onSubmit={(text) => chat.submit(text)}
         onStop={chat.stop}
         isLoading={chat.isLoading}
-        error={(demoError ?? chat.error) ?? undefined}
+        error={demoError ?? chat.error ?? undefined}
         onRetry={handleRetry}
         onQuickPrompt={handleQuickPrompt}
         onConfirmAction={handleConfirmAction}

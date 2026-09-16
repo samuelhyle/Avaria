@@ -16,6 +16,4 @@ export function register() {
 // In the static demo build there is no request lifecycle to instrument and
 // Sentry isn't initialised, so no-op instead of calling the SDK directly.
 export const onRequestError =
-  process.env.BUILD_MODE === "demo"
-    ? () => {}
-    : Sentry.captureRequestError
+  process.env.BUILD_MODE === "demo" ? () => {} : Sentry.captureRequestError

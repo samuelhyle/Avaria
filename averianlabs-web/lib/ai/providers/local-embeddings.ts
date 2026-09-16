@@ -25,7 +25,7 @@ interface LocalEmbedderState {
   loadError: Error | null
 }
 
-let state: LocalEmbedderState = {
+const state: LocalEmbedderState = {
   pipeline: null,
   loading: null,
   loadError: null,
@@ -69,9 +69,7 @@ export async function localEmbedText(input: string): Promise<number[] | null> {
     const result = await pipe(trimmed, { pooling: "mean", normalize: true })
     const data = Array.from(result.data as ArrayLike<number>)
     if (data.length !== EXPECTED_DIM) {
-      console.warn(
-        `[local-embed] dimension mismatch: got ${data.length}, expected ${EXPECTED_DIM}`,
-      )
+      console.warn(`[local-embed] dimension mismatch: got ${data.length}, expected ${EXPECTED_DIM}`)
       return null
     }
     return data

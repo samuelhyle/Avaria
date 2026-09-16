@@ -33,8 +33,6 @@ export function assertNotDemo(feature: string): void {
  * Resolves to "force-dynamic" in production and "auto" for the static demo
  * build (where every dynamic page is excluded from the export anyway).
  */
-export const DYNAMIC = (isDemoBuild() ? "auto" : "force-dynamic") as
-  | "auto"
-  | "force-dynamic"
+export const DYNAMIC = (isDemoBuild() ? "auto" : "force-dynamic") as "auto" | "force-dynamic"
 
 export const REVALIDATE = isDemoBuild() ? false : 0

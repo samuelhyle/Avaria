@@ -368,7 +368,9 @@ function classifyHttpError(status: number, body: string): Error {
     // Body wasn't JSON — fall through with code "unknown".
   }
   if (status === 429 || code === "rate_limited") {
-    const e = new Error("You're sending messages a bit fast. Please slow down and try again in a minute.")
+    const e = new Error(
+      "You're sending messages a bit fast. Please slow down and try again in a minute.",
+    )
     e.name = "rate_limited"
     return e
   }
@@ -378,7 +380,9 @@ function classifyHttpError(status: number, body: string): Error {
     return e
   }
   if (status === 400 || code === "invalid_request") {
-    const e = new Error("That message couldn't be sent. Try clearing the conversation and sending again.")
+    const e = new Error(
+      "That message couldn't be sent. Try clearing the conversation and sending again.",
+    )
     e.name = "invalid_request"
     return e
   }

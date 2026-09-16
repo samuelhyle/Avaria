@@ -10,8 +10,8 @@
  *   3. The fallback in `listPosts()` (returns []) handles empty Sanity
  */
 
-import { demoCache } from "@/lib/demo/cache"
 import { isDemoBuild } from "@/lib/demo"
+import { demoCache } from "@/lib/demo/cache"
 import { DEMO_POSTS } from "@/lib/demo/fixtures"
 import { sanity } from "@/sanity/client"
 

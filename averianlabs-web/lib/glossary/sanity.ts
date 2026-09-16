@@ -1,3 +1,5 @@
+import { isDemoBuild } from "@/lib/demo"
+import { demoCache } from "@/lib/demo/cache"
 /**
  * Glossary data layer — Sanity-backed.
  *
@@ -7,8 +9,6 @@
  * the static Netlify demo build).
  */
 import { DEMO_GLOSSARY } from "@/lib/demo/fixtures"
-import { demoCache } from "@/lib/demo/cache"
-import { isDemoBuild } from "@/lib/demo"
 import { sanity } from "@/sanity/client"
 
 export type GlossaryCategory =

@@ -5,6 +5,9 @@ const BASE_URL = process.env.BASE_URL ?? `http://localhost:${PORT}`
 
 export default defineConfig({
   testDir: "./tests",
+  // Vitest unit tests live under tests/unit/ and would crash Playwright's
+  // runner; exclude them.
+  testIgnore: ["**/tests/unit/**", "**/*.unit.test.ts"],
   fullyParallel: true,
   forbidOnly: process.env.CI === "true",
   retries: process.env.CI === "true" ? 2 : 0,
