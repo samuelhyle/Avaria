@@ -1,0 +1,120 @@
+# Netlify config for the AverianLabs Next.js app.
+#
+# Build pipeline:
+#   1. `pnpm install`         – restore deps
+#   2. `pnpm build`           – standard `next build` with `output: "standalone"`
+#                               (the non-demo branch of `next.config.ts`). The
+#                               @netlify/plugin-nextjs plugin below packages
+#                               the result into Netlify Functions + Edge
+#                               Functions automatically.
+#
+# `app/api/` ships intact — route handlers run as Node Functions and read
+# secrets (`MINIMAX_API_KEY`, etc.) from Netlify env vars at invocation
+# time. Never put server-only secrets in `NEXT_PUBLIC_*`, in this file,
+# or in `.env*` committed to git; set them under
+#   Site settings → Environment variables → Production / Preview / Branch
+# and the Netlify Next.js plugin will surface them to the function runtime.
+#
+# Required Netlify env vars (Production scope):
+#   - MINIMAX_API_KEY          enables /api/ai/chat (Averia). Without it the
+#                              route returns 503 `provider_unavailable` and the
+#                              widget shows the "Averia is offline" message.
+#   - NEXT_PUBLIC_SITE_URL     e.g. https://<your-site>.netlify.app — used
+#                              by middleware for the canonical-origin header.
+#   - DATABASE_URL             Neon/Supabase/etc. Postgres URL. Without it
+#                              the marketing/catalog/AI-chat surface still
+#                              renders, /api/health reports 503, and DB-backed
+#                              routes (/api/auth/*, /api/checkout, …) return
+#                              503 `service_unavailable`. Add it whenever you
+#                              want accounts, orders, forum, newsletter,
+#                              partner program, etc.
+#   - AUTH_SECRET              32+ char secret for Auth.js. Without it,
+#                              session/registration endpoints return 503.
+#   - AUTH_URL                 e.g. https://<your-site>.netlify.app — pins
+#                              canonical origins against Host-header spoofing.
+# Optional:
+#   - STRIPE_SECRET_KEY / STRIPE_WEBHOOK_SECRET — enable checkout/payment
+#   - RESEND_API_KEY                            — enable transactional email
+#   - SENTRY_DSN / NEXT_PUBLIC_SENTRY_DSN       — enable error reporting
+#   - NEXT_PUBLIC_POSTHOG_KEY                   — enable analytics
+#   - UPSTASH_REDIS_REST_URL / _TOKEN           — enable distributed rate
+#                                                 limiting (otherwise each
+#                                                 function uses memory)
+#   - MINIMAX_BASE_URL / MINIMAX_CHAT_MODEL /
+#     MINIMAX_EMBEDDING_MODEL — point Averia at a different provider.
+
+[build]
+  base    = "averianlabs-web"
+  command = "pnpm install --frozen-lockfile && pnpm build"
+  # The Next.js Runtime plugin manages the publish directory itself; setting
+  # it explicitly here would override the plugin's output and break the
+  # Functions / Edge / Static routing. Leave it unset.
+
+[build.environment]
+  NODE_VERSION = "22"
+  PNPM_VERSION = "10"
+  # `next build` evaluates server modules before runtime injection — relax
+  # the env validator during the build phase so the build never fails on
+  # missing runtime-only secrets. The runtime still uses real env vars when
+  # they are present in the Netlify UI.
+  NEXT_PHASE = "phase-production-build"
+  NODE_ENV = "production"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Cache pnpm store + Next build cache between builds to keep installs fast
+# and reuse webpack output where possible.
+[[cache]]
+  path = "averianlabs-web/node_modules/.pnpm-store"
+
+[[cache]]
+  path = "averianlabs-web/.next/cache"
+
+# Pin the official Next.js Runtime plugin. Without this, Netlify auto-detects
+# Next and installs whatever version it ships with — pinning avoids surprise
+# upgrades and lets us opt into `nodeVersion = 22` consistently.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# The production app uses middleware to 307 → /en/... when a request hits a
+# non-locale path. With the Next.js Runtime the middleware executes
+# server-side per request, so we no longer need the static-export rewrite
+# engine that the previous demo required.
+
+# Noindex headers on every response (the Netlify deploy is still a
+# preview/demo — the canonical site is Vercel).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Long-cache hashed assets emitted by Next/Tailwind.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Long-cache OG image + favicon.
+[[headers]]
+  for = "/og-default.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/favicon.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Security headers mirroring next.config.ts. Netlify adds HSTS automatically
+# via the dashboard once HTTPS is enabled, but we keep an explicit one for
+# deploys that bypass the UI (CLI, API).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-origin"
