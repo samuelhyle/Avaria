@@ -66,6 +66,15 @@
   NEXT_PHASE = "phase-production-build"
   NODE_ENV = "production"
   NEXT_TELEMETRY_DISABLED = "1"
+  # Netlify's secrets scanner matches any reference to a "sensitive" env var
+  # name (its own allowlist, which includes the MiniMax keys) to the file
+  # contents — so the public default values `https://api.minimax.io/v1`,
+  # `MiniMax-M3`, `text-embedding-MiniMax-M3` get flagged because they
+  # appear in `.env.example`, `docker-compose.yml`, and `lib/ai/providers/
+  # minimax.ts` (which reads them as defaults). Those values are NOT secrets
+  # (the API key `MINIMAX_API_KEY` is still scanned). Whitelist the public
+  # ones so the deploy doesn't fail on a false positive.
+  SECRETS_SCAN_OMIT_KEYS = "MINIMAX_BASE_URL,MINIMAX_CHAT_MODEL,MINIMAX_EMBEDDING_MODEL,MINIMAX_EMBEDDING_DIMENSIONS"
 
 # Cache pnpm store + Next build cache between builds to keep installs fast
 # and reuse webpack output where possible.
