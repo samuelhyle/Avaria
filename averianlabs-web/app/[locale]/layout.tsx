@@ -29,6 +29,7 @@ const CLIENT_NAMESPACES = [
   "ageGate",
   "auth",
   "averia",
+  "calculator",
   "cart",
   "checkout",
   "common",
