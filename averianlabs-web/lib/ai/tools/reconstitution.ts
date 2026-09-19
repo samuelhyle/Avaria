@@ -1,22 +1,25 @@
 /**
  * getReconstitution — math for reconstituting a research peptide vial.
  *
- * Same formula as the on-page calculator (mg / mL × dose mcg → volume).
- * Refuses inputs that suggest human-use framing.
+ * Tool wrapper around `lib/calculator/reconstitution.solveReconstitution`.
+ * The math lives in one place; the tool layer only adds the JSON schema
+ * the model uses, the input validation that protects us from hallucinated
+ * tool calls, and the result shape we render back to the model.
  */
 
+import {
+  MAX_PEPTIDE_RATIO_MG_PER_ML,
+  solveReconstitution,
+} from "@/lib/calculator/reconstitution"
 import type { Tool, ToolContext, ToolResult } from "@/lib/ai/tools/registry"
+import { DEFAULT_SYRINGE } from "@/lib/calculator/syringe"
 
 interface Args {
   vialMg: number
   solventMl: number
   doseMcg: number
-  syringeIU?: number
+  syringeIuPerMl?: number
 }
-
-const HUMAN_USE_PATTERNS: RegExp[] = [
-  /\b(patient|patients|human|humans|self|inject|personal|clinic|clinic use|my|me)\b/i,
-]
 
 export const reconstitutionTool: Tool = {
   definition: {
@@ -32,7 +35,7 @@ export const reconstitutionTool: Tool = {
           description: "Volume of bacteriostatic water added, in milliliters.",
         },
         doseMcg: { type: "number", description: "Target dose per draw, in micrograms." },
-        syringeIU: {
+        syringeIuPerMl: {
           type: "number",
           description:
             "IU per mL on the syringe (default 100). 1 mL insulin syringe = 100 IU; 0.5 mL = 50 IU.",
@@ -43,38 +46,43 @@ export const reconstitutionTool: Tool = {
   },
   async execute(rawArgs, _ctx: ToolContext): Promise<ToolResult> {
     const args = (rawArgs ?? {}) as Args
-    const { vialMg, solventMl, doseMcg, syringeIU = 100 } = args
-
-    if ([vialMg, solventMl, doseMcg].some((v) => !Number.isFinite(v) || v <= 0)) {
+    const { vialMg, solventMl, doseMcg, syringeIuPerMl = DEFAULT_SYRINGE.iuPerMl } = args
+    if (![vialMg, solventMl, doseMcg, syringeIuPerMl].every((v) => Number.isFinite(v) && v > 0)) {
       return { content: { error: "invalid_inputs" } }
     }
+    if (syringeIuPerMl > 1000) {
+      // Defensive — real syringes top out at ~100 IU/mL. Past that the answer
+      // is almost certainly a hallucinated tool call.
+      return { content: { error: "invalid_inputs", field: "syringeIuPerMl" } }
+    }
+    if (vialMg / solventMl > MAX_PEPTIDE_RATIO_MG_PER_ML) {
+      return { content: { error: "invalid_inputs", field: "concentration", maxRatio: MAX_PEPTIDE_RATIO_MG_PER_ML } }
+    }
 
-    const totalMcg = vialMg * 1000
-    const concentrationMgPerMl = vialMg / solventMl
-    const concentrationMcgPerMl = concentrationMgPerMl * 1000
-    const volumePerDoseMl = doseMcg / concentrationMcgPerMl
-    const dosesTotal = Math.floor(totalMcg / doseMcg)
-    const iuPerDose = volumePerDoseMl * syringeIU
+    const syringe = { ...DEFAULT_SYRINGE, iuPerMl: syringeIuPerMl }
+    const r = solveReconstitution({ vialMg, solventMl, doseMcg, syringe })
+    if (r.invalid) {
+      return { content: { error: "invalid_inputs", reason: r.invalid.reason, fields: r.invalid.fields } }
+    }
 
     return {
       content: {
-        inputs: { vialMg, solventMl, doseMcg, syringeIU },
+        inputs: { vialMg, solventMl, doseMcg, syringeIuPerMl },
         concentration: {
-          mgPerMl: round(concentrationMgPerMl),
-          mcgPerMl: round(concentrationMcgPerMl),
+          mgPerMl: r.concentrationMgPerMl,
+          mcgPerMl: r.concentrationMcgPerMl,
         },
-        perDose: { volumeMl: round(volumePerDoseMl), iu: round(iuPerDose) },
-        dosesRemaining: dosesTotal,
+        perDose: {
+          volumeMl: r.volumePerDoseMl,
+          iu: r.iuPerDose,
+          iuSnapped: r.iuPerDoseSnapped,
+          volumeMlSnapped: r.volumePerDoseMlSnapped,
+        },
+        dosesRemaining: r.totalDoses,
+        leftoverMcg: r.leftoverMcg,
         reminder:
           "For research/laboratory contexts only. Verify calculations against your protocol and lab SOPs.",
       },
     }
   },
 }
-
-function round(n: number): number {
-  return Math.round(n * 100) / 100
-}
-
-// Exported for A6 guardrail tests.
-export const _guard = HUMAN_USE_PATTERNS

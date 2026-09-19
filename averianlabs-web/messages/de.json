@@ -76,6 +76,67 @@
     "disclaimer": "Nur für Forschungszwecke. Nicht für Menschen oder Tiere.",
     "disclaimerFull": "Alle von AverianLabs verkauften Produkte sind ausschließlich für Laborforschung und In-vitro-Studien bestimmt. Sie sind nicht für den menschlichen Verzehr, diagnostische Zwecke oder therapeutische Anwendungen bestimmt. Mit dem Kauf bestätigen Sie, dass Sie ein qualifizierter Forscher oder institutioneller Käufer sind."
   },
+  "coa": {
+    "badge": "Öffentliches COA-Register",
+    "title": "Analysezertifikate",
+    "subtitle": "Jede ausgelieferte Charge wird unabhängig geprüft. Durchsuchen Sie unten die neuesten Analysezertifikate.",
+    "tableHeaders": {
+      "batch": "Charge",
+      "product": "Produkt",
+      "hplc": "HPLC",
+      "endotoxin": "Endotoxin",
+      "lab": "Labor",
+      "status": "Status"
+    },
+    "filterPlaceholder": "Nach Chargencode oder Produkt suchen…",
+    "resultsCount": "{count, plural, =0 {Keine Ergebnisse} one {1 Analysezertifikat} other {{count} Analysezertifikate}}",
+    "viewDetails": "Details anzeigen →",
+    "batchTitle": "Analysezertifikat",
+    "batchSubtitle": "Chargenspezifische Testergebnisse und Dokumentation.",
+    "testsHeading": "Testergebnisse",
+    "testsHeaders": {
+      "test": "Test",
+      "result": "Ergebnis",
+      "method": "Methode"
+    },
+    "testHplcPurity": "HPLC-Reinheit",
+    "testHplcMethod": "RP-HPLC",
+    "testEndotoxin": "Endotoxin",
+    "testEndotoxinMethod": "LAL",
+    "testIdentity": "Identität",
+    "testIdentityMethod": "ESI-MS",
+    "testIdentityResult": "Bestätigt",
+    "testStorage": "Lagerung",
+    "manufacturingHeading": "Herstellung und Haltbarkeit",
+    "manufacturedAt": "Hergestellt",
+    "expiresAt": "Gültig bis",
+    "labHeading": "Prüflabor",
+    "viewFullPdf": "Vollständiges Analysezertifikat öffnen (PDF)",
+    "pdfUnavailableNote": "Die PDF-Version wird veröffentlicht, sobald unser Laborpartner die Dokumentation liefert.",
+    "chromatogramHeading": "Chromatogramm",
+    "chromatogramNote": "Das Chromatogramm wird als Anhang zum PDF-Analysezertifikat veröffentlicht.",
+    "backToList": "← Zurück zu den Analysezertifikaten",
+    "traceabilityHeading": "Rückverfolgbarkeit",
+    "traceabilitySub": "Eine Qualitätskette, die Sie prüfen können. Jeder Schritt wird dokumentiert.",
+    "step1Title": "Rohstoff",
+    "step1Body": "Das Peptid-Rohmaterial wird vom Hersteller übernommen und in Quarantäne überführt.",
+    "step2Title": "Herstellung",
+    "step2Body": "Lyophilisierung, Abfüllung und Versiegelung erfolgen in steriler Umgebung.",
+    "step3Title": "Chargennummer",
+    "step3Body": "Jede Charge erhält eine eindeutige Chargennummer zur vollständigen Rückverfolgbarkeit.",
+    "step4Title": "Unabhängige Analyse",
+    "step4Body": "Das Prüflabor analysiert HPLC-, Endotoxin- und Massenspektrometrie-Ergebnisse.",
+    "step4BodyWithLab": "Getestet im Labor {lab}",
+    "step5Title": "Analysezertifikat (COA)",
+    "step5Body": "Das Analysezertifikat wird veröffentlicht und der Lieferung beigefügt.",
+    "step6Title": "Versand",
+    "step6Body": "Versand innerhalb von 24 Stunden aus unserem EU-Lager. Kühlkette dokumentiert.",
+    "notFoundTitle": "Charge nicht gefunden",
+    "notFoundBody": "Für diesen Chargencode wurde kein Analysezertifikat gefunden.",
+    "description": "Öffentliches Register jeder Charge — HPLC-Reinheit, Endotoxin, Massenspektrum und Labor.",
+    "passBadge": "BESTANDEN",
+    "passFullLabel": "Alle Tests bestanden"
+  },
   "nav": {
     "shop": "Shop",
     "labTests": "Labortests",
@@ -107,37 +168,77 @@
     "sectionResearch": "Forschung",
     "sectionCompany": "Unternehmen",
     "cartCount": "{count, plural, =0 {Warenkorb leer} one {1 Artikel im Warenkorb} other {# Artikel im Warenkorb}}",
-    "language": "Sprache"
+    "language": "Sprache",
+    "breadShop": "Shop",
+    "batchDataHeading": "Chargendaten",
+    "batchDataCode": "Chargencode",
+    "batchDataManufactured": "Hergestellt",
+    "batchDataExpires": "Läuft ab",
+    "batchDataLab": "Testlabor",
+    "batchDataHplc": "HPLC-Reinheit",
+    "batchDataEndotoxin": "Endotoxin",
+    "batchDataMs": "Massenspektrometrie",
+    "batchDataConfirmed": "Bestätigt",
+    "batchDataOpenCoa": "COA öffnen",
+    "batchLabel": "Letzte Charge",
+    "coaAvailable": "COA ansehen",
+    "contactForBatch": "Kontakt für aktuelle Chargenverfügbarkeit",
+    "endotoxin": "Endotoxin",
+    "endotoxinUnit": "EU/mg",
+    "expires": "Verfällt",
+    "fromSizes": "{count, plural, =0 {— Größen} one {ab · 1 Größe} other {ab · {count} Größen}}",
+    "howWeVerify": "So verifizieren wir jede Charge",
+    "manufactured": "Hergestellt",
+    "pricingOnRequest": "Preis auf Anfrage",
+    "readFullMethodology": "Vollständige Methodik lesen",
+    "relatedHeading": "Ähnliche Peptide",
+    "requestQuote": "Angebot anfordern",
+    "shipsIn24h": "Versand in 24 h",
+    "specCas": "CAS-Nummer",
+    "specFormula": "Summenformel",
+    "specMw": "Molekulargewicht",
+    "specPurity": "Reinheit",
+    "specSequence": "Sequenz",
+    "specStorage": "Lagerung",
+    "specifications": "Spezifikationen",
+    "stockIn": "Auf Lager",
+    "stockLow": "Geringer Bestand · {count} übrig",
+    "stockOut": "Nicht vorrätig",
+    "tabCoa": "COA & Labortests",
+    "testedAt": "Getestet in",
+    "vatNote": "Inkl. MwSt. Endpreis im Checkout.",
+    "viewAllInCategory": "Alle in {category} anzeigen →",
+    "whatsInTheBox": "Was ist in der Box"
   },
   "home": {
     "heroEyebrow": "EU · Forschungsqualität · Drittpartei-geprüft",
-    "heroTitle": "Präzisionspeptide für ernsthafte Forschung.",
-    "heroSubtitle": "EU-Versand. HPLC + Endotoxin verifiziert. Vollständiges Analysezertifikat für jede Charge.",
+    "heroTitle": "Forschungs-Peptide in Laborqualität kaufen.",
+    "heroSubtitle": "Jede Charge HPLC-, Massenspektrum- und Endotoxin-prüft von Drittlabors. Lyophilisiert für intakte Kühlkette. 24-h-Versand in der EU. COAs online abrufbar oder mit jeder Bestellung.",
     "ctaShop": "Katalog ansehen",
     "ctaResearch": "Forschung lesen",
     "trustHeading": "Warum Forscher AverianLabs wählen",
-    "trustBadge1": "EU-GMP-Lieferantennetzwerk",
-    "trustBadge2": "HPLC-Reinheit ≥ 98%",
-    "trustBadge3": "Endotoxin < 5 EU/mg",
-    "trustBadge4": "24h EU-Versand",
-    "trustBadge5": "ISO 17025 Lab-Partner",
-    "trustBadge6": "DSGVO-konform",
+    "trustBadge1": "Schneller EU-Versand",
+    "trustBadge2": "HPLC-Reinheit ≥ 98 %",
+    "trustBadge3": "100 % Zufriedenheitsgarantie",
+    "trustBadge4": "Mengenrabatt bis −20 %",
+    "trustBadge5": "ISO-17025-Laborpartner",
+    "trustBadge6": "DSGVO & USt-konform",
     "featuredHeading": "Ausgewählte Forschungspeptide",
     "featuredSub": "Jede Charge wird mit ihrem eigenen Analysezertifikat geliefert.",
     "threeDHeading": "Jedes Fläschchen in 3D ansehen",
     "threeDSub": "Drehen Sie das Karussell, zoomen Sie ins Glas und springen Sie direkt in ein Produkt — jede Charge verlinkt ihr eigenes Analysezertifikat.",
     "threeDCta": "3D-Katalog öffnen",
     "categoriesHeading": "Nach Forschungsbereich",
-    "catWeight": "Metabolische Forschung",
-    "catWeightDesc": "Semaglutid, Tirzepatid, AOD-9604",
-    "catRecovery": "Erholung & Gewebe",
-    "catRecoveryDesc": "BPC-157, TB-500, GHK-Cu",
-    "catCognitive": "Kognition",
-    "catCognitiveDesc": "Semax, Selank, Cerebrolysin",
-    "catLongevity": "Langlebigkeit",
-    "catLongevityDesc": "Epithalon, GHK-Cu, NAD+",
-    "catCosmetic": "Kosmetische Forschung",
-    "catCosmeticDesc": "GHK-Cu, Melanotan II",
+    "catMetabolic": "Stoffwechsel & Rezeptorsignalisierung",
+    "catMetabolicDesc": "GLP-1- und GIP-Rezeptorsignalisierung in vitro. Rezeptorassays, Zellkultur, ADME-Profilierung.",
+    "catRecovery": "Zellbiologie & Gewebemodelle",
+    "catRecoveryDesc": "Angiogene und Gewebeumbaumodell-Forschung. Zellmigrationsmodelle, Fibroblastenaktivität, Wundmodelle.",
+    "catCognitive": "Neurobiologische Forschung",
+    "catCognitiveDesc": "Neurotrophin- und Neuronen-Zellkulturforschung. BDNF-Signalisierung, In-vitro-Neurobiologie.",
+    "catLongevity": "Mitochondrien & zelluläre Energetik",
+    "catLongevityDesc": "Telomerbiologie und NAD⁺-Signalwegforschung. Seneszenzmodelle, Mitochondrienfunktion.",
+    "catCosmetic": "Pigmentierung & Melanogenese",
+    "catCosmeticDesc": "Melanogenese und Hautgewebemodelle. Keratinozytenkultur, Melanozyten-Signalisierung.",
     "labHeading": "Lab-Transparenz, bei jeder Charge",
     "labSub": "Jede Durchstechflasche wird mit einem öffentlichen Analysezertifikat versandt.",
     "calcHeading": "Rekonstitutionsrechner",
@@ -151,10 +252,78 @@
     "newsletterSub": "Neue Peptide, Literatur, Labor-Notizen.",
     "newsletterPlaceholder": "ihre@einrichtung.de",
     "newsletterCta": "Abonnieren",
-    "catBlends": "Mischungen & Kombis",
+    "catBlends": "Kombinationen",
     "catBlendsDesc": "KLOW, BPC+TB-500, individuelle Peptidkombinationen",
-    "catSupplies": "Verbrauchsmaterial",
-    "catSuppliesDesc": "BAC-Wasser, Spritzen, Fläschchen"
+    "catSupplies": "Sonstige Forschungsreagenzien",
+    "catSuppliesDesc": "BAC-Wasser, Spritzen, Fläschchen",
+    "stat1Label": "Chargenspezifische HPLC-Reinheit",
+    "stat1Value": "—",
+    "stat1Note": "Pro Charge veröffentlicht",
+    "stat2Label": "Unabhängige Labortests",
+    "stat2Value": "—",
+    "stat2Note": "Bei Versand bestätigt",
+    "stat3Label": "EU-Versand",
+    "stat3Value": "—",
+    "stat3Note": "Abhängig von der Chargendokumentation",
+    "labBadge": "Volle Lab-Transparenz",
+    "labMethodologyLink": "Mehr über unsere Methodik",
+    "coaBadge": "Chargenspezifische Analyse",
+    "coaTitle": "Analysezertifikat",
+    "coaBody": "Genaue Analysedaten, Chromatogramme und Laborfreigabe jeder Charge werden pro Charge veröffentlicht. Öffnen Sie die Labortests-Seite, um mehr über Methoden und Verifizierbarkeit zu erfahren.",
+    "coaHeaderTest": "Test",
+    "coaHeaderResult": "Ergebnis",
+    "coaHeaderMethod": "Methode",
+    "coaRow1": "HPLC-Reinheit · Ergebnis pro Charge",
+    "coaRow2": "Endotoxin · Im unabhängigen Labor",
+    "coaRow3": "Massenspektrometrie · Pro Charge",
+    "coaRow4": "Testlabor · —",
+    "coaCta": "Labortests-Seite öffnen",
+    "communityHeading": "Aus der Forschungsgemeinschaft",
+    "communitySub": "Diskussionen, Antworten, Chargen-Updates und geteilte Forschungspläne aus der AverianLabs-Community.",
+    "subscribeBadge": "Forschungsmengen",
+    "subscribeTitle": "Regelmäßige Forschungslieferung",
+    "subscribeSub": "Reservieren Sie die aktuelle Charge und planen Sie die Lieferung alle 4, 8 oder 12 Wochen — jederzeit über Ihr Konto kündbar.",
+    "subscribeBullet1": "Vorrangiger EU-Versand bei jeder Lieferung",
+    "subscribeBullet2": "Reservierung der aktuellen Charge",
+    "subscribeBullet3": "10 % Rabatt auf jede Durchstechflasche",
+    "subscribeBullet4": "Frei kombinierbar im gesamten Katalog",
+    "subscribeCta": "Abonnement starten",
+    "subscribeExampleLabel": "Beispiel-Abonnement",
+    "subscribeExampleProduct": "BPC-157 · 10 mg · alle 8 Wochen",
+    "subscribePerShipment": "Pro Lieferung",
+    "subscribeAnnualSavings": "Jährliche Ersparnis",
+    "subscribeSavingsSuffix": "/ Jahr",
+    "institutionsBadge": "Für Forschungseinrichtungen",
+    "about": "Über uns",
+    "account": "Konto",
+    "allProducts": "Alle Produkte",
+    "blog": "Forschung",
+    "calculator": "Rechner",
+    "cart": "Warenkorb",
+    "close": "Schließen",
+    "coaLibrary": "Labor-COAs",
+    "community": "Gemeinschaft",
+    "documents": "Dokumente",
+    "glossary": "Glossar",
+    "labTests": "Labortests",
+    "openMenu": "Menü öffnen",
+    "partner": "Partnerprogramm",
+    "search": "Suchen",
+    "sectionShop": "Shop",
+    "sectionResearch": "Forschung",
+    "sectionCompany": "Unternehmen",
+    "whyHeading": "Warum Forschende AverianLabs wählen",
+    "whySub": "Genau die drei Dinge, auf die es ankommt — Geschwindigkeit, Sicherheit und Qualität — mit Garantien, für die wir unseren Ruf geben.",
+    "why1Title": "Schneller, verfolgter EU-Versand",
+    "why1Body": "Bestellungen vor 14:00 EET werden am selben Werktag aus unserem EU-Lager versandt. Verfolgte Carrier — Posti, DHL, DPD.",
+    "why2Title": "Laborbestätigte Reinheit",
+    "why2Body": "Jede Charge wird mit einem chargenspezifischen COA geliefert: HPLC-Chromatogramm, Massenspektrum, Endotoxin-Panel und Labor-Unterschrift.",
+    "why3Title": "100 % Zufriedenheitsgarantie",
+    "why3Body": "Wenn ein Vial warm, beschädigt oder nachweislich durch Carrier-/Zollfehler zurückgehalten ankommt, liefern wir kostenlos nach.",
+    "bulkHeading": "Im Großhandel kaufen, mehr sparen",
+    "bulkSub": "Volumen-Stufen je SKU. Der Rabatt wird automatisch an der Kasse angewendet — kein Code nötig.",
+    "bulkCtaShop": "Katalog ansehen",
+    "bulkCtaContact": "Kontakt für 21+"
   },
   "shop": {
     "title": "Forschungskatalog",
@@ -213,7 +382,12 @@
     "fromLabel": "Ab",
     "pricingLabel": "Preis",
     "recentlyViewed": "Zuletzt angesehen",
-    "recentlyViewedHelper": "Weitermachen wo du aufgehört hast"
+    "recentlyViewedHelper": "Weitermachen wo du aufgehört hast",
+    "coaAvailable": "COA verfügbar",
+    "batchLabel": "Charge {code}",
+    "purityHplcLabel": "{purity}% HPLC",
+    "manufacturedDate": "Hergestellt {date}",
+    "expiresDate": "Läuft ab {date}"
   },
   "product": {
     "addToCart": "In den Warenkorb",
@@ -233,37 +407,171 @@
     "tabCitations": "Forschung",
     "tabFaq": "FAQ",
     "relatedHeading": "Ähnliche Peptide",
-    "stockIn": "Auf Lager — Versand in 24h",
-    "stockLow": "Nur noch {n} Fläschchen",
-    "stockOut": "Ausverkauft — benachrichtigen",
+    "stockIn": "Auf Lager",
+    "stockLow": "Geringer Bestand · {count} übrig",
+    "stockOut": "Nicht vorrätig",
     "vatNote": "Inkl. MwSt. Endpreis im Checkout.",
     "batchLabel": "Letzte Charge",
     "viewCoa": "COA ansehen",
     "lab": "Getestet in {lab}",
     "notifyMe": "Benachrichtigen",
-    "notifySubmitted": "Wir benachrichtigen Sie per E-Mail."
+    "notifySubmitted": "Wir benachrichtigen Sie per E-Mail.",
+    "specifications": "Spezifikationen",
+    "testedAt": "Getestet in",
+    "manufactured": "Hergestellt",
+    "expires": "Verfällt",
+    "endotoxin": "Endotoxin",
+    "endotoxinUnit": "EU/mg",
+    "howWeVerify": "So verifizieren wir jede Charge",
+    "methodologyHplcTitle": "HPLC-Reinheit",
+    "methodologyHplcDesc": "Umkehrphasen-HPLC gegen Referenzstandard.",
+    "methodologyMsTitle": "Massenspektrum-Identität",
+    "methodologyMsDesc": "ESI-MS bestätigt das Molekulargewicht auf 0,1 Da genau.",
+    "methodologyEndotoxinTitle": "Endotoxin-Panel",
+    "methodologyEndotoxinDesc": "LAL kinetisch chromogen; Grenzwert < 5 EU/mg.",
+    "methodologyColdChainTitle": "Kühlkette bestätigt",
+    "methodologyColdChainDesc": "Temperaturprotokoll liegt jeder Lieferung bei.",
+    "readFullMethodology": "Vollständige Methodik lesen",
+    "whatsInTheBox": "Was ist in der Box",
+    "boxLyophilized": "Lyophilisiertes Peptidfläschchen",
+    "boxBacWater": "Steriles BAC-Wasser (10 mL)",
+    "boxCoa": "Chargenspezifisches COA",
+    "boxStorage": "Lager- und Handhabungskarte",
+    "boxReconstitution": "Rekonstitutionsprotokoll",
+    "boxTamperSeal": "Siegel mit Manipulationsschutz",
+    "shipsIn24h": "Versand in 24 h",
+    "fromSizes": "{count, plural, =0 {— Größen} one {ab · 1 Größe} other {ab · {count} Größen}}",
+    "stockQuoteOnly": "Nur auf Anfrage",
+    "requestQuote": "Angebot anfordern",
+    "pricingOnRequest": "Preis auf Anfrage",
+    "contactForBatch": "Kontakt für aktuelle Chargenverfügbarkeit",
+    "faqHeading": "Häufig gestellte Fragen",
+    "viewAllInCategory": "Alle in {category} anzeigen →",
+    "trustBadge1": "EU-GMP-Lieferantennetzwerk",
+    "trustBadge2": "Von Drittlabors HPLC-getestet",
+    "trustBadge3": "Endotoxin < 5 EU/mg",
+    "trustBadge4": "EU-Versand in 24 h",
+    "trustBadge5": "ISO-17025-Laborpartner",
+    "trustBadge6": "DSGVO-konform",
+    "trustSub1": "Jede Charge verifiziert",
+    "trustSub2": "Im Partnerlabor bestätigt",
+    "trustSub3": "Unabhängige Zertifizierung",
+    "trustSub4": "Kostenlos ab 150 €",
+    "freeShippingThreshold": "Kostenloser Versand ab {amount} in der EU",
+    "wishlistAdd": "Zur Wunschliste",
+    "wishlistRemove": "Von der Wunschliste entfernen",
+    "wishlistSaved": "Gespeichert",
+    "compareAdd": "Zum Vergleich",
+    "compareRemove": "Aus Vergleich entfernen",
+    "compareAdded": "Im Vergleich",
+    "addedToCart": "In den Warenkorb",
+    "bundleAdded": "Paket in den Warenkorb",
+    "removedFromCart": "Aus dem Warenkorb entfernt",
+    "outOfStock": "Nicht vorrätig",
+    "lowStockLeft": "Geringer Bestand · {count} übrig",
+    "inStock": "Auf Lager",
+    "quoteOnly": "Nur Angebot",
+    "wishlistCleared": "Wunschliste geleert",
+    "purityHplc": "{purity} % HPLC",
+    "quoteTitle": "Angebot anfordern",
+    "quoteSubtitle": "Preis und aktuelle Chargenverfügbarkeit auf Anfrage. Antwort innerhalb von 24 h.",
+    "quoteSent": "Anfrage gesendet",
+    "quoteEmailPlaceholder": "sie@lab.de",
+    "quoteSentDesc": "Wir mailen Ihnen den aktuellen Preis für {name}.",
+    "freeShippingOver": "Kostenloser Versand ab {amount} EU-weit",
+    "sale": "Sale",
+    "addToCartWithPrice": "In den Warenkorb · {price}",
+    "addedToCartDesc": "{name} {mg} mg × {qty}",
+    "subscribeHeading": "Abonnieren & 10 % sparen",
+    "subscribeSub": "Automatische Nachbestellung alle 4–12 Wochen · jederzeit kündbar",
+    "subscribeSaveAmount": "{amount}/Bestellung sparen",
+    "subscribeCadence": "Lieferrhythmus",
+    "subscribeVialsPerShipment": "Fläschchen pro Lieferung",
+    "subscribePerShipment": "Pro Lieferung",
+    "subscribeSaved": "Abonnement gespeichert",
+    "subscribeStart": "Abonnement starten",
+    "subscribeCancelAnytime": "Überspringen oder jederzeit kündigen",
+    "subscribeLockIn": "Aktuelle Charge sichern",
+    "subscribePriorityDispatch": "Vorrangiger EU-Versand",
+    "subscribeCadence4": "Alle 4 Wochen",
+    "subscribeCadence8": "Alle 8 Wochen",
+    "subscribeCadence12": "Alle 12 Wochen",
+    "subscribeDescription": "{qty} × {mg} mg alle {weeks} Wochen — jederzeit im Konto kündbar.",
+    "completeStack": "Ergänze dein Stack",
+    "saveBundlePercent": "5 % sparen",
+    "bundleSaved": "{count} Artikel · {amount} sparen",
+    "thisProduct": "Dieses Produkt",
+    "bundleTotal": "Paket-Gesamtpreis",
+    "saveOnBundle": "{amount} auf dem Paket sparen",
+    "addBundle": "Paket hinzufügen",
+    "qvFullDetails": "Vollständige Details",
+    "qvRemovedFromWishlist": "Von der Wunschliste entfernt",
+    "qvSavedToWishlist": "Zur Wunschliste hinzugefügt",
+    "qvRemovedFromCompare": "Aus Vergleich entfernt",
+    "qvAddedToCompare": "Zum Vergleich hinzugefügt",
+    "stickyAdd": "In den Warenkorb",
+    "stickyOutOfStock": "Nicht vorrätig",
+    "stickySubscribe": "Abonnieren",
+    "stickyCompare": "Vergleichen",
+    "stickySubscribeTooltip": "Abonnieren & 10 % sparen",
+    "stickySubscriptionSaved": "Abonnement gespeichert",
+    "stickySubscriptionDesc": "Sie erhalten {mg} mg alle {weeks} Wochen — jederzeit kündbar, 10 % sparen.",
+    "stickyRemovedFromWishlist": "Von der Wunschliste entfernt",
+    "stickySavedToWishlist": "Zur Wunschliste hinzugefügt",
+    "stickyRemovedFromCompare": "Aus Vergleich entfernt",
+    "stickyAddedToCompare": "Zum Vergleich hinzugefügt",
+    "faq1Q": "Wie wird jede Charge verifiziert?",
+    "faq1A": "Jede Charge wird von einem ISO-17025-zertifizierten Drittlabor (Eurofins Biolab, Synlab oder Biolab GmbH) getestet. HPLC-Reinheit, Endotoxinwerte und Massenspektrum-Identität werden vor der Freigabe der Charge bestätigt. Das COA-PDF für jede Charge finden Sie im Reiter „Dokumente“.",
+    "faq2Q": "Was beinhaltet das Analysezertifikat?",
+    "faq2A": "Das COA enthält HPLC-Reinheit in %, Endotoxin (EU/mg), Massenspektrum-Bestätigung, Chargennummer, Herstellungsdatum, Verfallsdatum und das Prüflabor. Jede Charge hat einen eindeutigen Code, mit dem Sie ihr spezifisches COA unter /coa abrufen können.",
+    "faq3Q": "Wie sollte ich das Fläschchen nach dem Öffnen lagern?",
+    "faq3A": "Lyophilisierte Peptide bei -20 °C in trockener Umgebung lagern. Nach der Rekonstitution bei 2–8 °C lagern und innerhalb des in Ihrem Protokoll angegebenen Zeitraums verbrauchen. Das Datenblatt jedes Produkts enthält die spezifische Lagertemperatur.",
+    "faq4Q": "Liefern Sie in mein Land?",
+    "faq4A": "Wir liefern derzeit in alle EU-Mitgliedstaaten sowie nach Norwegen, in die Schweiz und nach Großbritannien. Für einige Jurisdiktionen gelten lokale Beschränkungen — die vollständige Liste finden Sie an der Kasse. In gesperrte Länder (gemäß der EU-Richtlinie für eingeschränkte Stoffe) wird nicht geliefert.",
+    "faq5Q": "Kann ich als Nicht-EU-Forscher eine MwSt.-Erstattung erhalten?",
+    "faq5A": "Wenn Sie eine gültige Nicht-EU-USt-Registrierung oder eine Forschungsinstitution-ID angeben, wird Ihre Bestellung mit null USt. abgerechnet. Senden Sie das Dokument nach der Bestellung an billing@averianlabs.eu — wir erstatten die USt.-Zeile.",
+    "faq6Q": "Welche Zahlungsmethoden akzeptieren Sie?",
+    "faq6A": "Stripe (Karte, Apple Pay, Google Pay), PayPal, SEPA-Banküberweisung für institutionelle Bestellungen über 1.000 € und Coinbase Commerce für BTC / ETH / USDC. Das EU-Verbraucherschutzgesetz gilt für jede Zahlungsmethode.",
+    "fbIncludeItem": "{name} hinzufügen",
+    "batchDataHeading": "Chargendaten",
+    "batchDataCode": "Chargencode",
+    "batchDataManufactured": "Hergestellt",
+    "batchDataExpires": "Läuft ab",
+    "batchDataLab": "Testlabor",
+    "batchDataHplc": "HPLC-Reinheit",
+    "batchDataEndotoxin": "Endotoxin",
+    "batchDataMs": "Massenspektrometrie",
+    "batchDataConfirmed": "Bestätigt",
+    "batchDataOpenCoa": "COA öffnen",
+    "coaAvailable": "COA verfügbar",
+    "openCalculator": "Rekonstitution für diese Flasche berechnen"
   },
   "cart": {
     "title": "Warenkorb",
-    "empty": "Ihr Warenkorb ist leer.",
+    "empty": "Ihr Warenkorb ist leer",
+    "emptyDesc": "Wählen Sie ein Peptid aus dem Katalog, um Ihre Bestellung zu starten — jede Charge wird mit eigenem COA, Endotoxin-Panel und Massenspektrum-Identitätsbestätigung versandt.",
+    "browseCatalog": "Katalog ansehen",
+    "bestSellers": "Bestseller diesen Monat",
     "emptyCta": "Katalog ansehen",
     "subtotal": "Zwischensumme",
+    "subtotalBeforeDiscount": "Zwischensumme vor Rabatt",
     "shipping": "Versand",
     "vat": "MwSt.",
     "total": "Gesamt",
     "checkout": "Zur Kasse",
     "remove": "Entfernen",
+    "itemCount": "{count, plural, =0 {keine Artikel} one {1 Artikel} other {{count} Artikel}}",
     "promo": "Gutscheincode",
     "promoApply": "Anwenden",
     "points": "{points} Punkte einlösen (−{amount})",
     "drawerTitle": "Ihr Warenkorb",
     "subtitle": "Ihre ausgewählten Peptide und Materialien — bereit zur Überprüfung.",
-    "rewardsEarn": "You will earn",
-    "rewardsFrom": "from this order",
-    "recommendationsHeading": "Best sellers",
-    "continueShopping": "Continue shopping",
-    "secureCheckout": "Secure checkout",
-    "freeShippingProgress": "Add {amount} more for free EU shipping",
+    "rewardsEarn": "Sie erhalten",
+    "rewardsFrom": "mit dieser Bestellung",
+    "recommendationsHeading": "Bestseller",
+    "continueShopping": "← Weiter einkaufen",
+    "secureCheckout": "Sicherer Checkout",
+    "freeShippingProgress": "Noch {amount} bis zum kostenlosen EU-Versand",
     "freeShippingUnlocked": "Kostenloser EU-Versand freigeschaltet"
   },
   "checkout": {
@@ -294,7 +602,104 @@
     "city": "Stadt",
     "country": "Land",
     "continueToShipping": "Weiter zum Versand",
-    "title": "Kasse"
+    "title": "Kasse",
+    "loadingShipping": "Versandoptionen werden geladen…",
+    "vat": "MwSt.",
+    "total": "Gesamt",
+    "yourCartEmpty": "Ihr Warenkorb ist leer",
+    "completeEmailFirst": "Bitte zuerst den E-Mail-Schritt abschließen",
+    "chooseShipping": "Bitte wählen Sie eine Versandart",
+    "checkoutFailed": "Checkout fehlgeschlagen",
+    "cryptoUnavailable": "Krypto-Zahlung nicht verfügbar",
+    "genericError": "Etwas ist schiefgelegend",
+    "paymentSuccess": "Zahlung erfolgreich!",
+    "emailPlaceholder": "sie@lab.de",
+    "vatPlaceholder": "DE123456789",
+    "continueToPayment": "Weiter zur Zahlung",
+    "orderSummary": "Bestellübersicht",
+    "subtotalItems": "Zwischensumme ({count, plural, =0 {keine Artikel} one {1 Artikel} other {{count} Artikel}})",
+    "vatLabel": "MwSt. ({label})",
+    "totalLabel": "Gesamt",
+    "paymentMethodLabel": "Zahlungsart",
+    "cardSepa": "Karte / SEPA",
+    "crypto": "Krypto",
+    "consentTerms": "Ich stimme den",
+    "consentTermsLink": "Allgemeinen Geschäftsbedingungen",
+    "consentAnd": "und der",
+    "consentPrivacy": "Datenschutzerklärung",
+    "consentResearch": "Ich verstehe, dass AverianLabs-Produkte nur für Forschungszwecke bestimmt sind.",
+    "creatingOrder": "Bestellung wird erstellt…",
+    "vatIncluded": "Inkl. MwSt.",
+    "shippingFree": "Kostenloser Versand",
+    "bulkDiscountLabel": "Mengenrabatt",
+    "bulkTier10": "−10 % ab 5–10 Vials derselben SKU",
+    "bulkTier15": "−15 % ab 11–20 Vials derselben SKU",
+    "bulkTier20": "−20 % ab 21+ Vials derselben SKU",
+    "bulkNudge10": "Noch {units} Vial dieser SKU hinzufügen, um −10 % zu erhalten",
+    "bulkNudge15": "Noch {units} Vial dieser SKU hinzufügen, um −15 % zu erhalten",
+    "bulkNudge20": "Noch {units} Vial dieser SKU hinzufügen, um −20 % zu erhalten",
+    "shippingPostiExpress": "Posti Express — 1–2 Werktage",
+    "shippingDhlExpress": "DHL Express — 1–3 Werktage",
+    "shippingDpdClassic": "DPD Classic — 3–5 Werktage",
+    "shipTo": "Lieferadresse",
+    "billTo": "Rechnungsadresse",
+    "phone": "Telefon",
+    "saveInfo": "Infos für die nächste Bestellung speichern",
+    "stripeUnavailable": "Stripe ist nicht geladen. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut.",
+    "paymentFailedFallback": "Zahlung fehlgeschlagen. Bitte erneut versuchen.",
+    "processingPayment": "Zahlung wird verarbeitet…",
+    "payAmount": "Zahlen {amount}",
+    "secureHeading": "Sicherer Checkout",
+    "secureTls": "256-Bit-TLS · Stripe Radar Betrugserkennung bei jeder Zahlung",
+    "securePci": "PCI-DSS Level 1 — wir sehen oder speichern Ihre Kartennummer nie",
+    "secureWithdrawal": "EU-Widerrufsrecht von 14 Tagen für Verbraucherbestellungen",
+    "weAccept": "Wir akzeptieren",
+    "paymentVisa": "Visa",
+    "paymentMastercard": "Mastercard",
+    "paymentAmex": "Amex",
+    "paymentApplePay": "Apple Pay",
+    "paymentPaypal": "PayPal",
+    "paymentSepa": "SEPA",
+    "paymentCrypto": "BTC / ETH / USDC",
+    "confirmOrder": "Bestellung bestätigen",
+    "countryFinland": "Finnland",
+    "countrySweden": "Schweden",
+    "countryEstonia": "Estland",
+    "countryGermany": "Deutschland",
+    "countryNetherlands": "Niederlande",
+    "countryFrance": "Frankreich",
+    "countrySpain": "Spanien",
+    "countryItaly": "Italien",
+    "countryDenmark": "Dänemark",
+    "countryPoland": "Polen",
+    "fieldRequired": "Pflichtfeld",
+    "fieldInvalid": "Bitte überprüfen Sie dieses Feld",
+    "bulkNudge10_plural": "Noch {units} Vials dieser SKU hinzufügen, um −10 % zu erhalten",
+    "bulkNudge15_plural": "Noch {units} Vials dieser SKU hinzufügen, um −15 % zu erhalten",
+    "bulkNudge20_plural": "Noch {units} Vials dieser SKU hinzufügen, um −20 % zu erhalten"
+  },
+  "confirm": {
+    "title": "Vielen Dank für Ihre Bestellung",
+    "subtitle": "Wir haben Ihnen eine Bestellbestätigung per E-Mail gesendet.",
+    "orderNumber": "Bestellnummer",
+    "orderNotFound": "Bestellung nicht gefunden",
+    "orderNotFoundDesc": "Wir konnten diese Bestellung nicht finden. Bitte prüfen Sie Ihre E-Mail auf die Bestellbestätigung.",
+    "statusPaid": "Bezahlt",
+    "statusPending": "Zahlung ausstehend",
+    "includedWithOrder": "Im Lieferumfang enthalten:",
+    "includeCoa": "Chargenspezifisches Analysezertifikat (PDF)",
+    "includeEndotoxin": "Endotoxin-Testbericht",
+    "includeMs": "Massenspektrum-Bestätigung",
+    "includeReconstitution": "Rekonstitutionsanleitung",
+    "shippingAddress": "Lieferadresse",
+    "billingAddress": "Rechnungsadresse",
+    "orderSummary": "Bestellübersicht",
+    "subtotal": "Zwischensumme",
+    "shipping": "Versand",
+    "vat": "MwSt.",
+    "total": "Gesamt",
+    "viewOrder": "Bestellung ansehen",
+    "continueShopping": "Weiter einkaufen"
   },
   "footer": {
     "tagline": "Präzisionspeptide für ernsthafte Forschung.",
@@ -311,6 +716,7 @@
     "partner": "Partnerprogramm",
     "contact": "Kontakt",
     "faq": "FAQ",
+    "rewards": "Rewards",
     "shipping": "Versand & Rückgabe",
     "terms": "AGB",
     "privacy": "Datenschutz",
@@ -324,7 +730,13 @@
     "coa": "COA-Bibliothek",
     "glossary": "Glossar",
     "documents": "Dokumente",
-    "community": "Community"
+    "community": "Community",
+    "businessIdLabel": "Firmen-ID",
+    "vatLabel": "USt",
+    "stripeSecured": "Stripe-gesichert",
+    "gdprCompliant": "DSGVO-konform",
+    "euDispatch": "24h EU-Versand",
+    "account": "Konto"
   },
   "cookie": {
     "title": "Cookies & Analytics",
@@ -372,26 +784,131 @@
     "nextProducts": "Nächste Produkte",
     "addToWishlist": "Zur Wunschliste hinzufügen",
     "removeFromWishlist": "Von Wunschliste entfernen",
-    "closeQuickView": "Schnellansicht schließen"
+    "closeQuickView": "Schnellansicht schließen",
+    "shareList": "Liste teilen",
+    "copied": "Kopiert!",
+    "quote": "Angebot",
+    "vialSize": "Flaschengröße",
+    "addToCartWithPrice": "In den Warenkorb · {price}",
+    "addToCompare": "Zum Vergleich",
+    "compareAdd": "Zum Vergleich",
+    "compareAdded": "Im Vergleich",
+    "addedToCart": "In den Warenkorb",
+    "addedToCartDesc": "{name} {mg} mg × {qty}",
+    "batchLabel": "Letzte Charge",
+    "batchDataEndotoxin": "Endotoxin",
+    "batchDataExpires": "Läuft ab",
+    "batchDataHplc": "HPLC-Reinheit",
+    "batchDataManufactured": "Hergestellt",
+    "batchDataOpenCoa": "COA öffnen",
+    "coaAvailable": "COA ansehen",
+    "endotoxinUnit": "EU/mg",
+    "freeShippingOver": "Kostenloser Versand ab {amount} EU-weit",
+    "fromSizes": "{count, plural, =0 {— Größen} one {ab · 1 Größe} other {ab · {count} Größen}}",
+    "inStock": "Auf Lager",
+    "inStockBadge": "Auf Lager",
+    "outOfStock": "Nicht vorrätig",
+    "outOfStockBadge": "Nicht vorrätig",
+    "lowStockBadge": "Geringer Bestand · {count} übrig",
+    "lowStockLeft": "Geringer Bestand · {count} übrig",
+    "purityHplc": "{purity} % HPLC",
+    "purityHplcLabel": "{purity} % HPLC",
+    "quoteEmailPlaceholder": "sie@lab.de",
+    "quoteSent": "Anfrage gesendet",
+    "quoteSentDesc": "Wir mailen Ihnen den aktuellen Preis für {name}.",
+    "quoteSubtitle": "Preis und aktuelle Chargenverfügbarkeit auf Anfrage. Antwort innerhalb von 24 h.",
+    "quoteTitle": "Angebot anfordern",
+    "qvAddedToCompare": "Zum Vergleich hinzugefügt",
+    "qvFullDetails": "Vollständige Details",
+    "qvRemovedFromCompare": "Aus Vergleich entfernt",
+    "qvRemovedFromWishlist": "Von der Wunschliste entfernt",
+    "qvSavedToWishlist": "Zur Wunschliste hinzugefügt",
+    "removeFromCompare": "Aus Vergleich entfernen",
+    "requestQuote": "Angebot anfordern",
+    "stockQuoteOnly": "Nur auf Anfrage",
+    "wishlistAdd": "Zur Wunschliste",
+    "wishlistSaved": "Gespeichert",
+    "stickyAdd": "In den Warenkorb",
+    "stickyAddedToCompare": "Zum Vergleich hinzugefügt",
+    "stickyCompare": "Vergleichen",
+    "stickyOutOfStock": "Nicht vorrätig",
+    "stickyRemovedFromCompare": "Aus Vergleich entfernt",
+    "stickyRemovedFromWishlist": "Von der Wunschliste entfernt",
+    "stickySavedToWishlist": "Zur Wunschliste hinzugefügt",
+    "stickySubscribe": "Abonnieren",
+    "stickySubscribeTooltip": "Abonnieren & 10 % sparen",
+    "stickySubscriptionDesc": "Sie erhalten {mg} mg alle {weeks} Wochen — jederzeit kündbar, 10 % sparen.",
+    "stickySubscriptionSaved": "Abonnement gespeichert",
+    "subscribing": "Abonnement starten",
+    "applyFilters": "Filter anwenden",
+    "checkout": "Zur Kasse",
+    "empty": "Leer",
+    "emptyCta": "Katalog ansehen",
+    "filters": "Filter",
+    "compareLabel": "Vergleichen",
+    "comparing": "Im Vergleich",
+    "drawerTitle": "Menü",
+    "freeShippingProgress": "{amount} mehr für kostenlosen Versand",
+    "freeShippingUnlocked": "Kostenloser Versand freigeschaltet",
+    "fromLabel": "Ab",
+    "pricingLabel": "Preis",
+    "privacyLink": "Datenschutzerklärung",
+    "privacyPost": ". DSGVO-freundlich.",
+    "privacyPre": "Mit der Nutzung dieser Seite stimmen Sie unserer",
+    "quantity": "Menge",
+    "researchUseOnly": "Nur Forschungszwecke",
+    "rewardsEarn": "Belohnungen sammeln",
+    "rewardsFrom": "Aus Belohnungen",
+    "sale": "Sale",
+    "selectVialSize": "Fläschchengröße wählen",
+    "shipping": "Versand",
+    "shippingFree": "Kostenloser Versand",
+    "shop": "Shop",
+    "subtotal": "Zwischensumme",
+    "success": "Erfolg",
+    "title": "Titel",
+    "total": "Gesamt",
+    "vat": "MwSt.",
+    "vatIncluded": "inkl. MwSt.",
+    "viewAllProducts": "Alle Produkte ansehen",
+    "body": "Inhalt",
+    "secureHeading": "Sicherer Checkout",
+    "featured": "Empfohlen",
+    "browseByCategory": "Nach Kategorie durchsuchen",
+    "productsCount": "{count, plural, =0 {keine Produkte} one {1 Produkt} other {{count} Produkte}}",
+    "remove": "Entfernen",
+    "carouselRequestQuote": "Angebot anfordern",
+    "carouselPricingOnRequest": "Preis auf Anfrage",
+    "quickAdd": "Schnellansicht"
   },
   "glossary": {
-    "title": "Glossary",
-    "subtitle": "Every acronym, technique, and piece of jargon we use on the site — explained in plain language with sources.",
-    "searchPlaceholder": "Search terms…",
-    "empty": "No glossary terms yet.",
-    "backToIndex": "← All terms",
-    "relatedTermsHeading": "Related terms",
-    "relatedProductsHeading": "Related products",
-    "synonymsLabel": "Also known as",
-    "notFoundTitle": "Term not found",
-    "notFoundBody": "We don't have a glossary entry for this term yet.",
+    "title": "Glossar",
+    "subtitle": "Jedes Akronym, jede Technik und jeder Fachbegriff auf der Seite — verständlich erklärt mit Quellenangaben.",
+    "searchPlaceholder": "Begriffe suchen…",
+    "filterAll": "Alle",
+    "noResults": "Keine passenden Begriffe.",
+    "empty": "Noch keine Glossareinträge.",
+    "backToIndex": "← Alle Begriffe",
+    "relatedTermsHeading": "Verwandte Begriffe",
+    "relatedProductsHeading": "Verwandte Produkte",
+    "relatedProducts": "Verwandte Produkte",
+    "synonymsLabel": "Auch bekannt als",
+    "notFoundTitle": "Begriff nicht gefunden",
+    "notFoundBody": "Wir haben noch keinen Glossareintrag zu diesem Begriff.",
     "categoryLabels": {
-      "analytical": "Analytical",
-      "chemistry": "Chemistry",
+      "analytical": "Analytisch",
+      "chemistry": "Chemie",
       "compliance": "Compliance",
-      "logistics": "Logistics",
-      "product": "Product",
-      "regulatory": "Regulatory"
+      "logistics": "Logistik",
+      "product": "Produkt",
+      "regulatory": "Regulierung"
+    },
+    "categories": {
+      "analysis": "Analyse",
+      "sequence": "Sequenz",
+      "formulation": "Formulierung",
+      "storage": "Lagerung",
+      "regulatory": "Regulierung"
     }
   },
   "averia": {
@@ -483,6 +1000,18 @@
       "privacyNote": "Unterhaltungen werden nur mit deiner Erlaubnis gespeichert. Du kannst sie jederzeit exportieren oder löschen —",
       "privacyLink": "Datenschutzerklärung"
     },
+    "sourcesHeading": "Quellen",
+    "sourcesCount": "{count, plural, =0 {keine Quellen} one {1 Quelle} other {{count} Quellen}}",
+    "showSources": "Quellen anzeigen",
+    "hideSources": "Quellen ausblenden",
+    "noSources": "Noch keine zitierten Quellen — frag Averia zu einem Produkt, um Quellenangaben zu sehen.",
+    "sourceTypes": {
+      "product": "Produkt",
+      "coa": "Analysezertifikat",
+      "glossary": "Glossar",
+      "blog": "Artikel",
+      "document": "Dokument"
+    },
     "send": "Senden",
     "stop": "Stoppen",
     "ageRequired": "Bitte bestätige zuerst, dass du 18+ bist.",
@@ -495,8 +1024,13 @@
     "errorServerBody": "Auf unserer Seite ist ein Fehler aufgetreten. Bitte in einem Moment erneut versuchen."
   },
   "community": {
-    "signInToPost": "Sign in to post",
-    "signInCta": "Sign in",
+    "signInToPost": "Anmelden, um zu posten",
+    "signInCta": "Anmelden",
+    "signInToReact": "Anmelden, um zu reagieren",
+    "signInToJoin": "Anmelden, um an der Diskussion teilzunehmen →",
+    "signInToCreatePlans": "Anmelden, um Forschungspläne zu erstellen.",
+    "signInToViewPlan": "Anmelden, um deinen Forschungsplan anzuzeigen.",
+    "signInCtaArrow": "Anmelden →",
     "cancel": "Abbrechen",
     "reportFailed": "Bericht konnte nicht gesendet werden. Bitte erneut versuchen.",
     "activityEmpty": "Noch keine Aktivität.",
@@ -511,19 +1045,27 @@
     "fieldBodyHint": "Markdown unterstützt. Nachrichten werden automatisch geprüft.",
     "fieldCategory": "Kategorie",
     "fieldTitle": "Titel",
+    "titlePlaceholder": "Sei konkret…",
+    "bodyPlaceholder": "Markdown unterstützt. Belege Aussagen nach Möglichkeit mit Quellen.",
     "hubHeading": "Diskussionskategorien",
     "hubSub": "Wähle eine Kategorie und tauche ein.",
+    "hubEyebrow": "Nur Forschung · moderiert",
     "leaderboardEmpty": "Sei der Erste.",
     "leaderboardHeading": "Top-Mitwirkende",
     "leaderboardSub": "Mitglieder sammeln Reputation durch erhaltene Reaktionen.",
     "lockedNotice": "Dieser Thread ist gesperrt.",
     "moderationNote": "Moderatorennotiz",
+    "moderationBadge": "Moderation",
+    "moderationDescription": "Beiträge werden vor der Veröffentlichung von einem lexikalischen Wächter geprüft und anschließend asynchron von einem LLM-Moderator überprüft. Eine menschliche Warteschlange bearbeitet Randfälle.",
+    "threadModerationDescription": "Neue Beiträge werden vor der Veröffentlichung von einem automatischen Moderator geprüft. Markierte Inhalte werden von der menschlichen Warteschlange überprüft.",
+    "lockedBadge": "Gesperrt",
     "newThread": "Neuer Thread",
     "newThreadSub": "Sei präzise. Belege Aussagen nach Möglichkeit mit Quellen.",
     "newThreadTitle": "Neuen Thread starten",
     "reactionHelpful": "Hilfreich",
     "reactionInsightful": "Einsichtsvoll",
     "reactionThanks": "Danke",
+    "reactionOwnPost": "Du kannst nicht auf deine eigenen Beiträge reagieren",
     "recentHeading": "Letzte Aktivität",
     "removedNotice": "Ein Moderator hat diese Nachricht entfernt.",
     "replyPlaceholder": "Zur Diskussion beitragen…",
@@ -568,6 +1110,8 @@
     "tierProgress": "{current} / {target} bis zum nächsten: {next}",
     "title": "Community",
     "warnNotice": "Diese Nachricht ist zur Überprüfung markiert.",
+    "anonymous": "Anonym",
+    "edited": "bearbeitet",
     "categories": {
       "announcements": {
         "name": "Bekanntmachungen",
@@ -597,7 +1141,11 @@
         "name": "Off-Topic-Lounge",
         "description": "Alles andere."
       }
-    }
+    },
+    "timeNow": "jetzt",
+    "timeMinutes": "{m} Min.",
+    "timeHours": "{h} Std.",
+    "timeDays": "{d} T"
   },
   "plans": {
     "signInCta": "Anmelden zum Speichern",
@@ -612,6 +1160,8 @@
     "fieldNotes": "Notizen (optional)",
     "fieldNotesHint": "Markdown unterstützt. Wird beim Teilen angezeigt.",
     "fieldTitle": "Planname",
+    "titlePlaceholder": "Sehnenreparatur-Panel",
+    "notesPlaceholder": "Warum diese Kombination, In-vitro-Bedingungen, erwartete Ergebnisse…",
     "items": "Plan-Produkte",
     "itemsCount": "{count, plural, =0 {Keine Produkte} one {# Produkt} other {# Produkte}}",
     "makePrivate": "Privat halten",
@@ -631,7 +1181,13 @@
     "subtitle": "Kuratierte Produkt-Bundles für deine Forschung. Privat speichern oder öffentlich teilen.",
     "title": "Gespeicherte Forschungspläne",
     "untitled": "Unbenannter Plan",
-    "viewOriginal": "Produkt ansehen"
+    "viewOriginal": "Produkt ansehen",
+    "cancel": "Abbrechen",
+    "copy": "Kopieren",
+    "deleteConfirmPhrase": "LÖSCHEN",
+    "badge": "Pläne",
+    "signInCtaArrow": "Anmelden, um Pläne zu erstellen →",
+    "signInToCreatePlans": "Anmelden, um Pläne zu erstellen"
   },
   "activity": {
     "title": "Aktivität",
@@ -656,13 +1212,18 @@
     "deleteConfirmPhrase": "LÖSCHEN",
     "deleteDescription": "Konto und alle zugehörigen Daten dauerhaft löschen. Nach 30 Tagen nicht mehr rückgängig zu machen.",
     "deleteTitle": "Konto löschen",
+    "deleteScheduledTitle": "Kontolöschung geplant.",
+    "deleteScheduledBody": "Alle deine Daten werden in 30 Tagen dauerhaft gelöscht.",
+    "deletePlaceholder": "LÖSCHEN",
     "exportButton": "Export anfordern",
     "exportDescription": "JSON-Archiv mit allen bei uns gespeicherten Daten herunterladen — Bestellungen, Pläne, Forum-Beiträge, Konto.",
     "exportPending": "Export angefordert. Prüfe deine E-Mail.",
-    "exportTitle": "Daten exportieren"
+    "exportTitle": "Daten exportieren",
+    "cancel": "Abbrechen"
   },
   "account": {
     "title": "Konto",
+    "badge": "Konto",
     "settings": "Einstellungen",
     "orders": "Bestellungen",
     "security": "Sicherheit",
@@ -688,10 +1249,44 @@
     "deletedPending": "Kontolöschung ist vorgemerkt. Sie wird innerhalb von 30 Tagen abgeschlossen.",
     "exportReady": "Datenexport ist fertig. Prüfe deine E-Mail.",
     "noPlans": "Du hast noch keine Pläne erstellt.",
+    "plansEmptyHint": "Bündle Produkte, die du zusammen verwendest, und teile sie öffentlich über einen Link.",
     "sectionGdpr": "Datenschutz & Daten",
     "sectionResearchPlans": "Gespeicherte Forschungspläne",
     "viewPlans": "Pläne ansehen",
-    "welcome": "Willkommen zurück"
+    "welcome": "Willkommen zurück",
+    "tileOrders": "Bestellungen",
+    "tileCoaLibrary": "COA-Bibliothek",
+    "tileSubscriptions": "Abonnements",
+    "tileSecurity": "Sicherheit",
+    "itemsCount": "{count, plural, =0 {Keine Elemente} one {1 Element} other {{count} Elemente}}",
+    "planUntitled": "Unbenannter Plan",
+    "planProductsCount": "{count, plural, one {# Produkt} other {# Produkte}}",
+    "planVisibilityPublic": "Öffentlich",
+    "planVisibilityPrivate": "Privat",
+    "backToAccount": "← Zurück zum Konto",
+    "noOrders": "Du hast noch keine Bestellungen aufgegeben.",
+    "noOrdersSub": "Durchsuche den Katalog und deine erste Bestellung erscheint hier.",
+    "browseShop": "Shop durchsuchen",
+    "notificationsBadge": "Benachrichtigungen",
+    "notificationsTitle": "Posteingang",
+    "notificationsDescription": "Antworten, Reaktionen und geteilte Pläne. {count} ungelesen.",
+    "notificationsSignInPrompt": "Anmelden, um Benachrichtigungen anzuzeigen.",
+    "notificationsAllCaughtUp": "Du bist auf dem Laufenden.",
+    "notificationsSomeone": "Jemand",
+    "notificationsReply": "hat auf deinen Thread geantwortet",
+    "notificationsReaction": "hat auf deinen Beitrag reagiert",
+    "notificationsPlanShared": "hat einen Forschungsplan geteilt",
+    "notificationsNotified": "hat dich benachrichtigt",
+    "deleteConfirmTitle": "Kontolöschung geplant.",
+    "deleteConfirmBody": "Alle deine Daten werden in 30 Tagen dauerhaft gelöscht.",
+    "deleteUnavailableTitle": "Kontolöschung nicht verfügbar",
+    "deleteUnavailableBody": "In dieser Bereitstellung ist keine Datenbank konfiguriert.",
+    "confirmDeleteTitle": "Anmelden, um zu bestätigen",
+    "confirmDeleteBody": "Melde dich beim Konto an, dessen Löschung du bestätigen möchtest.",
+    "confirmDeleteSignInLink": "← Anmelden",
+    "confirmDeleteConfirmedBadge": "Bestätigt",
+    "confirmDeleteHardDeleteNote": "Deine persönlichen Daten sind für die endgültige Löschung in 30 Tagen vorgesehen. Bis dahin sind sie in der Datenbank anonymisiert, aber durch den Support wiederherstellbar, falls du es dir anders überlegst.",
+    "confirmDeleteHomeLink": "← Startseite"
   },
   "documents": {
     "title": "Dokumente",
@@ -711,15 +1306,28 @@
     "role": "Rolle"
   },
   "contact": {
+    "title": "Kontakt",
+    "intro": "Echte Wissenschaftler, wirklich schnell. Wir antworten innerhalb von 24 Stunden, an Werktagen.",
+    "emailLabel": "E-Mail",
+    "labInquiriesLabel": "Laboranfragen",
+    "hqNote": "Hauptsitz: Helsinki, Finnland · Lager: Vantaa · Laborpartner: Eurofins Biolab (DE)",
     "name": "Name",
-    "email": "E-Mail",
     "subject": "Betreff",
     "message": "Nachricht",
     "send": "Nachricht senden",
     "sending": "Wird gesendet…",
     "sentTitle": "Nachricht gesendet",
     "sentBody": "Wir antworten innerhalb von 24 Stunden.",
-    "errorTitle": "Etwas ist schiefgelaufen"
+    "errorTitle": "Etwas ist schiefgelaufen",
+    "email": "E-Mail",
+    "cofounderPromisesHeading": "Worauf Sie sich verlassen können",
+    "cofounderPromisesSub": "Drei Versprechen, die wir jedem Forschenden geben — jedes Mal.",
+    "promiseCoaTitle": "Laborergebnisse, jedes Mal",
+    "promiseCoaBody": "Jede Charge wird mit ihrem COA versandt. Sie können den COA jeder Charge auch online abrufen — Suche nach Produkt oder Chargencode.",
+    "promiseCoaCta": "COA-Register ansehen",
+    "promiseSupportTitle": "Mensch + trainierter Bot",
+    "promiseSupportBody": "Averia beantwortet die meisten Fragen in Sekunden. Komplexe und kommerzielle Anfragen erreichen unser Helsinki-Team innerhalb eines Werktags.",
+    "promiseSupportCta": "Averia fragen"
   },
   "newsletter": {
     "title": "Hol dir den monatlichen Research-Digest.",
@@ -780,12 +1388,34 @@
   "admin": {
     "audit": "Audit-Protokoll",
     "auditSub": "Jede Admin-Aktion",
+    "auditBadge": "Admin · Audit-Protokoll",
+    "auditEmpty": "Noch keine Admin-Aktionen aufgezeichnet.",
+    "auditWhen": "Wann",
+    "auditActor": "Akteur",
+    "auditAction": "Aktion",
+    "auditEntity": "Entität",
+    "auditMetadata": "Metadaten",
     "dashboard": "Übersicht",
     "dashboardSub": "Übersicht",
+    "dashboardBadge": "Admin · Übersicht",
     "documents": "Dokumente",
     "documentsSub": "COA, SDS, HPLC, …",
+    "documentsBadge": "Admin · Dokumente",
+    "documentsDescription": "Verwalte die typisierten Dokumente (COA, SDS, HPLC, METHOD, NMR, SPEC, MSDS), die auf Produktseiten und unter /documents/[id] erscheinen.",
     "moderation": "Moderation",
     "moderationSub": "Markierte Inhalte",
+    "moderationBadge": "Admin · Moderation",
+    "moderationDescription": "Erst Mitglieder-Meldungen, dann Beiträge, die vom lexikalischen Wächter oder LLM-Moderator markiert wurden. Neueste zuerst. Klicke Ansehen, um den gesamten Beitrag zu prüfen.",
+    "averiaConversations": "Averia-Konversationen",
+    "averiaConversationsSub": "Durchsuche, finde und entwerfe Antworten auf Kundenkonversationen.",
+    "averiaBadge": "Admin · Averia",
+    "averiaTranscriptBadge": "Admin · Transkript",
+    "averiaTranscriptTitle": "Transkript · {count} Nachrichten",
+    "averiaBackToList": "← Alle Konversationen",
+    "averiaBackToHome": "← Startseite",
+    "averiaBackToCommunity": "← Zurück zur Community",
+    "averiaNotFound": "Konversation nicht gefunden.",
+    "averiaBackFromMissing": "← Zurück zur Liste",
     "signOut": "Abmelden",
     "statsNewMembers": "Neue Mitglieder",
     "statsNewMembersSub": "letzte 7 Tage",
@@ -795,7 +1425,1062 @@
     "statsRecentPlansSub": "letzte 7 Tage",
     "statsRecentThreads": "Neue Threads",
     "statsRecentThreadsSub": "Ereignisse in den letzten 24h",
+    "statsNewThreads": "Neue Threads",
     "statsTotalDocs": "Dokumente gesamt",
-    "statsTotalDocsSub": "alle 7 Typen"
+    "statsTotalDocsSub": "alle 7 Typen",
+    "viewLink": "Ansehen →",
+    "moderationQueue": {
+      "verdictError": "Urteil konnte nicht gespeichert werden. Bitte erneut versuchen.",
+      "verdictRecorded": "Urteil gespeichert.",
+      "queueEmpty": "Warteschlange leer. Alle markierten Beiträge wurden überprüft.",
+      "postBodyUnavailable": "(Beitragstext nicht verfügbar)",
+      "byAuthor": "von {name}",
+      "viewFullPost": "Vollen Beitrag anzeigen",
+      "hide": "Ausblenden",
+      "view": "Ansehen",
+      "dismissTitle": "Verwerfen — keine Aktion nötig",
+      "dismiss": "Verwerfen",
+      "removePostTitle": "Entfernen — Beitrag offline nehmen",
+      "removePost": "Beitrag entfernen",
+      "allowTitle": "Erlauben — sichtbar lassen, als überprüft markieren",
+      "allow": "Erlauben",
+      "keepTitle": "Markiert lassen — überprüft, sichtbar lassen",
+      "keep": "Behalten",
+      "removeTitle": "Entfernen — Beitragsstatus auf entfernt setzen",
+      "remove": "Entfernen",
+      "openThread": "Thread öffnen →"
+    },
+    "documentsClient": {
+      "newDocument": "Neues Dokument",
+      "noDocuments": "Noch keine Dokumente. Klicke auf \"Neues Dokument\", um eines hinzuzufügen.",
+      "deleteAria": "Löschen",
+      "createDocument": "Dokument erstellen",
+      "fieldType": "Typ",
+      "fieldTitle": "Titel",
+      "titlePlaceholder": "BPC-157 · Charge 2026-04",
+      "fieldVersion": "Version",
+      "fieldProductOptional": "Produkt (optional)",
+      "noneOption": "— Keines —",
+      "fieldExternalUrlOptional": "Externe URL (optional)",
+      "externalUrlHint": "PDF-URL auf R2 oder einem beliebigen CDN",
+      "externalUrlPlaceholder": "https://r2.example.com/coa-bpc-2026-04.pdf",
+      "cancel": "Abbrechen",
+      "create": "Erstellen"
+    },
+    "conversationSearch": {
+      "placeholder": "Titel, Konversations-ID suchen…",
+      "allLocales": "Alle Sprachen",
+      "english": "Englisch",
+      "finnish": "Finnisch",
+      "german": "Deutsch",
+      "swedish": "Schwedisch",
+      "dutch": "Niederländisch",
+      "submit": "Suchen",
+      "tableTitle": "Titel",
+      "tableLocale": "Sprache",
+      "tableOwner": "Besitzer",
+      "tableContext": "Kontext",
+      "tableLastMessage": "Letzte Nachricht",
+      "ownerUser": "Benutzer",
+      "ownerAnon": "Anonym",
+      "empty": "Keine Konversationen gefunden."
+    },
+    "draftReply": {
+      "title": "Antwortentwurf",
+      "toneWarm": "warm",
+      "toneConcise": "knapp",
+      "toneTechnical": "technisch",
+      "drafting": "Wird entworfen…",
+      "generate": "Entwurf erstellen ({tone})",
+      "charsCount": "{count} Zeichen",
+      "copied": "Kopiert",
+      "copy": "Kopieren",
+      "supportRequest": "Supportanfrage"
+    }
+  },
+  "legal": {
+    "draftBanner": "ENTWURF — VOR VERÖFFENTLICHUNG JURISTISCH PRÜFEN LASSEN. Diese Seite ist ein deutscher Entwurfsvorschlag und noch nicht verbindlich.",
+    "terms": {
+      "title": "Nutzungsbedingungen",
+      "lastUpdated": "Zuletzt aktualisiert: 1. September 2026",
+      "intro": "Mit dem Zugriff auf averianlabs.eu oder andere Domains von AverianLabs akzeptieren Sie diese Nutzungsbedingungen. Alle Produkte werden unter einer strikten Nur-Forschungs-Lizenz verkauft.",
+      "sections": {
+        "eligibility": {
+          "title": "1. Berechtigung",
+          "body": "Sie müssen mindestens 18 Jahre alt und ein qualifizierter Forscher oder institutioneller Käufer sein, um bei AverianLabs zu kaufen."
+        },
+        "researchUse": {
+          "title": "2. Nur für Forschungszwecke",
+          "body": "Alle Produkte sind ausschließlich für Laborforschung und In-vitro-Studien bestimmt. Sie sind NICHT für den menschlichen Verzehr, diagnostische Zwecke oder therapeutische Anwendungen bestimmt."
+        },
+        "pricing": {
+          "title": "3. Preise & Mehrwertsteuer",
+          "body": "Die Preise verstehen sich inklusive EU-Mehrwertsteuer (OSS-Regelung). B2B-Kunden mit gültiger USt-IdNr. können an der Kasse im Reverse-Charge-Verfahren kaufen."
+        },
+        "shipping": {
+          "title": "4. Versand",
+          "body": "Wir versenden innerhalb von 24 Stunden aus unserem Lager in Helsinki. Die Gefahr des Verlusts geht mit dem Scan durch den Frachtführer auf den Käufer über."
+        },
+        "returns": {
+          "title": "5. Rückgaben",
+          "body": "Aufgrund der Beschaffenheit von Forschungspeptiden sind geöffnete oder in der Kühlkette beeinträchtigte Fläschchen von der Rückgabe ausgeschlossen. Ungeöffnete Produkte können innerhalb von 14 Tagen zum Umtausch oder zur Erstattung zurückgegeben werden."
+        },
+        "liability": {
+          "title": "6. Haftungsbeschränkung",
+          "body": "Die Haftung von AverianLabs ist auf den Kaufpreis des Produkts beschränkt. Wir gewähren keine Eignung für eine bestimmte Forschungsanwendung über das veröffentlichte Analysezertifikat hinaus."
+        },
+        "governingLaw": {
+          "title": "7. Anwendbares Recht",
+          "body": "Diese Bedingungen unterliegen finnischem Recht. Streitigkeiten unterliegen der ausschließlichen Zuständigkeit des Bezirksgerichts Helsinki."
+        },
+        "contact": {
+          "title": "8. Kontakt",
+          "body": "Fragen: legal@averianlabs.eu"
+        }
+      }
+    },
+    "privacy": {
+      "title": "Datenschutzerklärung",
+      "lastUpdated": "Zuletzt aktualisiert: 1. September 2026 · DSGVO-konform",
+      "intro": "Diese Erklärung beschreibt, wie AverianLabs Oy (\"wir\") personenbezogene Daten auf averianlabs.eu und verbundenen Domains gemäß der EU-Datenschutz-Grundverordnung (DSGVO) und dem finnischen Datenschutzgesetz verarbeitet.",
+      "sections": {
+        "dataCollected": {
+          "title": "Erhobene Daten",
+          "body": "Kontodaten: E-Mail, Name, Passwort-Hash (falls Sie ein Konto erstellen). Bestelldaten: Liefer-/Rechnungsadresse, Bestellverlauf. Technische Daten: IP (gekürzt), User-Agent, Referrer (30 Tage gespeichert). Analyse: nur mit Ihrer ausdrücklichen Einwilligung über das Cookie-Banner."
+        },
+        "lawfulBasis": {
+          "title": "Rechtsgrundlage",
+          "body": "Vertrag (Art. 6(1)(b)) für Bestellungen, Einwilligung (Art. 6(1)(a)) für Analyse, rechtliche Verpflichtung (Art. 6(1)(c)) für die Buchhaltung."
+        },
+        "subprocessors": {
+          "title": "Auftragsverarbeiter",
+          "body": "Stripe Payments Europe Ltd — Zahlungsabwicklung (EU); Coinbase Commerce — Krypto-Zahlungen; Resend — Transaktions-E-Mail (EU); PostHog Cloud EU — Produktanalyse (einwilligungspflichtig); Sanity Inc. — Content (USA, EU-Datenresidenz); Cloudflare — CDN / DDoS; Neon — Datenbank (Frankfurt)."
+        },
+        "yourRights": {
+          "title": "Ihre Rechte",
+          "body": "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Widerspruch. E-Mail an privacy@averianlabs.eu. Sie können auch eine Beschwerde bei Ihrer nationalen Aufsichtsbehörde einreichen (in Finnland: tietosuojavaltuutettu)."
+        },
+        "retention": {
+          "title": "Aufbewahrungsdauer",
+          "body": "Kontodaten: bis zur Löschung. Bestelldaten: 7 Jahre (Buchhaltungspflicht). Analyse: 14 Monate."
+        },
+        "contact": {
+          "title": "Kontakt",
+          "body": "Datenschutzbeauftragter: dpo@averianlabs.eu · AverianLabs Oy, Helsinki, Finnland."
+        }
+      }
+    },
+    "cookies": {
+      "title": "Cookies",
+      "lastUpdated": "Zuletzt aktualisiert: 1. September 2026",
+      "intro": "Wir verwenden nur ein Minimum an Cookies. Notwendige Cookies können nicht deaktiviert werden; Analyse-Cookies erfordern Ihre Einwilligung.",
+      "sections": {
+        "essential": {
+          "title": "Notwendig",
+          "body": "averianlabs-cart — speichert Ihren Warenkorb (1 Jahr); averianlabs-age-confirmed — merkt sich die Altersbestätigung (1 Jahr); averianlabs-cookie-consent — merkt sich Ihre Cookie-Auswahl (1 Jahr); Stripe / Coinbase Sitzungs-Cookies (vom Zahlungsanbieter gesetzt)."
+        },
+        "analytics": {
+          "title": "Analyse (Einwilligung)",
+          "body": "PostHog (EU) und Plausible werden erst geladen, nachdem Sie im Cookie-Banner \"Alle akzeptieren\" klicken. Sie erheben anonymisierte, aggregierte Nutzungsdaten."
+        },
+        "changeChoice": {
+          "title": "Auswahl ändern",
+          "body": "Klicken Sie auf den kleinen \"Cookies\"-Link in der Fußzeile oder löschen Sie Ihre Browserdaten."
+        }
+      }
+    },
+    "disclaimer": {
+      "badge": "Nur für Forschungszwecke",
+      "title": "Forschungs-Disclaimer",
+      "lead": "Alle von AverianLabs Oy verkauften Produkte sind ausschließlich für Laborforschung und In-vitro-Studien bestimmt.",
+      "sections": {
+        "notForHuman": {
+          "title": "Nicht zum Verzehr durch Menschen",
+          "body": "Die auf averianlabs.eu gelisteten Produkte sind nicht für die Verwendung, den Verzehr, die Verabreichung oder die Anwendung am menschlichen oder tierischen Körper bestimmt."
+        },
+        "noMedicalClaims": {
+          "title": "Keine medizinischen Ansprüche",
+          "body": "Die auf dieser Website bereitgestellten Informationen dienen nur Forschungs- und Bildungszwecken. Sie sind keine medizinische Beratung, Diagnose oder Behandlungsempfehlung. AverianLabs Oy befürwortet, empfiehlt oder unterstützt keine Off-Label-Verwendung eines Produkts."
+        },
+        "buyerResponsibility": {
+          "title": "Verantwortung des Käufers",
+          "body": "Mit dem Kauf bei AverianLabs bestätigen Sie, dass Sie ein qualifizierter Forscher oder institutioneller Käufer sind und dass die Produkte ausschließlich für legitime Laborforschung unter Einhaltung aller geltenden lokalen, nationalen und internationalen Gesetze und Vorschriften verwendet werden."
+        },
+        "compliance": {
+          "title": "Einhaltung von Vorschriften",
+          "body": "Es liegt in der Verantwortung des Käufers sicherzustellen, dass Import, Besitz und Verwendung von Forschungspeptiden allen geltenden Vorschriften in seiner Rechtsordnung entsprechen. AverianLabs Oy behält sich das Recht vor, jedem Käufer oder jeder Rechtsordnung nach eigenem Ermessen den Service zu verweigern."
+        }
+      }
+    }
+  },
+  "compare": {
+    "badge": "Im Vergleich",
+    "title": "Forschungspeptide vergleichen",
+    "subtitle": "Reinheit, Fläschchengrößen, Sequenz und Lagerung — über den gesamten Katalog.",
+    "compare": "Zum Vergleich",
+    "actionAdd": "Zum Vergleich",
+    "clear": "Aus Vergleich entfernen",
+    "removeFromCompareA11y": "Aus Vergleich entfernen",
+    "addedToCart": "Im Vergleich",
+    "inStockCount": "Auf Lager",
+    "lowStock": "Geringer Bestand · {count} übrig",
+    "close": "Schließen",
+    "barTitle": "Peptide vergleichen",
+    "barLabel": "{count, plural, =0 {Keine Produkte ausgewählt} one {1 Produkt im Vergleich} other {{count} Produkte im Vergleich}}",
+    "barSub": "Nebeneinander HPLC, Massenspektrum, Sequenz und Preis.",
+    "addAllToCart": "Alle in den Warenkorb",
+    "badgeQuote": "Nur auf Anfrage",
+    "clearAll": "Alle entfernen",
+    "colAvailability": "Verfügbarkeit",
+    "colCas": "CAS",
+    "colCategory": "Kategorie",
+    "colFormula": "Formel",
+    "colMw": "MG",
+    "colPurity": "Reinheit",
+    "colSequence": "Sequenz",
+    "colStorage": "Lagerung",
+    "colVialSizes": "Fläschchengrößen",
+    "contact": "Kontakt",
+    "emptyBody": "Produkte ansehen und zum Vergleich hinzufügen.",
+    "emptyTitle": "Keine Produkte zum Vergleichen",
+    "footerSummary": "{count} von {max} im Vergleich",
+    "fromPrice": "Ab {price}",
+    "headerAttribute": "Eigenschaft",
+    "pickerPrompt": "Produkt auswählen",
+    "actionNotify": "Benachrichtigen"
+  },
+  "about": {
+    "badge": "Über AverianLabs",
+    "title": "Von Forschern, für Forscher.",
+    "intro": "Wir haben AverianLabs gegründet, weil die Lieferkette für Forschungspeptide intransparent, langsam und inkonsistent war. Jede Charge sollte ein öffentliches COA mitliefern, jede Frage eine echte Antwort erhalten und jede Bestellung innerhalb von 24 Stunden aus einem EU-Labor versendet werden.",
+    "stats": [
+      {
+        "value": "100 %",
+        "label": "COA für jede Charge",
+        "note": "Unsere Verpflichtung bei jeder Lieferung"
+      },
+      {
+        "value": "—",
+        "label": "Chargenspezifische HPLC-Reinheit",
+        "note": "Pro Charge veröffentlicht"
+      },
+      {
+        "value": "24 h",
+        "label": "EU-Versand",
+        "note": "Unser Ziel"
+      },
+      {
+        "value": "—",
+        "label": "Bediente Forscher",
+        "note": "Mehrere Hundert in der EU"
+      }
+    ],
+    "valuesTitle": "Unsere Werte",
+    "values": [
+      {
+        "title": "Transparenz",
+        "body": "Jedes Testergebnis, jeder Lieferant, jeder Preis. Offen by default."
+      },
+      {
+        "title": "Reinheit",
+        "body": "Wir verkaufen weniger Peptide, um jede Charge gründlicher testen zu können."
+      },
+      {
+        "title": "Geschwindigkeit",
+        "body": "Forschung wartet nicht. 24-h-Versand aus unserem EU-Hub in Helsinki."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Häufig gefragt",
+    "subtitle": "Schnelle Antworten auf die häufigsten Fragen.",
+    "items": [
+      {
+        "q": "Sind Ihre Produkte für den menschlichen Verzehr bestimmt?",
+        "a": "Nein. Alle von AverianLabs verkauften Produkte sind ausschließlich für Laborforschung und In-vitro-Studien bestimmt. Sie sind nicht für die Anwendung an Menschen oder Tieren vorgesehen."
+      },
+      {
+        "q": "Wie lange dauert der Versand?",
+        "a": "Wir versenden innerhalb von 24 Stunden aus unserem Lager in Helsinki. Die EU-Lieferung dauert in der Regel 1–3 Werktage per Posti oder DHL."
+      },
+      {
+        "q": "Stellen Sie Analysezertifikate zur Verfügung?",
+        "a": "Ja. Jede Charge wird mit einem chargenspezifischen COA (HPLC-Reinheit, Massenspektrum-Bestätigung) und Endotoxinbericht versendet. PDFs sind öffentlich unter /coa verfügbar."
+      },
+      {
+        "q": "In welche Länder versenden Sie?",
+        "a": "Wir versenden in alle EU-Länder sowie nach UK, NO, CH und TR. In einige wenige eingeschränkte Jurisdiktionen versenden wir nicht (siehe AGB)."
+      },
+      {
+        "q": "Welche Zahlungsmethoden akzeptieren Sie?",
+        "a": "Karten (Visa, MC, Amex), Apple Pay, Google Pay, iDEAL, Klarna, SEPA-Lastschrift und Krypto (BTC, ETH, USDC) über Coinbase Commerce."
+      },
+      {
+        "q": "Bieten Sie Mengen- / B2B-Preise an?",
+        "a": "Ja — bewerben Sie sich für unser Partnerprogramm. Universitäten, Forschungslabore und Wiederverkäufer erhalten bis zu 35 % Rabatt und NET-14-Rechnungsstellung."
+      }
+    ]
+  },
+  "labTests": {
+    "badge": "ISO 17025 Lab-Partner",
+    "title": "So testen wir jede Charge",
+    "subtitle": "Unabhängige Verifizierung in jedem Schritt. Keine Charge wird ohne vollständigen analytischen Fingerabdruck versendet.",
+    "batchesLabel": "verfolgte Chargen",
+    "tests": [
+      {
+        "title": "HPLC-Reinheit",
+        "body": "Umkehrphasen-HPLC quantifiziert den Peptidgehalt gegen einen zertifizierten Referenzstandard. Akzeptanz: ≥ 98 %."
+      },
+      {
+        "title": "Endotoxin (LAL)",
+        "body": "Kinetisch-chromogener LAL gemäß USP <85>. Akzeptanz: < 5 EU/mg."
+      },
+      {
+        "title": "Massenspektrometrie",
+        "body": "ESI-MS bestätigt, dass das Molekulargewicht innerhalb von ±1 Da mit dem theoretischen übereinstimmt."
+      },
+      {
+        "title": "Sterilität & Mykoplasma",
+        "body": "14-tägige Sterilitätsprüfung (USP <71>) und Mykoplasma-qPCR bei jeder Charge."
+      }
+    ],
+    "sequenceTitle": "Testablauf",
+    "sequence": [
+      {
+        "step": "01",
+        "title": "Eingang",
+        "body": "Rohpeptid geht in Quarantäne"
+      },
+      {
+        "step": "02",
+        "title": "Identität",
+        "body": "ESI-MS bestätigt die Sequenz"
+      },
+      {
+        "step": "03",
+        "title": "Reinheit",
+        "body": "HPLC bei 214 nm + 220 nm"
+      },
+      {
+        "step": "04",
+        "title": "Sicherheit",
+        "body": "Endotoxin, Sterilität, Mykoplasma"
+      }
+    ]
+  },
+  "quality": {
+    "badge": "Qualität",
+    "title": "Qualität, durchgehend",
+    "items": [
+      {
+        "title": "EU-GMP-Lieferanten",
+        "body": "Wir auditieren jeden Peptidhersteller jährlich, vor Ort, persönlich."
+      },
+      {
+        "title": "ISO 17025-Tests",
+        "body": "Unabhängige Labore in DE, FI und NL testen jede Charge vor dem Versand erneut."
+      },
+      {
+        "title": "EU-weite Logistik",
+        "body": "Helsinki → zu Ihnen, in 24 h. Verfolgt, mit Unterschrift, Umgebungs- oder Kühlkette nach Bedarf."
+      }
+    ]
+  },
+  "shippingReturns": {
+    "title": "Versand, Rückgabe & Garantien",
+    "items": [
+      {
+        "title": "Versanddienstleister",
+        "body": "Posti (FI primär), DHL Express (Rest-EU), DPD Classic."
+      },
+      {
+        "title": "Versand",
+        "body": "Bestellungen vor 14:00 Uhr EET werden am selben Werktag versendet. Andere innerhalb von 24 h."
+      },
+      {
+        "title": "Kühlkette",
+        "body": "Umgebungsstabile Peptide werden bei Raumtemperatur in Schutz Schaumstoff versendet. Gekühlte Artikel mit Kühlakkus."
+      },
+      {
+        "title": "Rückgaben",
+        "body": "Ungeöffnete Produkte sind innerhalb von 14 Tagen rückgabefähig. Geöffnete / temperaturempfindliche Fläschchen sind nicht rückgabefähig."
+      }
+    ],
+    "ratesTitle": "Preise",
+    "tableRegion": "Region",
+    "tableCarrier": "Versanddienstleister",
+    "tableEta": "ETA",
+    "tablePrice": "Preis",
+    "rates": [
+      {
+        "region": "Finnland",
+        "carrier": "Posti Express",
+        "eta": "1–2 Tage",
+        "priceCents": 990
+      },
+      {
+        "region": "EU (Rest)",
+        "carrier": "DHL Express",
+        "eta": "1–3 Tage",
+        "priceCents": 1490
+      },
+      {
+        "region": "EU (Rest)",
+        "carrier": "DPD Classic",
+        "eta": "3–5 Tage",
+        "priceCents": 690
+      },
+      {
+        "region": "UK / NO / CH",
+        "carrier": "DHL Express",
+        "eta": "2–4 Tage",
+        "priceCents": 1990
+      }
+    ],
+    "freeShippingNote": "Kostenloser Versand innerhalb der EU ab €150.",
+    "guaranteeHeading": "Neuversand- & Erstattungsgarantie",
+    "guaranteeSub": "Wenn Ihre Bestellung nicht angekommen ist oder vom Zoll wegen eines nachgewiesenen Carrier-Fehlers festgehalten wurde, machen wir es wieder gut.",
+    "guaranteeDidntArriveTitle": "Nicht angekommen?",
+    "guaranteeDidntArriveBody": "Wenn die Sendungsverfolgung einen Verlust anzeigt, kontaktieren Sie den Support mit Ihrer Bestellnummer. Wir eröffnen eine Carrier-Untersuchung und liefern die gleichen Produkte kostenlos nach.",
+    "guaranteeCustomsTitle": "Vom Zoll festgehalten?",
+    "guaranteeCustomsBody": "Forschungs-Peptide von AverianLabs sind keine kontrollierten Substanzen und passieren den EU-Zoll in der Regel problemlos. Wird eine Sendung festgehalten und liegt die Ursache nachweislich beim Carrier oder unseren Versandpapieren, liefern wir kostenlos nach.",
+    "guaranteeReshipFailsTitle": "Zweite Lieferung kam nicht an?",
+    "guaranteeReshipFailsBody": "Wir erstatten die vollen Kosten der betroffenen Produkte — inklusive ursprünglicher Versandkosten — sobald die zweite Lieferung die ETA des Carriers überschreitet.",
+    "guaranteeContactCta": "Neuversand-Fall eröffnen",
+    "supportHeading": "Experten-Support — Mensch + trainierter Bot",
+    "supportSub": "Die meisten Fragen zu Produktauswahl und Rekonstitution beantwortet Averia, unser trainierter Forschungs-Concierge, in Sekunden. Komplexe oder kommerzielle Anfragen gehen an unser Helsinki-Team.",
+    "supportAveriaTitle": "Averia (Forschungs-Concierge)",
+    "supportAveriaBody": "Trainiert auf jedem Produkt-Datenblatt, COA und Rekonstitutions-Guide. Fragt bei Bedarf nach der Bestellnummer und halluziniert keine Reinheitswerte.",
+    "supportHumanTitle": "Helsinki-Forschungsteam",
+    "supportHumanBody": "Basierend in Helsinki. E-Mail an support@averianlabs.eu — typische Antwort innerhalb eines Werktags; Priority-Queue für Großhandel und akademische Bestellungen.",
+    "supportContactCta": "Team kontaktieren"
+  },
+  "wishlist": {
+    "title": "Wunschliste",
+    "subtitle": "Ihre gespeicherten Peptide — setzen Sie dort fort, wo Sie aufgehört haben, oder teilen Sie sie mit Kollegen.",
+    "bestSellersBadge": "Beliebt bei Forschern wie Ihnen",
+    "bestSellersTitle": "Bestseller",
+    "bestSellersSubtitle": "Top-bewertete Peptide diesen Monat.",
+    "viewAllProducts": "Alle {count} Produkte anzeigen →"
+  },
+  "rewards": {
+    "badge": "Treueprogramm",
+    "title": "AverianLabs Rewards",
+    "subtitle": "Sammeln Sie Punkte bei jeder Bestellung. Steigen Sie Stufen auf. Lösen Sie sie für Forschungsguthaben ein. Je mehr Sie forschen, desto mehr sparen Sie.",
+    "chooseTier": "Wählen Sie Ihre Stufe",
+    "mostPopular": "Am beliebtesten",
+    "tiers": [
+      {
+        "name": "Apex",
+        "threshold": 0,
+        "perks": [
+          {
+            "text": "1 Punkt pro 1 € Ausgaben"
+          },
+          {
+            "text": "Geburtstags-Bonus-Punkte"
+          },
+          {
+            "text": "Früher Zugriff auf neue Chargen"
+          }
+        ],
+        "ctaStart": "Mit Sammeln beginnen",
+        "ctaUnlock": "{name} freischalten"
+      },
+      {
+        "name": "Kristall",
+        "threshold": 500,
+        "perks": [
+          {
+            "text": "1,25 Punkte pro 1 € Ausgaben"
+          },
+          {
+            "text": "Kostenloser EU-Versand für alle Bestellungen"
+          },
+          {
+            "text": "Exklusive Produkt-Drops"
+          },
+          {
+            "text": "Priorität bei Chargenauswahl"
+          }
+        ],
+        "ctaStart": "Mit Sammeln beginnen",
+        "ctaUnlock": "{name} freischalten"
+      },
+      {
+        "name": "Aurora",
+        "threshold": 2000,
+        "perks": [
+          {
+            "text": "1,5 Punkte pro 1 € Ausgaben"
+          },
+          {
+            "text": "Kostenloser Express-EU-Versand"
+          },
+          {
+            "text": "Vorrangige Support-Hotline"
+          },
+          {
+            "text": "Einladungen zu Laborbesuchen"
+          },
+          {
+            "text": "Persönlicher Account Manager"
+          }
+        ],
+        "ctaStart": "Mit Sammeln beginnen",
+        "ctaUnlock": "{name} freischalten"
+      }
+    ],
+    "tierStarting": "Einstiegsstufe",
+    "tierSpend": "{amount}+ Lebenszeitumsatz",
+    "howToEarn": "Punkte sammeln",
+    "earnWays": [
+      {
+        "action": "Bestellung aufgeben",
+        "points": "1–1,5× pro 1 €",
+        "desc": "Punkte skalieren mit Ihrer Stufe"
+      },
+      {
+        "action": "Produktbewertung schreiben",
+        "points": "50 Punkte",
+        "desc": "Nur verifizierte Käufer"
+      },
+      {
+        "action": "Kollegen empfehlen",
+        "points": "250 Punkte",
+        "desc": "Wenn diese erste Bestellung aufgeben"
+      },
+      {
+        "action": "Forschungsplan teilen",
+        "points": "25 Punkte",
+        "desc": "Öffentlicher Plan mit 5+ Saves"
+      }
+    ],
+    "referralBadge": "Empfehlungsprogramm",
+    "referralTitle": "Geben Sie 15 €, erhalten Sie 15 €",
+    "referralBody": "Teilen Sie Ihren einzigartigen Empfehlungslink mit Kollegen. Wenn diese ihre erste Bestellung über 100 € aufgeben, erhalten Sie beide 15 € Forschungsguthaben. Keine Begrenzung der Empfehlungen.",
+    "referralBullets": [
+      "Teilen Sie Ihren einzigartigen Link per E-Mail oder Social Media",
+      "Kollege erhält 15 € Rabatt auf die erste Bestellung (100 €+)",
+      "Sie erhalten 15 € Guthaben + 250 Bonuspunkte",
+      "Unbegrenzte Empfehlungen — stapeln Sie Ihr Guthaben"
+    ],
+    "referralLinkLabel": "Ihr Empfehlungslink",
+    "referralCopy": "Kopieren",
+    "referralGetLink": "Meinen Empfehlungslink holen",
+    "referralSignInHint": "Anmelden, um Ihren einzigartigen Link zu generieren",
+    "redeemTitle": "Punkte einlösen",
+    "redemptions": [
+      {
+        "points": 500,
+        "valueCents": 500,
+        "label": "Bestellguthaben",
+        "rate": "1 % zurück"
+      },
+      {
+        "points": 1000,
+        "valueCents": 1200,
+        "label": "Bestellguthaben (Bonus)",
+        "rate": "1,2 % zurück"
+      },
+      {
+        "points": 2500,
+        "valueCents": 3500,
+        "label": "Bestellguthaben (Premium)",
+        "rate": "1,4 % zurück"
+      }
+    ],
+    "redeemFooter": "Punkte verfallen 12 Monate nach dem Sammeln. Guthaben wird automatisch an der Kasse angewendet.",
+    "ptsLabel": "{count, plural, one {# Pkt} other {# Pkt}}"
+  },
+  "partner": {
+    "orgName": "Institutionsname",
+    "country": "Land",
+    "contactEmail": "kontakt@institution.eu",
+    "volume": "Geschätztes monatliches Volumen (Vials)",
+    "useCaseResearchLab": "Forschungslabor",
+    "useCaseUniversity": "Universität",
+    "useCaseReseller": "Wiederverkäufer",
+    "useCaseClinic": "Klinik",
+    "useCaseDetail": "Anwendungsfall / Forschungsfokus",
+    "submit": "Antrag einreichen",
+    "submitting": "Wird gesendet…",
+    "submittedTitle": "Antrag erhalten.",
+    "submittedBody": "Wir prüfen Ihre Angaben und antworten innerhalb von 48 Stunden. Schauen Sie in Ihren Posteingang für die nächsten Schritte.",
+    "submitError": "Übermittlung fehlgeschlagen",
+    "submitErrorGeneric": "Etwas ist schiefgelaufen",
+    "submitSuccess": "Antrag eingereicht",
+    "applicationReceivedTitle": "Antrag erhalten.",
+    "applicationReceivedBody": "Wir prüfen deine Angaben und antworten innerhalb von 48 Stunden."
+  },
+  "search": {
+    "label": "Suchen",
+    "commandLabel": "AverianLabs durchsuchen",
+    "inputPlaceholder": "Peptide, Chargen-IDs, Artikel suchen…",
+    "inputAria": "Suchen",
+    "empty": "Keine Ergebnisse. Versuche einen Peptidnamen wie \"BPC-157\" oder eine CAS-Nummer.",
+    "groupProducts": "Produkte",
+    "groupQuickLinks": "Schnellzugriff",
+    "groupRecent": "Zuletzt",
+    "hintNavigate": "navigieren",
+    "hintOpen": "öffnen",
+    "hintClose": "schließen",
+    "productsIndexed": "{count} Produkte indexiert",
+    "quickLinks": {
+      "shop": "Alle Peptide ansehen",
+      "labTests": "Labormethodik",
+      "calculator": "Rekonstitutionsrechner",
+      "blog": "Forschungsblog",
+      "partner": "Partnerprogramm"
+    },
+    "quote": "Angebot",
+    "searchBatch": "Charge {code}",
+    "searchCoa": "Analysezertifikat · {code}",
+    "searchGlossary": "Glossar · {term}",
+    "searchDoc": "Dokument · {title}",
+    "searchResultsCount": "{count, plural, =0 {Keine Ergebnisse} one {# Ergebnis} other {# Ergebnisse}}"
+  },
+  "calculator": {
+    "inputs": "Eingaben",
+    "peptideMass": "Peptidmasse (mg)",
+    "bacteriostaticWater": "Bakteriostatisches Wasser (mL)",
+    "desiredDose": "Gewünschte Dosis (mcg)",
+    "results": "Ergebnisse",
+    "concentration": "Konzentration",
+    "concentrationUnit": "mg/mL",
+    "concentrationMcgUnit": "mcg/mL",
+    "volumePerDose": "Volumen pro Dosis",
+    "volumePerDoseUnit": "mL",
+    "totalDoses": "Dosen pro Fläschchen",
+    "dosesCalculation": "{mass} mg ÷ {dose} mcg",
+    "iuOnSyringe": "IU auf 100-IU/mL-Spritze",
+    "researchOnly": "Nur für Forschungsberechnungen. Immer mit dem eigenen Protokoll abgleichen.",
+    "unitsMcg": "mcg",
+    "unitsIu": "IU",
+    "unitsMl": "mL",
+    "title": "Rekonstitutionsrechner",
+    "subtitle": "Berechnen Sie Zugabevolumen, Arbeitskonzentration und verbleibende Dosen für jede Peptid-Fläschchengröße.",
+    "heroEyebrow": "Forschungswerkzeuge",
+    "heroTitle": "Der Peptidrechner für den Laboralltag",
+    "heroBody": "Fünf Rechner (Rekonstitution, Titration, Verdünnung, Breakeven, Vergleich), eine gemeinsame Mathebibliothek und eine schöne Spritzenvisualisierung. Protokolle speichern, per URL teilen, Bench-Card drucken.",
+    "openInAveria": "Dieses Setup in Averia öffnen",
+    "viewAllTools": "Alle Rechner anzeigen",
+    "tabs": {
+      "reconstitution": "Rekonstitution",
+      "titration": "Titration",
+      "dilution": "Verdünnung",
+      "breakeven": "Breakeven",
+      "compare": "Vergleich"
+    },
+    "outputs": "Ausgaben",
+    "product": "Produkt (optional)",
+    "noProductSelected": "Eigenes Setup",
+    "syringe": "Spritze",
+    "storage": "Lagerung",
+    "leftoverMcg": "Verbleibendes Peptid",
+    "leftoverMcgUnit": "mcg ungenutzt",
+    "actions": {
+      "share": "Teilen",
+      "shareCopied": "Link kopiert",
+      "save": "Protokoll speichern",
+      "saved": "Gespeichert",
+      "reset": "Zurücksetzen",
+      "print": "Drucken",
+      "exportCsv": "CSV exportieren",
+      "sendToAveria": "Averia fragen",
+      "openSaved": "Gespeichert",
+      "viewHistory": "Verlauf",
+      "clearHistory": "Verlauf löschen",
+      "deleteProtocol": "Protokoll löschen"
+    },
+    "validation": {
+      "nonPositive": "Muss größer als null sein.",
+      "concentrationTooHigh": "Über der praktischen Löslichkeitsgrenze — verdünnen oder Fläschchen aufteilen.",
+      "concentrationCaution": "Nähert sich der Löslichkeitsgrenze — die Entnahme bleibt genau, aber die Lagerung verkürzt sich.",
+      "drawTooSmall": "Entnahmemenge unter dem praktischen Minimum — versuchen Sie den Verdünnungs-Tab.",
+      "nan": "Zahl eingeben."
+    },
+    "saturation": {
+      "cautionTitle": "Nähert sich der Löslichkeitsgrenze",
+      "aboveTitle": "Über der Löslichkeitsgrenze — löst sich nicht vollständig",
+      "ceiling": "Praktische Obergrenze",
+      "ratio": "Arbeitskonzentration"
+    },
+    "stability": {
+      "title": "Stabilität nach Rekonstitution",
+      "subtitle": "Geschätzte Haltbarkeit nach Zugabe des Lösungsmittels.",
+      "shelfLife": "Empfohlene Haltbarkeit",
+      "refrigerated": "Gekühlt",
+      "frozen": "Gefroren (−20 °C)",
+      "room": "Raumtemperatur"
+    },
+    "syringes": {
+      "title": "Spritzenwahl",
+      "subtitle": "Wechseln Sie die Spritze, um die IU-Markierung und das empfohlene Entnahmevolumen neu zu berechnen.",
+      "0_3": "0.3 mL · 30 IU",
+      "0_5": "0.5 mL · 50 IU",
+      "1_0": "1.0 mL · 100 IU"
+    },
+    "presets": {
+      "title": "Häufige Starts",
+      "subtitle": "Ein-Klick-Setups passend zu den Katalog-Fläschchen.",
+      "empty": "Noch keine gespeicherten Protokolle — Preset wählen oder dieses Setup speichern."
+    },
+    "history": {
+      "title": "Letzte Berechnungen",
+      "subtitle": "Lokal in diesem Browser gespeichert.",
+      "empty": "Berechnung ausführen, um sie hier zu sehen.",
+      "remove": "Entfernen"
+    },
+    "reconstitution": {
+      "drawLabel": "Für diese Dosis entnehmen",
+      "withSyringe": "Auf einer {syringe}-Spritze",
+      "vialYield": "Fläschchen ergibt {count} Dosen à {dose}"
+    },
+    "titration": {
+      "title": "Titrationsleiter",
+      "subtitle": "Dosis über Wochen oder Schritte rampen.",
+      "startDose": "Startdosis",
+      "endDose": "Enddosis",
+      "steps": "Schritte",
+      "duration": "Dauer",
+      "durationWeeks": "{count, plural, =1 {1 Woche} other {{count} Wochen}}",
+      "stepLabel": "Schritt {index}",
+      "totalConsumed": "Insgesamt verbrauchtes Peptid",
+      "exceedsVial": "Plan überschreitet ein Fläschchen — {vials} kaufen."
+    },
+    "dilution": {
+      "title": "Verdünnungskette",
+      "subtitle": "Wenn die Entnahme zu klein zum Pipettieren ist, zuerst verdünnen.",
+      "rawVolume": "Rohes Entnahmevolumen",
+      "minDraw": "Minimales sicheres Volumen",
+      "factor": "Erforderlicher Verdünnungsfaktor",
+      "step1": "Schritt 1 — Rekonstitution",
+      "step2": "Schritt 2 — Verdünnen 1:{factor}",
+      "step2Detail": "{sourceMl} mL der rekonstituierten Lösung in {diluentMl} mL steriles Wasser oder BAC-Wasser geben.",
+      "working": "Arbeitskonzentration",
+      "finalDraw": "Endgültige Entnahme"
+    },
+    "breakeven": {
+      "title": "Fläschchenplan-Breakeven",
+      "subtitle": "Fläschchenkombinationen für einen Ziel-Dosisplan vergleichen.",
+      "plan": "Plan",
+      "price": "Gesamtpreis",
+      "perMg": "Pro mg",
+      "doses": "Dosen",
+      "leftover": "Restbestand",
+      "waste": "Verluste €",
+      "pickCheapest": "Niedrigster Preis pro mg",
+      "pickLeastWaste": "Kleinster Restbestand",
+      "addPlan": "Eigenen Plan hinzufügen",
+      "removePlan": "Entfernen"
+    },
+    "compare": {
+      "title": "Protokollvergleich",
+      "subtitle": "Mathematik zweier Rekonstitutionsszenarien nebeneinander.",
+      "left": "Links",
+      "right": "Rechts",
+      "addProtocol": "Protokoll hinzufügen"
+    },
+    "share": {
+      "copyTooltip": "URL mit aktuellem Setup kopieren",
+      "copied": "Kopiert",
+      "buildFromUrl": "Aus URL geladen"
+    },
+    "disclaimer": {
+      "title": "Nur für Forschungszwecke",
+      "body": "Diese Rechner unterstützen Laborworkflows. Sie sind keine medizinische Beratung und nicht für therapeutische Anwendungen zugelassen.",
+      "researchOnly": "AverianLabs-Produkte werden ausschließlich für Laborforschung und In-vitro-Studien verkauft. Nicht für menschliche oder tierärztliche Verwendung, Diagnose oder Therapie."
+    },
+    "aria": {
+      "resultSummary": "{mgPerMl} Milligramm pro Milliliter, {mL} Milliliter pro Dosis, {iu} Internationale Einheiten auf der {syringe}-Spritze. Fläschchen ergibt {doses} Dosen.",
+      "resultLabel": "Berechnungsergebnis"
+    }
+  },
+  "error": {
+    "label": "Fehler",
+    "title": "Etwas ist schiefgelaufen",
+    "body": "Ein unerwarteter Fehler ist aufgetreten. Bitte erneut versuchen oder zur Startseite gehen.",
+    "tryAgain": "Erneut versuchen",
+    "backHome": "Zurück zur Startseite"
+  },
+  "notFound": {
+    "label": "Fehler 404",
+    "title": "Seite nicht gefunden",
+    "body": "Leider konnten wir die gesuchte Seite nicht finden.",
+    "backHome": "Zurück zur Startseite",
+    "browseCatalog": "Katalog durchsuchen",
+    "searchHint": "Suchen:"
+  },
+  "email": {
+    "tagline": "Präzisionspeptide für ernsthafte Forschung",
+    "footer": "AverianLabs · Helsinki, Finnland · Nur für Forschungszwecke",
+    "confirmEmailSubject": "Bestätige dein AverianLabs-Konto",
+    "confirmEmailTitle": "E-Mail bestätigen",
+    "confirmEmailBody": "Bestätige diese Adresse, um dein Konto zu aktivieren. Der Link ist 24 Stunden gültig.",
+    "confirmEmailCta": "E-Mail bestätigen",
+    "confirmEmailIgnore": "Falls du kein Konto erstellt hast, ignoriere diese E-Mail.",
+    "resetPasswordSubject": "AverianLabs-Passwort zurücksetzen",
+    "resetPasswordTitle": "Passwort zurücksetzen",
+    "resetPasswordBody": "Wir haben eine Anfrage zum Zurücksetzen deines Passworts erhalten. Der Link ist 1 Stunde gültig.",
+    "resetPasswordCta": "Passwort zurücksetzen",
+    "resetPasswordIgnore": "Falls du dies nicht angefordert hast, ignoriere diese E-Mail — dein Passwort wird nicht geändert.",
+    "deleteAccountSubject": "Bestätige die Löschung deines AverianLabs-Kontos",
+    "deleteAccountTitle": "Kontolöschung bestätigen",
+    "deleteAccountBody": "Dies löscht dein Konto und persönliche Daten. Du hast 30 Tage Zeit, um es dir anders zu überlegen, bevor alles dauerhaft entfernt wird. Der Link ist 24 Stunden gültig.",
+    "deleteAccountCta": "Löschung bestätigen",
+    "deleteAccountIgnore": "Falls du dies nicht angefordert hast, ignoriere diese E-Mail — dein Konto bleibt aktiv.",
+    "newsletterSubject": "Bestätige dein AverianLabs-Newsletter-Abonnement",
+    "newsletterTitle": "Abonnement bestätigen",
+    "newsletterBody": "Bestätige diese Adresse, um Charge-Veröffentlichungen, neue COAs und Forschungsnotizen zu erhalten. Der Link ist 24 Stunden gültig.",
+    "newsletterCta": "Abonnement bestätigen",
+    "newsletterIgnore": "Falls du dies nicht angefordert hast, ignoriere diese E-Mail — du wirst nicht abonniert.",
+    "contactNotificationTitle": "Neue Kontaktformular-Nachricht",
+    "contactFooter": "AverianLabs · Kontaktformular · direkt auf diese E-Mail antworten",
+    "orderConfirmedSubject": "Bestellung bestätigt — {number}",
+    "orderConfirmedTitle": "Bestellung bestätigt",
+    "orderLabel": "Bestellung {number}",
+    "orderColumnProduct": "Produkt",
+    "orderColumnQty": "Menge",
+    "orderColumnPrice": "Preis",
+    "orderSubtotal": "Zwischensumme",
+    "orderShipping": "Versand",
+    "orderVat": "MwSt. (24%)",
+    "orderTotal": "Gesamt",
+    "orderWhatsNext": "Was kommt als Nächstes?",
+    "orderWhatsNextBody": "Das chargenspezifische Analysezertifikat (COA), der Endotoxin-Bericht und die Massenspektrometrie-Bestätigung sind in deinem Konto verfügbar, sobald die Bestellung versandt wird.",
+    "orderFooter": "Fragen? Antworte auf diese E-Mail oder kontaktiere support@averianlabs.eu.",
+    "shippingTitle": "Deine Bestellung wurde versandt",
+    "shippingTracking": "Sendungsverfolgung",
+    "shippingTrack": "Sendung verfolgen",
+    "reviewRequestSubject": "Wie haben deine Peptide abgeschnitten? Bestellung {number} bewerten",
+    "reviewRequestTitle": "Wie haben deine Peptide abgeschnitten?",
+    "reviewRequestGreeting": "Hi {name}, deine Bestellung {order} mit {items} wurde vor wenigen Tagen geliefert.",
+    "reviewRequestBody": "Dein Feedback hilft anderen Forschern, fundierte Entscheidungen zu treffen, und uns, unsere Qualitätsstandards zu halten. Würdest du dir eine Minute nehmen, um deine Erfahrung zu teilen?",
+    "reviewRequestCta": "Bewertung abgeben",
+    "reviewRequestWhatToReview": "Was bewerten",
+    "reviewRequestWhatToReviewBody": "Reinheitskonstanz, Verpackungsqualität, COA-Genauigkeit, Liefergeschwindigkeit oder alles, was dir bei deiner Forschung aufgefallen ist.",
+    "reviewRequestNeedHelp": "Brauchst du Hilfe?",
+    "reviewRequestNeedHelpBody": "Antworte auf diese E-Mail oder kontaktiere unser Support-Team unter support@averianlabs.eu. Wir antworten werktags innerhalb von 2 Stunden.",
+    "reviewRequestFooter": "Du erhältst diese E-Mail, weil du eine Bestellung bei uns aufgegeben hast. Wir senden dir nichts weiter, außer du bittest uns darum.",
+    "cartRecoverySubject": "Du hast Artikel im Warenkorb — schließe deine Bestellung ab",
+    "cartRecoveryTitle": "Du hast Artikel im Warenkorb gelassen",
+    "cartRecoveryBody": "Forschungspeptide warten auf dich. Schließe deine Bestellung ab, bevor der Lagerbestand deiner ausgewählten Charge zur Neige geht.",
+    "cartRecoveryCta": "Bestellung abschließen",
+    "cartRecoveryFreeShipping": "Kostenloser EU-Versand",
+    "cartRecoveryFreeShippingBody": "ab 150 €. Dein Warenkorb könnte sich qualifizieren.",
+    "cartRecoveryFooter": "Du erhältst diese E-Mail, weil du eine Bestellung auf averianlabs.eu begonnen hast. Wir senden nur eine Erinnerung."
+  },
+  "knowledge": {
+    "title": "Forschungsdokumentation",
+    "subtitle": "Analysezertifikate, Labormethoden, Produktspezifikationen und Glossar — alles an einem Ort.",
+    "categoriesHeading": "Nach Quelle durchsuchen",
+    "recentDocs": "Neueste Dokumente",
+    "recentGlossary": "Neueste Glossarbegriffe",
+    "viewAll": "Alle anzeigen →",
+    "noRecentDocs": "Noch keine veröffentlichten Dokumente.",
+    "quickAccess": "Schnellzugriff",
+    "links": {
+      "coa": "Analysezertifikate",
+      "methods": "Testmethoden",
+      "products": "Produktspezifikationen",
+      "articles": "Forschungsartikel",
+      "glossary": "Glossar",
+      "calculators": "Rechner"
+    },
+    "categories": {
+      "coa": {
+        "title": "Analysezertifikate",
+        "desc": "HPLC-, Endotoxin- und Massenspektrometrie-Daten für jede Charge — chargenspezifische PASS-Freigabe."
+      },
+      "methods": {
+        "title": "Testmethoden",
+        "desc": "Unabhängige Laboranalysen: HPLC, Massenspektrometrie, LAL, Sterilität, Mykoplasmen."
+      },
+      "products": {
+        "title": "Produktspezifikationen",
+        "desc": "Technische Daten, Sequenzen und Lagerungshinweise für jedes Peptidprodukt."
+      },
+      "articles": {
+        "title": "Forschungsartikel",
+        "desc": "Peer-reviewed Referenzen und eigene Forschungsnotizen zur Peptidwissenschaft."
+      },
+      "glossary": {
+        "title": "Glossar",
+        "desc": "Begriffe und Techniken der Peptidforschung, Analytik, Lagerung und Regulierung."
+      },
+      "calculators": {
+        "title": "Rechner",
+        "desc": "Rekonstitutions- und Dosisberechnungen auf den Mikroliter genau für Forschungsworkflows."
+      }
+    },
+    "browseAll": "Alle ansehen →",
+    "itemsCount": "{count, plural, =0 {keine Elemente} one {1 Element} other {{count} Elemente}}",
+    "batchesLabel": "Letzte Charge",
+    "filterAll": "Filter",
+    "badge": "Wissen",
+    "noResults": "Keine Ergebnisse",
+    "noSources": "Keine Quellen gefunden",
+    "relatedProducts": "Verwandte Produkte",
+    "searchPlaceholder": "Suchen…",
+    "sequenceTitle": "Sequenz",
+    "sourcesCount": "{count, plural, =0 {Keine Quellen} one {1 Quelle} other {{count} Quellen}}",
+    "sourcesHeading": "Quellen"
+  },
+  "terms": {
+    "title": "Nutzungsbedingungen",
+    "lastUpdated": "Zuletzt aktualisiert: 1. September 2026",
+    "intro": "Mit dem Zugriff auf averianlabs.eu oder andere Domains von AverianLabs akzeptieren Sie diese Nutzungsbedingungen. Alle Produkte werden unter einer strikten Nur-Forschungs-Lizenz verkauft.",
+    "sections": {
+      "eligibility": {
+        "title": "1. Berechtigung",
+        "body": "Sie müssen mindestens 18 Jahre alt und ein qualifizierter Forscher oder institutioneller Käufer sein, um bei AverianLabs zu kaufen."
+      },
+      "researchUse": {
+        "title": "2. Nur für Forschungszwecke",
+        "body": "Alle Produkte sind ausschließlich für Laborforschung und In-vitro-Studien bestimmt. Sie sind NICHT für den menschlichen Verzehr, diagnostische Zwecke oder therapeutische Anwendungen bestimmt."
+      },
+      "pricing": {
+        "title": "3. Preise & Mehrwertsteuer",
+        "body": "Die Preise verstehen sich inklusive EU-Mehrwertsteuer (OSS-Regelung). B2B-Kunden mit gültiger USt-IdNr. können an der Kasse im Reverse-Charge-Verfahren kaufen."
+      },
+      "shipping": {
+        "title": "4. Versand",
+        "body": "Wir versenden innerhalb von 24 Stunden aus unserem Lager in Helsinki. Die Gefahr des Verlusts geht mit dem Scan durch den Frachtführer auf den Käufer über."
+      },
+      "returns": {
+        "title": "5. Rückgaben",
+        "body": "Aufgrund der Beschaffenheit von Forschungspeptiden sind geöffnete oder in der Kühlkette beeinträchtigte Fläschchen von der Rückgabe ausgeschlossen. Ungeöffnete Produkte können innerhalb von 14 Tagen zum Umtausch oder zur Erstattung zurückgegeben werden."
+      },
+      "liability": {
+        "title": "6. Haftungsbeschränkung",
+        "body": "Die Haftung von AverianLabs ist auf den Kaufpreis des Produkts beschränkt. Wir gewähren keine Eignung für eine bestimmte Forschungsanwendung über das veröffentlichte Analysezertifikat hinaus."
+      },
+      "governingLaw": {
+        "title": "7. Anwendbares Recht",
+        "body": "Diese Bedingungen unterliegen finnischem Recht. Streitigkeiten unterliegen der ausschließlichen Zuständigkeit des Bezirksgerichts Helsinki."
+      },
+      "contact": {
+        "title": "8. Kontakt",
+        "body": "Fragen: legal@averianlabs.eu"
+      }
+    }
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung",
+    "lastUpdated": "Zuletzt aktualisiert: 1. September 2026 · DSGVO-konform",
+    "intro": "Diese Erklärung beschreibt, wie AverianLabs Oy (\"wir\") personenbezogene Daten auf averianlabs.eu und verbundenen Domains gemäß der EU-Datenschutz-Grundverordnung (DSGVO) und dem finnischen Datenschutzgesetz verarbeitet.",
+    "sections": {
+      "dataCollected": {
+        "title": "Erhobene Daten",
+        "body": "Kontodaten: E-Mail, Name, Passwort-Hash (falls Sie ein Konto erstellen). Bestelldaten: Liefer-/Rechnungsadresse, Bestellverlauf. Technische Daten: IP (gekürzt), User-Agent, Referrer (30 Tage gespeichert). Analyse: nur mit Ihrer ausdrücklichen Einwilligung über das Cookie-Banner."
+      },
+      "lawfulBasis": {
+        "title": "Rechtsgrundlage",
+        "body": "Vertrag (Art. 6(1)(b)) für Bestellungen, Einwilligung (Art. 6(1)(a)) für Analyse, rechtliche Verpflichtung (Art. 6(1)(c)) für die Buchhaltung."
+      },
+      "subprocessors": {
+        "title": "Auftragsverarbeiter",
+        "body": "Stripe Payments Europe Ltd — Zahlungsabwicklung (EU); Coinbase Commerce — Krypto-Zahlungen; Resend — Transaktions-E-Mail (EU); PostHog Cloud EU — Produktanalyse (einwilligungspflichtig); Sanity Inc. — Content (USA, EU-Datenresidenz); Cloudflare — CDN / DDoS; Neon — Datenbank (Frankfurt)."
+      },
+      "yourRights": {
+        "title": "Ihre Rechte",
+        "body": "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Widerspruch. E-Mail an privacy@averianlabs.eu. Sie können auch eine Beschwerde bei Ihrer nationalen Aufsichtsbehörde einreichen (in Finnland: tietosuojavaltuutettu)."
+      },
+      "retention": {
+        "title": "Aufbewahrungsdauer",
+        "body": "Kontodaten: bis zur Löschung. Bestelldaten: 7 Jahre (Buchhaltungspflicht). Analyse: 14 Monate."
+      },
+      "contact": {
+        "title": "Kontakt",
+        "body": "Datenschutzbeauftragter: dpo@averianlabs.eu · AverianLabs Oy, Helsinki, Finnland."
+      }
+    }
+  },
+  "cookies": {
+    "title": "Cookies",
+    "lastUpdated": "Zuletzt aktualisiert: 1. September 2026",
+    "intro": "Wir verwenden nur ein Minimum an Cookies. Notwendige Cookies können nicht deaktiviert werden; Analyse-Cookies erfordern Ihre Einwilligung.",
+    "sections": {
+      "essential": {
+        "title": "Notwendig",
+        "body": "averianlabs-cart — speichert Ihren Warenkorb (1 Jahr); averianlabs-age-confirmed — merkt sich die Altersbestätigung (1 Jahr); averianlabs-cookie-consent — merkt sich Ihre Cookie-Auswahl (1 Jahr); Stripe / Coinbase Sitzungs-Cookies (vom Zahlungsanbieter gesetzt)."
+      },
+      "analytics": {
+        "title": "Analyse (Einwilligung)",
+        "body": "PostHog (EU) und Plausible werden erst geladen, nachdem Sie im Cookie-Banner \"Alle akzeptieren\" klicken. Sie erheben anonymisierte, aggregierte Nutzungsdaten."
+      },
+      "changeChoice": {
+        "title": "Auswahl ändern",
+        "body": "Klicken Sie auf den kleinen \"Cookies\"-Link in der Fußzeile oder löschen Sie Ihre Browserdaten."
+      }
+    }
+  },
+  "disclaimer": {
+    "badge": "Nur für Forschungszwecke",
+    "title": "Forschungs-Disclaimer",
+    "lead": "Alle von AverianLabs Oy verkauften Produkte sind ausschließlich für Laborforschung und In-vitro-Studien bestimmt.",
+    "sections": {
+      "notForHuman": {
+        "title": "Nicht zum Verzehr durch Menschen",
+        "body": "Die auf averianlabs.eu gelisteten Produkte sind nicht für die Verwendung, den Verzehr, die Verabreichung oder die Anwendung am menschlichen oder tierischen Körper bestimmt."
+      },
+      "noMedicalClaims": {
+        "title": "Keine medizinischen Ansprüche",
+        "body": "Die auf dieser Website bereitgestellten Informationen dienen nur Forschungs- und Bildungszwecken. Sie sind keine medizinische Beratung, Diagnose oder Behandlungsempfehlung. AverianLabs Oy befürwortet, empfiehlt oder unterstützt keine Off-Label-Verwendung eines Produkts."
+      },
+      "buyerResponsibility": {
+        "title": "Verantwortung des Käufers",
+        "body": "Mit dem Kauf bei AverianLabs bestätigen Sie, dass Sie ein qualifizierter Forscher oder institutioneller Käufer sind und dass die Produkte ausschließlich für legitime Laborforschung unter Einhaltung aller geltenden lokalen, nationalen und internationalen Gesetze und Vorschriften verwendet werden."
+      },
+      "compliance": {
+        "title": "Einhaltung von Vorschriften",
+        "body": "Es liegt in der Verantwortung des Käufers sicherzustellen, dass Import, Besitz und Verwendung von Forschungspeptiden allen geltenden Vorschriften in seiner Rechtsordnung entsprechen. AverianLabs Oy behält sich das Recht vor, jedem Käufer oder jeder Rechtsordnung nach eigenem Ermessen den Service zu verweigern."
+      }
+    }
+  },
+  "actions": {
+    "addPrompt": "In den Warenkorb?",
+    "addToCart": "In den Warenkorb",
+    "added": "Hinzugefügt",
+    "addedToast": "{name} zum Warenkorb hinzugefügt",
+    "dismiss": "Schließen",
+    "remember": "Für später merken",
+    "rememberPrompt": "Für das nächste Mal speichern?",
+    "remembered": "Gemerkt",
+    "rememberedToast": "Plan in Ihrem Konto gespeichert",
+    "removedToast": "Aus dem Warenkorb entfernt"
+  },
+  "feedback": {
+    "helpful": "Hilfreich",
+    "notHelpful": "Nicht hilfreich"
+  },
+  "links": {
+    "coa": "Analysezertifikate",
+    "methods": "Testmethoden",
+    "products": "Produktspezifikationen",
+    "articles": "Forschungsartikel",
+    "glossary": "Glossar",
+    "calculators": "Rechner"
+  },
+  "tableHeaders": {
+    "batch": "Charge",
+    "endotoxin": "Endotoxin",
+    "hplc": "HPLC",
+    "lab": "Labor",
+    "product": "Produkt",
+    "status": "Status"
+  },
+  "testsHeaders": {
+    "method": "Methode",
+    "result": "Ergebnis",
+    "test": "Test"
+  },
+  "topbar": {
+    "coaEveryBatch": "COA für jede Charge",
+    "dispatch24h": "Versand in 24 h",
+    "euDispatched": "Versand aus der EU",
+    "freeShipping": "Gratisversand ab 150 €",
+    "hplcVerified": "HPLC + Endotoxin geprüft"
   }
 }

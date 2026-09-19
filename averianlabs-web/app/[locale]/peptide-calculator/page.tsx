@@ -15,17 +15,8 @@ export default async function PeptideCalculatorPage({
   const _t = await getTranslations({ locale, namespace: "product" })
 
   return (
-    <Container className="py-16">
-      <header className="mb-10 max-w-2xl">
-        <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
-          Reconstitution calculator
-        </h1>
-        <p className="mt-3 text-ink-muted">
-          Calculate draw volumes, concentrations, and remaining doses for any peptide vial.
-        </p>
-      </header>
-
-      <Calculator />
+    <Container className="py-12 sm:py-16" size="wide">
+      <Calculator locale={locale} />
     </Container>
   )
 }

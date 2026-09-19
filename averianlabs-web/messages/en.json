@@ -76,6 +76,67 @@
     "disclaimer": "For research use only. Not for human or animal use.",
     "disclaimerFull": "All products sold by AverianLabs are intended solely for laboratory research and in-vitro studies. They are not intended for human consumption, diagnostic use, or therapeutic applications. By purchasing, you confirm you are a qualified researcher or institutional buyer."
   },
+  "coa": {
+    "badge": "Public COA registry",
+    "title": "Certificates of Analysis",
+    "subtitle": "Every batch we ship is independently tested. Browse the latest Certificates below.",
+    "tableHeaders": {
+      "batch": "Batch",
+      "product": "Product",
+      "hplc": "HPLC",
+      "endotoxin": "Endotoxin",
+      "lab": "Lab",
+      "status": "Status"
+    },
+    "filterPlaceholder": "Search by batch code or product…",
+    "resultsCount": "{count, plural, =0 {No results} one {1 certificate of analysis} other {{count} certificates of analysis}}",
+    "viewDetails": "View details →",
+    "batchTitle": "Certificate of Analysis",
+    "batchSubtitle": "Batch-specific test results and documentation.",
+    "testsHeading": "Test results",
+    "testsHeaders": {
+      "test": "Test",
+      "result": "Result",
+      "method": "Method"
+    },
+    "testHplcPurity": "HPLC purity",
+    "testHplcMethod": "RP-HPLC",
+    "testEndotoxin": "Endotoxin",
+    "testEndotoxinMethod": "LAL",
+    "testIdentity": "Identity",
+    "testIdentityMethod": "ESI-MS",
+    "testIdentityResult": "Confirmed",
+    "testStorage": "Storage",
+    "manufacturingHeading": "Manufacturing and shelf life",
+    "manufacturedAt": "Manufactured",
+    "expiresAt": "Valid until",
+    "labHeading": "Testing laboratory",
+    "viewFullPdf": "Open full Certificate of Analysis (PDF)",
+    "pdfUnavailableNote": "PDF version is published once our laboratory partner delivers the documentation.",
+    "chromatogramHeading": "Chromatogram",
+    "chromatogramNote": "The chromatogram is published as an attachment to the PDF Certificate of Analysis.",
+    "backToList": "← Back to Certificates of Analysis",
+    "traceabilityHeading": "Traceability",
+    "traceabilitySub": "A quality chain you can audit. Every step is documented.",
+    "step1Title": "Raw material",
+    "step1Body": "The peptide raw material is received from the manufacturer and moved into quarantine.",
+    "step2Title": "Manufacturing",
+    "step2Body": "Lyophilisation, vial filling and crimping take place in a sterile environment.",
+    "step3Title": "Batch numbering",
+    "step3Body": "Each batch is assigned a unique batch number for full traceability.",
+    "step4Title": "Independent analysis",
+    "step4Body": "The testing laboratory analyses HPLC, endotoxin and mass spectrometry results.",
+    "step4BodyWithLab": "Tested at {lab}",
+    "step5Title": "Certificate of Analysis (COA)",
+    "step5Body": "The Certificate of Analysis is published and attached to the shipment.",
+    "step6Title": "Dispatch",
+    "step6Body": "Shipped within 24 hours from our EU warehouse. Cold chain documented.",
+    "notFoundTitle": "Batch not found",
+    "notFoundBody": "No Certificate of Analysis could be found for this batch code.",
+    "description": "Public registry of every product's latest batch — HPLC chromatogram, mass-spec trace, endotoxin panel, lab of record, and batch-level PASS sign-off. Freely downloadable and peer-reviewable.",
+    "passBadge": "PASS",
+    "passFullLabel": "All tests passed"
+  },
   "nav": {
     "shop": "Shop",
     "labTests": "Lab Tests",
@@ -107,36 +168,88 @@
     "sectionResearch": "Research",
     "sectionCompany": "Company",
     "cartCount": "{count, plural, =0 {Cart empty} one {1 item in cart} other {# items in cart}}",
-    "language": "Language"
+    "language": "Language",
+    "breadShop": "Shop",
+    "batchDataHeading": "Batch data",
+    "batchDataCode": "Batch code",
+    "batchDataManufactured": "Manufactured",
+    "batchDataExpires": "Expires",
+    "batchDataLab": "Testing lab",
+    "batchDataHplc": "HPLC purity",
+    "batchDataEndotoxin": "Endotoxin",
+    "batchDataMs": "Mass spec",
+    "batchDataConfirmed": "Confirmed",
+    "batchDataOpenCoa": "Open COA",
+    "batchLabel": "Latest batch",
+    "coaAvailable": "View COA",
+    "contactForBatch": "Contact for current batch availability",
+    "endotoxin": "Endotoxin",
+    "endotoxinUnit": "EU/mg",
+    "expires": "Expires",
+    "fromSizes": "{count, plural, =0 {— sizes} one {from · 1 size} other {from · {count} sizes}}",
+    "howWeVerify": "How we verify every batch",
+    "manufactured": "Manufactured",
+    "pricingOnRequest": "Pricing on request",
+    "readFullMethodology": "Read the full methodology",
+    "relatedHeading": "Related peptides",
+    "requestQuote": "Request quote",
+    "shipsIn24h": "Ships in 24h",
+    "specCas": "CAS number",
+    "specFormula": "Molecular formula",
+    "specMw": "Molecular weight",
+    "specPurity": "Purity",
+    "specSequence": "Sequence",
+    "specStorage": "Storage",
+    "specifications": "Specifications",
+    "stockIn": "In stock",
+    "stockLow": "Low · {count} left",
+    "stockOut": "Out of stock",
+    "tabCoa": "COA & lab tests",
+    "testedAt": "Tested at",
+    "vatNote": "Incl. VAT. Final price at checkout.",
+    "viewAllInCategory": "View all in {category} →",
+    "whatsInTheBox": "What's in the box"
   },
   "home": {
     "heroEyebrow": "EU · Research-grade · Third-party tested",
-    "heroTitle": "Precision peptides for serious research.",
-    "heroSubtitle": "Every batch third-party HPLC + mass spec + endotoxin verified. Lyophilised for cold-chain integrity. 24h EU dispatch. For researchers who don't compromise on data.",
+    "heroTitle": "Buy research-grade peptides, manufactured to lab spec.",
+    "heroSubtitle": "Every batch third-party HPLC + mass spec + endotoxin verified. Lyophilised for cold-chain integrity. 24h EU dispatch. COAs you can pull online or receive with every order.",
     "ctaShop": "Browse the catalog",
     "ctaResearch": "Read the research",
     "trustHeading": "Why labs choose AverianLabs",
-    "trustBadge1": "EU-GMP vendor network",
+    "trustBadge1": "Fast EU dispatch",
     "trustBadge2": "HPLC purity ≥ 98%",
-    "trustBadge3": "Endotoxin < 5 EU/mg",
-    "trustBadge4": "24h EU dispatch",
+    "trustBadge3": "100% satisfaction guarantee",
+    "trustBadge4": "Bulk savings up to −20%",
     "trustBadge5": "ISO 17025 lab partner",
-    "trustBadge6": "GDPR compliant",
+    "trustBadge6": "GDPR & VAT compliant",
+    "whyHeading": "Why choose AverianLabs",
+    "whySub": "The same three things every researcher asks for — speed, certainty, and quality — backed by guarantees we'd stake our reputation on.",
+    "why1Title": "Fast, tracked EU shipping",
+    "why1Body": "Orders placed before 14:00 EET ship the same business day from our EU warehouse. Tracked carriers — Posti, DHL, DPD.",
+    "why2Title": "Lab-verified purity",
+    "why2Body": "Every batch ships with a batch-specific COA: HPLC chromatogram, mass-spec trace, endotoxin panel, and the lab-of-record sign-off.",
+    "why3Title": "100% satisfaction guarantee",
+    "why3Body": "If a vial arrives warm, damaged, or held by customs on a verified carrier error, we reship free — and refund if a second reship doesn't arrive.",
+    "bulkHeading": "Buy in bulk, save more",
+    "bulkSub": "Same-SKU volume tiers. The discount is applied automatically at checkout — no code needed.",
+    "bulkCtaShop": "Shop the catalog",
+    "bulkCtaContact": "Contact for 21+",
     "featuredHeading": "Featured research peptides",
     "featuredSub": "Every vial ships with a batch-specific COA — HPLC chromatogram, mass-spec trace, endotoxin panel, and lab-of-record sign-off — ready for your records.",
     "threeDHeading": "Inspect every vial in 3D",
     "threeDSub": "Spin the carousel, zoom into the vial, and inspect each batch's certificate of analysis before you order. Every product links to its full HPLC + mass-spec + endotoxin data.",
     "threeDCta": "Open the 3D catalog",
     "categoriesHeading": "Browse by research area",
-    "catWeight": "Metabolic research",
-    "catWeightDesc": "GLP-1 and GIP receptor signalling in vitro. Receptor assays, cell culture, ADME profiling.",
-    "catRecovery": "Recovery & tissue",
+    "catMetabolic": "Metabolism & receptor signaling",
+    "catMetabolicDesc": "GLP-1 and GIP receptor signaling in vitro. Receptor assays, cell culture, ADME profiling.",
+    "catRecovery": "Cell biology & tissue models",
     "catRecoveryDesc": "Angiogenic and tissue-remodelling research. Cell migration models, fibroblast activity, wound-model assays.",
-    "catCognitive": "Cognitive",
+    "catCognitive": "Neurobiological research",
     "catCognitiveDesc": "Neurotrophin and neuronal cell culture research. BDNF signalling, in vitro neurobiology.",
-    "catLongevity": "Longevity",
+    "catLongevity": "Mitochondria & cellular energetics",
     "catLongevityDesc": "Telomere biology and NAD⁺-pathway research. Senescence models, mitochondrial function.",
-    "catCosmetic": "Cosmetic research",
+    "catCosmetic": "Pigmentation & melanogenesis",
     "catCosmeticDesc": "Melanogenesis and skin-tissue models. Keratinocyte culture, melanocyte signalling.",
     "labHeading": "Full transparency on every batch",
     "labSub": "Every vial ships with a public certificate of analysis. Click any batch ID to inspect HPLC chromatograms, mass-spec traces, endotoxin panels, and the lab of record — data your reviewers can verify, not just trust.",
@@ -151,10 +264,66 @@
     "newsletterSub": "New SKUs, peer-reviewed literature digests, and lab notes from our research team. One email a month. No spam — unsubscribe in one click.",
     "newsletterPlaceholder": "you@lab.eu",
     "newsletterCta": "Subscribe",
-    "catBlends": "Blends",
+    "catBlends": "Combinations",
     "catBlendsDesc": "KLOW, BPC+TB-500, custom peptide blends",
-    "catSupplies": "Supplies",
-    "catSuppliesDesc": "BAC water, syringes, vials"
+    "catSupplies": "Other research reagents",
+    "catSuppliesDesc": "BAC water, syringes, vials",
+    "stat1Label": "Batch-specific HPLC purity",
+    "stat1Value": "—",
+    "stat1Note": "Published per batch",
+    "stat2Label": "Independent lab testing",
+    "stat2Value": "—",
+    "stat2Note": "Confirmed at dispatch",
+    "stat3Label": "EU dispatch",
+    "stat3Value": "—",
+    "stat3Note": "Depends on batch documentation",
+    "labBadge": "Full lab transparency",
+    "labMethodologyLink": "Learn about our methodology",
+    "coaBadge": "Batch-specific analysis",
+    "coaTitle": "Certificate of Analysis",
+    "coaBody": "Exact analytical data, chromatograms, and lab sign-off for each batch are published per batch. Open the lab testing page to read about our methods and verifiability.",
+    "coaHeaderTest": "Test",
+    "coaHeaderResult": "Result",
+    "coaHeaderMethod": "Method",
+    "coaRow1": "HPLC purity · Per-batch result",
+    "coaRow2": "Endotoxin · At independent lab",
+    "coaRow3": "Mass spec · Per batch",
+    "coaRow4": "Testing lab · —",
+    "coaCta": "Open the lab testing page",
+    "communityHeading": "From the research community",
+    "communitySub": "Threads, replies, batch updates, and shared research plans from the AverianLabs community.",
+    "subscribeBadge": "Research quantities",
+    "subscribeTitle": "Regular research supply",
+    "subscribeSub": "Reserve the current batch and schedule delivery every 4, 8, or 12 weeks — cancel any time from your account.",
+    "subscribeBullet1": "Priority EU dispatch on every shipment",
+    "subscribeBullet2": "Current batch reservation",
+    "subscribeBullet3": "10% off every vial",
+    "subscribeBullet4": "Mix and match across the catalog",
+    "subscribeCta": "Start a subscription",
+    "subscribeExampleLabel": "Example subscription",
+    "subscribeExampleProduct": "BPC-157 · 10 mg · every 8 weeks",
+    "subscribePerShipment": "Per shipment",
+    "subscribeAnnualSavings": "Annual savings",
+    "subscribeSavingsSuffix": "/ year",
+    "institutionsBadge": "For institutions",
+    "about": "About",
+    "account": "Account",
+    "allProducts": "All products",
+    "blog": "Research",
+    "calculator": "Calculator",
+    "cart": "Cart",
+    "close": "Close",
+    "coaLibrary": "Lab COAs",
+    "community": "Community",
+    "documents": "Documents",
+    "glossary": "Glossary",
+    "labTests": "Lab Tests",
+    "openMenu": "Open menu",
+    "partner": "Partner program",
+    "search": "Search",
+    "sectionShop": "Shop",
+    "sectionResearch": "Research",
+    "sectionCompany": "Company"
   },
   "shop": {
     "title": "Research catalog",
@@ -213,7 +382,12 @@
     "fromLabel": "From",
     "pricingLabel": "Pricing",
     "recentlyViewed": "Recently viewed",
-    "recentlyViewedHelper": "Picked up where you left off"
+    "recentlyViewedHelper": "Picked up where you left off",
+    "coaAvailable": "COA available",
+    "batchLabel": "Batch {code}",
+    "purityHplcLabel": "{purity}% HPLC",
+    "manufacturedDate": "Manufactured {date}",
+    "expiresDate": "Expires {date}"
   },
   "product": {
     "addToCart": "Add to cart",
@@ -233,26 +407,160 @@
     "tabCitations": "Research",
     "tabFaq": "FAQ",
     "relatedHeading": "Related peptides",
-    "stockIn": "In stock — ships within 24h",
-    "stockLow": "Only {n} vials left",
-    "stockOut": "Out of stock — notify me",
+    "openCalculator": "Calculate reconstitution for this vial",
+    "stockIn": "In stock",
+    "stockLow": "Low · {count} left",
+    "stockOut": "Out of stock",
     "vatNote": "Incl. VAT. Final price at checkout.",
     "batchLabel": "Latest batch",
     "viewCoa": "View COA",
     "lab": "Tested at {lab}",
     "notifyMe": "Notify me when available",
-    "notifySubmitted": "We'll email you."
+    "notifySubmitted": "We'll email you.",
+    "specifications": "Specifications",
+    "testedAt": "Tested at",
+    "manufactured": "Manufactured",
+    "expires": "Expires",
+    "endotoxin": "Endotoxin",
+    "endotoxinUnit": "EU/mg",
+    "howWeVerify": "How we verify every batch",
+    "methodologyHplcTitle": "HPLC purity",
+    "methodologyHplcDesc": "Reverse-phase HPLC against reference standard.",
+    "methodologyMsTitle": "Mass-spec identity",
+    "methodologyMsDesc": "ESI-MS confirms molecular weight to 0.1 Da.",
+    "methodologyEndotoxinTitle": "Endotoxin panel",
+    "methodologyEndotoxinDesc": "LAL kinetic chromogenic; must be <5 EU/mg.",
+    "methodologyColdChainTitle": "Cold-chain verified",
+    "methodologyColdChainDesc": "Temperature log attached to every shipment.",
+    "readFullMethodology": "Read the full methodology",
+    "whatsInTheBox": "What's in the box",
+    "boxLyophilized": "Lyophilized peptide vial",
+    "boxBacWater": "Sterile BAC water (10 mL)",
+    "boxCoa": "Batch-specific COA",
+    "boxStorage": "Storage & handling card",
+    "boxReconstitution": "Reconstitution protocol",
+    "boxTamperSeal": "Tamper-evident seal",
+    "shipsIn24h": "Ships in 24h",
+    "fromSizes": "{count, plural, =0 {— sizes} one {from · 1 size} other {from · {count} sizes}}",
+    "stockQuoteOnly": "Quote only",
+    "requestQuote": "Request quote",
+    "pricingOnRequest": "Pricing on request",
+    "contactForBatch": "Contact for current batch availability",
+    "faqHeading": "Frequently asked questions",
+    "viewAllInCategory": "View all in {category} →",
+    "trustBadge1": "EU-GMP vendor network",
+    "trustBadge2": "Third-party HPLC tested",
+    "trustBadge3": "Endotoxin < 5 EU/mg",
+    "trustBadge4": "24h EU dispatch",
+    "trustBadge5": "ISO 17025 lab partner",
+    "trustBadge6": "GDPR compliant",
+    "trustSub1": "Every batch verified",
+    "trustSub2": "Confirmed at partner lab",
+    "trustSub3": "Independent certification",
+    "trustSub4": "Free over €150",
+    "freeShippingThreshold": "Free shipping over {amount} EU-wide",
+    "wishlistAdd": "Add to wishlist",
+    "wishlistRemove": "Remove from wishlist",
+    "wishlistSaved": "Saved",
+    "compareAdd": "Add to compare",
+    "compareRemove": "Remove from compare",
+    "compareAdded": "Comparing",
+    "addedToCart": "Added to cart",
+    "bundleAdded": "Bundle added to cart",
+    "removedFromCart": "Removed from cart",
+    "outOfStock": "Out of stock",
+    "lowStockLeft": "Low · {count} left",
+    "inStock": "In stock",
+    "quoteOnly": "Quote only",
+    "wishlistCleared": "Wishlist cleared",
+    "purityHplc": "{purity} % HPLC",
+    "quoteTitle": "Request quote",
+    "quoteSubtitle": "Pricing and current batch availability on request. We reply within 24h.",
+    "quoteSent": "Quote request sent",
+    "quoteEmailPlaceholder": "you@lab.eu",
+    "quoteSentDesc": "We'll email you current pricing for {name}.",
+    "freeShippingOver": "Free shipping over {amount} EU-wide",
+    "sale": "Sale",
+    "addToCartWithPrice": "Add to cart · {price}",
+    "addedToCartDesc": "{name} {mg}mg × {qty}",
+    "subscribeHeading": "Subscribe & save 10%",
+    "subscribeSub": "Auto-reorder every 4–12 weeks · cancel anytime",
+    "subscribeSaveAmount": "Save {amount}/order",
+    "subscribeCadence": "Delivery cadence",
+    "subscribeVialsPerShipment": "Vials per shipment",
+    "subscribePerShipment": "Per shipment",
+    "subscribeSaved": "Subscription saved",
+    "subscribeStart": "Start subscription",
+    "subscribeCancelAnytime": "Skip or cancel anytime",
+    "subscribeLockIn": "Lock in current batch",
+    "subscribePriorityDispatch": "Priority EU dispatch",
+    "subscribeCadence4": "Every 4 weeks",
+    "subscribeCadence8": "Every 8 weeks",
+    "subscribeCadence12": "Every 12 weeks",
+    "subscribeDescription": "{qty} × {mg}mg every {weeks} weeks — cancel anytime in your account.",
+    "completeStack": "Complete your stack",
+    "saveBundlePercent": "Save 5%",
+    "bundleSaved": "{count} items · save {amount}",
+    "thisProduct": "This product",
+    "bundleTotal": "Bundle total",
+    "saveOnBundle": "Save {amount} on the bundle",
+    "addBundle": "Add bundle",
+    "qvFullDetails": "Full details",
+    "qvRemovedFromWishlist": "Removed from wishlist",
+    "qvSavedToWishlist": "Saved to wishlist",
+    "qvRemovedFromCompare": "Removed from compare",
+    "qvAddedToCompare": "Added to compare",
+    "stickyAdd": "Add to cart",
+    "stickyOutOfStock": "Out of stock",
+    "stickySubscribe": "Subscribe",
+    "stickyCompare": "Compare",
+    "stickySubscribeTooltip": "Subscribe & save 10%",
+    "stickySubscriptionSaved": "Subscription saved",
+    "stickySubscriptionDesc": "You'll receive {mg}mg every {weeks} weeks — cancel anytime, save 10%.",
+    "stickyRemovedFromWishlist": "Removed from wishlist",
+    "stickySavedToWishlist": "Saved to wishlist",
+    "stickyRemovedFromCompare": "Removed from compare",
+    "stickyAddedToCompare": "Added to compare",
+    "faq1Q": "How is each batch verified?",
+    "faq1A": "Every batch is third-party tested by an ISO 17025-certified lab (Eurofins Biolab, Synlab, or Biolab GmbH). HPLC purity, endotoxin levels, and mass-spec identity are confirmed before the batch is released. You can find the COA PDF for each batch in the Documents tab.",
+    "faq2Q": "What does the Certificate of Analysis include?",
+    "faq2A": "The COA includes HPLC purity %, endotoxin (EU/mg), mass-spec confirmation, batch ID, manufacturing date, expiry, and the testing lab. Each batch has a unique code you can use to look up its specific COA in /coa.",
+    "faq3Q": "How should I store the vial after opening?",
+    "faq3A": "For lyophilized peptides, store at -20 °C in a desiccated environment. After reconstitution, store at 2-8 °C and use within the timeframe indicated by your protocol. Each product's data sheet lists the specific storage temperature.",
+    "faq4Q": "Do you ship to my country?",
+    "faq4A": "We currently ship to all EU member states plus Norway, Switzerland, and the UK. A handful of jurisdictions are restricted by local regulation — see the full list at checkout. Banned countries (per the EU restricted-substances directive) cannot be served.",
+    "faq5Q": "Can I get a VAT refund as a non-EU researcher?",
+    "faq5A": "If you provide a valid non-EU VAT registration or research-institution ID, we'll zero-rate VAT on your order. Email the document to billing@averianlabs.eu after placing your order and we'll refund the VAT line.",
+    "faq6Q": "What payment methods do you accept?",
+    "faq6A": "Stripe (card, Apple Pay, Google Pay), PayPal, SEPA bank transfer for institutional orders over €1000, and Coinbase Commerce for BTC / ETH / USDC. EU consumer protection law applies to every payment method.",
+    "fbIncludeItem": "Include {name}",
+    "batchDataHeading": "Batch data",
+    "batchDataCode": "Batch code",
+    "batchDataManufactured": "Manufactured",
+    "batchDataExpires": "Expires",
+    "batchDataLab": "Testing lab",
+    "batchDataHplc": "HPLC purity",
+    "batchDataEndotoxin": "Endotoxin",
+    "batchDataMs": "Mass spec",
+    "batchDataConfirmed": "Confirmed",
+    "batchDataOpenCoa": "Open COA",
+    "coaAvailable": "COA available"
   },
   "cart": {
     "title": "Cart",
-    "empty": "Your cart is empty.",
+    "empty": "Your cart is empty",
+    "emptyDesc": "Pick a peptide from the catalog to start your order — every batch ships with its own COA, endotoxin panel, and mass-spec identity confirmation.",
+    "browseCatalog": "Browse catalog",
+    "bestSellers": "Best sellers this month",
     "emptyCta": "Browse the catalog",
     "subtotal": "Subtotal",
+    "subtotalBeforeDiscount": "Subtotal before discount",
     "shipping": "Shipping",
     "vat": "VAT",
     "total": "Total",
     "checkout": "Checkout",
     "remove": "Remove",
+    "itemCount": "{count, plural, =0 {no items} one {1 item} other {{count} items}}",
     "promo": "Promo code",
     "promoApply": "Apply",
     "points": "Use {points} points (−{amount})",
@@ -261,7 +569,7 @@
     "rewardsEarn": "You will earn",
     "rewardsFrom": "from this order",
     "recommendationsHeading": "Best sellers",
-    "continueShopping": "Continue shopping",
+    "continueShopping": "← Continue shopping",
     "secureCheckout": "Secure checkout",
     "freeShippingProgress": "Add {amount} more for free EU shipping",
     "freeShippingUnlocked": "Free EU shipping unlocked"
@@ -294,7 +602,104 @@
     "city": "City",
     "country": "Country",
     "continueToShipping": "Continue to shipping",
-    "title": "Checkout"
+    "title": "Checkout",
+    "loadingShipping": "Loading shipping options…",
+    "vat": "VAT",
+    "total": "Total",
+    "yourCartEmpty": "Your cart is empty",
+    "completeEmailFirst": "Please complete the email step first",
+    "chooseShipping": "Please choose a shipping method",
+    "checkoutFailed": "Checkout failed",
+    "cryptoUnavailable": "Crypto payment unavailable",
+    "genericError": "Something went wrong",
+    "paymentSuccess": "Payment successful!",
+    "emailPlaceholder": "you@lab.eu",
+    "vatPlaceholder": "FI12345678",
+    "continueToPayment": "Continue to payment",
+    "orderSummary": "Order summary",
+    "subtotalItems": "Subtotal ({count, plural, =0 {no items} one {1 item} other {{count} items}})",
+    "vatLabel": "VAT ({label})",
+    "totalLabel": "Total",
+    "paymentMethodLabel": "Payment method",
+    "cardSepa": "Card / SEPA",
+    "crypto": "Crypto",
+    "consentTerms": "I agree to the",
+    "consentTermsLink": "Terms of Service",
+    "consentAnd": "and",
+    "consentPrivacy": "Privacy Policy",
+    "consentResearch": "I understand that AverianLabs products are for research use only.",
+    "creatingOrder": "Creating order…",
+    "vatIncluded": "Incl. VAT",
+    "shippingFree": "Free shipping",
+    "bulkDiscountLabel": "Bulk discount",
+    "bulkTier10": "−10% off · 5–10 vials of the same SKU",
+    "bulkTier15": "−15% off · 11–20 vials of the same SKU",
+    "bulkTier20": "−20% off · 21+ vials of the same SKU",
+    "bulkNudge10": "Add {units} more vial of this SKU to unlock −10% off",
+    "bulkNudge10_plural": "Add {units} more vials of this SKU to unlock −10% off",
+    "bulkNudge15": "Add {units} more vial of this SKU to unlock −15% off",
+    "bulkNudge15_plural": "Add {units} more vials of this SKU to unlock −15% off",
+    "bulkNudge20": "Add {units} more vial of this SKU to unlock −20% off",
+    "bulkNudge20_plural": "Add {units} more vials of this SKU to unlock −20% off",
+    "shippingPostiExpress": "Posti Express — 1–2 business days",
+    "shippingDhlExpress": "DHL Express — 1–3 business days",
+    "shippingDpdClassic": "DPD Classic — 3–5 business days",
+    "shipTo": "Shipping address",
+    "billTo": "Billing address",
+    "phone": "Phone",
+    "saveInfo": "Save info for next order",
+    "stripeUnavailable": "Stripe is not loaded. Please refresh and try again.",
+    "paymentFailedFallback": "Payment failed. Please try again.",
+    "processingPayment": "Processing payment…",
+    "payAmount": "Pay {amount}",
+    "secureHeading": "Secure checkout",
+    "secureTls": "256-bit TLS · Stripe Radar fraud screening on every payment",
+    "securePci": "PCI-DSS Level 1 — we never see or store your card number",
+    "secureWithdrawal": "EU 14-day right of withdrawal on consumer orders",
+    "weAccept": "We accept",
+    "paymentVisa": "Visa",
+    "paymentMastercard": "Mastercard",
+    "paymentAmex": "Amex",
+    "paymentApplePay": "Apple Pay",
+    "paymentPaypal": "PayPal",
+    "paymentSepa": "SEPA",
+    "paymentCrypto": "BTC / ETH / USDC",
+    "confirmOrder": "Confirm order",
+    "countryFinland": "Finland",
+    "countrySweden": "Sweden",
+    "countryEstonia": "Estonia",
+    "countryGermany": "Germany",
+    "countryNetherlands": "Netherlands",
+    "countryFrance": "France",
+    "countrySpain": "Spain",
+    "countryItaly": "Italy",
+    "countryDenmark": "Denmark",
+    "countryPoland": "Poland",
+    "fieldRequired": "Required field",
+    "fieldInvalid": "Please check this field"
+  },
+  "confirm": {
+    "title": "Thanks for your order",
+    "subtitle": "We've emailed your order confirmation.",
+    "orderNumber": "Order number",
+    "orderNotFound": "Order not found",
+    "orderNotFoundDesc": "We couldn't find this order. Please check your email for confirmation.",
+    "statusPaid": "Paid",
+    "statusPending": "Pending payment",
+    "includedWithOrder": "Included with your order:",
+    "includeCoa": "Batch-specific Certificate of Analysis (PDF)",
+    "includeEndotoxin": "Endotoxin test report",
+    "includeMs": "Mass-spec confirmation",
+    "includeReconstitution": "Reconstitution guide",
+    "shippingAddress": "Shipping address",
+    "billingAddress": "Billing address",
+    "orderSummary": "Order summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "vat": "VAT",
+    "total": "Total",
+    "viewOrder": "View order",
+    "continueShopping": "Continue shopping"
   },
   "footer": {
     "tagline": "Precision peptides for serious research.",
@@ -314,6 +719,7 @@
     "partner": "Partner program",
     "contact": "Contact",
     "faq": "FAQ",
+    "rewards": "Rewards",
     "shipping": "Shipping & returns",
     "terms": "Terms",
     "privacy": "Privacy",
@@ -324,7 +730,13 @@
     "rightsReserved": "© {year} AverianLabs. All rights reserved.",
     "vatIdLabel": "VAT ID",
     "researchUse": "Research use only. Not for human consumption.",
-    "coa": "COA library"
+    "coa": "COA library",
+    "businessIdLabel": "Business ID",
+    "vatLabel": "VAT",
+    "stripeSecured": "Stripe-secured",
+    "gdprCompliant": "GDPR compliant",
+    "euDispatch": "24h EU dispatch",
+    "account": "Account"
   },
   "cookie": {
     "title": "Cookies & analytics",
@@ -372,7 +784,102 @@
     "nextProducts": "Next products",
     "addToWishlist": "Add to wishlist",
     "removeFromWishlist": "Remove from wishlist",
-    "closeQuickView": "Close quick view"
+    "closeQuickView": "Close quick view",
+    "shareList": "Share list",
+    "copied": "Copied!",
+    "quote": "Quote",
+    "vialSize": "Vial size",
+    "addToCartWithPrice": "Add to cart · {price}",
+    "addToCompare": "Add to compare",
+    "compareAdd": "Add to compare",
+    "compareAdded": "Comparing",
+    "addedToCart": "Added to cart",
+    "addedToCartDesc": "{name} {mg}mg × {qty}",
+    "batchLabel": "Latest batch",
+    "batchDataEndotoxin": "Endotoxin",
+    "batchDataExpires": "Expires",
+    "batchDataHplc": "HPLC purity",
+    "batchDataManufactured": "Manufactured",
+    "batchDataOpenCoa": "Open COA",
+    "coaAvailable": "View COA",
+    "endotoxinUnit": "EU/mg",
+    "freeShippingOver": "Free shipping over {amount} EU-wide",
+    "fromSizes": "{count, plural, =0 {— sizes} one {from · 1 size} other {from · {count} sizes}}",
+    "inStock": "In stock",
+    "inStockBadge": "In stock",
+    "outOfStock": "Out of stock",
+    "outOfStockBadge": "Out of stock",
+    "lowStockBadge": "Low · {count} left",
+    "lowStockLeft": "Low · {count} left",
+    "purityHplc": "{purity} % HPLC",
+    "purityHplcLabel": "{purity} % HPLC",
+    "quoteEmailPlaceholder": "you@lab.eu",
+    "quoteSent": "Quote request sent",
+    "quoteSentDesc": "We'll email you current pricing for {name}.",
+    "quoteSubtitle": "Pricing and current batch availability on request. We reply within 24h.",
+    "quoteTitle": "Request quote",
+    "qvAddedToCompare": "Added to compare",
+    "qvFullDetails": "Full details",
+    "qvRemovedFromCompare": "Removed from compare",
+    "qvRemovedFromWishlist": "Removed from wishlist",
+    "qvSavedToWishlist": "Saved to wishlist",
+    "removeFromCompare": "Remove from compare",
+    "requestQuote": "Request quote",
+    "stockQuoteOnly": "Quote only",
+    "wishlistAdd": "Add to wishlist",
+    "wishlistSaved": "Saved",
+    "stickyAdd": "Add to cart",
+    "stickyAddedToCompare": "Added to compare",
+    "stickyCompare": "Compare",
+    "stickyOutOfStock": "Out of stock",
+    "stickyRemovedFromCompare": "Removed from compare",
+    "stickyRemovedFromWishlist": "Removed from wishlist",
+    "stickySavedToWishlist": "Saved to wishlist",
+    "stickySubscribe": "Subscribe",
+    "stickySubscribeTooltip": "Subscribe & save 10%",
+    "stickySubscriptionDesc": "You'll receive {mg}mg every {weeks} weeks — cancel anytime, save 10%.",
+    "stickySubscriptionSaved": "Subscription saved",
+    "subscribing": "Start subscription",
+    "applyFilters": "Apply filters",
+    "checkout": "Checkout",
+    "empty": "Empty",
+    "emptyCta": "Browse the catalog",
+    "filters": "Filters",
+    "compareLabel": "Compare",
+    "comparing": "Comparing",
+    "drawerTitle": "Menu",
+    "freeShippingProgress": "Add {amount} more for free shipping",
+    "freeShippingUnlocked": "Free shipping unlocked",
+    "fromLabel": "From",
+    "pricingLabel": "Pricing",
+    "privacyLink": "privacy policy",
+    "privacyPost": ". GDPR-friendly.",
+    "privacyPre": "By using this site you agree to our",
+    "quantity": "Quantity",
+    "researchUseOnly": "Research use only",
+    "rewardsEarn": "Earn rewards",
+    "rewardsFrom": "From rewards",
+    "sale": "Sale",
+    "selectVialSize": "Select vial size",
+    "shipping": "Shipping",
+    "shippingFree": "Free shipping",
+    "shop": "Shop",
+    "subtotal": "Subtotal",
+    "success": "Success",
+    "title": "Title",
+    "total": "Total",
+    "vat": "VAT",
+    "vatIncluded": "VAT included",
+    "viewAllProducts": "View all products",
+    "body": "Body",
+    "secureHeading": "Secure checkout",
+    "featured": "Featured",
+    "browseByCategory": "Browse by category",
+    "productsCount": "{count, plural, =0 {no products} one {1 product} other {{count} products}}",
+    "remove": "Remove",
+    "carouselRequestQuote": "Request quote",
+    "carouselPricingOnRequest": "Pricing on request",
+    "quickAdd": "Quick add"
   },
   "averia": {
     "title": "Averia",
@@ -470,6 +977,18 @@
       "privacyNote": "Conversations are only saved if you allow it. You can export or delete them anytime —",
       "privacyLink": "privacy policy"
     },
+    "sourcesHeading": "Sources",
+    "sourcesCount": "{count, plural, =0 {No sources} one {1 source} other {{count} sources}}",
+    "showSources": "Show sources",
+    "hideSources": "Hide sources",
+    "noSources": "No sources cited yet — ask Averia about a product to start seeing citations.",
+    "sourceTypes": {
+      "product": "Product",
+      "coa": "Certificate of Analysis",
+      "glossary": "Glossary",
+      "blog": "Article",
+      "document": "Document"
+    },
     "send": "Send",
     "stop": "Stop",
     "ageRequired": "Please confirm you are 18+ first."
@@ -477,12 +996,34 @@
   "admin": {
     "dashboard": "Dashboard",
     "dashboardSub": "Overview",
+    "dashboardBadge": "Admin · Dashboard",
     "moderation": "Moderation",
     "moderationSub": "Flagged content",
+    "moderationBadge": "Admin · Moderation",
+    "moderationDescription": "Member reports first, then posts flagged by the lexical guard or the LLM moderator. Newest first. Click View to inspect the full post body.",
     "documents": "Documents",
     "documentsSub": "COA, SDS, HPLC, …",
+    "documentsBadge": "Admin · Documents",
+    "documentsDescription": "Manage the typed documents (COA, SDS, HPLC, METHOD, NMR, SPEC, MSDS) that surface on product pages and at /documents/[id].",
     "audit": "Audit log",
     "auditSub": "Every admin action",
+    "auditBadge": "Admin · Audit log",
+    "auditEmpty": "No admin actions recorded yet.",
+    "auditWhen": "When",
+    "auditActor": "Actor",
+    "auditAction": "Action",
+    "auditEntity": "Entity",
+    "auditMetadata": "Metadata",
+    "averiaConversations": "Averia conversations",
+    "averiaConversationsSub": "Browse, search and draft replies to customer conversations.",
+    "averiaBadge": "Admin · Averia",
+    "averiaTranscriptBadge": "Admin · Transcript",
+    "averiaTranscriptTitle": "Transcript · {count} messages",
+    "averiaBackToList": "← All conversations",
+    "averiaBackToHome": "← Home",
+    "averiaBackToCommunity": "← Back to community",
+    "averiaNotFound": "Conversation not found.",
+    "averiaBackFromMissing": "← Back to list",
     "signOut": "Sign out",
     "statsPendingModeration": "Pending moderation",
     "statsPendingModerationSub": "events in last 24h",
@@ -492,8 +1033,78 @@
     "statsRecentPlansSub": "last 7 days",
     "statsRecentThreads": "New threads",
     "statsRecentThreadsSub": "events in last 24h",
+    "statsNewThreads": "New threads",
     "statsTotalDocs": "Total documents",
-    "statsTotalDocsSub": "all 7 types"
+    "statsTotalDocsSub": "all 7 types",
+    "viewLink": "View →",
+    "moderationQueue": {
+      "verdictError": "Couldn't record the verdict. Try again.",
+      "verdictRecorded": "Verdict recorded.",
+      "queueEmpty": "Queue empty. Every flagged post has been reviewed.",
+      "postBodyUnavailable": "(post body unavailable)",
+      "byAuthor": "by {name}",
+      "viewFullPost": "View full post",
+      "hide": "Hide",
+      "view": "View",
+      "dismissTitle": "Dismiss — no action needed",
+      "dismiss": "Dismiss",
+      "removePostTitle": "Remove — take the post down",
+      "removePost": "Remove post",
+      "allowTitle": "Allow — keep visible, mark reviewed",
+      "allow": "Allow",
+      "keepTitle": "Keep flagged — reviewed, leave visible",
+      "keep": "Keep",
+      "removeTitle": "Remove — set post status to removed",
+      "remove": "Remove",
+      "openThread": "Open thread →"
+    },
+    "documentsClient": {
+      "newDocument": "New document",
+      "noDocuments": "No documents yet. Click \"New document\" to add one.",
+      "deleteAria": "Delete",
+      "createDocument": "Create document",
+      "fieldType": "Type",
+      "fieldTitle": "Title",
+      "titlePlaceholder": "BPC-157 · 2026-04 batch",
+      "fieldVersion": "Version",
+      "fieldProductOptional": "Product (optional)",
+      "noneOption": "— None —",
+      "fieldExternalUrlOptional": "External URL (optional)",
+      "externalUrlHint": "PDF URL on R2 or any CDN",
+      "externalUrlPlaceholder": "https://r2.example.com/coa-bpc-2026-04.pdf",
+      "cancel": "Cancel",
+      "create": "Create"
+    },
+    "conversationSearch": {
+      "placeholder": "Search title, conversation id…",
+      "allLocales": "All locales",
+      "english": "English",
+      "finnish": "Finnish",
+      "german": "German",
+      "swedish": "Swedish",
+      "dutch": "Dutch",
+      "submit": "Search",
+      "tableTitle": "Title",
+      "tableLocale": "Locale",
+      "tableOwner": "Owner",
+      "tableContext": "Context",
+      "tableLastMessage": "Last message",
+      "ownerUser": "user",
+      "ownerAnon": "anon",
+      "empty": "No conversations found."
+    },
+    "draftReply": {
+      "title": "Draft reply",
+      "toneWarm": "warm",
+      "toneConcise": "concise",
+      "toneTechnical": "technical",
+      "drafting": "Drafting…",
+      "generate": "Generate draft ({tone})",
+      "charsCount": "{count} chars",
+      "copied": "Copied",
+      "copy": "Copy",
+      "supportRequest": "Support request"
+    }
   },
   "community": {
     "title": "Community",
@@ -502,8 +1113,14 @@
     "newThread": "New thread",
     "signInToPost": "Sign in to post",
     "signInCta": "Sign in",
+    "signInToReact": "Sign in to react",
+    "signInToJoin": "Sign in to join the discussion →",
+    "signInToCreatePlans": "Sign in to create research plans.",
+    "signInToViewPlan": "Sign in to view your research plan.",
+    "signInCtaArrow": "Sign in →",
     "hubHeading": "Discussion categories",
     "hubSub": "Pick a category and dive in.",
+    "hubEyebrow": "Research-only · moderated",
     "leaderboardHeading": "Top contributors",
     "leaderboardSub": "Members earn reputation from reactions they receive.",
     "recentHeading": "Recent activity",
@@ -516,6 +1133,8 @@
     "fieldCategory": "Category",
     "fieldBody": "Body",
     "fieldBodyHint": "Markdown supported. Messages are auto-moderated.",
+    "titlePlaceholder": "Be specific…",
+    "bodyPlaceholder": "Markdown supported. Cite sources where possible.",
     "submit": "Post thread",
     "submitting": "Posting…",
     "replyTitle": "Reply",
@@ -549,6 +1168,7 @@
     "reactionHelpful": "Helpful",
     "reactionInsightful": "Insightful",
     "reactionThanks": "Thanks",
+    "reactionOwnPost": "You can't react to your own post",
     "reportPost": "Report",
     "reportTitle": "Report this post",
     "reportReasonLabel": "Reason",
@@ -565,8 +1185,14 @@
     "errorTitleShort": "Post failed",
     "errorBody": "The moderator system blocked your message.",
     "moderationNote": "Moderator note",
+    "moderationBadge": "Moderation",
+    "moderationDescription": "Posts are checked by a lexical guard before they go live, then asynchronously reviewed by an LLM moderator. A human queue handles edge cases.",
+    "threadModerationDescription": "New posts are checked by an automated moderator before going live. The human queue reviews flagged content.",
+    "lockedBadge": "Locked",
     "activityEmpty": "No activity yet.",
     "leaderboardEmpty": "Be first.",
+    "anonymous": "Anonymous",
+    "edited": "edited",
     "categories": {
       "announcements": {
         "name": "Announcements",
@@ -598,16 +1224,23 @@
       }
     },
     "cancel": "Cancel",
-    "reportFailed": "Couldn't submit the report. Try again."
+    "reportFailed": "Couldn't submit the report. Try again.",
+    "timeNow": "now",
+    "timeMinutes": "{m}m",
+    "timeHours": "{h}h",
+    "timeDays": "{d}d"
   },
   "glossary": {
     "title": "Glossary",
     "subtitle": "Every abbreviation, technique and term used on the site.",
     "searchPlaceholder": "Search terms…",
+    "filterAll": "All",
+    "noResults": "No terms match your search.",
     "empty": "No glossary terms yet.",
     "backToIndex": "← All terms",
     "relatedTermsHeading": "Related terms",
     "relatedProductsHeading": "Related products",
+    "relatedProducts": "Related products",
     "synonymsLabel": "Also known as",
     "notFoundTitle": "Term not found",
     "notFoundBody": "We don't have a glossary entry for this term yet.",
@@ -617,6 +1250,13 @@
       "compliance": "Compliance",
       "logistics": "Logistics",
       "product": "Product",
+      "regulatory": "Regulatory"
+    },
+    "categories": {
+      "analysis": "Analysis",
+      "sequence": "Sequence",
+      "formulation": "Formulation",
+      "storage": "Storage",
       "regulatory": "Regulatory"
     }
   },
@@ -628,11 +1268,14 @@
     "otherForProduct": "Other documents for this product",
     "empty": "No documents.",
     "tabLabel": "Documents",
-    "viewAll": "View all documents"
+    "viewAll": "View all documents",
+    "subtitle": "Certificates and analyses",
+    "search": "Search documents…"
   },
   "authors": {
     "role": "Role",
-    "postsComing": "Articles by this author coming soon."
+    "postsComing": "Articles by this author coming soon.",
+    "title": "Authors"
   },
   "plans": {
     "title": "Saved research plans",
@@ -649,6 +1292,8 @@
     "fieldTitle": "Plan name",
     "fieldNotes": "Notes (optional)",
     "fieldNotesHint": "Markdown supported. Shown when shared.",
+    "titlePlaceholder": "Tendon repair panel",
+    "notesPlaceholder": "Why this combination, in vitro conditions, expected readouts…",
     "saveChanges": "Save changes",
     "deletePlan": "Delete plan",
     "deleteConfirm": "Delete this plan? This action can't be undone.",
@@ -666,7 +1311,13 @@
     "sharedPlanSubtitle": "A curated bundle from an AverianLabs community member.",
     "signInCta": "Sign in to save",
     "saveFailed": "Couldn't save to the plan. Please try again.",
-    "addedToPlan": "Saved to plan."
+    "addedToPlan": "Saved to plan.",
+    "cancel": "Cancel",
+    "copy": "Copy",
+    "deleteConfirmPhrase": "DELETE",
+    "badge": "Plans",
+    "signInCtaArrow": "Sign in to create plans →",
+    "signInToCreatePlans": "Sign in to create plans"
   },
   "activity": {
     "title": "What's been happening",
@@ -681,7 +1332,8 @@
       "plan_shared": "shared a research plan:"
     },
     "empty": "No activity yet — the feed fills up as members post.",
-    "viewAll": "View all activity"
+    "viewAll": "View all activity",
+    "subtitle": "Recent activity from the community"
   },
   "gdpr": {
     "exportTitle": "Export your data",
@@ -692,16 +1344,25 @@
     "deleteDescription": "Permanently delete your account and all data tied to it. After 30 days, the action cannot be undone.",
     "deleteButton": "Delete account",
     "deleteConfirm": "Type DELETE to confirm. After 30 days, the action cannot be undone.",
-    "deleteConfirmPhrase": "DELETE"
+    "deleteConfirmPhrase": "DELETE",
+    "deleteScheduledTitle": "Account deletion scheduled.",
+    "deleteScheduledBody": "All your data will be permanently deleted in 30 days.",
+    "deletePlaceholder": "DELETE",
+    "cancel": "Cancel",
+    "title": "Data & privacy",
+    "exportData": "Export my data",
+    "deleteAccount": "Delete my account"
   },
   "account": {
     "title": "Account",
+    "badge": "Account",
     "welcome": "Welcome back",
     "sectionResearchPlans": "Saved research plans",
     "sectionGdpr": "Privacy & data",
     "viewPlans": "View plans",
     "createPlan": "Create plan",
     "noPlans": "You haven't created any plans yet.",
+    "plansEmptyHint": "Bundle products you use together and share publicly with a link.",
     "deletedPending": "Account deletion is pending. It will be processed within 30 days.",
     "exportReady": "Data export is ready. Check your email.",
     "sectionAi": "Averia & saved data",
@@ -719,18 +1380,69 @@
     "aiSourceExplicit": "You asked to remember this",
     "aiSourceInferred": "Inferred from your conversations",
     "aiConsentOnToast": "Conversation saving turned on.",
-    "aiConsentOffToast": "Conversation saving turned off."
+    "aiConsentOffToast": "Conversation saving turned off.",
+    "tileOrders": "Orders",
+    "tileCoaLibrary": "COA library",
+    "tileSubscriptions": "Subscriptions",
+    "tileSecurity": "Security",
+    "itemsCount": "{count, plural, =0 {No items} one {1 item} other {{count} items}}",
+    "planUntitled": "Untitled plan",
+    "planProductsCount": "{count, plural, one {# product} other {# products}}",
+    "planVisibilityPublic": "Public",
+    "planVisibilityPrivate": "Private",
+    "backToAccount": "← Back to account",
+    "orders": "Orders",
+    "noOrders": "You haven't placed any orders yet.",
+    "noOrdersSub": "Browse the catalog and your first order will show up here.",
+    "browseShop": "Browse shop",
+    "notificationsBadge": "Notifications",
+    "notificationsTitle": "Inbox",
+    "notificationsDescription": "Replies, reactions, and shared plans. {count} unread.",
+    "notificationsSignInPrompt": "Sign in to view notifications.",
+    "notificationsAllCaughtUp": "You're all caught up.",
+    "notificationsSomeone": "Someone",
+    "notificationsReply": "replied to your thread",
+    "notificationsReaction": "reacted to your post",
+    "notificationsPlanShared": "shared a research plan",
+    "notificationsNotified": "notified you",
+    "deleteConfirmTitle": "Account deletion scheduled.",
+    "deleteConfirmBody": "All your data will be permanently deleted in 30 days.",
+    "deleteUnavailableTitle": "Account deletion is unavailable",
+    "deleteUnavailableBody": "This deployment doesn't have a database configured.",
+    "confirmDeleteTitle": "Sign in to confirm",
+    "confirmDeleteBody": "Sign in to the account whose deletion you want to confirm.",
+    "confirmDeleteSignInLink": "← Sign in",
+    "confirmDeleteConfirmedBadge": "Confirmed",
+    "confirmDeleteHardDeleteNote": "Your personal data is queued for hard-deletion in 30 days. Until then, it's anonymised in the database but recoverable by support if you change your mind.",
+    "confirmDeleteHomeLink": "← Home",
+    "settings": "Settings",
+    "security": "Security",
+    "addresses": "Addresses",
+    "preferences": "Preferences"
   },
   "contact": {
+    "title": "Contact",
+    "intro": "Real scientists, real fast. We answer within 24 hours, weekdays.",
+    "emailLabel": "Email",
+    "labInquiriesLabel": "Lab inquiries",
+    "hqNote": "HQ: Helsinki, Finland · Warehouse: Vantaa · Lab partner: Eurofins Biolab (DE)",
     "name": "Name",
-    "email": "Email",
     "subject": "Subject",
     "message": "Message",
     "send": "Send message",
     "sending": "Sending…",
     "sentTitle": "Message sent",
     "sentBody": "We'll reply within 24 hours.",
-    "errorTitle": "Something went wrong"
+    "errorTitle": "Something went wrong",
+    "email": "Email",
+    "cofounderPromisesHeading": "What you can count on",
+    "cofounderPromisesSub": "Three commitments we make every researcher, every time.",
+    "promiseCoaTitle": "Lab results, every time",
+    "promiseCoaBody": "Every batch ships with its COA attached. You can also pull any batch's COA online — search by product or batch code.",
+    "promiseCoaCta": "Browse the COA registry",
+    "promiseSupportTitle": "Human + trained bot",
+    "promiseSupportBody": "Averia answers most questions in seconds. Complex and commercial enquiries route to our Helsinki research team within one business day.",
+    "promiseSupportCta": "Ask Averia"
   },
   "auth": {
     "signInTitle": "Sign in",
@@ -787,5 +1499,990 @@
     "confirmSuccess": "Your subscription is confirmed. Welcome aboard.",
     "confirmInvalid": "This confirmation link is invalid or has expired.",
     "confirmMissing": "This confirmation link is incomplete."
+  },
+  "legal": {
+    "draftBanner": "DRAFT — REQUIRES LEGAL REVIEW BEFORE PUBLICATION. This page is an English draft proposal and is not yet binding.",
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: 1 September 2026",
+      "intro": "By accessing averianlabs.eu or any affiliated domain, you agree to these Terms of Service. All products are sold under a strict research-use-only license.",
+      "sections": {
+        "eligibility": {
+          "title": "1. Eligibility",
+          "body": "You must be 18 years or older and a qualified researcher or institutional buyer to purchase from AverianLabs."
+        },
+        "researchUse": {
+          "title": "2. Research use only",
+          "body": "All products are intended strictly for laboratory research and in-vitro studies. They are NOT intended for human consumption, diagnostic use, or therapeutic applications."
+        },
+        "pricing": {
+          "title": "3. Pricing & VAT",
+          "body": "Prices are inclusive of EU VAT (OSS scheme). B2B customers with a valid VAT ID may purchase reverse-charge at checkout."
+        },
+        "shipping": {
+          "title": "4. Shipping",
+          "body": "We dispatch within 24 hours from our Helsinki warehouse. Risk of loss passes to the buyer upon carrier scan."
+        },
+        "returns": {
+          "title": "5. Returns",
+          "body": "Due to the nature of research-grade peptides, opened or temperature-compromised vials are not returnable. Unopened product may be returned within 14 days for exchange or refund."
+        },
+        "liability": {
+          "title": "6. Liability",
+          "body": "AverianLabs' liability is limited to the purchase price of the product. We do not warrant fitness for any particular research application beyond the published Certificate of Analysis."
+        },
+        "governingLaw": {
+          "title": "7. Governing law",
+          "body": "These terms are governed by Finnish law. Disputes are subject to the exclusive jurisdiction of the Helsinki District Court."
+        },
+        "contact": {
+          "title": "8. Contact",
+          "body": "Questions: legal@averianlabs.eu"
+        }
+      }
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: 1 September 2026 · GDPR compliant",
+      "intro": "This policy explains how AverianLabs Oy (\"we\") processes personal data on averianlabs.eu and affiliated domains, in compliance with the EU General Data Protection Regulation (GDPR) and the Finnish Personal Data Act.",
+      "sections": {
+        "dataCollected": {
+          "title": "Data we collect",
+          "body": "Account data: email, name, hashed password (if you create an account). Order data: shipping/billing address, order history. Technical data: IP (truncated), user agent, referrer (kept 30 days). Analytics: only with your explicit consent via the cookie banner."
+        },
+        "lawfulBasis": {
+          "title": "Lawful basis",
+          "body": "Contract (Art. 6(1)(b)) for orders, consent (Art. 6(1)(a)) for analytics, legal obligation (Art. 6(1)(c)) for accounting."
+        },
+        "subprocessors": {
+          "title": "Subprocessors",
+          "body": "Stripe Payments Europe Ltd — payment processing (EU); Coinbase Commerce — crypto payments; Resend — transactional email (EU); PostHog Cloud EU — product analytics (consent-gated); Sanity Inc. — content (US, EU data residency); Cloudflare — CDN / DDoS; Neon — database (Frankfurt)."
+        },
+        "yourRights": {
+          "title": "Your rights",
+          "body": "You have the right to access, rectify, erase, restrict, port, and object. Email privacy@averianlabs.eu. You may also lodge a complaint with your national supervisory authority (in Finland: tietosuojavaltuutettu)."
+        },
+        "retention": {
+          "title": "Retention",
+          "body": "Account data: until deletion. Order data: 7 years (accounting). Analytics: 14 months."
+        },
+        "contact": {
+          "title": "Contact",
+          "body": "Data Protection Officer: dpo@averianlabs.eu · AverianLabs Oy, Helsinki, Finland."
+        }
+      }
+    },
+    "cookies": {
+      "title": "Cookies",
+      "lastUpdated": "Last updated: 1 September 2026",
+      "intro": "We use a minimal set of cookies. Essential cookies cannot be disabled; analytics cookies require your consent.",
+      "sections": {
+        "essential": {
+          "title": "Essential",
+          "body": "averianlabs-cart — saves your cart (1 year); averianlabs-age-confirmed — remembers age-gate confirmation (1 year); averianlabs-cookie-consent — remembers your cookie choice (1 year); Stripe / Coinbase session cookies (set by payment provider)."
+        },
+        "analytics": {
+          "title": "Analytics (consent)",
+          "body": "PostHog (EU) and Plausible are loaded only after you click \"Accept all\" on the cookie banner. They collect anonymised, aggregated usage data."
+        },
+        "changeChoice": {
+          "title": "Change your choice",
+          "body": "Click the small \"Cookies\" link in the footer, or clear your browser data."
+        }
+      }
+    },
+    "disclaimer": {
+      "badge": "Research use only",
+      "title": "Research disclaimer",
+      "lead": "All products sold by AverianLabs Oy are intended strictly for laboratory research and in-vitro studies.",
+      "sections": {
+        "notForHuman": {
+          "title": "Not for human consumption",
+          "body": "The products listed on averianlabs.eu are not intended for human or veterinary use, consumption, administration, or application to the body in any form."
+        },
+        "noMedicalClaims": {
+          "title": "No medical claims",
+          "body": "Information provided on this website is for research and educational purposes only. It is not intended as medical advice, diagnosis, or treatment recommendation. AverianLabs Oy does not endorse, recommend, or support the off-label use of any product."
+        },
+        "buyerResponsibility": {
+          "title": "Buyer's responsibility",
+          "body": "By purchasing from AverianLabs, you confirm that you are a qualified researcher or institutional buyer, and that the products will be used solely for legitimate laboratory research in compliance with all applicable local, national, and international laws and regulations."
+        },
+        "compliance": {
+          "title": "Compliance",
+          "body": "It is the buyer's responsibility to ensure that the import, possession, and use of research peptides complies with all applicable regulations in their jurisdiction. AverianLabs Oy reserves the right to refuse service to any buyer or jurisdiction at its sole discretion."
+        }
+      }
+    }
+  },
+  "compare": {
+    "badge": "Side-by-side",
+    "title": "Compare research peptides",
+    "subtitle": "Purity, vial sizes, sequence, and storage — across every peptide in our catalog.",
+    "compare": "Add to compare",
+    "actionAdd": "Add to compare",
+    "clear": "Remove from compare",
+    "removeFromCompareA11y": "Remove from compare",
+    "addedToCart": "Comparing",
+    "inStockCount": "In stock",
+    "lowStock": "Low · {count} left",
+    "close": "Close",
+    "barTitle": "Compare peptides",
+    "barLabel": "{count, plural, =0 {No products selected} one {1 product in compare} other {{count} products in compare}}",
+    "barSub": "Side-by-side HPLC, mass-spec, sequence, and pricing.",
+    "addAllToCart": "Add all to cart",
+    "badgeQuote": "Quote only",
+    "clearAll": "Clear all",
+    "colAvailability": "Availability",
+    "colCas": "CAS",
+    "colCategory": "Category",
+    "colFormula": "Formula",
+    "colMw": "MW",
+    "colPurity": "Purity",
+    "colSequence": "Sequence",
+    "colStorage": "Storage",
+    "colVialSizes": "Vial sizes",
+    "contact": "Contact",
+    "emptyBody": "Browse products and add them to compare.",
+    "emptyTitle": "No products to compare",
+    "footerSummary": "Comparing {count} of {max}",
+    "fromPrice": "From {price}",
+    "headerAttribute": "Attribute",
+    "pickerPrompt": "Select a product",
+    "actionNotify": "Notify me"
+  },
+  "about": {
+    "badge": "About AverianLabs",
+    "title": "Built by researchers, for researchers.",
+    "intro": "We started AverianLabs because the research peptide supply chain was opaque, slow, and inconsistent. Every batch should come with a public COA, every question should get a real answer, and every order should ship within 24 hours from an EU lab.",
+    "stats": [
+      {
+        "value": "100%",
+        "label": "COA on every batch",
+        "note": "Our commitment with every shipment"
+      },
+      {
+        "value": "—",
+        "label": "Batch-specific HPLC purity",
+        "note": "Published per batch"
+      },
+      {
+        "value": "24h",
+        "label": "EU dispatch",
+        "note": "Our target"
+      },
+      {
+        "value": "—",
+        "label": "Researchers served",
+        "note": "Several hundred across the EU"
+      }
+    ],
+    "valuesTitle": "Our values",
+    "values": [
+      {
+        "title": "Transparency",
+        "body": "Every test result, every supplier, every price. Open by default."
+      },
+      {
+        "title": "Purity",
+        "body": "We sell fewer peptides so we can test every batch more thoroughly."
+      },
+      {
+        "title": "Speed",
+        "body": "Research doesn't wait. 24h dispatch from our EU hub in Helsinki."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Frequently asked",
+    "subtitle": "Quick answers to the questions we get most.",
+    "items": [
+      {
+        "q": "Are your products for human consumption?",
+        "a": "No. All products sold by AverianLabs are intended strictly for laboratory research and in-vitro studies. They are not for human or veterinary use."
+      },
+      {
+        "q": "How long does shipping take?",
+        "a": "We dispatch within 24 hours from our Helsinki warehouse. EU delivery is typically 1–3 business days via Posti or DHL."
+      },
+      {
+        "q": "Do you provide Certificates of Analysis?",
+        "a": "Yes. Every batch ships with a batch-specific COA (HPLC purity, mass-spec confirmation) and endotoxin report. PDFs are available publicly at /coa."
+      },
+      {
+        "q": "Which countries do you ship to?",
+        "a": "We ship to all EU countries plus UK, NO, CH, and TR. We do not ship to a small number of restricted jurisdictions (see terms)."
+      },
+      {
+        "q": "What payment methods do you accept?",
+        "a": "Cards (Visa, MC, Amex), Apple Pay, Google Pay, iDEAL, Klarna, SEPA Direct Debit, and crypto (BTC, ETH, USDC) via Coinbase Commerce."
+      },
+      {
+        "q": "Do you offer volume / B2B pricing?",
+        "a": "Yes — apply for our partner program. Universities, research labs, and resellers get up to 35% off and NET-14 invoicing."
+      }
+    ]
+  },
+  "labTests": {
+    "badge": "ISO 17025 lab partner",
+    "title": "How we test every batch",
+    "subtitle": "Independent verification at every step. No batch ships without a complete analytical fingerprint.",
+    "batchesLabel": "batches tracked",
+    "tests": [
+      {
+        "title": "HPLC purity",
+        "body": "Reversed-phase HPLC quantifies peptide content against a certified reference standard. Acceptance: ≥ 98%."
+      },
+      {
+        "title": "Endotoxin (LAL)",
+        "body": "Kinetic chromogenic LAL per USP <85>. Acceptance: < 5 EU/mg."
+      },
+      {
+        "title": "Mass spectrometry",
+        "body": "ESI-MS confirms molecular weight matches theoretical within ±1 Da."
+      },
+      {
+        "title": "Sterility & mycoplasma",
+        "body": "14-day sterility (USP <71>) and mycoplasma qPCR on every lot."
+      }
+    ],
+    "sequenceTitle": "Test sequence",
+    "sequence": [
+      {
+        "step": "01",
+        "title": "Receipt",
+        "body": "Raw peptide enters quarantine"
+      },
+      {
+        "step": "02",
+        "title": "Identity",
+        "body": "ESI-MS confirms sequence"
+      },
+      {
+        "step": "03",
+        "title": "Purity",
+        "body": "HPLC at 214 nm + 220 nm"
+      },
+      {
+        "step": "04",
+        "title": "Safety",
+        "body": "Endotoxin, sterility, mycoplasma"
+      }
+    ]
+  },
+  "quality": {
+    "badge": "Quality",
+    "title": "Quality, end to end",
+    "items": [
+      {
+        "title": "EU-GMP vendors",
+        "body": "We audit every peptide manufacturer annually, on-site, in person."
+      },
+      {
+        "title": "ISO 17025 testing",
+        "body": "Independent labs in DE, FI, and NL re-test every batch before it ships."
+      },
+      {
+        "title": "EU-wide logistics",
+        "body": "Helsinki → you, in 24h. Tracked, signed-for, ambient or cold-chain as needed."
+      }
+    ]
+  },
+  "shippingReturns": {
+    "title": "Shipping, returns & guarantees",
+    "items": [
+      {
+        "title": "Carriers",
+        "body": "Posti (FI primary), DHL Express (rest of EU), DPD Classic."
+      },
+      {
+        "title": "Dispatch",
+        "body": "Orders placed before 14:00 EET ship same business day. Others ship within 24h."
+      },
+      {
+        "title": "Cold-chain",
+        "body": "Ambient-stable peptides ship at room temp in protective foam. Refrigerated items ship with cold packs."
+      },
+      {
+        "title": "Returns",
+        "body": "Unopened product returnable within 14 days. Opened / temperature-compromised vials not returnable."
+      }
+    ],
+    "ratesTitle": "Rates",
+    "tableRegion": "Region",
+    "tableCarrier": "Carrier",
+    "tableEta": "ETA",
+    "tablePrice": "Price",
+    "rates": [
+      {
+        "region": "Finland",
+        "carrier": "Posti Express",
+        "eta": "1–2 days",
+        "priceCents": 990
+      },
+      {
+        "region": "EU (rest)",
+        "carrier": "DHL Express",
+        "eta": "1–3 days",
+        "priceCents": 1490
+      },
+      {
+        "region": "EU (rest)",
+        "carrier": "DPD Classic",
+        "eta": "3–5 days",
+        "priceCents": 690
+      },
+      {
+        "region": "UK / NO / CH",
+        "carrier": "DHL Express",
+        "eta": "2–4 days",
+        "priceCents": 1990
+      }
+    ],
+    "freeShippingNote": "Free shipping on EU orders over €150.",
+    "guaranteeHeading": "Reshipment & refund guarantee",
+    "guaranteeSub": "If your order never arrived or was held by customs on a verified carrier error, we make it right.",
+    "guaranteeDidntArriveTitle": "Didn't arrive?",
+    "guaranteeDidntArriveBody": "If tracking shows the parcel lost in transit or never delivered, contact support with your order number. We open a carrier investigation and reship the same products free of charge as soon as the investigation concludes.",
+    "guaranteeCustomsTitle": "Held by customs?",
+    "guaranteeCustomsBody": "Research-use peptides sold by AverianLabs are not controlled substances and clear EU customs routinely. If a parcel is held and the cause is verified to be on the carrier or our dispatch paperwork, we reship at no cost.",
+    "guaranteeReshipFailsTitle": "Second reship didn't arrive?",
+    "guaranteeReshipFailsBody": "We refund the full cost of the affected products — including original shipping — once the second delivery fails to land within the carrier's stated ETA.",
+    "guaranteeContactCta": "Open a reshipment case",
+    "supportHeading": "Expert support — human + trained bot",
+    "supportSub": "Most product-selection and reconstitution questions are answered in seconds by Averia, our trained research concierge. Complex or commercial enquiries route to our Helsinki team.",
+    "supportAveriaTitle": "Averia (research concierge)",
+    "supportAveriaBody": "Trained on every product datasheet, COA, and reconstitution guide. Asks for the order number when needed and never hallucinates purity numbers.",
+    "supportHumanTitle": "Helsel research team",
+    "supportHumanBody": "Helsinki-based lab specialists. Email support@averianlabs.eu — typical response within 1 business day; priority queue for wholesale and academic orders.",
+    "supportContactCta": "Email the team"
+  },
+  "wishlist": {
+    "title": "Wishlist",
+    "subtitle": "Your saved peptides — pick up where you left off, or share with a colleague.",
+    "bestSellersBadge": "Popular with researchers like you",
+    "bestSellersTitle": "Best sellers",
+    "bestSellersSubtitle": "Top-voted peptides this month.",
+    "viewAllProducts": "View all {count} products →"
+  },
+  "rewards": {
+    "badge": "Loyalty program",
+    "title": "AverianLabs Rewards",
+    "subtitle": "Earn points on every order. Climb tiers. Redeem for research credit. The more you research, the more you save.",
+    "chooseTier": "Choose your tier",
+    "mostPopular": "Most popular",
+    "tiers": [
+      {
+        "name": "Apex",
+        "threshold": 0,
+        "perks": [
+          {
+            "text": "1 point per €1 spent"
+          },
+          {
+            "text": "Birthday bonus points"
+          },
+          {
+            "text": "Early access to new batches"
+          }
+        ],
+        "ctaStart": "Start earning",
+        "ctaUnlock": "Unlock {name}"
+      },
+      {
+        "name": "Crystal",
+        "threshold": 500,
+        "perks": [
+          {
+            "text": "1.25 points per €1 spent"
+          },
+          {
+            "text": "Free EU shipping on all orders"
+          },
+          {
+            "text": "Exclusive product drops"
+          },
+          {
+            "text": "Priority batch selection"
+          }
+        ],
+        "ctaStart": "Start earning",
+        "ctaUnlock": "Unlock {name}"
+      },
+      {
+        "name": "Aurora",
+        "threshold": 2000,
+        "perks": [
+          {
+            "text": "1.5 points per €1 spent"
+          },
+          {
+            "text": "Free express EU shipping"
+          },
+          {
+            "text": "Priority support line"
+          },
+          {
+            "text": "Lab visit invitations"
+          },
+          {
+            "text": "Dedicated account manager"
+          }
+        ],
+        "ctaStart": "Start earning",
+        "ctaUnlock": "Unlock {name}"
+      }
+    ],
+    "tierStarting": "Starting tier",
+    "tierSpend": "{amount}+ lifetime spend",
+    "howToEarn": "How to earn points",
+    "earnWays": [
+      {
+        "action": "Place an order",
+        "points": "1–1.5× per €1",
+        "desc": "Points scale with your tier"
+      },
+      {
+        "action": "Write a product review",
+        "points": "50 pts",
+        "desc": "Verified purchase reviews only"
+      },
+      {
+        "action": "Refer a colleague",
+        "points": "250 pts",
+        "desc": "When they place their first order"
+      },
+      {
+        "action": "Share a research plan",
+        "points": "25 pts",
+        "desc": "Public plan with 5+ saves"
+      }
+    ],
+    "referralBadge": "Referral program",
+    "referralTitle": "Give €15, get €15",
+    "referralBody": "Share your unique referral link with colleagues. When they place their first order over €100, you both receive €15 in research credit. No limit on referrals.",
+    "referralBullets": [
+      "Share your unique link via email or social",
+      "Colleague gets €15 off their first order (€100+)",
+      "You get €15 credit + 250 bonus points",
+      "Unlimited referrals — stack your credits"
+    ],
+    "referralLinkLabel": "Your referral link",
+    "referralCopy": "Copy",
+    "referralGetLink": "Get my referral link",
+    "referralSignInHint": "Sign in to generate your unique link",
+    "redeemTitle": "Redeem your points",
+    "redemptions": [
+      {
+        "points": 500,
+        "valueCents": 500,
+        "label": "Order credit",
+        "rate": "1% back"
+      },
+      {
+        "points": 1000,
+        "valueCents": 1200,
+        "label": "Order credit (bonus)",
+        "rate": "1.2% back"
+      },
+      {
+        "points": 2500,
+        "valueCents": 3500,
+        "label": "Order credit (premium)",
+        "rate": "1.4% back"
+      }
+    ],
+    "redeemFooter": "Points expire 12 months after earning. Credits are applied automatically at checkout.",
+    "ptsLabel": "{count, plural, one {# pt} other {# pts}}"
+  },
+  "partner": {
+    "orgName": "Institution name",
+    "country": "Country",
+    "contactEmail": "contact@institution.eu",
+    "volume": "Estimated monthly volume (vials)",
+    "useCaseResearchLab": "Research lab",
+    "useCaseUniversity": "University",
+    "useCaseReseller": "Reseller",
+    "useCaseClinic": "Clinic",
+    "useCaseDetail": "Use case / research focus",
+    "submit": "Submit application",
+    "submitting": "Submitting…",
+    "submittedTitle": "Application received.",
+    "submittedBody": "We'll review your details and respond within 48 hours. Check your inbox for next steps.",
+    "submitError": "Submission failed",
+    "submitErrorGeneric": "Something went wrong",
+    "submitSuccess": "Application submitted",
+    "applicationReceivedTitle": "Application received.",
+    "applicationReceivedBody": "We'll review your details and respond within 48 hours."
+  },
+  "search": {
+    "label": "Search",
+    "commandLabel": "Search AverianLabs",
+    "inputPlaceholder": "Search peptides, batch IDs, articles…",
+    "inputAria": "Search",
+    "empty": "No results. Try a peptide name like \"BPC-157\" or a CAS number.",
+    "groupProducts": "Products",
+    "groupQuickLinks": "Quick links",
+    "groupRecent": "Recent",
+    "hintNavigate": "navigate",
+    "hintOpen": "open",
+    "hintClose": "close",
+    "productsIndexed": "{count} products indexed",
+    "quickLinks": {
+      "shop": "Browse all peptides",
+      "labTests": "Lab test methodology",
+      "calculator": "Reconstitution calculator",
+      "blog": "Research blog",
+      "partner": "Partner program"
+    },
+    "quote": "Quote",
+    "searchBatch": "Batch {code}",
+    "searchCoa": "COA · {code}",
+    "searchGlossary": "Glossary · {term}",
+    "searchDoc": "Document · {title}",
+    "searchResultsCount": "{count, plural, =0 {No results} one {# result} other {# results}}"
+  },
+  "calculator": {
+    "title": "Reconstitution calculator",
+    "subtitle": "Calculate draw volumes, concentrations, and remaining doses for any peptide vial.",
+    "heroEyebrow": "Research tools",
+    "heroTitle": "The peptide calculator built for bench work",
+    "heroBody": "Five working calculators (reconstitution, titration, dilution, breakeven, comparison), one shared math library, and a beautiful syringe visualisation. Save protocols, share via URL, and print your bench card.",
+    "openInAveria": "Open this setup in Averia",
+    "viewAllTools": "See every calculator below",
+    "tabs": {
+      "reconstitution": "Reconstitution",
+      "titration": "Titration",
+      "dilution": "Dilution",
+      "breakeven": "Breakeven",
+      "compare": "Compare"
+    },
+    "inputs": "Inputs",
+    "outputs": "Outputs",
+    "peptideMass": "Peptide mass (mg)",
+    "bacteriostaticWater": "Bacteriostatic water (mL)",
+    "desiredDose": "Desired dose (mcg)",
+    "product": "Product (optional)",
+    "noProductSelected": "Custom setup",
+    "syringe": "Syringe",
+    "storage": "Storage target",
+    "results": "Results",
+    "concentration": "Concentration",
+    "concentrationUnit": "mg/mL",
+    "concentrationMcgUnit": "mcg/mL",
+    "volumePerDose": "Volume per dose",
+    "volumePerDoseUnit": "mL",
+    "totalDoses": "Total doses in vial",
+    "dosesCalculation": "{mass} mg ÷ {dose} mcg",
+    "iuOnSyringe": "IU on syringe",
+    "leftoverMcg": "Peptide remaining",
+    "leftoverMcgUnit": "mcg unused",
+    "researchOnly": "For research calculations only. Always verify with your protocol.",
+    "unitsMcg": "mcg",
+    "unitsIu": "IU",
+    "unitsMl": "mL",
+    "actions": {
+      "share": "Share",
+      "shareCopied": "Link copied",
+      "save": "Save protocol",
+      "saved": "Saved",
+      "reset": "Reset",
+      "print": "Print",
+      "exportCsv": "Export CSV",
+      "sendToAveria": "Ask Averia",
+      "openSaved": "Saved",
+      "viewHistory": "History",
+      "clearHistory": "Clear history",
+      "deleteProtocol": "Delete protocol"
+    },
+    "validation": {
+      "nonPositive": "Must be greater than zero.",
+      "concentrationTooHigh": "Above the practical solubility ceiling — dilute or split vials.",
+      "concentrationCaution": "Approaching the solubility ceiling — draw will be accurate, but storage may shorten.",
+      "drawTooSmall": "Draw volume is below the practical minimum — try the Dilution tab.",
+      "nan": "Enter a number."
+    },
+    "saturation": {
+      "cautionTitle": "Approaching the solubility ceiling",
+      "aboveTitle": "Above the solubility ceiling — won't fully dissolve",
+      "ceiling": "Practical ceiling",
+      "ratio": "Working concentration"
+    },
+    "stability": {
+      "title": "Post-reconstitution stability",
+      "subtitle": "Estimated shelf life after you add solvent.",
+      "shelfLife": "Recommended shelf life",
+      "refrigerated": "Refrigerated",
+      "frozen": "Frozen (−20 °C)",
+      "room": "Room temperature"
+    },
+    "syringes": {
+      "title": "Syringe selection",
+      "subtitle": "Switch the syringe to retune IU marking and recommended draw volume.",
+      "0_3": "0.3 mL · 30 IU",
+      "0_5": "0.5 mL · 50 IU",
+      "1_0": "1.0 mL · 100 IU"
+    },
+    "presets": {
+      "title": "Common starts",
+      "subtitle": "Single-click setups that match the catalog vials.",
+      "empty": "No saved protocols yet — pick a preset or save this setup."
+    },
+    "history": {
+      "title": "Recent calculations",
+      "subtitle": "Saved locally in this browser.",
+      "empty": "Run a calculation to see it here.",
+      "remove": "Remove"
+    },
+    "reconstitution": {
+      "drawLabel": "To draw this dose",
+      "withSyringe": "On a {syringe} syringe",
+      "vialYield": "Vial yields {count} doses at {dose} each"
+    },
+    "titration": {
+      "title": "Titration ladder",
+      "subtitle": "Ramp a dose across weeks or steps.",
+      "startDose": "Starting dose",
+      "endDose": "Ending dose",
+      "steps": "Steps",
+      "duration": "Duration",
+      "durationWeeks": "{count, plural, =1 {1 week} other {{count} weeks}}",
+      "stepLabel": "Step {index}",
+      "totalConsumed": "Total peptide consumed",
+      "exceedsVial": "Plan exceeds one vial — buy {vials}."
+    },
+    "dilution": {
+      "title": "Dilution chain",
+      "subtitle": "When the draw is too small to pipette accurately, dilute first.",
+      "rawVolume": "Raw draw volume",
+      "minDraw": "Minimum comfortable draw",
+      "factor": "Required dilution factor",
+      "step1": "Step 1 — Reconstitute",
+      "step2": "Step 2 — Dilute 1:{factor}",
+      "step2Detail": "Add {sourceMl} mL of the reconstituted solution to {diluentMl} mL of sterile water or BAC water.",
+      "working": "Working concentration",
+      "finalDraw": "Final draw"
+    },
+    "breakeven": {
+      "title": "Vial plan breakeven",
+      "subtitle": "Compare vial combinations against a target dose schedule.",
+      "plan": "Plan",
+      "price": "Total price",
+      "perMg": "Per mg",
+      "doses": "Doses",
+      "leftover": "Leftover",
+      "waste": "Wasted €",
+      "pickCheapest": "Lowest cost per mg",
+      "pickLeastWaste": "Smallest leftover",
+      "addPlan": "Add custom plan",
+      "removePlan": "Remove"
+    },
+    "compare": {
+      "title": "Protocol comparison",
+      "subtitle": "Side-by-side math for two reconstitution scenarios.",
+      "left": "Left",
+      "right": "Right",
+      "addProtocol": "Add protocol"
+    },
+    "share": {
+      "copyTooltip": "Copy URL with the current setup",
+      "copied": "Copied",
+      "buildFromUrl": "Loaded from URL"
+    },
+    "disclaimer": {
+      "title": "Research-use only",
+      "body": "These calculators support laboratory workflows. They are not medical advice and are not approved for therapeutic use.",
+      "researchOnly": "AverianLabs products are sold for laboratory research and in-vitro studies only. They are not for human or veterinary use, diagnosis, or therapy."
+    },
+    "aria": {
+      "resultSummary": "{mgPerMl} milligrams per millilitre, {mL} millilitres per dose, {iu} international units on the {syringe} syringe. Vial yields {doses} doses.",
+      "resultLabel": "Calculation result"
+    }
+  },
+  "error": {
+    "label": "Error",
+    "title": "Something went wrong",
+    "body": "An unexpected error occurred. Please try again or return to the home page.",
+    "tryAgain": "Try again",
+    "backHome": "Back to home"
+  },
+  "notFound": {
+    "label": "Error 404",
+    "title": "Page not found",
+    "body": "Sorry, we couldn't find what you were looking for.",
+    "backHome": "Back to home",
+    "browseCatalog": "Browse catalog",
+    "searchHint": "Search:"
+  },
+  "email": {
+    "tagline": "Precision peptides for serious research",
+    "footer": "AverianLabs · Helsinki, Finland · Research use only",
+    "confirmEmailSubject": "Confirm your AverianLabs account",
+    "confirmEmailTitle": "Confirm your email",
+    "confirmEmailBody": "Confirm this address to activate your account. The link expires in 24 hours.",
+    "confirmEmailCta": "Confirm email",
+    "confirmEmailIgnore": "If you didn't create an account, you can ignore this email.",
+    "resetPasswordSubject": "Reset your AverianLabs password",
+    "resetPasswordTitle": "Reset your password",
+    "resetPasswordBody": "We received a request to reset your password. The link expires in 1 hour.",
+    "resetPasswordCta": "Reset password",
+    "resetPasswordIgnore": "If you didn't request this, you can safely ignore this email — your password won't change.",
+    "deleteAccountSubject": "Confirm your AverianLabs account deletion",
+    "deleteAccountTitle": "Confirm account deletion",
+    "deleteAccountBody": "This will delete your account and personal data. You have 30 days to change your mind before it is permanently removed. The link expires in 24 hours.",
+    "deleteAccountCta": "Confirm deletion",
+    "deleteAccountIgnore": "If you didn't request this, ignore this email — your account stays active.",
+    "newsletterSubject": "Confirm your AverianLabs subscription",
+    "newsletterTitle": "Confirm your subscription",
+    "newsletterBody": "Confirm this address to receive batch releases, new COAs and research notes. The link expires in 24 hours.",
+    "newsletterCta": "Confirm subscription",
+    "newsletterIgnore": "If you didn't request this, ignore this email — you won't be subscribed.",
+    "contactNotificationTitle": "New contact form message",
+    "contactFooter": "AverianLabs · contact form · reply directly to this email",
+    "orderConfirmedSubject": "Order confirmed — {number}",
+    "orderConfirmedTitle": "Order confirmed",
+    "orderLabel": "Order {number}",
+    "orderColumnProduct": "Product",
+    "orderColumnQty": "Qty",
+    "orderColumnPrice": "Price",
+    "orderSubtotal": "Subtotal",
+    "orderShipping": "Shipping",
+    "orderVat": "VAT (24%)",
+    "orderTotal": "Total",
+    "orderWhatsNext": "What's next?",
+    "orderWhatsNextBody": "Your batch-specific Certificate of Analysis (COA), endotoxin report, and mass-spec confirmation will be available in your account once the order ships.",
+    "orderFooter": "Questions? Reply to this email or contact support@averianlabs.eu.",
+    "shippingTitle": "Your order has shipped",
+    "shippingTracking": "Tracking",
+    "shippingTrack": "Track shipment",
+    "reviewRequestSubject": "How did your peptides perform? Review order {number}",
+    "reviewRequestTitle": "How did your peptides perform?",
+    "reviewRequestGreeting": "Hi {name}, your order {order} containing {items} was delivered a few days ago.",
+    "reviewRequestBody": "Your feedback helps other researchers make informed decisions and helps us maintain our quality standards. Would you take a minute to share your experience?",
+    "reviewRequestCta": "Leave a review",
+    "reviewRequestWhatToReview": "What to review",
+    "reviewRequestWhatToReviewBody": "Purity consistency, packaging quality, COA accuracy, delivery speed, or anything that stood out during your research.",
+    "reviewRequestNeedHelp": "Need help?",
+    "reviewRequestNeedHelpBody": "Reply to this email or reach our support team at support@averianlabs.eu. We respond within 2 hours during business days.",
+    "reviewRequestFooter": "You received this because you placed an order with us. We won't email you again unless you ask us to.",
+    "cartRecoverySubject": "You left items in your cart — complete your order",
+    "cartRecoveryTitle": "You left items in your cart",
+    "cartRecoveryBody": "You have research peptides waiting for you. Complete your order before stock runs low on your selected batch.",
+    "cartRecoveryCta": "Complete your order",
+    "cartRecoveryFreeShipping": "Free EU shipping",
+    "cartRecoveryFreeShippingBody": "on orders over €150. Your cart may qualify.",
+    "cartRecoveryFooter": "You received this because you started an order at averianlabs.eu. We'll only send one reminder."
+  },
+  "knowledge": {
+    "title": "Research documentation",
+    "subtitle": "Certificates of analysis, lab methods, product specs and glossary — everything in one place.",
+    "categoriesHeading": "Browse by source",
+    "recentDocs": "Recent documents",
+    "recentGlossary": "Newest glossary terms",
+    "viewAll": "View all →",
+    "noRecentDocs": "No documents published yet.",
+    "quickAccess": "Quick access",
+    "links": {
+      "coa": "Certificates of Analysis",
+      "methods": "Test methods",
+      "products": "Product specs",
+      "articles": "Research articles",
+      "glossary": "Glossary",
+      "calculators": "Calculators"
+    },
+    "categories": {
+      "coa": {
+        "title": "Certificates of Analysis",
+        "desc": "HPLC, endotoxin, and mass-spec data for every batch — batch-specific PASS sign-off."
+      },
+      "methods": {
+        "title": "Test methods",
+        "desc": "Independent lab analyses: HPLC, mass spectrometry, LAL, sterility, mycoplasma."
+      },
+      "products": {
+        "title": "Product specs",
+        "desc": "Technical specifications, sequences, and storage guidance for every peptide product."
+      },
+      "articles": {
+        "title": "Research articles",
+        "desc": "Peer-reviewed references and in-house research notes on peptide science."
+      },
+      "glossary": {
+        "title": "Glossary",
+        "desc": "Terms and techniques across peptide research, analytics, storage, and regulation."
+      },
+      "calculators": {
+        "title": "Calculators",
+        "desc": "Reconstitution and dose math, accurate to the microlitre, for research workflows."
+      }
+    },
+    "browseAll": "Browse all →",
+    "itemsCount": "{count, plural, =0 {no items} one {1 item} other {{count} items}}",
+    "batchesLabel": "Latest batch",
+    "filterAll": "Filters",
+    "badge": "Knowledge",
+    "noResults": "No results",
+    "noSources": "No sources found",
+    "relatedProducts": "Related products",
+    "searchPlaceholder": "Search…",
+    "sequenceTitle": "Sequence",
+    "sourcesCount": "{count, plural, =0 {No sources} one {1 source} other {{count} sources}}",
+    "sourcesHeading": "Sources"
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: 1 September 2026",
+    "intro": "By accessing averianlabs.eu or any affiliated domain, you agree to these Terms of Service. All products are sold under a strict research-use-only license.",
+    "sections": {
+      "eligibility": {
+        "title": "1. Eligibility",
+        "body": "You must be 18 years or older and a qualified researcher or institutional buyer to purchase from AverianLabs."
+      },
+      "researchUse": {
+        "title": "2. Research use only",
+        "body": "All products are intended strictly for laboratory research and in-vitro studies. They are NOT intended for human consumption, diagnostic use, or therapeutic applications."
+      },
+      "pricing": {
+        "title": "3. Pricing & VAT",
+        "body": "Prices are inclusive of EU VAT (OSS scheme). B2B customers with a valid VAT ID may purchase reverse-charge at checkout."
+      },
+      "shipping": {
+        "title": "4. Shipping",
+        "body": "We dispatch within 24 hours from our Helsinki warehouse. Risk of loss passes to the buyer upon carrier scan."
+      },
+      "returns": {
+        "title": "5. Returns",
+        "body": "Due to the nature of research-grade peptides, opened or temperature-compromised vials are not returnable. Unopened product may be returned within 14 days for exchange or refund."
+      },
+      "liability": {
+        "title": "6. Liability",
+        "body": "AverianLabs' liability is limited to the purchase price of the product. We do not warrant fitness for any particular research application beyond the published Certificate of Analysis."
+      },
+      "governingLaw": {
+        "title": "7. Governing law",
+        "body": "These terms are governed by Finnish law. Disputes are subject to the exclusive jurisdiction of the Helsinki District Court."
+      },
+      "contact": {
+        "title": "8. Contact",
+        "body": "Questions: legal@averianlabs.eu"
+      }
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: 1 September 2026 · GDPR compliant",
+    "intro": "This policy explains how AverianLabs Oy (\"we\") processes personal data on averianlabs.eu and affiliated domains, in compliance with the EU General Data Protection Regulation (GDPR) and the Finnish Personal Data Act.",
+    "sections": {
+      "dataCollected": {
+        "title": "Data we collect",
+        "body": "Account data: email, name, hashed password (if you create an account). Order data: shipping/billing address, order history. Technical data: IP (truncated), user agent, referrer (kept 30 days). Analytics: only with your explicit consent via the cookie banner."
+      },
+      "lawfulBasis": {
+        "title": "Lawful basis",
+        "body": "Contract (Art. 6(1)(b)) for orders, consent (Art. 6(1)(a)) for analytics, legal obligation (Art. 6(1)(c)) for accounting."
+      },
+      "subprocessors": {
+        "title": "Subprocessors",
+        "body": "Stripe Payments Europe Ltd — payment processing (EU); Coinbase Commerce — crypto payments; Resend — transactional email (EU); PostHog Cloud EU — product analytics (consent-gated); Sanity Inc. — content (US, EU data residency); Cloudflare — CDN / DDoS; Neon — database (Frankfurt)."
+      },
+      "yourRights": {
+        "title": "Your rights",
+        "body": "You have the right to access, rectify, erase, restrict, port, and object. Email privacy@averianlabs.eu. You may also lodge a complaint with your national supervisory authority (in Finland: tietosuojavaltuutettu)."
+      },
+      "retention": {
+        "title": "Retention",
+        "body": "Account data: until deletion. Order data: 7 years (accounting). Analytics: 14 months."
+      },
+      "contact": {
+        "title": "Contact",
+        "body": "Data Protection Officer: dpo@averianlabs.eu · AverianLabs Oy, Helsinki, Finland."
+      }
+    }
+  },
+  "cookies": {
+    "title": "Cookies",
+    "lastUpdated": "Last updated: 1 September 2026",
+    "intro": "We use a minimal set of cookies. Essential cookies cannot be disabled; analytics cookies require your consent.",
+    "sections": {
+      "essential": {
+        "title": "Essential",
+        "body": "averianlabs-cart — saves your cart (1 year); averianlabs-age-confirmed — remembers age-gate confirmation (1 year); averianlabs-cookie-consent — remembers your cookie choice (1 year); Stripe / Coinbase session cookies (set by payment provider)."
+      },
+      "analytics": {
+        "title": "Analytics (consent)",
+        "body": "PostHog (EU) and Plausible are loaded only after you click \"Accept all\" on the cookie banner. They collect anonymised, aggregated usage data."
+      },
+      "changeChoice": {
+        "title": "Change your choice",
+        "body": "Click the small \"Cookies\" link in the footer, or clear your browser data."
+      }
+    }
+  },
+  "disclaimer": {
+    "badge": "Research use only",
+    "title": "Research disclaimer",
+    "lead": "All products sold by AverianLabs Oy are intended strictly for laboratory research and in-vitro studies.",
+    "sections": {
+      "notForHuman": {
+        "title": "Not for human consumption",
+        "body": "The products listed on averianlabs.eu are not intended for human or veterinary use, consumption, administration, or application to the body in any form."
+      },
+      "noMedicalClaims": {
+        "title": "No medical claims",
+        "body": "Information provided on this website is for research and educational purposes only. It is not intended as medical advice, diagnosis, or treatment recommendation. AverianLabs Oy does not endorse, recommend, or support the off-label use of any product."
+      },
+      "buyerResponsibility": {
+        "title": "Buyer's responsibility",
+        "body": "By purchasing from AverianLabs, you confirm that you are a qualified researcher or institutional buyer, and that the products will be used solely for legitimate laboratory research in compliance with all applicable local, national, and international laws and regulations."
+      },
+      "compliance": {
+        "title": "Compliance",
+        "body": "It is the buyer's responsibility to ensure that the import, possession, and use of research peptides complies with all applicable regulations in their jurisdiction. AverianLabs Oy reserves the right to refuse service to any buyer or jurisdiction at its sole discretion."
+      }
+    }
+  },
+  "actions": {
+    "addPrompt": "Add to cart?",
+    "addToCart": "Add to cart",
+    "added": "Added",
+    "addedToast": "Added {name} to your cart",
+    "dismiss": "Dismiss",
+    "remember": "Remember this",
+    "rememberPrompt": "Save for next time?",
+    "remembered": "Remembered",
+    "rememberedToast": "Plan saved to your account",
+    "removedToast": "Removed from cart"
+  },
+  "feedback": {
+    "helpful": "Helpful",
+    "notHelpful": "Not helpful"
+  },
+  "links": {
+    "coa": "Certificates of Analysis",
+    "methods": "Test methods",
+    "products": "Product specs",
+    "articles": "Research articles",
+    "glossary": "Glossary",
+    "calculators": "Calculators"
+  },
+  "tableHeaders": {
+    "batch": "Batch",
+    "endotoxin": "Endotoxin",
+    "hplc": "HPLC",
+    "lab": "Lab",
+    "product": "Product",
+    "status": "Status"
+  },
+  "testsHeaders": {
+    "method": "Method",
+    "result": "Result",
+    "test": "Test"
+  },
+  "topbar": {
+    "coaEveryBatch": "COA on every batch",
+    "dispatch24h": "24h dispatch",
+    "euDispatched": "EU-dispatched",
+    "freeShipping": "Free shipping over €150",
+    "hplcVerified": "HPLC + endotoxin verified"
   }
 }

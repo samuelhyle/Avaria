@@ -76,6 +76,67 @@
     "disclaimer": "Endast för forskning. Inte för människor eller djur.",
     "disclaimerFull": "Alla produkter som säljs av AverianLabs är endast avsedda för laboratorieforskning och in vitro-studier."
   },
+  "coa": {
+    "badge": "Offentligt COA-register",
+    "title": "Analyscertifikat",
+    "subtitle": "Varje levererad sats testas oberoende. Bläddra bland de senaste analyscertifikaten nedan.",
+    "tableHeaders": {
+      "batch": "Sats",
+      "product": "Produkt",
+      "hplc": "HPLC",
+      "endotoxin": "Endotoxin",
+      "lab": "Laboratorium",
+      "status": "Status"
+    },
+    "filterPlaceholder": "Sök efter satskod eller produkt…",
+    "resultsCount": "{count, plural, =0 {Inga resultat} one {1 analyscertifikat} other {{count} analyscertifikat}}",
+    "viewDetails": "Visa detaljer →",
+    "batchTitle": "Analyscertifikat",
+    "batchSubtitle": "Satsspecifika testresultat och dokumentation.",
+    "testsHeading": "Testresultat",
+    "testsHeaders": {
+      "test": "Test",
+      "result": "Resultat",
+      "method": "Metod"
+    },
+    "testHplcPurity": "HPLC-renhet",
+    "testHplcMethod": "RP-HPLC",
+    "testEndotoxin": "Endotoxin",
+    "testEndotoxinMethod": "LAL",
+    "testIdentity": "Identitet",
+    "testIdentityMethod": "ESI-MS",
+    "testIdentityResult": "Bekräftad",
+    "testStorage": "Förvaring",
+    "manufacturingHeading": "Tillverkning och hållbarhet",
+    "manufacturedAt": "Tillverkad",
+    "expiresAt": "Giltig till",
+    "labHeading": "Testlaboratorium",
+    "viewFullPdf": "Öppna fullständigt analyscertifikat (PDF)",
+    "pdfUnavailableNote": "PDF-versionen publiceras så snart vår laboratoriepartner levererar dokumentationen.",
+    "chromatogramHeading": "Kromatogram",
+    "chromatogramNote": "Kromatogrammet publiceras som bilaga till PDF-analyscertifikatet.",
+    "backToList": "← Tillbaka till analyscertifikaten",
+    "traceabilityHeading": "Spårbarhet",
+    "traceabilitySub": "En kvalitetskedja du kan granska. Varje steg dokumenteras.",
+    "step1Title": "Råmaterial",
+    "step1Body": "Peptidråmaterialet tas emot från tillverkaren och flyttas till karantän.",
+    "step2Title": "Tillverkning",
+    "step2Body": "Lyofilisering, flaskfyllning och försegling sker i steril miljö.",
+    "step3Title": "Satsnummer",
+    "step3Body": "Varje sats tilldelas ett unikt satsnummer för full spårbarhet.",
+    "step4Title": "Oberoende analys",
+    "step4Body": "Testlaboratoriet analyserar HPLC-, endotoxin- och masspektrometriresultat.",
+    "step4BodyWithLab": "Testad vid {lab}",
+    "step5Title": "Analyscertifikat (COA)",
+    "step5Body": "Analyscertifikatet publiceras och bifogas leveransen.",
+    "step6Title": "Leverans",
+    "step6Body": "Leverans inom 24 timmar från vårt EU-lager. Kylkedja dokumenterad.",
+    "notFoundTitle": "Satsen hittades inte",
+    "notFoundBody": "Inget analyscertifikat kunde hittas för denna satskod.",
+    "description": "Öppet register för varje produkts senaste sats — HPLC-renhet, endotoxin, masspektrometri och laboratorium.",
+    "passBadge": "GODKÄND",
+    "passFullLabel": "Alla tester godkända"
+  },
   "nav": {
     "shop": "Butik",
     "labTests": "Labbtester",
@@ -107,37 +168,77 @@
     "sectionResearch": "Forskning",
     "sectionCompany": "Företag",
     "cartCount": "{count, plural, =0 {Varukorgen är tom} one {1 vara i varukorgen} other {# varor i varukorgen}}",
-    "language": "Språk"
+    "language": "Språk",
+    "breadShop": "Butik",
+    "batchDataHeading": "Batchdata",
+    "batchDataCode": "Batchkod",
+    "batchDataManufactured": "Tillverkad",
+    "batchDataExpires": "Utgår",
+    "batchDataLab": "Testlabb",
+    "batchDataHplc": "HPLC-renhet",
+    "batchDataEndotoxin": "Endotoxin",
+    "batchDataMs": "Masspektrometri",
+    "batchDataConfirmed": "Bekräftad",
+    "batchDataOpenCoa": "Öppna COA",
+    "batchLabel": "Senaste batch",
+    "coaAvailable": "Visa COA",
+    "contactForBatch": "Kontakta oss för aktuell batchtillgänglighet",
+    "endotoxin": "Endotoxin",
+    "endotoxinUnit": "EU/mg",
+    "expires": "Utgår",
+    "fromSizes": "{count, plural, =0 {— storlekar} one {från · 1 storlek} other {från · {count} storlekar}}",
+    "howWeVerify": "Så verifierar vi varje batch",
+    "manufactured": "Tillverkad",
+    "pricingOnRequest": "Pris på begäran",
+    "readFullMethodology": "Läs hela metodiken",
+    "relatedHeading": "Relaterade peptider",
+    "requestQuote": "Begär offert",
+    "shipsIn24h": "Leverans inom 24 h",
+    "specCas": "CAS-nummer",
+    "specFormula": "Molekylformel",
+    "specMw": "Molekylvikt",
+    "specPurity": "Renhet",
+    "specSequence": "Sekvens",
+    "specStorage": "Förvaring",
+    "specifications": "Specifikationer",
+    "stockIn": "I lager",
+    "stockLow": "Få kvar · {count} kvar",
+    "stockOut": "Slut i lager",
+    "tabCoa": "COA & labbtester",
+    "testedAt": "Testad på",
+    "vatNote": "Inkl. moms.",
+    "viewAllInCategory": "Visa alla i {category} →",
+    "whatsInTheBox": "Vad finns i förpackningen"
   },
   "home": {
     "heroEyebrow": "EU · Forskningskvalitet · Tredjepartstestad",
-    "heroTitle": "Precisionspeptider för seriös forskning.",
-    "heroSubtitle": "EU-leverans. HPLC + endotoxin verifierat. Fullständigt analyscertifikat för varje batch.",
+    "heroTitle": "Köp forskningsklassade peptider, tillverkade enligt labbspec.",
+    "heroSubtitle": "Varje sats HPLC-, masspektri- och endotoxintestas av tredje part. Lyofiliserade för intakt kylkedja. 24-timmars EU-leverans. COA:er kan hämtas online eller följer med varje beställning.",
     "ctaShop": "Bläddra i katalog",
     "ctaResearch": "Läs forskningen",
     "trustHeading": "Varför forskare väljer AverianLabs",
-    "trustBadge1": "EU-GMP-leverantörsnätverk",
-    "trustBadge2": "HPLC-renhet ≥ 98%",
-    "trustBadge3": "Endotoxin < 5 EU/mg",
-    "trustBadge4": "24h EU-leverans",
-    "trustBadge5": "ISO 17025 labbpartner",
-    "trustBadge6": "GDPR-kompatibel",
+    "trustBadge1": "Snabb EU-frakt",
+    "trustBadge2": "HPLC-renhet ≥ 98 %",
+    "trustBadge3": "100 % nöjdhetsgaranti",
+    "trustBadge4": "Volymrabatt upp till −20 %",
+    "trustBadge5": "ISO 17025-laboratoriepartner",
+    "trustBadge6": "GDPR & moms-kompatibel",
     "featuredHeading": "Utvalda forskningspeptider",
     "featuredSub": "Varje batch levereras med sitt eget analyscertifikat.",
     "threeDHeading": "Inspektera varje injektionsflaska i 3D",
     "threeDSub": "Snurra karusellen, zooma in i glaset och hoppa direkt in i en produkt — varje batch länkar till sitt eget analyscertifikat.",
     "threeDCta": "Öppna 3D-katalogen",
     "categoriesHeading": "Bläddra per forskningsområde",
-    "catWeight": "Metabol forskning",
-    "catWeightDesc": "Semaglutid, Tirzepatid, AOD-9604",
-    "catRecovery": "Återhämtning & vävnad",
-    "catRecoveryDesc": "BPC-157, TB-500, GHK-Cu",
-    "catCognitive": "Kognition",
-    "catCognitiveDesc": "Semax, Selank, Cerebrolysin",
-    "catLongevity": "Livslängd",
-    "catLongevityDesc": "Epitalon, GHK-Cu, NAD+",
-    "catCosmetic": "Kosmetisk forskning",
-    "catCosmeticDesc": "GHK-Cu, Melanotan II",
+    "catMetabolic": "Metabolism & receptorsignalering",
+    "catMetabolicDesc": "GLP-1- och GIP-receptorsignalering in vitro. Receptoranalyser, cellkultur, ADME-profilering.",
+    "catRecovery": "Cellbiologi & vävnadsmodeller",
+    "catRecoveryDesc": "Angiogen och vävnadsremodelleringsforskning. Cellmigrationsmodeller, fibroblastaktivitet, sårmodeller.",
+    "catCognitive": "Neurobiologisk forskning",
+    "catCognitiveDesc": "Neurotrofin- och neuroncellkulturforskning. BDNF-signalering, in vitro-neurobiologi.",
+    "catLongevity": "Mitokondrier & cellulär energetik",
+    "catLongevityDesc": "Telomerbiologi och NAD⁺-signalvägsforskning. Senescensmodeller, mitokondriell funktion.",
+    "catCosmetic": "Pigmentering & melanogenes",
+    "catCosmeticDesc": "Melanogenes och hudvävnadsmodeller. Keratinocytkultur, melanocytsignalering.",
     "labHeading": "Labbtransparens, för varje batch",
     "labSub": "Varje injektionsflaska levereras med ett offentligt analyscertifikat.",
     "calcHeading": "Rekonstitutionskalkylator",
@@ -151,10 +252,78 @@
     "newsletterSub": "Nya peptider, litteratur, labbanteckningar.",
     "newsletterPlaceholder": "din@institution.se",
     "newsletterCta": "Prenumerera",
-    "catBlends": "Blandningar & kombinationer",
+    "catBlends": "Kombinationer",
     "catBlendsDesc": "KLOW, BPC+TB-500, anpassade peptidkombinationer",
-    "catSupplies": "Tillbehör",
-    "catSuppliesDesc": "BAC-vatten, sprutor, vialer"
+    "catSupplies": "Övriga forskningsreagenser",
+    "catSuppliesDesc": "BAC-vatten, sprutor, vialer",
+    "stat1Label": "Batchspecifik HPLC-renhet",
+    "stat1Value": "—",
+    "stat1Note": "Publiceras per batch",
+    "stat2Label": "Oberoende labbtester",
+    "stat2Value": "—",
+    "stat2Note": "Bekräftas vid leverans",
+    "stat3Label": "EU-leverans",
+    "stat3Value": "—",
+    "stat3Note": "Beror på batchdokumentation",
+    "labBadge": "Full labbtransparens",
+    "labMethodologyLink": "Läs om vår metodik",
+    "coaBadge": "Batchspecifik analys",
+    "coaTitle": "Analyscertifikat",
+    "coaBody": "Exakta analysdata, kromatogram och labbgodkännande för varje batch publiceras per batch. Öppna labbtestssidan för att läsa om våra metoder och verifierbarhet.",
+    "coaHeaderTest": "Test",
+    "coaHeaderResult": "Resultat",
+    "coaHeaderMethod": "Metod",
+    "coaRow1": "HPLC-renhet · Resultat per batch",
+    "coaRow2": "Endotoxin · På oberoende labb",
+    "coaRow3": "Masspektrometri · Per batch",
+    "coaRow4": "Testlabb · —",
+    "coaCta": "Öppna labbtestssidan",
+    "communityHeading": "Från forskargemenskapen",
+    "communitySub": "Trådar, svar, batchuppdateringar och delade forskningsplaner från AverianLabs-gemenskapen.",
+    "subscribeBadge": "Forskningskvantiteter",
+    "subscribeTitle": "Regelbunden forskningsleverans",
+    "subscribeSub": "Reservera aktuell batch och planera leverans var 4:e, 8:e eller 12:e vecka — avsluta när som helst från ditt konto.",
+    "subscribeBullet1": "Prioriterad EU-leverans vid varje leverans",
+    "subscribeBullet2": "Reservation av aktuell batch",
+    "subscribeBullet3": "10 % rabatt på varje injektionsflaska",
+    "subscribeBullet4": "Fritt kombinera i hela katalogen",
+    "subscribeCta": "Starta en prenumeration",
+    "subscribeExampleLabel": "Exempelprenumeration",
+    "subscribeExampleProduct": "BPC-157 · 10 mg · var 8:e vecka",
+    "subscribePerShipment": "Per leverans",
+    "subscribeAnnualSavings": "Årlig besparing",
+    "subscribeSavingsSuffix": "/ år",
+    "institutionsBadge": "För forskningsinstitutioner",
+    "about": "Om oss",
+    "account": "Konto",
+    "allProducts": "Alla produkter",
+    "blog": "Forskning",
+    "calculator": "Kalkylator",
+    "cart": "Varukorg",
+    "close": "Stäng",
+    "coaLibrary": "Lab-COA",
+    "community": "Gemenskap",
+    "documents": "Dokument",
+    "glossary": "Ordlista",
+    "labTests": "Labbtester",
+    "openMenu": "Öppna menyn",
+    "partner": "Partnerprogram",
+    "search": "Sök",
+    "sectionShop": "Butik",
+    "sectionResearch": "Forskning",
+    "sectionCompany": "Företag",
+    "whyHeading": "Varför välja AverianLabs",
+    "whySub": "Samma tre saker varje forskare efterfrågar — snabbhet, trygghet och kvalitet — med garantier vi vågar stå för.",
+    "why1Title": "Snabb, spårbar EU-frakt",
+    "why1Body": "Beställningar före kl. 14:00 EET skickas samma arbetsdag från vårt EU-lager. Spårbara transportörer — Posti, DHL, DPD.",
+    "why2Title": "Laboratorieverifierad renhet",
+    "why2Body": "Varje sats levereras med ett batchspecifikt COA: HPLC-kromatogram, masspektrum, endotoxinpanel och laboratoriets sign-off.",
+    "why3Title": "100 % nöjdhetsgaranti",
+    "why3Body": "Om en vial anländer varm, skadad eller hålls av tullen vid ett verifierat transportörsfel, skickar vi en ny avgiftsfritt — och återbetalar om en andra leverans inte kommer fram.",
+    "bulkHeading": "Köp mer, spara mer",
+    "bulkSub": "Volymrabatter per SKU. Rabatten tillämpas automatiskt i kassan — ingen kod behövs.",
+    "bulkCtaShop": "Se katalogen",
+    "bulkCtaContact": "Kontakt för 21+"
   },
   "shop": {
     "title": "Forskningskatalog",
@@ -213,7 +382,12 @@
     "fromLabel": "Från",
     "pricingLabel": "Pris",
     "recentlyViewed": "Senast visade",
-    "recentlyViewedHelper": "Fortsätt där du slutade"
+    "recentlyViewedHelper": "Fortsätt där du slutade",
+    "coaAvailable": "COA tillgänglig",
+    "batchLabel": "Batch {code}",
+    "purityHplcLabel": "{purity}% HPLC",
+    "manufacturedDate": "Tillverkad {date}",
+    "expiresDate": "Utgår {date}"
   },
   "product": {
     "addToCart": "Lägg i varukorgen",
@@ -233,37 +407,171 @@
     "tabCitations": "Forskning",
     "tabFaq": "FAQ",
     "relatedHeading": "Relaterade peptider",
-    "stockIn": "I lager — skickas inom 24h",
-    "stockLow": "Endast {n} flaskor kvar",
-    "stockOut": "Slut — meddela mig",
+    "stockIn": "I lager",
+    "stockLow": "Få kvar · {count} kvar",
+    "stockOut": "Slut i lager",
     "vatNote": "Inkl. moms.",
     "batchLabel": "Senaste batch",
     "viewCoa": "Visa COA",
     "lab": "Testad på {lab}",
     "notifyMe": "Meddela",
-    "notifySubmitted": "Vi meddelar dig."
+    "notifySubmitted": "Vi meddelar dig.",
+    "specifications": "Specifikationer",
+    "testedAt": "Testad på",
+    "manufactured": "Tillverkad",
+    "expires": "Utgår",
+    "endotoxin": "Endotoxin",
+    "endotoxinUnit": "EU/mg",
+    "howWeVerify": "Så verifierar vi varje batch",
+    "methodologyHplcTitle": "HPLC-renhet",
+    "methodologyHplcDesc": "Omvänd fas-HPLC mot referensstandard.",
+    "methodologyMsTitle": "Masspektrometri-identitet",
+    "methodologyMsDesc": "ESI-MS bekräftar molekylvikt med 0,1 Da noggrannhet.",
+    "methodologyEndotoxinTitle": "Endotoxinpanel",
+    "methodologyEndotoxinDesc": "LAL kinetisk kromogen; gräns < 5 EU/mg.",
+    "methodologyColdChainTitle": "Köldkedja verifierad",
+    "methodologyColdChainDesc": "Temperaturlogg bifogas varje leverans.",
+    "readFullMethodology": "Läs hela metodiken",
+    "whatsInTheBox": "Vad finns i förpackningen",
+    "boxLyophilized": "Lyofiliserad peptidflaska",
+    "boxBacWater": "Sterilt BAC-vatten (10 mL)",
+    "boxCoa": "Batchspecifikt COA",
+    "boxStorage": "Förvarings- och hanteringskort",
+    "boxReconstitution": "Rekonstitutionsprotokoll",
+    "boxTamperSeal": "Manipulationssäkert sigill",
+    "shipsIn24h": "Leverans inom 24 h",
+    "fromSizes": "{count, plural, =0 {— storlekar} one {från · 1 storlek} other {från · {count} storlekar}}",
+    "stockQuoteOnly": "Endast offert",
+    "requestQuote": "Begär offert",
+    "pricingOnRequest": "Pris på begäran",
+    "contactForBatch": "Kontakta oss för aktuell batchtillgänglighet",
+    "faqHeading": "Vanliga frågor",
+    "viewAllInCategory": "Visa alla i {category} →",
+    "trustBadge1": "EU-GMP-leverantörsnätverk",
+    "trustBadge2": "HPLC-testad av tredje part",
+    "trustBadge3": "Endotoxin < 5 EU/mg",
+    "trustBadge4": "24 h EU-leverans",
+    "trustBadge5": "ISO 17025-labbpartner",
+    "trustBadge6": "GDPR-kompatibel",
+    "trustSub1": "Varje batch verifierad",
+    "trustSub2": "Bekräftat hos partnerlabb",
+    "trustSub3": "Oberoende certifiering",
+    "trustSub4": "Gratis över 150 €",
+    "freeShippingThreshold": "Fri frakt över {amount} i EU",
+    "wishlistAdd": "Lägg till önskelista",
+    "wishlistRemove": "Ta bort från önskelistan",
+    "wishlistSaved": "Sparad",
+    "compareAdd": "Lägg till i jämförelse",
+    "compareRemove": "Ta bort från jämförelse",
+    "compareAdded": "Jämförs",
+    "addedToCart": "Tillagd i varukorgen",
+    "bundleAdded": "Paket tillagt i varukorgen",
+    "removedFromCart": "Borttagen från varukorgen",
+    "outOfStock": "Slut i lager",
+    "lowStockLeft": "Få kvar · {count} kvar",
+    "inStock": "I lager",
+    "quoteOnly": "Endast offert",
+    "wishlistCleared": "Önskelistan rensad",
+    "purityHplc": "{purity} % HPLC",
+    "quoteTitle": "Begär offert",
+    "quoteSubtitle": "Pris och aktuell batchtillgänglighet på begäran. Vi svarar inom 24 h.",
+    "quoteSent": "Offertförfrågan skickad",
+    "quoteEmailPlaceholder": "du@lab.se",
+    "quoteSentDesc": "Vi mailar dig aktuellt pris för {name}.",
+    "freeShippingOver": "Fri frakt över {amount} i hela EU",
+    "sale": "Rea",
+    "addToCartWithPrice": "Lägg i varukorgen · {price}",
+    "addedToCartDesc": "{name} {mg} mg × {qty}",
+    "subscribeHeading": "Prenumerera & spara 10 %",
+    "subscribeSub": "Automatisk återbeställning var 4–12 vecka · avbryt när som helst",
+    "subscribeSaveAmount": "Spara {amount}/beställning",
+    "subscribeCadence": "Leveransintervall",
+    "subscribeVialsPerShipment": "Flaskor per leverans",
+    "subscribePerShipment": "Per leverans",
+    "subscribeSaved": "Prenumeration sparad",
+    "subscribeStart": "Starta prenumeration",
+    "subscribeCancelAnytime": "Hoppa över eller avbryt när som helst",
+    "subscribeLockIn": "Lås in aktuell batch",
+    "subscribePriorityDispatch": "Prioriterad EU-leverans",
+    "subscribeCadence4": "Var 4:e vecka",
+    "subscribeCadence8": "Var 8:e vecka",
+    "subscribeCadence12": "Var 12:e vecka",
+    "subscribeDescription": "{qty} × {mg} mg var {weeks}:e vecka — avbryt när som helst i ditt konto.",
+    "completeStack": "Komplettera din stack",
+    "saveBundlePercent": "Spara 5 %",
+    "bundleSaved": "{count} varor · spara {amount}",
+    "thisProduct": "Denna produkt",
+    "bundleTotal": "Paketets totalpris",
+    "saveOnBundle": "Spara {amount} på paketet",
+    "addBundle": "Lägg till paket",
+    "qvFullDetails": "Fullständig information",
+    "qvRemovedFromWishlist": "Borttagen från önskelistan",
+    "qvSavedToWishlist": "Tillagd i önskelistan",
+    "qvRemovedFromCompare": "Borttagen från jämförelsen",
+    "qvAddedToCompare": "Tillagd i jämförelse",
+    "stickyAdd": "Lägg i varukorgen",
+    "stickyOutOfStock": "Slut i lager",
+    "stickySubscribe": "Prenumerera",
+    "stickyCompare": "Jämför",
+    "stickySubscribeTooltip": "Prenumerera & spara 10 %",
+    "stickySubscriptionSaved": "Prenumeration sparad",
+    "stickySubscriptionDesc": "Du får {mg} mg var {weeks}:e vecka — avbryt när som helst, spara 10 %.",
+    "stickyRemovedFromWishlist": "Borttagen från önskelistan",
+    "stickySavedToWishlist": "Tillagd i önskelistan",
+    "stickyRemovedFromCompare": "Borttagen från jämförelsen",
+    "stickyAddedToCompare": "Tillagd i jämförelse",
+    "faq1Q": "Hur verifieras varje batch?",
+    "faq1A": "Varje batch testas av ett tredjepartslaboratorium som är ISO 17025-certifierat (Eurofins Biolab, Synlab eller Biolab GmbH). HPLC-renhet, endotoxinnivåer och masspektrometri-identitet bekräftas innan batchen frigörs. Du hittar COA-PDF:en för varje batch under fliken Dokument.",
+    "faq2Q": "Vad ingår i analyscertifikatet?",
+    "faq2A": "COA:n innehåller HPLC-renhet i %, endotoxin (EU/mg), masspektrometribekräftelse, batch-ID, tillverkningsdatum, utgångsdatum och testlaboratorium. Varje batch har en unik kod som du kan använda för att hämta dess specifika COA under /coa.",
+    "faq3Q": "Hur bör jag förvara flaskan efter öppning?",
+    "faq3A": "För lyofiliserade peptider, förvara vid -20 °C i en torkad miljö. Efter rekonstitution, förvara vid 2–8 °C och använd inom den tidsram som anges i ditt protokoll. Varje produkts datablad anger den specifika förvaringstemperaturen.",
+    "faq4Q": "Skickar ni till mitt land?",
+    "faq4A": "Vi skickar för närvarande till alla EU-medlemsstater samt Norge, Schweiz och Storbritannien. Ett fåtal jurisdiktioner är begränsade enligt lokal lagstiftning — se hela listan i kassan. Till förbjudna länder (enligt EU:s direktiv om begränsade ämnen) levereras inte.",
+    "faq5Q": "Kan jag få en momsåterbetalning som forskare utanför EU?",
+    "faq5A": "Om du anger en giltig momsregistrering utanför EU eller ett ID för en forskningsinstitution, sätter vi noll moms på din beställning. Skicka dokumentet till billing@averianlabs.eu efter att du lagt beställningen så återbetalar vi momsraden.",
+    "faq6Q": "Vilka betalningsmetoder accepterar ni?",
+    "faq6A": "Stripe (kort, Apple Pay, Google Pay), PayPal, SEPA-banköverföring för institutionella beställningar över €1000 och Coinbase Commerce för BTC / ETH / USDC. EU:s konsumentskyddslagstiftning gäller för varje betalningsmetod.",
+    "fbIncludeItem": "Inkludera {name}",
+    "batchDataHeading": "Batchdata",
+    "batchDataCode": "Batchkod",
+    "batchDataManufactured": "Tillverkad",
+    "batchDataExpires": "Utgår",
+    "batchDataLab": "Testlabb",
+    "batchDataHplc": "HPLC-renhet",
+    "batchDataEndotoxin": "Endotoxin",
+    "batchDataMs": "Masspektrometri",
+    "batchDataConfirmed": "Bekräftad",
+    "batchDataOpenCoa": "Öppna COA",
+    "coaAvailable": "COA tillgänglig",
+    "openCalculator": "Beräkna rekonstitution för denna flaska"
   },
   "cart": {
     "title": "Varukorg",
-    "empty": "Din varukorg är tom.",
-    "emptyCta": "Bläddra i katalog",
+    "empty": "Din varukorg är tom",
+    "emptyDesc": "Välj en peptid i katalogen för att starta din beställning — varje batch levereras med eget analyscertifikat, endotoxinpanel och masspektrometribekräftelse.",
+    "emptyCta": "Bläddra i katalogen",
+    "browseCatalog": "Bläddra i katalogen",
+    "bestSellers": "Månadens storsäljare",
     "subtotal": "Delsumma",
+    "subtotalBeforeDiscount": "Delsumma före rabatt",
     "shipping": "Frakt",
     "vat": "Moms",
     "total": "Totalt",
     "checkout": "Till kassan",
     "remove": "Ta bort",
+    "itemCount": "{count, plural, =0 {inga varor} one {1 vara} other {{count} varor}}",
     "promo": "Kampanjkod",
     "promoApply": "Tillämpa",
     "points": "Använd {points} poäng (−{amount})",
     "drawerTitle": "Din varukorg",
     "subtitle": "Dina valda peptider och förnödenheter — redo för granskning.",
-    "rewardsEarn": "You will earn",
-    "rewardsFrom": "from this order",
-    "recommendationsHeading": "Best sellers",
-    "continueShopping": "Continue shopping",
-    "secureCheckout": "Secure checkout",
-    "freeShippingProgress": "Add {amount} more for free EU shipping",
+    "rewardsEarn": "Du tjänar",
+    "rewardsFrom": "på denna beställning",
+    "recommendationsHeading": "Storsäljare",
+    "continueShopping": "← Fortsätt handla",
+    "secureCheckout": "Säker kassa",
+    "freeShippingProgress": "Lägg till {amount} till för fri EU-frakt",
     "freeShippingUnlocked": "Fri EU-frakt upplåst"
   },
   "checkout": {
@@ -294,7 +602,104 @@
     "city": "Ort",
     "country": "Land",
     "continueToShipping": "Fortsätt till frakt",
-    "title": "Kassa"
+    "title": "Kassa",
+    "loadingShipping": "Laddar fraktalternativ…",
+    "vat": "Moms",
+    "total": "Totalt",
+    "yourCartEmpty": "Din varukorg är tom",
+    "completeEmailFirst": "Slutför e-poststeget först",
+    "chooseShipping": "Välj en fraktmetod",
+    "checkoutFailed": "Kassan misslyckades",
+    "cryptoUnavailable": "Kryptobetalning är inte tillgänglig",
+    "genericError": "Något gick fel",
+    "paymentSuccess": "Betalning genomförd!",
+    "emailPlaceholder": "du@lab.se",
+    "vatPlaceholder": "SE123456789012",
+    "continueToPayment": "Fortsätt till betalning",
+    "orderSummary": "Beställningssammanfattning",
+    "subtotalItems": "Delsumma ({count, plural, =0 {inga varor} one {1 vara} other {{count} varor}})",
+    "vatLabel": "Moms ({label})",
+    "totalLabel": "Totalt",
+    "paymentMethodLabel": "Betalningsmetod",
+    "cardSepa": "Kort / SEPA",
+    "crypto": "Krypto",
+    "consentTerms": "Jag godkänner",
+    "consentTermsLink": "användarvillkoren",
+    "consentAnd": "och",
+    "consentPrivacy": "integritetspolicyn",
+    "consentResearch": "Jag förstår att AverianLabs produkter endast är avsedda för forskning.",
+    "creatingOrder": "Skapar beställning…",
+    "vatIncluded": "Inkl. moms",
+    "shippingFree": "Fri frakt",
+    "bulkDiscountLabel": "Volymrabatt",
+    "bulkTier10": "−10 % rabatt på 5–10 vials av samma SKU",
+    "bulkTier15": "−15 % rabatt på 11–20 vials av samma SKU",
+    "bulkTier20": "−20 % rabatt på 21+ vials av samma SKU",
+    "bulkNudge10": "Lägg till {units} vial av denna SKU för att låsa upp −10 % rabatt",
+    "bulkNudge15": "Lägg till {units} vial av denna SKU för att låsa upp −15 % rabatt",
+    "bulkNudge20": "Lägg till {units} vial av denna SKU för att låsa upp −20 % rabatt",
+    "shippingPostiExpress": "Posti Express — 1–2 arbetsdagar",
+    "shippingDhlExpress": "DHL Express — 1–3 arbetsdagar",
+    "shippingDpdClassic": "DPD Classic — 3–5 arbetsdagar",
+    "shipTo": "Leveransadress",
+    "billTo": "Fakturaadress",
+    "phone": "Telefon",
+    "saveInfo": "Spara uppgifter för nästa beställning",
+    "stripeUnavailable": "Stripe är inte laddat. Uppdatera sidan och försök igen.",
+    "paymentFailedFallback": "Betalningen misslyckades. Försök igen.",
+    "processingPayment": "Behandlar betalning…",
+    "payAmount": "Betala {amount}",
+    "secureHeading": "Säker kassa",
+    "secureTls": "256-bitars TLS · Stripe Radar bedrägeriskydd vid varje betalning",
+    "securePci": "PCI-DSS nivå 1 — vi ser eller lagrar aldrig ditt kortnummer",
+    "secureWithdrawal": "EU 14 dagars ångerrätt för konsumentbeställningar",
+    "weAccept": "Vi accepterar",
+    "paymentVisa": "Visa",
+    "paymentMastercard": "Mastercard",
+    "paymentAmex": "Amex",
+    "paymentApplePay": "Apple Pay",
+    "paymentPaypal": "PayPal",
+    "paymentSepa": "SEPA",
+    "paymentCrypto": "BTC / ETH / USDC",
+    "confirmOrder": "Bekräfta beställning",
+    "countryFinland": "Finland",
+    "countrySweden": "Sverige",
+    "countryEstonia": "Estland",
+    "countryGermany": "Tyskland",
+    "countryNetherlands": "Nederländerna",
+    "countryFrance": "Frankrike",
+    "countrySpain": "Spanien",
+    "countryItaly": "Italien",
+    "countryDenmark": "Danmark",
+    "countryPoland": "Polen",
+    "fieldRequired": "Obligatoriskt fält",
+    "fieldInvalid": "Kontrollera detta fält",
+    "bulkNudge10_plural": "Lägg till {units} vials av denna SKU för att låsa upp −10 % rabatt",
+    "bulkNudge15_plural": "Lägg till {units} vials av denna SKU för att låsa upp −15 % rabatt",
+    "bulkNudge20_plural": "Lägg till {units} vials av denna SKU för att låsa upp −20 % rabatt"
+  },
+  "confirm": {
+    "title": "Tack för din beställning",
+    "subtitle": "Vi har skickat en beställningsbekräftelse till din e-post.",
+    "orderNumber": "Beställningsnummer",
+    "orderNotFound": "Beställningen hittades inte",
+    "orderNotFoundDesc": "Vi kunde inte hitta denna beställning. Kontrollera din e-post för bekräftelse.",
+    "statusPaid": "Betald",
+    "statusPending": "Väntar på betalning",
+    "includedWithOrder": "Ingår i din beställning:",
+    "includeCoa": "Batchspecifikt analyscertifikat (PDF)",
+    "includeEndotoxin": "Endotoxintestrapport",
+    "includeMs": "Masspektrometribekräftelse",
+    "includeReconstitution": "Rekonstitutionsguide",
+    "shippingAddress": "Leveransadress",
+    "billingAddress": "Fakturaadress",
+    "orderSummary": "Beställningssammanfattning",
+    "subtotal": "Delsumma",
+    "shipping": "Frakt",
+    "vat": "Moms",
+    "total": "Totalt",
+    "viewOrder": "Visa beställning",
+    "continueShopping": "Fortsätt handla"
   },
   "footer": {
     "tagline": "Precisionspeptider för seriös forskning.",
@@ -311,6 +716,7 @@
     "partner": "Partnerprogram",
     "contact": "Kontakt",
     "faq": "FAQ",
+    "rewards": "Rewards",
     "shipping": "Frakt & returer",
     "terms": "Villkor",
     "privacy": "Integritet",
@@ -324,7 +730,13 @@
     "coa": "COA-bibliotek",
     "glossary": "Ordlista",
     "documents": "Dokument",
-    "community": "Community"
+    "community": "Community",
+    "businessIdLabel": "Organisationsnummer",
+    "vatLabel": "Moms",
+    "stripeSecured": "Stripe-säkrad",
+    "gdprCompliant": "GDPR-kompatibel",
+    "euDispatch": "24h EU-leverans",
+    "account": "Konto"
   },
   "cookie": {
     "title": "Cookies & analys",
@@ -372,7 +784,102 @@
     "nextProducts": "Nästa produkter",
     "addToWishlist": "Lägg till i önskelista",
     "removeFromWishlist": "Ta bort från önskelista",
-    "closeQuickView": "Stäng snabbvy"
+    "closeQuickView": "Stäng snabbvy",
+    "shareList": "Dela lista",
+    "copied": "Kopierat!",
+    "quote": "Offert",
+    "vialSize": "Flaskstorlek",
+    "addToCartWithPrice": "Lägg i varukorgen · {price}",
+    "addToCompare": "Lägg till i jämförelse",
+    "compareAdd": "Lägg till i jämförelse",
+    "compareAdded": "Jämförs",
+    "addedToCart": "Tillagd i varukorgen",
+    "addedToCartDesc": "{name} {mg} mg × {qty}",
+    "batchLabel": "Senaste batch",
+    "batchDataEndotoxin": "Endotoxin",
+    "batchDataExpires": "Utgår",
+    "batchDataHplc": "HPLC-renhet",
+    "batchDataManufactured": "Tillverkad",
+    "batchDataOpenCoa": "Öppna COA",
+    "coaAvailable": "Visa COA",
+    "endotoxinUnit": "EU/mg",
+    "freeShippingOver": "Fri frakt över {amount} i hela EU",
+    "fromSizes": "{count, plural, =0 {— storlekar} one {från · 1 storlek} other {från · {count} storlekar}}",
+    "inStock": "I lager",
+    "inStockBadge": "I lager",
+    "outOfStock": "Slut i lager",
+    "outOfStockBadge": "Slut i lager",
+    "lowStockBadge": "Få kvar · {count} kvar",
+    "lowStockLeft": "Få kvar · {count} kvar",
+    "purityHplc": "{purity} % HPLC",
+    "purityHplcLabel": "{purity} % HPLC",
+    "quoteEmailPlaceholder": "du@lab.se",
+    "quoteSent": "Offertförfrågan skickad",
+    "quoteSentDesc": "Vi mailar dig aktuellt pris för {name}.",
+    "quoteSubtitle": "Pris och aktuell batchtillgänglighet på begäran. Vi svarar inom 24 h.",
+    "quoteTitle": "Begär offert",
+    "qvAddedToCompare": "Tillagd i jämförelse",
+    "qvFullDetails": "Fullständig information",
+    "qvRemovedFromCompare": "Borttagen från jämförelsen",
+    "qvRemovedFromWishlist": "Borttagen från önskelistan",
+    "qvSavedToWishlist": "Tillagd i önskelistan",
+    "removeFromCompare": "Ta bort från jämförelse",
+    "requestQuote": "Begär offert",
+    "stockQuoteOnly": "Endast offert",
+    "wishlistAdd": "Lägg till önskelista",
+    "wishlistSaved": "Sparad",
+    "stickyAdd": "Lägg i varukorgen",
+    "stickyAddedToCompare": "Tillagd i jämförelse",
+    "stickyCompare": "Jämför",
+    "stickyOutOfStock": "Slut i lager",
+    "stickyRemovedFromCompare": "Borttagen från jämförelsen",
+    "stickyRemovedFromWishlist": "Borttagen från önskelistan",
+    "stickySavedToWishlist": "Tillagd i önskelistan",
+    "stickySubscribe": "Prenumerera",
+    "stickySubscribeTooltip": "Prenumerera & spara 10 %",
+    "stickySubscriptionDesc": "Du får {mg} mg var {weeks}:e vecka — avbryt när som helst, spara 10 %.",
+    "stickySubscriptionSaved": "Prenumeration sparad",
+    "subscribing": "Starta prenumeration",
+    "applyFilters": "Tillämpa filter",
+    "checkout": "Till kassan",
+    "empty": "Tom",
+    "emptyCta": "Bläddra i katalogen",
+    "filters": "Filter",
+    "compareLabel": "Jämför",
+    "comparing": "Jämförs",
+    "drawerTitle": "Meny",
+    "freeShippingProgress": "Lägg till {amount} för fri frakt",
+    "freeShippingUnlocked": "Fri frakt upplåst",
+    "fromLabel": "Från",
+    "pricingLabel": "Pris",
+    "privacyLink": "integritetspolicy",
+    "privacyPost": ". GDPR-vänligt.",
+    "privacyPre": "Genom att använda webbplatsen godkänner du vår",
+    "quantity": "Antal",
+    "researchUseOnly": "Endast forskningsbruk",
+    "rewardsEarn": "Tjäna belöningar",
+    "rewardsFrom": "Från belöningar",
+    "sale": "Rea",
+    "selectVialSize": "Välj flaskstorlek",
+    "shipping": "Frakt",
+    "shippingFree": "Fri frakt",
+    "shop": "Butik",
+    "subtotal": "Delsumma",
+    "success": "Klart",
+    "title": "Titel",
+    "total": "Totalt",
+    "vat": "Moms",
+    "vatIncluded": "inkl. moms",
+    "viewAllProducts": "Visa alla produkter",
+    "body": "Innehåll",
+    "secureHeading": "Säker kassa",
+    "featured": "Utvalda",
+    "browseByCategory": "Bläddra efter kategori",
+    "productsCount": "{count, plural, =0 {inga produkter} one {1 produkt} other {{count} produkter}}",
+    "remove": "Ta bort",
+    "carouselRequestQuote": "Begär offert",
+    "carouselPricingOnRequest": "Pris på begäran",
+    "quickAdd": "Snabbköp"
   },
   "averia": {
     "title": "Averia",
@@ -463,6 +970,18 @@
       "privacyNote": "Konversationer sparas bara om du tillåter det. Du kan exportera eller radera dem när som helst —",
       "privacyLink": "integritetspolicy"
     },
+    "sourcesHeading": "Källor",
+    "sourcesCount": "{count, plural, =0 {inga källor} one {1 källa} other {{count} källor}}",
+    "showSources": "Visa källor",
+    "hideSources": "Dölj källor",
+    "noSources": "Inga citerade källor ännu — fråga Averia om en produkt för att se källhänvisningar.",
+    "sourceTypes": {
+      "product": "Produkt",
+      "coa": "Analyscertifikat",
+      "glossary": "Ordlista",
+      "blog": "Artikel",
+      "document": "Dokument"
+    },
     "send": "Skicka",
     "stop": "Stoppa",
     "ageRequired": "Bekräfta först att du är 18+.",
@@ -475,28 +994,43 @@
     "errorServerBody": "Averia stötte på ett problem på vår sida. Försök igen om en stund."
   },
   "glossary": {
-    "title": "Glossary",
-    "subtitle": "Every acronym, technique, and piece of jargon we use on the site — explained in plain language with sources.",
-    "searchPlaceholder": "Search terms…",
-    "empty": "No glossary terms yet.",
-    "backToIndex": "← All terms",
-    "relatedTermsHeading": "Related terms",
-    "relatedProductsHeading": "Related products",
-    "synonymsLabel": "Also known as",
-    "notFoundTitle": "Term not found",
-    "notFoundBody": "We don't have a glossary entry for this term yet.",
+    "title": "Ordlista",
+    "subtitle": "Varje akronym, teknik och fackterm vi använder på webbplatsen — förklarad med källhänvisningar.",
+    "searchPlaceholder": "Sök termer…",
+    "filterAll": "Alla",
+    "noResults": "Inga matchande termer.",
+    "empty": "Inga ordlistetermer ännu.",
+    "backToIndex": "← Alla termer",
+    "relatedTermsHeading": "Relaterade termer",
+    "relatedProductsHeading": "Relaterade produkter",
+    "relatedProducts": "Relaterade produkter",
+    "synonymsLabel": "Också känt som",
+    "notFoundTitle": "Termen hittades inte",
+    "notFoundBody": "Vi har ännu ingen ordlistepost för denna term.",
     "categoryLabels": {
-      "analytical": "Analytical",
-      "chemistry": "Chemistry",
-      "compliance": "Compliance",
-      "logistics": "Logistics",
-      "product": "Product",
-      "regulatory": "Regulatory"
+      "analytical": "Analytisk",
+      "chemistry": "Kemi",
+      "compliance": "Efterlevnad",
+      "logistics": "Logistik",
+      "product": "Produkt",
+      "regulatory": "Reglering"
+    },
+    "categories": {
+      "analysis": "Analys",
+      "sequence": "Sekvens",
+      "formulation": "Formulering",
+      "storage": "Förvaring",
+      "regulatory": "Reglering"
     }
   },
   "community": {
-    "signInToPost": "Sign in to post",
-    "signInCta": "Sign in",
+    "signInToPost": "Logga in för att posta",
+    "signInCta": "Logga in",
+    "signInToReact": "Logga in för att reagera",
+    "signInToJoin": "Logga in för att delta i diskussionen →",
+    "signInToCreatePlans": "Logga in för att skapa forskningsplaner.",
+    "signInToViewPlan": "Logga in för att se din forskningsplan.",
+    "signInCtaArrow": "Logga in →",
     "cancel": "Avbryt",
     "reportFailed": "Kunde inte skicka rapporten. Försök igen.",
     "activityEmpty": "Ingen aktivitet ännu.",
@@ -511,19 +1045,27 @@
     "fieldBodyHint": "Markdown stöds. Meddelanden granskas automatiskt.",
     "fieldCategory": "Kategori",
     "fieldTitle": "Titel",
+    "titlePlaceholder": "Var specifik…",
+    "bodyPlaceholder": "Markdown stöds. Citera källor där det är möjligt.",
     "hubHeading": "Diskussionskategorier",
     "hubSub": "Välj en kategori och dyk in.",
+    "hubEyebrow": "Endast forskning · modererad",
     "leaderboardEmpty": "Var först.",
     "leaderboardHeading": "Toppbidragare",
     "leaderboardSub": "Medlemmar samlar rykte genom mottagna reaktioner.",
     "lockedNotice": "Den här tråden är låst.",
     "moderationNote": "Moderatoranteckning",
+    "moderationBadge": "Moderering",
+    "moderationDescription": "Inlägg kontrolleras av en lexikalisk vakt innan de publiceras, och granskas sedan asynkront av en LLM-moderator. En mänsklig kö hanterar specialfall.",
+    "threadModerationDescription": "Nya inlägg kontrolleras av en automatisk moderator innan de publiceras. Flaggat innehåll granskas av den mänskliga kön.",
+    "lockedBadge": "Låst",
     "newThread": "Ny tråd",
     "newThreadSub": "Var exakt. Citera källor där det är möjligt.",
     "newThreadTitle": "Starta en ny tråd",
     "reactionHelpful": "Hjälpsam",
     "reactionInsightful": "Insiktsfull",
     "reactionThanks": "Tack",
+    "reactionOwnPost": "Du kan inte reagera på ditt eget inlägg",
     "recentHeading": "Senaste aktivitet",
     "removedNotice": "En moderator tog bort detta meddelande.",
     "replyPlaceholder": "Bidra till diskussionen…",
@@ -568,6 +1110,8 @@
     "tierProgress": "{current} / {target} till nästa: {next}",
     "title": "Community",
     "warnNotice": "Detta meddelande är flaggat för granskning.",
+    "anonymous": "Anonym",
+    "edited": "redigerad",
     "categories": {
       "announcements": {
         "name": "Meddelanden",
@@ -597,7 +1141,11 @@
         "name": "Off-topic-lounge",
         "description": "Allt annat."
       }
-    }
+    },
+    "timeNow": "nu",
+    "timeMinutes": "{m} min",
+    "timeHours": "{h} tim",
+    "timeDays": "{d} d"
   },
   "plans": {
     "signInCta": "Logga in för att spara",
@@ -612,6 +1160,8 @@
     "fieldNotes": "Anteckningar (valfritt)",
     "fieldNotesHint": "Markdown stöds. Visas vid delning.",
     "fieldTitle": "Planens namn",
+    "titlePlaceholder": "Senreparationspanel",
+    "notesPlaceholder": "Varför denna kombination, in vitro-förhållanden, förväntade avläsningar…",
     "items": "Planens produkter",
     "itemsCount": "{count, plural, =0 {Inga produkter} one {# produkt} other {# produkter}}",
     "makePrivate": "Håll privat",
@@ -631,7 +1181,13 @@
     "subtitle": "Kurerade produktpaket för din forskning. Spara privat eller dela offentligt.",
     "title": "Sparade forskningsplaner",
     "untitled": "Namnlös plan",
-    "viewOriginal": "Visa produkt"
+    "viewOriginal": "Visa produkt",
+    "cancel": "Avbryt",
+    "copy": "Kopiera",
+    "deleteConfirmPhrase": "RADERA",
+    "badge": "Planer",
+    "signInCtaArrow": "Logga in för att skapa planer →",
+    "signInToCreatePlans": "Logga in för att skapa planer"
   },
   "activity": {
     "title": "Aktivitet",
@@ -656,13 +1212,18 @@
     "deleteConfirmPhrase": "RADERA",
     "deleteDescription": "Radera kontot och alla tillhörande data permanent. Efter 30 dagar går det inte att ångra.",
     "deleteTitle": "Radera ditt konto",
+    "deleteScheduledTitle": "Kontoradering schemalagd.",
+    "deleteScheduledBody": "All din data kommer att raderas permanent om 30 dagar.",
+    "deletePlaceholder": "RADERA",
     "exportButton": "Begär export",
     "exportDescription": "Ladda ner ett JSON-arkiv med allt vi har om dig — beställningar, planer, foruminlägg, konto.",
     "exportPending": "Export begärd. Kolla din e-post.",
-    "exportTitle": "Exportera dina data"
+    "exportTitle": "Exportera dina data",
+    "cancel": "Avbryt"
   },
   "account": {
     "title": "Konto",
+    "badge": "Konto",
     "settings": "Inställningar",
     "orders": "Beställningar",
     "security": "Säkerhet",
@@ -688,10 +1249,44 @@
     "deletedPending": "Kontoradering väntar. Den behandlas inom 30 dagar.",
     "exportReady": "Dataexporten är klar. Kolla din e-post.",
     "noPlans": "Du har inte skapat några planer än.",
+    "plansEmptyHint": "Paketera produkter du använder tillsammans och dela dem offentligt med en länk.",
     "sectionGdpr": "Integritet & data",
     "sectionResearchPlans": "Sparade forskningsplaner",
     "viewPlans": "Visa planer",
-    "welcome": "Välkommen tillbaka"
+    "welcome": "Välkommen tillbaka",
+    "tileOrders": "Beställningar",
+    "tileCoaLibrary": "COA-bibliotek",
+    "tileSubscriptions": "Prenumerationer",
+    "tileSecurity": "Säkerhet",
+    "itemsCount": "{count, plural, =0 {Inga objekt} one {1 objekt} other {{count} objekt}}",
+    "planUntitled": "Namnlös plan",
+    "planProductsCount": "{count, plural, one {# produkt} other {# produkter}}",
+    "planVisibilityPublic": "Offentlig",
+    "planVisibilityPrivate": "Privat",
+    "backToAccount": "← Tillbaka till kontot",
+    "noOrders": "Du har inte gjort några beställningar än.",
+    "noOrdersSub": "Bläddra i katalogen så visas din första beställning här.",
+    "browseShop": "Bläddra i butiken",
+    "notificationsBadge": "Aviseringar",
+    "notificationsTitle": "Inkorg",
+    "notificationsDescription": "Svar, reaktioner och delade planer. {count} olästa.",
+    "notificationsSignInPrompt": "Logga in för att se aviseringar.",
+    "notificationsAllCaughtUp": "Du är ikapp.",
+    "notificationsSomeone": "Någon",
+    "notificationsReply": "svarade på din tråd",
+    "notificationsReaction": "reagerade på ditt inlägg",
+    "notificationsPlanShared": "delade en forskningsplan",
+    "notificationsNotified": "meddelade dig",
+    "deleteConfirmTitle": "Kontoradering schemalagd.",
+    "deleteConfirmBody": "All din data kommer att raderas permanent om 30 dagar.",
+    "deleteUnavailableTitle": "Kontoradering är inte tillgänglig",
+    "deleteUnavailableBody": "Denna driftsättning har ingen databas konfigurerad.",
+    "confirmDeleteTitle": "Logga in för att bekräfta",
+    "confirmDeleteBody": "Logga in på kontot vars radering du vill bekräfta.",
+    "confirmDeleteSignInLink": "← Logga in",
+    "confirmDeleteConfirmedBadge": "Bekräftat",
+    "confirmDeleteHardDeleteNote": "Dina personuppgifter är köade för permanent radering om 30 dagar. Tills dess är de anonymiserade i databasen men kan återställas av supporten om du ändrar dig.",
+    "confirmDeleteHomeLink": "← Hem"
   },
   "documents": {
     "title": "Dokument",
@@ -711,15 +1306,28 @@
     "role": "Roll"
   },
   "contact": {
+    "title": "Kontakt",
+    "intro": "Riktiga forskare, riktigt snabbt. Vi svarar inom 24 timmar, på vardagar.",
+    "emailLabel": "E-post",
+    "labInquiriesLabel": "Labförfrågningar",
+    "hqNote": "HK: Helsingfors, Finland · Lager: Vandaa · Labbpartner: Eurofins Biolab (DE)",
     "name": "Namn",
-    "email": "E-post",
     "subject": "Ämne",
     "message": "Meddelande",
     "send": "Skicka meddelande",
     "sending": "Skickar…",
     "sentTitle": "Meddelandet skickat",
     "sentBody": "Vi svarar inom 24 timmar.",
-    "errorTitle": "Något gick fel"
+    "errorTitle": "Något gick fel",
+    "email": "E-post",
+    "cofounderPromisesHeading": "Vad du kan lita på",
+    "cofounderPromisesSub": "Tre åtaganden vi ger varje forskare, varje gång.",
+    "promiseCoaTitle": "Labbresultat, varje gång",
+    "promiseCoaBody": "Varje sats levereras med sitt COA. Du kan också hämta vilken sats COA som helst online — sök efter produkt eller batchkod.",
+    "promiseCoaCta": "Bläddra i COA-registret",
+    "promiseSupportTitle": "Människa + tränad bot",
+    "promiseSupportBody": "Averia svarar på de flesta frågor på sekunder. Komplexa och kommersiella förfrågningar går till vårt Helsingfors forskarteam inom en arbetsdag.",
+    "promiseSupportCta": "Fråga Averia"
   },
   "newsletter": {
     "title": "Få månadens forskningsöversikt.",
@@ -780,12 +1388,34 @@
   "admin": {
     "audit": "Granskningslogg",
     "auditSub": "Varje admin-åtgärd",
+    "auditBadge": "Admin · Granskningslogg",
+    "auditEmpty": "Inga admin-åtgärder registrerade ännu.",
+    "auditWhen": "När",
+    "auditActor": "Aktör",
+    "auditAction": "Åtgärd",
+    "auditEntity": "Entitet",
+    "auditMetadata": "Metadata",
     "dashboard": "Översikt",
     "dashboardSub": "Översikt",
+    "dashboardBadge": "Admin · Översikt",
     "documents": "Dokument",
     "documentsSub": "COA, SDS, HPLC, …",
+    "documentsBadge": "Admin · Dokument",
+    "documentsDescription": "Hantera de typade dokumenten (COA, SDS, HPLC, METHOD, NMR, SPEC, MSDS) som visas på produktsidor och under /documents/[id].",
     "moderation": "Moderering",
     "moderationSub": "Flaggade inlägg",
+    "moderationBadge": "Admin · Moderering",
+    "moderationDescription": "Medlemsrapporter först, sedan inlägg flaggade av den lexikaliska vakten eller LLM-moderatorn. Nyaste först. Klicka Visa för att granska hela inlägget.",
+    "averiaConversations": "Averia-konversationer",
+    "averiaConversationsSub": "Bläddra, sök och skapa utkast till svar på kundkonversationer.",
+    "averiaBadge": "Admin · Averia",
+    "averiaTranscriptBadge": "Admin · Transkript",
+    "averiaTranscriptTitle": "Transkript · {count} meddelanden",
+    "averiaBackToList": "← Alla konversationer",
+    "averiaBackToHome": "← Hem",
+    "averiaBackToCommunity": "← Tillbaka till communityn",
+    "averiaNotFound": "Konversation hittades inte.",
+    "averiaBackFromMissing": "← Tillbaka till listan",
     "signOut": "Logga ut",
     "statsNewMembers": "Nya medlemmar",
     "statsNewMembersSub": "senaste 7 dagarna",
@@ -795,7 +1425,1062 @@
     "statsRecentPlansSub": "senaste 7 dagarna",
     "statsRecentThreads": "Nya trådar",
     "statsRecentThreadsSub": "händelser senaste 24h",
+    "statsNewThreads": "Nya trådar",
     "statsTotalDocs": "Totalt antal dokument",
-    "statsTotalDocsSub": "alla 7 typer"
+    "statsTotalDocsSub": "alla 7 typer",
+    "viewLink": "Visa →",
+    "moderationQueue": {
+      "verdictError": "Kunde inte registrera utslaget. Försök igen.",
+      "verdictRecorded": "Utslag registrerat.",
+      "queueEmpty": "Kön är tom. Alla flaggade inlägg har granskats.",
+      "postBodyUnavailable": "(inläggstext ej tillgänglig)",
+      "byAuthor": "av {name}",
+      "viewFullPost": "Visa hela inlägget",
+      "hide": "Dölj",
+      "view": "Visa",
+      "dismissTitle": "Avfärda — ingen åtgärd behövs",
+      "dismiss": "Avfärda",
+      "removePostTitle": "Ta bort — ta ner inlägget",
+      "removePost": "Ta bort inlägg",
+      "allowTitle": "Tillåt — håll synligt, markera som granskat",
+      "allow": "Tillåt",
+      "keepTitle": "Behåll flaggat — granskat, lämna synligt",
+      "keep": "Behåll",
+      "removeTitle": "Ta bort — sätt inläggets status till borttagen",
+      "remove": "Ta bort",
+      "openThread": "Öppna tråd →"
+    },
+    "documentsClient": {
+      "newDocument": "Nytt dokument",
+      "noDocuments": "Inga dokument ännu. Klicka på \"Nytt dokument\" för att lägga till ett.",
+      "deleteAria": "Radera",
+      "createDocument": "Skapa dokument",
+      "fieldType": "Typ",
+      "fieldTitle": "Titel",
+      "titlePlaceholder": "BPC-157 · 2026-04 batch",
+      "fieldVersion": "Version",
+      "fieldProductOptional": "Produkt (valfritt)",
+      "noneOption": "— Ingen —",
+      "fieldExternalUrlOptional": "Extern URL (valfritt)",
+      "externalUrlHint": "PDF-URL på R2 eller någon CDN",
+      "externalUrlPlaceholder": "https://r2.example.com/coa-bpc-2026-04.pdf",
+      "cancel": "Avbryt",
+      "create": "Skapa"
+    },
+    "conversationSearch": {
+      "placeholder": "Sök titel, konversations-id…",
+      "allLocales": "Alla språk",
+      "english": "Engelska",
+      "finnish": "Finska",
+      "german": "Tyska",
+      "swedish": "Svenska",
+      "dutch": "Nederländska",
+      "submit": "Sök",
+      "tableTitle": "Titel",
+      "tableLocale": "Språk",
+      "tableOwner": "Ägare",
+      "tableContext": "Kontext",
+      "tableLastMessage": "Senaste meddelande",
+      "ownerUser": "användare",
+      "ownerAnon": "anon",
+      "empty": "Inga konversationer hittades."
+    },
+    "draftReply": {
+      "title": "Svarsutkast",
+      "toneWarm": "varm",
+      "toneConcise": "koncis",
+      "toneTechnical": "teknisk",
+      "drafting": "Utkast skapas…",
+      "generate": "Skapa utkast ({tone})",
+      "charsCount": "{count} tecken",
+      "copied": "Kopierat",
+      "copy": "Kopiera",
+      "supportRequest": "Supportförfrågan"
+    }
+  },
+  "legal": {
+    "draftBanner": "UTKAST — KRÄVER JURIDISK GRANSKNING INNAN PUBLICERING. Denna sida är ett svenskt utkast och ännu inte bindande.",
+    "terms": {
+      "title": "Användarvillkor",
+      "lastUpdated": "Senast uppdaterad: 1 september 2026",
+      "intro": "Genom att använda averianlabs.eu eller andra domäner som tillhör AverianLabs godkänner du dessa användarvillkor. Alla produkter säljs under en strikt forskningslicens.",
+      "sections": {
+        "eligibility": {
+          "title": "1. Behörighet",
+          "body": "Du måste vara minst 18 år och en kvalificerad forskare eller institutionell köpare för att handla från AverianLabs."
+        },
+        "researchUse": {
+          "title": "2. Endast för forskning",
+          "body": "Alla produkter är endast avsedda för laboratorieforskning och in vitro-studier. De är INTE avsedda för mänsklig konsumtion, diagnostisk användning eller terapeutiska tillämpningar."
+        },
+        "pricing": {
+          "title": "3. Priser och moms",
+          "body": "Priserna är inklusive EU-moms (OSS-system). B2B-kunder med giltigt momsregistreringsnummer kan handla med omvänd skattskyldighet i kassan."
+        },
+        "shipping": {
+          "title": "4. Frakt",
+          "body": "Vi skickar inom 24 timmar från vårt lager i Helsingfors. Risken övergår till köparen vid transportörens skanning."
+        },
+        "returns": {
+          "title": "5. Returer",
+          "body": "På grund av forskningspeptidernas natur kan öppnade eller temperaturkänsliga flaskor inte returneras. Oöppnad produkt kan returneras inom 14 dagar för byte eller återbetalning."
+        },
+        "liability": {
+          "title": "6. Ansvarsbegränsning",
+          "body": "AverianLabs ansvar är begränsat till produktens inköpspris. Vi garanterar inte lämplighet för någon specifik forskningstillämpning utöver det publicerade analyscertifikatet."
+        },
+        "governingLaw": {
+          "title": "7. Tillämplig lag",
+          "body": "Dessa villkor regleras av finsk lag. Tvister avgörs uteslutande av Helsingfors tingsrätt."
+        },
+        "contact": {
+          "title": "8. Kontakt",
+          "body": "Frågor: legal@averianlabs.eu"
+        }
+      }
+    },
+    "privacy": {
+      "title": "Integritetspolicy",
+      "lastUpdated": "Senast uppdaterad: 1 september 2026 · GDPR-kompatibel",
+      "intro": "Denna policy beskriver hur AverianLabs Oy (\"vi\") behandlar personuppgifter på averianlabs.eu och tillhörande domäner i enlighet med EU:s allmänna dataskyddsförordning (GDPR) och den finska dataskyddslagen.",
+      "sections": {
+        "dataCollected": {
+          "title": "Data vi samlar in",
+          "body": "Kontodata: e-post, namn, lösenordshash (om du skapar ett konto). Beställningsdata: leverans-/fakturaadress, beställningshistorik. Teknisk data: IP (trunkerad), användaragent, referent (sparas i 30 dagar). Analys: endast med ditt uttryckliga samtycke via cookie-bandet."
+        },
+        "lawfulBasis": {
+          "title": "Rättslig grund",
+          "body": "Avtal (art. 6(1)(b)) för beställningar, samtycke (art. 6(1)(a)) för analys, rättslig förpliktelse (art. 6(1)(c)) för bokföring."
+        },
+        "subprocessors": {
+          "title": "Underbiträden",
+          "body": "Stripe Payments Europe Ltd — betalningshantering (EU); Coinbase Commerce — kryptobetalningar; Resend — transaktionell e-post (EU); PostHog Cloud EU — produktanalys (samtyckesbaserad); Sanity Inc. — innehåll (EU-datalagring); Cloudflare — CDN / DDoS; Neon — databas (Frankfurt)."
+        },
+        "yourRights": {
+          "title": "Dina rättigheter",
+          "body": "Du har rätt att få tillgång till, rätta, radera, begränsa,portera och invända mot behandling. E-posta privacy@averianlabs.eu. Du kan också lämna in ett klagomål till din nationella tillsynsmyndighet (i Finland: tietosuojavaltuutettu)."
+        },
+        "retention": {
+          "title": "Lagringstid",
+          "body": "Kontodata: tills radering. Beställningsdata: 7 år (bokföringsskyldighet). Analys: 14 månader."
+        },
+        "contact": {
+          "title": "Kontakt",
+          "body": "Dataskyddsombud: dpo@averianlabs.eu · AverianLabs Oy, Helsingfors, Finland."
+        }
+      }
+    },
+    "cookies": {
+      "title": "Cookies",
+      "lastUpdated": "Senast uppdaterad: 1 september 2026",
+      "intro": "Vi använder ett minimum av cookies. Nödvändiga cookies kan inte inaktiveras; analyscookies kräver ditt samtycke.",
+      "sections": {
+        "essential": {
+          "title": "Nödvändiga",
+          "body": "averianlabs-cart — sparar din varukorg (1 år); averianlabs-age-confirmed — kommer ihåg åldersgrindens bekräftelse (1 år); averianlabs-cookie-consent — kommer ihåg ditt cookie-val (1 år); Stripe / Coinbase sessionscookies (sätts av betalningsleverantören)."
+        },
+        "analytics": {
+          "title": "Analys (samtycke)",
+          "body": "PostHog (EU) och Plausible läses in först efter att du klickar \"Acceptera alla\" i cookie-bandet. De samlar in anonymiserad, aggregerad användningsdata."
+        },
+        "changeChoice": {
+          "title": "Ändra ditt val",
+          "body": "Klicka på den lilla \"Cookies\"-länken i sidfoten, eller rensa din webbläsardata."
+        }
+      }
+    },
+    "disclaimer": {
+      "badge": "Endast för forskning",
+      "title": "Forskningsfriskrivning",
+      "lead": "Alla produkter som säljs av AverianLabs Oy är endast avsedda för laboratorieforskning och in vitro-studier.",
+      "sections": {
+        "notForHuman": {
+          "title": "Inte för mänsklig konsumtion",
+          "body": "Produkterna som listas på averianlabs.eu är inte avsedda för mänsklig eller veterinär användning, konsumtion, administrering eller applicering på kroppen i någon form."
+        },
+        "noMedicalClaims": {
+          "title": "Inga medicinska anspråk",
+          "body": "Information på denna webbplats är endast för forsknings- och utbildningsändamål. Den är inte avsedd som medicinsk rådgivning, diagnos eller behandlingsrekommendation. AverianLabs Oy stödjer, rekommenderar eller godkänner inte off-label-användning av någon produkt."
+        },
+        "buyerResponsibility": {
+          "title": "Köparens ansvar",
+          "body": "Genom att köpa från AverianLabs bekräftar du att du är en kvalificerad forskare eller institutionell köpare, och att produkterna endast kommer att användas för legitim laboratorieforskning i enlighet med alla tillämpliga lokala, nationella och internationella lagar och förordningar."
+        },
+        "compliance": {
+          "title": "Efterlevnad",
+          "body": "Det är köparens ansvar att säkerställa att import, innehav och användning av forskningspeptider följer alla tillämpliga förordningar i deras jurisdiktion. AverianLabs Oy förbehåller sig rätten att vägra service till någon köpare eller jurisdiktion efter eget gottfinnande."
+        }
+      }
+    }
+  },
+  "compare": {
+    "badge": "Sida vid sida",
+    "title": "Jämför forskningspeptider",
+    "subtitle": "Ren het, flaskstorlekar, sekvens och förvaring — över hela katalogen.",
+    "compare": "Lägg till i jämförelse",
+    "actionAdd": "Lägg till i jämförelse",
+    "clear": "Ta bort från jämförelse",
+    "removeFromCompareA11y": "Ta bort från jämförelse",
+    "addedToCart": "Jämförs",
+    "inStockCount": "I lager",
+    "lowStock": "Få kvar · {count} kvar",
+    "close": "Stäng",
+    "barTitle": "Jämför peptider",
+    "barLabel": "{count, plural, =0 {Inga produkter valda} one {1 produkt i jämförelse} other {{count} produkter i jämförelse}}",
+    "barSub": "Sida vid sida HPLC, masspektrometri, sekvens och pris.",
+    "addAllToCart": "Lägg alla i varukorgen",
+    "badgeQuote": "Endast offert",
+    "clearAll": "Rensa alla",
+    "colAvailability": "Tillgänglighet",
+    "colCas": "CAS",
+    "colCategory": "Kategori",
+    "colFormula": "Formel",
+    "colMw": "MW",
+    "colPurity": "Renhet",
+    "colSequence": "Sekvens",
+    "colStorage": "Förvaring",
+    "colVialSizes": "Flaskstorlekar",
+    "contact": "Kontakt",
+    "emptyBody": "Bläddra bland produkter och lägg till dem i jämförelsen.",
+    "emptyTitle": "Inga produkter att jämföra",
+    "footerSummary": "Jämför {count} av {max}",
+    "fromPrice": "Från {price}",
+    "headerAttribute": "Attribut",
+    "pickerPrompt": "Välj produkt",
+    "actionNotify": "Meddela mig"
+  },
+  "about": {
+    "badge": "Om AverianLabs",
+    "title": "Byggt av forskare, för forskare.",
+    "intro": "Vi startade AverianLabs eftersom leveranskedjan för forskningspeptider var ogenomskinlig, långsam och inkonsekvent. Varje batch bör komma med ett publikt COA, varje fråga bör få ett riktigt svar och varje beställning bör skickas inom 24 timmar från ett EU-labb.",
+    "stats": [
+      {
+        "value": "100 %",
+        "label": "COA för varje batch",
+        "note": "Vårt åtagande vid varje leverans"
+      },
+      {
+        "value": "—",
+        "label": "Batchspecifik HPLC-renhet",
+        "note": "Publiceras per batch"
+      },
+      {
+        "value": "24 h",
+        "label": "EU-leverans",
+        "note": "Vårt mål"
+      },
+      {
+        "value": "—",
+        "label": "Betjänade forskare",
+        "note": "Flera hundra i EU"
+      }
+    ],
+    "valuesTitle": "Våra värderingar",
+    "values": [
+      {
+        "title": "Transparens",
+        "body": "Varje testresultat, varje leverantör, varje pris. Öppet som standard."
+      },
+      {
+        "title": "Ren het",
+        "body": "Vi säljer färre peptider så att vi kan testa varje batch mer noggrant."
+      },
+      {
+        "title": "Hastighet",
+        "body": "Forskning väntar inte. 24 h leverans från vårt EU-nav i Helsingfors."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Vanliga frågor",
+    "subtitle": "Snabba svar på de vanligaste frågorna.",
+    "items": [
+      {
+        "q": "Är era produkter avsedda för människor?",
+        "a": "Nej. Alla produkter som säljs av AverianLabs är uteslutande avsedda för laboratorieforskning och in vitro-studier. De är inte avsedda för människor eller djur."
+      },
+      {
+        "q": "Hur lång tid tar leveransen?",
+        "a": "Vi skickar inom 24 timmar från vårt lager i Helsingfors. EU-leverans tar vanligtvis 1–3 arbetsdagar via Posti eller DHL."
+      },
+      {
+        "q": "Tillhandahåller ni analyscertifikat?",
+        "a": "Ja. Varje batch levereras med ett batchspecifikt COA (HPLC-renhet, masspektrometriverifiering) och endotoxinrapport. PDF-filer finns tillgängliga publikt på /coa."
+      },
+      {
+        "q": "Vilka länder levererar ni till?",
+        "a": "Vi levererar till alla EU-länder samt UK, NO, CH och TR. Vi levererar inte till ett fåtal begränsade jurisdiktioner (se villkor)."
+      },
+      {
+        "q": "Vilka betalningsmetoder accepterar ni?",
+        "a": "Kort (Visa, MC, Amex), Apple Pay, Google Pay, iDEAL, Klarna, SEPA-direktdebitering och krypto (BTC, ETH, USDC) via Coinbase Commerce."
+      },
+      {
+        "q": "Erbjuder ni volym- / B2B-priser?",
+        "a": "Ja — ansök om vårt partnerprogram. Universitet, forskningslabb och återförsäljare får upp till 35 % rabatt och NET-14-fakturering."
+      }
+    ]
+  },
+  "labTests": {
+    "badge": "ISO 17025 labbpartner",
+    "title": "Så här testar vi varje batch",
+    "subtitle": "Oberoende verifiering i varje steg. Ingen batch skickas utan ett komplett analytiskt fingeravtryck.",
+    "batchesLabel": "spårade batcher",
+    "tests": [
+      {
+        "title": "HPLC-renhet",
+        "body": "Omvänd fas HPLC kvantifierar peptidinnehållet mot en certifierad referensstandard. Acceptans: ≥ 98 %."
+      },
+      {
+        "title": "Endotoxin (LAL)",
+        "body": "Kinematisk kromogen LAL enligt USP <85>. Acceptans: < 5 EU/mg."
+      },
+      {
+        "title": "Masspektrometri",
+        "body": "ESI-MS bekräftar att molekylvikten matchar teoretisk inom ±1 Da."
+      },
+      {
+        "title": "Sterilitet & mykoplasma",
+        "body": "14 dagars sterilitetstest (USP <71>) och mykoplasma-qPCR på varje sats."
+      }
+    ],
+    "sequenceTitle": "Testsekvens",
+    "sequence": [
+      {
+        "step": "01",
+        "title": "Mottagning",
+        "body": "Råpeptid går i karantän"
+      },
+      {
+        "step": "02",
+        "title": "Identitet",
+        "body": "ESI-MS bekräftar sekvensen"
+      },
+      {
+        "step": "03",
+        "title": "Ren het",
+        "body": "HPLC vid 214 nm + 220 nm"
+      },
+      {
+        "step": "04",
+        "title": "Säkerhet",
+        "body": "Endotoxin, sterilitet, mykoplasma"
+      }
+    ]
+  },
+  "quality": {
+    "badge": "Kvalitet",
+    "title": "Kvalitet, från start till mål",
+    "items": [
+      {
+        "title": "EU-GMP-leverantörer",
+        "body": "Vi reviderar varje peptidtillverkare årligen, på plats, personligen."
+      },
+      {
+        "title": "ISO 17025-testning",
+        "body": "Oberoende labb i DE, FI och NL testar varje batch igen innan den skickas."
+      },
+      {
+        "title": "EU-omfattande logistik",
+        "body": "Helsingfors → till dig, på 24 h. Spårad, kvitterad, omgivnings- eller kylkedja efter behov."
+      }
+    ]
+  },
+  "shippingReturns": {
+    "title": "Frakt, returer och garantier",
+    "items": [
+      {
+        "title": "Fraktbolag",
+        "body": "Posti (FI primär), DHL Express (övriga EU), DPD Classic."
+      },
+      {
+        "title": "Leverans",
+        "body": "Beställningar före kl. 14:00 EET skickas samma arbetsdag. Övriga inom 24 h."
+      },
+      {
+        "title": "Kylkedja",
+        "body": "Omgivningsstabila peptider skickas vid rumstemperatur i skyddskum. Kylda varor skickas med kylklampar."
+      },
+      {
+        "title": "Returer",
+        "body": "Oöppnad produkt kan returneras inom 14 dagar. Öppnade / temperaturpåverkade flaskor kan inte returneras."
+      }
+    ],
+    "ratesTitle": "Priser",
+    "tableRegion": "Region",
+    "tableCarrier": "Fraktbolag",
+    "tableEta": "ETA",
+    "tablePrice": "Pris",
+    "rates": [
+      {
+        "region": "Finland",
+        "carrier": "Posti Express",
+        "eta": "1–2 dagar",
+        "priceCents": 990
+      },
+      {
+        "region": "EU (övriga)",
+        "carrier": "DHL Express",
+        "eta": "1–3 dagar",
+        "priceCents": 1490
+      },
+      {
+        "region": "EU (övriga)",
+        "carrier": "DPD Classic",
+        "eta": "3–5 dagar",
+        "priceCents": 690
+      },
+      {
+        "region": "UK / NO / CH",
+        "carrier": "DHL Express",
+        "eta": "2–4 dagar",
+        "priceCents": 1990
+      }
+    ],
+    "freeShippingNote": "Fri frakt för EU-beställningar över €150.",
+    "guaranteeHeading": "Återleverans- och återbetalningsgaranti",
+    "guaranteeSub": "Om din beställning aldrig kom fram eller hölls av tullen på grund av ett verifierat transportörsfel, gör rätar vi till det.",
+    "guaranteeDidntArriveTitle": "Kom inte fram?",
+    "guaranteeDidntArriveBody": "Om spårningen visar att paketet tappats bort, kontakta support med ditt ordernummer. Vi öppnar en transportörsutredning och skickar samma produkter avgiftsfritt när utredningen är klar.",
+    "guaranteeCustomsTitle": "Hölls av tullen?",
+    "guaranteeCustomsBody": "Forskningspeptider från AverianLabs är inte kontrollerade substanser och passerar EU-tullen rutinmässigt. Om ett paket hålls kvar och orsaken verifierats ligga hos transportören eller våra fraktpapper, skickar vi på nytt utan kostnad.",
+    "guaranteeReshipFailsTitle": "Kommer inte andra leveransen heller fram?",
+    "guaranteeReshipFailsBody": "Vi återbetalar hela kostnaden för de drabbade produkterna — — inklusive ursprunglig frakt — när den andra leveransen inte kommer fram inom transportörens angivna ETA.",
+    "guaranteeContactCta": "Öppna ett återleveransärende",
+    "supportHeading": "Expertsupport — människa + tränad bot",
+    "supportSub": "De flesta frågor om produktval und rekonstitution besvaras på sekunder av Averia, vår tränade forsknings-concierge. Komplexa eller kommersiella förfrågningar går till vårt Helsingfors-team.",
+    "supportAveriaTitle": "Averia (forsknings-concierge)",
+    "supportAveriaBody": "Tränad på varje produkts datablad, COA und rekonstitutionsguide. Frågar efter ordernummer vid behov und hittar inte på renhetsvärden.",
+    "supportHumanTitle": "Helsingfors forskarteam",
+    "supportHumanBody": "Helsingfors-baserade labspecialister. E-post support@averianlabs.eu — typiskt svar inom 1 arbetsdag; prioritetskö för grossist- und akademiska beställningar.",
+    "supportContactCta": "Kontakta teamet"
+  },
+  "wishlist": {
+    "title": "Önskelista",
+    "subtitle": "Dina sparade peptider — fortsätt där du slutade eller dela med en kollega.",
+    "bestSellersBadge": "Populärt bland forskare som du",
+    "bestSellersTitle": "Bästsäljare",
+    "bestSellersSubtitle": "Toppröstade peptider denna månad.",
+    "viewAllProducts": "Visa alla {count} produkter →"
+  },
+  "rewards": {
+    "badge": "Lojalitetsprogram",
+    "title": "AverianLabs Rewards",
+    "subtitle": "Tjäna poäng vid varje beställning. Klättra i nivåer. Lös in mot forskningskredit. Ju mer du forskar, desto mer sparen s du.",
+    "chooseTier": "Välj din nivå",
+    "mostPopular": "Mest populär",
+    "tiers": [
+      {
+        "name": "Apex",
+        "threshold": 0,
+        "perks": [
+          {
+            "text": "1 poäng per 1 € spendat"
+          },
+          {
+            "text": "Födelsedagsbonuspoäng"
+          },
+          {
+            "text": "Tidig tillgång till nya batcher"
+          }
+        ],
+        "ctaStart": "Börja tjäna",
+        "ctaUnlock": "Lås upp {name}"
+      },
+      {
+        "name": "Kristall",
+        "threshold": 500,
+        "perks": [
+          {
+            "text": "1,25 poäng per 1 € spendat"
+          },
+          {
+            "text": "Fri EU-frakt för alla beställningar"
+          },
+          {
+            "text": "Exklusiva produktlanseringar"
+          },
+          {
+            "text": "Prioriterat batchval"
+          }
+        ],
+        "ctaStart": "Börja tjäna",
+        "ctaUnlock": "Lås upp {name}"
+      },
+      {
+        "name": "Aurora",
+        "threshold": 2000,
+        "perks": [
+          {
+            "text": "1,5 poäng per 1 € spendat"
+          },
+          {
+            "text": "Fri express EU-frakt"
+          },
+          {
+            "text": "Prioriterad supportlinje"
+          },
+          {
+            "text": "Inbjudningar till labb-besök"
+          },
+          {
+            "text": "Dedikerad kontomanager"
+          }
+        ],
+        "ctaStart": "Börja tjäna",
+        "ctaUnlock": "Lås upp {name}"
+      }
+    ],
+    "tierStarting": "Startnivå",
+    "tierSpend": "{amount}+ livstidsutgifter",
+    "howToEarn": "Så här tjänar du poäng",
+    "earnWays": [
+      {
+        "action": "Gör en beställning",
+        "points": "1–1,5× per 1 €",
+        "desc": "Poäng skalar med din nivå"
+      },
+      {
+        "action": "Skriv en produktrecension",
+        "points": "50 poäng",
+        "desc": "Endast verifierade köp"
+      },
+      {
+        "action": "Rekommendera en kollega",
+        "points": "250 poäng",
+        "desc": "När de gör sin första beställning"
+      },
+      {
+        "action": "Dela en forskningsplan",
+        "points": "25 poäng",
+        "desc": "Publik plan med 5+ sparade"
+      }
+    ],
+    "referralBadge": "Rekommendationsprogram",
+    "referralTitle": "Ge 15 €, få 15 €",
+    "referralBody": "Dela din unika rekommendationslänk med kollegor. När de gör sin första beställning över 100 €, får ni båda 15 € i forskningskredit. Ingen gräns för antal rekommendationer.",
+    "referralBullets": [
+      "Dela din unika länk via e-post eller sociala medier",
+      "Kollega får 15 € rabatt på sin första beställning (100 €+)",
+      "Du får 15 € kredit + 250 bonuspoäng",
+      "Obegränsade rekommendationer — stapla dina krediter"
+    ],
+    "referralLinkLabel": "Din rekommendationslänk",
+    "referralCopy": "Kopiera",
+    "referralGetLink": "Hämta min rekommendationslänk",
+    "referralSignInHint": "Logga in för att generera din unika länk",
+    "redeemTitle": "Lös in dina poäng",
+    "redemptions": [
+      {
+        "points": 500,
+        "valueCents": 500,
+        "label": "Beställningskredit",
+        "rate": "1 % tillbaka"
+      },
+      {
+        "points": 1000,
+        "valueCents": 1200,
+        "label": "Beställningskredit (bonus)",
+        "rate": "1,2 % tillbaka"
+      },
+      {
+        "points": 2500,
+        "valueCents": 3500,
+        "label": "Beställningskredit (premium)",
+        "rate": "1,4 % tillbaka"
+      }
+    ],
+    "redeemFooter": "Poäng förfaller 12 månader efter intjänande. Krediter tillämpas automatiskt i kassan.",
+    "ptsLabel": "{count, plural, one {# poäng} other {# poäng}}"
+  },
+  "partner": {
+    "orgName": "Institutionsnamn",
+    "country": "Land",
+    "contactEmail": "kontakt@institution.eu",
+    "volume": "Uppskattad månatlig volym (flaskor)",
+    "useCaseResearchLab": "Forskningslabb",
+    "useCaseUniversity": "Universitet",
+    "useCaseReseller": "Återförsäljare",
+    "useCaseClinic": "Klinik",
+    "useCaseDetail": "Användningsfall / forskningsfokus",
+    "submit": "Skicka ansökan",
+    "submitting": "Skickar…",
+    "submittedTitle": "Ansökan mottagen.",
+    "submittedBody": "Vi granskar dina uppgifter och svarar inom 48 timmar. Kolla din inkorg för nästa steg.",
+    "submitError": "Skickningen misslyckades",
+    "submitErrorGeneric": "Något gick fel",
+    "submitSuccess": "Ansökan skickad",
+    "applicationReceivedTitle": "Ansökan mottagen.",
+    "applicationReceivedBody": "Vi granskar dina uppgifter och svarar inom 48 timmar."
+  },
+  "search": {
+    "label": "Sök",
+    "commandLabel": "Sök i AverianLabs",
+    "inputPlaceholder": "Sök peptider, batch-ID:n, artiklar…",
+    "inputAria": "Sök",
+    "empty": "Inga resultat. Testa ett peptidnamn som \"BPC-157\" eller ett CAS-nummer.",
+    "groupProducts": "Produkter",
+    "groupQuickLinks": "Snabblänkar",
+    "groupRecent": "Senaste",
+    "hintNavigate": "navigera",
+    "hintOpen": "öppna",
+    "hintClose": "stäng",
+    "productsIndexed": "{count} produkter indexerade",
+    "quickLinks": {
+      "shop": "Bläddra bland alla peptider",
+      "labTests": "Labmetodik",
+      "calculator": "Rekonstitutionskalkylator",
+      "blog": "Forskningsblogg",
+      "partner": "Partnerprogram"
+    },
+    "quote": "Offert",
+    "searchBatch": "Batch {code}",
+    "searchCoa": "Analyscertifikat · {code}",
+    "searchGlossary": "Ordlista · {term}",
+    "searchDoc": "Dokument · {title}",
+    "searchResultsCount": "{count, plural, =0 {Inga resultat} one {# resultat} other {# resultat}}"
+  },
+  "calculator": {
+    "inputs": "Indata",
+    "peptideMass": "Peptidmassa (mg)",
+    "bacteriostaticWater": "Bakteriostatiskt vatten (mL)",
+    "desiredDose": "Önskad dos (mcg)",
+    "results": "Resultat",
+    "concentration": "Koncentration",
+    "concentrationUnit": "mg/mL",
+    "concentrationMcgUnit": "mcg/mL",
+    "volumePerDose": "Volym per dos",
+    "volumePerDoseUnit": "mL",
+    "totalDoses": "Antal doser i injektionsflaskan",
+    "dosesCalculation": "{mass} mg ÷ {dose} mcg",
+    "iuOnSyringe": "IU på 100 IU/mL spruta",
+    "researchOnly": "Endast för forskningsberäkningar. Verifiera alltid med ditt protokoll.",
+    "unitsMcg": "mcg",
+    "unitsIu": "IU",
+    "unitsMl": "mL",
+    "title": "Rekonstitutionskalkylator",
+    "subtitle": "Beräkna upptagningsvolymer, arbetskoncentrationer och återstående doser för varje peptidflaska.",
+    "heroEyebrow": "Forskningsverktyg",
+    "heroTitle": "Peptidkalkylatorn för labbet",
+    "heroBody": "Fem kalkylatorer (rekonstitution, titrering, spädning, breakeven, jämförelse), ett delat mattebibliotek och en vacker sprutvisualisering. Spara protokoll, dela via URL och skriv ut bench-kort.",
+    "openInAveria": "Öppna denna uppsättning i Averia",
+    "viewAllTools": "Se alla kalkylatorer nedan",
+    "tabs": {
+      "reconstitution": "Rekonstitution",
+      "titration": "Titrering",
+      "dilution": "Spädning",
+      "breakeven": "Breakeven",
+      "compare": "Jämför"
+    },
+    "outputs": "Utdata",
+    "product": "Produkt (valfri)",
+    "noProductSelected": "Anpassad uppsättning",
+    "syringe": "Spruta",
+    "storage": "Förvaring",
+    "leftoverMcg": "Återstående peptid",
+    "leftoverMcgUnit": "mcg oanvänt",
+    "actions": {
+      "share": "Dela",
+      "shareCopied": "Länk kopierad",
+      "save": "Spara protokoll",
+      "saved": "Sparad",
+      "reset": "Återställ",
+      "print": "Skriv ut",
+      "exportCsv": "Exportera CSV",
+      "sendToAveria": "Fråga Averia",
+      "openSaved": "Sparade",
+      "viewHistory": "Historik",
+      "clearHistory": "Rensa historik",
+      "deleteProtocol": "Ta bort protokoll"
+    },
+    "validation": {
+      "nonPositive": "Måste vara större än noll.",
+      "concentrationTooHigh": "Över den praktiska löslighetsgränsen — späd eller dela flaskor.",
+      "concentrationCaution": "Närmar sig löslighetsgränsen — upptagningen är korrekt, men förvaringen blir kortare.",
+      "drawTooSmall": "Upptagningsvolymen under det praktiska minimum — prova spädningsfliken.",
+      "nan": "Ange ett tal."
+    },
+    "saturation": {
+      "cautionTitle": "Närmar sig löslighetsgränsen",
+      "aboveTitle": "Över löslighetsgränsen — löses inte helt",
+      "ceiling": "Praktisk övre gräns",
+      "ratio": "Arbetskoncentration"
+    },
+    "stability": {
+      "title": "Stabilitet efter rekonstitution",
+      "subtitle": "Uppskattad hållbarhet efter tillsats av lösningsmedel.",
+      "shelfLife": "Rekommenderad hållbarhet",
+      "refrigerated": "Kyld",
+      "frozen": "Frusen (−20 °C)",
+      "room": "Rumstemperatur"
+    },
+    "syringes": {
+      "title": "Sprutval",
+      "subtitle": "Byt spruta för att justera IU-markering och rekommenderad volym.",
+      "0_3": "0.3 mL · 30 IU",
+      "0_5": "0.5 mL · 50 IU",
+      "1_0": "1.0 mL · 100 IU"
+    },
+    "presets": {
+      "title": "Vanliga starter",
+      "subtitle": "Ett-klicks-uppsättningar som matchar katalogens flaskor.",
+      "empty": "Inga sparade protokoll ännu — välj en förinställning eller spara denna uppsättning."
+    },
+    "history": {
+      "title": "Senaste beräkningar",
+      "subtitle": "Sparas lokalt i denna webbläsare.",
+      "empty": "Kör en beräkning för att se den här.",
+      "remove": "Ta bort"
+    },
+    "reconstitution": {
+      "drawLabel": "Volym att dra",
+      "withSyringe": "På en {syringe}-spruta",
+      "vialYield": "Flaska ger {count} doser om {dose}"
+    },
+    "titration": {
+      "title": "Titreringstrappa",
+      "subtitle": "Trappa dosen över veckor eller steg.",
+      "startDose": "Startdos",
+      "endDose": "Slutdos",
+      "steps": "Steg",
+      "duration": "Varaktighet",
+      "durationWeeks": "{count, plural, =1 {1 vecka} other {{count} veckor}}",
+      "stepLabel": "Steg {index}",
+      "totalConsumed": "Total peptidförbrukning",
+      "exceedsVial": "Planen överstiger en flaska — köp {vials}."
+    },
+    "dilution": {
+      "title": "Spädningskedja",
+      "subtitle": "När volymen är för liten för att pipettera korrekt, späd först.",
+      "rawVolume": "Rå upptagningsvolym",
+      "minDraw": "Minsta säkra volym",
+      "factor": "Erforderlig spädningsfaktor",
+      "step1": "Steg 1 — Rekonstitution",
+      "step2": "Steg 2 — Späd 1:{factor}",
+      "step2Detail": "Tillsätt {sourceMl} mL av den rekonstituerade lösningen till {diluentMl} mL sterilt vatten eller BAC-vatten.",
+      "working": "Arbetskoncentration",
+      "finalDraw": "Slutlig upptagning"
+    },
+    "breakeven": {
+      "title": "Flaskplan breakeven",
+      "subtitle": "Jämför flaskkombinationer mot en måldosplan.",
+      "plan": "Plan",
+      "price": "Totalpris",
+      "perMg": "Per mg",
+      "doses": "Doser",
+      "leftover": "Rest",
+      "waste": "Svinn €",
+      "pickCheapest": "Lägsta pris per mg",
+      "pickLeastWaste": "Minsta rest",
+      "addPlan": "Lägg till egen plan",
+      "removePlan": "Ta bort"
+    },
+    "compare": {
+      "title": "Protokolljämförelse",
+      "subtitle": "Matte för två rekonstitutionsscenarier sida vid sida.",
+      "left": "Vänster",
+      "right": "Höger",
+      "addProtocol": "Lägg till protokoll"
+    },
+    "share": {
+      "copyTooltip": "Kopiera URL med aktuell uppsättning",
+      "copied": "Kopierad",
+      "buildFromUrl": "Laddad från URL"
+    },
+    "disclaimer": {
+      "title": "Endast för forskning",
+      "body": "Dessa kalkylatorer stödjer laboratorieflöden. Inte medicinsk rådgivning och inte godkända för terapeutiskt bruk.",
+      "researchOnly": "AverianLabs produkter säljs endast för laboratorieforskning och in-vitro-studier. Inte för humant eller veterinärt bruk, diagnos eller terapi."
+    },
+    "aria": {
+      "resultSummary": "{mgPerMl} milligram per milliliter, {mL} milliliter per dos, {iu} internationella enheter på {syringe}-sprutan. Flaska ger {doses} doser.",
+      "resultLabel": "Beräkningsresultat"
+    }
+  },
+  "error": {
+    "label": "Fel",
+    "title": "Något gick fel",
+    "body": "Ett oväntat fel inträffade. Försök igen eller gå tillbaka till startsidan.",
+    "tryAgain": "Försök igen",
+    "backHome": "Tillbaka till startsidan"
+  },
+  "notFound": {
+    "label": "Fel 404",
+    "title": "Sidan hittades inte",
+    "body": "Tyvärr kunde vi inte hitta det du letade efter.",
+    "backHome": "Tillbaka till startsidan",
+    "browseCatalog": "Bläddra i katalogen",
+    "searchHint": "Sök:"
+  },
+  "email": {
+    "tagline": "Precisionspeptider för seriös forskning",
+    "footer": "AverianLabs · Helsingfors, Finland · Endast för forskning",
+    "confirmEmailSubject": "Bekräfta ditt AverianLabs-konto",
+    "confirmEmailTitle": "Bekräfta din e-post",
+    "confirmEmailBody": "Bekräfta denna adress för att aktivera ditt konto. Länken är giltig i 24 timmar.",
+    "confirmEmailCta": "Bekräfta e-post",
+    "confirmEmailIgnore": "Om du inte skapade ett konto kan du ignorera detta mejl.",
+    "resetPasswordSubject": "Återställ ditt AverianLabs-lösenord",
+    "resetPasswordTitle": "Återställ ditt lösenord",
+    "resetPasswordBody": "Vi har fått en begäran om att återställa ditt lösenord. Länken är giltig i 1 timme.",
+    "resetPasswordCta": "Återställ lösenord",
+    "resetPasswordIgnore": "Om du inte begärde detta kan du ignorera mejlet — ditt lösenord ändras inte.",
+    "deleteAccountSubject": "Bekräfta borttagning av ditt AverianLabs-konto",
+    "deleteAccountTitle": "Bekräfta kontoborttagning",
+    "deleteAccountBody": "Detta tar bort ditt konto och personuppgifter. Du har 30 dagar på dig att ändra dig innan allt raderas permanent. Länken är giltig i 24 timmar.",
+    "deleteAccountCta": "Bekräfta borttagning",
+    "deleteAccountIgnore": "Om du inte begärde detta, ignorera mejlet — ditt konto förblir aktivt.",
+    "newsletterSubject": "Bekräfta din prenumeration på AverianLabs nyhetsbrev",
+    "newsletterTitle": "Bekräfta din prenumeration",
+    "newsletterBody": "Bekräfta denna adress för att få batchsläpp, nya COA och forskningsanteckningar. Länken är giltig i 24 timmar.",
+    "newsletterCta": "Bekräfta prenumeration",
+    "newsletterIgnore": "Om du inte begärde detta, ignorera mejlet — du kommer inte att prenumerera.",
+    "contactNotificationTitle": "Nytt meddelande via kontaktformuläret",
+    "contactFooter": "AverianLabs · kontaktformulär · svara direkt på detta mejl",
+    "orderConfirmedSubject": "Order bekräftad — {number}",
+    "orderConfirmedTitle": "Order bekräftad",
+    "orderLabel": "Order {number}",
+    "orderColumnProduct": "Produkt",
+    "orderColumnQty": "Antal",
+    "orderColumnPrice": "Pris",
+    "orderSubtotal": "Delsumma",
+    "orderShipping": "Frakt",
+    "orderVat": "Moms (24%)",
+    "orderTotal": "Totalt",
+    "orderWhatsNext": "Vad händer nu?",
+    "orderWhatsNextBody": "Det batchspecifika analyscertifikatet (COA), endotoxinrapporten och masspektrometribekräftelsen finns i ditt konto när ordern skickas.",
+    "orderFooter": "Frågor? Svara på detta mejl eller kontakta support@averianlabs.eu.",
+    "shippingTitle": "Din order har skickats",
+    "shippingTracking": "Spårningsnummer",
+    "shippingTrack": "Spåra sändning",
+    "reviewRequestSubject": "Hur presterade dina peptider? Betygsätt order {number}",
+    "reviewRequestTitle": "Hur presterade dina peptider?",
+    "reviewRequestGreeting": "Hej {name}, din order {order} med {items} levererades för några dagar sedan.",
+    "reviewRequestBody": "Din feedback hjälper andra forskare att fatta informerade beslut och oss att upprätthålla våra kvalitetsstandarder. Kan du ta en minut för att dela din upplevelse?",
+    "reviewRequestCta": "Lämna en recension",
+    "reviewRequestWhatToReview": "Vad du kan recensera",
+    "reviewRequestWhatToReviewBody": "Renhetskonsekvens, förpackningskvalitet, COA-noggrannhet, leveranshastighet eller allt som stack ut under din forskning.",
+    "reviewRequestNeedHelp": "Behöver du hjälp?",
+    "reviewRequestNeedHelpBody": "Svara på detta mejl eller kontakta vårt supportteam på support@averianlabs.eu. Vi svarar inom 2 timmar på vardagar.",
+    "reviewRequestFooter": "Du fick detta mejl eftersom du lade en beställning hos oss. Vi hör inte av oss igen om du inte ber oss.",
+    "cartRecoverySubject": "Du lämnade varor i kundvagnen — slutför din order",
+    "cartRecoveryTitle": "Du lämnade varor i kundvagnen",
+    "cartRecoveryBody": "Forskningspeptider väntar på dig. Slutför din order innan lagret av din valda sats tar slut.",
+    "cartRecoveryCta": "Slutför din beställning",
+    "cartRecoveryFreeShipping": "Fri frakt inom EU",
+    "cartRecoveryFreeShippingBody": "på beställningar över €150. Din kundvagn kan kvalificera sig.",
+    "cartRecoveryFooter": "Du fick detta mejl eftersom du startade en beställning på averianlabs.eu. Vi skickar bara en påminnelse."
+  },
+  "knowledge": {
+    "title": "Forskningsdokumentation",
+    "subtitle": "Analyscertifikat, testmetoder, produktspecifikationer och ordlista — allt på ett ställe.",
+    "categoriesHeading": "Bläddra efter källa",
+    "recentDocs": "Senaste dokument",
+    "recentGlossary": "Nyaste ordlistetermer",
+    "viewAll": "Visa alla →",
+    "noRecentDocs": "Inga publicerade dokument ännu.",
+    "quickAccess": "Snabbåtkomst",
+    "links": {
+      "coa": "Analyscertifikat",
+      "methods": "Testmetoder",
+      "products": "Produktspecifikationer",
+      "articles": "Forskningsartiklar",
+      "glossary": "Ordlista",
+      "calculators": "Kalkylatorer"
+    },
+    "categories": {
+      "coa": {
+        "title": "Analyscertifikat",
+        "desc": "HPLC-, endotoxin- och masspektrometridata för varje batch — batchspecifikt PASS-godkännande."
+      },
+      "methods": {
+        "title": "Testmetoder",
+        "desc": "Oberoende laboratorieanalyser: HPLC, masspektrometri, LAL, sterilitet, mykoplasma."
+      },
+      "products": {
+        "title": "Produktspecifikationer",
+        "desc": "Tekniska specifikationer, sekvenser och förvaringsanvisningar för varje peptidprodukt."
+      },
+      "articles": {
+        "title": "Forskningsartiklar",
+        "desc": "Granskade referenser och egna forskningsanteckningar om peptidvetenskap."
+      },
+      "glossary": {
+        "title": "Ordlista",
+        "desc": "Termer och tekniker inom peptidforskning, analys, förvaring och reglering."
+      },
+      "calculators": {
+        "title": "Kalkylatorer",
+        "desc": "Rekonstitutions- och dosmatematik med mikroliterns precision för forskningsflöden."
+      }
+    },
+    "browseAll": "Bläddra alla →",
+    "itemsCount": "{count, plural, =0 {inga objekt} one {1 objekt} other {{count} objekt}}",
+    "batchesLabel": "Senaste batch",
+    "filterAll": "Filter",
+    "badge": "Kunskap",
+    "noResults": "Inga resultat",
+    "noSources": "Inga källor hittades",
+    "relatedProducts": "Relaterade produkter",
+    "searchPlaceholder": "Sök…",
+    "sequenceTitle": "Sekvens",
+    "sourcesCount": "{count, plural, =0 {Inga källor} one {1 källa} other {{count} källor}}",
+    "sourcesHeading": "Källor"
+  },
+  "terms": {
+    "title": "Användarvillkor",
+    "lastUpdated": "Senast uppdaterad: 1 september 2026",
+    "intro": "Genom att använda averianlabs.eu eller andra domäner som tillhör AverianLabs godkänner du dessa användarvillkor. Alla produkter säljs under en strikt forskningslicens.",
+    "sections": {
+      "eligibility": {
+        "title": "1. Behörighet",
+        "body": "Du måste vara minst 18 år och en kvalificerad forskare eller institutionell köpare för att handla från AverianLabs."
+      },
+      "researchUse": {
+        "title": "2. Endast för forskning",
+        "body": "Alla produkter är endast avsedda för laboratorieforskning och in vitro-studier. De är INTE avsedda för mänsklig konsumtion, diagnostisk användning eller terapeutiska tillämpningar."
+      },
+      "pricing": {
+        "title": "3. Priser och moms",
+        "body": "Priserna är inklusive EU-moms (OSS-system). B2B-kunder med giltigt momsregistreringsnummer kan handla med omvänd skattskyldighet i kassan."
+      },
+      "shipping": {
+        "title": "4. Frakt",
+        "body": "Vi skickar inom 24 timmar från vårt lager i Helsingfors. Risken övergår till köparen vid transportörens skanning."
+      },
+      "returns": {
+        "title": "5. Returer",
+        "body": "På grund av forskningspeptidernas natur kan öppnade eller temperaturkänsliga flaskor inte returneras. Oöppnad produkt kan returneras inom 14 dagar för byte eller återbetalning."
+      },
+      "liability": {
+        "title": "6. Ansvarsbegränsning",
+        "body": "AverianLabs ansvar är begränsat till produktens inköpspris. Vi garanterar inte lämplighet för någon specifik forskningstillämpning utöver det publicerade analyscertifikatet."
+      },
+      "governingLaw": {
+        "title": "7. Tillämplig lag",
+        "body": "Dessa villkor regleras av finsk lag. Tvister avgörs uteslutande av Helsingfors tingsrätt."
+      },
+      "contact": {
+        "title": "8. Kontakt",
+        "body": "Frågor: legal@averianlabs.eu"
+      }
+    }
+  },
+  "privacy": {
+    "title": "Integritetspolicy",
+    "lastUpdated": "Senast uppdaterad: 1 september 2026 · GDPR-kompatibel",
+    "intro": "Denna policy beskriver hur AverianLabs Oy (\"vi\") behandlar personuppgifter på averianlabs.eu och tillhörande domäner i enlighet med EU:s allmänna dataskyddsförordning (GDPR) och den finska dataskyddslagen.",
+    "sections": {
+      "dataCollected": {
+        "title": "Data vi samlar in",
+        "body": "Kontodata: e-post, namn, lösenordshash (om du skapar ett konto). Beställningsdata: leverans-/fakturaadress, beställningshistorik. Teknisk data: IP (trunkerad), användaragent, referent (sparas i 30 dagar). Analys: endast med ditt uttryckliga samtycke via cookie-bandet."
+      },
+      "lawfulBasis": {
+        "title": "Rättslig grund",
+        "body": "Avtal (art. 6(1)(b)) för beställningar, samtycke (art. 6(1)(a)) för analys, rättslig förpliktelse (art. 6(1)(c)) för bokföring."
+      },
+      "subprocessors": {
+        "title": "Underbiträden",
+        "body": "Stripe Payments Europe Ltd — betalningshantering (EU); Coinbase Commerce — kryptobetalningar; Resend — transaktionell e-post (EU); PostHog Cloud EU — produktanalys (samtyckesbaserad); Sanity Inc. — innehåll (EU-datalagring); Cloudflare — CDN / DDoS; Neon — databas (Frankfurt)."
+      },
+      "yourRights": {
+        "title": "Dina rättigheter",
+        "body": "Du har rätt att få tillgång till, rätta, radera, begränsa,portera och invända mot behandling. E-posta privacy@averianlabs.eu. Du kan också lämna in ett klagomål till din nationella tillsynsmyndighet (i Finland: tietosuojavaltuutettu)."
+      },
+      "retention": {
+        "title": "Lagringstid",
+        "body": "Kontodata: tills radering. Beställningsdata: 7 år (bokföringsskyldighet). Analys: 14 månader."
+      },
+      "contact": {
+        "title": "Kontakt",
+        "body": "Dataskyddsombud: dpo@averianlabs.eu · AverianLabs Oy, Helsingfors, Finland."
+      }
+    }
+  },
+  "cookies": {
+    "title": "Cookies",
+    "lastUpdated": "Senast uppdaterad: 1 september 2026",
+    "intro": "Vi använder ett minimum av cookies. Nödvändiga cookies kan inte inaktiveras; analyscookies kräver ditt samtycke.",
+    "sections": {
+      "essential": {
+        "title": "Nödvändiga",
+        "body": "averianlabs-cart — sparar din varukorg (1 år); averianlabs-age-confirmed — kommer ihåg åldersgrindens bekräftelse (1 år); averianlabs-cookie-consent — kommer ihåg ditt cookie-val (1 år); Stripe / Coinbase sessionscookies (sätts av betalningsleverantören)."
+      },
+      "analytics": {
+        "title": "Analys (samtycke)",
+        "body": "PostHog (EU) och Plausible läses in först efter att du klickar \"Acceptera alla\" i cookie-bandet. De samlar in anonymiserad, aggregerad användningsdata."
+      },
+      "changeChoice": {
+        "title": "Ändra ditt val",
+        "body": "Klicka på den lilla \"Cookies\"-länken i sidfoten, eller rensa din webbläsardata."
+      }
+    }
+  },
+  "disclaimer": {
+    "badge": "Endast för forskning",
+    "title": "Forskningsfriskrivning",
+    "lead": "Alla produkter som säljs av AverianLabs Oy är endast avsedda för laboratorieforskning och in vitro-studier.",
+    "sections": {
+      "notForHuman": {
+        "title": "Inte för mänsklig konsumtion",
+        "body": "Produkterna som listas på averianlabs.eu är inte avsedda för mänsklig eller veterinär användning, konsumtion, administrering eller applicering på kroppen i någon form."
+      },
+      "noMedicalClaims": {
+        "title": "Inga medicinska anspråk",
+        "body": "Information på denna webbplats är endast för forsknings- och utbildningsändamål. Den är inte avsedd som medicinsk rådgivning, diagnos eller behandlingsrekommendation. AverianLabs Oy stödjer, rekommenderar eller godkänner inte off-label-användning av någon produkt."
+      },
+      "buyerResponsibility": {
+        "title": "Köparens ansvar",
+        "body": "Genom att köpa från AverianLabs bekräftar du att du är en kvalificerad forskare eller institutionell köpare, och att produkterna endast kommer att användas för legitim laboratorieforskning i enlighet med alla tillämpliga lokala, nationella och internationella lagar och förordningar."
+      },
+      "compliance": {
+        "title": "Efterlevnad",
+        "body": "Det är köparens ansvar att säkerställa att import, innehav och användning av forskningspeptider följer alla tillämpliga förordningar i deras jurisdiktion. AverianLabs Oy förbehåller sig rätten att vägra service till någon köpare eller jurisdiktion efter eget gottfinnande."
+      }
+    }
+  },
+  "actions": {
+    "addPrompt": "Lägga i varukorgen?",
+    "addToCart": "Lägg i varukorgen",
+    "added": "Tillagd",
+    "addedToast": "{name} tillagd i din varukorg",
+    "dismiss": "Stäng",
+    "remember": "Kom ihåg detta",
+    "rememberPrompt": "Spara till nästa gång?",
+    "remembered": "Sparad",
+    "rememberedToast": "Plan sparad på ditt konto",
+    "removedToast": "Borttagen från varukorgen"
+  },
+  "feedback": {
+    "helpful": "Hjälpsam",
+    "notHelpful": "Inte hjälpsam"
+  },
+  "links": {
+    "coa": "Analyscertifikat",
+    "methods": "Testmetoder",
+    "products": "Produktspecifikationer",
+    "articles": "Forskningsartiklar",
+    "glossary": "Ordlista",
+    "calculators": "Kalkylatorer"
+  },
+  "tableHeaders": {
+    "batch": "Sats",
+    "endotoxin": "Endotoxin",
+    "hplc": "HPLC",
+    "lab": "Laboratorium",
+    "product": "Produkt",
+    "status": "Status"
+  },
+  "testsHeaders": {
+    "method": "Metod",
+    "result": "Resultat",
+    "test": "Test"
+  },
+  "topbar": {
+    "coaEveryBatch": "COA för varje batch",
+    "dispatch24h": "24 h leverans",
+    "euDispatched": "Skickas från EU",
+    "freeShipping": "Fri frakt över 150 €",
+    "hplcVerified": "HPLC + endotoxin verifierat"
   }
 }

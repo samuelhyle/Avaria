@@ -2,23 +2,27 @@ import { getRequestConfig } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { type Locale, defaultLocale, isLocale } from "./config"
 
+type LocaleMessages = Record<string, unknown>
+type LocaleMessageValue = string | LocaleMessages
+
 export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale
   const locale: Locale = requested && isLocale(requested) ? requested : defaultLocale
 
-  let messages: Record<string, unknown> = {}
+  let messages: LocaleMessages = {}
   try {
-    messages = (await import(`../../messages/${locale}.json`)).default
+    messages = (await import(`../../messages/${locale}.json`)).default as LocaleMessages
   } catch {
     if (locale !== defaultLocale) notFound()
   }
 
   // Fall back to English strings when a locale is missing keys — keeps pages
   // rendering while translations are still being authored in non-en locales.
-  let englishMessages: Record<string, unknown> = {}
+  let englishMessages: LocaleMessages = {}
   if (locale !== defaultLocale) {
     try {
-      englishMessages = (await import(`../../messages/${defaultLocale}.json`)).default
+      englishMessages = (await import(`../../messages/${defaultLocale}.json`))
+        .default as LocaleMessages
     } catch {
       // ignore — fallback disabled
     }
@@ -58,21 +62,26 @@ export default getRequestConfig(async ({ requestLocale }) => {
     onError: () => {},
     // Tell next-intl to use English strings instead of throwing when a key
     // is missing in the current locale — local dev with partial translations.
-    getMessageFallback: ({ key, namespace }) => {
+    getMessageFallback: ({ key, namespace, error }) => {
       const fullKey = namespace ? `${namespace}.${key}` : key
       const fallback =
         lookupMessage(englishMessages, fullKey) ?? lookupMessage(englishMessages, key)
+      if (process.env.NODE_ENV !== "production" && typeof console !== "undefined") {
+        const code = error && "code" in error ? error.code : "?"
+        // eslint-disable-next-line no-console
+        console.warn(`[i18n fallback] ${locale}.${fullKey} (${code})`)
+      }
       return typeof fallback === "string" ? fallback : fullKey
     },
   }
 })
 
 /** Resolve a dot-separated key against a nested message object. */
-function lookupMessage(messages: Record<string, unknown>, path: string): unknown {
-  return path.split(".").reduce<unknown>((acc, part) => {
-    if (acc && typeof acc === "object" && part in (acc as Record<string, unknown>)) {
-      return (acc as Record<string, unknown>)[part]
+function lookupMessage(messages: LocaleMessages, path: string): LocaleMessageValue {
+  return path.split(".").reduce<LocaleMessageValue>((acc, part): LocaleMessageValue => {
+    if (acc && typeof acc === "object" && part in acc) {
+      return (acc as LocaleMessages)[part] as LocaleMessageValue
     }
-    return undefined
+    return "" as LocaleMessageValue
   }, messages)
 }

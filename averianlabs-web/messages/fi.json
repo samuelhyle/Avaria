@@ -76,6 +76,67 @@
     "disclaimer": "Vain tutkimuskäyttöön. Ei ihmisille eikä eläimille.",
     "disclaimerFull": "Kaikki AverianLabsin myymät tuotteet on tarkoitettu ainoastaan laboratoriotutkimukseen ja in vitro -tutkimuksiin. Niitä ei ole tarkoitettu ihmisravinnoksi, diagnostiseen käyttöön eikä terapeuttisiin sovelluksiin. Ostamalla vahvistat olevasi pätevä tutkija tai institutionaalinen ostaja."
   },
+  "coa": {
+    "badge": "Julkinen analyysitodistusarkisto",
+    "title": "Analyysitodistukset",
+    "subtitle": "Jokainen lähetetty erä on riippumattomasti testattu. Selaa uusimmat analyysitodistukset alta.",
+    "tableHeaders": {
+      "batch": "Erä",
+      "product": "Tuote",
+      "hplc": "HPLC",
+      "endotoxin": "Endotoksiini",
+      "lab": "Laboratorio",
+      "status": "Tila"
+    },
+    "filterPlaceholder": "Hae eräkoodilla tai tuotteella…",
+    "resultsCount": "{count, plural, =0 {Ei tuloksia} one {1 analyysitodistus} other {{count} analyysitodistusta}}",
+    "viewDetails": "Näytä tiedot →",
+    "batchTitle": "Analyysitodistus",
+    "batchSubtitle": "Eräkohtaiset testitulokset ja dokumentaatio.",
+    "testsHeading": "Testitulokset",
+    "testsHeaders": {
+      "test": "Testi",
+      "result": "Tulos",
+      "method": "Menetelmä"
+    },
+    "testHplcPurity": "HPLC-puhtaus",
+    "testHplcMethod": "RP-HPLC",
+    "testEndotoxin": "Endotoksiini",
+    "testEndotoxinMethod": "LAL",
+    "testIdentity": "Identiteetti",
+    "testIdentityMethod": "ESI-MS",
+    "testIdentityResult": "Vahvistettu",
+    "testStorage": "Säilytys",
+    "manufacturingHeading": "Valmistus ja voimassaolo",
+    "manufacturedAt": "Valmistettu",
+    "expiresAt": "Voimassa",
+    "labHeading": "Testauslaboratorio",
+    "viewFullPdf": "Avaa täydellinen analyysitodistus (PDF)",
+    "pdfUnavailableNote": "PDF-versio julkaistaan, kunhan laboratoriokumppani on toimittanut dokumentaation.",
+    "chromatogramHeading": "Kromatogrammi",
+    "chromatogramNote": "Kromatogrammi julkaistaan PDF-analyysitodistuksen liitteenä.",
+    "backToList": "← Takaisin analyysitodistuksiin",
+    "traceabilityHeading": "Jäljitettävyys",
+    "traceabilitySub": "Laatuketju, jonka voi tarkistaa. Jokainen vaihe dokumentoidaan.",
+    "step1Title": "Raaka-aine",
+    "step1Body": "Peptidiraaka-aine vastaanotetaan valmistajalta ja siirtyy karanteeniin.",
+    "step2Title": "Valmistus",
+    "step2Body": "Lyofilisointi, pullotus ja sinetöinti steriilissä ympäristössä.",
+    "step3Title": "Eränumero",
+    "step3Body": "Jokaiselle erälle annetaan yksilöllinen eränumero jäljitettävyyttä varten.",
+    "step4Title": "Riippumaton analyysi",
+    "step4Body": "Testauslaboratorio analysoi HPLC-, endotoksiini- ja massaspektritulokset.",
+    "step4BodyWithLab": "Testattu laboratoriossa {lab}",
+    "step5Title": "Analyysitodistus (COA)",
+    "step5Body": "Analyysitodistus julkaistaan ja liitetään toimitukseen.",
+    "step6Title": "Toimitus",
+    "step6Body": "Lähetys 24 tunnissa EU-varastoltamme. Kylmäketju dokumentoitu.",
+    "notFoundTitle": "Erää ei löytynyt",
+    "notFoundBody": "Analyysitodistusta tällä eräkoodilla ei löytynyt.",
+    "description": "Julkinen rekisteri jokaisen tuotteen uusimmasta erästä — HPLC-kromatogrammi, massaspektridata, endotoksiinipaneeli, testauslaboratorio ja eräkohtainen hyväksyntä. Vapaasti ladattavissa ja vertaisarvioitavissa.",
+    "passBadge": "HYVÄKSYTTY",
+    "passFullLabel": "Kaikki testit hyväksytty"
+  },
   "nav": {
     "shop": "Kauppa",
     "labTests": "Laboratoriotestit",
@@ -107,36 +168,76 @@
     "sectionResearch": "Tutkimus",
     "sectionCompany": "Yritys",
     "cartCount": "{count, plural, =0 {Ostoskori on tyhjä} one {1 tuote ostoskorissa} other {# tuotetta ostoskorissa}}",
-    "language": "Kieli"
+    "language": "Kieli",
+    "breadShop": "Kauppa",
+    "batchDataHeading": "Erän tiedot",
+    "batchDataCode": "Erätunnus",
+    "batchDataManufactured": "Valmistettu",
+    "batchDataExpires": "Vanhenee",
+    "batchDataLab": "Testauslaboratorio",
+    "batchDataHplc": "HPLC-puhtaus",
+    "batchDataEndotoxin": "Endotoksiini",
+    "batchDataMs": "Massaspektri",
+    "batchDataConfirmed": "Vahvistettu",
+    "batchDataOpenCoa": "Avaa analyysitodistus",
+    "batchLabel": "Uusin erä",
+    "coaAvailable": "Näytä analyysitodistus",
+    "contactForBatch": "Ota yhteyttä nykyisen erän saatavuuteen",
+    "endotoxin": "Endotoksiini",
+    "endotoxinUnit": "EY/mg",
+    "expires": "Voimassa",
+    "fromSizes": "{count, plural, =0 {— kokoa} one {alkaen · 1 koko} other {alkaen · {count} kokoa}}",
+    "howWeVerify": "Näin varmistamme jokaisen erän",
+    "manufactured": "Valmistettu",
+    "pricingOnRequest": "Hinta pyynnöstä",
+    "readFullMethodology": "Lue koko testausmenetelmä",
+    "relatedHeading": "Liittyvät peptidit",
+    "requestQuote": "Pyydä tarjous",
+    "shipsIn24h": "Lähetys 24 tunnissa",
+    "specCas": "CAS-numero",
+    "specFormula": "Molekyylikaava",
+    "specMw": "Molekyylipaino",
+    "specPurity": "Puhtaus",
+    "specSequence": "Sekvenssi",
+    "specStorage": "Säilytys",
+    "specifications": "Tuotetiedot",
+    "stockIn": "Varastossa",
+    "stockLow": "Vähissä · {count} jäljellä",
+    "stockOut": "Loppu varastosta",
+    "tabCoa": "Analyysitodistus ja laboratoriotestit",
+    "testedAt": "Testauslaboratorio",
+    "vatNote": "Sis. ALV:n. Lopullinen hinta kassalla.",
+    "viewAllInCategory": "Näytä kaikki kategoriasta {category} →",
+    "whatsInTheBox": "Pakkauksen sisältö"
   },
   "home": {
     "heroEyebrow": "EU · Tutkimuslaatu · Kolmannen osapuolen testaama",
-    "heroTitle": "Tarkkoja peptidejä vaativaan tutkimukseen.",
-    "heroSubtitle": "Jokainen erä kolmannen osapuolen HPLC-, massaspektri- ja endotoksiiniverifioima. Lyofilisoitu kylmäketju säilyttäen. 24 tunnin EU-lähetys. Tutkijoille, jotka eivät tingi datasta.",
+    "heroTitle": "Osta tutkimukseen valmistettuja peptidejä.",
+    "heroSubtitle": "Jokainen erä HPLC-, massaspektri- ja endotoksiinitestattu kolmannen osapuolen toimesta. Lyofilisoitu kylmäketjun eheyden takaamiseksi. 24 h EU-toimitus. COA-todistukset saatavilla verkossa tai tilauksen mukana.",
     "ctaShop": "Selaa valikoimaa",
     "ctaResearch": "Lue tutkimusartikkeleita",
     "trustHeading": "Miksi laboratoriot valitsevat AverianLabsin",
-    "trustBadge1": "EU-GMP-toimittajaverkosto",
+    "trustBadge1": "Nopea EU-toimitus",
     "trustBadge2": "HPLC-puhtaus ≥ 98 %",
-    "trustBadge3": "Endotoksiini < 5 EY/mg",
-    "trustBadge4": "24 tunnin EU-lähetys",
-    "trustBadge5": "ISO 17025 -laboratoriokumppani",
-    "trustBadge6": "GDPR-yhteensopiva",
+    "trustBadge3": "100 % tyytyväisyystakuu",
+    "trustBadge4": "Määräalennus jopa −20 %",
+    "trustBadge5": "ISO 17025 -laboratorio",
+    "trustBadge6": "GDPR & ALV-yhteensopiva",
     "featuredHeading": "Esitellyt tutkimuspeptidit",
     "featuredSub": "Jokaisen pullon mukana toimitetaan eräkohtainen analyysitodistus — HPLC-kromatogrammi, massaspektrijälki, endotoksiinipaneeli ja laboratorion hyväksyntä — valmiina tutkimuskansioon.",
     "threeDHeading": "Tutki jokaista pulloa 3D-muodossa",
     "threeDSub": "Pyöritä karusellia, zoomaa lasipulloon ja tarkastele jokaisen erän analyysitodistusta ennen tilausta. Jokainen tuote linkittyy täyteen HPLC-, massaspektri- ja endotoksiinidataan.",
     "threeDCta": "Avaa 3D-valikoima",
     "categoriesHeading": "Selaa tutkimusalueittain",
-    "catWeight": "Metabolinen tutkimus",
-    "catWeightDesc": "GLP-1- ja GIP-reseptorisignalointi in vitro. Reseptorimääritykset, soluviljelmät, ADME-profilointi.",
-    "catRecovery": "Toipuminen ja kudos",
+    "catMetabolic": "Metabolia ja reseptorisignalointi",
+    "catMetabolicDesc": "GLP-1- ja GIP-reseptorisignalointi in vitro. Reseptorimääritykset, soluviljelmät, ADME-profilointi.",
+    "catRecovery": "Solubiologia ja kudosmallit",
     "catRecoveryDesc": "Angiogeeninen ja kudosremodelointitutkimus. Solumigraatiomallit, fibroblastiaktiivisuus, haavamallit.",
-    "catCognitive": "Kognitiivinen",
+    "catCognitive": "Neurobiologinen tutkimus",
     "catCognitiveDesc": "Neurotropiinit ja hermosoluviljelmät. BDNF-signalointi, in vitro -neurotutkimus.",
-    "catLongevity": "Pitkäikäisyys",
+    "catLongevity": "Mitokondriot ja solujen energia-aineenvaihdunta",
     "catLongevityDesc": "Telomeeribiologia ja NAD⁺-signalointi. Soluvanhenemismallit, mitokondriofunktio.",
-    "catCosmetic": "Kosmeettinen tutkimus",
+    "catCosmetic": "Pigmentaatio ja melanogeneesi",
     "catCosmeticDesc": "Melanogeneesi ja ihokudosmallit. Keratinosyyttiviljelmät, melanosyyttisignalointi.",
     "labHeading": "Läpinäkyvyyttä jokaisessa erässä",
     "labSub": "Jokaisen pullon mukana tulee julkinen analyysitodistus. Klikkaa mitä tahansa erätunnusta ja tarkastele HPLC-kromatogrammeja, massaspektrijälkiä, endotoksiinipaneeleita ja testauslaboratoriota — dataa, jonka arvioijasi voi varmentaa, ei vain luottaa.",
@@ -153,8 +254,76 @@
     "newsletterCta": "Tilaa",
     "catBlends": "Yhdistelmät",
     "catBlendsDesc": "KLOW, BPC + TB-500, räätälöidyt peptidiseokset",
-    "catSupplies": "Tarvikkeet",
-    "catSuppliesDesc": "BAC-vesi, ruiskut, ampullit"
+    "catSupplies": "Muut tutkimusreagenssit",
+    "catSuppliesDesc": "BAC-vesi, ruiskut, ampullit",
+    "stat1Label": "Eräkohtainen HPLC-puhtaus",
+    "stat1Value": "—",
+    "stat1Note": "Julkaistaan eräkohtaisesti",
+    "stat2Label": "Riippumaton laboratoriotestaus",
+    "stat2Value": "—",
+    "stat2Note": "Vahvistetaan toimitusvaiheessa",
+    "stat3Label": "EU-lähetys",
+    "stat3Value": "—",
+    "stat3Note": "Riippuu erän dokumentaatiosta",
+    "labBadge": "Täysi laboratorioläpinäkyvyys",
+    "labMethodologyLink": "Lue testausmenetelmistä",
+    "coaBadge": "Eräkohtainen analyysi",
+    "coaTitle": "Analyysitodistus",
+    "coaBody": "Jokaisen erän tarkat analyysitiedot, kromatogrammit ja laboratorion hyväksyntä julkaistaan eräkohtaisesti. Avaa laboratoriotestaus-sivu lukeaksesi menetelmistä ja todennettavuudesta.",
+    "coaHeaderTest": "Testi",
+    "coaHeaderResult": "Tulos",
+    "coaHeaderMethod": "Menetelmä",
+    "coaRow1": "HPLC-puhtaus · Eräkohtainen tulos",
+    "coaRow2": "Endotoksiini · Riippumattomassa laboratoriossa",
+    "coaRow3": "Massaspektri · Eräkohtaisesti",
+    "coaRow4": "Testauslaboratorio · —",
+    "coaCta": "Avaa laboratoriotestaus-sivu",
+    "communityHeading": "Tutkimusyhteisöltä",
+    "communitySub": "Ketjuja, vastauksia, eräpäivityksiä ja jaettuja tutkimussuunnitelmia AverianLabsin tutkimusyhteisöltä.",
+    "subscribeBadge": "Tutkimusmäärät",
+    "subscribeTitle": "Säännöllinen tutkimustoimitus",
+    "subscribeSub": "Varaa nykyinen erä ja varmista toimitus 4, 8 tai 12 viikon välein — voit peruuttaa milloin tahansa tililtäsi.",
+    "subscribeBullet1": "Priorisoitu EU-lähetys jokaiselle toimitukselle",
+    "subscribeBullet2": "Nykyisen erän varaus",
+    "subscribeBullet3": "10 % alennus jokaisesta pullosta",
+    "subscribeBullet4": "Vapaa yhdisteltävyys koko valikoimasta",
+    "subscribeCta": "Aloita säännöllinen tilaus",
+    "subscribeExampleLabel": "Esimerkkitilaus",
+    "subscribeExampleProduct": "BPC-157 · 10 mg · 8 viikon välein",
+    "subscribePerShipment": "Per toimitus",
+    "subscribeAnnualSavings": "Vuosisäästö",
+    "subscribeSavingsSuffix": "/ vuosi",
+    "institutionsBadge": "Tutkimuslaitoksille",
+    "about": "Tietoa",
+    "account": "Tili",
+    "allProducts": "Kaikki tuotteet",
+    "blog": "Tutkimus",
+    "calculator": "Laskuri",
+    "cart": "Ostoskori",
+    "close": "Sulje",
+    "coaLibrary": "LAB-COA",
+    "community": "Yhteisö",
+    "documents": "Dokumentit",
+    "glossary": "Sanasto",
+    "labTests": "Laboratoriotestit",
+    "openMenu": "Avaa valikko",
+    "partner": "Kumppanuusohjelma",
+    "search": "Hae",
+    "sectionShop": "Kauppa",
+    "sectionResearch": "Tutkimus",
+    "sectionCompany": "Yritys",
+    "whyHeading": "Miksi valita AverianLabs",
+    "whySub": "Kolme samaa asiaa, joita jokainen tutkija arvostaa — nopeus, varmuus ja laatu — takeilla, joiden varaan uskallamme maineemme panna.",
+    "why1Title": "Nopea, seurattu EU-toimitus",
+    "why1Body": "Ennen klo 14:00 EET tehdyt tilaukset lähtevät samana arkipäivänä EU-varastoltamme. Seuratut kuljetusyhtiöt — Posti, DHL, DPD.",
+    "why2Title": "Laboratoriovarmennettu puhtaus",
+    "why2Body": "Jokaisen erän mukana tulee eräkohtainen COA: HPLC-kromatogrammi, massaspektri, endotoksiinitiedot ja laboratorion hyväksyntä.",
+    "why3Title": "100 % tyytyväisyystakuu",
+    "why3Body": "Jos pullo saapuu lämpimänä, vaurioituneena tai tulli pidättää sen todennetun kuljetusvirheen vuoksi, lähetämme uuden veloituksetta — ja hyvitämme, jos toinenkin uudelleenlähetys epäonnistuu.",
+    "bulkHeading": "Osta enemmän, säästä enemmän",
+    "bulkSub": "Samaa SKU:ta koskevat määräporrasalennukset. Alennus lisätään automaattisesti kassalla — koodia ei tarvita.",
+    "bulkCtaShop": "Selaa valikoimaa",
+    "bulkCtaContact": "Ota yhteyttä 21+"
   },
   "shop": {
     "title": "Tutkimusvalikoima",
@@ -213,7 +382,12 @@
     "fromLabel": "Alkaen",
     "pricingLabel": "Hinnoittelu",
     "recentlyViewed": "Äskettäin katsellut",
-    "recentlyViewedHelper": "Jatka siitä, mihin jäit"
+    "recentlyViewedHelper": "Jatka siitä, mihin jäit",
+    "coaAvailable": "Analyysitodistus saatavilla",
+    "batchLabel": "Erä {code}",
+    "purityHplcLabel": "{purity}% HPLC",
+    "manufacturedDate": "Valmistettu {date}",
+    "expiresDate": "Vanhenee {date}"
   },
   "product": {
     "addToCart": "Lisää ostoskoriin",
@@ -233,26 +407,160 @@
     "tabCitations": "Tutkimus",
     "tabFaq": "UKK",
     "relatedHeading": "Liittyvät peptidit",
-    "stockIn": "Varastossa — lähtee 24 tunnin sisällä",
-    "stockLow": "Vain {n} pulloa jäljellä",
-    "stockOut": "Loppu — ilmoita minulle",
+    "stockIn": "Varastossa",
+    "stockLow": "Vähissä · {count} jäljellä",
+    "stockOut": "Loppu varastosta",
     "vatNote": "Sis. ALV:n. Lopullinen hinta kassalla.",
     "batchLabel": "Uusin erä",
     "viewCoa": "Näytä analyysitodistus",
     "lab": "Testattu laboratoriossa {lab}",
     "notifyMe": "Ilmoita, kun saatavilla",
-    "notifySubmitted": "Ilmoitamme sinulle sähköpostilla."
+    "notifySubmitted": "Ilmoitamme sinulle sähköpostilla.",
+    "specifications": "Tuotetiedot",
+    "testedAt": "Testauslaboratorio",
+    "manufactured": "Valmistettu",
+    "expires": "Voimassa",
+    "endotoxin": "Endotoksiini",
+    "endotoxinUnit": "EY/mg",
+    "howWeVerify": "Näin varmistamme jokaisen erän",
+    "methodologyHplcTitle": "HPLC-puhtaus",
+    "methodologyHplcDesc": "Käänteisfaasi-HPLC vertailustandardia vasten.",
+    "methodologyMsTitle": "Massaspektri-identiteetti",
+    "methodologyMsDesc": "ESI-MS vahvistaa molekyylipainon 0,1 Da:n tarkkuudella.",
+    "methodologyEndotoxinTitle": "Endotoksiinipaneeli",
+    "methodologyEndotoxinDesc": "LAL-kineettinen kromogeeninen; raja < 5 EY/mg.",
+    "methodologyColdChainTitle": "Kylmäketju varmistettu",
+    "methodologyColdChainDesc": "Lämpötilaloki liitetään jokaiseen toimitukseen.",
+    "readFullMethodology": "Lue koko testausmenetelmä",
+    "whatsInTheBox": "Pakkauksen sisältö",
+    "boxLyophilized": "Lyofilisoitu peptidipullo",
+    "boxBacWater": "Steriili BAC-vesi (10 mL)",
+    "boxCoa": "Eräkohtainen analyysitodistus",
+    "boxStorage": "Säilytys- ja käsittelyohje",
+    "boxReconstitution": "Liuotusprotokolla",
+    "boxTamperSeal": "Turvatiiviste",
+    "shipsIn24h": "Lähetys 24 tunnissa",
+    "fromSizes": "{count, plural, =0 {— kokoa} one {alkaen · 1 koko} other {alkaen · {count} kokoa}}",
+    "stockQuoteOnly": "Vain tarjouspyynnöllä",
+    "requestQuote": "Pyydä tarjous",
+    "pricingOnRequest": "Hinta pyynnöstä",
+    "contactForBatch": "Ota yhteyttä nykyisen erän saatavuuteen",
+    "faqHeading": "Usein kysytyt kysymykset",
+    "viewAllInCategory": "Näytä kaikki kategoriasta {category} →",
+    "trustBadge1": "EU-GMP-toimittajaverkosto",
+    "trustBadge2": "Kolmannen osapuolen HPLC-testattu",
+    "trustBadge3": "Endotoksiini < 5 EY/mg",
+    "trustBadge4": "24 tunnin EU-lähetys",
+    "trustBadge5": "ISO 17025 -laboratoriokumppani",
+    "trustBadge6": "GDPR-yhteensopiva",
+    "trustSub1": "Jokainen erä varmennettu",
+    "trustSub2": "Vahvistettu kumppanilaboratoriossa",
+    "trustSub3": "Riippumaton sertifiointi",
+    "trustSub4": "Ilmainen yli 150 €",
+    "freeShippingThreshold": "Ilmainen toimitus yli {amount} EU:ssa",
+    "wishlistAdd": "Lisää toivelistaan",
+    "wishlistRemove": "Poista toivelistalta",
+    "wishlistSaved": "Toivelistalla",
+    "compareAdd": "Lisää vertailuun",
+    "compareRemove": "Poista vertailusta",
+    "compareAdded": "Vertailussa",
+    "addedToCart": "Lisätty ostoskoriin",
+    "bundleAdded": "Paketti lisätty ostoskoriin",
+    "removedFromCart": "Poistettu ostoskorista",
+    "outOfStock": "Loppu varastosta",
+    "lowStockLeft": "Vähissä · {count} jäljellä",
+    "inStock": "Varastossa",
+    "quoteOnly": "Vain tarjous",
+    "wishlistCleared": "Toivelista tyhjennetty",
+    "purityHplc": "{purity} % HPLC",
+    "quoteTitle": "Pyydä tarjous",
+    "quoteSubtitle": "Hinta ja nykyisen erän saatavuus pyynnöstä. Vastaamme 24 tunnin sisällä.",
+    "quoteSent": "Tarjouspyyntö lähetetty",
+    "quoteEmailPlaceholder": "sinä@lab.fi",
+    "quoteSentDesc": "Lähetämme sinulle nykyisen hinnan tuotteelle {name}.",
+    "freeShippingOver": "Ilmainen toimitus yli {amount} EU:ssa",
+    "sale": "Ale",
+    "addToCartWithPrice": "Lisää ostoskoriin · {price}",
+    "addedToCartDesc": "{name} {mg} mg × {qty}",
+    "subscribeHeading": "Tilaa ja säästä 10 %",
+    "subscribeSub": "Automaattinen uusintatilaus 4–12 viikon välein · peruuta milloin tahansa",
+    "subscribeSaveAmount": "Säästä {amount}/tilaus",
+    "subscribeCadence": "Toimitusväli",
+    "subscribeVialsPerShipment": "Pulloa per toimitus",
+    "subscribePerShipment": "Per toimitus",
+    "subscribeSaved": "Tilaus tallennettu",
+    "subscribeStart": "Aloita tilaus",
+    "subscribeCancelAnytime": "Ohita tai peruuta milloin tahansa",
+    "subscribeLockIn": "Varmista nykyinen erä",
+    "subscribePriorityDispatch": "Priorisoitu EU-lähetys",
+    "subscribeCadence4": "4 viikon välein",
+    "subscribeCadence8": "8 viikon välein",
+    "subscribeCadence12": "12 viikon välein",
+    "subscribeDescription": "{qty} × {mg} mg {weeks} viikon välein — peruuta milloin tahansa tililtäsi.",
+    "completeStack": "Täydennä tutkimuspakkaasi",
+    "saveBundlePercent": "Säästä 5 %",
+    "bundleSaved": "{count} tuotetta · säästä {amount}",
+    "thisProduct": "Tämä tuote",
+    "bundleTotal": "Paketin kokonaishinta",
+    "saveOnBundle": "Säästä {amount} paketista",
+    "addBundle": "Lisää paketti",
+    "qvFullDetails": "Täydet tiedot",
+    "qvRemovedFromWishlist": "Poistettu toivelistalta",
+    "qvSavedToWishlist": "Lisätty toivelistaan",
+    "qvRemovedFromCompare": "Poistettu vertailusta",
+    "qvAddedToCompare": "Lisätty vertailuun",
+    "stickyAdd": "Lisää ostoskoriin",
+    "stickyOutOfStock": "Loppu varastosta",
+    "stickySubscribe": "Tilaa",
+    "stickyCompare": "Vertaile",
+    "stickySubscribeTooltip": "Tilaa ja säästä 10 %",
+    "stickySubscriptionSaved": "Tilaus tallennettu",
+    "stickySubscriptionDesc": "Saat {mg} mg {weeks} viikon välein — peruuta milloin tahansa, säästä 10 %.",
+    "stickyRemovedFromWishlist": "Poistettu toivelistalta",
+    "stickySavedToWishlist": "Lisätty toivelistaan",
+    "stickyRemovedFromCompare": "Poistettu vertailusta",
+    "stickyAddedToCompare": "Lisätty vertailuun",
+    "faq1Q": "Miten jokainen erä varmennetaan?",
+    "faq1A": "Jokaisen erän testaa kolmannen osapuolen ISO 17025 -sertifioitu laboratorio (Eurofins Biolab, Synlab tai Biolab GmbH). HPLC-puhtaus, endotoksiinitasot ja massaspektri-identiteetti vahvistetaan ennen erän vapauttamista. Jokaisen erän analyysitodistuksen PDF löytyy Dokumentit-välilehdeltä.",
+    "faq2Q": "Mitä analyysitodistus sisältää?",
+    "faq2A": "Analyysitodistus sisältää HPLC-puhtausprosentin, endotoksiinin (EY/mg), massaspektri-vahvistuksen, erätunnuksen, valmistuspäivän, viimeisen käyttöpäivän ja testauslaboratorion. Jokaisella erällä on yksilöllinen koodi, jolla voit hakea sen tarkan analyysitodistuksen osoitteessa /coa.",
+    "faq3Q": "Miten pulloa tulisi säilyttää avaamisen jälkeen?",
+    "faq3A": "Lyofilisoidut peptidit säilytetään -20 °C:ssa kuivatetussa ympäristössä. Liuotuksen jälkeen säilytä 2–8 °C:ssa ja käytä protokollasi ilmoittaman ajan kuluessa. Kunkin tuotteen tuoteselosteessa on ilmoitettu tarkka säilytyslämpötila.",
+    "faq4Q": "Toimitatteko maahani?",
+    "faq4A": "Toimitamme tällä hetkellä kaikkiin EU:n jäsenvaltioihin sekä Norjaan, Sveitsiin ja Yhdistyneeseen kuningaskuntaan. Muutamat lainkäyttöalueet ovat paikallisen sääntelyn rajoittamia — katso täydellinen lista kassalta. Kieltomaihin (EU:n rajoitettujen aineiden direktiivin mukaan) ei toimiteta.",
+    "faq5Q": "Saanko ALV-palautuksen EU:n ulkopuolisena tutkijana?",
+    "faq5A": "Jos annat voimassa olevan EU:n ulkopuolisen ALV-rekisteröinnin tai tutkimuslaitostunnuksen, asetamme tilauksesi ALV:n nollakannalle. Lähetä asiakirja osoitteeseen billing@averianlabs.eu tilauksen tekemisen jälkeen, niin palautamme ALV-rivin.",
+    "faq6Q": "Mitä maksutapoja hyväksytte?",
+    "faq6A": "Stripe (kortti, Apple Pay, Google Pay), PayPal, SEPA-tilisiirto yli 1 000 €:n institutionaalisille tilauksille ja Coinbase Commerce BTC-, ETH- ja USDC-maksuille. EU:n kuluttajansuojalainsäädäntö koskee jokaista maksutapaa.",
+    "fbIncludeItem": "Sisällytä {name}",
+    "batchDataHeading": "Erän tiedot",
+    "batchDataCode": "Erätunnus",
+    "batchDataManufactured": "Valmistettu",
+    "batchDataExpires": "Vanhenee",
+    "batchDataLab": "Testauslaboratorio",
+    "batchDataHplc": "HPLC-puhtaus",
+    "batchDataEndotoxin": "Endotoksiini",
+    "batchDataMs": "Massaspektri",
+    "batchDataConfirmed": "Vahvistettu",
+    "batchDataOpenCoa": "Avaa analyysitodistus",
+    "coaAvailable": "Analyysitodistus saatavilla",
+    "openCalculator": "Laske liuotus tälle pullolle"
   },
   "cart": {
     "title": "Ostoskori",
-    "empty": "Ostoskorisi on tyhjä.",
+    "empty": "Ostoskorisi on tyhjä",
+    "emptyDesc": "Valitse peptidi valikoimasta aloittaaksesi tilauksen — jokaisen erän mukana toimitetaan oma analyysitodistus, endotoksiinipaneeli ja massaspektri-identiteettivahvistus.",
+    "browseCatalog": "Selaa valikoimaa",
+    "bestSellers": "Tämän kuukauden suosikit",
     "emptyCta": "Selaa valikoimaa",
     "subtotal": "Välisumma",
+    "subtotalBeforeDiscount": "Välisumma ennen alennusta",
     "shipping": "Toimitus",
     "vat": "ALV",
     "total": "Yhteensä",
-    "checkout": "Kassalle",
+    "checkout": "Siirry kassalle",
     "remove": "Poista",
+    "itemCount": "{count, plural, =0 {ei tuotteita} one {1 tuote} other {{count} tuotetta}}",
     "promo": "Kampanjakoodi",
     "promoApply": "Käytä",
     "points": "Käytä {points} pistettä (−{amount})",
@@ -261,7 +569,7 @@
     "rewardsEarn": "Ansaitse",
     "rewardsFrom": "tällä tilauksella",
     "recommendationsHeading": "Suosituimmat",
-    "continueShopping": "Jatka ostoksia",
+    "continueShopping": "← Jatka ostoksia",
     "secureCheckout": "Turvallinen kassa",
     "freeShippingProgress": "Lisää {amount} vielä — ilmainen EU-toimitus",
     "freeShippingUnlocked": "Ilmainen EU-toimitus avattu"
@@ -294,7 +602,104 @@
     "city": "Postitoimipaikka",
     "country": "Maa",
     "continueToShipping": "Jatka toimitukseen",
-    "title": "Kassa"
+    "title": "Kassa",
+    "loadingShipping": "Ladataan toimitusvaihtoehtoja…",
+    "vat": "ALV",
+    "total": "Yhteensä",
+    "yourCartEmpty": "Ostoskorisi on tyhjä",
+    "completeEmailFirst": "Täytä ensin sähköpostivaihe",
+    "chooseShipping": "Valitse toimitustapa",
+    "checkoutFailed": "Kassa epäonnistui",
+    "cryptoUnavailable": "Kryptomaksu ei ole käytettävissä",
+    "genericError": "Jokin meni vikaan",
+    "paymentSuccess": "Maksu onnistui!",
+    "emailPlaceholder": "sinun@lab.fi",
+    "vatPlaceholder": "FI12345678",
+    "continueToPayment": "Siirry maksamaan",
+    "orderSummary": "Tilauksen yhteenveto",
+    "subtotalItems": "Välisumma ({count, plural, =0 {ei tuotteita} one {1 tuote} other {{count} tuotetta}})",
+    "vatLabel": "ALV ({label})",
+    "totalLabel": "Yhteensä",
+    "paymentMethodLabel": "Maksutapa",
+    "cardSepa": "Kortti / SEPA",
+    "crypto": "Krypto",
+    "consentTerms": "Hyväksyn",
+    "consentTermsLink": "käyttöehdot",
+    "consentAnd": "ja",
+    "consentPrivacy": "tietosuojaselosteen",
+    "consentResearch": "Ymmärrän, että AverianLabsin tuotteet on tarkoitettu vain tutkimuskäyttöön.",
+    "creatingOrder": "Luodaan tilausta…",
+    "vatIncluded": "Sis. ALV:n",
+    "shippingFree": "Ilmainen toimitus",
+    "bulkDiscountLabel": "Määräalennus",
+    "bulkTier10": "−10 % alennus 5–10 vialista samaa SKU:ta",
+    "bulkTier15": "−15 % alennus 11–20 vialista samaa SKU:ta",
+    "bulkTier20": "−20 % alennus 21+ vialista samaa SKU:ta",
+    "bulkNudge10": "Lisää {units} pullo tätä SKU:ta saadaksesi −10 % alennuksen",
+    "bulkNudge15": "Lisää {units} pullo tätä SKU:ta saadaksesi −15 % alennuksen",
+    "bulkNudge20": "Lisää {units} pullo tätä SKU:ta saadaksesi −20 % alennuksen",
+    "shippingPostiExpress": "Posti Express — 1–2 arkipäivää",
+    "shippingDhlExpress": "DHL Express — 1–3 arkipäivää",
+    "shippingDpdClassic": "DPD Classic — 3–5 arkipäivää",
+    "shipTo": "Toimitusosoite",
+    "billTo": "Laskutusosoite",
+    "phone": "Puhelin",
+    "saveInfo": "Tallenna tiedot seuraavaa tilausta varten",
+    "stripeUnavailable": "Stripeä ei ole ladattu. Päivitä sivu ja yritä uudelleen.",
+    "paymentFailedFallback": "Maksu epäonnistui. Yritä uudelleen.",
+    "processingPayment": "Käsitellään maksua…",
+    "payAmount": "Maksa {amount}",
+    "secureHeading": "Turvallinen kassa",
+    "secureTls": "256-bittinen TLS · Stripe Radar -petosten tunnistus jokaisessa maksussa",
+    "securePci": "PCI-DSS Level 1 — emme näe emmekä tallenna korttinumeroasi",
+    "secureWithdrawal": "EU:n 14 päivän peruutusoikeus kuluttajatilauksille",
+    "weAccept": "Hyväksymme",
+    "paymentVisa": "Visa",
+    "paymentMastercard": "Mastercard",
+    "paymentAmex": "Amex",
+    "paymentApplePay": "Apple Pay",
+    "paymentPaypal": "PayPal",
+    "paymentSepa": "SEPA",
+    "paymentCrypto": "BTC / ETH / USDC",
+    "confirmOrder": "Vahvista tilaus",
+    "countryFinland": "Suomi",
+    "countrySweden": "Ruotsi",
+    "countryEstonia": "Viro",
+    "countryGermany": "Saksa",
+    "countryNetherlands": "Alankomaat",
+    "countryFrance": "Ranska",
+    "countrySpain": "Espanja",
+    "countryItaly": "Italia",
+    "countryDenmark": "Tanska",
+    "countryPoland": "Puola",
+    "fieldRequired": "Pakollinen kenttä",
+    "fieldInvalid": "Tarkista kentän sisältö",
+    "bulkNudge10_plural": "Lisää {units} pulloa tätä SKU:ta saadaksesi −10 % alennuksen",
+    "bulkNudge15_plural": "Lisää {units} pulloa tätä SKU:ta saadaksesi −15 % alennuksen",
+    "bulkNudge20_plural": "Lisää {units} pulloa tätä SKU:ta saadaksesi −20 % alennuksen"
+  },
+  "confirm": {
+    "title": "Kiitos tilauksestasi",
+    "subtitle": "Tilausvahvistus on lähetetty sähköpostiisi.",
+    "orderNumber": "Tilausnumero",
+    "orderNotFound": "Tilausta ei löytynyt",
+    "orderNotFoundDesc": "Emme löytäneet tätä tilausta. Tarkista tilausvahvistus sähköpostistasi.",
+    "statusPaid": "Maksettu",
+    "statusPending": "Odottaa maksua",
+    "includedWithOrder": "Tilaukseen sisältyy:",
+    "includeCoa": "Eräkohtainen analyysitodistus (PDF)",
+    "includeEndotoxin": "Endotoksiinitestiraportti",
+    "includeMs": "Massaspektri-vahvistus",
+    "includeReconstitution": "Liuotusohje",
+    "shippingAddress": "Toimitusosoite",
+    "billingAddress": "Laskutusosoite",
+    "orderSummary": "Tilauksen yhteenveto",
+    "subtotal": "Välisumma",
+    "shipping": "Toimitus",
+    "vat": "ALV",
+    "total": "Yhteensä",
+    "viewOrder": "Näytä tilaus",
+    "continueShopping": "Jatka ostoksia"
   },
   "footer": {
     "tagline": "Tarkkoja peptidejä vaativaan tutkimukseen.",
@@ -314,6 +719,7 @@
     "partner": "Kumppanuusohjelma",
     "contact": "Yhteystiedot",
     "faq": "UKK",
+    "rewards": "Rewards",
     "shipping": "Toimitus ja palautukset",
     "terms": "Ehdot",
     "privacy": "Tietosuoja",
@@ -324,7 +730,13 @@
     "rightsReserved": "© {year} AverianLabs. Kaikki oikeudet pidätetään.",
     "vatIdLabel": "ALV-tunnus",
     "researchUse": "Vain tutkimuskäyttöön. Ei ihmisravinnoksi.",
-    "coa": "Analyysitodistusarkisto"
+    "coa": "Analyysitodistusarkisto",
+    "businessIdLabel": "Y-tunnus",
+    "vatLabel": "ALV",
+    "stripeSecured": "Stripe-suojattu",
+    "gdprCompliant": "GDPR-yhteensopiva",
+    "euDispatch": "24 tunnin EU-lähetys",
+    "account": "Tili"
   },
   "cookie": {
     "title": "Evästeet ja analytiikka",
@@ -372,7 +784,102 @@
     "nextProducts": "Seuraavat tuotteet",
     "addToWishlist": "Lisää toivelistalle",
     "removeFromWishlist": "Poista toivelistalta",
-    "closeQuickView": "Sulje pikanäkymä"
+    "closeQuickView": "Sulje pikanäkymä",
+    "shareList": "Jaa lista",
+    "copied": "Kopioitu!",
+    "quote": "Tarjous",
+    "vialSize": "Pullokoko",
+    "addToCartWithPrice": "Lisää ostoskoriin · {price}",
+    "addToCompare": "Lisää vertailuun",
+    "compareAdd": "Lisää vertailuun",
+    "compareAdded": "Vertailussa",
+    "addedToCart": "Lisätty ostoskoriin",
+    "addedToCartDesc": "{name} {mg} mg × {qty}",
+    "batchLabel": "Uusin erä",
+    "batchDataEndotoxin": "Endotoksiini",
+    "batchDataExpires": "Vanhenee",
+    "batchDataHplc": "HPLC-puhtaus",
+    "batchDataManufactured": "Valmistettu",
+    "batchDataOpenCoa": "Avaa analyysitodistus",
+    "coaAvailable": "Näytä analyysitodistus",
+    "endotoxinUnit": "EY/mg",
+    "freeShippingOver": "Ilmainen toimitus yli {amount} EU:ssa",
+    "fromSizes": "{count, plural, =0 {— kokoa} one {alkaen · 1 koko} other {alkaen · {count} kokoa}}",
+    "inStock": "Varastossa",
+    "inStockBadge": "Varastossa",
+    "outOfStock": "Loppu varastosta",
+    "outOfStockBadge": "Loppu varastosta",
+    "lowStockBadge": "Vähissä · {count} jäljellä",
+    "lowStockLeft": "Vähissä · {count} jäljellä",
+    "purityHplc": "{purity} % HPLC",
+    "purityHplcLabel": "{purity} % HPLC",
+    "quoteEmailPlaceholder": "sinä@lab.fi",
+    "quoteSent": "Tarjouspyyntö lähetetty",
+    "quoteSentDesc": "Lähetämme sinulle nykyisen hinnan tuotteelle {name}.",
+    "quoteSubtitle": "Hinta ja nykyisen erän saatavuus pyynnöstä. Vastaamme 24 tunnin sisällä.",
+    "quoteTitle": "Pyydä tarjous",
+    "qvAddedToCompare": "Lisätty vertailuun",
+    "qvFullDetails": "Täydet tiedot",
+    "qvRemovedFromCompare": "Poistettu vertailusta",
+    "qvRemovedFromWishlist": "Poistettu toivelistalta",
+    "qvSavedToWishlist": "Lisätty toivelistaan",
+    "removeFromCompare": "Poista vertailusta",
+    "requestQuote": "Pyydä tarjous",
+    "stockQuoteOnly": "Vain tarjouspyynnöllä",
+    "wishlistAdd": "Lisää toivelistaan",
+    "wishlistSaved": "Toivelistalla",
+    "stickyAdd": "Lisää ostoskoriin",
+    "stickyAddedToCompare": "Lisätty vertailuun",
+    "stickyCompare": "Vertaile",
+    "stickyOutOfStock": "Loppu varastosta",
+    "stickyRemovedFromCompare": "Poistettu vertailusta",
+    "stickyRemovedFromWishlist": "Poistettu toivelistalta",
+    "stickySavedToWishlist": "Lisätty toivelistaan",
+    "stickySubscribe": "Tilaa",
+    "stickySubscribeTooltip": "Tilaa ja säästä 10 %",
+    "stickySubscriptionDesc": "Saat {mg} mg {weeks} viikon välein — peruuta milloin tahansa, säästä 10 %.",
+    "stickySubscriptionSaved": "Tilaus tallennettu",
+    "subscribing": "Aloita tilaus",
+    "applyFilters": "Käytä suodattimia",
+    "checkout": "Kassalle",
+    "empty": "Tyhjä",
+    "emptyCta": "Selaa valikoimaa",
+    "filters": "Suodattimet",
+    "compareLabel": "Vertaile",
+    "comparing": "Vertailussa",
+    "drawerTitle": "Valikko",
+    "freeShippingProgress": "Lisää {amount} saadaksesi ilmaisen toimituksen",
+    "freeShippingUnlocked": "Ilmainen toimitus avattu",
+    "fromLabel": "Alkaen",
+    "pricingLabel": "Hinnoittelu",
+    "privacyLink": "tietosuojakäytäntöön",
+    "privacyPost": ". GDPR-ystävällinen.",
+    "privacyPre": "Käyttämällä sivustoa hyväksyt",
+    "quantity": "Määrä",
+    "researchUseOnly": "Vain tutkimuskäyttöön",
+    "rewardsEarn": "Ansaitse palkintoja",
+    "rewardsFrom": "Palkinnoista",
+    "sale": "Ale",
+    "selectVialSize": "Valitse pullokoko",
+    "shipping": "Toimitus",
+    "shippingFree": "Ilmainen toimitus",
+    "shop": "Kauppa",
+    "subtotal": "Välisumma",
+    "success": "Onnistui",
+    "title": "Otsikko",
+    "total": "Yhteensä",
+    "vat": "ALV",
+    "vatIncluded": "Sis. ALV",
+    "viewAllProducts": "Näytä kaikki tuotteet",
+    "body": "Runko",
+    "secureHeading": "Turvallinen kassa",
+    "featured": "Suositellut",
+    "browseByCategory": "Selaa kategorioittain",
+    "productsCount": "{count, plural, =0 {ei tuotteita} one {1 tuote} other {{count} tuotetta}}",
+    "remove": "Poista",
+    "carouselRequestQuote": "Pyydä tarjous",
+    "carouselPricingOnRequest": "Hinta pyynnöstä",
+    "quickAdd": "Pikalisää"
   },
   "averia": {
     "title": "Averia",
@@ -463,6 +970,18 @@
       "privacyNote": "Keskustelut tallennetaan vain luvallasi. Voit viedä tai poistaa ne milloin tahansa —",
       "privacyLink": "tietosuojakäytäntö"
     },
+    "sourcesHeading": "Lähteet",
+    "sourcesCount": "{count, plural, =0 {ei lähteitä} one {1 lähde} other {{count} lähtettä}}",
+    "showSources": "Näytä lähteet",
+    "hideSources": "Piilota lähteet",
+    "noSources": "Ei vielä viitattuja lähteitä — kysy Averialta tuotteesta nähdäksesi lainaukset.",
+    "sourceTypes": {
+      "product": "Tuote",
+      "coa": "Analyysitodistus",
+      "glossary": "Sanasto",
+      "blog": "Artikkeli",
+      "document": "Dokumentti"
+    },
     "send": "Lähetä",
     "stop": "Pysäytä",
     "ageRequired": "Vahvista ensin, että olet 18+.",
@@ -477,12 +996,34 @@
   "admin": {
     "dashboard": "Hallintapaneeli",
     "dashboardSub": "Yleiskatsaus",
+    "dashboardBadge": "Admin · Hallintapaneeli",
     "moderation": "Moderointi",
     "moderationSub": "Liputettu sisältö",
+    "moderationBadge": "Admin · Moderointi",
+    "moderationDescription": "Jäsenilmoitukset ensin, sitten lexikaalisen suojan tai LLM-moderaattorin liputtamat viestit. Uusimmat ensin. Klikkaa Näytä nähdäksesi koko viestin.",
     "documents": "Dokumentit",
     "documentsSub": "Analyysitodistukset, käyttöturvallisuustiedotteet, HPLC…",
+    "documentsBadge": "Admin · Dokumentit",
+    "documentsDescription": "Hallinnoi tyypitettyjä dokumentteja (COA, SDS, HPLC, METHOD, NMR, SPEC, MSDS), jotka näkyvät tuotesivuilla ja osoitteessa /documents/[id].",
     "audit": "Audit-loki",
     "auditSub": "Jokainen ylläpitotoiminto",
+    "auditBadge": "Admin · Audit-loki",
+    "auditEmpty": "Ei vielä kirjattuja ylläpitotoimintoja.",
+    "auditWhen": "Aika",
+    "auditActor": "Toimija",
+    "auditAction": "Toiminto",
+    "auditEntity": "Kohde",
+    "auditMetadata": "Metatiedot",
+    "averiaConversations": "Averia-keskustelut",
+    "averiaConversationsSub": "Selaa, hae ja luonnostele vastauksia asiakaskeskusteluihin.",
+    "averiaBadge": "Admin · Averia",
+    "averiaTranscriptBadge": "Admin · Keskustelulokio",
+    "averiaTranscriptTitle": "Keskustelulokio · {count} viestiä",
+    "averiaBackToList": "← Kaikki keskustelut",
+    "averiaBackToHome": "← Etusivu",
+    "averiaBackToCommunity": "← Takaisin yhteisöön",
+    "averiaNotFound": "Keskustelua ei löytynyt.",
+    "averiaBackFromMissing": "← Takaisin listaan",
     "signOut": "Kirjaudu ulos",
     "statsPendingModeration": "Odottaa moderointia",
     "statsPendingModerationSub": "tapahtumaa viimeisen 24 tunnin aikana",
@@ -492,8 +1033,78 @@
     "statsRecentPlansSub": "viimeisen 7 päivän aikana",
     "statsRecentThreads": "Uudet ketjut",
     "statsRecentThreadsSub": "tapahtumaa viimeisen 24 tunnin aikana",
+    "statsNewThreads": "Uudet ketjut",
     "statsTotalDocs": "Dokumentteja yhteensä",
-    "statsTotalDocsSub": "kaikki 7 tyyppiä"
+    "statsTotalDocsSub": "kaikki 7 tyyppiä",
+    "viewLink": "Näytä →",
+    "moderationQueue": {
+      "verdictError": "Päätöksen tallentaminen ei onnistunut. Yritä uudelleen.",
+      "verdictRecorded": "Päätös tallennettu.",
+      "queueEmpty": "Jono on tyhjä. Kaikki liputetut viestit on tarkastettu.",
+      "postBodyUnavailable": "(viestin runko ei saatavilla)",
+      "byAuthor": "kirjoittaja {name}",
+      "viewFullPost": "Näytä koko viesti",
+      "hide": "Piilota",
+      "view": "Näytä",
+      "dismissTitle": "Hylkää — ei toimenpiteitä",
+      "dismiss": "Hylkää",
+      "removePostTitle": "Poista — ota viesti alas",
+      "removePost": "Poista viesti",
+      "allowTitle": "Salli — pidä näkyvissä, merkitse tarkastetuksi",
+      "allow": "Salli",
+      "keepTitle": "Pidä liputettuna — tarkastettu, jätä näkyviin",
+      "keep": "Pidä",
+      "removeTitle": "Poista — aseta viestin tila poistetuksi",
+      "remove": "Poista",
+      "openThread": "Avaa ketju →"
+    },
+    "documentsClient": {
+      "newDocument": "Uusi dokumentti",
+      "noDocuments": "Ei vielä dokumentteja. Klikkaa \"Uusi dokumentti\" lisätäksesi yksi.",
+      "deleteAria": "Poista",
+      "createDocument": "Luo dokumentti",
+      "fieldType": "Tyyppi",
+      "fieldTitle": "Otsikko",
+      "titlePlaceholder": "BPC-157 · 2026-04 erä",
+      "fieldVersion": "Versio",
+      "fieldProductOptional": "Tuote (valinnainen)",
+      "noneOption": "— Ei mitään —",
+      "fieldExternalUrlOptional": "Ulkoinen URL (valinnainen)",
+      "externalUrlHint": "PDF-URL R2:ssa tai missä tahansa CDN:ssä",
+      "externalUrlPlaceholder": "https://r2.example.com/coa-bpc-2026-04.pdf",
+      "cancel": "Peruuta",
+      "create": "Luo"
+    },
+    "conversationSearch": {
+      "placeholder": "Hae otsikkoa, keskustelutunnusta…",
+      "allLocales": "Kaikki kielet",
+      "english": "Englanti",
+      "finnish": "Suomi",
+      "german": "Saksa",
+      "swedish": "Ruotsi",
+      "dutch": "Hollanti",
+      "submit": "Hae",
+      "tableTitle": "Otsikko",
+      "tableLocale": "Kieli",
+      "tableOwner": "Omistaja",
+      "tableContext": "Konteksti",
+      "tableLastMessage": "Viimeisin viesti",
+      "ownerUser": "käyttäjä",
+      "ownerAnon": "anonyymi",
+      "empty": "Keskusteluja ei löytynyt."
+    },
+    "draftReply": {
+      "title": "Vastauksen luonnos",
+      "toneWarm": "lämmin",
+      "toneConcise": "tiivis",
+      "toneTechnical": "tekninen",
+      "drafting": "Luonnostellaan…",
+      "generate": "Luo luonnos ({tone})",
+      "charsCount": "{count} merkkiä",
+      "copied": "Kopioitu",
+      "copy": "Kopioi",
+      "supportRequest": "Tukipyyntö"
+    }
   },
   "community": {
     "title": "Yhteisö",
@@ -502,8 +1113,14 @@
     "newThread": "Uusi ketju",
     "signInToPost": "Kirjaudu sisään julkaistaksesi",
     "signInCta": "Kirjaudu sisään",
+    "signInToReact": "Kirjaudu sisään reagoidaksesi",
+    "signInToJoin": "Kirjaudu sisään liittyäksesi keskusteluun →",
+    "signInToCreatePlans": "Kirjaudu sisään luodaksesi tutkimussuunnitelmia.",
+    "signInToViewPlan": "Kirjaudu sisään nähdäksesi tutkimussuunnitelmasi.",
+    "signInCtaArrow": "Kirjaudu sisään →",
     "hubHeading": "Keskustelukategoriat",
     "hubSub": "Valitse kategoria ja sukella sisään.",
+    "hubEyebrow": "Vain tutkimuskäyttöön · moderoitu",
     "leaderboardHeading": "Ahkerimmat kirjoittajat",
     "leaderboardSub": "Jäsenet kerryttävät mainetta saamistaan reaktioista.",
     "recentHeading": "Viimeisin toiminta",
@@ -516,6 +1133,8 @@
     "fieldCategory": "Kategoria",
     "fieldBody": "Sisältö",
     "fieldBodyHint": "Markdown on tuettu. Viestit tarkastaa automaattinen moderaattori.",
+    "titlePlaceholder": "Ole tarkka…",
+    "bodyPlaceholder": "Markdown tuettu. Siteeraa lähteitä mahdollisuuksien mukaan.",
     "submit": "Julkaise ketju",
     "submitting": "Julkaistaan…",
     "replyTitle": "Vastaa",
@@ -549,6 +1168,7 @@
     "reactionHelpful": "Hyödyllinen",
     "reactionInsightful": "Oivaltava",
     "reactionThanks": "Kiitos",
+    "reactionOwnPost": "Et voi reagoida omaan viestiisi",
     "reportPost": "Ilmianna",
     "reportTitle": "Ilmianna tämä viesti",
     "reportReasonLabel": "Syy",
@@ -565,8 +1185,14 @@
     "errorTitleShort": "Julkaisu epäonnistui",
     "errorBody": "Moderaattorijärjestelmä esti viestisi.",
     "moderationNote": "Moderaattorin huomautus",
+    "moderationBadge": "Moderointi",
+    "moderationDescription": "Viestit tarkastaa lexikaalinen suodatin ennen julkaisua, ja LLM-moderaattori tarkastaa ne asynkronisesti. Ihmisjono hoitaa erikoistapaukset.",
+    "threadModerationDescription": "Uudet viestit tarkastaa automaattinen moderaattori ennen julkaisua. Liputettua sisältöä tarkastaa ihmisjono.",
+    "lockedBadge": "Lukittu",
     "activityEmpty": "Ei vielä toimintaa.",
     "leaderboardEmpty": "Ole ensimmäinen.",
+    "anonymous": "Anonyymi",
+    "edited": "muokattu",
     "categories": {
       "announcements": {
         "name": "Tiedotteet",
@@ -598,16 +1224,23 @@
       }
     },
     "cancel": "Peruuta",
-    "reportFailed": "Ilmoituksen lähettäminen ei onnistunut. Yritä uudelleen."
+    "reportFailed": "Ilmoituksen lähettäminen ei onnistunut. Yritä uudelleen.",
+    "timeNow": "nyt",
+    "timeMinutes": "{m} min",
+    "timeHours": "{h} t",
+    "timeDays": "{d} pv"
   },
   "glossary": {
     "title": "Sanasto",
     "subtitle": "Kaikki sivustolla käytetyt lyhenteet, tekniikat ja termit.",
     "searchPlaceholder": "Hae termejä…",
+    "filterAll": "Kaikki",
+    "noResults": "Hakuehtoihin ei vastaavia termejä.",
     "empty": "Ei vielä sanastotermejä.",
     "backToIndex": "← Kaikki termit",
     "relatedTermsHeading": "Liittyvät termit",
     "relatedProductsHeading": "Liittyvät tuotteet",
+    "relatedProducts": "Liittyvät tuotteet",
     "synonymsLabel": "Tunnetaan myös nimellä",
     "notFoundTitle": "Termiä ei löytynyt",
     "notFoundBody": "Meillä ei ole vielä sanastomerkintää tälle termille.",
@@ -617,6 +1250,13 @@
       "compliance": "Vaatimustenmukaisuus",
       "logistics": "Logistiikka",
       "product": "Tuote",
+      "regulatory": "Sääntely"
+    },
+    "categories": {
+      "analysis": "Analyysi",
+      "sequence": "Sekvenssi",
+      "formulation": "Formulaatio",
+      "storage": "Säilytys",
       "regulatory": "Sääntely"
     }
   },
@@ -628,11 +1268,14 @@
     "otherForProduct": "Muut dokumentit tälle tuotteelle",
     "empty": "Ei dokumentteja.",
     "tabLabel": "Dokumentit",
-    "viewAll": "Näytä kaikki dokumentit"
+    "viewAll": "Näytä kaikki dokumentit",
+    "subtitle": "Analyysitodistukset ja dokumentit",
+    "search": "Hae dokumenteista…"
   },
   "authors": {
     "role": "Rooli",
-    "postsComing": "Tämän kirjoittajan artikkelit tulossa pian."
+    "postsComing": "Tämän kirjoittajan artikkelit tulossa pian.",
+    "title": "Kirjoittajat"
   },
   "plans": {
     "title": "Tallennetut tutkimussuunnitelmat",
@@ -649,6 +1292,8 @@
     "fieldTitle": "Suunnitelman nimi",
     "fieldNotes": "Muistiinpanot (valinnainen)",
     "fieldNotesHint": "Markdown tuettu. Näkyy jaettaessa.",
+    "titlePlaceholder": "Jännekorjauspaneeli",
+    "notesPlaceholder": "Miksi tämä yhdistelmä, in vitro -olosuhteet, odotetut lukemat…",
     "saveChanges": "Tallenna muutokset",
     "deletePlan": "Poista suunnitelma",
     "deleteConfirm": "Poistetaanko tämä suunnitelma? Toimintoa ei voi peruuttaa.",
@@ -666,7 +1311,13 @@
     "sharedPlanSubtitle": "Kuratoitu paketti AverianLabs-yhteisön jäseneltä.",
     "signInCta": "Kirjaudu sisään tallentaaksesi",
     "saveFailed": "Suunnitelmaan tallentaminen ei onnistunut. Yritä uudelleen.",
-    "addedToPlan": "Tallennettu suunnitelmaan."
+    "addedToPlan": "Tallennettu suunnitelmaan.",
+    "cancel": "Peruuta",
+    "copy": "Kopioi",
+    "deleteConfirmPhrase": "DELETE",
+    "badge": "Suunnitelmat",
+    "signInCtaArrow": "Kirjaudu sisään luodaksesi suunnitelmia →",
+    "signInToCreatePlans": "Kirjaudu sisään luodaksesi suunnitelmia"
   },
   "activity": {
     "title": "Mitä on tapahtunut",
@@ -681,7 +1332,8 @@
       "plan_shared": "jakoi tutkimussuunnitelman:"
     },
     "empty": "Ei vielä toimintaa — syöte täyttyy jäsenten postatessa.",
-    "viewAll": "Näytä kaikki toiminta"
+    "viewAll": "Näytä kaikki toiminta",
+    "subtitle": "Viimeisimmät tapahtumat yhteisössä"
   },
   "gdpr": {
     "exportTitle": "Vie tietosi",
@@ -692,16 +1344,25 @@
     "deleteDescription": "Poista tilisi ja kaikki siihen liittyvät tiedot pysyvästi. 30 päivän kuluttua toimintoa ei voi peruuttaa.",
     "deleteButton": "Poista tili",
     "deleteConfirm": "Kirjoita DELETE vahvistaaksesi. 30 päivän kuluttua toimintoa ei voi peruuttaa.",
-    "deleteConfirmPhrase": "DELETE"
+    "deleteConfirmPhrase": "DELETE",
+    "deleteScheduledTitle": "Tilin poisto ajastettu.",
+    "deleteScheduledBody": "Kaikki tietosi poistetaan pysyvästi 30 päivän kuluessa.",
+    "deletePlaceholder": "DELETE",
+    "cancel": "Peruuta",
+    "title": "Tietosuoja",
+    "exportData": "Vie tietoni",
+    "deleteAccount": "Poista tilini"
   },
   "account": {
     "title": "Tili",
+    "badge": "Tili",
     "welcome": "Tervetuloa takaisin",
     "sectionResearchPlans": "Tallennetut tutkimussuunnitelmat",
     "sectionGdpr": "Yksityisyys ja tiedot",
     "viewPlans": "Näytä suunnitelmat",
     "createPlan": "Luo suunnitelma",
     "noPlans": "Et ole vielä luonut suunnitelmia.",
+    "plansEmptyHint": "Kokoa yhdessä käyttämäsi tuotteet ja jaa ne julkisesti linkillä.",
     "deletedPending": "Tilin poisto on vireillä. Se käsitellään 30 päivän kuluessa.",
     "exportReady": "Tietojen vienti on valmis. Tarkista sähköpostisi.",
     "sectionAi": "Averia ja tallennetut tiedot",
@@ -719,18 +1380,69 @@
     "aiSourceExplicit": "Pyysit muistamaan tämän",
     "aiSourceInferred": "Päätelty keskusteluistasi",
     "aiConsentOnToast": "Keskustelujen tallennus otettu käyttöön.",
-    "aiConsentOffToast": "Keskustelujen tallennus poistettu käytöstä."
+    "aiConsentOffToast": "Keskustelujen tallennus poistettu käytöstä.",
+    "tileOrders": "Tilaukset",
+    "tileCoaLibrary": "Analyysitodistusarkisto",
+    "tileSubscriptions": "Tilaukset",
+    "tileSecurity": "Tietoturva",
+    "itemsCount": "{count, plural, =0 {Ei kohteita} one {1 kohde} other {{count} kohdetta}}",
+    "planUntitled": "Nimetön suunnitelma",
+    "planProductsCount": "{count, plural, one {# tuote} other {# tuotetta}}",
+    "planVisibilityPublic": "Julkinen",
+    "planVisibilityPrivate": "Yksityinen",
+    "backToAccount": "← Takaisin tilille",
+    "orders": "Tilaukset",
+    "noOrders": "Et ole vielä tehnyt tilauksia.",
+    "noOrdersSub": "Selaa valikoimaa, ja ensimmäinen tilauksesi näkyy täällä.",
+    "browseShop": "Selaa kauppaa",
+    "notificationsBadge": "Ilmoitukset",
+    "notificationsTitle": "Postilaatikko",
+    "notificationsDescription": "Vastaukset, reaktiot ja jaetut suunnitelmat. {count} lukematonta.",
+    "notificationsSignInPrompt": "Kirjaudu sisään nähdäksesi ilmoitukset.",
+    "notificationsAllCaughtUp": "Olet ajan tasalla.",
+    "notificationsSomeone": "Joku",
+    "notificationsReply": "vastasi ketjuusi",
+    "notificationsReaction": "reagoi viestiisi",
+    "notificationsPlanShared": "jakoi tutkimussuunnitelman",
+    "notificationsNotified": "ilmoitti sinulle",
+    "deleteConfirmTitle": "Tilin poisto ajastettu.",
+    "deleteConfirmBody": "Kaikki tietosi poistetaan pysyvästi 30 päivän kuluessa.",
+    "deleteUnavailableTitle": "Tilin poisto ei ole käytettävissä",
+    "deleteUnavailableBody": "Tässä käyttöönotossa ei ole tietokantaa määritettynä.",
+    "confirmDeleteTitle": "Kirjaudu sisään vahvistaaksesi",
+    "confirmDeleteBody": "Kirjaudu sisään tilille, jonka poistoa haluat vahvistaa.",
+    "confirmDeleteSignInLink": "← Kirjaudu sisään",
+    "confirmDeleteConfirmedBadge": "Vahvistettu",
+    "confirmDeleteHardDeleteNote": "Henkilötietosi on asetettu odottamaan pysyvää poistoa 30 päivän kuluessa. Siihen asti ne on anonymisoitu tietokannassa, mutta tuki voi palauttaa ne, jos muutat mielesi.",
+    "confirmDeleteHomeLink": "← Etusivu",
+    "settings": "Asetukset",
+    "security": "Turvallisuus",
+    "addresses": "Osoitteet",
+    "preferences": "Mieltymykset"
   },
   "contact": {
+    "title": "Yhteystiedot",
+    "intro": "Oikeita tutkijoita, oikeasti nopeasti. Vastaamme 24 tunnin sisällä arkipäivisin.",
+    "emailLabel": "Sähköposti",
+    "labInquiriesLabel": "Laboratoriotiedustelut",
+    "hqNote": "Pääkonttori: Helsinki, Suomi · Varasto: Vantaa · Laboratoriokumppani: Eurofins Biolab (DE)",
     "name": "Nimi",
-    "email": "Sähköposti",
     "subject": "Aihe",
     "message": "Viesti",
     "send": "Lähetä viesti",
     "sending": "Lähetetään…",
     "sentTitle": "Viesti lähetetty",
     "sentBody": "Vastaamme 24 tunnin sisällä.",
-    "errorTitle": "Jotain meni pieleen"
+    "errorTitle": "Jotain meni pieleen",
+    "email": "Sähköposti",
+    "cofounderPromisesHeading": "Mihin voit luottaa",
+    "cofounderPromisesSub": "Kolme lupausta, jotka annamme jokaiselle tutkijalle, joka kerta.",
+    "promiseCoaTitle": "Laboratoriotulokset, joka kerta",
+    "promiseCoaBody": "Jokaisen erän mukana tulee sen COA. Voit myös hakea minkä tahansa erän COA:n verkossa — hae tuotteen tai eräkoodin perusteella.",
+    "promiseCoaCta": "Selaa COA-rekisteriä",
+    "promiseSupportTitle": "Ihminen ja koulutettu botti",
+    "promiseSupportBody": "Averia vastaa useimpiin kysymyksiin sekunneissa. Monimutkaiset ja kaupalliset kyselyt ohjautuvat Helsinki-tutkimustiimillemme yhden työpäivän sisällä.",
+    "promiseSupportCta": "Kysy Averialta"
   },
   "auth": {
     "signInTitle": "Kirjaudu sisään",
@@ -787,5 +1499,990 @@
     "confirmSuccess": "Tilauksesi on vahvistettu. Tervetuloa mukaan!",
     "confirmInvalid": "Vahvistuslinkki on virheellinen tai vanhentunut.",
     "confirmMissing": "Vahvistuslinkki on puutteellinen."
+  },
+  "legal": {
+    "draftBanner": "LUONNOS — VAATII JURIDISEN TARKISTUKSEN ENNEN JULKAISUA. Tämä sivu on suomenkielinen ehdotusluonnos eikä vielä sitova.",
+    "terms": {
+      "title": "Käyttöehdot",
+      "lastUpdated": "Päivitetty viimeksi: 1.9.2026",
+      "intro": "Käyttämällä averianlabs.eu-sivustoa tai muita AverianLabsin verkkotunnuksia hyväksyt nämä käyttöehdot. Kaikki tuotteet myydään tiukalla vain tutkimuskäyttöön -lisenssillä.",
+      "sections": {
+        "eligibility": {
+          "title": "1. Kelpoisuus",
+          "body": "Ostajan on oltava vähintään 18-vuotias ja pätevä tutkija tai institutionaalinen ostaja voidakseen ostaa AverianLabsilta."
+        },
+        "researchUse": {
+          "title": "2. Vain tutkimuskäyttöön",
+          "body": "Kaikki tuotteet on tarkoitettu ainoastaan laboratoriotutkimukseen ja in vitro -tutkimuksiin. Niitä EI ole tarkoitettu ihmisravinnoksi, diagnostiseen käyttöön eikä terapeuttisiin sovelluksiin."
+        },
+        "pricing": {
+          "title": "3. Hinnoittelu ja ALV",
+          "body": "Hinnat sisältävät EU:n ALV:n (OSS-järjestelmä). B2B-asiakkaat, joilla on voimassa oleva ALV-numero, voivat ostaa käännettyä verovelvollisuutta käyttäen (reverse charge) kassalla."
+        },
+        "shipping": {
+          "title": "4. Toimitus",
+          "body": "Lähetämme tilaukset 24 tunnin kuluessa Helsingin varastoltamme. Vahingonvaara siirtyy ostajalle kuljetusyhtiön skannauksessa."
+        },
+        "returns": {
+          "title": "5. Palautukset",
+          "body": "Tutkimuslaatuisten peptidien luonteen vuoksi avattuja tai kylmäketjusta vaurioituneita pulloja ei voi palauttaa. Avaamattoman tuotteen voi palauttaa 14 päivän kuluessa vaihtoa tai hyvitystä varten."
+        },
+        "liability": {
+          "title": "6. Vastuunrajoitus",
+          "body": "AverianLabsin vastuu rajoittuu tuotteen ostohintaan. Emme takaa soveltuvuutta mihinkään tiettyyn tutkimuskäyttöön julkaistua analyysitodistusta pidemmälle."
+        },
+        "governingLaw": {
+          "title": "7. Sovellettava laki",
+          "body": "Näitä ehtoja sovelletaan Suomen lain mukaan. Riidat ratkaistaan yksinomaan Helsingin käräjäoikeudessa."
+        },
+        "contact": {
+          "title": "8. Yhteystiedot",
+          "body": "Kysymykset: legal@averianlabs.eu"
+        }
+      }
+    },
+    "privacy": {
+      "title": "Tietosuojaseloste",
+      "lastUpdated": "Päivitetty viimeksi: 1.9.2026 · GDPR-yhteensopiva",
+      "intro": "Tämä seloste kuvaa, miten AverianLabs Oy (\"me\") käsittelee henkilötietoja averianlabs.eu-sivustolla ja muilla verkkotunnuksillamme EU:n yleisen tietosuoja-asetuksen (GDPR) ja Suomen tietosuojalain mukaisesti.",
+      "sections": {
+        "dataCollected": {
+          "title": "Keräämämme tiedot",
+          "body": "Tilitiedot: sähköposti, nimi, salasanan tiiviste (jos luot tilin). Tilaustiedot: toimitus- ja laskutusosoite, tilaushistoria. Tekniset tiedot: IP-osoite (lyhennetty), käyttäjäagentti, viittaussivusto (säilytetään 30 päivää). Analytiikka: vain evästebannerin kautta annetulla suostumuksellasi."
+        },
+        "lawfulBasis": {
+          "title": "Käsittelyperuste",
+          "body": "Sopimus (art. 6(1)(b)) tilauksille, suostumus (art. 6(1)(a)) analytiikalle, lakisääteinen velvoite (art. 6(1)(c)) kirjanpidossa."
+        },
+        "subprocessors": {
+          "title": "Alikäsittelijät",
+          "body": "Stripe Payments Europe Ltd — maksujen käsittely (EU); Coinbase Commerce — kryptovaluuttamaksut; Resend — transaktiosähköposti (EU); PostHog Cloud EU — tuoteanalytiikka (suostumuksella); Sanity Inc. — sisällönhallinta (Yhdysvallat, EU-tietoresidenssi); Cloudflare — CDN / DDoS-suojaus; Neon — tietokanta (Frankfurt)."
+        },
+        "yourRights": {
+          "title": "Oikeutesi",
+          "body": "Sinulla on oikeus tutustua tietoihisi, oikaista, poistaa, rajoittaa käsittelyä, siirtää tiedot ja vastustaa käsittelyä. Lähetä pyyntö osoitteeseen privacy@averianlabs.eu. Voit myös tehdä valituksen kansalliselle valvontaviranomaiselle (Suomessa: tietosuojavaltuutettu)."
+        },
+        "retention": {
+          "title": "Säilytysaika",
+          "body": "Tilitiedot: poistoon asti. Tilaustiedot: 7 vuotta (kirjanpitovelvollisuus). Analytiikka: 14 kuukautta."
+        },
+        "contact": {
+          "title": "Yhteystiedot",
+          "body": "Tietosuojavaltuutettu: dpo@averianlabs.eu · AverianLabs Oy, Helsinki, Suomi."
+        }
+      }
+    },
+    "cookies": {
+      "title": "Evästeet",
+      "lastUpdated": "Päivitetty viimeksi: 1.9.2026",
+      "intro": "Käytämme vain välttämättömiä evästeitä. Välttämättömiä evästeitä ei voi poistaa käytöstä; analytiikkaevästeet vaativat suostumuksesi.",
+      "sections": {
+        "essential": {
+          "title": "Välttämättömät",
+          "body": "averianlabs-cart — tallentaa ostoskorin (1 vuosi); averianlabs-age-confirmed — muistaa ikäportin hyväksynnän (1 vuosi); averianlabs-cookie-consent — muistaa evästevalintasi (1 vuosi); Stripe / Coinbase -istuntoevästeet (asettaa maksupalveluntarjoaja)."
+        },
+        "analytics": {
+          "title": "Analytiikka (suostumuksella)",
+          "body": "PostHog (EU) ja Plausible ladataan vasta, kun hyväksyt analytiikkaevästeet evästebannerissa. Keräämme anonyymia ja koostettua käyttötietoa."
+        },
+        "changeChoice": {
+          "title": "Muuta valintaasi",
+          "body": "Napsauta footterin \"Evästeet\"-linkkiä tai tyhjennä selaimen tiedot."
+        }
+      }
+    },
+    "disclaimer": {
+      "badge": "Vain tutkimuskäyttöön",
+      "title": "Tutkimuskäyttödisclaimer",
+      "lead": "Kaikki AverianLabs Oy:n myymät tuotteet on tarkoitettu ainoastaan laboratoriotutkimukseen ja in vitro -tutkimuksiin.",
+      "sections": {
+        "notForHuman": {
+          "title": "Ei ihmisille eikä eläimille",
+          "body": "AverianLabsin myymiä tuotteita ei ole tarkoitettu ihmis- tai eläinkäyttöön, nautittavaksi, annettavaksi tai muulla tavoin elimistöön annettavaksi."
+        },
+        "noMedicalClaims": {
+          "title": "Ei lääketieteellisiä väitteitä",
+          "body": "Verkkosivuston tiedot ovat vain tutkimus- ja koulutuskäyttöön. Ne eivät ole lääketieteellistä neuvontaa, diagnoosia tai hoitosuositusta. AverianLabs Oy ei suosittele, tue tai hyväksy minkään tuotteen käyttöä ohjeiden vastaisesti."
+        },
+        "buyerResponsibility": {
+          "title": "Ostajan vastuu",
+          "body": "Ostamalla AverianLabsilta vahvistat olevasi pätevä tutkija tai institutionaalinen ostaja ja käyttäväsi tuotteita ainoastaan lailliseen laboratoriotutkimukseen noudattaen kaikkia sovellettavia paikallisia, kansallisia ja kansainvälisiä lakeja ja määräyksiä."
+        },
+        "compliance": {
+          "title": "Sääntelyn noudattaminen",
+          "body": "Ostajan vastuulla on varmistaa, että tutkimuspeptidien tuonti, hallussapito ja käyttö on kaikkien sovellettavien määräysten mukaista hänen lainkäyttöalueellaan. AverianLabs Oy pidättää oikeuden kieltäytyä palvelusta mille tahansa ostajalle tai lainkäyttöalueelle harkintansa mukaan."
+        }
+      }
+    }
+  },
+  "compare": {
+    "badge": "Rinnakkain",
+    "title": "Vertaile tutkimuspeptidejä",
+    "subtitle": "Puhtaus, pullokoot, sekvenssi ja säilytys — koko valikoiman laajuudelta.",
+    "compare": "Lisää vertailuun",
+    "actionAdd": "Lisää vertailuun",
+    "clear": "Poista vertailusta",
+    "removeFromCompareA11y": "Poista vertailusta",
+    "addedToCart": "Vertailussa",
+    "inStockCount": "Varastossa",
+    "lowStock": "Vähissä · {count} jäljellä",
+    "close": "Sulje",
+    "barTitle": "Vertaile peptidejä",
+    "barLabel": "{count, plural, =0 {Ei valittuja tuotteita} one {1 tuote vertailussa} other {{count} tuotetta vertailussa}}",
+    "barSub": "Vierekkäin HPLC, massaspektri, sekvenssi ja hinnoittelu.",
+    "addAllToCart": "Lisää kaikki ostoskoriin",
+    "badgeQuote": "Vain tarjouspyynnöllä",
+    "clearAll": "Tyhjennä kaikki",
+    "colAvailability": "Saatavuus",
+    "colCas": "CAS",
+    "colCategory": "Kategoria",
+    "colFormula": "Kaava",
+    "colMw": "MW",
+    "colPurity": "Puhtaus",
+    "colSequence": "Sekvenssi",
+    "colStorage": "Säilytys",
+    "colVialSizes": "Pullokoot",
+    "contact": "Yhteystiedot",
+    "emptyBody": "Selaa tuotteita ja lisää niitä vertailuun.",
+    "emptyTitle": "Ei vertailtavia tuotteita",
+    "footerSummary": "Verrataan {count}/{max}",
+    "fromPrice": "Alkaen {price}",
+    "headerAttribute": "Ominaisuus",
+    "pickerPrompt": "Valitse tuote",
+    "actionNotify": "Ilmoita minulle"
+  },
+  "about": {
+    "badge": "Tietoa AverianLabsista",
+    "title": "Tutkijoiden rakentama, tutkijoille.",
+    "intro": "Perustimme AverianLabsin, koska tutkimuspeptidien toimitusketju oli läpinäkymätön, hidas ja epäjohdonmukainen. Jokaisen erän mukana tulee julkinen analyysitodistus, jokaiseen kysymykseen saa oikean vastauksen, ja jokainen tilaus lähtee 24 tunnissa EU-laboratoriosta.",
+    "stats": [
+      {
+        "value": "100 %",
+        "label": "Analyysitodistus jokaisessa erässä",
+        "note": "Sitoutumisemme jokaisen lähetyksen yhteydessä"
+      },
+      {
+        "value": "—",
+        "label": "Eräkohtainen HPLC-puhtaus",
+        "note": "Julkaistaan eräkohtaisesti"
+      },
+      {
+        "value": "24 h",
+        "label": "EU-lähetys",
+        "note": "Tavoitteemme"
+      },
+      {
+        "value": "—",
+        "label": "Palveltuja tutkijoita",
+        "note": "Useita satoja EU:ssa"
+      }
+    ],
+    "valuesTitle": "Arvomme",
+    "values": [
+      {
+        "title": "Läpinäkyvyys",
+        "body": "Jokainen testitulos, jokainen toimittaja, jokainen hinta. Avoimuus oletuksena."
+      },
+      {
+        "title": "Puhtaus",
+        "body": "Myymme vähemmän peptidejä, jotta voimme testata jokaisen erän perusteellisemmin."
+      },
+      {
+        "title": "Nopeus",
+        "body": "Tutkimus ei odota. 24 tunnin lähetys EU-keskusvarastostamme Helsingistä."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Usein kysytyt kysymykset",
+    "subtitle": "Nopeat vastaukset yleisimpiin kysymyksiin.",
+    "items": [
+      {
+        "q": "Onko tuotteet tarkoitettu ihmisille?",
+        "a": "Ei. Kaikki AverianLabsin myymät tuotteet on tarkoitettu ainoastaan laboratoriotutkimukseen ja in-vitro-tutkimuksiin. Niitä ei ole tarkoitettu ihmisten tai eläinten käyttöön."
+      },
+      {
+        "q": "Kuinka kauan toimitus kestää?",
+        "a": "Lähetämme 24 tunnin sisällä Helsingin varastostamme. EU-toimitukset kestävät tyypillisesti 1–3 arkipäivää Postin tai DHL:n kautta."
+      },
+      {
+        "q": "Toimitatteko analyysitodistuksia?",
+        "a": "Kyllä. Jokaisen erän mukana toimitetaan eräkohtainen analyysitodistus (HPLC-puhtaus, massaspektri-vahvistus) ja endotoksiiniraportti. PDF-tiedostot ovat julkisesti saatavilla osoitteessa /coa."
+      },
+      {
+        "q": "Mihin maihin toimitatte?",
+        "a": "Toimitamme kaikkiin EU-maihin sekä Iso-Britanniaan, Norjaan, Sveitsiin ja Turkkiin. Emme toimita muutamaan rajoitettuun lainkäyttöalueeseen (katso käyttöehdot)."
+      },
+      {
+        "q": "Mitä maksutapoja hyväksytte?",
+        "a": "Kortit (Visa, MC, Amex), Apple Pay, Google Pay, iDEAL, Klarna, SEPA-suoraveloitus ja kryptovaluutat (BTC, ETH, USDC) Coinbase Commercen kautta."
+      },
+      {
+        "q": "Tarjoatteko määrä- / B2B-hinnoittelua?",
+        "a": "Kyllä — hae kumppanuusohjelmaamme. Yliopistot, tutkimuslaboratoriot ja jälleenmyyjät saavat jopa 35 % alennuksen ja NET-14-laskutuksen."
+      }
+    ]
+  },
+  "labTests": {
+    "badge": "ISO 17025 -laboratoriokumppani",
+    "title": "Näin testaamme jokaisen erän",
+    "subtitle": "Riippumaton todennus joka vaiheessa. Yhtään erää ei lähetetä ilman täydellistä analyyttista sormenjälkeä.",
+    "batchesLabel": "seurattua erää",
+    "tests": [
+      {
+        "title": "HPLC-puhtaus",
+        "body": "Käänteisfaasi-HPLC kvantifioi peptidipitoisuuden sertifioitua referenssistandardia vasten. Hyväksymisraja: ≥ 98 %."
+      },
+      {
+        "title": "Endotoksiini (LAL)",
+        "body": "Kineettinen kromogeeninen LAL USP <85> -menetelmän mukaisesti. Hyväksymisraja: < 5 EY/mg."
+      },
+      {
+        "title": "Massaspektrometria",
+        "body": "ESI-MS vahvistaa molekyylipainon vastaavan teoreettista ±1 Da tarkkuudella."
+      },
+      {
+        "title": "Steriliteetti ja mykoplasma",
+        "body": "14 vuorokauden steriliteettitesti (USP <71>) ja mykoplasma-qPCR jokaiselle erälle."
+      }
+    ],
+    "sequenceTitle": "Testausjärjestys",
+    "sequence": [
+      {
+        "step": "01",
+        "title": "Vastaanotto",
+        "body": "Raaka-aine siirtyy karanteeniin"
+      },
+      {
+        "step": "02",
+        "title": "Identiteetti",
+        "body": "ESI-MS vahvistaa sekvenssin"
+      },
+      {
+        "step": "03",
+        "title": "Puhtaus",
+        "body": "HPLC 214 nm + 220 nm"
+      },
+      {
+        "step": "04",
+        "title": "Turvallisuus",
+        "body": "Endotoksiini, steriliteetti, mykoplasma"
+      }
+    ]
+  },
+  "quality": {
+    "badge": "Laatu",
+    "title": "Laatu lopusta loppuun",
+    "items": [
+      {
+        "title": "EU-GMP-toimittajat",
+        "body": "Auditoimme jokaisen peptidivalmistajan vuosittain paikan päällä."
+      },
+      {
+        "title": "ISO 17025 -testaus",
+        "body": "Riippumattomat laboratoriot Saksassa, Suomessa ja Alankomaissa testaavat jokaisen erän uudelleen ennen lähetystä."
+      },
+      {
+        "title": "EU-laajuinen logistiikka",
+        "body": "Helsingistä sinulle 24 tunnissa. Seurattu, allekirjoitettava, huoneenlämpö- tai kylmäketju tarpeen mukaan."
+      }
+    ]
+  },
+  "shippingReturns": {
+    "title": "Toimitus, palautukset ja takuut",
+    "items": [
+      {
+        "title": "Kuljettajat",
+        "body": "Posti (pääasiallinen Suomessa), DHL Express (muu EU), DPD Classic."
+      },
+      {
+        "title": "Lähetys",
+        "body": "Ennen klo 14:00 EET tilatut tilaukset lähtevät samana arkipäivänä. Muut 24 tunnin sisällä."
+      },
+      {
+        "title": "Kylmäketju",
+        "body": "Huoneenlämmössä säilyvät peptidit lähetetään suojavaahdossa. Kylmäsäilytettävät tuotteet lähetetään kylmäpakkauksilla."
+      },
+      {
+        "title": "Palautukset",
+        "body": "Avaamattoman tuotteen voi palauttaa 14 päivän sisällä. Avattuja tai lämpötilaltaan vaarantuneita pulloja ei voi palauttaa."
+      }
+    ],
+    "ratesTitle": "Hinnat",
+    "tableRegion": "Alue",
+    "tableCarrier": "Kuljettaja",
+    "tableEta": "Arvioitu toimitusaika",
+    "tablePrice": "Hinta",
+    "rates": [
+      {
+        "region": "Suomi",
+        "carrier": "Posti Express",
+        "eta": "1–2 arkipäivää",
+        "priceCents": 990
+      },
+      {
+        "region": "EU (muu)",
+        "carrier": "DHL Express",
+        "eta": "1–3 arkipäivää",
+        "priceCents": 1490
+      },
+      {
+        "region": "EU (muu)",
+        "carrier": "DPD Classic",
+        "eta": "3–5 arkipäivää",
+        "priceCents": 690
+      },
+      {
+        "region": "UK / NO / CH",
+        "carrier": "DHL Express",
+        "eta": "2–4 arkipäivää",
+        "priceCents": 1990
+      }
+    ],
+    "freeShippingNote": "Ilmainen toimitus EU-tilauksille yli €150.",
+    "guaranteeHeading": "Uudelleentoimitus- ja hyvitystakuu",
+    "guaranteeSub": "Jos tilauksesi ei saapunut tai tulli pidätti sen todennetun kuljetusvirheen vuoksi, korjaamme tilanteen.",
+    "guaranteeDidntArriveTitle": "Ei saapunut?",
+    "guaranteeDidntArriveBody": "Jos seuranta osoittaa lähetyksen kadonneeksi, ota yhteyttä tukeen tilausnumerollasi. Avaamme kuljetusyhtiön tutkinnan ja lähetämme samat tuotteet veloituksetta uudelleen tutkinnan valmistuttua.",
+    "guaranteeCustomsTitle": "Tulli pidätti?",
+    "guaranteeCustomsBody": "AverianLabsin tutkimuskäyttöön myymät peptidit eivät ole valvottuja aineita ja menevät EU-tullin läpi rutiininomaisesti. Jos lähetys pidätetään ja syy on todennettavasti kuljetusyhtiön tai meidän lähetysasiakirjojen, lähetämme uudelleen veloituksetta.",
+    "guaranteeReshipFailsTitle": "Toinenkaan uudelleenlähetys ei saapunut?",
+    "guaranteeReshipFailsBody": "Hyvitämme kyseisten tuotteiden koko hinnan — alkuperäiset toimituskulut mukaan_lukien — kun toinen toimitus ei saavu kuljetusyhtiön ilmoittamaan aikarajaan mennessä.",
+    "guaranteeContactCta": "Avaa uudelleenlähetystapaus",
+    "supportHeading": "Asiantuntijatuki — ihminen ja koulutettutikko",
+    "supportSub": "Suurimman osan tuotevalinta- ja liuotus-kysymyksistä vastaa Averia, koulutettututkimusavustajamme, sekunneissa. Monimutkaiset tai kaupalliset kyselyt ohjautuvat Helsinki-tiimillemme.",
+    "supportAveriaTitle": "Averia (tutkimusavustaja)",
+    "supportAveriaBody": "Koulutettu jokaisen tuotteen datalehdellä, COA:lla ja liuotusoppaalla. Kysyy tilausnumeron tarvittaessa eikä kuvittele puhtauslukuja.",
+    "supportHumanTitle": "Helsinki-tutkimustiimi",
+    "supportHumanBody": "Helsinki-pohjainen labor-erikoistiimi. Sähköposti support@averianlabs.eu — tyypillinen vastaus yhden työpäivän sisällä; prioriteettijono tukku- ja akateemisille tilauksille.",
+    "supportContactCta": "Ota yhteyttä tiimiin"
+  },
+  "wishlist": {
+    "title": "Toivelista",
+    "subtitle": "Tallentamasi peptidit — jatka siitä mihin jäit tai jaa kollegalle.",
+    "bestSellersBadge": "Suosittu tutkijoiden keskuudessa",
+    "bestSellersTitle": "Myydyimmät",
+    "bestSellersSubtitle": "Tässä kuussa eniten äänestetyt peptidit.",
+    "viewAllProducts": "Näytä kaikki {count} tuotetta →"
+  },
+  "rewards": {
+    "badge": "Kanta-asiakasohjelma",
+    "title": "AverianLabs Rewards",
+    "subtitle": "Ansaitse pisteitä joka tilauksesta. Nouse tasoilla. Lunasta tutkimusluottoa. Mitä enemmän tutkit, sitä enemmän säästät.",
+    "chooseTier": "Valitse tasosi",
+    "mostPopular": "Suosituin",
+    "tiers": [
+      {
+        "name": "Apex",
+        "threshold": 0,
+        "perks": [
+          {
+            "text": "1 piste per 1 € kulutus"
+          },
+          {
+            "text": "Syntymäpäiväbonuspisteet"
+          },
+          {
+            "text": "Ensikäyttöoikeus uusiin eriin"
+          }
+        ],
+        "ctaStart": "Aloita ansaitseminen",
+        "ctaUnlock": "Avaa {name}"
+      },
+      {
+        "name": "Kristalli",
+        "threshold": 500,
+        "perks": [
+          {
+            "text": "1,25 pistettä per 1 € kulutus"
+          },
+          {
+            "text": "Ilmainen EU-toimitus kaikkiin tilauksiin"
+          },
+          {
+            "text": "Ainoastaan jäsenille tarjottavat tuotteet"
+          },
+          {
+            "text": "Etusija erävalinnoissa"
+          }
+        ],
+        "ctaStart": "Aloita ansaitseminen",
+        "ctaUnlock": "Avaa {name}"
+      },
+      {
+        "name": "Aurora",
+        "threshold": 2000,
+        "perks": [
+          {
+            "text": "1,5 pistettä per 1 € kulutus"
+          },
+          {
+            "text": "Ilmainen pikalähetys EU:ssa"
+          },
+          {
+            "text": "Ensisijainen tukilinja"
+          },
+          {
+            "text": "Kutsut laboratoriokäynneille"
+          },
+          {
+            "text": "Oma yhteyshenkilö"
+          }
+        ],
+        "ctaStart": "Aloita ansaitseminen",
+        "ctaUnlock": "Avaa {name}"
+      }
+    ],
+    "tierStarting": "Aloitustaso",
+    "tierSpend": "{amount}+ elinikäinen kulutus",
+    "howToEarn": "Pisteiden ansaitseminen",
+    "earnWays": [
+      {
+        "action": "Tee tilaus",
+        "points": "1–1,5× per 1 €",
+        "desc": "Pisteet skaalautuvat tason mukaan"
+      },
+      {
+        "action": "Kirjoita tuotearvostelu",
+        "points": "50 pistettä",
+        "desc": "Vain vahvistetut ostot"
+      },
+      {
+        "action": "Suosittele kollegaa",
+        "points": "250 pistettä",
+        "desc": "Kun he tekevät ensimmäisen tilauksen"
+      },
+      {
+        "action": "Jaa tutkimussuunnitelma",
+        "points": "25 pistettä",
+        "desc": "Julkinen suunnitelma, 5+ tallennusta"
+      }
+    ],
+    "referralBadge": "Suositteluohjelma",
+    "referralTitle": "Anna 15 €, saat 15 €",
+    "referralBody": "Jaa uniikki suosittelulinkkisi kollegoille. Kun he tekevät ensimmäisen yli 100 € tilauksensa, saatte molemmat 15 € tutkimusluottoa. Ei rajoitusta suositteluiden määrälle.",
+    "referralBullets": [
+      "Jaa uniikki linkkisi sähköpostilla tai sosiaalisessa mediassa",
+      "Kollega saa 15 € alennuksen ensimmäisestä tilauksestaan (100 €+)",
+      "Sinä saat 15 € luottoa + 250 bonuspistettä",
+      "Rajoittamaton määrä suositteluja — kerrytä luottoja"
+    ],
+    "referralLinkLabel": "Suosittelulinkkisi",
+    "referralCopy": "Kopioi",
+    "referralGetLink": "Hae suosittelulinkkini",
+    "referralSignInHint": "Kirjaudu sisään luodaksesi uniikin linkin",
+    "redeemTitle": "Lunasta pisteitäsi",
+    "redemptions": [
+      {
+        "points": 500,
+        "valueCents": 500,
+        "label": "Tilausluotto",
+        "rate": "1 % takaisin"
+      },
+      {
+        "points": 1000,
+        "valueCents": 1200,
+        "label": "Tilausluotto (bonus)",
+        "rate": "1,2 % takaisin"
+      },
+      {
+        "points": 2500,
+        "valueCents": 3500,
+        "label": "Tilausluotto (premium)",
+        "rate": "1,4 % takaisin"
+      }
+    ],
+    "redeemFooter": "Pisteet vanhenevat 12 kuukauden kuluttua ansaitsemisesta. Luotot sovelletaan automaattisesti kassalla.",
+    "ptsLabel": "{count, plural, one {# piste} other {# pistettä}}"
+  },
+  "partner": {
+    "orgName": "Laitoksen nimi",
+    "country": "Maa",
+    "contactEmail": "yhteys@laitos.eu",
+    "volume": "Arvioitu kuukausittainen määrä (pulloa)",
+    "useCaseResearchLab": "Tutkimuslaboratorio",
+    "useCaseUniversity": "Yliopisto",
+    "useCaseReseller": "Jälleenmyyjä",
+    "useCaseClinic": "Klinikka",
+    "useCaseDetail": "Käyttötarkoitus / tutkimuskohde",
+    "submit": "Lähetä hakemus",
+    "submitting": "Lähetetään…",
+    "submittedTitle": "Hakemus vastaanotettu.",
+    "submittedBody": "Käymme tietosi läpi ja vastaamme 48 tunnin sisällä. Tarkista sähköpostisi jatko-ohjeita varten.",
+    "submitError": "Lähetys epäonnistui",
+    "submitErrorGeneric": "Jotain meni pieleen",
+    "submitSuccess": "Hakemus lähetetty",
+    "applicationReceivedTitle": "Hakemus vastaanotettu.",
+    "applicationReceivedBody": "Käymme tietosi läpi ja vastaamme 48 tunnin sisällä."
+  },
+  "search": {
+    "label": "Hae",
+    "commandLabel": "Hae AverianLabsista",
+    "inputPlaceholder": "Hae peptidejä, erätunnuksia, artikkeleita…",
+    "inputAria": "Hae",
+    "empty": "Ei tuloksia. Kokeile peptidin nimellä, kuten \"BPC-157\", tai CAS-numerolla.",
+    "groupProducts": "Tuotteet",
+    "groupQuickLinks": "Pikavalinnat",
+    "groupRecent": "Viimeisimmät",
+    "hintNavigate": "siirry",
+    "hintOpen": "avaa",
+    "hintClose": "sulje",
+    "productsIndexed": "{count} tuotetta indeksoitu",
+    "quickLinks": {
+      "shop": "Selaa kaikkia peptidejä",
+      "labTests": "Laboratoriotestien metodologia",
+      "calculator": "Liuotuslaskuri",
+      "blog": "Tutkimusblogi",
+      "partner": "Kumppanuusohjelma"
+    },
+    "quote": "Tarjous",
+    "searchBatch": "Erä {code}",
+    "searchCoa": "Analyysitodistus · {code}",
+    "searchGlossary": "Sanasto · {term}",
+    "searchDoc": "Dokumentti · {title}",
+    "searchResultsCount": "{count, plural, =0 {Ei tuloksia} one {# tulos} other {# tulosta}}"
+  },
+  "calculator": {
+    "inputs": "Syötteet",
+    "peptideMass": "Peptidin massa (mg)",
+    "bacteriostaticWater": "Bakteriostaattinen vesi (mL)",
+    "desiredDose": "Haluttu annos (mcg)",
+    "results": "Tulokset",
+    "concentration": "Pitoisuus",
+    "concentrationUnit": "mg/mL",
+    "concentrationMcgUnit": "mcg/mL",
+    "volumePerDose": "Vetomäärä per annos",
+    "volumePerDoseUnit": "mL",
+    "totalDoses": "Annosmäärä pullossa",
+    "dosesCalculation": "{mass} mg ÷ {dose} mcg",
+    "iuOnSyringe": "IU 100 IU/mL ruiskulla",
+    "researchOnly": "Vain tutkimuslaskentaan. Varmista aina protokollastasi.",
+    "unitsMcg": "mcg",
+    "unitsIu": "IU",
+    "unitsMl": "mL",
+    "title": "Liuotuslaskuri",
+    "subtitle": "Laske vetomäärät, työskentelypitoisuudet ja jäljellä olevat annokset mille tahansa peptidipullokoolle.",
+    "heroEyebrow": "Tutkimustyökalut",
+    "heroTitle": "Laborin peptidilaskuri",
+    "heroBody": "Viisi laskuria (liuotus, titraus, laimennus, breakeven, vertailu), yhteinen laskentakirjasto ja kaunis ruiskun visualisointi. Tallenna protokollia, jaa URL:lla ja tulosta työpöytäkortti.",
+    "openInAveria": "Avaa tämä asetus Averiassa",
+    "viewAllTools": "Kaikki laskurit alla",
+    "tabs": {
+      "reconstitution": "Liuotus",
+      "titration": "Titraus",
+      "dilution": "Laimennus",
+      "breakeven": "Breakeven",
+      "compare": "Vertailu"
+    },
+    "outputs": "Tulosteet",
+    "product": "Tuote (valinnainen)",
+    "noProductSelected": "Mukautettu asetus",
+    "syringe": "Ruisku",
+    "storage": "Säilytys",
+    "leftoverMcg": "Jäljellä oleva peptidi",
+    "leftoverMcgUnit": "mcg käyttämätöntä",
+    "actions": {
+      "share": "Jaa",
+      "shareCopied": "Linkki kopioitu",
+      "save": "Tallenna protokolla",
+      "saved": "Tallennettu",
+      "reset": "Nollaa",
+      "print": "Tulosta",
+      "exportCsv": "Vie CSV",
+      "sendToAveria": "Kysy Averialta",
+      "openSaved": "Tallennetut",
+      "viewHistory": "Historia",
+      "clearHistory": "Tyhjennä historia",
+      "deleteProtocol": "Poista protokolla"
+    },
+    "validation": {
+      "nonPositive": "Oltava suurempi kuin nolla.",
+      "concentrationTooHigh": "Käytännön liukoisuusrajan yläpuolella — laimenna tai jaa pulloihin.",
+      "concentrationCaution": "Lähestyy liukoisuusrajaa — vetomäärä pysyy tarkkana, mutta säilyvyys lyhenee.",
+      "drawTooSmall": "Vetomäärä alle käytännön minimin — kokeile laimennusvälilehteä.",
+      "nan": "Anna numero."
+    },
+    "saturation": {
+      "cautionTitle": "Lähestyy liukoisuusrajaa",
+      "aboveTitle": "Liukoisuusrajan yläpuolella — ei liukene täysin",
+      "ceiling": "Käytännön yläraja",
+      "ratio": "Työskentelypitoisuus"
+    },
+    "stability": {
+      "title": "Stabiilius liuotuksen jälkeen",
+      "subtitle": "Arvioitu säilyvyys liuottimen lisäämisen jälkeen.",
+      "shelfLife": "Suositeltu säilyvyys",
+      "refrigerated": "Jääkaapissa",
+      "frozen": "Pakastettu (−20 °C)",
+      "room": "Huoneenlämpö"
+    },
+    "syringes": {
+      "title": "Ruiskun valinta",
+      "subtitle": "Vaihda ruisku säätääksesi IU-merkinnät ja suositellun vetomäärän.",
+      "0_3": "0.3 mL · 30 IU",
+      "0_5": "0.5 mL · 50 IU",
+      "1_0": "1.0 mL · 100 IU"
+    },
+    "presets": {
+      "title": "Yleiset aloitukset",
+      "subtitle": "Yhden klikkauksen asetukset katalogin pulloille.",
+      "empty": "Ei tallennettuja protokollia vielä — valitse esiasetus tai tallenna tämä asetus."
+    },
+    "history": {
+      "title": "Viimeisimmät laskennat",
+      "subtitle": "Tallennettu paikallisesti tähän selaimeen.",
+      "empty": "Suorita laskenta nähdäksesi sen täällä.",
+      "remove": "Poista"
+    },
+    "reconstitution": {
+      "drawLabel": "Vedä tämä annos",
+      "withSyringe": "{syringe}-ruiskulla",
+      "vialYield": "Pullosta {count} annosta à {dose}"
+    },
+    "titration": {
+      "title": "Titrausasteikko",
+      "subtitle": "Nosta annosta viikkojen tai askelten yli.",
+      "startDose": "Aloitusannos",
+      "endDose": "Lopetusannos",
+      "steps": "Askelia",
+      "duration": "Kesto",
+      "durationWeeks": "{count, plural, =1 {1 viikko} other {{count} viikkoa}}",
+      "stepLabel": "Askel {index}",
+      "totalConsumed": "Kokonaiskulutettu peptidi",
+      "exceedsVial": "Suunnitelma ylittää yhden pullon — osta {vials}."
+    },
+    "dilution": {
+      "title": "Laimennusketju",
+      "subtitle": "Kun vetomäärä on liian pieni pipetoitavaksi, laimenna ensin.",
+      "rawVolume": "Raaka vetomäärä",
+      "minDraw": "Pienin turvallinen vetomäärä",
+      "factor": "Vaadittu laimennuskerroin",
+      "step1": "Askel 1 — Liuotus",
+      "step2": "Askel 2 — Laimenna 1:{factor}",
+      "step2Detail": "Lisää {sourceMl} mL liuosta {diluentMl} mL:aan steriiliä vettä tai BAC-vettä.",
+      "working": "Työskentelypitoisuus",
+      "finalDraw": "Lopullinen vetomäärä"
+    },
+    "breakeven": {
+      "title": "Pullosuunnitelman breakeven",
+      "subtitle": "Vertaile pulloyhdistelmiä kohdeannosaikataulua vastaan.",
+      "plan": "Suunnitelma",
+      "price": "Kokonaishinta",
+      "perMg": "Per mg",
+      "doses": "Annosta",
+      "leftover": "Ylijäämä",
+      "waste": "Hävikki €",
+      "pickCheapest": "Halvin per mg",
+      "pickLeastWaste": "Pienin ylijäämä",
+      "addPlan": "Lisää oma suunnitelma",
+      "removePlan": "Poista"
+    },
+    "compare": {
+      "title": "Protokollan vertailu",
+      "subtitle": "Kahden liuotusskenaarion matematiikka rinnakkain.",
+      "left": "Vasen",
+      "right": "Oikea",
+      "addProtocol": "Lisää protokolla"
+    },
+    "share": {
+      "copyTooltip": "Kopioi URL nykyisellä asetuksella",
+      "copied": "Kopioitu",
+      "buildFromUrl": "Ladattu URL:sta"
+    },
+    "disclaimer": {
+      "title": "Vain tutkimuskäyttöön",
+      "body": "Nämä laskurit tukevat laboratoriotyönkulkuja. Eivät ole lääketieteellistä neuvontaa eivätkä hyväksyttyjä terapeuttiseen käyttöön.",
+      "researchOnly": "AverianLabs-tuotteita myydään vain laboratoriotutkimukseen ja in vitro -tutkimuksiin. Ei ihmis- tai eläinkäyttöön, diagnoosiin tai hoitoon."
+    },
+    "aria": {
+      "resultSummary": "{mgPerMl} milligrammaa millilitrassa, {mL} millilitraa per annos, {iu} kansainvälistä yksikköä {syringe}-ruiskulla. Pullosta {doses} annosta.",
+      "resultLabel": "Laskennan tulos"
+    }
+  },
+  "error": {
+    "label": "Virhe",
+    "title": "Jotain meni pieleen",
+    "body": "Tapahtui odottamaton virhe. Yritä uudelleen tai palaa etusivulle.",
+    "tryAgain": "Yritä uudelleen",
+    "backHome": "Takaisin etusivulle"
+  },
+  "notFound": {
+    "label": "Virhe 404",
+    "title": "Sivua ei löytynyt",
+    "body": "Valitettavasti etsimääsi sivua ei löytynyt.",
+    "backHome": "Takaisin etusivulle",
+    "browseCatalog": "Selaa valikoimaa",
+    "searchHint": "Hae:"
+  },
+  "email": {
+    "tagline": "Tarkkoja peptidejä vaativaan tutkimukseen",
+    "footer": "AverianLabs · Helsinki, Suomi · Vain tutkimuskäyttöön",
+    "confirmEmailSubject": "Vahvista AverianLabs-tilisi",
+    "confirmEmailTitle": "Vahvista sähköpostisi",
+    "confirmEmailBody": "Vahvista tämä osoite aktivoidaksesi tilisi. Linkki on voimassa 24 tuntia.",
+    "confirmEmailCta": "Vahvista sähköposti",
+    "confirmEmailIgnore": "Jos et luonut tiliä, voit jättää tämän viestin huomiotta.",
+    "resetPasswordSubject": "Palauta AverianLabs-salasanasi",
+    "resetPasswordTitle": "Palauta salasanasi",
+    "resetPasswordBody": "Saimme pyynnön palauttaa salasanasi. Linkki on voimassa 1 tunnin.",
+    "resetPasswordCta": "Palauta salasana",
+    "resetPasswordIgnore": "Jos et pyytänyt tätä, voit jättää viestin huomiotta — salasanasi ei muutu.",
+    "deleteAccountSubject": "Vahvista AverianLabs-tilin poisto",
+    "deleteAccountTitle": "Vahvista tilin poisto",
+    "deleteAccountBody": "Tämä poistaa tilisi ja henkilötietosi. Sinulla on 30 päivää aikaa peruuttaa ennen kuin tiedot poistetaan pysyvästi. Linkki on voimassa 24 tuntia.",
+    "deleteAccountCta": "Vahvista poisto",
+    "deleteAccountIgnore": "Jos et pyytänyt tätä, jätä viesti huomiotta — tilisi pysyy aktiivisena.",
+    "newsletterSubject": "Vahvista AverianLabs-uutiskirjetilauksesi",
+    "newsletterTitle": "Vahvista tilauksesi",
+    "newsletterBody": "Vahvista tämä osoite vastaanottaaksesi eräpäivityksiä, uusia analyysitodistuksia ja tutkimusmuistiinpanoja. Linkki on voimassa 24 tuntia.",
+    "newsletterCta": "Vahvista tilaus",
+    "newsletterIgnore": "Jos et pyytänyt tätä, jätä viesti huomiotta — et tule saamaan uutiskirjettä.",
+    "contactNotificationTitle": "Uusi yhteydenottolomakkeen viesti",
+    "contactFooter": "AverianLabs · yhteydenottolomake · vastaa suoraan tähän viestiin",
+    "orderConfirmedSubject": "Tilaus vahvistettu — {number}",
+    "orderConfirmedTitle": "Tilaus vahvistettu",
+    "orderLabel": "Tilaus {number}",
+    "orderColumnProduct": "Tuote",
+    "orderColumnQty": "Määrä",
+    "orderColumnPrice": "Hinta",
+    "orderSubtotal": "Välisumma",
+    "orderShipping": "Toimitus",
+    "orderVat": "ALV (24 %)",
+    "orderTotal": "Yhteensä",
+    "orderWhatsNext": "Mitä seuraavaksi?",
+    "orderWhatsNextBody": "Eräkohtainen analyysitodistus (COA), endotoksiiniraportti ja massaspektri-vahvistus ovat saatavilla tililläsi, kun tilaus lähtee.",
+    "orderFooter": "Kysymyksiä? Vastaa tähän viestiin tai ota yhteyttä support@averianlabs.eu.",
+    "shippingTitle": "Tilauksesi on lähetetty",
+    "shippingTracking": "Seurantakoodi",
+    "shippingTrack": "Seuraa lähetystä",
+    "reviewRequestSubject": "Miten peptidisi toimivat? Arvostele tilaus {number}",
+    "reviewRequestTitle": "Miten peptidisi toimivat?",
+    "reviewRequestGreeting": "Hei {name}, tilauksesi {order} sisältäen {items} toimitettiin muutama päivä sitten.",
+    "reviewRequestBody": "Palautteesi auttaa muita tutkijoita tekemään tietoon perustuvia päätöksiä ja meitä ylläpitämään laatustandardejamme. Voisitko käyttää hetken kokemuksesi jakamiseen?",
+    "reviewRequestCta": "Jätä arvostelu",
+    "reviewRequestWhatToReview": "Mitä arvostella",
+    "reviewRequestWhatToReviewBody": "Puhtauden tasaisuus, pakkauksen laatu, analyysitodistuksen tarkkuus, toimitusnopeus tai mikä tahansa tutkimuksessasi erityisesti huomioitu.",
+    "reviewRequestNeedHelp": "Tarvitsetko apua?",
+    "reviewRequestNeedHelpBody": "Vastaa tähän viestiin tai ota yhteyttä tukeemme osoitteessa support@averianlabs.eu. Vastaamme 2 tunnin sisällä arkipäivinä.",
+    "reviewRequestFooter": "Sait tämän viestin, koska teit tilauksen kanssamme. Emme lähetä enempää viestejä ilman pyyntöäsi.",
+    "cartRecoverySubject": "Ostoskorissasi on tuotteita — viimeistele tilauksesi",
+    "cartRecoveryTitle": "Jätit tuotteita ostoskoriisi",
+    "cartRecoveryBody": "Tutkimuspeptidisi odottavat sinua. Viimeistele tilauksesi ennen kuin valitsemasi erän varasto loppuu.",
+    "cartRecoveryCta": "Viimeistele tilauksesi",
+    "cartRecoveryFreeShipping": "Ilmainen EU-toimitus",
+    "cartRecoveryFreeShippingBody": "yli 150 € tilauksille. Ostoskorisi saattaa täyttää ehdot.",
+    "cartRecoveryFooter": "Sait tämän viestin, koska aloitit tilauksen osoitteessa averianlabs.eu. Lähetämme vain yhden muistutuksen."
+  },
+  "knowledge": {
+    "title": "Tutkimusdokumentaatio",
+    "subtitle": "Analyysitodistukset, testausmenetelmät, tuotetiedot ja sanasto — kaikki yhdestä paikasta.",
+    "categoriesHeading": "Selaa lähteen mukaan",
+    "recentDocs": "Viimeisimmät dokumentit",
+    "recentGlossary": "Uusimmat sanastotermit",
+    "viewAll": "Näytä kaikki →",
+    "noRecentDocs": "Ei vielä julkaistuja dokumentteja.",
+    "quickAccess": "Pikalinkit",
+    "links": {
+      "coa": "Analyysitodistukset",
+      "methods": "Testausmenetelmät",
+      "products": "Tuotetiedot",
+      "articles": "Tutkimusartikkelit",
+      "glossary": "Sanasto",
+      "calculators": "Laskurit"
+    },
+    "categories": {
+      "coa": {
+        "title": "Analyysitodistukset",
+        "desc": "HPLC-, endotoksiini- ja massaspektritiedot jokaiselle erälle — eräkohtainen PASS-hyväksyntä."
+      },
+      "methods": {
+        "title": "Testausmenetelmät",
+        "desc": "Riippumattoman laboratorion analyysit: HPLC, massaspektrometria, LAL, steriiliys, mykoplasma."
+      },
+      "products": {
+        "title": "Tuotetiedot",
+        "desc": "Tekniset tiedot, sekvenssit ja säilytysohjeet jokaiselle peptidituotteelle."
+      },
+      "articles": {
+        "title": "Tutkimusartikkelit",
+        "desc": "Vertaisarvioidut viittaukset ja omat tutkimusmuistiinpanot peptiditieteestä."
+      },
+      "glossary": {
+        "title": "Sanasto",
+        "desc": "Termit ja tekniikat peptiditutkimuksessa, analytiikassa, säilytyksessä ja sääntelyssä."
+      },
+      "calculators": {
+        "title": "Laskurit",
+        "desc": "Liuotus- ja annoslaskenta mikrolitran tarkkuudella tutkimuskäyttöön."
+      }
+    },
+    "browseAll": "Selaa kaikkia →",
+    "itemsCount": "{count, plural, =0 {ei kohteita} one {1 kohde} other {{count} kohdetta}}",
+    "batchesLabel": "Uusin erä",
+    "filterAll": "Suodattimet",
+    "badge": "Tietämys",
+    "noResults": "Ei tuloksia",
+    "noSources": "Lähteitä ei löytynyt",
+    "relatedProducts": "Liittyvät tuotteet",
+    "searchPlaceholder": "Hae…",
+    "sequenceTitle": "Sekvenssi",
+    "sourcesCount": "{count, plural, =0 {Ei lähteitä} one {1 lähde} other {{count} lähtettä}}",
+    "sourcesHeading": "Lähteet"
+  },
+  "terms": {
+    "title": "Käyttöehdot",
+    "lastUpdated": "Päivitetty viimeksi: 1.9.2026",
+    "intro": "Käyttämällä averianlabs.eu-sivustoa tai muita AverianLabsin verkkotunnuksia hyväksyt nämä käyttöehdot. Kaikki tuotteet myydään tiukalla vain tutkimuskäyttöön -lisenssillä.",
+    "sections": {
+      "eligibility": {
+        "title": "1. Kelpoisuus",
+        "body": "Ostajan on oltava vähintään 18-vuotias ja pätevä tutkija tai institutionaalinen ostaja voidakseen ostaa AverianLabsilta."
+      },
+      "researchUse": {
+        "title": "2. Vain tutkimuskäyttöön",
+        "body": "Kaikki tuotteet on tarkoitettu ainoastaan laboratoriotutkimukseen ja in vitro -tutkimuksiin. Niitä EI ole tarkoitettu ihmisravinnoksi, diagnostiseen käyttöön eikä terapeuttisiin sovelluksiin."
+      },
+      "pricing": {
+        "title": "3. Hinnoittelu ja ALV",
+        "body": "Hinnat sisältävät EU:n ALV:n (OSS-järjestelmä). B2B-asiakkaat, joilla on voimassa oleva ALV-numero, voivat ostaa käännettyä verovelvollisuutta käyttäen (reverse charge) kassalla."
+      },
+      "shipping": {
+        "title": "4. Toimitus",
+        "body": "Lähetämme tilaukset 24 tunnin kuluessa Helsingin varastoltamme. Vahingonvaara siirtyy ostajalle kuljetusyhtiön skannauksessa."
+      },
+      "returns": {
+        "title": "5. Palautukset",
+        "body": "Tutkimuslaatuisten peptidien luonteen vuoksi avattuja tai kylmäketjusta vaurioituneita pulloja ei voi palauttaa. Avaamattoman tuotteen voi palauttaa 14 päivän kuluessa vaihtoa tai hyvitystä varten."
+      },
+      "liability": {
+        "title": "6. Vastuunrajoitus",
+        "body": "AverianLabsin vastuu rajoittuu tuotteen ostohintaan. Emme takaa soveltuvuutta mihinkään tiettyyn tutkimuskäyttöön julkaistua analyysitodistusta pidemmälle."
+      },
+      "governingLaw": {
+        "title": "7. Sovellettava laki",
+        "body": "Näitä ehtoja sovelletaan Suomen lain mukaan. Riidat ratkaistaan yksinomaan Helsingin käräjäoikeudessa."
+      },
+      "contact": {
+        "title": "8. Yhteystiedot",
+        "body": "Kysymykset: legal@averianlabs.eu"
+      }
+    }
+  },
+  "privacy": {
+    "title": "Tietosuojaseloste",
+    "lastUpdated": "Päivitetty viimeksi: 1.9.2026 · GDPR-yhteensopiva",
+    "intro": "Tämä seloste kuvaa, miten AverianLabs Oy (\"me\") käsittelee henkilötietoja averianlabs.eu-sivustolla ja muilla verkkotunnuksillamme EU:n yleisen tietosuoja-asetuksen (GDPR) ja Suomen tietosuojalain mukaisesti.",
+    "sections": {
+      "dataCollected": {
+        "title": "Keräämämme tiedot",
+        "body": "Tilitiedot: sähköposti, nimi, salasanan tiiviste (jos luot tilin). Tilaustiedot: toimitus- ja laskutusosoite, tilaushistoria. Tekniset tiedot: IP-osoite (lyhennetty), käyttäjäagentti, viittaussivusto (säilytetään 30 päivää). Analytiikka: vain evästebannerin kautta annetulla suostumuksellasi."
+      },
+      "lawfulBasis": {
+        "title": "Käsittelyperuste",
+        "body": "Sopimus (art. 6(1)(b)) tilauksille, suostumus (art. 6(1)(a)) analytiikalle, lakisääteinen velvoite (art. 6(1)(c)) kirjanpidossa."
+      },
+      "subprocessors": {
+        "title": "Alikäsittelijät",
+        "body": "Stripe Payments Europe Ltd — maksujen käsittely (EU); Coinbase Commerce — kryptovaluuttamaksut; Resend — transaktiosähköposti (EU); PostHog Cloud EU — tuoteanalytiikka (suostumuksella); Sanity Inc. — sisällönhallinta (Yhdysvallat, EU-tietoresidenssi); Cloudflare — CDN / DDoS-suojaus; Neon — tietokanta (Frankfurt)."
+      },
+      "yourRights": {
+        "title": "Oikeutesi",
+        "body": "Sinulla on oikeus tutustua tietoihisi, oikaista, poistaa, rajoittaa käsittelyä, siirtää tiedot ja vastustaa käsittelyä. Lähetä pyyntö osoitteeseen privacy@averianlabs.eu. Voit myös tehdä valituksen kansalliselle valvontaviranomaiselle (Suomessa: tietosuojavaltuutettu)."
+      },
+      "retention": {
+        "title": "Säilytysaika",
+        "body": "Tilitiedot: poistoon asti. Tilaustiedot: 7 vuotta (kirjanpitovelvollisuus). Analytiikka: 14 kuukautta."
+      },
+      "contact": {
+        "title": "Yhteystiedot",
+        "body": "Tietosuojavaltuutettu: dpo@averianlabs.eu · AverianLabs Oy, Helsinki, Suomi."
+      }
+    }
+  },
+  "cookies": {
+    "title": "Evästeet",
+    "lastUpdated": "Päivitetty viimeksi: 1.9.2026",
+    "intro": "Käytämme vain välttämättömiä evästeitä. Välttämättömiä evästeitä ei voi poistaa käytöstä; analytiikkaevästeet vaativat suostumuksesi.",
+    "sections": {
+      "essential": {
+        "title": "Välttämättömät",
+        "body": "averianlabs-cart — tallentaa ostoskorin (1 vuosi); averianlabs-age-confirmed — muistaa ikäportin hyväksynnän (1 vuosi); averianlabs-cookie-consent — muistaa evästevalintasi (1 vuosi); Stripe / Coinbase -istuntoevästeet (asettaa maksupalveluntarjoaja)."
+      },
+      "analytics": {
+        "title": "Analytiikka (suostumuksella)",
+        "body": "PostHog (EU) ja Plausible ladataan vasta, kun hyväksyt analytiikkaevästeet evästebannerissa. Keräämme anonyymia ja koostettua käyttötietoa."
+      },
+      "changeChoice": {
+        "title": "Muuta valintaasi",
+        "body": "Napsauta footterin \"Evästeet\"-linkkiä tai tyhjennä selaimen tiedot."
+      }
+    }
+  },
+  "disclaimer": {
+    "badge": "Vain tutkimuskäyttöön",
+    "title": "Tutkimuskäyttödisclaimer",
+    "lead": "Kaikki AverianLabs Oy:n myymät tuotteet on tarkoitettu ainoastaan laboratoriotutkimukseen ja in vitro -tutkimuksiin.",
+    "sections": {
+      "notForHuman": {
+        "title": "Ei ihmisille eikä eläimille",
+        "body": "AverianLabsin myymiä tuotteita ei ole tarkoitettu ihmis- tai eläinkäyttöön, nautittavaksi, annettavaksi tai muulla tavoin elimistöön annettavaksi."
+      },
+      "noMedicalClaims": {
+        "title": "Ei lääketieteellisiä väitteitä",
+        "body": "Verkkosivuston tiedot ovat vain tutkimus- ja koulutuskäyttöön. Ne eivät ole lääketieteellistä neuvontaa, diagnoosia tai hoitosuositusta. AverianLabs Oy ei suosittele, tue tai hyväksy minkään tuotteen käyttöä ohjeiden vastaisesti."
+      },
+      "buyerResponsibility": {
+        "title": "Ostajan vastuu",
+        "body": "Ostamalla AverianLabsilta vahvistat olevasi pätevä tutkija tai institutionaalinen ostaja ja käyttäväsi tuotteita ainoastaan lailliseen laboratoriotutkimukseen noudattaen kaikkia sovellettavia paikallisia, kansallisia ja kansainvälisiä lakeja ja määräyksiä."
+      },
+      "compliance": {
+        "title": "Sääntelyn noudattaminen",
+        "body": "Ostajan vastuulla on varmistaa, että tutkimuspeptidien tuonti, hallussapito ja käyttö on kaikkien sovellettavien määräysten mukaista hänen lainkäyttöalueellaan. AverianLabs Oy pidättää oikeuden kieltäytyä palvelusta mille tahansa ostajalle tai lainkäyttöalueelle harkintansa mukaan."
+      }
+    }
+  },
+  "actions": {
+    "addPrompt": "Lisätäänkö ostoskoriin?",
+    "addToCart": "Lisää ostoskoriin",
+    "added": "Lisätty",
+    "addedToast": "{name} lisätty ostoskoriin",
+    "dismiss": "Sulje",
+    "remember": "Muista tämä",
+    "rememberPrompt": "Tallenna seuraavaa kertaa varten?",
+    "remembered": "Tallennettu",
+    "rememberedToast": "Suunnitelma tallennettu tilillesi",
+    "removedToast": "Poistettu ostoskorista"
+  },
+  "feedback": {
+    "helpful": "Hyödyllinen",
+    "notHelpful": "Ei hyödyllinen"
+  },
+  "links": {
+    "coa": "Analyysitodistukset",
+    "methods": "Testausmenetelmät",
+    "products": "Tuotetiedot",
+    "articles": "Tutkimusartikkelit",
+    "glossary": "Sanasto",
+    "calculators": "Laskurit"
+  },
+  "tableHeaders": {
+    "batch": "Erä",
+    "endotoxin": "Endotoksiini",
+    "hplc": "HPLC",
+    "lab": "Laboratorio",
+    "product": "Tuote",
+    "status": "Tila"
+  },
+  "testsHeaders": {
+    "method": "Menetelmä",
+    "result": "Tulos",
+    "test": "Testi"
+  },
+  "topbar": {
+    "coaEveryBatch": "Analyysitodistus jokaisessa erässä",
+    "dispatch24h": "24 tunnin lähetys",
+    "euDispatched": "Lähetys EU:sta",
+    "freeShipping": "Ilmainen toimitus yli 150 €",
+    "hplcVerified": "HPLC- ja endotoksiinivarmennus"
   }
 }

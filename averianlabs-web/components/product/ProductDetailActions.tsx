@@ -7,9 +7,11 @@ import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
 import { useCart } from "@/lib/cart/store"
 import type { Locale, Product } from "@/lib/products/types"
+import { isContactOnly } from "@/lib/products/vials"
 import { cn } from "@/lib/utils/cn"
 import { formatCurrency } from "@/lib/utils/format"
-import { Check, Mail, ShoppingBag } from "lucide-react"
+import { Calculator, Check, Mail, ShoppingBag } from "lucide-react"
+import Link from "next/link"
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
@@ -23,6 +25,9 @@ interface PlanSummary {
   id: string
   title: string
 }
+
+// Threshold (in cents) for free EU-wide shipping, formatted with active locale.
+const FREE_SHIPPING_THRESHOLD_CENTS = 15000
 
 export function ProductDetailActions({ product, locale }: ProductDetailActionsProps) {
   const t = useTranslations("product")
@@ -69,29 +74,27 @@ export function ProductDetailActions({ product, locale }: ProductDetailActionsPr
 
   const vial = product.vials[vialIdx]
   if (!vial) return null
-  const isContact = vial.contactOnly === true || vial.priceCents === 0
+  const isContact = isContactOnly(vial)
   const disabled = !isContact && vial.stockQty === 0
 
   if (isContact) {
     return (
       <div className="mt-8 rounded-[var(--radius-lg)] border border-line bg-surface-2 p-6">
-        <h3 className="font-display text-lg font-semibold">Request quote</h3>
-        <p className="mt-1 text-sm text-ink-muted">
-          Pricing and current batch availability on request. We reply within 24h.
-        </p>
+        <h3 className="font-display text-lg font-semibold">{t("quoteTitle")}</h3>
+        <p className="mt-1 text-sm text-ink-muted">{t("quoteSubtitle")}</p>
         <form
           className="mt-4 space-y-3"
           onSubmit={(e) => {
             e.preventDefault()
-            toast.success("Quote request sent", {
-              description: `We'll email you current pricing for ${translation.name}.`,
+            toast.success(t("quoteSent"), {
+              description: t("quoteSentDesc", { name: translation.name }),
             })
           }}
         >
-          <Input type="email" placeholder="you@lab.eu" required />
+          <Input type="email" placeholder={t("quoteEmailPlaceholder")} required />
           <Button type="submit" size="lg" fullWidth>
             <Mail className="h-4 w-4" />
-            Request quote
+            {t("requestQuote")}
           </Button>
         </form>
       </div>
@@ -107,7 +110,9 @@ export function ProductDetailActions({ product, locale }: ProductDetailActionsPr
       qty,
       unitPriceCents: vial.priceCents,
     })
-    toast.success("Added to cart", { description: `${translation.name} ${vial.mg}mg × ${qty}` })
+    toast.success(t("addedToCart"), {
+      description: t("addedToCartDesc", { name: translation.name, mg: vial.mg, qty }),
+    })
   }
 
   return (
@@ -140,10 +145,26 @@ export function ProductDetailActions({ product, locale }: ProductDetailActionsPr
                 <span className="font-display text-sm">
                   {formatCurrency(v.priceCents, "EUR", locale)}
                 </span>
-                {v.compareAtCents ? <Badge tone="warn">Sale</Badge> : null}
+                {v.compareAtCents ? <Badge tone="warn">{t("sale")}</Badge> : null}
               </button>
             ))}
           </div>
+          <Link
+            href={`/${locale}/peptide-calculator?calc=${encodeURIComponent(
+              JSON.stringify({
+                v: 1,
+                tab: "reconstitution",
+                vialMg: vial.mg,
+                solventMl: vial.mg <= 10 ? 2 : 3,
+                doseMcg: vial.mg <= 10 ? 250 : 2500,
+                productSlug: product.slug,
+              }),
+            ).replace(/"/g, "")}`}
+            className="mt-3 inline-flex items-center gap-1.5 text-2xs text-accent hover:text-accent-hover"
+          >
+            <Calculator className="h-3.5 w-3.5" />
+            {t("openCalculator", { defaultValue: "Calculate reconstitution for this vial" })}
+          </Link>
         </div>
 
         <div>
@@ -173,18 +194,24 @@ export function ProductDetailActions({ product, locale }: ProductDetailActionsPr
 
         <Button size="lg" fullWidth disabled={disabled} onClick={handleAdd}>
           {disabled ? (
-            <Badge tone="danger">Out of stock</Badge>
+            <Badge tone="danger">{t("outOfStock")}</Badge>
           ) : (
             <>
               <ShoppingBag className="h-4 w-4" />
-              {t("addToCart")} · {formatCurrency(vial.priceCents * qty, "EUR", locale)}
+              {t("addToCartWithPrice", {
+                price: formatCurrency(vial.priceCents * qty, "EUR", locale),
+              })}
             </>
           )}
         </Button>
 
         <div className="flex items-center gap-2 text-xs text-ink-muted">
           <Check className="h-3 w-3 text-success" />
-          <span>Free shipping over €150 EU-wide</span>
+          <span>
+            {t("freeShippingOver", {
+              amount: formatCurrency(FREE_SHIPPING_THRESHOLD_CENTS, "EUR", locale),
+            })}
+          </span>
         </div>
 
         {isAuthed !== null ? (

@@ -76,6 +76,67 @@
     "disclaimer": "Alleen voor onderzoek. Niet voor mens of dier.",
     "disclaimerFull": "Alle producten van AverianLabs zijn uitsluitend bedoeld voor laboratoriumonderzoek."
   },
+  "coa": {
+    "badge": "Openbaar COA-register",
+    "title": "Analysecertificaten",
+    "subtitle": "Elke verzonden batch wordt onafhankelijk getest. Bekijk de nieuwste analysecertificaten hieronder.",
+    "tableHeaders": {
+      "batch": "Batch",
+      "product": "Product",
+      "hplc": "HPLC",
+      "endotoxin": "Endotoxine",
+      "lab": "Laboratorium",
+      "status": "Status"
+    },
+    "filterPlaceholder": "Zoek op batchcode of product…",
+    "resultsCount": "{count, plural, =0 {Geen resultaten} one {1 analysecertificaat} other {{count} analysecertificaten}}",
+    "viewDetails": "Bekijk details →",
+    "batchTitle": "Analysecertificaat",
+    "batchSubtitle": "Batchspecifieke testresultaten en documentatie.",
+    "testsHeading": "Testresultaten",
+    "testsHeaders": {
+      "test": "Test",
+      "result": "Resultaat",
+      "method": "Methode"
+    },
+    "testHplcPurity": "HPLC-zuiverheid",
+    "testHplcMethod": "RP-HPLC",
+    "testEndotoxin": "Endotoxine",
+    "testEndotoxinMethod": "LAL",
+    "testIdentity": "Identiteit",
+    "testIdentityMethod": "ESI-MS",
+    "testIdentityResult": "Bevestigd",
+    "testStorage": "Opslag",
+    "manufacturingHeading": "Productie en houdbaarheid",
+    "manufacturedAt": "Geproduceerd",
+    "expiresAt": "Geldig tot",
+    "labHeading": "Testlaboratorium",
+    "viewFullPdf": "Volledig analysecertificaat openen (PDF)",
+    "pdfUnavailableNote": "De PDF-versie wordt gepubliceerd zodra onze laboratoriumpartner de documentatie levert.",
+    "chromatogramHeading": "Chromatogram",
+    "chromatogramNote": "Het chromatogram wordt gepubliceerd als bijlage bij het PDF-analysecertificaat.",
+    "backToList": "← Terug naar analysecertificaten",
+    "traceabilityHeading": "Traceerbaarheid",
+    "traceabilitySub": "Een kwaliteitsketen die u kunt controleren. Elke stap wordt gedocumenteerd.",
+    "step1Title": "Grondstof",
+    "step1Body": "Het peptide-grondstof wordt ontvangen van de fabrikant en in quarantaine geplaatst.",
+    "step2Title": "Productie",
+    "step2Body": "Lyofilisatie, flaconvulling en verzegeling vinden plaats in een steriele omgeving.",
+    "step3Title": "Batchnummer",
+    "step3Body": "Elke batch krijgt een uniek batchnummer voor volledige traceerbaarheid.",
+    "step4Title": "Onafhankelijke analyse",
+    "step4Body": "Het testlaboratorium analyseert HPLC-, endotoxine- en massaspectrometrieresultaten.",
+    "step4BodyWithLab": "Getest in laboratorium {lab}",
+    "step5Title": "Analysecertificaat (COA)",
+    "step5Body": "Het analysecertificaat wordt gepubliceerd en bij de zending gevoegd.",
+    "step6Title": "Verzending",
+    "step6Body": "Verzending binnen 24 uur vanuit ons EU-magazijn. Koudketen gedocumenteerd.",
+    "notFoundTitle": "Batch niet gevonden",
+    "notFoundBody": "Er is geen analysecertificaat gevonden voor deze batchcode.",
+    "description": "Openbaar register van elke batch — HPLC-zuiverheid, endotoxine, massaspectrometrie en laboratorium.",
+    "passBadge": "GOEDGEKEURD",
+    "passFullLabel": "Alle tests goedgekeurd"
+  },
   "nav": {
     "shop": "Winkel",
     "labTests": "Labtests",
@@ -107,37 +168,77 @@
     "sectionResearch": "Onderzoek",
     "sectionCompany": "Bedrijf",
     "cartCount": "{count, plural, =0 {Winkelwagen leeg} one {1 item in winkelwagen} other {# items in winkelwagen}}",
-    "language": "Taal"
+    "language": "Taal",
+    "breadShop": "Winkel",
+    "batchDataHeading": "Batchgegevens",
+    "batchDataCode": "Batchcode",
+    "batchDataManufactured": "Geproduceerd",
+    "batchDataExpires": "Verloopt",
+    "batchDataLab": "Testlaboratorium",
+    "batchDataHplc": "HPLC-zuiverheid",
+    "batchDataEndotoxin": "Endotoxine",
+    "batchDataMs": "Massaspectrometrie",
+    "batchDataConfirmed": "Bevestigd",
+    "batchDataOpenCoa": "Open COA",
+    "batchLabel": "Laatste batch",
+    "coaAvailable": "Bekijk COA",
+    "contactForBatch": "Contact opnemen voor huidige batchbeschikbaarheid",
+    "endotoxin": "Endotoxine",
+    "endotoxinUnit": "EU/mg",
+    "expires": "Vervalt",
+    "fromSizes": "{count, plural, =0 {— formaten} one {vanaf · 1 formaat} other {vanaf · {count} formaten}}",
+    "howWeVerify": "Zo verifiëren we elke batch",
+    "manufactured": "Geproduceerd",
+    "pricingOnRequest": "Prijs op aanvraag",
+    "readFullMethodology": "Lees de volledige methodologie",
+    "relatedHeading": "Gerelateerde peptiden",
+    "requestQuote": "Offerte aanvragen",
+    "shipsIn24h": "Verzending binnen 24 uur",
+    "specCas": "CAS-nummer",
+    "specFormula": "Molecuulformule",
+    "specMw": "Molecuulgewicht",
+    "specPurity": "Zuiverheid",
+    "specSequence": "Sequentie",
+    "specStorage": "Opslag",
+    "specifications": "Specificaties",
+    "stockIn": "Op voorraad",
+    "stockLow": "Bijna op · {count} over",
+    "stockOut": "Uitverkocht",
+    "tabCoa": "COA & labtests",
+    "testedAt": "Getest in",
+    "vatNote": "Incl. BTW.",
+    "viewAllInCategory": "Bekijk alles in {category} →",
+    "whatsInTheBox": "Wat zit er in de doos"
   },
   "home": {
     "heroEyebrow": "EU · Onderzoekskwaliteit · Onafhankelijk getest",
-    "heroTitle": "Precisiepeptiden voor serieus onderzoek.",
-    "heroSubtitle": "EU-verzending. HPLC + endotoxine geverifieerd. Volledig analysecertificaat per batch.",
+    "heroTitle": "Koop onderzoekspeptiden, vervaardigd volgens labspecificatie.",
+    "heroSubtitle": "Elke batch HPLC-, massaspectrometrie- en endotoxine-getest door derden. Gevriesdroogd voor koude-keten integriteit. 24-uurs EU-verzending. COA's online op te halen of bij elke bestelling meegeleverd.",
     "ctaShop": "Catalogus bekijken",
     "ctaResearch": "Lees onderzoek",
     "trustHeading": "Waarom onderzoekers AverianLabs kiezen",
-    "trustBadge1": "EU-GMP-leveranciersnetwerk",
-    "trustBadge2": "HPLC-zuiverheid ≥ 98%",
-    "trustBadge3": "Endotoxine < 5 EU/mg",
-    "trustBadge4": "24u EU-verzending",
-    "trustBadge5": "ISO 17025 labpartner",
-    "trustBadge6": "AVG-conform",
+    "trustBadge1": "Snelle EU-verzending",
+    "trustBadge2": "HPLC-zuiverheid ≥ 98 %",
+    "trustBadge3": "100 % tevredenheidsgarantie",
+    "trustBadge4": "Volumekorting tot −20 %",
+    "trustBadge5": "ISO 17025-laboratoriumpartner",
+    "trustBadge6": "AVG & BTW-conform",
     "featuredHeading": "Uitgelichte onderzoekspeptiden",
     "featuredSub": "Elke batch wordt geleverd met het eigen analyserapport.",
     "threeDHeading": "Bekijk elke vial in 3D",
     "threeDSub": "Draai aan de carrousel, zoom in op het glas en spring direct naar een product — elke batch linkt naar het eigen analyserapport.",
     "threeDCta": "3D-catalogus openen",
     "categoriesHeading": "Blader per onderzoeksgebied",
-    "catWeight": "Metabool onderzoek",
-    "catWeightDesc": "Semaglutide, Tirzepatide, AOD-9604",
-    "catRecovery": "Herstel & weefsel",
-    "catRecoveryDesc": "BPC-157, TB-500, GHK-Cu",
-    "catCognitive": "Cognitie",
-    "catCognitiveDesc": "Semax, Selank, Cerebrolysin",
-    "catLongevity": "Levensduur",
-    "catLongevityDesc": "Epithalon, GHK-Cu, NAD+",
-    "catCosmetic": "Cosmetisch onderzoek",
-    "catCosmeticDesc": "GHK-Cu, Melanotan II",
+    "catMetabolic": "Metabolisme & receptorsignalering",
+    "catMetabolicDesc": "GLP-1- en GIP-receptorsignalering in vitro. Receptortests, celkweek, ADME-profilering.",
+    "catRecovery": "Celbiologie & weefselmodellen",
+    "catRecoveryDesc": "Angiogenese en weefselremodelleringsonderzoek. Celmigratiemodellen, fibroblastactiviteit, wondmodellen.",
+    "catCognitive": "Neurobiologisch onderzoek",
+    "catCognitiveDesc": "Neurotrofine en neuronale celkweekonderzoek. BDNF-signalering, in vitro-neurobiologie.",
+    "catLongevity": "Mitochondriën & cellulaire energie",
+    "catLongevityDesc": "Telomeerbiologie en NAD⁺-signaleringsonderzoek. Senescentiemodellen, mitochondriële functie.",
+    "catCosmetic": "Pigmentatie & melanogenese",
+    "catCosmeticDesc": "Melanogenese en huidweefselmodellen. Keratinocytkweek, melanocytsignalering.",
     "labHeading": "Labtransparantie, per batch",
     "labSub": "Elke flacon wordt verzonden met een openbaar analysecertificaat.",
     "calcHeading": "Reconstitutierekenmachine",
@@ -151,10 +252,78 @@
     "newsletterSub": "Nieuwe peptiden, literatuur, labnotities.",
     "newsletterPlaceholder": "u@instituut.nl",
     "newsletterCta": "Abonneer",
-    "catBlends": "Mengsels & combinaties",
+    "catBlends": "Combinaties",
     "catBlendsDesc": "KLOW, BPC+TB-500, op maat gemaakte peptidecombinaties",
-    "catSupplies": "Benodigdheden",
-    "catSuppliesDesc": "BAC-water, spuiten, flesjes"
+    "catSupplies": "Overige onderzoeksreagentia",
+    "catSuppliesDesc": "BAC-water, spuiten, flesjes",
+    "stat1Label": "Batchspecifieke HPLC-zuiverheid",
+    "stat1Value": "—",
+    "stat1Note": "Per batch gepubliceerd",
+    "stat2Label": "Onafhankelijke labtests",
+    "stat2Value": "—",
+    "stat2Note": "Bevestigd bij verzending",
+    "stat3Label": "EU-verzending",
+    "stat3Value": "—",
+    "stat3Note": "Afhankelijk van batchdocumentatie",
+    "labBadge": "Volledige labtransparantie",
+    "labMethodologyLink": "Lees meer over onze methodologie",
+    "coaBadge": "Batchspecifieke analyse",
+    "coaTitle": "Analysecertificaat",
+    "coaBody": "Exacte analysedata, chromatogrammen en labgoedkeuring per batch worden per batch gepubliceerd. Open de labtestpagina om meer te lezen over methoden en verifieerbaarheid.",
+    "coaHeaderTest": "Test",
+    "coaHeaderResult": "Resultaat",
+    "coaHeaderMethod": "Methode",
+    "coaRow1": "HPLC-zuiverheid · Resultaat per batch",
+    "coaRow2": "Endotoxine · In onafhankelijk lab",
+    "coaRow3": "Massaspectrometrie · Per batch",
+    "coaRow4": "Testlab · —",
+    "coaCta": "Open de labtestpagina",
+    "communityHeading": "Van de onderzoeksgemeenschap",
+    "communitySub": "Discussies, antwoorden, batchupdates en gedeelde onderzoeksplannen van de AverianLabs-gemeenschap.",
+    "subscribeBadge": "Onderzoekshoeveelheden",
+    "subscribeTitle": "Regelmatige onderzoekslevering",
+    "subscribeSub": "Reserveer de huidige batch en plan levering elke 4, 8 of 12 weken — op elk moment opzeggen via uw account.",
+    "subscribeBullet1": "Prioriteit EU-verzending bij elke levering",
+    "subscribeBullet2": "Reservering huidige batch",
+    "subscribeBullet3": "10% korting op elke flacon",
+    "subscribeBullet4": "Vrij combineerbaar in de hele catalogus",
+    "subscribeCta": "Start een abonnement",
+    "subscribeExampleLabel": "Voorbeeldabonnement",
+    "subscribeExampleProduct": "BPC-157 · 10 mg · elke 8 weken",
+    "subscribePerShipment": "Per levering",
+    "subscribeAnnualSavings": "Jaarlijkse besparing",
+    "subscribeSavingsSuffix": "/ jaar",
+    "institutionsBadge": "Voor onderzoeksinstellingen",
+    "about": "Over ons",
+    "account": "Account",
+    "allProducts": "Alle producten",
+    "blog": "Onderzoek",
+    "calculator": "Rekenmachine",
+    "cart": "Winkelwagen",
+    "close": "Sluiten",
+    "coaLibrary": "Lab-COA's",
+    "community": "Community",
+    "documents": "Documenten",
+    "glossary": "Woordenlijst",
+    "labTests": "Labtests",
+    "openMenu": "Menu openen",
+    "partner": "Partnerprogramma",
+    "search": "Zoeken",
+    "sectionShop": "Shop",
+    "sectionResearch": "Onderzoek",
+    "sectionCompany": "Bedrijf",
+    "whyHeading": "Waarom AverianLabs kiezen",
+    "whySub": "Dezelfde drie dingen die elke onderzoeker vraagt — snelheid, zekerheid en kwaliteit — ondersteund door garanties waarop we onze reputatie durven te zetten.",
+    "why1Title": "Snelle, traceerbare EU-verzending",
+    "why1Body": "Bestellingen vóór 14:00 EET worden dezelfde werkdag vanuit ons EU-magazijn verzonden. Traceerbare vervoerders — Posti, DHL, DPD.",
+    "why2Title": "Laboratoriumgeverifieerde zuiverheid",
+    "why2Body": "Elke batch wordt geleverd met een batchspecifiek COA: HPLC-chromatogram, massaspectrogram, endotoxine-panel en laboratoriumondertekening.",
+    "why3Title": "100 % tevredenheidsgarantie",
+    "why3Body": "Als een vial warm, beschadigd of door de douane vastgehouden aankomt door een geverifieerde vervoerderfout, leveren wij gratis opnieuw — en storten terug als een tweede levering ook niet aankomt.",
+    "bulkHeading": "Koop meer, bespaar meer",
+    "bulkSub": "Volumekorting per SKU. De korting wordt automatisch toegepast bij het afrekenen — geen code nodig.",
+    "bulkCtaShop": "Bekijk de catalogus",
+    "bulkCtaContact": "Contact voor 21+"
   },
   "shop": {
     "title": "Onderzoekscatalogus",
@@ -213,7 +382,12 @@
     "fromLabel": "Vanaf",
     "pricingLabel": "Prijzen",
     "recentlyViewed": "Recent bekeken",
-    "recentlyViewedHelper": "Verder waar je gebleven was"
+    "recentlyViewedHelper": "Verder waar je gebleven was",
+    "coaAvailable": "COA beschikbaar",
+    "batchLabel": "Batch {code}",
+    "purityHplcLabel": "{purity}% HPLC",
+    "manufacturedDate": "Geproduceerd {date}",
+    "expiresDate": "Verloopt {date}"
   },
   "product": {
     "addToCart": "In winkelwagen",
@@ -233,37 +407,171 @@
     "tabCitations": "Onderzoek",
     "tabFaq": "FAQ",
     "relatedHeading": "Gerelateerde peptiden",
-    "stockIn": "Op voorraad — 24u verzending",
-    "stockLow": "Nog {n} flacons",
-    "stockOut": "Uitverkocht — meld me",
+    "stockIn": "Op voorraad",
+    "stockLow": "Bijna op · {count} over",
+    "stockOut": "Uitverkocht",
     "vatNote": "Incl. BTW.",
     "batchLabel": "Laatste batch",
     "viewCoa": "Bekijk COA",
     "lab": "Getest in {lab}",
     "notifyMe": "Waarschuw mij",
-    "notifySubmitted": "We mailen u."
+    "notifySubmitted": "We mailen u.",
+    "specifications": "Specificaties",
+    "testedAt": "Getest in",
+    "manufactured": "Geproduceerd",
+    "expires": "Vervalt",
+    "endotoxin": "Endotoxine",
+    "endotoxinUnit": "EU/mg",
+    "howWeVerify": "Zo verifiëren we elke batch",
+    "methodologyHplcTitle": "HPLC-zuiverheid",
+    "methodologyHplcDesc": "Omgekeerde-fase HPLC tegen referentiestandaard.",
+    "methodologyMsTitle": "Massaspectrometrie-identiteit",
+    "methodologyMsDesc": "ESI-MS bevestigt molecuulgewicht tot 0,1 Da nauwkeurig.",
+    "methodologyEndotoxinTitle": "Endotoxine-panel",
+    "methodologyEndotoxinDesc": "LAL kinetisch chromogeen; limiet < 5 EU/mg.",
+    "methodologyColdChainTitle": "Koudeketen geverifieerd",
+    "methodologyColdChainDesc": "Temperatuurlogboek bijgevoegd bij elke zending.",
+    "readFullMethodology": "Lees de volledige methodologie",
+    "whatsInTheBox": "Wat zit er in de doos",
+    "boxLyophilized": "Gelyofiliseerde peptide flacon",
+    "boxBacWater": "Steriel BAC-water (10 mL)",
+    "boxCoa": "Batchspecifiek COA",
+    "boxStorage": "Opslag- en hanteringskaart",
+    "boxReconstitution": "Reconstitutieprotocol",
+    "boxTamperSeal": "Verzegeling met sabotagebeveiliging",
+    "shipsIn24h": "Verzending binnen 24 uur",
+    "fromSizes": "{count, plural, =0 {— formaten} one {vanaf · 1 formaat} other {vanaf · {count} formaten}}",
+    "stockQuoteOnly": "Alleen offerte",
+    "requestQuote": "Offerte aanvragen",
+    "pricingOnRequest": "Prijs op aanvraag",
+    "contactForBatch": "Contact opnemen voor huidige batchbeschikbaarheid",
+    "faqHeading": "Veelgestelde vragen",
+    "viewAllInCategory": "Bekijk alles in {category} →",
+    "trustBadge1": "EU-GMP-leveranciersnetwerk",
+    "trustBadge2": "Door derden HPLC-getest",
+    "trustBadge3": "Endotoxine < 5 EU/mg",
+    "trustBadge4": "24 uur EU-verzending",
+    "trustBadge5": "ISO 17025-laboratoriumpartner",
+    "trustBadge6": "AVG-conform",
+    "trustSub1": "Elke batch geverifieerd",
+    "trustSub2": "Bevestigd in partnerlaboratorium",
+    "trustSub3": "Onafhankelijke certificering",
+    "trustSub4": "Gratis boven €150",
+    "freeShippingThreshold": "Gratis verzending boven {amount} in de EU",
+    "wishlistAdd": "Toevoegen aan verlanglijst",
+    "wishlistRemove": "Verwijderen van verlanglijst",
+    "wishlistSaved": "Opgeslagen",
+    "compareAdd": "Toevoegen aan vergelijking",
+    "compareRemove": "Verwijderen uit vergelijking",
+    "compareAdded": "Wordt vergeleken",
+    "addedToCart": "Toegevoegd aan winkelwagen",
+    "bundleAdded": "Bundel toegevoegd aan winkelwagen",
+    "removedFromCart": "Verwijderd uit winkelwagen",
+    "outOfStock": "Uitverkocht",
+    "lowStockLeft": "Bijna op · {count} over",
+    "inStock": "Op voorraad",
+    "quoteOnly": "Alleen offerte",
+    "wishlistCleared": "Verlanglijst geleegd",
+    "purityHplc": "{purity} % HPLC",
+    "quoteTitle": "Offerte aanvragen",
+    "quoteSubtitle": "Prijs en huidige batchbeschikbaarheid op aanvraag. We reageren binnen 24 uur.",
+    "quoteSent": "Offerte-aanvraag verzonden",
+    "quoteEmailPlaceholder": "u@lab.nl",
+    "quoteSentDesc": "We mailen u de huidige prijs voor {name}.",
+    "freeShippingOver": "Gratis verzending boven {amount} in de hele EU",
+    "sale": "Aanbieding",
+    "addToCartWithPrice": "In winkelwagen · {price}",
+    "addedToCartDesc": "{name} {mg} mg × {qty}",
+    "subscribeHeading": "Abonneren & bespaar 10%",
+    "subscribeSub": "Automatische nabestelling elke 4–12 weken · altijd opzegbaar",
+    "subscribeSaveAmount": "Bespaar {amount}/bestelling",
+    "subscribeCadence": "Leveringsfrequentie",
+    "subscribeVialsPerShipment": "Flacons per zending",
+    "subscribePerShipment": "Per zending",
+    "subscribeSaved": "Abonnement opgeslagen",
+    "subscribeStart": "Abonnement starten",
+    "subscribeCancelAnytime": "Overslaan of altijd opzeggen",
+    "subscribeLockIn": "Huidige batch vastleggen",
+    "subscribePriorityDispatch": "Priority EU-verzending",
+    "subscribeCadence4": "Elke 4 weken",
+    "subscribeCadence8": "Elke 8 weken",
+    "subscribeCadence12": "Elke 12 weken",
+    "subscribeDescription": "{qty} × {mg} mg elke {weeks} weken — altijd opzegbaar in uw account.",
+    "completeStack": "Maak je set compleet",
+    "saveBundlePercent": "Bespaar 5%",
+    "bundleSaved": "{count} items · bespaar {amount}",
+    "thisProduct": "Dit product",
+    "bundleTotal": "Bundel totaal",
+    "saveOnBundle": "Bespaar {amount} op de bundel",
+    "addBundle": "Bundel toevoegen",
+    "qvFullDetails": "Volledige details",
+    "qvRemovedFromWishlist": "Verwijderd van verlanglijst",
+    "qvSavedToWishlist": "Toegevoegd aan verlanglijst",
+    "qvRemovedFromCompare": "Verwijderd uit vergelijking",
+    "qvAddedToCompare": "Toegevoegd aan vergelijking",
+    "stickyAdd": "In winkelwagen",
+    "stickyOutOfStock": "Uitverkocht",
+    "stickySubscribe": "Abonneren",
+    "stickyCompare": "Vergelijken",
+    "stickySubscribeTooltip": "Abonneren & bespaar 10%",
+    "stickySubscriptionSaved": "Abonnement opgeslagen",
+    "stickySubscriptionDesc": "U ontvangt {mg} mg elke {weeks} weken — altijd opzegbaar, bespaar 10%.",
+    "stickyRemovedFromWishlist": "Verwijderd van verlanglijst",
+    "stickySavedToWishlist": "Toegevoegd aan verlanglijst",
+    "stickyRemovedFromCompare": "Verwijderd uit vergelijking",
+    "stickyAddedToCompare": "Toegevoegd aan vergelijking",
+    "faq1Q": "Hoe wordt elke batch geverifieerd?",
+    "faq1A": "Elke batch wordt getest door een ISO 17025-gecertificeerd derde partij-lab (Eurofins Biolab, Synlab of Biolab GmbH). HPLC-zuiverheid, endotoxineniveaus en massaspectrometrie-identiteit worden bevestigd voordat de batch wordt vrijgegeven. De COA-PDF voor elke batch vindt u op het tabblad Documenten.",
+    "faq2Q": "Wat staat er in het analysecertificaat?",
+    "faq2A": "De COA bevat HPLC-zuiverheid in %, endotoxine (EU/mg), massaspectrometrie-bevestiging, batch-ID, productiedatum, vervaldatum en het testlaboratorium. Elke batch heeft een unieke code die u kunt gebruiken om de specifieke COA op te zoeken in /coa.",
+    "faq3Q": "Hoe moet ik de flacon bewaren na opening?",
+    "faq3A": "Bewaar lyofilized peptiden bij -20 °C in een droge omgeving. Na reconstitutie, bewaar bij 2–8 °C en gebruik binnen de termijn die in uw protocol staat. Het gegevensblad van elk product vermeldt de specifieke bewaartemperatuur.",
+    "faq4Q": "Verzenden jullie naar mijn land?",
+    "faq4A": "We verzenden momenteel naar alle EU-lidstaten plus Noorwegen, Zwitserland en het VK. Voor een aantal rechtsgebieden gelden lokale beperkingen — zie de volledige lijst bij de kassa. Naar verboden landen (volgens de EU-richtlijn voor beperkte stoffen) wordt niet verzonden.",
+    "faq5Q": "Kan ik BTW-teruggave krijgen als niet-EU-onderzoeker?",
+    "faq5A": "Als u een geldig niet-EU-BTW-registratienummer of een onderzoeksinstelling-ID opgeeft, rekenen we uw bestelling af met 0% BTW. Mail het document na uw bestelling naar billing@averianlabs.eu en we storten de BTW-regel terug.",
+    "faq6Q": "Welke betaalmethoden accepteren jullie?",
+    "faq6A": "Stripe (kaart, Apple Pay, Google Pay), PayPal, SEPA-bankoverschrijving voor institutionele bestellingen boven €1000 en Coinbase Commerce voor BTC / ETH / USDC. De EU-consumentenbeschermingswet is op elke betaalmethode van toepassing.",
+    "fbIncludeItem": "{name} toevoegen",
+    "batchDataHeading": "Batchgegevens",
+    "batchDataCode": "Batchcode",
+    "batchDataManufactured": "Geproduceerd",
+    "batchDataExpires": "Verloopt",
+    "batchDataLab": "Testlaboratorium",
+    "batchDataHplc": "HPLC-zuiverheid",
+    "batchDataEndotoxin": "Endotoxine",
+    "batchDataMs": "Massaspectrometrie",
+    "batchDataConfirmed": "Bevestigd",
+    "batchDataOpenCoa": "Open COA",
+    "coaAvailable": "COA beschikbaar",
+    "openCalculator": "Bereken reconstitutie voor deze flacon"
   },
   "cart": {
     "title": "Winkelwagen",
-    "empty": "Uw winkelwagen is leeg.",
-    "emptyCta": "Blader in catalogus",
+    "empty": "Uw winkelwagen is leeg",
+    "emptyDesc": "Kies een peptide uit de catalogus om uw bestelling te starten — elke batch wordt geleverd met eigen analysecertificaat, endotoxine-panel en massaspectrometrie-identiteitsbevestiging.",
+    "emptyCta": "Blader door de catalogus",
+    "browseCatalog": "Blader door de catalogus",
+    "bestSellers": "Bestsellers van deze maand",
     "subtotal": "Subtotaal",
+    "subtotalBeforeDiscount": "Subtotaal vóór korting",
     "shipping": "Verzending",
     "vat": "BTW",
     "total": "Totaal",
     "checkout": "Afrekenen",
     "remove": "Verwijderen",
+    "itemCount": "{count, plural, =0 {geen items} one {1 item} other {{count} items}}",
     "promo": "Promocode",
     "promoApply": "Toepassen",
     "points": "Gebruik {points} punten (−{amount})",
     "drawerTitle": "Uw winkelwagen",
     "subtitle": "Uw geselecteerde peptiden en benodigdheden — klaar voor beoordeling.",
-    "rewardsEarn": "You will earn",
-    "rewardsFrom": "from this order",
-    "recommendationsHeading": "Best sellers",
-    "continueShopping": "Continue shopping",
-    "secureCheckout": "Secure checkout",
-    "freeShippingProgress": "Add {amount} more for free EU shipping",
+    "rewardsEarn": "U verdient",
+    "rewardsFrom": "op deze bestelling",
+    "recommendationsHeading": "Bestsellers",
+    "continueShopping": "← Verder winkelen",
+    "secureCheckout": "Veilig afrekenen",
+    "freeShippingProgress": "Nog {amount} voor gratis EU-verzending",
     "freeShippingUnlocked": "Gratis EU-verzending ontgrendeld"
   },
   "checkout": {
@@ -294,7 +602,104 @@
     "city": "Stad",
     "country": "Land",
     "continueToShipping": "Doorgaan naar verzending",
-    "title": "Afrekenen"
+    "title": "Afrekenen",
+    "loadingShipping": "Verzendopties laden…",
+    "vat": "BTW",
+    "total": "Totaal",
+    "yourCartEmpty": "Uw winkelwagen is leeg",
+    "completeEmailFirst": "Voltooi eerst de e-mailstap",
+    "chooseShipping": "Kies een verzendmethode",
+    "checkoutFailed": "Afrekenen mislukt",
+    "cryptoUnavailable": "Cryptobetaling niet beschikbaar",
+    "genericError": "Er ging iets mis",
+    "paymentSuccess": "Betaling geslaagd!",
+    "emailPlaceholder": "u@lab.nl",
+    "vatPlaceholder": "NL123456789B01",
+    "continueToPayment": "Doorgaan naar betaling",
+    "orderSummary": "Bestellingsoverzicht",
+    "subtotalItems": "Subtotaal ({count, plural, =0 {geen items} one {1 item} other {{count} items}})",
+    "vatLabel": "BTW ({label})",
+    "totalLabel": "Totaal",
+    "paymentMethodLabel": "Betaalmethode",
+    "cardSepa": "Kaart / SEPA",
+    "crypto": "Crypto",
+    "consentTerms": "Ik ga akkoord met de",
+    "consentTermsLink": "servicevoorwaarden",
+    "consentAnd": "en het",
+    "consentPrivacy": "privacybeleid",
+    "consentResearch": "Ik begrijp dat AverianLabs-producten alleen voor onderzoek zijn.",
+    "creatingOrder": "Bestelling aanmaken…",
+    "vatIncluded": "Incl. BTW",
+    "shippingFree": "Gratis verzending",
+    "bulkDiscountLabel": "Volumekorting",
+    "bulkTier10": "−10 % korting op 5–10 vials van dezelfde SKU",
+    "bulkTier15": "−15 % korting op 11–20 vials van dezelfde SKU",
+    "bulkTier20": "−20 % korting op 21+ vials van dezelfde SKU",
+    "bulkNudge10": "Voeg nog {units} vial van deze SKU toe voor −10 % korting",
+    "bulkNudge15": "Voeg nog {units} vial van deze SKU toe voor −15 % korting",
+    "bulkNudge20": "Voeg nog {units} vial van deze SKU toe voor −20 % korting",
+    "shippingPostiExpress": "Posti Express — 1–2 werkdagen",
+    "shippingDhlExpress": "DHL Express — 1–3 werkdagen",
+    "shippingDpdClassic": "DPD Classic — 3–5 werkdagen",
+    "shipTo": "Verzendadres",
+    "billTo": "Factuuradres",
+    "phone": "Telefoon",
+    "saveInfo": "Gegevens opslaan voor volgende bestelling",
+    "stripeUnavailable": "Stripe is niet geladen. Vernieuw de pagina en probeer opnieuw.",
+    "paymentFailedFallback": "Betaling mislukt. Probeer opnieuw.",
+    "processingPayment": "Betaling verwerken…",
+    "payAmount": "Betaal {amount}",
+    "secureHeading": "Veilig afrekenen",
+    "secureTls": "256-bit TLS · Stripe Radar fraudebescherming bij elke betaling",
+    "securePci": "PCI-DSS Level 1 — we zien of slaan uw kaartnummer nooit op",
+    "secureWithdrawal": "EU 14 dagen herroepingsrecht voor consumentenbestellingen",
+    "weAccept": "Wij accepteren",
+    "paymentVisa": "Visa",
+    "paymentMastercard": "Mastercard",
+    "paymentAmex": "Amex",
+    "paymentApplePay": "Apple Pay",
+    "paymentPaypal": "PayPal",
+    "paymentSepa": "SEPA",
+    "paymentCrypto": "BTC / ETH / USDC",
+    "confirmOrder": "Bestelling bevestigen",
+    "countryFinland": "Finland",
+    "countrySweden": "Zweden",
+    "countryEstonia": "Estland",
+    "countryGermany": "Duitsland",
+    "countryNetherlands": "Nederland",
+    "countryFrance": "Frankrijk",
+    "countrySpain": "Spanje",
+    "countryItaly": "Italië",
+    "countryDenmark": "Denemarken",
+    "countryPoland": "Polen",
+    "fieldRequired": "Verplicht veld",
+    "fieldInvalid": "Controleer dit veld",
+    "bulkNudge10_plural": "Voeg nog {units} vials van deze SKU toe voor −10 % korting",
+    "bulkNudge15_plural": "Voeg nog {units} vials van deze SKU toe voor −15 % korting",
+    "bulkNudge20_plural": "Voeg nog {units} vials van deze SKU toe voor −20 % korting"
+  },
+  "confirm": {
+    "title": "Bedankt voor uw bestelling",
+    "subtitle": "We hebben uw bestelbevestiging per e-mail verzonden.",
+    "orderNumber": "Bestelnummer",
+    "orderNotFound": "Bestelling niet gevonden",
+    "orderNotFoundDesc": "We konden deze bestelling niet vinden. Controleer uw e-mail voor de bevestiging.",
+    "statusPaid": "Betaald",
+    "statusPending": "Wacht op betaling",
+    "includedWithOrder": "Inbegrepen bij uw bestelling:",
+    "includeCoa": "Batchspecifiek analysecertificaat (PDF)",
+    "includeEndotoxin": "Endotoxine-testrapport",
+    "includeMs": "Massaspectrometrie-bevestiging",
+    "includeReconstitution": "Reconstitutiegids",
+    "shippingAddress": "Verzendadres",
+    "billingAddress": "Factuuradres",
+    "orderSummary": "Bestellingsoverzicht",
+    "subtotal": "Subtotaal",
+    "shipping": "Verzending",
+    "vat": "BTW",
+    "total": "Totaal",
+    "viewOrder": "Bestelling bekijken",
+    "continueShopping": "Verder winkelen"
   },
   "footer": {
     "tagline": "Precisiepeptiden voor serieus onderzoek.",
@@ -311,6 +716,7 @@
     "partner": "Partnerprogramma",
     "contact": "Contact",
     "faq": "FAQ",
+    "rewards": "Rewards",
     "shipping": "Verzending & retour",
     "terms": "Voorwaarden",
     "privacy": "Privacy",
@@ -324,7 +730,13 @@
     "coa": "COA-bibliotheek",
     "glossary": "Woordenlijst",
     "documents": "Documenten",
-    "community": "Community"
+    "community": "Community",
+    "businessIdLabel": "KvK-nummer",
+    "vatLabel": "BTW",
+    "stripeSecured": "Stripe-beveiligd",
+    "gdprCompliant": "AVG-conform",
+    "euDispatch": "24u EU-verzending",
+    "account": "Account"
   },
   "cookie": {
     "title": "Cookies & analytics",
@@ -372,26 +784,131 @@
     "nextProducts": "Volgende producten",
     "addToWishlist": "Toevoegen aan verlanglijst",
     "removeFromWishlist": "Verwijderen van verlanglijst",
-    "closeQuickView": "Snelweergave sluiten"
+    "closeQuickView": "Snelweergave sluiten",
+    "shareList": "Lijst delen",
+    "copied": "Gekopieerd!",
+    "quote": "Offerte",
+    "vialSize": "Flesformaat",
+    "addToCartWithPrice": "In winkelwagen · {price}",
+    "addToCompare": "Toevoegen aan vergelijking",
+    "compareAdd": "Toevoegen aan vergelijking",
+    "compareAdded": "Wordt vergeleken",
+    "addedToCart": "Toegevoegd aan winkelwagen",
+    "addedToCartDesc": "{name} {mg} mg × {qty}",
+    "batchLabel": "Laatste batch",
+    "batchDataEndotoxin": "Endotoxine",
+    "batchDataExpires": "Verloopt",
+    "batchDataHplc": "HPLC-zuiverheid",
+    "batchDataManufactured": "Geproduceerd",
+    "batchDataOpenCoa": "Open COA",
+    "coaAvailable": "Bekijk COA",
+    "endotoxinUnit": "EU/mg",
+    "freeShippingOver": "Gratis verzending boven {amount} in de hele EU",
+    "fromSizes": "{count, plural, =0 {— formaten} one {vanaf · 1 formaat} other {vanaf · {count} formaten}}",
+    "inStock": "Op voorraad",
+    "inStockBadge": "Op voorraad",
+    "outOfStock": "Uitverkocht",
+    "outOfStockBadge": "Uitverkocht",
+    "lowStockBadge": "Bijna op · {count} over",
+    "lowStockLeft": "Bijna op · {count} over",
+    "purityHplc": "{purity} % HPLC",
+    "purityHplcLabel": "{purity} % HPLC",
+    "quoteEmailPlaceholder": "u@lab.nl",
+    "quoteSent": "Offerte-aanvraag verzonden",
+    "quoteSentDesc": "We mailen u de huidige prijs voor {name}.",
+    "quoteSubtitle": "Prijs en huidige batchbeschikbaarheid op aanvraag. We reageren binnen 24 uur.",
+    "quoteTitle": "Offerte aanvragen",
+    "qvAddedToCompare": "Toegevoegd aan vergelijking",
+    "qvFullDetails": "Volledige details",
+    "qvRemovedFromCompare": "Verwijderd uit vergelijking",
+    "qvRemovedFromWishlist": "Verwijderd van verlanglijst",
+    "qvSavedToWishlist": "Toegevoegd aan verlanglijst",
+    "removeFromCompare": "Verwijderen uit vergelijking",
+    "requestQuote": "Offerte aanvragen",
+    "stockQuoteOnly": "Alleen offerte",
+    "wishlistAdd": "Toevoegen aan verlanglijst",
+    "wishlistSaved": "Opgeslagen",
+    "stickyAdd": "In winkelwagen",
+    "stickyAddedToCompare": "Toegevoegd aan vergelijking",
+    "stickyCompare": "Vergelijken",
+    "stickyOutOfStock": "Uitverkocht",
+    "stickyRemovedFromCompare": "Verwijderd uit vergelijking",
+    "stickyRemovedFromWishlist": "Verwijderd van verlanglijst",
+    "stickySavedToWishlist": "Toegevoegd aan verlanglijst",
+    "stickySubscribe": "Abonneren",
+    "stickySubscribeTooltip": "Abonneren & bespaar 10%",
+    "stickySubscriptionDesc": "U ontvangt {mg} mg elke {weeks} weken — altijd opzegbaar, bespaar 10%.",
+    "stickySubscriptionSaved": "Abonnement opgeslagen",
+    "subscribing": "Abonnement starten",
+    "applyFilters": "Filters toepassen",
+    "checkout": "Afrekenen",
+    "empty": "Leeg",
+    "emptyCta": "Blader door de catalogus",
+    "filters": "Filters",
+    "compareLabel": "Vergelijken",
+    "comparing": "Wordt vergeleken",
+    "drawerTitle": "Menu",
+    "freeShippingProgress": "Voeg {amount} toe voor gratis verzending",
+    "freeShippingUnlocked": "Gratis verzending geactiveerd",
+    "fromLabel": "Vanaf",
+    "pricingLabel": "Prijzen",
+    "privacyLink": "privacybeleid",
+    "privacyPost": ". GDPR-vriendelijk.",
+    "privacyPre": "Door deze site te gebruiken ga je akkoord met ons",
+    "quantity": "Aantal",
+    "researchUseOnly": "Alleen voor onderzoek",
+    "rewardsEarn": "Verdien beloningen",
+    "rewardsFrom": "Uit beloningen",
+    "sale": "Aanbieding",
+    "selectVialSize": "Kies flacongrootte",
+    "shipping": "Verzending",
+    "shippingFree": "Gratis verzending",
+    "shop": "Winkel",
+    "subtotal": "Subtotaal",
+    "success": "Gelukt",
+    "title": "Titel",
+    "total": "Totaal",
+    "vat": "BTW",
+    "vatIncluded": "incl. BTW",
+    "viewAllProducts": "Bekijk alle producten",
+    "body": "Inhoud",
+    "secureHeading": "Veilig afrekenen",
+    "featured": "Aanbevolen",
+    "browseByCategory": "Bladeren op categorie",
+    "productsCount": "{count, plural, =0 {geen producten} one {1 product} other {{count} producten}}",
+    "remove": "Verwijderen",
+    "carouselRequestQuote": "Offerte aanvragen",
+    "carouselPricingOnRequest": "Prijs op aanvraag",
+    "quickAdd": "Snel toevoegen"
   },
   "glossary": {
-    "title": "Glossary",
-    "subtitle": "Every acronym, technique, and piece of jargon we use on the site — explained in plain language with sources.",
-    "searchPlaceholder": "Search terms…",
-    "empty": "No glossary terms yet.",
-    "backToIndex": "← All terms",
-    "relatedTermsHeading": "Related terms",
-    "relatedProductsHeading": "Related products",
-    "synonymsLabel": "Also known as",
-    "notFoundTitle": "Term not found",
-    "notFoundBody": "We don't have a glossary entry for this term yet.",
+    "title": "Woordenlijst",
+    "subtitle": "Elke afkorting, techniek en term die we op de site gebruiken — uitgelegd met bronvermeldingen.",
+    "searchPlaceholder": "Zoek termen…",
+    "filterAll": "Alle",
+    "noResults": "Geen overeenkomende termen.",
+    "empty": "Nog geen woordenlijst-items.",
+    "backToIndex": "← Alle termen",
+    "relatedTermsHeading": "Gerelateerde termen",
+    "relatedProductsHeading": "Gerelateerde producten",
+    "relatedProducts": "Gerelateerde producten",
+    "synonymsLabel": "Ook bekend als",
+    "notFoundTitle": "Term niet gevonden",
+    "notFoundBody": "We hebben nog geen woordenlijstitem voor deze term.",
     "categoryLabels": {
-      "analytical": "Analytical",
-      "chemistry": "Chemistry",
+      "analytical": "Analytisch",
+      "chemistry": "Chemie",
       "compliance": "Compliance",
-      "logistics": "Logistics",
+      "logistics": "Logistiek",
       "product": "Product",
-      "regulatory": "Regulatory"
+      "regulatory": "Regelgeving"
+    },
+    "categories": {
+      "analysis": "Analyse",
+      "sequence": "Sequentie",
+      "formulation": "Formulering",
+      "storage": "Opslag",
+      "regulatory": "Regelgeving"
     }
   },
   "averia": {
@@ -483,6 +1000,18 @@
       "privacyNote": "Gesprekken worden alleen opgeslagen met jouw toestemming. Je kunt ze altijd exporteren of verwijderen —",
       "privacyLink": "privacybeleid"
     },
+    "sourcesHeading": "Bronnen",
+    "sourcesCount": "{count, plural, =0 {geen bronnen} one {1 bron} other {{count} bronnen}}",
+    "showSources": "Bronnen tonen",
+    "hideSources": "Bronnen verbergen",
+    "noSources": "Nog geen geciteerde bronnen — vraag Averia over een product om citaten te zien.",
+    "sourceTypes": {
+      "product": "Product",
+      "coa": "Analysecertificaat",
+      "glossary": "Woordenlijst",
+      "blog": "Artikel",
+      "document": "Document"
+    },
     "send": "Verzenden",
     "stop": "Stoppen",
     "ageRequired": "Bevestig eerst dat je 18+ bent.",
@@ -495,8 +1024,13 @@
     "errorServerBody": "Averia ondervond een probleem aan onze kant. Probeer het zo opnieuw."
   },
   "community": {
-    "signInToPost": "Sign in to post",
-    "signInCta": "Sign in",
+    "signInToPost": "Log in om te plaatsen",
+    "signInCta": "Log in",
+    "signInToReact": "Log in om te reageren",
+    "signInToJoin": "Log in om deel te nemen aan de discussie →",
+    "signInToCreatePlans": "Log in om onderzoeksplannen aan te maken.",
+    "signInToViewPlan": "Log in om je onderzoeksplan te bekijken.",
+    "signInCtaArrow": "Log in →",
     "cancel": "Annuleren",
     "reportFailed": "Rapport kon niet worden verzonden. Probeer het opnieuw.",
     "activityEmpty": "Nog geen activiteit.",
@@ -511,19 +1045,27 @@
     "fieldBodyHint": "Markdown ondersteund. Berichten worden automatisch gemodereerd.",
     "fieldCategory": "Categorie",
     "fieldTitle": "Titel",
+    "titlePlaceholder": "Wees specifiek…",
+    "bodyPlaceholder": "Markdown ondersteund. Verwijs waar mogelijk naar bronnen.",
     "hubHeading": "Discussiecategorieën",
     "hubSub": "Kies een categorie en duik erin.",
+    "hubEyebrow": "Alleen onderzoek · gemodereerd",
     "leaderboardEmpty": "Wees de eerste.",
     "leaderboardHeading": "Topbijdragers",
     "leaderboardSub": "Leden verdienen reputatie via ontvangen reacties.",
     "lockedNotice": "Deze discussie is vergrendeld.",
     "moderationNote": "Moderatornotitie",
+    "moderationBadge": "Moderatie",
+    "moderationDescription": "Berichten worden vooraf door een lexicale bewaker gecontroleerd voordat ze live gaan, en daarna asynchroon beoordeeld door een LLM-moderator. Een menselijke wachtrij behandelt randgevallen.",
+    "threadModerationDescription": "Nieuwe berichten worden voor publicatie gecontroleerd door een geautomatiseerde moderator. De menselijke wachtrij beoordeelt gemarkeerde inhoud.",
+    "lockedBadge": "Vergrendeld",
     "newThread": "Nieuwe discussie",
     "newThreadSub": "Wees precies. Verwijs waar mogelijk naar bronnen.",
     "newThreadTitle": "Start een nieuwe discussie",
     "reactionHelpful": "Behulpzaam",
     "reactionInsightful": "Inzichtvol",
     "reactionThanks": "Bedankt",
+    "reactionOwnPost": "Je kunt niet op je eigen bericht reageren",
     "recentHeading": "Recente activiteit",
     "removedNotice": "Een moderator heeft dit bericht verwijderd.",
     "replyPlaceholder": "Draag bij aan de discussie…",
@@ -568,6 +1110,8 @@
     "tierProgress": "{current} / {target} tot volgende: {next}",
     "title": "Community",
     "warnNotice": "Dit bericht is gemarkeerd voor beoordeling.",
+    "anonymous": "Anoniem",
+    "edited": "bewerkt",
     "categories": {
       "announcements": {
         "name": "Aankondigingen",
@@ -597,7 +1141,11 @@
         "name": "Off-topic lounge",
         "description": "Alles wat overig is."
       }
-    }
+    },
+    "timeNow": "nu",
+    "timeMinutes": "{m} min",
+    "timeHours": "{h} u",
+    "timeDays": "{d} d"
   },
   "documents": {
     "title": "Documenten",
@@ -629,6 +1177,8 @@
     "fieldNotes": "Notities (optioneel)",
     "fieldNotesHint": "Markdown ondersteund. Wordt getoond bij delen.",
     "fieldTitle": "Naam van het plan",
+    "titlePlaceholder": "Pezenherstelpaneel",
+    "notesPlaceholder": "Waarom deze combinatie, in vitro-omstandigheden, verwachte resultaten…",
     "items": "Planproducten",
     "itemsCount": "{count, plural, =0 {Geen producten} one {# product} other {# producten}}",
     "makePrivate": "Privé houden",
@@ -648,7 +1198,13 @@
     "subtitle": "Samengestelde productbundels voor je onderzoek. Privé opslaan of openbaar delen.",
     "title": "Opgeslagen onderzoeksplannen",
     "untitled": "Naamloos plan",
-    "viewOriginal": "Product bekijken"
+    "viewOriginal": "Product bekijken",
+    "cancel": "Annuleren",
+    "copy": "Kopiëren",
+    "deleteConfirmPhrase": "VERWIJDEREN",
+    "badge": "Plannen",
+    "signInCtaArrow": "Log in om plannen te maken →",
+    "signInToCreatePlans": "Log in om plannen te maken"
   },
   "activity": {
     "title": "Activiteit",
@@ -673,13 +1229,18 @@
     "deleteConfirmPhrase": "VERWIJDEREN",
     "deleteDescription": "Verwijder je account en alle bijbehorende gegevens permanent. Na 30 dagen niet meer ongedaan te maken.",
     "deleteTitle": "Je account verwijderen",
+    "deleteScheduledTitle": "Accountverwijdering ingepland.",
+    "deleteScheduledBody": "Al je gegevens worden binnen 30 dagen permanent verwijderd.",
+    "deletePlaceholder": "VERWIJDEREN",
     "exportButton": "Export aanvragen",
     "exportDescription": "Download een JSON-archief met alles wat we over je hebben — bestellingen, plannen, forumberichten, account.",
     "exportPending": "Export aangevraagd. Check je e-mail.",
-    "exportTitle": "Je gegevens exporteren"
+    "exportTitle": "Je gegevens exporteren",
+    "cancel": "Annuleren"
   },
   "account": {
     "title": "Account",
+    "badge": "Account",
     "settings": "Instellingen",
     "orders": "Bestellingen",
     "security": "Beveiliging",
@@ -705,21 +1266,68 @@
     "deletedPending": "Accountverwijdering is in behandeling. Wordt binnen 30 dagen verwerkt.",
     "exportReady": "Data-export is klaar. Check je e-mail.",
     "noPlans": "Je hebt nog geen plannen aangemaakt.",
+    "plansEmptyHint": "Bundel producten die je samen gebruikt en deel ze openbaar met een link.",
     "sectionGdpr": "Privacy & gegevens",
     "sectionResearchPlans": "Opgeslagen onderzoeksplannen",
     "viewPlans": "Plannen bekijken",
-    "welcome": "Welkom terug"
+    "welcome": "Welkom terug",
+    "tileOrders": "Bestellingen",
+    "tileCoaLibrary": "COA-bibliotheek",
+    "tileSubscriptions": "Abonnementen",
+    "tileSecurity": "Beveiliging",
+    "itemsCount": "{count, plural, =0 {Geen items} one {1 item} other {{count} items}}",
+    "planUntitled": "Naamloos plan",
+    "planProductsCount": "{count, plural, one {# product} other {# producten}}",
+    "planVisibilityPublic": "Openbaar",
+    "planVisibilityPrivate": "Privé",
+    "backToAccount": "← Terug naar account",
+    "noOrders": "Je hebt nog geen bestellingen geplaatst.",
+    "noOrdersSub": "Blader door de catalogus en je eerste bestelling verschijnt hier.",
+    "browseShop": "Blader door de winkel",
+    "notificationsBadge": "Meldingen",
+    "notificationsTitle": "Inbox",
+    "notificationsDescription": "Reacties, reacties en gedeelde plannen. {count} ongelezen.",
+    "notificationsSignInPrompt": "Log in om meldingen te bekijken.",
+    "notificationsAllCaughtUp": "Je bent helemaal bij.",
+    "notificationsSomeone": "Iemand",
+    "notificationsReply": "heeft op je discussie gereageerd",
+    "notificationsReaction": "reageerde op je bericht",
+    "notificationsPlanShared": "heeft een onderzoeksplan gedeeld",
+    "notificationsNotified": "heeft je op de hoogte gesteld",
+    "deleteConfirmTitle": "Accountverwijdering ingepland.",
+    "deleteConfirmBody": "Al je gegevens worden binnen 30 dagen permanent verwijderd.",
+    "deleteUnavailableTitle": "Accountverwijdering niet beschikbaar",
+    "deleteUnavailableBody": "Deze implementatie heeft geen database geconfigureerd.",
+    "confirmDeleteTitle": "Log in om te bevestigen",
+    "confirmDeleteBody": "Log in op het account waarvan je de verwijdering wilt bevestigen.",
+    "confirmDeleteSignInLink": "← Log in",
+    "confirmDeleteConfirmedBadge": "Bevestigd",
+    "confirmDeleteHardDeleteNote": "Je persoonsgegevens staan in de wachtrij voor hard-deletion over 30 dagen. Tot die tijd zijn ze geanonimiseerd in de database, maar te herstellen door support als je van gedachten verandert.",
+    "confirmDeleteHomeLink": "← Home"
   },
   "contact": {
+    "title": "Contact",
+    "intro": "Echte wetenschappers, echt snel. We antwoorden binnen 24 uur, op werkdagen.",
+    "emailLabel": "E-mail",
+    "labInquiriesLabel": "Lab-aanvragen",
+    "hqNote": "HK: Helsinki, Finland · Magazijn: Vantaa · Labpartner: Eurofins Biolab (DE)",
     "name": "Naam",
-    "email": "E-mail",
     "subject": "Onderwerp",
     "message": "Bericht",
     "send": "Bericht verzenden",
     "sending": "Verzenden…",
     "sentTitle": "Bericht verzonden",
     "sentBody": "We reageren binnen 24 uur.",
-    "errorTitle": "Er ging iets mis"
+    "errorTitle": "Er ging iets mis",
+    "email": "E-mail",
+    "cofounderPromisesHeading": "Waar je op kunt rekenen",
+    "cofounderPromisesSub": "Drie beloftes die we elke onderzoeker doen, elke keer weer.",
+    "promiseCoaTitle": "Laboratoriumresultaten, altijd",
+    "promiseCoaBody": "Elke batch wordt geleverd met bijbehorend COA. Je kunt ook online elk batch-COA opvragen — zoek op product of batchcode.",
+    "promiseCoaCta": "Bekijk het COA-register",
+    "promiseSupportTitle": "Mens + getrainde bot",
+    "promiseSupportBody": "Averia beantwoordt de meeste vragen in seconden. Complexe en commerciële vragen gaan binnen één werkdag naar ons Helsinki researchteam.",
+    "promiseSupportCta": "Vraag het Averia"
   },
   "newsletter": {
     "title": "Ontvang de maandelijkse onderzoeksdigest.",
@@ -780,22 +1388,1099 @@
   "admin": {
     "audit": "Auditlogboek",
     "auditSub": "Elke admin-actie",
+    "auditBadge": "Admin · Auditlogboek",
+    "auditEmpty": "Nog geen admin-acties geregistreerd.",
+    "auditWhen": "Wanneer",
+    "auditActor": "Actor",
+    "auditAction": "Actie",
+    "auditEntity": "Entiteit",
+    "auditMetadata": "Metadata",
     "dashboard": "Overzicht",
     "dashboardSub": "Overzicht",
+    "dashboardBadge": "Admin · Overzicht",
     "documents": "Documenten",
     "documentsSub": "COA, SDS, HPLC, …",
+    "documentsBadge": "Admin · Documenten",
+    "documentsDescription": "Beheer de getypeerde documenten (COA, SDS, HPLC, METHOD, NMR, SPEC, MSDS) die op productpagina's en onder /documents/[id] verschijnen.",
     "moderation": "Moderatie",
     "moderationSub": "Gemarkeerde inhoud",
+    "moderationBadge": "Admin · Moderatie",
+    "moderationDescription": "Eerst lidrapporten, daarna berichten gemarkeerd door de lexicale bewaker of LLM-moderator. Nieuwste eerst. Klik Bekijken om het volledige bericht te inspecteren.",
+    "averiaConversations": "Averia-gesprekken",
+    "averiaConversationsSub": "Blader door, zoek in en stel antwoorden op voor klantgesprekken.",
+    "averiaBadge": "Admin · Averia",
+    "averiaTranscriptBadge": "Admin · Transcript",
+    "averiaTranscriptTitle": "Transcript · {count} berichten",
+    "averiaBackToList": "← Alle gesprekken",
+    "averiaBackToHome": "← Home",
+    "averiaBackToCommunity": "← Terug naar community",
+    "averiaNotFound": "Gesprek niet gevonden.",
+    "averiaBackFromMissing": "← Terug naar lijst",
     "signOut": "Afmelden",
     "statsNewMembers": "Nieuwe leden",
     "statsNewMembersSub": "afgelopen 7 dagen",
-    "statsPendingModeration": "Openstaande moderatie",
-    "statsPendingModerationSub": "gebeurtenissen laatste 24u",
+    "statsPendingModeration": "In afwachting van moderatie",
+    "statsPendingModerationSub": "gebeurtenissen in laatste 24u",
     "statsRecentPlans": "Gedeelde plannen",
     "statsRecentPlansSub": "afgelopen 7 dagen",
     "statsRecentThreads": "Nieuwe discussies",
-    "statsRecentThreadsSub": "gebeurtenissen laatste 24u",
-    "statsTotalDocs": "Totaal documenten",
-    "statsTotalDocsSub": "alle 7 typen"
+    "statsRecentThreadsSub": "gebeurtenissen in laatste 24u",
+    "statsNewThreads": "Nieuwe discussies",
+    "statsTotalDocs": "Totaal aantal documenten",
+    "statsTotalDocsSub": "alle 7 types",
+    "viewLink": "Bekijken →",
+    "moderationQueue": {
+      "verdictError": "Kon het oordeel niet opslaan. Probeer het opnieuw.",
+      "verdictRecorded": "Oordeel opgeslagen.",
+      "queueEmpty": "Wachtrij is leeg. Alle gemarkeerde berichten zijn beoordeeld.",
+      "postBodyUnavailable": "(berichttekst niet beschikbaar)",
+      "byAuthor": "door {name}",
+      "viewFullPost": "Volledig bericht bekijken",
+      "hide": "Verbergen",
+      "view": "Bekijken",
+      "dismissTitle": "Afwijzen — geen actie nodig",
+      "dismiss": "Afwijzen",
+      "removePostTitle": "Verwijderen — bericht offline halen",
+      "removePost": "Bericht verwijderen",
+      "allowTitle": "Toestaan — zichtbaar houden, als beoordeeld markeren",
+      "allow": "Toestaan",
+      "keepTitle": "Gemarkeerd houden — beoordeeld, zichtbaar laten",
+      "keep": "Behouden",
+      "removeTitle": "Verwijderen — zet berichtstatus op verwijderd",
+      "remove": "Verwijderen",
+      "openThread": "Open discussie →"
+    },
+    "documentsClient": {
+      "newDocument": "Nieuw document",
+      "noDocuments": "Nog geen documenten. Klik op \"Nieuw document\" om er een toe te voegen.",
+      "deleteAria": "Verwijderen",
+      "createDocument": "Document aanmaken",
+      "fieldType": "Type",
+      "fieldTitle": "Titel",
+      "titlePlaceholder": "BPC-157 · 2026-04 batch",
+      "fieldVersion": "Versie",
+      "fieldProductOptional": "Product (optioneel)",
+      "noneOption": "— Geen —",
+      "fieldExternalUrlOptional": "Externe URL (optioneel)",
+      "externalUrlHint": "PDF-URL op R2 of een willekeurige CDN",
+      "externalUrlPlaceholder": "https://r2.example.com/coa-bpc-2026-04.pdf",
+      "cancel": "Annuleren",
+      "create": "Aanmaken"
+    },
+    "conversationSearch": {
+      "placeholder": "Zoek titel, gespreks-ID…",
+      "allLocales": "Alle talen",
+      "english": "Engels",
+      "finnish": "Fins",
+      "german": "Duits",
+      "swedish": "Zweeds",
+      "dutch": "Nederlands",
+      "submit": "Zoeken",
+      "tableTitle": "Titel",
+      "tableLocale": "Taal",
+      "tableOwner": "Eigenaar",
+      "tableContext": "Context",
+      "tableLastMessage": "Laatste bericht",
+      "ownerUser": "gebruiker",
+      "ownerAnon": "anon",
+      "empty": "Geen gesprekken gevonden."
+    },
+    "draftReply": {
+      "title": "Antwoordconcept",
+      "toneWarm": "warm",
+      "toneConcise": "beknopt",
+      "toneTechnical": "technisch",
+      "drafting": "Concept wordt gemaakt…",
+      "generate": "Genereer concept ({tone})",
+      "charsCount": "{count} tekens",
+      "copied": "Gekopieerd",
+      "copy": "Kopiëren",
+      "supportRequest": "Ondersteuningsverzoek"
+    }
+  },
+  "legal": {
+    "draftBanner": "CONCEPT — VEREIST JURIDISCHE BEOORDELING VOOR PUBLICATIE. Deze pagina is een Nederlandstalig conceptvoorstel en nog niet bindend.",
+    "terms": {
+      "title": "Servicevoorwaarden",
+      "lastUpdated": "Laatst bijgewerkt: 1 september 2026",
+      "intro": "Door averianlabs.eu of andere domeinen van AverianLabs te gebruiken, gaat u akkoord met deze servicevoorwaarden. Alle producten worden verkocht onder een strikte onderzoekslicentie.",
+      "sections": {
+        "eligibility": {
+          "title": "1. Geschiktheid",
+          "body": "U moet ten minste 18 jaar oud zijn en een gekwalificeerde onderzoeker of institutionele koper om bij AverianLabs te kopen."
+        },
+        "researchUse": {
+          "title": "2. Alleen voor onderzoek",
+          "body": "Alle producten zijn uitsluitend bedoeld voor laboratoriumonderzoek en in-vitro-studies. Ze zijn NIET bedoeld voor menselijke consumptie, diagnostisch gebruik of therapeutische toepassingen."
+        },
+        "pricing": {
+          "title": "3. Prijzen en btw",
+          "body": "Prijzen zijn inclusief EU-btw (OSS-regeling). B2B-klanten met een geldig btw-nummer kunnen bij het afrekenen kopen met verlegde heffing (reverse charge)."
+        },
+        "shipping": {
+          "title": "4. Verzending",
+          "body": "Wij verzenden binnen 24 uur vanuit ons magazijn in Helsinki. Het risico van verlies gaat bij de scan door de vervoerder over op de koper."
+        },
+        "returns": {
+          "title": "5. Retourzendingen",
+          "body": "Vanwege de aard van onderzoekspeptiden kunnen geopende of in de koelketen aangetaste flacons niet worden geretourneerd. Ongeopend product kan binnen 14 dagen worden geretourneerd voor omruiling of terugbetaling."
+        },
+        "liability": {
+          "title": "6. Aansprakelijkheidsbeperking",
+          "body": "De aansprakelijkheid van AverianLabs is beperkt tot de aankoopprijs van het product. Wij garanderen geen geschiktheid voor een bepaalde onderzoekstoepassing boven het gepubliceerde analysecertificaat."
+        },
+        "governingLaw": {
+          "title": "7. Toepasselijk recht",
+          "body": "Op deze voorwaarden is het Finse recht van toepassing. Geschillen worden uitsluitend beslecht door de arrondissementsrechtbank van Helsinki."
+        },
+        "contact": {
+          "title": "8. Contact",
+          "body": "Vragen: legal@averianlabs.eu"
+        }
+      }
+    },
+    "privacy": {
+      "title": "Privacybeleid",
+      "lastUpdated": "Laatst bijgewerkt: 1 september 2026 · AVG-conform",
+      "intro": "Dit beleid beschrijft hoe AverianLabs Oy (\"wij\") persoonsgegevens verwerkt op averianlabs.eu en aangesloten domeinen, in overeenstemming met de Algemene verordening gegevensbescherming (AVG) van de EU en de Finse gegevensbeschermingswet.",
+      "sections": {
+        "dataCollected": {
+          "title": "Gegevens die we verzamelen",
+          "body": "Accountgegevens: e-mail, naam, wachtwoordhash (als u een account aanmaakt). Bestelgegevens: verzend-/factuuradres, bestelgeschiedenis. Technische gegevens: IP (ingekort), user-agent, verwijzer (30 dagen bewaard). Analyse: alleen met uw uitdrukkelijke toestemming via de cookiebanner."
+        },
+        "lawfulBasis": {
+          "title": "Rechtsgrondslag",
+          "body": "Overeenkomst (art. 6(1)(b)) voor bestellingen, toestemming (art. 6(1)(a)) voor analyse, wettelijke verplichting (art. 6(1)(c)) voor boekhouding."
+        },
+        "subprocessors": {
+          "title": "Subverwerkers",
+          "body": "Stripe Payments Europe Ltd — betalingsverwerking (EU); Coinbase Commerce — cryptobetalingen; Resend — transactionele e-mail (EU); PostHog Cloud EU — productanalyse (toestemmingsgebonden); Sanity Inc. — content (VS, EU-dataresidentie); Cloudflare — CDN / DDoS; Neon — database (Frankfurt)."
+        },
+        "yourRights": {
+          "title": "Uw rechten",
+          "body": "U heeft het recht op toegang, rectificatie, wissen, beperking, overdraagbaarheid en bezwaar. E-mail privacy@averianlabs.eu. U kunt ook een klacht indienen bij uw nationale toezichthoudende autoriteit (in Finland: tietosuojavaltuutettu)."
+        },
+        "retention": {
+          "title": "Bewaartermijn",
+          "body": "Accountgegevens: tot verwijdering. Bestelgegevens: 7 jaar (boekhoudplicht). Analyse: 14 maanden."
+        },
+        "contact": {
+          "title": "Contact",
+          "body": "Functionaris voor gegevensbescherming: dpo@averianlabs.eu · AverianLabs Oy, Helsinki, Finland."
+        }
+      }
+    },
+    "cookies": {
+      "title": "Cookies",
+      "lastUpdated": "Laatst bijgewerkt: 1 september 2026",
+      "intro": "We gebruiken een minimale set cookies. Essentiële cookies kunnen niet worden uitgeschakeld; analysecookies vereisen uw toestemming.",
+      "sections": {
+        "essential": {
+          "title": "Essentieel",
+          "body": "averianlabs-cart — slaat uw winkelwagen op (1 jaar); averianlabs-age-confirmed — onthoudt leeftijdspoortbevestiging (1 jaar); averianlabs-cookie-consent — onthoudt uw cookiekeuze (1 jaar); Stripe / Coinbase-sessiecookies (geplaatst door betalingsprovider)."
+        },
+        "analytics": {
+          "title": "Analyse (toestemming)",
+          "body": "PostHog (EU) en Plausible worden pas geladen nadat u in de cookiebanner op \"Alles accepteren\" klikt. Ze verzamelen geanonimiseerde, geaggregeerde gebruiksgegevens."
+        },
+        "changeChoice": {
+          "title": "Wijzig uw keuze",
+          "body": "Klik op de kleine \"Cookies\"-link in de footer, of wis uw browsergegevens."
+        }
+      }
+    },
+    "disclaimer": {
+      "badge": "Alleen voor onderzoek",
+      "title": "Onderzoeksdisclaimer",
+      "lead": "Alle producten die door AverianLabs Oy worden verkocht, zijn uitsluitend bedoeld voor laboratoriumonderzoek en in-vitro-studies.",
+      "sections": {
+        "notForHuman": {
+          "title": "Niet voor menselijke consumptie",
+          "body": "De producten die op averianlabs.eu worden vermeld, zijn niet bedoeld voor menselijk of diergeneeskundig gebruik, consumptie, toediening of toepassing op het lichaam in welke vorm dan ook."
+        },
+        "noMedicalClaims": {
+          "title": "Geen medische claims",
+          "body": "Informatie op deze website is uitsluitend bedoeld voor onderzoeks- en onderwijsdoeleinden. Het is niet bedoeld als medisch advies, diagnose of behandelingsaanbeveling. AverianLabs Oy onderschrijft, beveelt niet aan of ondersteunt het off-label gebruik van een product."
+        },
+        "buyerResponsibility": {
+          "title": "Verantwoordelijkheid van de koper",
+          "body": "Door bij AverianLabs te kopen, bevestigt u dat u een gekwalificeerde onderzoeker of institutionele koper bent, en dat de producten uitsluitend zullen worden gebruikt voor legitiem laboratoriumonderzoek in overeenstemming met alle toepasselijke lokale, nationale en internationale wetten en voorschriften."
+        },
+        "compliance": {
+          "title": "Naleving",
+          "body": "Het is de verantwoordelijkheid van de koper om ervoor te zorgen dat de import, het bezit en het gebruik van onderzoekspeptiden voldoet aan alle toepasselijke voorschriften in hun rechtsgebied. AverianLabs Oy behoudt zich het recht voor om naar eigen goeddunken service te weigeren aan een koper of rechtsgebied."
+        }
+      }
+    }
+  },
+  "compare": {
+    "badge": "Zij aan zij",
+    "title": "Vergelijk onderzoekspeptiden",
+    "subtitle": "Zuiverheid, flacongroottes, sequentie en opslag — over de hele catalogus.",
+    "compare": "Toevoegen aan vergelijking",
+    "actionAdd": "Toevoegen aan vergelijking",
+    "clear": "Verwijderen uit vergelijking",
+    "removeFromCompareA11y": "Verwijderen uit vergelijking",
+    "addedToCart": "Wordt vergeleken",
+    "inStockCount": "Op voorraad",
+    "lowStock": "Bijna op · {count} over",
+    "close": "Sluiten",
+    "barTitle": "Vergelijk peptiden",
+    "barLabel": "{count, plural, =0 {Geen producten geselecteerd} one {1 product in vergelijking} other {{count} producten in vergelijking}}",
+    "barSub": "Naast elkaar HPLC, massaspectrometrie, sequentie en prijs.",
+    "addAllToCart": "Voeg alles toe aan winkelwagen",
+    "badgeQuote": "Alleen offerte",
+    "clearAll": "Alles wissen",
+    "colAvailability": "Beschikbaarheid",
+    "colCas": "CAS",
+    "colCategory": "Categorie",
+    "colFormula": "Formule",
+    "colMw": "MW",
+    "colPurity": "Zuiverheid",
+    "colSequence": "Sequentie",
+    "colStorage": "Opslag",
+    "colVialSizes": "Flacongroottes",
+    "contact": "Contact",
+    "emptyBody": "Blader door producten en voeg ze toe aan de vergelijking.",
+    "emptyTitle": "Geen producten om te vergelijken",
+    "footerSummary": "{count} van {max} vergeleken",
+    "fromPrice": "Vanaf {price}",
+    "headerAttribute": "Eigenschap",
+    "pickerPrompt": "Selecteer een product",
+    "actionNotify": "Waarschuw mij"
+  },
+  "about": {
+    "badge": "Over AverianLabs",
+    "title": "Gebouwd door onderzoekers, voor onderzoekers.",
+    "intro": "We hebben AverianLabs opgericht omdat de toeleveringsketen van onderzoekspeptiden ondoorzichtig, traag en inconsistent was. Elke batch moet een openbaar COA bevatten, elke vraag moet een echt antwoord krijgen, en elke bestelling moet binnen 24 uur vanuit een EU-laboratorium worden verzonden.",
+    "stats": [
+      {
+        "value": "100 %",
+        "label": "COA bij elke batch",
+        "note": "Onze toezegging bij elke levering"
+      },
+      {
+        "value": "—",
+        "label": "Batchspecifieke HPLC-zuiverheid",
+        "note": "Per batch gepubliceerd"
+      },
+      {
+        "value": "24u",
+        "label": "EU-verzending",
+        "note": "Onze doelstelling"
+      },
+      {
+        "value": "—",
+        "label": "Bediende onderzoekers",
+        "note": "Meerdere honderden in de EU"
+      }
+    ],
+    "valuesTitle": "Onze waarden",
+    "values": [
+      {
+        "title": "Transparantie",
+        "body": "Elk testresultaat, elke leverancier, elke prijs. Open by default."
+      },
+      {
+        "title": "Zuiverheid",
+        "body": "We verkopen minder peptiden zodat we elke batch grondiger kunnen testen."
+      },
+      {
+        "title": "Snelheid",
+        "body": "Onderzoek wacht niet. 24u verzending vanuit onze EU-hub in Helsinki."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Veelgestelde vragen",
+    "subtitle": "Snelle antwoorden op de meest gestelde vragen.",
+    "items": [
+      {
+        "q": "Zijn uw producten bedoeld voor menselijke consumptie?",
+        "a": "Nee. Alle producten van AverianLabs zijn uitsluitend bedoeld voor laboratoriumonderzoek en in-vitro-studies. Ze zijn niet voor menselijk of diergeneeskundig gebruik."
+      },
+      {
+        "q": "Hoe lang duurt de verzending?",
+        "a": "We verzenden binnen 24 uur vanuit ons magazijn in Helsinki. EU-levering duurt doorgaans 1–3 werkdagen via Posti of DHL."
+      },
+      {
+        "q": "Bieden u analysecertificaten aan?",
+        "a": "Ja. Elke batch wordt geleverd met een batchspecifiek COA (HPLC-zuiverheid, massaspectrometrie-bevestiging) en endotoxinerapport. PDF's zijn openbaar beschikbaar op /coa."
+      },
+      {
+        "q": "Naar welke landen verzendt u?",
+        "a": "We verzenden naar alle EU-landen plus UK, NO, CH en TR. We verzenden niet naar een klein aantal beperkte jurisdicties (zie voorwaarden)."
+      },
+      {
+        "q": "Welke betaalmethoden accepteert u?",
+        "a": "Kaarten (Visa, MC, Amex), Apple Pay, Google Pay, iDEAL, Klarna, SEPA-incasso en crypto (BTC, ETH, USDC) via Coinbase Commerce."
+      },
+      {
+        "q": "Biedt u volume- / B2B-prijzen aan?",
+        "a": "Ja — solliciteer voor ons partnerprogramma. Universiteiten, onderzoekslabs en wederverkopers krijgen tot 35 % korting en NET-14-facturering."
+      }
+    ]
+  },
+  "labTests": {
+    "badge": "ISO 17025 labpartner",
+    "title": "Zo testen we elke batch",
+    "subtitle": "Onafhankelijke verificatie bij elke stap. Geen batch wordt verzonden zonder een volledige analytische vingerafdruk.",
+    "batchesLabel": "gevolgde batches",
+    "tests": [
+      {
+        "title": "HPLC-zuiverheid",
+        "body": "Omgekeerde-fase HPLC kwantificeert peptidegehalte tegen een gecertificeerde referentiestandaard. Acceptatie: ≥ 98 %."
+      },
+      {
+        "title": "Endotoxine (LAL)",
+        "body": "Kinetische chromogene LAL volgens USP <85>. Acceptatie: < 5 EU/mg."
+      },
+      {
+        "title": "Massaspectrometrie",
+        "body": "ESI-MS bevestigt dat molecuulgewicht binnen ±1 Da overeenkomt met theoretisch."
+      },
+      {
+        "title": "Steriliteit & mycoplasma",
+        "body": "14-daagse steriliteitstest (USP <71>) en mycoplasma-qPCR op elke batch."
+      }
+    ],
+    "sequenceTitle": "Testvolgorde",
+    "sequence": [
+      {
+        "step": "01",
+        "title": "Ontvangst",
+        "body": "Rauwe peptide gaat in quarantaine"
+      },
+      {
+        "step": "02",
+        "title": "Identiteit",
+        "body": "ESI-MS bevestigt sequentie"
+      },
+      {
+        "step": "03",
+        "title": "Zuiverheid",
+        "body": "HPLC bij 214 nm + 220 nm"
+      },
+      {
+        "step": "04",
+        "title": "Veiligheid",
+        "body": "Endotoxine, steriliteit, mycoplasma"
+      }
+    ]
+  },
+  "quality": {
+    "badge": "Kwaliteit",
+    "title": "Kwaliteit, van begin tot eind",
+    "items": [
+      {
+        "title": "EU-GMP-leveranciers",
+        "body": "We auditen elke peptidefabrikant jaarlijks, ter plaatse, persoonlijk."
+      },
+      {
+        "title": "ISO 17025-tests",
+        "body": "Onafhankelijke labs in DE, FI en NL testen elke batch opnieuw voor verzending."
+      },
+      {
+        "title": "EU-brede logistiek",
+        "body": "Helsinki → bij u, in 24u. Getraceerd, getekend, omgeving- of koelketen indien nodig."
+      }
+    ]
+  },
+  "shippingReturns": {
+    "title": "Verzending, retouren en garanties",
+    "items": [
+      {
+        "title": "Vervoerders",
+        "body": "Posti (FI primair), DHL Express (rest EU), DPD Classic."
+      },
+      {
+        "title": "Verzending",
+        "body": "Bestellingen vóór 14:00 EET worden dezelfde werkdag verzonden. Anders binnen 24u."
+      },
+      {
+        "title": "Koelketen",
+        "body": "Omgevingsstabiele peptiden worden op kamertemperatuur in beschermend schuim verzonden. Gekoelde artikelen worden met koelelementen verzonden."
+      },
+      {
+        "title": "Retouren",
+        "body": "Ongeopend product retourneerbaar binnen 14 dagen. Geopende / temperatuurgevoelige flacons zijn niet retourneerbaar."
+      }
+    ],
+    "ratesTitle": "Tarieven",
+    "tableRegion": "Regio",
+    "tableCarrier": "Vervoerder",
+    "tableEta": "ETA",
+    "tablePrice": "Prijs",
+    "rates": [
+      {
+        "region": "Finland",
+        "carrier": "Posti Express",
+        "eta": "1–2 dagen",
+        "priceCents": 990
+      },
+      {
+        "region": "EU (rest)",
+        "carrier": "DHL Express",
+        "eta": "1–3 dagen",
+        "priceCents": 1490
+      },
+      {
+        "region": "EU (rest)",
+        "carrier": "DPD Classic",
+        "eta": "3–5 dagen",
+        "priceCents": 690
+      },
+      {
+        "region": "UK / NO / CH",
+        "carrier": "DHL Express",
+        "eta": "2–4 dagen",
+        "priceCents": 1990
+      }
+    ],
+    "freeShippingNote": "Gratis verzending voor EU-bestellingen boven €150.",
+    "guaranteeHeading": "Herverzend- en restitutiegarantie",
+    "guaranteeSub": "Als je bestelling nooit is aangekomen of door de douane is vastgehouden door een geverifieerde vervoerderfout, maken we het goed.",
+    "guaranteeDidntArriveTitle": "Niet aangekomen?",
+    "guaranteeDidntArriveBody": "Als de tracking aangeeft dat het pakket zoek is geraakt, neem contact op met support met je bestelnummer. We openen een vervoerderonderzoek en leveren dezelfde producten gratis opnieuw zodra het onderzoek is afgerond.",
+    "guaranteeCustomsTitle": "Door de douane vastgehouden?",
+    "guaranteeCustomsBody": "Onderzoekspeptiden van AverianLabs zijn geen gereguleerde stoffen en passeren de EU-douane routinematig. Als een pakket wordt vastgehouden en de oorzaak geverifieerd ligt bij de vervoerder of onze verzendpapieren, leveren we kosteloos opnieuw.",
+    "guaranteeReshipFailsTitle": "Ook de tweede levering niet aangekomen?",
+    "guaranteeReshipFailsBody": "We storten de volledige kosten van de getroffen producten terug — inclusief oorspronkelijke verzendkosten — zodra de tweede levering de door de vervoerder opgegeven ETA overschrijdt.",
+    "guaranteeContactCta": "Open een herverzendingszaak",
+    "supportHeading": "Expert support — mens + getrainde bot",
+    "supportSub": "De meeste vragen over productselectie en reconstitutie worden in seconden beantwoord door Averia, onze getrainde research-concierge. Complexe of commerciële vragen gaan naar ons Helsinki-team.",
+    "supportAveriaTitle": "Averia (research-concierge)",
+    "supportAveriaBody": "Getraind op elk productdatasheet, COA en reconstitutiegids. Vraagt om het bestelnummer indien nodig en verzint geen zuiverheidscijfers.",
+    "supportHumanTitle": "Helsinki researchteam",
+    "supportHumanBody": "Gevestigd in Helsinki. E-mail support@averianlabs.eu — typisch antwoord binnen 1 werkdag; prioriteitswachtrij voor wholesale- en academische bestellingen.",
+    "supportContactCta": "Neem contact op met het team"
+  },
+  "wishlist": {
+    "title": "Verlanglijst",
+    "subtitle": "Uw opgeslagen peptiden — ga verder waar u gebleven was, of deel met een collega.",
+    "bestSellersBadge": "Populair bij onderzoekers zoals u",
+    "bestSellersTitle": "Bestsellers",
+    "bestSellersSubtitle": "Top gestemde peptiden deze maand.",
+    "viewAllProducts": "Bekijk alle {count} producten →"
+  },
+  "rewards": {
+    "badge": "Loyaliteitsprogramma",
+    "title": "AverianLabs Rewards",
+    "subtitle": "Verdien punten bij elke bestelling. Klim in niveaus. Wissel in voor onderzoekskrediet. Hoe meer u onderzoekt, hoe meer u bespaart.",
+    "chooseTier": "Kies uw niveau",
+    "mostPopular": "Meest populair",
+    "tiers": [
+      {
+        "name": "Apex",
+        "threshold": 0,
+        "perks": [
+          {
+            "text": "1 punt per €1 besteed"
+          },
+          {
+            "text": "Verjaardagsbonuspunten"
+          },
+          {
+            "text": "Vroege toegang tot nieuwe batches"
+          }
+        ],
+        "ctaStart": "Beginnen met verdienen",
+        "ctaUnlock": "Ontgrendel {name}"
+      },
+      {
+        "name": "Kristal",
+        "threshold": 500,
+        "perks": [
+          {
+            "text": "1,25 punten per €1 besteed"
+          },
+          {
+            "text": "Gratis EU-verzending voor alle bestellingen"
+          },
+          {
+            "text": "Exclusieve productlanceringen"
+          },
+          {
+            "text": "Voorrang bij batchselectie"
+          }
+        ],
+        "ctaStart": "Beginnen met verdienen",
+        "ctaUnlock": "Ontgrendel {name}"
+      },
+      {
+        "name": "Aurora",
+        "threshold": 2000,
+        "perks": [
+          {
+            "text": "1,5 punten per €1 besteed"
+          },
+          {
+            "text": "Gratis express EU-verzending"
+          },
+          {
+            "text": "Voorrangslijn voor ondersteuning"
+          },
+          {
+            "text": "Uitnodigingen voor lab-bezoeken"
+          },
+          {
+            "text": "Toegewijde accountmanager"
+          }
+        ],
+        "ctaStart": "Beginnen met verdienen",
+        "ctaUnlock": "Ontgrendel {name}"
+      }
+    ],
+    "tierStarting": "Startniveau",
+    "tierSpend": "{amount}+ levenslange bestedingen",
+    "howToEarn": "Punten verdienen",
+    "earnWays": [
+      {
+        "action": "Plaats een bestelling",
+        "points": "1–1,5× per €1",
+        "desc": "Punten schalen met uw niveau"
+      },
+      {
+        "action": "Schrijf een productbeoordeling",
+        "points": "50 pts",
+        "desc": "Alleen geverifieerde aankopen"
+      },
+      {
+        "action": "Verwijs een collega",
+        "points": "250 pts",
+        "desc": "Wanneer zij hun eerste bestelling plaatsen"
+      },
+      {
+        "action": "Deel een onderzoeksplan",
+        "points": "25 pts",
+        "desc": "Openbaar plan met 5+ opslagen"
+      }
+    ],
+    "referralBadge": "Verwijzingsprogramma",
+    "referralTitle": "Geef €15, krijg €15",
+    "referralBody": "Deel uw unieke verwijzingslink met collega's. Wanneer zij hun eerste bestelling boven €100 plaatsen, ontvangen jullie allebei €15 onderzoekskrediet. Geen limiet op verwijzingen.",
+    "referralBullets": [
+      "Deel uw unieke link via e-mail of sociale media",
+      "Collega krijgt €15 korting op eerste bestelling (€100+)",
+      "U krijgt €15 krediet + 250 bonuspunten",
+      "Onbeperkte verwijzingen — stapel uw kredieten"
+    ],
+    "referralLinkLabel": "Uw verwijzingslink",
+    "referralCopy": "Kopiëren",
+    "referralGetLink": "Haal mijn verwijzingslink op",
+    "referralSignInHint": "Log in om uw unieke link te genereren",
+    "redeemTitle": "Punten inwisselen",
+    "redemptions": [
+      {
+        "points": 500,
+        "valueCents": 500,
+        "label": "Bestelkrediet",
+        "rate": "1 % terug"
+      },
+      {
+        "points": 1000,
+        "valueCents": 1200,
+        "label": "Bestelkrediet (bonus)",
+        "rate": "1,2 % terug"
+      },
+      {
+        "points": 2500,
+        "valueCents": 3500,
+        "label": "Bestelkrediet (premium)",
+        "rate": "1,4 % terug"
+      }
+    ],
+    "redeemFooter": "Punten vervallen 12 maanden na het verdienen. Krediet wordt automatisch toegepast bij de kassa.",
+    "ptsLabel": "{count, plural, one {# pt} other {# pts}}"
+  },
+  "partner": {
+    "orgName": "Naam instelling",
+    "country": "Land",
+    "contactEmail": "contact@instelling.eu",
+    "volume": "Geschat maandelijks volume (flacons)",
+    "useCaseResearchLab": "Onderzoekslab",
+    "useCaseUniversity": "Universiteit",
+    "useCaseReseller": "Wederverkoper",
+    "useCaseClinic": "Kliniek",
+    "useCaseDetail": "Toepassing / onderzoeksfocus",
+    "submit": "Aanvraag indienen",
+    "submitting": "Bezig met verzenden…",
+    "submittedTitle": "Aanvraag ontvangen.",
+    "submittedBody": "We bekijken uw gegevens en reageren binnen 48 uur. Controleer uw inbox voor de volgende stappen.",
+    "submitError": "Verzenden mislukt",
+    "submitErrorGeneric": "Er ging iets mis",
+    "submitSuccess": "Aanvraag verzonden",
+    "applicationReceivedTitle": "Aanvraag ontvangen.",
+    "applicationReceivedBody": "We bekijken je gegevens en reageren binnen 48 uur."
+  },
+  "search": {
+    "label": "Zoeken",
+    "commandLabel": "Zoek in AverianLabs",
+    "inputPlaceholder": "Zoek peptiden, batchnummers, artikelen…",
+    "inputAria": "Zoeken",
+    "empty": "Geen resultaten. Probeer een peptidenaam zoals \"BPC-157\" of een CAS-nummer.",
+    "groupProducts": "Producten",
+    "groupQuickLinks": "Snelle links",
+    "groupRecent": "Recent",
+    "hintNavigate": "navigeren",
+    "hintOpen": "openen",
+    "hintClose": "sluiten",
+    "productsIndexed": "{count} producten geïndexeerd",
+    "quickLinks": {
+      "shop": "Blader door alle peptiden",
+      "labTests": "Labmethodologie",
+      "calculator": "Reconstitutiecalculator",
+      "blog": "Onderzoeksblog",
+      "partner": "Partnerprogramma"
+    },
+    "quote": "Offerte",
+    "searchBatch": "Batch {code}",
+    "searchCoa": "Analysecertificaat · {code}",
+    "searchGlossary": "Woordenlijst · {term}",
+    "searchDoc": "Document · {title}",
+    "searchResultsCount": "{count, plural, =0 {Geen resultaten} one {# resultaat} other {# resultaten}}"
+  },
+  "calculator": {
+    "inputs": "Invoer",
+    "peptideMass": "Peptidemassa (mg)",
+    "bacteriostaticWater": "Bacteriostatisch water (mL)",
+    "desiredDose": "Gewenste dosis (mcg)",
+    "results": "Resultaten",
+    "concentration": "Concentratie",
+    "concentrationUnit": "mg/mL",
+    "concentrationMcgUnit": "mcg/mL",
+    "volumePerDose": "Volume per dosis",
+    "volumePerDoseUnit": "mL",
+    "totalDoses": "Aantal doses per flacon",
+    "dosesCalculation": "{mass} mg ÷ {dose} mcg",
+    "iuOnSyringe": "IU op 100 IU/mL spuit",
+    "researchOnly": "Alleen voor rekenonderzoek. Verifieer altijd met je protocol.",
+    "unitsMcg": "mcg",
+    "unitsIu": "IU",
+    "unitsMl": "mL",
+    "title": "Reconstitutiecalculator",
+    "subtitle": "Bereken afnamevolumes, werkpicks en resterende doses voor elke peptide-flacon.",
+    "heroEyebrow": "Onderzoekstools",
+    "heroTitle": "De peptidecalculator voor de werkbank",
+    "heroBody": "Vijf calculators (reconstitutie, titratie, verdunning, breakeven, vergelijking), één gedeelde wiskundebibliotheek en een prachtige spuitvisualisatie. Protocollen opslaan, delen via URL en bench-kaart afdrukken.",
+    "openInAveria": "Open deze setup in Averia",
+    "viewAllTools": "Alle calculators hieronder",
+    "tabs": {
+      "reconstitution": "Reconstitutie",
+      "titration": "Titratie",
+      "dilution": "Verdunning",
+      "breakeven": "Breakeven",
+      "compare": "Vergelijken"
+    },
+    "outputs": "Uitvoer",
+    "product": "Product (optioneel)",
+    "noProductSelected": "Aangepaste setup",
+    "syringe": "Spuit",
+    "storage": "Opslag",
+    "leftoverMcg": "Resterend peptide",
+    "leftoverMcgUnit": "mcg ongebruikt",
+    "actions": {
+      "share": "Delen",
+      "shareCopied": "Link gekopieerd",
+      "save": "Protocol opslaan",
+      "saved": "Opgeslagen",
+      "reset": "Resetten",
+      "print": "Afdrukken",
+      "exportCsv": "CSV exporteren",
+      "sendToAveria": "Vraag Averia",
+      "openSaved": "Opgeslagen",
+      "viewHistory": "Geschiedenis",
+      "clearHistory": "Geschiedenis wissen",
+      "deleteProtocol": "Protocol verwijderen"
+    },
+    "validation": {
+      "nonPositive": "Moet groter zijn dan nul.",
+      "concentrationTooHigh": "Boven de praktische oplosbaarheidsgrens — verdunnen of flacons splitsen.",
+      "concentrationCaution": "Nadert de oplosbaarheidsgrens — afname blijft nauwkeurig, maar opslag wordt korter.",
+      "drawTooSmall": "Afname onder de praktische minimum — probeer de Verdunning-tab.",
+      "nan": "Voer een getal in."
+    },
+    "saturation": {
+      "cautionTitle": "Nadert de oplosbaarheidsgrens",
+      "aboveTitle": "Boven de oplosbaarheidsgrens — lost niet volledig op",
+      "ceiling": "Praktische bovengrens",
+      "ratio": "Werkpicks"
+    },
+    "stability": {
+      "title": "Stabiliteit na reconstitutie",
+      "subtitle": "Geschatte houdbaarheid na toevoegen van oplosmiddel.",
+      "shelfLife": "Aanbevolen houdbaarheid",
+      "refrigerated": "Gekoeld",
+      "frozen": "Bevroren (−20 °C)",
+      "room": "Kamertemperatuur"
+    },
+    "syringes": {
+      "title": "Spuitkeuze",
+      "subtitle": "Wissel van spuit om de IU-markering en aanbevolen afname opnieuw te berekenen.",
+      "0_3": "0.3 mL · 30 IU",
+      "0_5": "0.5 mL · 50 IU",
+      "1_0": "1.0 mL · 100 IU"
+    },
+    "presets": {
+      "title": "Veelvoorkomende starts",
+      "subtitle": "One-click setups passend bij de catalogusflacons.",
+      "empty": "Nog geen opgeslagen protocollen — kies een preset of sla deze setup op."
+    },
+    "history": {
+      "title": "Recente berekeningen",
+      "subtitle": "Lokaal opgeslagen in deze browser.",
+      "empty": "Voer een berekening uit om hem hier te zien.",
+      "remove": "Verwijderen"
+    },
+    "reconstitution": {
+      "drawLabel": "Af te nemen volume",
+      "withSyringe": "Op een {syringe}-spuit",
+      "vialYield": "Flacon levert {count} doses van {dose}"
+    },
+    "titration": {
+      "title": "Titratiereeks",
+      "subtitle": "Verhoog de dosis over weken of stappen.",
+      "startDose": "Startdosis",
+      "endDose": "Einddosis",
+      "steps": "Stappen",
+      "duration": "Duur",
+      "durationWeeks": "{count, plural, =1 {1 week} other {{count} weken}}",
+      "stepLabel": "Stap {index}",
+      "totalConsumed": "Totaal verbruikt peptide",
+      "exceedsVial": "Plan overschrijdt één flacon — koop {vials}."
+    },
+    "dilution": {
+      "title": "Verdunningsketen",
+      "subtitle": "Wanneer de afname te klein is om nauwkeurig te pipetteren, eerst verdunnen.",
+      "rawVolume": "Ruw afnamevolume",
+      "minDraw": "Minimaal veilig volume",
+      "factor": "Benodigde verdunningsfactor",
+      "step1": "Stap 1 — Reconstitutie",
+      "step2": "Stap 2 — Verdunnen 1:{factor}",
+      "step2Detail": "Voeg {sourceMl} mL van de gereconstitueerde oplossing toe aan {diluentMl} mL steriel water of BAC-water.",
+      "working": "Werkpicks",
+      "finalDraw": "Eindafname"
+    },
+    "breakeven": {
+      "title": "Flaconplan breakeven",
+      "subtitle": "Vergelijk flaconcombinaties tegen een doeldosisplanning.",
+      "plan": "Plan",
+      "price": "Totale prijs",
+      "perMg": "Per mg",
+      "doses": "Doses",
+      "leftover": "Restant",
+      "waste": "Verlies €",
+      "pickCheapest": "Laagste prijs per mg",
+      "pickLeastWaste": "Kleinste restant",
+      "addPlan": "Eigen plan toevoegen",
+      "removePlan": "Verwijderen"
+    },
+    "compare": {
+      "title": "Protocolvergelijking",
+      "subtitle": "Wiskunde van twee reconstitutiescenario's naast elkaar.",
+      "left": "Links",
+      "right": "Rechts",
+      "addProtocol": "Protocol toevoegen"
+    },
+    "share": {
+      "copyTooltip": "Kopieer URL met de huidige setup",
+      "copied": "Gekopieerd",
+      "buildFromUrl": "Vanuit URL geladen"
+    },
+    "disclaimer": {
+      "title": "Alleen voor onderzoeksdoeleinden",
+      "body": "Deze calculators ondersteunen laboratoriumworkflows. Geen medisch advies en niet goedgekeurd voor therapeutisch gebruik.",
+      "researchOnly": "AverianLabs-producten worden uitsluitend verkocht voor laboratoriumonderzoek en in-vitro-studies. Niet voor menselijk of veterinair gebruik, diagnose of therapie."
+    },
+    "aria": {
+      "resultSummary": "{mgPerMl} milligram per milliliter, {mL} milliliter per dosis, {iu} internationale eenheden op de {syringe}-spuit. Flacon levert {doses} doses.",
+      "resultLabel": "Berekeningsresultaat"
+    }
+  },
+  "error": {
+    "label": "Fout",
+    "title": "Er ging iets mis",
+    "body": "Er is een onverwachte fout opgetreden. Probeer het opnieuw of ga terug naar de startpagina.",
+    "tryAgain": "Opnieuw proberen",
+    "backHome": "Terug naar startpagina"
+  },
+  "notFound": {
+    "label": "Fout 404",
+    "title": "Pagina niet gevonden",
+    "body": "Sorry, we konden niet vinden wat je zocht.",
+    "backHome": "Terug naar startpagina",
+    "browseCatalog": "Blader door catalogus",
+    "searchHint": "Zoeken:"
+  },
+  "email": {
+    "tagline": "Precisiepeptiden voor serieus onderzoek",
+    "footer": "AverianLabs · Helsinki, Finland · Alleen voor onderzoek",
+    "confirmEmailSubject": "Bevestig je AverianLabs-account",
+    "confirmEmailTitle": "Bevestig je e-mailadres",
+    "confirmEmailBody": "Bevestig dit adres om je account te activeren. De link is 24 uur geldig.",
+    "confirmEmailCta": "E-mail bevestigen",
+    "confirmEmailIgnore": "Als je geen account hebt aangemaakt, kun je deze e-mail negeren.",
+    "resetPasswordSubject": "Stel je AverianLabs-wachtwoord opnieuw in",
+    "resetPasswordTitle": "Wachtwoord herstellen",
+    "resetPasswordBody": "We hebben een verzoek ontvangen om je wachtwoord te herstellen. De link is 1 uur geldig.",
+    "resetPasswordCta": "Wachtwoord herstellen",
+    "resetPasswordIgnore": "Als je dit niet hebt aangevraagd, kun je deze e-mail negeren — je wachtwoord verandert niet.",
+    "deleteAccountSubject": "Bevestig verwijdering van je AverianLabs-account",
+    "deleteAccountTitle": "Accountverwijdering bevestigen",
+    "deleteAccountBody": "Dit verwijdert je account en persoonlijke gegevens. Je hebt 30 dagen om van gedachten te veranderen voordat alles permanent wordt verwijderd. De link is 24 uur geldig.",
+    "deleteAccountCta": "Verwijdering bevestigen",
+    "deleteAccountIgnore": "Als je dit niet hebt aangevraagd, negeer deze e-mail — je account blijft actief.",
+    "newsletterSubject": "Bevestig je AverianLabs-nieuwsbriefabonnement",
+    "newsletterTitle": "Bevestig je abonnement",
+    "newsletterBody": "Bevestig dit adres om batchupdates, nieuwe COA's en onderzoeksnotities te ontvangen. De link is 24 uur geldig.",
+    "newsletterCta": "Abonnement bevestigen",
+    "newsletterIgnore": "Als je dit niet hebt aangevraagd, negeer deze e-mail — je wordt niet geabonneerd.",
+    "contactNotificationTitle": "Nieuw contactformulierbericht",
+    "contactFooter": "AverianLabs · contactformulier · antwoord direct op deze e-mail",
+    "orderConfirmedSubject": "Bestelling bevestigd — {number}",
+    "orderConfirmedTitle": "Bestelling bevestigd",
+    "orderLabel": "Bestelling {number}",
+    "orderColumnProduct": "Product",
+    "orderColumnQty": "Aantal",
+    "orderColumnPrice": "Prijs",
+    "orderSubtotal": "Subtotaal",
+    "orderShipping": "Verzending",
+    "orderVat": "BTW (24%)",
+    "orderTotal": "Totaal",
+    "orderWhatsNext": "Wat nu?",
+    "orderWhatsNextBody": "Het batchspecifieke analysecertificaat (COA), endotoxine-rapport en massaspectrometrie-bevestiging zijn beschikbaar in je account zodra de bestelling wordt verzonden.",
+    "orderFooter": "Vragen? Beantwoord deze e-mail of neem contact op met support@averianlabs.eu.",
+    "shippingTitle": "Je bestelling is verzonden",
+    "shippingTracking": "Trackingnummer",
+    "shippingTrack": "Zending volgen",
+    "reviewRequestSubject": "Hoe presteerden je peptiden? Beoordeel bestelling {number}",
+    "reviewRequestTitle": "Hoe presteerden je peptiden?",
+    "reviewRequestGreeting": "Hoi {name}, je bestelling {order} met {items} is een paar dagen geleden bezorgd.",
+    "reviewRequestBody": "Jouw feedback helpt andere onderzoekers geïnformeerde beslissingen te nemen en ons om onze kwaliteitsnormen te handhaven. Neem je een minuut om je ervaring te delen?",
+    "reviewRequestCta": "Schrijf een beoordeling",
+    "reviewRequestWhatToReview": "Wat te beoordelen",
+    "reviewRequestWhatToReviewBody": "Zuiverheidsconsistentie, verpakkingskwaliteit, COA-nauwkeurigheid, levernsnelheid of alles wat opviel tijdens je onderzoek.",
+    "reviewRequestNeedHelp": "Hulp nodig?",
+    "reviewRequestNeedHelpBody": "Beantwoord deze e-mail of neem contact op met ons supportteam via support@averianlabs.eu. We reageren binnen 2 uur op werkdagen.",
+    "reviewRequestFooter": "Je ontving deze e-mail omdat je een bestelling bij ons hebt geplaatst. We mailen je niet meer tenzij je ons dat vraagt.",
+    "cartRecoverySubject": "Je liet artikelen in je winkelwagen — voltooi je bestelling",
+    "cartRecoveryTitle": "Je liet artikelen in je winkelwagen",
+    "cartRecoveryBody": "Onderzoekspeptiden wachten op je. Voltooi je bestelling voordat de voorraad van je gekozen batch opraken.",
+    "cartRecoveryCta": "Voltooi je bestelling",
+    "cartRecoveryFreeShipping": "Gratis EU-verzending",
+    "cartRecoveryFreeShippingBody": "bij bestellingen boven €150. Je winkelwagen komt mogelijk in aanmerking.",
+    "cartRecoveryFooter": "Je ontving deze e-mail omdat je een bestelling startte op averianlabs.eu. We sturen maar één herinnering."
+  },
+  "knowledge": {
+    "title": "Onderzoeksdocumentatie",
+    "subtitle": "Analysecertificaten, labmethoden, productspecificaties en woordenlijst — alles op één plek.",
+    "categoriesHeading": "Bladeren op bron",
+    "recentDocs": "Recentste documenten",
+    "recentGlossary": "Nieuwste woordenlijst-items",
+    "viewAll": "Alles bekijken →",
+    "noRecentDocs": "Nog geen gepubliceerde documenten.",
+    "quickAccess": "Snelle toegang",
+    "links": {
+      "coa": "Analysecertificaten",
+      "methods": "Testmethoden",
+      "products": "Productspecificaties",
+      "articles": "Onderzoeksartikelen",
+      "glossary": "Woordenlijst",
+      "calculators": "Calculators"
+    },
+    "categories": {
+      "coa": {
+        "title": "Analysecertificaten",
+        "desc": "HPLC-, endotoxine- en massaspectrometriedata voor elke batch — batchspecifieke PASS-goedkeuring."
+      },
+      "methods": {
+        "title": "Testmethoden",
+        "desc": "Onafhankelijke laboratoriumanalyses: HPLC, massaspectrometrie, LAL, steriliteit, mycoplasma."
+      },
+      "products": {
+        "title": "Productspecificaties",
+        "desc": "Technische specificaties, sequenties en bewaarinstructies voor elk peptideproduct."
+      },
+      "articles": {
+        "title": "Onderzoeksartikelen",
+        "desc": "Peer-reviewed referenties en eigen onderzoeksnotities over peptidewetenschap."
+      },
+      "glossary": {
+        "title": "Woordenlijst",
+        "desc": "Termen en technieken uit peptideonderzoek, analyse, opslag en regelgeving."
+      },
+      "calculators": {
+        "title": "Calculators",
+        "desc": "Reconstitutie- en doseringsberekeningen tot op de microliter nauwkeurig voor onderzoeksworkflows."
+      }
+    },
+    "browseAll": "Blader door alles →",
+    "itemsCount": "{count, plural, =0 {geen items} one {1 item} other {{count} items}}",
+    "batchesLabel": "Laatste batch",
+    "filterAll": "Filters",
+    "badge": "Kennis",
+    "noResults": "Geen resultaten",
+    "noSources": "Geen bronnen gevonden",
+    "relatedProducts": "Gerelateerde producten",
+    "searchPlaceholder": "Zoeken…",
+    "sequenceTitle": "Sequentie",
+    "sourcesCount": "{count, plural, =0 {Geen bronnen} one {1 bron} other {{count} bronnen}}",
+    "sourcesHeading": "Bronnen"
+  },
+  "terms": {
+    "title": "Servicevoorwaarden",
+    "lastUpdated": "Laatst bijgewerkt: 1 september 2026",
+    "intro": "Door averianlabs.eu of andere domeinen van AverianLabs te gebruiken, gaat u akkoord met deze servicevoorwaarden. Alle producten worden verkocht onder een strikte onderzoekslicentie.",
+    "sections": {
+      "eligibility": {
+        "title": "1. Geschiktheid",
+        "body": "U moet ten minste 18 jaar oud zijn en een gekwalificeerde onderzoeker of institutionele koper om bij AverianLabs te kopen."
+      },
+      "researchUse": {
+        "title": "2. Alleen voor onderzoek",
+        "body": "Alle producten zijn uitsluitend bedoeld voor laboratoriumonderzoek en in-vitro-studies. Ze zijn NIET bedoeld voor menselijke consumptie, diagnostisch gebruik of therapeutische toepassingen."
+      },
+      "pricing": {
+        "title": "3. Prijzen en btw",
+        "body": "Prijzen zijn inclusief EU-btw (OSS-regeling). B2B-klanten met een geldig btw-nummer kunnen bij het afrekenen kopen met verlegde heffing (reverse charge)."
+      },
+      "shipping": {
+        "title": "4. Verzending",
+        "body": "Wij verzenden binnen 24 uur vanuit ons magazijn in Helsinki. Het risico van verlies gaat bij de scan door de vervoerder over op de koper."
+      },
+      "returns": {
+        "title": "5. Retourzendingen",
+        "body": "Vanwege de aard van onderzoekspeptiden kunnen geopende of in de koelketen aangetaste flacons niet worden geretourneerd. Ongeopend product kan binnen 14 dagen worden geretourneerd voor omruiling of terugbetaling."
+      },
+      "liability": {
+        "title": "6. Aansprakelijkheidsbeperking",
+        "body": "De aansprakelijkheid van AverianLabs is beperkt tot de aankoopprijs van het product. Wij garanderen geen geschiktheid voor een bepaalde onderzoekstoepassing boven het gepubliceerde analysecertificaat."
+      },
+      "governingLaw": {
+        "title": "7. Toepasselijk recht",
+        "body": "Op deze voorwaarden is het Finse recht van toepassing. Geschillen worden uitsluitend beslecht door de arrondissementsrechtbank van Helsinki."
+      },
+      "contact": {
+        "title": "8. Contact",
+        "body": "Vragen: legal@averianlabs.eu"
+      }
+    }
+  },
+  "privacy": {
+    "title": "Privacybeleid",
+    "lastUpdated": "Laatst bijgewerkt: 1 september 2026 · AVG-conform",
+    "intro": "Dit beleid beschrijft hoe AverianLabs Oy (\"wij\") persoonsgegevens verwerkt op averianlabs.eu en aangesloten domeinen, in overeenstemming met de Algemene verordening gegevensbescherming (AVG) van de EU en de Finse gegevensbeschermingswet.",
+    "sections": {
+      "dataCollected": {
+        "title": "Gegevens die we verzamelen",
+        "body": "Accountgegevens: e-mail, naam, wachtwoordhash (als u een account aanmaakt). Bestelgegevens: verzend-/factuuradres, bestelgeschiedenis. Technische gegevens: IP (ingekort), user-agent, verwijzer (30 dagen bewaard). Analyse: alleen met uw uitdrukkelijke toestemming via de cookiebanner."
+      },
+      "lawfulBasis": {
+        "title": "Rechtsgrondslag",
+        "body": "Overeenkomst (art. 6(1)(b)) voor bestellingen, toestemming (art. 6(1)(a)) voor analyse, wettelijke verplichting (art. 6(1)(c)) voor boekhouding."
+      },
+      "subprocessors": {
+        "title": "Subverwerkers",
+        "body": "Stripe Payments Europe Ltd — betalingsverwerking (EU); Coinbase Commerce — cryptobetalingen; Resend — transactionele e-mail (EU); PostHog Cloud EU — productanalyse (toestemmingsgebonden); Sanity Inc. — content (VS, EU-dataresidentie); Cloudflare — CDN / DDoS; Neon — database (Frankfurt)."
+      },
+      "yourRights": {
+        "title": "Uw rechten",
+        "body": "U heeft het recht op toegang, rectificatie, wissen, beperking, overdraagbaarheid en bezwaar. E-mail privacy@averianlabs.eu. U kunt ook een klacht indienen bij uw nationale toezichthoudende autoriteit (in Finland: tietosuojavaltuutettu)."
+      },
+      "retention": {
+        "title": "Bewaartermijn",
+        "body": "Accountgegevens: tot verwijdering. Bestelgegevens: 7 jaar (boekhoudplicht). Analyse: 14 maanden."
+      },
+      "contact": {
+        "title": "Contact",
+        "body": "Functionaris voor gegevensbescherming: dpo@averianlabs.eu · AverianLabs Oy, Helsinki, Finland."
+      }
+    }
+  },
+  "cookies": {
+    "title": "Cookies",
+    "lastUpdated": "Laatst bijgewerkt: 1 september 2026",
+    "intro": "We gebruiken een minimale set cookies. Essentiële cookies kunnen niet worden uitgeschakeld; analysecookies vereisen uw toestemming.",
+    "sections": {
+      "essential": {
+        "title": "Essentieel",
+        "body": "averianlabs-cart — slaat uw winkelwagen op (1 jaar); averianlabs-age-confirmed — onthoudt leeftijdspoortbevestiging (1 jaar); averianlabs-cookie-consent — onthoudt uw cookiekeuze (1 jaar); Stripe / Coinbase-sessiecookies (geplaatst door betalingsprovider)."
+      },
+      "analytics": {
+        "title": "Analyse (toestemming)",
+        "body": "PostHog (EU) en Plausible worden pas geladen nadat u in de cookiebanner op \"Alles accepteren\" klikt. Ze verzamelen geanonimiseerde, geaggregeerde gebruiksgegevens."
+      },
+      "changeChoice": {
+        "title": "Wijzig uw keuze",
+        "body": "Klik op de kleine \"Cookies\"-link in de footer, of wis uw browsergegevens."
+      }
+    }
+  },
+  "disclaimer": {
+    "badge": "Alleen voor onderzoek",
+    "title": "Onderzoeksdisclaimer",
+    "lead": "Alle producten die door AverianLabs Oy worden verkocht, zijn uitsluitend bedoeld voor laboratoriumonderzoek en in-vitro-studies.",
+    "sections": {
+      "notForHuman": {
+        "title": "Niet voor menselijke consumptie",
+        "body": "De producten die op averianlabs.eu worden vermeld, zijn niet bedoeld voor menselijk of diergeneeskundig gebruik, consumptie, toediening of toepassing op het lichaam in welke vorm dan ook."
+      },
+      "noMedicalClaims": {
+        "title": "Geen medische claims",
+        "body": "Informatie op deze website is uitsluitend bedoeld voor onderzoeks- en onderwijsdoeleinden. Het is niet bedoeld als medisch advies, diagnose of behandelingsaanbeveling. AverianLabs Oy onderschrijft, beveelt niet aan of ondersteunt het off-label gebruik van een product."
+      },
+      "buyerResponsibility": {
+        "title": "Verantwoordelijkheid van de koper",
+        "body": "Door bij AverianLabs te kopen, bevestigt u dat u een gekwalificeerde onderzoeker of institutionele koper bent, en dat de producten uitsluitend zullen worden gebruikt voor legitiem laboratoriumonderzoek in overeenstemming met alle toepasselijke lokale, nationale en internationale wetten en voorschriften."
+      },
+      "compliance": {
+        "title": "Naleving",
+        "body": "Het is de verantwoordelijkheid van de koper om ervoor te zorgen dat de import, het bezit en het gebruik van onderzoekspeptiden voldoet aan alle toepasselijke voorschriften in hun rechtsgebied. AverianLabs Oy behoudt zich het recht voor om naar eigen goeddunken service te weigeren aan een koper of rechtsgebied."
+      }
+    }
+  },
+  "actions": {
+    "addPrompt": "Toevoegen aan winkelwagen?",
+    "addToCart": "Toevoegen aan winkelwagen",
+    "added": "Toegevoegd",
+    "addedToast": "{name} toegevoegd aan uw winkelwagen",
+    "dismiss": "Sluiten",
+    "remember": "Onthoud dit",
+    "rememberPrompt": "Opslaan voor volgende keer?",
+    "remembered": "Onthouden",
+    "rememberedToast": "Plan opgeslagen in uw account",
+    "removedToast": "Verwijderd uit winkelwagen"
+  },
+  "feedback": {
+    "helpful": "Nuttig",
+    "notHelpful": "Niet nuttig"
+  },
+  "links": {
+    "coa": "Analysecertificaten",
+    "methods": "Testmethoden",
+    "products": "Productspecificaties",
+    "articles": "Onderzoeksartikelen",
+    "glossary": "Woordenlijst",
+    "calculators": "Calculators"
+  },
+  "tableHeaders": {
+    "batch": "Batch",
+    "endotoxin": "Endotoxine",
+    "hplc": "HPLC",
+    "lab": "Laboratorium",
+    "product": "Product",
+    "status": "Status"
+  },
+  "testsHeaders": {
+    "method": "Methode",
+    "result": "Resultaat",
+    "test": "Test"
+  },
+  "topbar": {
+    "coaEveryBatch": "COA bij elke batch",
+    "dispatch24h": "24u verzending",
+    "euDispatched": "Verzending uit de EU",
+    "freeShipping": "Gratis verzending boven €150",
+    "hplcVerified": "HPLC + endotoxine geverifieerd"
   }
 }
