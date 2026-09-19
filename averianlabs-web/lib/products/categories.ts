@@ -17,14 +17,14 @@ import type { ProductCategory } from "./types"
  */
 export interface CategoryMeta {
   slug: ProductCategory
-  /** i18n key suffix under the `home` namespace: catWeight → `cat${Key}`. */
+  /** i18n key suffix under the `home` namespace: catMetabolic → `cat${Key}`. */
   key: string
   hue: number
   icon: LucideIcon
 }
 
 export const CATEGORIES: CategoryMeta[] = [
-  { slug: "metabolic", key: "weight", hue: 220, icon: Beaker },
+  { slug: "metabolic", key: "metabolic", hue: 220, icon: Beaker },
   { slug: "recovery", key: "recovery", hue: 214, icon: Shield },
   { slug: "cognitive", key: "cognitive", hue: 250, icon: Brain },
   { slug: "longevity", key: "longevity", hue: 260, icon: Sparkles },

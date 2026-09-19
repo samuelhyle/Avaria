@@ -46,5 +46,12 @@ export async function GET(req: Request) {
     offset: toInt(searchParams.get("offset"), 0, 0, 10_000),
   })
 
-  return NextResponse.json(results)
+  return NextResponse.json(results, {
+    headers: {
+      // Search hits rarely change second-to-second. Stale-while-revalidate
+      // keeps the UX snappy: cached responses are served for 30s while the
+      // next request revalidates in the background.
+      "cache-control": "public, max-age=30, stale-while-revalidate=300",
+    },
+  })
 }

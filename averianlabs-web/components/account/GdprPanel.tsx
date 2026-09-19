@@ -47,8 +47,8 @@ export function GdprPanel() {
   if (deleted) {
     return (
       <div className="rounded-[var(--radius-lg)] border border-warn/30 bg-warn-soft p-5 text-sm text-warn">
-        <p className="font-medium">Account deletion scheduled.</p>
-        <p className="mt-1 text-xs">All your data will be permanently deleted in 30 days.</p>
+        <p className="font-medium">{t("deleteScheduledTitle")}</p>
+        <p className="mt-1 text-xs">{t("deleteScheduledBody")}</p>
       </div>
     )
   }
@@ -96,12 +96,12 @@ export function GdprPanel() {
             type="text"
             value={phrase}
             onChange={(e) => setPhrase(e.target.value.toUpperCase())}
-            placeholder="DELETE"
+            placeholder={t("deletePlaceholder")}
             className="mt-3 h-10 w-full rounded-[var(--radius)] border border-line bg-surface px-3 font-mono text-sm text-ink focus:border-danger focus:outline-none"
           />
           <div className="mt-4 flex justify-end gap-2">
             <Button variant="ghost" size="sm" onClick={() => setDeleteOpen(false)}>
-              Cancel
+              {t("cancel")}
             </Button>
             <Button
               variant="danger"

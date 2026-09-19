@@ -111,25 +111,16 @@ function tokenizeInline(text: string): Inline[] {
   return out
 }
 
-function escapeHtml(s: string): string {
-  return s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;")
-}
-
 export function PostMarkdown({ body }: { body: string }) {
   const tokens = tokenize(body)
 
   return (
     <div className="space-y-3">
-      {tokens.map((tk, i) => {
+      {tokens.map((tk) => {
         if (tk.kind === "code") {
           return (
             <pre
-              key={`code-${i}`}
+              key={`code:${tk.text.slice(0, 16)}`}
               className="overflow-x-auto rounded-[var(--radius)] border border-line bg-surface-2 p-3 font-mono text-xs text-ink"
             >
               <code>{tk.text}</code>
@@ -139,7 +130,7 @@ export function PostMarkdown({ body }: { body: string }) {
         if (tk.kind === "blockquote") {
           return (
             <blockquote
-              key={`bq-${i}`}
+              key={`bq:${tk.text.slice(0, 16)}`}
               className="border-l-2 border-accent pl-3 italic text-ink-muted"
             >
               <Inline text={tk.text} />
@@ -151,9 +142,9 @@ export function PostMarkdown({ body }: { body: string }) {
           // Easier: split on newlines if present, else single-line marker fallback
           const split = tk.text.includes("\n") ? tk.text.split("\n") : items
           return (
-            <ul key={`ul-${i}`} className="ml-5 list-disc space-y-1 text-ink">
-              {split.map((it, j) => (
-                <li key={`ul-${i}-${j}`}>
+            <ul key={`ul:${tk.text.slice(0, 16)}`} className="ml-5 list-disc space-y-1 text-ink">
+              {split.map((it) => (
+                <li key={`ul-item:${it}`}>
                   <Inline text={it} />
                 </li>
               ))}
@@ -163,9 +154,9 @@ export function PostMarkdown({ body }: { body: string }) {
         if (tk.kind === "ol") {
           const items = tk.text.split("\n")
           return (
-            <ol key={`ol-${i}`} className="ml-5 list-decimal space-y-1 text-ink">
-              {items.map((it, j) => (
-                <li key={`ol-${i}-${j}`}>
+            <ol key={`ol:${tk.text.slice(0, 16)}`} className="ml-5 list-decimal space-y-1 text-ink">
+              {items.map((it) => (
+                <li key={`ol-item:${it}`}>
                   <Inline text={it} />
                 </li>
               ))}
@@ -173,7 +164,7 @@ export function PostMarkdown({ body }: { body: string }) {
           )
         }
         return (
-          <p key={`p-${i}`} className="whitespace-pre-wrap text-ink">
+          <p key={`p:${tk.text.slice(0, 16)}`} className="whitespace-pre-wrap text-ink">
             <Inline text={tk.text} />
           </p>
         )
@@ -186,13 +177,13 @@ function Inline({ text }: { text: string }) {
   const tokens = tokenizeInline(text)
   return (
     <>
-      {tokens.map((t, i) => {
-        if (t.kind === "bold") return <strong key={`b-${i}-${t.text.slice(0, 8)}`}>{t.text}</strong>
-        if (t.kind === "italic") return <em key={`i-${i}-${t.text.slice(0, 8)}`}>{t.text}</em>
+      {tokens.map((t) => {
+        if (t.kind === "bold") return <strong key={`b:${t.text}`}>{t.text}</strong>
+        if (t.kind === "italic") return <em key={`i:${t.text}`}>{t.text}</em>
         if (t.kind === "code") {
           return (
             <code
-              key={`c-${i}-${t.text.slice(0, 8)}`}
+              key={`c:${t.text}`}
               className="rounded bg-surface-2 px-1 py-0.5 font-mono text-xs text-ink"
             >
               {t.text}
@@ -203,7 +194,7 @@ function Inline({ text }: { text: string }) {
           const external = t.href?.startsWith("http")
           return (
             <a
-              key={`l-${i}-${t.text.slice(0, 8)}`}
+              key={`l:${t.href}:${t.text}`}
               href={t.href}
               target={external ? "_blank" : undefined}
               rel={external ? "noreferrer" : undefined}
@@ -214,10 +205,11 @@ function Inline({ text }: { text: string }) {
           )
         }
         return (
-          <span
-            key={`t-${i}-${t.text.slice(0, 8)}`}
-            dangerouslySetInnerHTML={{ __html: escapeHtml(t.text) }}
-          />
+          // Plain React text — escapes safely and renders identically to the
+          // previous `dangerouslySetInnerHTML={{ __html: escapeHtml(t.text) }}`
+          // pattern, without the brittle "first escape, then re-parse" round
+          // trip that was suppressing real security tooling.
+          <span key={`t:${t.text}`}>{t.text}</span>
         )
       })}
     </>

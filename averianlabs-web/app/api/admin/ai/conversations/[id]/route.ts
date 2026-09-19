@@ -12,8 +12,9 @@ import { db } from "@/lib/db"
 import { asc, eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
-export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
+
+export const runtime = "nodejs"
 
 export async function GET(
   _request: Request,

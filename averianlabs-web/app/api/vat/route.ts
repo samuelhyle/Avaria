@@ -1,3 +1,4 @@
+import { logger } from "@/lib/logger"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { validateVatId } from "@/lib/vat"
@@ -25,7 +26,7 @@ export async function POST(request: Request) {
     const result = await validateVatId(parsed.vatId)
     return NextResponse.json(result)
   } catch (err) {
-    console.error("[vat] validation failed", err)
+    logger.error("[vat] validation failed", err)
     return NextResponse.json({ error: "VAT validation unavailable." }, { status: 502 })
   }
 }

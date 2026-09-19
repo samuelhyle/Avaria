@@ -1,10 +1,9 @@
-export const dynamic = "force-dynamic"
-
 import { ThreadComposer } from "@/components/community/ThreadComposer"
 import { Container } from "@/components/ui/Container"
 import { ensureCategories, getCurrentMember, listCategories } from "@/lib/community"
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
+export const dynamic = "force-dynamic"
 
 export async function generateMetadata({
   params,

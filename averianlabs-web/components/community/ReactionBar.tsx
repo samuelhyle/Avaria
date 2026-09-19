@@ -54,9 +54,9 @@ export function ReactionBar({ postId, isAuthed, counts, mine, isOwnPost }: React
             disabled={!isAuthed || isOwnPost}
             title={
               isOwnPost
-                ? "You can't react to your own post"
+                ? t("reactionOwnPost")
                 : !isAuthed
-                  ? "Sign in to react"
+                  ? t("signInToReact")
                   : t(`reaction${capitalize(kind)}` as never)
             }
             className={cn(

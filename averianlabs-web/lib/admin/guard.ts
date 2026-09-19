@@ -19,26 +19,12 @@ import { type ReputationTier, tierFor } from "@/lib/community/reputation"
 import { db } from "@/lib/db"
 import { eq } from "drizzle-orm"
 
-export type AdminRole = "admin" | "moderator"
+import { AdminAccessError, type AdminMember, type AdminRole, mapUserRoleToAdmin } from "./types"
 
-export interface AdminMember {
-  id: string
-  email: string
-  name: string | null
-  image: string | null
-  role: AdminRole
-  reputation: number
-  tier: ReputationTier
-}
+export type { AdminRole, AdminMember, AdminTier } from "./types"
+export { AdminAccessError, adminErrorStatus, mapUserRoleToAdmin } from "./types"
 
-export class AdminAccessError extends Error {
-  readonly code: "unauthenticated" | "insufficient"
-  constructor(code: "unauthenticated" | "insufficient", message: string) {
-    super(message)
-    this.code = code
-    this.name = "AdminAccessError"
-  }
-}
+export type { ReputationTier }
 
 /**
  * Returns the current member if they have admin or moderator role.
@@ -73,8 +59,7 @@ export async function requireAdmin(): Promise<AdminMember> {
     throw new AdminAccessError("unauthenticated", "User not found.")
   }
 
-  const role: AdminRole | null =
-    r.role === "admin" ? "admin" : r.role === "moderator" ? "moderator" : null
+  const role = mapUserRoleToAdmin(r.role)
   if (!role) {
     throw new AdminAccessError("insufficient", "Admin or moderator role required.")
   }
@@ -94,17 +79,10 @@ export async function requireAdmin(): Promise<AdminMember> {
  * Same as `requireAdmin()` but returns null on failure instead of throwing.
  * Use in React Server Components that want to render a "Forbidden" shell.
  */
-export async function getAdminOrNull(): Promise<AdminMember | null> {
+export async function getAdminOrNull(): Promise<Awaited<ReturnType<typeof requireAdmin>> | null> {
   try {
     return await requireAdmin()
   } catch {
     return null
   }
-}
-
-/**
- * Determine the HTTP status code for an admin-access error.
- */
-export function adminErrorStatus(err: AdminAccessError): 401 | 403 {
-  return err.code === "unauthenticated" ? 401 : 403
 }

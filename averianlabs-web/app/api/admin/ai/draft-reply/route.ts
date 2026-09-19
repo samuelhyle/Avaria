@@ -8,12 +8,15 @@
 
 import { getAdminOrNull } from "@/lib/admin/guard"
 import { runTool } from "@/lib/ai/tools/registry"
+import { logger } from "@/lib/logger"
+import { assertCsrfOr403 } from "@/lib/security/csrf"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
-export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
+
+export const runtime = "nodejs"
 export const maxDuration = 30
 
 const bodySchema = z.object({
@@ -31,10 +34,13 @@ const bodySchema = z.object({
     .max(20)
     .optional(),
   tone: z.enum(["warm", "concise", "technical"]).optional(),
-  locale: z.string().min(2).max(5),
+  locale: z.enum(["en", "fi", "de", "sv", "nl"]),
 })
 
 export async function POST(request: Request): Promise<NextResponse> {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: process.env.NODE_ENV !== "production" })
+  if (csrf) return csrf
+
   // DB-backed role check (JWT role claims can be stale after demotion).
   const admin = await getAdminOrNull()
   if (!admin) {
@@ -70,7 +76,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         tone: body.tone,
       },
       {
-        locale: body.locale as "en" | "fi" | "de" | "sv" | "nl",
+        locale: body.locale,
         cart: [],
         isAdmin: true,
         auth: {
@@ -82,7 +88,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     )
     return NextResponse.json(result.content)
   } catch (err) {
-    console.error("[averia] admin draft-reply failed", err)
+    logger.error("[averia] admin draft-reply failed", err)
     return NextResponse.json({ error: "draft_failed" }, { status: 502 })
   }
 }

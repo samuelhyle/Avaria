@@ -67,7 +67,9 @@ describe("TIERS constant", () => {
 
   it("every tier has a numeric min that's strictly increasing", () => {
     for (let i = 1; i < TIERS.length; i++) {
+      // biome-ignore lint/style/noNonNullAssertion: loop bounds i < TIERS.length and i > 0.
       const prev = TIERS[i - 1]!
+      // biome-ignore lint/style/noNonNullAssertion: loop bounds i < TIERS.length.
       const curr = TIERS[i]!
       expect(curr.min).toBeGreaterThan(prev.min)
     }

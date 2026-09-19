@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/Badge"
 import { tierFor } from "@/lib/community/reputation"
 import { cn } from "@/lib/utils/cn"
 import { Eye, MessagesSquare } from "lucide-react"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 
 export interface ThreadRow {
@@ -19,14 +20,14 @@ export interface ThreadRow {
 interface ThreadRowProps {
   thread: ThreadRow
   locale: string
-  t: (key: string, values?: Record<string, string | number>) => string
 }
 
-export function ThreadListItem({ thread, locale, t }: ThreadRowProps) {
+export function ThreadListItem({ thread, locale }: ThreadRowProps) {
+  const t = useTranslations("community")
   const tier = tierFor(thread.authorReputation ?? 0)
-  const authorLabel = thread.authorName ?? "Anonymous"
+  const authorLabel = thread.authorName ?? t("anonymous")
   const last = new Date(thread.lastActivityAt)
-  const ago = relativeTime(last, locale)
+  const ago = relativeTime(last, locale, t)
 
   return (
     <Link
@@ -53,7 +54,7 @@ export function ThreadListItem({ thread, locale, t }: ThreadRowProps) {
           <span>
             {t("threadBy")} <span className="font-medium text-ink">{authorLabel}</span>
           </span>
-          {authorLabel !== "Anonymous" ? (
+          {thread.authorName ? (
             <Badge tone={tier.color} size="sm">
               {t(`reputation${capitalize(tier.id)}` as never)}
             </Badge>
@@ -71,16 +72,20 @@ function capitalize(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
-function relativeTime(date: Date, locale: string): string {
+function relativeTime(
+  date: Date,
+  locale: string,
+  t: ReturnType<typeof useTranslations<string>>,
+): string {
   const now = Date.now()
   const diff = Math.max(0, now - date.getTime())
   const min = Math.round(diff / 60_000)
-  if (min < 1) return "now"
-  if (min < 60) return `${min}m`
+  if (min < 1) return t("timeNow")
+  if (min < 60) return t("timeMinutes", { m: min })
   const h = Math.round(min / 60)
-  if (h < 24) return `${h}h`
+  if (h < 24) return t("timeHours", { h })
   const d = Math.round(h / 24)
-  if (d < 7) return `${d}d`
+  if (d < 7) return t("timeDays", { d })
   try {
     return new Intl.DateTimeFormat(locale, { month: "short", day: "numeric" }).format(date)
   } catch {

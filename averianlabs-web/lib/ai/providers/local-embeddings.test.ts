@@ -54,6 +54,7 @@ describe.skipIf(!ENABLED)("local-embeddings (Xenova/all-MiniLM-L6-v2)", () => {
     if (!a || !b || !c) return
     const cos = (x: number[], y: number[]) => {
       let dot = 0
+      // biome-ignore lint/style/noNonNullAssertion: i is bounded by x.length; safe within this loop.
       for (let i = 0; i < x.length; i++) dot += x[i]! * y[i]!
       return dot
     }

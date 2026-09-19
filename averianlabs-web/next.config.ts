@@ -1,8 +1,13 @@
+import withBundleAnalyzer from "@next/bundle-analyzer"
 import { withSentryConfig } from "@sentry/nextjs/config"
 import type { NextConfig } from "next"
 import createNextIntlPlugin from "next-intl/plugin"
 
 const withNextIntl = createNextIntlPlugin("./lib/i18n/request.ts")
+
+const withAnalyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+})
 
 const isDemoBuild = process.env.BUILD_MODE === "demo"
 
@@ -120,20 +125,24 @@ const config: NextConfig = isDemoBuild
       // deploy-upload body limit. pnpm flattens everything under
       // `node_modules/.pnpm/<name>@<version>/node_modules/<name>/`, so the
       // glob must include `.pnpm/`.
+      //
+      // The HF transformers / onnxruntime-node / sharp excludes were
+      // originally here too, but they ARE needed at runtime by the chat
+      // RAG (local embeddings fallback) and image pipeline. Excluding them
+      // from the trace means the Docker standalone build doesn't copy them
+      // into /app/node_modules, so the local embedder throws ERR_MODULE_NOT_FOUND
+      // and vector search silently breaks. They're external on Netlify too,
+      // but Netlify installs declared deps automatically — standalone does not.
       outputFileTracingExcludes: {
-      "*": [
-        "node_modules/.pnpm/@react-three+fiber*/**",
-        "node_modules/.pnpm/@react-three+drei*/**",
-        "node_modules/.pnpm/@react-three+postprocessing*/**",
-        "node_modules/.pnpm/three*/**",
-        "node_modules/.pnpm/postprocessing*/**",
-        "node_modules/.pnpm/react-pdf*/**",
-        "node_modules/.pnpm/pdfjs-dist*/**",
-        "node_modules/.pnpm/@huggingface+transformers*/**",
-        "node_modules/.pnpm/onnxruntime-node*/**",
-        "node_modules/.pnpm/@img+sharp*/**",
-        "node_modules/.pnpm/@img+colour*/**",
-      ],
+        "*": [
+          "node_modules/.pnpm/@react-three+fiber*/**",
+          "node_modules/.pnpm/@react-three+drei*/**",
+          "node_modules/.pnpm/@react-three+postprocessing*/**",
+          "node_modules/.pnpm/three*/**",
+          "node_modules/.pnpm/postprocessing*/**",
+          "node_modules/.pnpm/react-pdf*/**",
+          "node_modules/.pnpm/pdfjs-dist*/**",
+        ],
       },
       experimental: {
         serverActions: { bodySizeLimit: "2mb" },
@@ -196,4 +205,6 @@ const maybeWithSentry = (cfg: NextConfig): NextConfig =>
         tunnelRoute: "/api/sentry-tunnel",
       })
 
-export default isDemoBuild ? withNextIntl(config) : maybeWithSentry(withNextIntl(config))
+export default isDemoBuild
+  ? withNextIntl(withAnalyzer(config))
+  : maybeWithSentry(withNextIntl(withAnalyzer(config)))

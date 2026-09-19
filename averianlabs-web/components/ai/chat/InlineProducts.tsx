@@ -1,9 +1,10 @@
 "use client"
 
 import { FlaskConical } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import Link from "next/link"
 
+import { formatCurrency } from "@/lib/utils/format"
 import type { ToolTrace } from "./types"
 
 interface ProductCardData {
@@ -14,9 +15,10 @@ interface ProductCardData {
   fromPriceCents: number | null
 }
 
-export function extractProducts(trace?: ToolTrace[]): ProductCardData[] {
+export function extractProducts(trace?: ToolTrace[], locale?: string): ProductCardData[] {
   if (!trace || trace.length === 0) return []
   const out = new Map<string, ProductCardData>()
+  const localePrefix = locale ? `/${locale}` : ""
 
   const minPrice = (vials: Array<{ priceCents?: number }>): number | null => {
     const prices = vials
@@ -37,7 +39,9 @@ export function extractProducts(trace?: ToolTrace[]): ProductCardData[] {
         out.set(slug, {
           slug,
           name,
-          url: typeof item.url === "string" ? item.url : `/shop/${slug}`,
+          // Fall back to a locale-prefixed URL so the link works when the
+          // upstream tool forgot to include the locale segment.
+          url: typeof item.url === "string" ? item.url : `${localePrefix}/shop/${slug}`,
           purityPercent: typeof item.purityPercent === "number" ? item.purityPercent : null,
           fromPriceCents: Array.isArray(item.vials)
             ? minPrice(item.vials as Array<{ priceCents?: number }>)
@@ -52,7 +56,7 @@ export function extractProducts(trace?: ToolTrace[]): ProductCardData[] {
       out.set(r.slug, {
         slug: r.slug,
         name: r.name,
-        url: typeof r.url === "string" ? r.url : `/shop/${r.slug}`,
+        url: typeof r.url === "string" ? r.url : `${localePrefix}/shop/${r.slug}`,
         purityPercent: typeof r.purityPercent === "number" ? r.purityPercent : null,
         fromPriceCents: Array.isArray(r.vials)
           ? minPrice(r.vials as Array<{ priceCents?: number }>)
@@ -66,7 +70,7 @@ export function extractProducts(trace?: ToolTrace[]): ProductCardData[] {
         out.set(slug, {
           slug,
           name,
-          url: typeof item.url === "string" ? item.url : `/shop/${slug}`,
+          url: typeof item.url === "string" ? item.url : `${localePrefix}/shop/${slug}`,
           purityPercent: typeof item.purityPercent === "number" ? item.purityPercent : null,
           fromPriceCents: typeof item.fromPriceCents === "number" ? item.fromPriceCents : null,
         })
@@ -79,6 +83,7 @@ export function extractProducts(trace?: ToolTrace[]): ProductCardData[] {
 
 export function InlineProducts({ products }: { products: ProductCardData[] }) {
   const t = useTranslations("averia")
+  const locale = useLocale()
   return (
     <ul className="flex flex-col gap-1.5">
       {products.map((p) => (
@@ -92,7 +97,7 @@ export function InlineProducts({ products }: { products: ProductCardData[] }) {
                 <span className="block truncate text-xs font-medium text-ink">{p.name}</span>
                 <span className="block text-3xs text-ink-muted">
                   {p.purityPercent !== null ? `${p.purityPercent.toFixed(1)}% HPLC · ` : ""}
-                  {p.fromPriceCents !== null ? `${(p.fromPriceCents / 100).toFixed(2)} €` : ""}
+                  {p.fromPriceCents !== null ? formatCurrency(p.fromPriceCents, "EUR", locale) : ""}
                 </span>
               </span>
               <span className="shrink-0 text-3xs font-medium text-accent">{t("viewProduct")}</span>

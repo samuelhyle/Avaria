@@ -1,11 +1,13 @@
 /**
  * Pure helpers for the admin guard — exported for unit testing.
  *
- * The async `requireAdmin()` lives in `./runtime.ts` to keep the auth.js
- * import chain out of unit tests.
+ * The async `requireAdmin()` lives in `./guard.ts`; this file is kept free of
+ * Auth.js / DB imports so the helpers stay cheap to exercise in unit tests.
  */
 
 export type AdminRole = "admin" | "moderator"
+
+export type AdminTier = "new" | "contributor" | "analyst" | "senior" | "fellow"
 
 export interface AdminMember {
   id: string
@@ -14,7 +16,7 @@ export interface AdminMember {
   image: string | null
   role: AdminRole
   reputation: number
-  tier: "new" | "contributor" | "analyst" | "senior" | "fellow"
+  tier: AdminTier
 }
 
 export class AdminAccessError extends Error {
@@ -34,7 +36,7 @@ export function mapUserRoleToAdmin(role: string | null | undefined): AdminRole |
   return role === "admin" ? "admin" : role === "moderator" ? "moderator" : null
 }
 
-export function tierIdFor(reputation: number): AdminMember["tier"] {
+export function tierIdFor(reputation: number): AdminTier {
   if (reputation >= 250) return "fellow"
   if (reputation >= 100) return "senior"
   if (reputation >= 25) return "analyst"

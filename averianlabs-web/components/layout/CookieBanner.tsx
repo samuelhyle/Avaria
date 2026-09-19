@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 
 const STORAGE_KEY = "averianlabs-cookie-consent"
 
-export function CookieBanner({ locale }: { locale: string }) {
+export function CookieBanner() {
   const t = useTranslations("cookie")
   const [show, setShow] = useState(false)
 

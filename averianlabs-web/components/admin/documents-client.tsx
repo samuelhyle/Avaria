@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/Dialog"
 import { Input } from "@/components/ui/Input"
 import { DOCUMENT_TYPES, DOCUMENT_TYPE_LABELS, type DocumentType } from "@/lib/documents"
 import { Loader2, Plus, Trash2 } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import { useState, useTransition } from "react"
 
@@ -24,7 +25,7 @@ interface AdminDocumentsClientProps {
 }
 
 export function AdminDocumentsClient({ initialDocs, products }: AdminDocumentsClientProps) {
-  const t = (key: string) => key
+  const t = useTranslations("admin.documentsClient")
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [type, setType] = useState<DocumentType>("coa")
@@ -74,13 +75,13 @@ export function AdminDocumentsClient({ initialDocs, products }: AdminDocumentsCl
       <div className="mb-4 flex justify-end">
         <Button size="sm" onClick={() => setOpen(true)}>
           <Plus className="h-4 w-4" />
-          New document
+          {t("newDocument")}
         </Button>
       </div>
 
       {initialDocs.length === 0 ? (
         <div className="rounded-[var(--radius-lg)] border border-dashed border-line bg-surface p-10 text-center text-sm text-ink-muted">
-          No documents yet. Click "New document" to add one.
+          {t("noDocuments")}
         </div>
       ) : (
         <div className="space-y-2">
@@ -101,7 +102,7 @@ export function AdminDocumentsClient({ initialDocs, products }: AdminDocumentsCl
                 onClick={() => remove(d.id)}
                 disabled={busyId === d.id}
                 className="inline-flex h-8 w-8 items-center justify-center rounded-[var(--radius)] text-ink-muted hover:bg-danger-soft hover:text-danger"
-                aria-label="Delete"
+                aria-label={t("deleteAria")}
               >
                 {busyId === d.id ? (
                   <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -120,7 +121,7 @@ export function AdminDocumentsClient({ initialDocs, products }: AdminDocumentsCl
           <div className="mt-4 space-y-3">
             <div>
               <label htmlFor="doc-type" className="mb-1.5 block text-xs font-medium text-ink-muted">
-                Type
+                {t("fieldType")}
               </label>
               <select
                 id="doc-type"
@@ -136,18 +137,22 @@ export function AdminDocumentsClient({ initialDocs, products }: AdminDocumentsCl
               </select>
             </div>
             <Input
-              label="Title"
+              label={t("fieldTitle")}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="BPC-157 · 2026-04 batch"
+              placeholder={t("titlePlaceholder")}
             />
-            <Input label="Version" value={version} onChange={(e) => setVersion(e.target.value)} />
+            <Input
+              label={t("fieldVersion")}
+              value={version}
+              onChange={(e) => setVersion(e.target.value)}
+            />
             <div>
               <label
                 htmlFor="doc-product"
                 className="mb-1.5 block text-xs font-medium text-ink-muted"
               >
-                Product (optional)
+                {t("fieldProductOptional")}
               </label>
               <select
                 id="doc-product"
@@ -155,7 +160,7 @@ export function AdminDocumentsClient({ initialDocs, products }: AdminDocumentsCl
                 onChange={(e) => setProductId(e.target.value)}
                 className="h-10 w-full rounded-[var(--radius)] border border-line bg-surface px-3 text-sm focus:border-accent focus:outline-none"
               >
-                <option value="">— None —</option>
+                <option value="">{t("noneOption")}</option>
                 {products.map((p) => (
                   <option key={p.id} value={p.id}>
                     {p.name}
@@ -164,15 +169,15 @@ export function AdminDocumentsClient({ initialDocs, products }: AdminDocumentsCl
               </select>
             </div>
             <Input
-              label="External URL (optional)"
-              hint="PDF URL on R2 or any CDN"
+              label={t("fieldExternalUrlOptional")}
+              hint={t("externalUrlHint")}
               value={externalUrl}
               onChange={(e) => setExternalUrl(e.target.value)}
-              placeholder="https://r2.example.com/coa-bpc-2026-04.pdf"
+              placeholder={t("externalUrlPlaceholder")}
             />
             <div className="flex justify-end gap-2 pt-2">
               <Button variant="ghost" size="sm" onClick={() => setOpen(false)}>
-                Cancel
+                {t("cancel")}
               </Button>
               <Button size="sm" onClick={create} disabled={isPending || !title.trim()}>
                 {isPending ? (
@@ -180,7 +185,7 @@ export function AdminDocumentsClient({ initialDocs, products }: AdminDocumentsCl
                 ) : (
                   <Plus className="h-3.5 w-3.5" />
                 )}
-                Create
+                {t("create")}
               </Button>
             </div>
           </div>

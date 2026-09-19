@@ -38,7 +38,7 @@ export function SaveToPlanButton({
         className="inline-flex items-center gap-1.5 text-xs text-ink-muted hover:text-accent"
       >
         <BookmarkPlus className="h-3.5 w-3.5" />
-        {t("signInCta") ?? "Sign in to save"}
+        {t("signInCta")}
       </a>
     )
   }
@@ -130,7 +130,7 @@ export function SaveToPlanButton({
                 label={t("fieldTitle")}
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
-                placeholder="e.g. Tendon repair panel"
+                placeholder={t("titlePlaceholder")}
               />
               <div className="mt-2 flex justify-end">
                 <Button size="sm" onClick={create} disabled={isPending || !newTitle.trim()}>

@@ -15,6 +15,7 @@
 import { EMBEDDING_DIM, aiDocumentChunks, aiDocuments } from "@/db/schema/ai"
 import { embedText } from "@/lib/ai/providers/minimax"
 import { db } from "@/lib/db"
+import { logger } from "@/lib/logger"
 import { and, eq, inArray, sql } from "drizzle-orm"
 
 export interface RetrievedChunk {
@@ -185,7 +186,26 @@ interface RankerRow {
 async function bm25Search(opts: RankerOpts): Promise<RankerRow[]> {
   const config = tsConfigFor(opts.locale)
   const tsvector = sql`to_tsvector(${config}::regconfig, coalesce(${aiDocumentChunks.content}, ''))`
-  const tsquery = sql`plainto_tsquery(${config}::regconfig, ${opts.query})`
+  // Permissive OR'd lexeme query, built by extracting the stemmed tokens
+  // from the input and joining them with `|`. This handles natural-language
+  // queries where `websearch_to_tsquery` / `plainto_tsquery` would AND every
+  // token (including stems of filler words like "Anything" that don't appear
+  // in any chunk) and return zero results. The vector search + RRF still
+  // rank the resulting candidates precisely.
+  //
+  // Edge case: when the input has no usable lexemes (all stop words / pure
+  // punctuation), the subquery produces '' which to_tsquery rejects with
+  // "text-search query doesn't contain lexemes". Fall back to a non-matching
+  // tsquery so the AND filter rejects everything — vector search still runs.
+  const tsquery = sql`(
+    SELECT CASE
+      WHEN string_agg(lexeme, ' | ') IS NULL OR string_agg(lexeme, ' | ') = ''
+      THEN '!a'::tsquery
+      ELSE to_tsquery(string_agg(lexeme, ' | '))
+    END
+    FROM unnest(to_tsvector(${config}::regconfig, ${opts.query}))
+    WHERE length(lexeme) > 2
+  )`
 
   const filters = [eq(aiDocumentChunks.locale, opts.locale), sql`${tsvector} @@ ${tsquery}`]
   if (opts.source) filters.push(eq(aiDocuments.source, opts.source))
@@ -220,7 +240,7 @@ async function vectorSearch(opts: VectorOpts): Promise<RankerRow[]> {
     // Embedding dim mismatch means the index will silently score everything at
     // distance 1.0 anyway — warn loudly so misconfig doesn't look like "no
     // relevant content".
-    console.warn(
+    logger.warn(
       `[retrieval] embedding dimension mismatch: got ${opts.embedding.length}, expected ${EMBEDDING_DIM}. Falling back to keyword search.`,
     )
     return []

@@ -13,22 +13,22 @@
  */
 
 import { CONSENT_COOKIE } from "@/lib/ai/memory/cookies"
+import { safeUuid } from "@/lib/utils/uuid"
 
 const ANON_LS_KEY = "averia:anon"
-
-function uuid(): string {
-  if (typeof crypto !== "undefined" && "randomUUID" in crypto) return crypto.randomUUID()
-  return `anon-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`
-}
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
 export function getOrCreateAnonId(): string {
   if (typeof window === "undefined") return "ssr"
 
-  let id = window.localStorage.getItem(ANON_LS_KEY)
-  if (!id) {
-    id = uuid()
-    window.localStorage.setItem(ANON_LS_KEY, id)
+  const stored = window.localStorage.getItem(ANON_LS_KEY)
+  // Validate the stored value before reusing — older builds sometimes
+  // wrote a non-UUID placeholder, which the server would silently reject.
+  if (stored && UUID_RE.test(stored)) {
+    return stored
   }
+  const id = safeUuid()
+  window.localStorage.setItem(ANON_LS_KEY, id)
   return id
 }
 
@@ -45,7 +45,17 @@ export function setConsentState(state: "accepted" | "declined"): void {
 }
 
 function setCookie(name: string, value: string, opts: { maxAge: number; path: string }): void {
-  document.cookie = `${name}=${encodeURIComponent(value)}; max-age=${opts.maxAge}; path=${opts.path}; SameSite=Lax; Secure`
+  // `Secure` would block the cookie on `http://localhost` during dev; only
+  // attach it when the page is actually served over HTTPS.
+  const secure = typeof window !== "undefined" && window.location.protocol === "https:"
+  const parts = [
+    `${name}=${encodeURIComponent(value)}`,
+    `max-age=${opts.maxAge}`,
+    `path=${opts.path}`,
+    "SameSite=Lax",
+  ]
+  if (secure) parts.push("Secure")
+  document.cookie = parts.join("; ")
 }
 
 function readCookie(name: string): string | null {

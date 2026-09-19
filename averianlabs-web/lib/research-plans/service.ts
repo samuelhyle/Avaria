@@ -134,14 +134,21 @@ export async function getPlanForOwner(planId: string, ownerId: string): Promise<
 }
 
 export const getPlanByShareSlug = cache(async (slug: string): Promise<PlanView | null> => {
-  const [plan] = await db
-    .select()
-    .from(researchPlans)
-    .where(and(eq(researchPlans.shareSlug, slug), eq(researchPlans.isPublic, true)))
-    .limit(1)
-  if (!plan) return null
-  const items = await loadItemsByPlan([plan.id])
-  return toPlanView(plan, items.get(plan.id) ?? [])
+  try {
+    const [plan] = await db
+      .select()
+      .from(researchPlans)
+      .where(and(eq(researchPlans.shareSlug, slug), eq(researchPlans.isPublic, true)))
+      .limit(1)
+    if (!plan) return null
+    const items = await loadItemsByPlan([plan.id])
+    return toPlanView(plan, items.get(plan.id) ?? [])
+  } catch {
+    // DB unconfigured / unavailable — treat the share as not-found so the
+    // /en/plans/[slug] page degrades to a 404 instead of 500. The chat
+    // route already does this same pattern (see route.ts).
+    return null
+  }
 })
 
 export interface CreatePlanInput {

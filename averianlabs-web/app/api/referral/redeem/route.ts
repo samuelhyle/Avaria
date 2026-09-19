@@ -1,6 +1,9 @@
 import { referralRedemptions, rewardsAccounts } from "@/db/schema"
 import { getCurrentMember } from "@/lib/community"
 import { db } from "@/lib/db"
+import { logger } from "@/lib/logger"
+import { assertCsrfOr403 } from "@/lib/security/csrf"
+import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
@@ -11,7 +14,13 @@ const bodySchema = z.object({
 })
 
 export async function POST(req: Request) {
-  const member = await getCurrentMember().catch(() => null)
+  const csrf = assertCsrfOr403(req, { allowDevHosts: process.env.NODE_ENV !== "production" })
+  if (csrf) return csrf
+
+  const member = await getCurrentMember().catch((err) => {
+    logger.error("[referral:redeem] auth lookup failed", err)
+    return null
+  })
   if (!member) {
     return NextResponse.json({ error: "Authentication required." }, { status: 401 })
   }

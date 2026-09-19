@@ -6,6 +6,7 @@ import { useCart } from "@/lib/cart/store"
 import { useCheckout } from "@/lib/checkout/store"
 import { VAT_LABEL, computeOrderTotals } from "@/lib/pricing"
 import { type ShippingRate, fallbackShippingRates } from "@/lib/shipping"
+import { formatCurrency } from "@/lib/utils/format"
 import {
   ArrowRight,
   Bitcoin,
@@ -16,11 +17,11 @@ import {
   Mail,
   Truck,
 } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import dynamic from "next/dynamic"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 
 // Stripe.js is only needed on the final step — keep it out of the earlier
@@ -40,21 +41,10 @@ interface CheckoutFormProps {
   locale: string
 }
 
-const COUNTRIES = [
-  { code: "FI", label: "Finland" },
-  { code: "SE", label: "Sweden" },
-  { code: "EE", label: "Estonia" },
-  { code: "DE", label: "Germany" },
-  { code: "NL", label: "Netherlands" },
-  { code: "FR", label: "France" },
-  { code: "ES", label: "Spain" },
-  { code: "IT", label: "Italy" },
-  { code: "DK", label: "Denmark" },
-  { code: "PL", label: "Poland" },
-]
-
-export function CheckoutForm({ step, locale }: CheckoutFormProps) {
+export function CheckoutForm({ step, locale: localeProp }: CheckoutFormProps) {
   const t = useTranslations("checkout")
+  const localeFromHook = useLocale()
+  const locale = localeProp ?? localeFromHook
   const router = useRouter()
   const items = useCart((s) => s.items)
   const subtotal = useCart((s) => s.items.reduce((sum, i) => sum + i.unitPriceCents * i.qty, 0))
@@ -68,9 +58,33 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("stripe")
   const [rates, setRates] = useState<ShippingRate[]>([])
 
+  const COUNTRIES = [
+    { code: "FI", name: t("countryFinland") },
+    { code: "SE", name: t("countrySweden") },
+    { code: "EE", name: t("countryEstonia") },
+    { code: "DE", name: t("countryGermany") },
+    { code: "NL", name: t("countryNetherlands") },
+    { code: "FR", name: t("countryFrance") },
+    { code: "ES", name: t("countrySpain") },
+    { code: "IT", name: t("countryItaly") },
+    { code: "DK", name: t("countryDenmark") },
+    { code: "PL", name: t("countryPoland") },
+  ]
+
   const selectedRate = rates.find((r) => r.id === checkout.shippingMethod) ?? rates[0] ?? undefined
   const shippingCents = selectedRate?.priceCents ?? 0
   const { vatCents, totalCents: orderTotal } = computeOrderTotals(subtotal, shippingCents)
+
+  // The shipping-fetch effect reads `rates`, `checkout.shippingMethod`, and
+  // `checkout.setShippingMethod` from closure. Keep refs to those so the
+  // effect only re-runs when the address actually changes (not on every
+  // shipping selection tick).
+  const ratesRef = useRef(rates)
+  ratesRef.current = rates
+  const shippingMethodRef = useRef(checkout.shippingMethod)
+  shippingMethodRef.current = checkout.shippingMethod
+  const setShippingMethodRef = useRef(checkout.setShippingMethod)
+  setShippingMethodRef.current = checkout.setShippingMethod
 
   // Fetch server shipping rates once the address is known.
   useEffect(() => {
@@ -79,10 +93,10 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
     let cancelled = false
 
     const fallback = () => {
-      if (!cancelled && rates.length === 0) {
+      if (!cancelled && ratesRef.current.length === 0) {
         const local = fallbackShippingRates({ country })
         setRates(local)
-        if (!checkout.shippingMethod && local[0]) checkout.setShippingMethod(local[0].id)
+        if (!shippingMethodRef.current && local[0]) setShippingMethodRef.current(local[0].id)
       }
     }
 
@@ -105,9 +119,9 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
           return
         }
         setRates(next)
-        if (!next.some((r) => r.id === checkout.shippingMethod)) {
+        if (!next.some((r) => r.id === shippingMethodRef.current)) {
           const first = next[0]
-          if (first) checkout.setShippingMethod(first.id)
+          if (first) setShippingMethodRef.current(first.id)
         }
       })
       .catch(fallback)
@@ -115,7 +129,6 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
     return () => {
       cancelled = true
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step, checkout.country, checkout.postal, checkout.city])
 
   const next = () => {
@@ -135,15 +148,15 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
 
   const createOrderAndIntent = async () => {
     if (items.length === 0) {
-      toast.error("Your cart is empty")
+      toast.error(t("yourCartEmpty"))
       return
     }
     if (!checkout.email) {
-      toast.error("Please complete the email step first")
+      toast.error(t("completeEmailFirst"))
       return
     }
     if (!selectedRate) {
-      toast.error("Please choose a shipping method")
+      toast.error(t("chooseShipping"))
       return
     }
 
@@ -165,10 +178,10 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
       })
 
       const data = await res.json()
-      if (!res.ok) throw new Error(data.error || "Checkout failed")
+      if (!res.ok) throw new Error(data.error || t("checkoutFailed"))
 
       if (paymentMethod === "coinbase") {
-        if (!data.redirectUrl) throw new Error("Crypto payment unavailable")
+        if (!data.redirectUrl) throw new Error(t("cryptoUnavailable"))
         window.location.assign(data.redirectUrl)
         return
       }
@@ -176,7 +189,7 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
       setOrderId(data.orderId)
       setClientSecret(data.clientSecret)
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Something went wrong")
+      toast.error(err instanceof Error ? err.message : t("genericError"))
     } finally {
       setProcessing(false)
     }
@@ -188,7 +201,7 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
     if (orderId) {
       router.push(`/${locale}/checkout/confirm/${orderId}`)
     }
-    toast.success("Payment successful!")
+    toast.success(t("paymentSuccess"))
   }
 
   if (step === "email") {
@@ -211,7 +224,7 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
             autoComplete="email"
             value={checkout.email}
             onChange={(e) => checkout.setEmail(e.target.value)}
-            placeholder="you@lab.eu"
+            placeholder={t("emailPlaceholder")}
             label={t("email")}
           />
           <Button type="submit" size="lg" fullWidth>
@@ -310,7 +323,7 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
             >
               {COUNTRIES.map((c) => (
                 <option key={c.code} value={c.code}>
-                  {c.label}
+                  {c.name}
                 </option>
               ))}
             </select>
@@ -319,7 +332,7 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
           {checkout.b2b ? (
             <div>
               <Input
-                placeholder="FI12345678"
+                placeholder={t("vatPlaceholder")}
                 label={t("vatId")}
                 autoComplete="off"
                 value={checkout.vatId}
@@ -349,7 +362,7 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
             {rates.length === 0 ? (
               <div className="flex items-center gap-2 rounded-[var(--radius)] border border-line bg-surface-2 p-4 text-sm text-ink-muted">
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Loading shipping options…
+                {t("loadingShipping")}
               </div>
             ) : (
               rates.map((opt) => (
@@ -372,14 +385,16 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
                       <p className="text-xs text-ink-muted">{opt.eta}</p>
                     </div>
                   </div>
-                  <span className="font-display">€{(opt.priceCents / 100).toFixed(2)}</span>
+                  <span className="font-display">
+                    {formatCurrency(opt.priceCents, "EUR", locale)}
+                  </span>
                 </label>
               ))
             )}
           </div>
         </fieldset>
         <Button size="lg" fullWidth className="mt-6" onClick={next} disabled={!selectedRate}>
-          Continue to payment <ArrowRight className="h-4 w-4" />
+          {t("continueToPayment")} <ArrowRight className="h-4 w-4" />
         </Button>
       </div>
     )
@@ -395,28 +410,28 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
 
         {/* Order summary */}
         <div className="mt-6 rounded-[var(--radius)] border border-line bg-surface-2 p-4 text-sm">
-          <p className="font-medium text-ink">Order summary</p>
+          <p className="font-medium text-ink">{t("orderSummary")}</p>
           <div className="mt-2 space-y-1 text-ink-muted">
             <div className="flex justify-between">
-              <span>
-                Subtotal ({items.length} item{items.length !== 1 ? "s" : ""})
-              </span>
-              <span>€{(subtotal / 100).toFixed(2)}</span>
+              <span>{t("subtotalItems", { count: items.length })}</span>
+              <span>{formatCurrency(subtotal, "EUR", locale)}</span>
             </div>
             <div className="flex justify-between">
               <span>
-                Shipping
+                {t("shipping")}
                 {selectedRate ? ` (${selectedRate.carrier} ${selectedRate.service})` : ""}
               </span>
-              <span>€{(shippingCents / 100).toFixed(2)}</span>
+              <span>{formatCurrency(shippingCents, "EUR", locale)}</span>
             </div>
             <div className="flex justify-between">
-              <span>VAT ({VAT_LABEL})</span>
-              <span>€{(vatCents / 100).toFixed(2)}</span>
+              <span>
+                {t("vat")} ({VAT_LABEL})
+              </span>
+              <span>{formatCurrency(vatCents, "EUR", locale)}</span>
             </div>
             <div className="flex justify-between border-t border-line pt-2 font-semibold text-ink">
-              <span>Total</span>
-              <span>€{(orderTotal / 100).toFixed(2)}</span>
+              <span>{t("total")}</span>
+              <span>{formatCurrency(orderTotal, "EUR", locale)}</span>
             </div>
           </div>
         </div>
@@ -425,7 +440,7 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
           <div className="mt-6 space-y-4">
             {/* Payment method */}
             <fieldset>
-              <legend className="sr-only">Payment method</legend>
+              <legend className="sr-only">{t("paymentMethodLabel")}</legend>
               <div className="grid gap-2 sm:grid-cols-2">
                 <label className="flex cursor-pointer items-center gap-3 rounded-[var(--radius)] border border-line bg-surface p-3 text-sm has-[:checked]:border-accent has-[:checked]:bg-accent-soft focus-within:ring-2 focus-within:ring-accent focus-within:ring-offset-2 focus-within:ring-offset-surface">
                   <input
@@ -436,7 +451,7 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
                     className="h-4 w-4 text-accent focus:ring-accent"
                   />
                   <CreditCard className="h-4 w-4" />
-                  <span>Card / SEPA</span>
+                  <span>{t("cardSepa")}</span>
                 </label>
                 <label className="flex cursor-pointer items-center gap-3 rounded-[var(--radius)] border border-line bg-surface p-3 text-sm has-[:checked]:border-accent has-[:checked]:bg-accent-soft focus-within:ring-2 focus-within:ring-accent focus-within:ring-offset-2 focus-within:ring-offset-surface">
                   <input
@@ -447,7 +462,7 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
                     className="h-4 w-4 text-accent focus:ring-accent"
                   />
                   <Bitcoin className="h-4 w-4" />
-                  <span>Crypto</span>
+                  <span>{t("crypto")}</span>
                 </label>
               </div>
             </fieldset>
@@ -461,23 +476,23 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
                 className="mt-0.5 h-4 w-4 rounded border-line text-accent focus:ring-accent"
               />
               <span className="text-xs leading-relaxed text-ink-muted">
-                I agree to the{" "}
+                {t("consentTerms")}{" "}
                 <Link
                   href={`/${locale}/legal/terms`}
                   className="text-accent hover:underline"
                   target="_blank"
                 >
-                  Terms of Service
+                  {t("consentTermsLink")}
                 </Link>{" "}
-                and{" "}
+                {t("consentAnd")}{" "}
                 <Link
                   href={`/${locale}/legal/privacy`}
                   className="text-accent hover:underline"
                   target="_blank"
                 >
-                  Privacy Policy
+                  {t("consentPrivacy")}
                 </Link>
-                . I understand that AverianLabs products are for research use only.
+                . {t("consentResearch")}
               </span>
             </label>
 
@@ -490,11 +505,11 @@ export function CheckoutForm({ step, locale }: CheckoutFormProps) {
               {processing ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Creating order…
+                  {t("creatingOrder")}
                 </>
               ) : (
                 <>
-                  {t("placeOrder")} · €{(orderTotal / 100).toFixed(2)}
+                  {t("placeOrder")} · {formatCurrency(orderTotal, "EUR", locale)}
                 </>
               )}
             </Button>

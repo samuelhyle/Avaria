@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic"
-
 import { AdminShell, ForbiddenShell } from "@/components/admin/admin-shell"
 import { type ModerationItem, ModerationQueue } from "@/components/admin/moderation-queue"
 import { Badge } from "@/components/ui/Badge"
@@ -12,6 +10,7 @@ import { and, desc as descFn, inArray, ne } from "drizzle-orm"
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import Link from "next/link"
+export const dynamic = "force-dynamic"
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

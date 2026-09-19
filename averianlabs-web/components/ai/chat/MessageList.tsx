@@ -19,7 +19,7 @@ export function MessageList({
   // Hash all the things that should trigger a scroll when they grow. Watching
   // just `content` misses tool chips, citations, and action cards which can
   // appear without the content changing.
-  const growthKey = useMemo(() => {
+  const { growthKey, last } = useMemo(() => {
     let tool = 0
     let cite = 0
     let action = 0
@@ -28,14 +28,16 @@ export function MessageList({
       cite += m.citations?.length ?? 0
       action += m.proposedActions?.length ?? 0
     }
-    const last = messages.at(-1)
-    return (
-      messages.length * 1_000_000 +
-      (last?.content.length ?? 0) * 1000 +
-      tool * 100 +
-      cite * 10 +
-      action
-    )
+    const tail = messages.at(-1)
+    return {
+      last: tail,
+      growthKey:
+        messages.length * 1_000_000 +
+        (tail?.content.length ?? 0) * 1000 +
+        tool * 100 +
+        cite * 10 +
+        action,
+    }
   }, [messages])
 
   useAutoScroll({ scrollRef, growthKey, isStreaming })
@@ -61,7 +63,7 @@ export function MessageList({
         <Message
           key={m.id}
           message={m}
-          isStreaming={isStreaming && m === messages.at(-1) && m.role === "assistant"}
+          isStreaming={isStreaming && m === last && m.role === "assistant"}
           onConfirmAction={onConfirmAction}
           onDismissAction={onDismissAction}
           onFeedback={onFeedback}

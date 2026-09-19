@@ -1,6 +1,7 @@
 import { abandonedCartHtml, sendEmail } from "@/lib/email"
 import { locales } from "@/lib/i18n/config"
 import { isAuthorizedCronRequest } from "@/lib/security/cron"
+import { getTranslations } from "next-intl/server"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -38,11 +39,12 @@ export async function POST(req: Request) {
 
   const { email, locale, items } = parsed.data
 
-  const html = abandonedCartHtml({ customerEmail: email, items, locale })
+  const html = await abandonedCartHtml({ customerEmail: email, items, locale })
+  const t = await getTranslations({ locale, namespace: "email" })
 
   const ok = await sendEmail({
     to: email,
-    subject: "You left items in your cart — complete your order",
+    subject: t("cartRecoverySubject"),
     html,
   })
 

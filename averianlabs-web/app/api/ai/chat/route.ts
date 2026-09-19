@@ -41,56 +41,17 @@ import { type ChatIdentity, checkChatRateLimit } from "@/lib/ai/rate-limit"
 import type { ChatErrorBody } from "@/lib/ai/types"
 import { auth } from "@/lib/auth"
 import type { Locale } from "@/lib/i18n/config"
+import { logger, withRequestId } from "@/lib/logger"
 import { clientIp } from "@/lib/security/ip"
-import { z } from "zod"
+import { type ChatErrorBody as ChatErrorBodyType, chatRequestSchema } from "@/lib/validators/chat"
+import type { z } from "zod"
+
+export const dynamic = "force-dynamic"
 
 export const runtime = "nodejs"
-export const dynamic = "force-dynamic"
 export const maxDuration = 60
 
-const messageSchema = z.object({
-  id: z.string().min(1).max(64),
-  // Only user/assistant turns are accepted from clients — never system/tool.
-  role: z.enum(["user", "assistant"]),
-  content: z.string().min(1).max(8000),
-})
-
-const cartItemSchema = z.object({
-  sku: z.string(),
-  productSlug: z.string(),
-  name: z.string(),
-  mg: z.number(),
-  qty: z.number(),
-  unitPriceCents: z.number(),
-})
-
-const bodySchema = z.object({
-  messages: z.array(messageSchema).min(1).max(50),
-  locale: z.string().min(2).max(5).optional(),
-  context: z
-    .object({
-      kind: z.enum(["home", "shop", "product", "category", "cart", "blog", "support", "other"]),
-      slug: z.string().optional(),
-      name: z.string().optional(),
-      title: z.string().optional(),
-      itemCount: z.number().int().min(0).optional(),
-      path: z.string().optional(),
-    })
-    .optional(),
-  cart: z.array(cartItemSchema).optional(),
-  // Round-trip the conversation id from a previous turn. Server still
-  // resolves ownership via owner+locale and may ignore this id if the
-  // session is anonymous, has no consent, or the row was deleted.
-  conversationId: z.string().min(1).max(128).optional(),
-  // Raw UUID minted by the client on first visit. The server signs it and
-  // returns it as a Set-Cookie header on this response so the very next
-  // request can verify ownership without a separate identity round-trip.
-  anonId: z.string().uuid().optional(),
-  noRetrieve: z.boolean().optional(),
-  noPersist: z.boolean().optional(),
-})
-
-function jsonError(body: ChatErrorBody, status: number): Response {
+function jsonError(body: ChatErrorBodyType, status: number): Response {
   return new Response(JSON.stringify(body), {
     status,
     headers: { "content-type": "application/json; charset=utf-8" },
@@ -98,6 +59,17 @@ function jsonError(body: ChatErrorBody, status: number): Response {
 }
 
 export async function POST(request: Request): Promise<Response> {
+  // Per-request logger: stamp every line this handler emits with the same
+  // id so log drains can pivot from a user report straight to the matching
+  // request. The id is also sent to the client in the X-Request-Id header
+  // (added at the end of the handler) so support tickets can paste it back.
+  const requestId = crypto.randomUUID()
+  const reqLogger = withRequestId({
+    requestId,
+    route: "/api/ai/chat",
+    ip: clientIp(request),
+  })
+
   if (!isMinimaxConfigured()) {
     return jsonError(
       {
@@ -110,10 +82,10 @@ export async function POST(request: Request): Promise<Response> {
     )
   }
 
-  let parsed: z.infer<typeof bodySchema>
+  let parsed: z.infer<typeof chatRequestSchema>
   try {
     const raw = (await request.json()) as unknown
-    parsed = bodySchema.parse(raw)
+    parsed = chatRequestSchema.parse(raw)
   } catch {
     return jsonError(
       { error: true, code: "invalid_request", message: "Invalid request body." },
@@ -158,8 +130,8 @@ export async function POST(request: Request): Promise<Response> {
   // visitors — scan them too, not just the newest message.
   const priorHardCheck = parsed.messages
     .slice(0, -1)
-    .map((m) => preflightInput(m.content, locale))
-    .find((check) => check?.hard)
+    .map((m: { content: string }) => preflightInput(m.content, locale))
+    .find((check: { hard?: boolean } | null | undefined) => check?.hard)
   const blockedCheck = inputCheck?.hard ? inputCheck : priorHardCheck
   if (blockedCheck?.hard) {
     // Hard refusal — skip the agent loop entirely.
@@ -231,17 +203,19 @@ export async function POST(request: Request): Promise<Response> {
         metadata: m.metadata as PersistedMessage["metadata"],
       }))
     } catch (err) {
-      console.error("[averia] conversation load failed", err)
+      reqLogger.error("conversation_load_failed", err)
     }
   } else {
     // Non-consenting users still get multi-turn context from the client.
     // Take all messages except the last (which is the new user message).
     const prior = parsed.messages.slice(0, -1)
-    history = prior.slice(-6).map((m, i) => ({
-      id: m.id ?? `h-${i}`,
-      role: m.role as "user" | "assistant" | "system" | "tool",
-      content: m.content,
-    }))
+    history = prior
+      .slice(-6)
+      .map((m: { id?: string; role: string; content: string }, i: number) => ({
+        id: m.id ?? `h-${i}`,
+        role: m.role as "user" | "assistant" | "system" | "tool",
+        content: m.content,
+      }))
   }
 
   const newUserMessage: PersistedMessage = {
@@ -257,6 +231,7 @@ export async function POST(request: Request): Promise<Response> {
 
   const encoder = new TextEncoder()
   let cancelled = false
+  let inThinkBlock = false
   request.signal.addEventListener("abort", () => {
     cancelled = true
   })
@@ -274,15 +249,55 @@ export async function POST(request: Request): Promise<Response> {
   const sink = {
     enqueue(event: AgentEvent): void {
       if (cancelled) return
+      // Streaming-safe `<think>` strip: the model emits reasoning blocks inline
+      // with its final answer. We track open/close state across deltas so a
+      // block that spans multiple text events stays suppressed, and the
+      // post-think answer resumes cleanly. If the model never closes the
+      // block, everything after the open tag is dropped — better than leaking
+      // internal monologue to the UI.
+      if (event.type === "text") {
+        const delta = String(event.delta ?? "")
+        let out = ""
+        let i = 0
+        while (i < delta.length) {
+          if (inThinkBlock) {
+            const close = delta.indexOf("</think>", i)
+            if (close === -1) {
+              i = delta.length
+            } else {
+              i = close + "</think>".length
+              inThinkBlock = false
+            }
+          } else {
+            const open = delta.indexOf("<think>", i)
+            if (open === -1) {
+              out += delta.slice(i)
+              i = delta.length
+            } else {
+              out += delta.slice(i, open)
+              i = open + "<think>".length
+              inThinkBlock = true
+            }
+          }
+        }
+        if (!out) return
+        try {
+          controllerRef.current?.enqueue(
+            encoder.encode(`data: ${JSON.stringify({ type: "text", delta: out })}\n\n`),
+          )
+        } catch {
+          // Controller may have been closed if client disconnected.
+        }
+        accumulatedText += out
+        return
+      }
       const wire: AgentEvent = event.type === "done" ? { ...event, messageId: assistantId } : event
       try {
         controllerRef.current?.enqueue(encoder.encode(`data: ${JSON.stringify(wire)}\n\n`))
       } catch {
         // Controller may have been closed if client disconnected.
       }
-      if (event.type === "text") {
-        accumulatedText += event.delta
-      } else if (event.type === "tool-call") {
+      if (event.type === "tool-call") {
         toolTrace.push({ id: event.id, name: event.name, args: event.args })
       } else if (event.type === "tool-result") {
         const t = toolTrace.find((x) => x.id === event.id)
@@ -334,7 +349,7 @@ export async function POST(request: Request): Promise<Response> {
       )
         .catch((err) => {
           if (!cancelled) {
-            console.error("[averia] agent failed", err)
+            reqLogger.error("agent_failed", err)
             sink.enqueue({
               type: "error",
               message: "Averia hit a problem. Please try again in a moment.",
@@ -343,16 +358,15 @@ export async function POST(request: Request): Promise<Response> {
         })
         .finally(async () => {
           // ── Output verification ───────────────────────────────────────────
-          // Strip model reasoning blocks before verification + persistence
-          // (the client also hides them at render time).
-          accumulatedText = accumulatedText.replace(/<think>[\s\S]*?(<\/think>|$)/gi, "").trim()
+          // `accumulatedText` is already <think>-stripped by the sink, so
+          // verification + persistence see only the assistant's final answer.
           const report = verifyResponse(accumulatedText)
           if (
             report.unknownSkus.length > 0 ||
             report.priceMismatches.length > 0 ||
             report.warnings.length > 0
           ) {
-            console.warn("[averia] output verification", {
+            reqLogger.warn("output_verification", {
               conversationId: conversation?.id,
               unknownSkus: report.unknownSkus,
               priceMismatches: report.priceMismatches,
@@ -376,6 +390,15 @@ export async function POST(request: Request): Promise<Response> {
                     citations,
                     toolTrace,
                     proposedActions: actions,
+                    // Persist the verification summary so analytics can
+                    // chart SKU/price/medical-claim drift over time.
+                    verification: {
+                      passed: report.passed,
+                      warnings: report.warnings,
+                      unknownSkus: report.unknownSkus,
+                      priceMismatches: report.priceMismatches,
+                      needsMedicalReminder: report.needsMedicalReminder,
+                    },
                   },
                   tokensIn: usage.tokensIn,
                   tokensOut: usage.tokensOut,
@@ -383,7 +406,7 @@ export async function POST(request: Request): Promise<Response> {
                 },
               ])
             } catch (err) {
-              console.error("[averia] persist failed", err)
+              reqLogger.error("persist_failed", err)
             }
           }
           try {
@@ -412,6 +435,10 @@ export async function POST(request: Request): Promise<Response> {
     if (process.env.NODE_ENV === "production") cookieAttrs.push("Secure")
     headers["set-cookie"] = cookieAttrs.join("; ")
   }
+
+  // Echo the request id back so the client / support can correlate a
+  // report with the corresponding log line.
+  headers["x-request-id"] = requestId
 
   return new Response(stream, { headers })
 }

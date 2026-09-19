@@ -120,9 +120,13 @@ export function extractPrices(text: string): Array<{ sku?: string; cents: number
     const cents = priceToCents(m[1] ?? "")
     if (cents === null) continue
     // Heuristic: if a SKU appears within ~50 chars before the price, link them.
+    // Match blend SKUs (e.g. `BPC-TB-10`) first — without this branch the
+    // generic SKU_PATTERN picks up `TB-10` (which isn't a catalog row) and the
+    // price/SKU comparison silently no-ops.
     const idx = m.index ?? 0
     const before = text.slice(Math.max(0, idx - 50), idx)
-    const skuMatch = before.match(SKU_PATTERN)
+    const blendMatch = before.match(BLEND_SKU_PATTERN)
+    const skuMatch = blendMatch ?? before.match(SKU_PATTERN)
     results.push({ sku: skuMatch?.[0], cents, raw: m[0] })
   }
   return results

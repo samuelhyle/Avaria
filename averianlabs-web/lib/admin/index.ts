@@ -4,9 +4,9 @@ export {
   adminErrorStatus,
   AdminAccessError,
   mapUserRoleToAdmin,
-  tierIdFor,
   type AdminMember,
   type AdminRole,
-} from "./runtime"
+} from "./guard"
 
-export type { AdminMember as AdminMemberType } from "./types"
+// Pure helper kept here for unit-test convenience.
+export { tierIdFor } from "./types"

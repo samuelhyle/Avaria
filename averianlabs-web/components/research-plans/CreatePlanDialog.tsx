@@ -52,7 +52,7 @@ export function CreatePlanDialog({ locale }: CreatePlanDialogProps) {
               label={t("fieldTitle")}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Tendon repair panel"
+              placeholder={t("titlePlaceholder")}
             />
             <div>
               <label
@@ -67,14 +67,14 @@ export function CreatePlanDialog({ locale }: CreatePlanDialogProps) {
                 onChange={(e) => setNotes(e.target.value)}
                 rows={4}
                 maxLength={2000}
-                placeholder="Why this combination, in vitro conditions, expected readouts…"
+                placeholder={t("notesPlaceholder")}
                 className="w-full rounded-[var(--radius)] border border-line bg-surface px-3 py-2 text-sm leading-relaxed focus:border-accent focus:outline-none"
               />
               <p className="mt-1 text-xs text-ink-subtle">{t("fieldNotesHint")}</p>
             </div>
             <div className="flex justify-end gap-2">
               <Button variant="ghost" size="sm" onClick={() => setOpen(false)}>
-                Cancel
+                {t("cancel")}
               </Button>
               <Button size="sm" onClick={submit} disabled={isPending || !title.trim()}>
                 {isPending ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : null}

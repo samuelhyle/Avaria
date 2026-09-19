@@ -1,10 +1,17 @@
 import { resolve } from "node:path"
+import react from "@vitejs/plugin-react"
 import { defineConfig } from "vitest/config"
 
 export default defineConfig({
+  plugins: [react()],
   test: {
     environment: "node",
-    include: ["lib/**/*.test.ts", "scripts/**/*.test.ts", "tests/unit/**/*.test.ts"],
+    include: [
+      "lib/**/*.test.ts",
+      "components/**/*.test.tsx",
+      "scripts/**/*.test.ts",
+      "tests/unit/**/*.test.ts",
+    ],
     globals: false,
     coverage: {
       provider: "v8",

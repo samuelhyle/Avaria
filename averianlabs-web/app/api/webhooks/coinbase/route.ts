@@ -11,6 +11,8 @@ import {
   restoreStock,
   sendOrderConfirmationEmail,
 } from "@/lib/orders"
+import { clientIp } from "@/lib/security/ip"
+import { rateLimit } from "@/lib/security/rate-limit"
 import { type NextRequest, NextResponse } from "next/server"
 
 interface CoinbaseWebhookPayload {
@@ -26,6 +28,15 @@ interface CoinbaseWebhookPayload {
 }
 
 export async function POST(req: NextRequest) {
+  // Per-IP rate guard — Coinbase retries are spaced by seconds; a sustained
+  // burst from one IP usually means the upstream is misconfigured (HMAC
+  // rejected → fixed → resending) or someone is replaying.
+  const ip = clientIp(req)
+  const limit = await rateLimit(`webhook:coinbase:${ip}`, { limit: 1000, window: "1 m" })
+  if (!limit.success) {
+    return NextResponse.json({ error: "rate_limited" }, { status: 429 })
+  }
+
   const sig = req.headers.get("x-cc-webhook-signature")
   if (!sig) return NextResponse.json({ error: "no signature" }, { status: 400 })
 

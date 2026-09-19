@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic"
-
 import { AiMemoryPanel } from "@/components/account/AIMemoryPanel"
 import { GdprPanel } from "@/components/account/GdprPanel"
 import { LoginForm } from "@/components/auth/LoginForm"
@@ -14,6 +12,7 @@ import { BookmarkPlus, ChevronRight, FileText, Heart, Package, Settings } from "
 import type { Route } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import Link from "next/link"
+export const dynamic = "force-dynamic"
 
 export default async function AccountPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params

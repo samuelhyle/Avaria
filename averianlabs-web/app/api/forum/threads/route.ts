@@ -1,4 +1,6 @@
 import { createThread, getCurrentMember, listThreads } from "@/lib/community"
+import { isDatabaseConfigured } from "@/lib/db"
+import { assertCsrfOr403 } from "@/lib/security/csrf"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -16,6 +18,9 @@ function clampInt(value: string | null, fallback: number, min: number, max: numb
 }
 
 export async function GET(req: Request) {
+  if (!isDatabaseConfigured()) {
+    return NextResponse.json({ threads: [] })
+  }
   const url = new URL(req.url)
   const categorySlug = url.searchParams.get("category") ?? undefined
   try {
@@ -31,6 +36,15 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  if (!isDatabaseConfigured()) {
+    return NextResponse.json(
+      { ok: false, reason: "Community is offline.", ruleCodes: ["offline"] },
+      { status: 503 },
+    )
+  }
+  const csrf = assertCsrfOr403(req, { allowDevHosts: process.env.NODE_ENV !== "production" })
+  if (csrf) return csrf
+
   const member = await getCurrentMember()
   if (!member) {
     return NextResponse.json(

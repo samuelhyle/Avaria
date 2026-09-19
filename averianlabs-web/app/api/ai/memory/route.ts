@@ -9,6 +9,7 @@
 import { getAnonFromRequest } from "@/lib/ai/memory/consent"
 import { deleteAllMemories, deleteMemory, listMemories, upsertMemory } from "@/lib/ai/memory/store"
 import { auth } from "@/lib/auth"
+import { assertCsrfOr403 } from "@/lib/security/csrf"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -71,6 +72,9 @@ export async function GET(request: Request): Promise<NextResponse> {
 }
 
 export async function PUT(request: Request): Promise<NextResponse> {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: process.env.NODE_ENV !== "production" })
+  if (csrf) return csrf
+
   const userId = await resolveUserId(request)
   if (!userId) return NextResponse.json({ error: "no_owner" }, { status: 400 })
 
@@ -100,6 +104,9 @@ export async function PUT(request: Request): Promise<NextResponse> {
 }
 
 export async function DELETE(request: Request): Promise<NextResponse> {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: process.env.NODE_ENV !== "production" })
+  if (csrf) return csrf
+
   const userId = await resolveUserId(request)
   if (!userId) return NextResponse.json({ error: "no_owner" }, { status: 400 })
 

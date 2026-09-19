@@ -1,5 +1,6 @@
 import { partnerApplications } from "@/db/schema"
-import { db } from "@/lib/db"
+import { db, isDatabaseConfigured } from "@/lib/db"
+import { logger } from "@/lib/logger"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
@@ -14,6 +15,13 @@ const bodySchema = z.object({
 })
 
 export async function POST(request: Request) {
+  if (!isDatabaseConfigured()) {
+    return NextResponse.json(
+      { error: "Partner applications are offline on this deployment." },
+      { status: 503 },
+    )
+  }
+
   const limit = await rateLimit(`partner:ip:${clientIp(request)}`, { limit: 5, window: "1 h" })
   if (!limit.success) {
     return NextResponse.json({ error: "Too many requests." }, { status: 429 })
@@ -36,7 +44,7 @@ export async function POST(request: Request) {
     })
     return NextResponse.json({ ok: true })
   } catch (err) {
-    console.error("[partner] application failed", err)
+    logger.error("[partner] application failed", err)
     return NextResponse.json({ error: "Failed to submit application." }, { status: 500 })
   }
 }

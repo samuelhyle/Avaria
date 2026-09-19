@@ -11,17 +11,10 @@ interface PlanDetailActionsProps {
   planId: string
   shareSlug: string | null
   isPublic: boolean
-  title: string
   locale: string
 }
 
-export function PlanDetailActions({
-  planId,
-  shareSlug,
-  isPublic,
-  title,
-  locale,
-}: PlanDetailActionsProps) {
+export function PlanDetailActions({ planId, shareSlug, isPublic, locale }: PlanDetailActionsProps) {
   const t = useTranslations("plans")
   const router = useRouter()
   const [busy, setBusy] = useState<string | null>(null)
@@ -100,7 +93,7 @@ export function PlanDetailActions({
               />
               <Button size="sm" variant="outline" onClick={copy}>
                 <Copy className="h-3.5 w-3.5" />
-                {busy === "copy" ? t("shareCopied") : "Copy"}
+                {busy === "copy" ? t("shareCopied") : t("copy")}
               </Button>
             </div>
           ) : null}
@@ -115,12 +108,12 @@ export function PlanDetailActions({
             type="text"
             value={confirmPhrase}
             onChange={(e) => setConfirmPhrase(e.target.value)}
-            placeholder={t("deleteConfirmPhrase") ?? "DELETE"}
+            placeholder={t("deleteConfirmPhrase")}
             className="mt-3 h-10 w-full rounded-[var(--radius)] border border-line bg-surface px-3 font-mono text-sm text-ink focus:border-danger focus:outline-none"
           />
           <div className="mt-4 flex justify-end gap-2">
             <Button variant="ghost" size="sm" onClick={() => setDeleteOpen(false)}>
-              Cancel
+              {t("cancel")}
             </Button>
             <Button
               variant="danger"

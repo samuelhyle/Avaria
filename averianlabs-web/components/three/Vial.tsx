@@ -60,6 +60,7 @@ export function Vial({
 
   return (
     <group position={position} rotation={rotation}>
+      {/* biome-ignore lint/a11y/useKeyWithClickEvents: R3F canvas group, no keyboard equivalents */}
       <group
         ref={groupRef}
         onPointerOver={(e) => {

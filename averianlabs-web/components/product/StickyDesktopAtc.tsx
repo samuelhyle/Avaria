@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button"
 import { useCart } from "@/lib/cart/store"
 import { useCompare } from "@/lib/compare/store"
 import type { Locale, Product } from "@/lib/products/types"
+import { isContactOnly } from "@/lib/products/vials"
 import { cn } from "@/lib/utils/cn"
 import { formatCurrency } from "@/lib/utils/format"
 import { useWishlist } from "@/lib/wishlist/store"
@@ -20,7 +21,7 @@ interface StickyDesktopAtcProps {
 }
 
 export function StickyDesktopAtc({ product, locale }: StickyDesktopAtcProps) {
-  const t = useTranslations("shop")
+  const t = useTranslations("product")
   const tCommon = useTranslations("common")
   const add = useCart((s) => s.add)
   const wishlistToggle = useWishlist((s) => s.toggle)
@@ -34,7 +35,7 @@ export function StickyDesktopAtc({ product, locale }: StickyDesktopAtcProps) {
 
   const vial = product.vials[vialIdx]
   if (!vial) return null
-  const isContact = vial.contactOnly === true || vial.priceCents === 0
+  const isContact = isContactOnly(vial)
   const disabled = !isContact && vial.stockQty === 0
 
   useEffect(() => {
@@ -58,14 +59,14 @@ export function StickyDesktopAtc({ product, locale }: StickyDesktopAtcProps) {
       qty,
       unitPriceCents: vial.priceCents,
     })
-    toast.success("Added to cart", {
-      description: `${translation.name} ${vial.mg}mg × ${qty}`,
+    toast.success(t("addedToCart"), {
+      description: t("addedToCartDesc", { name: translation.name, mg: vial.mg, qty }),
     })
   }
 
   const handleSubscribe = () => {
-    toast.success("Subscription saved", {
-      description: `You'll receive ${vial.mg}mg every 8 weeks — cancel anytime, save 10%.`,
+    toast.success(t("stickySubscriptionSaved"), {
+      description: t("stickySubscriptionDesc", { mg: vial.mg, weeks: 8 }),
     })
   }
 
@@ -99,7 +100,7 @@ export function StickyDesktopAtc({ product, locale }: StickyDesktopAtcProps) {
             <select
               value={vialIdx}
               onChange={(e) => setVialIdx(Number(e.target.value))}
-              aria-label={t("vialSize")}
+              aria-label={tCommon("vialSize")}
               className="h-9 rounded-[var(--radius)] border border-line bg-surface px-2 text-xs focus:border-accent focus:outline-none"
             >
               {product.vials.map((v, i) => (
@@ -136,7 +137,9 @@ export function StickyDesktopAtc({ product, locale }: StickyDesktopAtcProps) {
             type="button"
             onClick={() => {
               wishlistToggle(product.slug)
-              toast.success(inWishlist ? "Removed from wishlist" : "Saved to wishlist")
+              toast.success(
+                inWishlist ? t("stickyRemovedFromWishlist") : t("stickySavedToWishlist"),
+              )
             }}
             className="inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] border border-line bg-surface text-ink-muted hover:bg-surface-2 hover:text-ink"
             aria-label={inWishlist ? tCommon("removeFromWishlist") : tCommon("addToWishlist")}
@@ -147,26 +150,26 @@ export function StickyDesktopAtc({ product, locale }: StickyDesktopAtcProps) {
             type="button"
             onClick={() => {
               compareToggle(product.slug)
-              toast.success(inCompare ? "Removed from compare" : "Added to compare")
+              toast.success(inCompare ? t("stickyRemovedFromCompare") : t("stickyAddedToCompare"))
             }}
             className="inline-flex h-9 items-center gap-1 rounded-[var(--radius)] border border-line bg-surface px-3 text-xs font-medium hover:bg-surface-2"
           >
-            Compare
+            {t("stickyCompare")}
           </button>
           <button
             type="button"
             onClick={handleSubscribe}
             className="inline-flex h-9 items-center gap-1 rounded-[var(--radius)] border border-accent/30 bg-accent-soft px-3 text-xs font-medium text-accent-ink hover:bg-accent-soft/80"
-            title="Subscribe & save 10%"
+            title={t("stickySubscribeTooltip")}
           >
             <Badge tone="accent" className="px-1 py-0 text-3xs">
               −10%
             </Badge>
-            Subscribe
+            {t("stickySubscribe")}
           </button>
           <Button size="md" disabled={disabled} onClick={handleAdd} className="min-w-[160px]">
             <ShoppingBag className="h-4 w-4" />
-            {disabled ? "Out of stock" : "Add to cart"}
+            {disabled ? t("stickyOutOfStock") : t("stickyAdd")}
           </Button>
         </div>
       </div>

@@ -36,14 +36,20 @@ export function AssistantMarkdown({
   }
 
   const { committed, trailing } = splitMarkdownForStreaming(content)
+  // The caret should only appear when there's something actually being
+  // typed — rendering it on an empty message is a stray UI element that
+  // also breaks the conversation-end milestone (no caret = stream done).
+  const hasContent = Boolean(committed || trailing)
   return (
     <div className={ASSISTANT_PROSE}>
       {committed ? <ReactMarkdown remarkPlugins={[remarkGfm]}>{committed}</ReactMarkdown> : null}
       {trailing ? <p className="m-0 whitespace-pre-wrap">{trailing}</p> : null}
-      <span
-        className="ml-0.5 inline-block h-3 w-1.5 translate-y-0.5 animate-pulse bg-accent"
-        aria-hidden
-      />
+      {hasContent ? (
+        <span
+          className="ml-0.5 inline-block h-3 w-1.5 translate-y-0.5 animate-pulse bg-accent"
+          aria-hidden
+        />
+      ) : null}
     </div>
   )
 }

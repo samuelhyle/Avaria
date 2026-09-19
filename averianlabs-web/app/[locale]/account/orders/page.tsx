@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic"
-
 import { Badge } from "@/components/ui/Badge"
 import { Button } from "@/components/ui/Button"
 import { Container } from "@/components/ui/Container"
@@ -8,6 +6,7 @@ import { listOrdersForUser } from "@/lib/orders"
 import { ArrowLeft, Package } from "lucide-react"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import Link from "next/link"
+export const dynamic = "force-dynamic"
 
 const STATUS_TONES: Record<string, "success" | "warn" | "muted" | "danger"> = {
   paid: "success",

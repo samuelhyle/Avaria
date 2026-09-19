@@ -1,9 +1,11 @@
 "use client"
 
 import { Share2 } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 
 export function ShareButton() {
+  const t = useTranslations("common")
   const [copied, setCopied] = useState(false)
 
   return (
@@ -19,7 +21,7 @@ export function ShareButton() {
       }}
     >
       <Share2 className="h-4 w-4" />
-      {copied ? "Copied!" : "Share list"}
+      {copied ? t("copied") : t("shareList")}
     </button>
   )
 }

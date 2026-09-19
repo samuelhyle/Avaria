@@ -14,6 +14,7 @@
  * subsequent calls share the same pipeline instance.
  */
 
+import { logger } from "@/lib/logger"
 import type { FeatureExtractionPipeline } from "@huggingface/transformers"
 
 const MODEL_ID = "Xenova/all-MiniLM-L6-v2"
@@ -52,7 +53,8 @@ async function getPipeline(): Promise<FeatureExtractionPipeline> {
       const loadPromise = pipeline("feature-extraction", MODEL_ID, { dtype: "q8" })
       const timeoutPromise = new Promise<never>((_resolve, reject) =>
         setTimeout(
-          () => reject(new Error(`local embedder load timed out after ${PIPELINE_LOAD_TIMEOUT_MS}ms`)),
+          () =>
+            reject(new Error(`local embedder load timed out after ${PIPELINE_LOAD_TIMEOUT_MS}ms`)),
           PIPELINE_LOAD_TIMEOUT_MS,
         ),
       )
@@ -82,12 +84,12 @@ export async function localEmbedText(input: string): Promise<number[] | null> {
     const result = await pipe(trimmed, { pooling: "mean", normalize: true })
     const data = Array.from(result.data as ArrayLike<number>)
     if (data.length !== EXPECTED_DIM) {
-      console.warn(`[local-embed] dimension mismatch: got ${data.length}, expected ${EXPECTED_DIM}`)
+      logger.warn(`[local-embed] dimension mismatch: got ${data.length}, expected ${EXPECTED_DIM}`)
       return null
     }
     return data
   } catch (err) {
-    console.error("[local-embed] single-text embed failed", err)
+    logger.error("[local-embed] single-text embed failed", err)
     return null
   }
 }
@@ -117,13 +119,13 @@ export async function localEmbedTexts(inputs: string[]): Promise<Array<number[] 
         const data = Array.from(out.data as ArrayLike<number>)
         results.push(data.length === EXPECTED_DIM ? data : null)
       } catch (err) {
-        console.error("[local-embed] chunk failed", err)
+        logger.error("[local-embed] chunk failed", err)
         results.push(null)
       }
     }
     return results
   } catch (err) {
-    console.error("[local-embed] pipeline unavailable", err)
+    logger.error("[local-embed] pipeline unavailable", err)
     return inputs.map(() => null)
   }
 }

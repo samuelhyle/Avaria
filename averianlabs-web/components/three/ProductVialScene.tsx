@@ -1,6 +1,7 @@
 "use client"
 
 import type { Product } from "@/lib/products/types"
+import { findCheapestVial } from "@/lib/products/vials"
 import { ContactShadows, Environment, OrbitControls } from "@react-three/drei"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { Suspense, useEffect, useRef, useState } from "react"
@@ -16,10 +17,8 @@ interface ProductVialSceneProps {
 
 function VialContainer({ product, autoRotate }: { product: Product; autoRotate: boolean }) {
   const ref = useRef<Group>(null)
-  const minVial = product.vials.reduce(
-    (min, v) => (v.priceCents < min.priceCents ? v : min),
-    product.vials[0]!,
-  )
+  const minVial = findCheapestVial(product)
+  const sku = minVial?.sku ?? product.slug.toUpperCase()
 
   useFrame((_, dt) => {
     if (ref.current && autoRotate) ref.current.rotation.y += dt * 0.25
@@ -29,7 +28,7 @@ function VialContainer({ product, autoRotate }: { product: Product; autoRotate: 
     <group ref={ref} position={[0, -0.1, 0]}>
       <Vial
         name={product.defaultTranslation.name}
-        sku={minVial.sku}
+        sku={sku}
         hue={product.hue}
         position={[0, 0, 0]}
         rotation={[0, 0, 0]}

@@ -12,10 +12,21 @@ import {
   sendOrderConfirmationEmail,
 } from "@/lib/orders"
 import { stripe } from "@/lib/payments/stripe"
+import { clientIp } from "@/lib/security/ip"
+import { rateLimit } from "@/lib/security/rate-limit"
 import { type NextRequest, NextResponse } from "next/server"
 import type Stripe from "stripe"
 
 export async function POST(req: NextRequest) {
+  // Per-IP rate guard — Stripe retries are deterministic and short (a few
+  // minutes at most), so anything north of 1000/min from one IP is an
+  // abuse signal and we refuse to keep checking signatures.
+  const ip = clientIp(req)
+  const limit = await rateLimit(`webhook:stripe:${ip}`, { limit: 1000, window: "1 m" })
+  if (!limit.success) {
+    return NextResponse.json({ error: "rate_limited" }, { status: 429 })
+  }
+
   const sig = req.headers.get("stripe-signature")
   if (!sig) return NextResponse.json({ error: "no signature" }, { status: 400 })
 

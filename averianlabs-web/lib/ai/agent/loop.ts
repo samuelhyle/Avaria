@@ -45,8 +45,13 @@ import {
 import type { ChatContext, CitationRef } from "@/lib/ai/types"
 import type { AgentEvent } from "@/lib/ai/types/events"
 import type { Locale } from "@/lib/i18n/config"
+import { logger } from "@/lib/logger"
 
 const MAX_STEPS = 5
+/** Default per-tool execution ceiling. Order/admin tools hit the DB; 5s is
+ *  plenty for a single query and short enough that a hung DB doesn't freeze
+ *  the agent. Override via `input.toolTimeoutMs`. */
+const TOOL_TIMEOUT_MS = 5_000
 
 export type { AgentEvent }
 
@@ -62,10 +67,26 @@ export interface PersistedMessage {
     citations?: CitationRef[]
     toolTrace?: Array<{ id: string; name: string; args?: unknown; result?: unknown }>
     proposedActions?: ProposedAction[]
+    /** Post-loop output verification — written when the route persists the turn. */
+    verification?: VerificationReport
   } | null
   tokensIn?: number
   tokensOut?: number
   latencyMs?: number
+}
+
+/**
+ * Output verification summary, persisted into `ai_messages.metadata` so we
+ * can aggregate false-SKU / price-mismatch rates in analytics. The full
+ * `VerificationReport` lives in `@/lib/ai/guardrails/verify`; this minimal
+ * shape is the union of fields we want to keep across deploys.
+ */
+export interface VerificationReport {
+  passed: boolean
+  warnings: string[]
+  unknownSkus: string[]
+  priceMismatches: Array<{ sku: string; citedCents: number; catalogCents: number }>
+  needsMedicalReminder: boolean
 }
 
 export interface AgentInput {
@@ -93,6 +114,10 @@ export interface AgentInput {
   systemNote?: string
   signal?: AbortSignal
   noRetrieve?: boolean
+  /** Max number of model steps before giving up. Default 5. */
+  maxSteps?: number
+  /** Per-tool execution timeout in milliseconds. Default 5_000. */
+  toolTimeoutMs?: number
 }
 
 export async function runAgent(input: AgentInput, sink: AgentSink): Promise<void> {
@@ -119,7 +144,7 @@ export async function runAgent(input: AgentInput, sink: AgentSink): Promise<void
         content: c.content,
       }))
     } catch (err) {
-      console.error("[averia] retrieval failed", err)
+      logger.error("[averia] retrieval failed", err)
     }
   }
 
@@ -135,7 +160,7 @@ export async function runAgent(input: AgentInput, sink: AgentSink): Promise<void
     ? await listMemories(
         input.owner.kind === "user" ? input.owner.userId : input.owner.anonymousId,
       ).catch((err) => {
-        console.error("[averia] memory load failed", err)
+        logger.error("[averia] memory load failed", err)
         return []
       })
     : []
@@ -180,8 +205,35 @@ export async function runAgent(input: AgentInput, sink: AgentSink): Promise<void
   let totalTokensOut = 0
   let lastFinishReason: string | null = null
 
-  for (let step = 0; step < MAX_STEPS; step++) {
-    if (input.signal?.aborted) return
+  const maxSteps = input.maxSteps ?? MAX_STEPS
+  const toolTimeoutMs = input.toolTimeoutMs ?? TOOL_TIMEOUT_MS
+
+  // One structured log line per turn so we can chart completion rate,
+  // median latency, and tool-call frequency from log drains.
+  const stepStartedAt = Date.now()
+  let lastStepReached = 0
+  logger.info("averia.turn.start", {
+    locale: input.locale,
+    userId: input.auth?.userId ?? (input.owner?.kind === "user" ? input.owner.userId : null),
+    conversationId: input.conversationId,
+    hasOwner: Boolean(input.owner),
+    isAdmin: Boolean(input.isAdmin),
+    noRetrieve: Boolean(input.noRetrieve),
+  })
+
+  for (let step = 0; step < maxSteps; step++) {
+    lastStepReached = step
+    if (input.signal?.aborted) {
+      logger.info("averia.turn.aborted", { step, elapsedMs: Date.now() - stepStartedAt })
+      return
+    }
+
+    // Capture the size of the request payload before we send it. After the
+    // step we add the assistant message + tool results back into
+    // `chatMessages`, so taking the diff on each iteration gives the actual
+    // per-step prompt size instead of double-counting the system + history
+    // across every step.
+    const tokensInBefore = estimateTokens(JSON.stringify(chatMessages), input.locale)
 
     // Emit a thinking event so the UI can show "Averia is thinking..." even
     // before the first content delta lands.
@@ -239,7 +291,7 @@ export async function runAgent(input: AgentInput, sink: AgentSink): Promise<void
         } catch {
           parsed = {}
         }
-        const result = await runTool(tc.name, parsed, toolContext)
+        const result = await runToolWithTimeout(tc.name, parsed, toolContext, toolTimeoutMs)
         sink.enqueue({ type: "tool-result", id: tc.id, name: tc.name, content: result.content })
         if (result.proposedAction) sink.enqueue({ type: "action", action: result.proposedAction })
         return result
@@ -257,6 +309,10 @@ export async function runAgent(input: AgentInput, sink: AgentSink): Promise<void
       chatMessages.push({ role: "tool", tool_call_id: tc.id, content })
     }
 
+    // Add the cost of this step's prompt: the size of the chatMessages
+    // array as we sent it to MiniMax (captured at the top of the loop).
+    totalTokensIn += tokensInBefore
+
     if (lastFinishReason !== "tool_calls") break
   }
 
@@ -271,11 +327,25 @@ export async function runAgent(input: AgentInput, sink: AgentSink): Promise<void
     finalText = fallback
   }
 
-  if (needsFooter && !finalText.includes("Research use only")) {
+  if (needsFooter && !finalText.includes(RESEARCH_FOOTER)) {
     sink.enqueue({ type: "text", delta: `\n\n${RESEARCH_FOOTER}` })
   }
 
-  totalTokensIn += estimateTokens(JSON.stringify(chatMessages))
+  // `totalTokensIn` is now accumulated per step inside the loop (capturing
+  // the prompt size BEFORE MiniMax saw it). This avoids the previous bug
+  // where post-loop `JSON.stringify(chatMessages)` double-counted the system
+  // prompt + history on every multi-step turn.
+
+  logger.info("averia.turn.done", {
+    locale: input.locale,
+    conversationId: input.conversationId,
+    elapsedMs: Date.now() - stepStartedAt,
+    tokensIn: totalTokensIn,
+    tokensOut: totalTokensOut,
+    fallbackUsed: finalText !== "" && !finalText.includes("\n\n") && needsFooter,
+    finishReason: lastFinishReason,
+    stepCount: lastStepReached + 1,
+  })
 
   sink.enqueue({
     type: "done",
@@ -293,6 +363,63 @@ function safeParse(json: string): unknown {
   } catch {
     return {}
   }
+}
+
+/**
+ * Run a tool with a per-tool execution ceiling. When the timeout fires we
+ * return a synthetic `{ error: "tool_timeout" }` payload so the model can
+ * narrate the failure and the loop can continue with the remaining tools
+ * instead of hanging on a single slow DB query.
+ *
+ * Falls back to `runTool` directly when `timeoutMs` is `Infinity` — useful
+ * for tests and admin operations that legitimately need more time.
+ */
+async function runToolWithTimeout(
+  name: string,
+  args: unknown,
+  ctx: ToolContext,
+  timeoutMs: number,
+) {
+  if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) {
+    return runTool(name, args, ctx)
+  }
+  const startedAt = Date.now()
+  try {
+    return await withTimeout(runTool(name, args, ctx), timeoutMs, () => {
+      logger.warn("averia.tool_timeout", {
+        tool: name,
+        timeoutMs,
+        elapsedMs: Date.now() - startedAt,
+      })
+    })
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err)
+    if (message.includes("timed out")) {
+      logger.warn("averia.tool_timeout_recovery", { tool: name, message })
+      return { content: { error: "tool_timeout", tool: name, timeoutMs } }
+    }
+    logger.error("averia.tool_failed", { tool: name, message })
+    return { content: { error: "tool_failed", tool: name, message } }
+  }
+}
+
+function withTimeout<T>(promise: Promise<T>, ms: number, onTimeout?: () => void): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const t = setTimeout(() => {
+      onTimeout?.()
+      reject(new Error(`tool execution timed out after ${ms}ms`))
+    }, ms)
+    promise.then(
+      (v) => {
+        clearTimeout(t)
+        resolve(v)
+      },
+      (err) => {
+        clearTimeout(t)
+        reject(err)
+      },
+    )
+  })
 }
 
 function estimateTokens(text: string, locale?: string): number {

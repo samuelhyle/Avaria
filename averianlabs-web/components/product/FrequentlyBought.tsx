@@ -6,6 +6,7 @@ import type { Locale, Product } from "@/lib/products/types"
 import { cn } from "@/lib/utils/cn"
 import { formatCurrency } from "@/lib/utils/format"
 import { Plus, ShoppingBag, Sparkles } from "lucide-react"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { type CSSProperties, useState } from "react"
 import { toast } from "sonner"
@@ -20,6 +21,7 @@ interface FrequentlyBoughtProps {
  * The cart flow uses the active product + the chosen bundle.
  */
 export function FrequentlyBought({ product, locale }: FrequentlyBoughtProps) {
+  const t = useTranslations("product")
   // Pick from same category, excluding current
   const sameCat = products
     .filter((p) => p.category === product.category && p.slug !== product.slug)
@@ -92,8 +94,11 @@ export function FrequentlyBought({ product, locale }: FrequentlyBoughtProps) {
         unitPriceCents: discountedCents(i.priceCents),
       })
     }
-    toast.success("Bundle added to cart", {
-      description: `${bundleItems.length} items · save €${(savedVsAlone / 100).toFixed(2)}`,
+    toast.success(t("bundleAdded"), {
+      description: t("bundleSaved", {
+        count: bundleItems.length,
+        amount: formatCurrency(savedVsAlone, "EUR", locale),
+      }),
     })
   }
 
@@ -101,9 +106,9 @@ export function FrequentlyBought({ product, locale }: FrequentlyBoughtProps) {
     <section className="rounded-[var(--radius-lg)] border border-accent/20 bg-accent-soft/40 p-6">
       <div className="mb-4 flex items-center gap-2">
         <Sparkles className="h-4 w-4 text-accent" />
-        <h2 className="font-display text-lg font-semibold">Complete your stack</h2>
+        <h2 className="font-display text-lg font-semibold">{t("completeStack")}</h2>
         <Badge tone="accent" className="ml-auto">
-          Save 5%
+          {t("saveBundlePercent")}
         </Badge>
       </div>
 
@@ -125,7 +130,7 @@ export function FrequentlyBought({ product, locale }: FrequentlyBoughtProps) {
             <div className="flex-1">
               <p className="flex items-center gap-1.5 text-sm font-medium">
                 {i.name}
-                {i.isMain ? <Badge tone="accent">This product</Badge> : null}
+                {i.isMain ? <Badge tone="accent">{t("thisProduct")}</Badge> : null}
               </p>
               <p className="font-mono text-3xs text-ink-subtle">{i.sku}</p>
             </div>
@@ -139,7 +144,7 @@ export function FrequentlyBought({ product, locale }: FrequentlyBoughtProps) {
                   checked={selected.has(i.slug)}
                   onChange={() => toggle(i.slug)}
                   className="h-4 w-4 rounded border-line text-accent focus:ring-accent"
-                  aria-label={`Include ${i.name}`}
+                  aria-label={t("fbIncludeItem", { name: i.name })}
                 />
               </label>
             )}
@@ -149,12 +154,12 @@ export function FrequentlyBought({ product, locale }: FrequentlyBoughtProps) {
 
       <div className="mt-4 flex items-end justify-between gap-3 border-t border-accent/20 pt-4">
         <div>
-          <p className="text-3xs uppercase tracking-wider text-ink-subtle">Bundle total</p>
+          <p className="text-3xs uppercase tracking-wider text-ink-subtle">{t("bundleTotal")}</p>
           <p className="font-display text-2xl font-semibold">
             {formatCurrency(bundleTotalCents, "EUR", locale)}
           </p>
           <p className="text-xs text-success">
-            Save €{(savedVsAlone / 100).toFixed(2)} on the bundle
+            {t("saveOnBundle", { amount: formatCurrency(savedVsAlone, "EUR", locale) })}
           </p>
         </div>
         <button
@@ -163,7 +168,7 @@ export function FrequentlyBought({ product, locale }: FrequentlyBoughtProps) {
           className="inline-flex h-12 items-center gap-2 rounded-[var(--radius)] bg-accent px-5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-accent-hover"
         >
           <ShoppingBag className="h-4 w-4" />
-          Add bundle
+          {t("addBundle")}
         </button>
       </div>
     </section>

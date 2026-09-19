@@ -9,9 +9,11 @@ import { useCart } from "@/lib/cart/store"
 import { products } from "@/lib/products/data"
 import type { Locale } from "@/lib/products/types"
 import { ArrowRight, ShoppingBag, Sparkles } from "lucide-react"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 
 export function CartView({ locale }: { locale: string }) {
+  const t = useTranslations("cart")
   const items = useCart((s) => s.items)
 
   if (items.length === 0) {
@@ -22,14 +24,11 @@ export function CartView({ locale }: { locale: string }) {
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-surface-2 text-ink-muted">
             <ShoppingBag className="h-6 w-6" />
           </div>
-          <h2 className="font-display text-2xl font-semibold">Your cart is empty</h2>
-          <p className="max-w-md text-sm text-ink-muted text-pretty">
-            Pick a peptide from the catalog to start your order — every batch ships with its own
-            COA, endotoxin panel, and mass-spec identity confirmation.
-          </p>
+          <h2 className="font-display text-2xl font-semibold">{t("empty")}</h2>
+          <p className="max-w-md text-sm text-ink-muted text-pretty">{t("emptyDesc")}</p>
           <Button asChild size="lg" className="mt-2">
             <Link href={`/${locale}/shop`}>
-              Browse catalog
+              {t("browseCatalog")}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
@@ -38,7 +37,7 @@ export function CartView({ locale }: { locale: string }) {
         <section>
           <div className="mb-6 flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-accent" />
-            <h3 className="font-display text-xl font-semibold">Best sellers this month</h3>
+            <h3 className="font-display text-xl font-semibold">{t("bestSellers")}</h3>
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {recommended.map((p) => (
@@ -62,7 +61,7 @@ export function CartView({ locale }: { locale: string }) {
             href={`/${locale}/shop`}
             className="inline-flex items-center gap-1 text-xs text-ink-muted hover:text-ink"
           >
-            ← Continue shopping
+            {t("continueShopping")}
           </Link>
         </div>
       </div>

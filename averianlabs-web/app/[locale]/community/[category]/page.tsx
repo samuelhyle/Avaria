@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic"
-
 import { ThreadListItem } from "@/components/community/ThreadListItem"
 import { Button } from "@/components/ui/Button"
 import { Container } from "@/components/ui/Container"
@@ -9,6 +7,7 @@ import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+export const dynamic = "force-dynamic"
 
 interface Props {
   params: Promise<{ locale: string; category: string }>
@@ -71,7 +70,6 @@ export default async function CategoryPage({ params }: Props) {
               <ThreadListItem
                 key={th.id}
                 locale={locale}
-                t={t as never}
                 thread={{
                   id: th.id,
                   slug: th.slug,

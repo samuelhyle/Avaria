@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic"
-
 import { AdminShell, ForbiddenShell } from "@/components/admin/admin-shell"
 import { Badge } from "@/components/ui/Badge"
 import { Container } from "@/components/ui/Container"
@@ -9,6 +7,7 @@ import { ScrollText, ShieldAlert } from "lucide-react"
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import Link from "next/link"
+export const dynamic = "force-dynamic"
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: "Audit log · Admin", robots: { index: false, follow: false } }

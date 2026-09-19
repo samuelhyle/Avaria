@@ -31,12 +31,22 @@ export const compareProductsTool: Tool = {
   },
   async execute(rawArgs, ctx): Promise<ToolResult> {
     const args = (rawArgs ?? {}) as Args
-    const found = args.slugs
+    // Defensive validation — `slugs` may not be an array if the model sends
+    // a string or skips the field entirely.
+    const slugs = Array.isArray(args.slugs) ? args.slugs : []
+    const safeSlugs = slugs.filter((s): s is string => typeof s === "string").slice(0, 4)
+    if (safeSlugs.length < 2) {
+      return {
+        content: { error: "invalid_inputs", hint: "Provide 2 to 4 product slugs." },
+      }
+    }
+
+    const found = safeSlugs
       .map((s) => products.find((p) => p.slug === s))
       .filter((p): p is (typeof products)[number] => Boolean(p))
 
     if (found.length === 0) {
-      return { content: { error: "none_found", requested: args.slugs, products: [] } }
+      return { content: { error: "none_found", requested: safeSlugs, products: [] } }
     }
 
     return {

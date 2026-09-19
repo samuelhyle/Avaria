@@ -25,7 +25,8 @@ import {
   uniqueIndex,
 } from "drizzle-orm/pg-core"
 
-/** pgvector type. `dimensions` defaults to EMBEDDING_DIM; override via env. */
+/** pgvector type. The dimension MUST match EMBEDDING_DIM — the migration
+ *  `0001_align_embedding_dim.sql` aligns the column to that size. */
 const pgVector = customType<{
   data: number[]
   driverData: string
@@ -33,6 +34,11 @@ const pgVector = customType<{
 }>({
   dataType(config) {
     const dims = config?.dimensions ?? EMBEDDING_DIM
+    if (dims !== EMBEDDING_DIM) {
+      throw new Error(
+        `pgVector dimension mismatch: schema declares EMBEDDING_DIM=${EMBEDDING_DIM} but config.dimensions=${dims}. Update EMBEDDING_DIM and run a migration instead of overriding per-column.`,
+      )
+    }
     return `vector(${dims})`
   },
   toDriver(value: number[]) {

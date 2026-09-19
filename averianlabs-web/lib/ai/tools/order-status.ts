@@ -9,7 +9,7 @@
 import { orderItems, orders, productTranslations, products, shipments, vials } from "@/db/schema"
 import type { Tool, ToolContext, ToolResult } from "@/lib/ai/tools/registry"
 import { db } from "@/lib/db"
-import { and, eq, or } from "drizzle-orm"
+import { and, eq } from "drizzle-orm"
 
 interface Args {
   orderNumber?: string
@@ -62,11 +62,15 @@ export const getOrderStatusTool: Tool = {
       return { content: { error: "missing_inputs" } }
     }
 
-    const rows = await db
-      .select()
-      .from(orders)
-      .where(and(...filters, ctx.auth ? eq(orders.userId, ctx.auth.userId) : or(...filters)))
-      .limit(1)
+    // Signed-in users are scoped to their own orders; anonymous callers must
+    // match EVERY provided filter (so knowing only an order number is not
+    // enough to enumerate orders — the previous `or(...filters)` branch let
+    // anonymous callers match on order number alone).
+    const whereExpr = ctx.auth
+      ? and(...filters, eq(orders.userId, ctx.auth.userId))
+      : and(...filters)
+
+    const rows = await db.select().from(orders).where(whereExpr).limit(1)
 
     const order = rows[0]
     if (!order) {

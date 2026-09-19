@@ -15,11 +15,11 @@ import { type APIRequestContext, type Page, expect, test } from "@/tests/fixture
 
 // Localised "Open Averia" button label (en: "Open Averia", fi: "Avaa Averia", …).
 const CHAT_BUBBLE = 'button[aria-label*="Averia" i]'
-const CHAT_DRAWER = '[data-averia-drawer], aside[aria-label*="Averia" i], aside:has(textarea)'
+const _CHAT_DRAWER = '[data-averia-drawer], aside[aria-label*="Averia" i], aside:has(textarea)'
 const CHAT_INPUT =
   'textarea[aria-label*="Ask" i], textarea[aria-label*="Tutkimus" i], textarea[aria-label*="Frag" i], textarea[aria-label*="Ställ" i], textarea[aria-label*="Vraag" i]'
 const STOP_BUTTON = 'button[aria-label="Stop"]'
-const SEND_BUTTON = 'button[aria-label="Send"], button[type="submit"]'
+const _SEND_BUTTON = 'button[aria-label="Send"], button[type="submit"]'
 
 async function openChat(page: Page) {
   // The widget is lazy-loaded via requestIdleCallback (3s fallback). Give it

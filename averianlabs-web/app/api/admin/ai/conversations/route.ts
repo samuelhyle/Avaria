@@ -11,8 +11,9 @@ import { db } from "@/lib/db"
 import { and, desc, eq, ilike, or } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
-export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
+
+export const runtime = "nodejs"
 
 export async function GET(request: Request): Promise<NextResponse> {
   // DB-backed role check (JWT role claims can be stale after demotion).

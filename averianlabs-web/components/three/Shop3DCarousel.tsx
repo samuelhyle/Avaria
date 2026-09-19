@@ -2,6 +2,7 @@
 
 import { VialGraphic } from "@/components/product/VialGraphic"
 import type { Locale, Product } from "@/lib/products/types"
+import { findCheapestVial } from "@/lib/products/vials"
 import { damp, shortestAngle, snapAngle, torusPosition, torusRotation } from "@/lib/three/math"
 import { formatCurrency } from "@/lib/utils/format"
 import { ContactShadows, Environment } from "@react-three/drei"
@@ -42,25 +43,6 @@ interface SceneProps {
   onSelect: (p: Product) => void
   radius: number
 }
-
-// Shared geometry to avoid recreating for every vial
-const VIAL_GEOMETRY = {
-  body: new THREE.CylinderGeometry(0.45, 0.45, 1.4, 64, 1, false),
-  liquid: new THREE.CylinderGeometry(0.46, 0.46, 0.18, 64),
-  cap: new THREE.CylinderGeometry(0.32, 0.32, 0.15, 32),
-  crimp: new THREE.CylinderGeometry(0.5, 0.5, 0.12, 64),
-  label: new THREE.CylinderGeometry(
-    0.448,
-    0.448,
-    1.35,
-    64,
-    1,
-    true,
-    -Math.PI / 3,
-    (2 * Math.PI) / 3,
-  ),
-}
-
 function useTorusLayout(products: Product[], radius: number) {
   return useMemo(() => {
     return products.map((p, i) => {
@@ -88,7 +70,6 @@ function Scene({
   const lastX = useRef(0)
   const lastT = useRef(0)
   const lastReportedIdx = useRef(activeIdx)
-  const zoomRef = useRef(radius)
 
   const layout = useTorusLayout(products, radius)
 
@@ -201,11 +182,19 @@ function Scene({
             label: {
               id: product.slug,
               name: product.defaultTranslation.name,
-              sku: product.vials[0]?.sku ?? product.slug.toUpperCase(),
+              sku: findCheapestVial(product)?.sku ?? product.slug.toUpperCase(),
               hue: product.hue,
             },
             hovered: activeIdx === i,
           }))}
+          onSelect={
+            onSelect
+              ? (i) => {
+                  const entry = layout[i]
+                  if (entry) onSelect(entry.product)
+                }
+              : undefined
+          }
         />
       </group>
       <ContactShadows
@@ -272,65 +261,9 @@ export function Shop3DCarousel({ products, locale, reducedMotion }: ShopCarousel
     return () => io.disconnect()
   }, [])
 
-  // Handle keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.altKey || e.ctrlKey || e.metaKey) return
-
-      switch (e.key) {
-        case "ArrowLeft":
-          e.preventDefault()
-          step(-1)
-          break
-        case "ArrowRight":
-          e.preventDefault()
-          step(1)
-          break
-        case "Home":
-          e.preventDefault()
-          goTo(0)
-          break
-        case "End":
-          e.preventDefault()
-          goTo(products.length - 1)
-          break
-        case "PageUp":
-          e.preventDefault()
-          setAutoRotate(false)
-          break
-        case "PageDown":
-          e.preventDefault()
-          setAutoRotate(true)
-          break
-        case "Escape":
-          if (autoRotate) {
-            e.preventDefault()
-            setAutoRotate(false)
-          }
-          break
-        default:
-          // Handle number keys 1-9 to jump to first N products
-          if (e.key >= "1" && e.key <= "9") {
-            const num = Number.parseInt(e.key, 10) - 1
-            if (num < products.length) {
-              e.preventDefault()
-              goTo(num)
-            }
-          }
-          break
-      }
-    }
-
-    if (rootRef.current) {
-      rootRef.current.addEventListener("keydown", handleKeyDown)
-    }
-
-    return () => {
-      if (rootRef.current) {
-        rootRef.current.removeEventListener("keydown", handleKeyDown)
-      }
-    }
-  }, [activeIdx, autoRotate, products.length])
+  // Handle keyboard navigation. Bound to `step` and `goTo` via the dep array
+  // so the listener re-attaches when they change identity (memoized callbacks).
+  // Declared further down where `step` and `goTo` are in scope.
 
   const slotAngle = useCallback(
     (i: number) => (i / products.length) * Math.PI * 2,
@@ -371,6 +304,51 @@ export function Shop3DCarousel({ products, locale, reducedMotion }: ShopCarousel
     },
     [locale, router],
   )
+
+  // Handle keyboard navigation. Bound to `step` and `goTo` via the dep array
+  // so the listener re-attaches when they change identity (memoized callbacks).
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.altKey || e.ctrlKey || e.metaKey) return
+
+      switch (e.key) {
+        case "ArrowLeft":
+          e.preventDefault()
+          step(-1)
+          break
+        case "ArrowRight":
+          e.preventDefault()
+          step(1)
+          break
+        case " ":
+          if (autoRotate) {
+            e.preventDefault()
+            setAutoRotate(false)
+          }
+          break
+        default:
+          // Handle number keys 1-9 to jump to first N products
+          if (e.key >= "1" && e.key <= "9") {
+            const num = Number.parseInt(e.key, 10) - 1
+            if (num < products.length) {
+              e.preventDefault()
+              goTo(num)
+            }
+          }
+          break
+      }
+    }
+
+    if (rootRef.current) {
+      rootRef.current.addEventListener("keydown", handleKeyDown)
+    }
+
+    return () => {
+      if (rootRef.current) {
+        rootRef.current.removeEventListener("keydown", handleKeyDown)
+      }
+    }
+  }, [autoRotate, products.length, step, goTo])
 
   // CSS fallback when WebGL unavailable
   if (!webglOk) {

@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils/cn"
 import { Search } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
 
@@ -18,6 +19,7 @@ export function ConversationSearch({
 }: ConversationSearchProps) {
   const router = useRouter()
   const params = useSearchParams()
+  const t = useTranslations("admin.conversationSearch")
   const [q, setQ] = useState(initialQ)
   const [locale, setLocale] = useState(initialLocale ?? "")
 
@@ -42,7 +44,7 @@ export function ConversationSearch({
           type="search"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Search title, conversation id…"
+          placeholder={t("placeholder")}
           className="w-full rounded-[var(--radius)] border border-line bg-surface py-2 pl-9 pr-3 text-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
         />
       </div>
@@ -51,18 +53,18 @@ export function ConversationSearch({
         onChange={(e) => setLocale(e.target.value)}
         className="rounded-[var(--radius)] border border-line bg-surface px-3 py-2 text-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
       >
-        <option value="">All locales</option>
-        <option value="en">English</option>
-        <option value="fi">Finnish</option>
-        <option value="de">German</option>
-        <option value="sv">Swedish</option>
-        <option value="nl">Dutch</option>
+        <option value="">{t("allLocales")}</option>
+        <option value="en">{t("english")}</option>
+        <option value="fi">{t("finnish")}</option>
+        <option value="de">{t("german")}</option>
+        <option value="sv">{t("swedish")}</option>
+        <option value="nl">{t("dutch")}</option>
       </select>
       <button
         type="submit"
         className="rounded-[var(--radius)] bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent-hover"
       >
-        Search
+        {t("submit")}
       </button>
     </form>
   )

@@ -6,6 +6,7 @@
  */
 
 import { CONSENT_COOKIE } from "@/lib/ai/memory/cookies"
+import { assertCsrfOr403 } from "@/lib/security/csrf"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
@@ -18,6 +19,9 @@ const bodySchema = z.object({
 })
 
 export async function POST(request: Request): Promise<NextResponse> {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: process.env.NODE_ENV !== "production" })
+  if (csrf) return csrf
+
   const limit = await rateLimit(`ai:consent:${clientIp(request)}`, { limit: 30, window: "1 m" })
   if (!limit.success) {
     return NextResponse.json({ error: "rate_limited" }, { status: 429 })

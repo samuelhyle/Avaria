@@ -1,15 +1,19 @@
-import { Award, CheckCircle2, FlaskConical, Lock, Shield, Truck } from "lucide-react"
+"use client"
 
-const badges = [
-  { icon: Shield, label: "EU-GMP vendor" },
-  { icon: FlaskConical, label: "Third-party HPLC tested" },
-  { icon: CheckCircle2, label: "Endotoxin < 5 EU/mg" },
-  { icon: Truck, label: "24h EU dispatch" },
-  { icon: Award, label: "ISO 17025 lab partner" },
-  { icon: Lock, label: "GDPR compliant" },
-]
+import { Award, CheckCircle2, FlaskConical, Lock, Shield, Truck } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 export function TrustStrip() {
+  const t = useTranslations("product")
+  const badges = [
+    { icon: Shield, label: t("trustBadge1") },
+    { icon: FlaskConical, label: t("trustBadge2") },
+    { icon: CheckCircle2, label: t("trustBadge3") },
+    { icon: Truck, label: t("trustBadge4") },
+    { icon: Award, label: t("trustBadge5") },
+    { icon: Lock, label: t("trustBadge6") },
+  ]
+
   return (
     <div className="mt-8 border-t border-line pt-6">
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">

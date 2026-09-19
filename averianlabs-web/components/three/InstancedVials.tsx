@@ -16,6 +16,13 @@ export interface InstancedVialSpec {
 
 interface InstancedVialsProps {
   specs: InstancedVialSpec[]
+  /**
+   * Called with the `instanceId` (the index into `specs`) when the user clicks
+   * on a vial body. R3F raycasts against the largest mesh (body); the label
+   * mesh sits in front of the body and intercepts the click in practice but
+   * carries the same id so the caller's lookup is consistent.
+   */
+  onSelect?: (instanceId: number) => void
 }
 
 interface Bundle {
@@ -36,7 +43,7 @@ interface Bundle {
  * With N=16 this drops the carousel from ~80 draw calls (5 parts × 16 vials)
  * down to 5 — a meaningful win on mid-range mobile.
  */
-export function InstancedVials({ specs }: InstancedVialsProps) {
+export function InstancedVials({ specs, onSelect }: InstancedVialsProps) {
   const geometries = useMemo(() => getVialGeometries(), [])
   const bundle = useMemo(() => buildBundle(geometries, specs.length), [geometries, specs.length])
 
@@ -67,13 +74,33 @@ export function InstancedVials({ specs }: InstancedVialsProps) {
   // Cleanup on unmount.
   useEffect(() => bundle.dispose(), [bundle])
 
+  // Hoist the click handler into a stable ref so the instanced meshes don't
+  // re-bind their event listeners on every render. R3F uses an event-emitter
+  // style; this is purely a stable callback identity win.
+  const handleClick = onSelect
+    ? (e: { instanceId?: number }) => {
+        if (typeof e.instanceId === "number") onSelect(e.instanceId)
+      }
+    : undefined
+
   return (
     <>
-      <primitive object={bundle.body} />
+      {/* biome-ignore lint/a11y/useKeyWithClickEvents: R3F <primitive> uses pointer events; keyboard semantics are handled at the Canvas wrapper level. */}
+      <primitive
+        object={bundle.body}
+        onClick={handleClick}
+        onPointerOver={() => {
+          document.body.style.cursor = onSelect ? "pointer" : "auto"
+        }}
+        onPointerOut={() => {
+          document.body.style.cursor = "auto"
+        }}
+      />
       <primitive object={bundle.liquid} />
       <primitive object={bundle.cap} />
       <primitive object={bundle.crimp} />
-      <primitive object={bundle.label} />
+      {/* biome-ignore lint/a11y/useKeyWithClickEvents: see note above */}
+      <primitive object={bundle.label} onClick={handleClick} />
     </>
   )
 }
@@ -92,13 +119,13 @@ function patchLabelForAtlas(mat: LabelMaterial) {
   mat.onBeforeCompile = (shader) => {
     shader.vertexShader = shader.vertexShader
       .replace(
-        `#include <common>`,
+        "#include <common>",
         `#include <common>
 attribute vec2 aAtlasOffset;
 attribute vec2 aAtlasRepeat;`,
       )
       .replace(
-        `#include <uv_vertex>`,
+        "#include <uv_vertex>",
         `#include <uv_vertex>
 vMapUv = uv * aAtlasRepeat + aAtlasOffset;`,
       )

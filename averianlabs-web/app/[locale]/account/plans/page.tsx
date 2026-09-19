@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic"
-
 import { CreatePlanDialog } from "@/components/research-plans/CreatePlanDialog"
 import { Badge } from "@/components/ui/Badge"
 import { Button } from "@/components/ui/Button"
@@ -10,6 +8,7 @@ import { BookmarkPlus, Calendar, Globe2, Lock, Plus } from "lucide-react"
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import Link from "next/link"
+export const dynamic = "force-dynamic"
 
 export async function generateMetadata({
   params,

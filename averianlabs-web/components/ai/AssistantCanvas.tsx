@@ -4,15 +4,17 @@ import { ChatInput } from "@/components/ai/ChatInput"
 import { ConsentBanner } from "@/components/ai/ConsentBanner"
 import { type ChatMessage, MessageList, type ProposedAction } from "@/components/ai/MessageList"
 import { QuickActions } from "@/components/ai/QuickActions"
+import { SourcesPanel } from "@/components/ai/SourcesPanel"
 import { HelixGlyph } from "@/components/ai/icons/HelixGlyph"
 import { Button } from "@/components/ui/Button"
 import { type ChatMessageWithExtras, useAveriaChat } from "@/lib/ai/hooks/use-averia-chat"
 import { usePageContext } from "@/lib/ai/hooks/use-page-context"
+import type { CitationRef } from "@/lib/ai/types"
 import { useCart } from "@/lib/cart/store"
 import { AlertCircle, MessageSquare, RefreshCw, Trash2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
-import { useCallback } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { toast } from "sonner"
 
 interface AssistantCanvasProps {
@@ -22,6 +24,10 @@ interface AssistantCanvasProps {
 /**
  * Full-page Averia canvas — the power-user view of the same chat the floating
  * widget uses. Shares the hook, message renderer and action/feedback plumbing.
+ *
+ * Adds a sources side-panel (toggleable) so researchers can see every cited
+ * source for the current conversation at a glance, with type labels and
+ * direct links into the originating page.
  */
 export function AssistantCanvas({ locale }: AssistantCanvasProps) {
   const t = useTranslations("averia")
@@ -31,6 +37,7 @@ export function AssistantCanvas({ locale }: AssistantCanvasProps) {
   const cartAdd = useCart((s) => s.add)
   const cartRemove = useCart((s) => s.remove)
   const context = usePageContext({ itemCount: cartCount })
+  const [showSources, setShowSources] = useState(true)
 
   const chat = useAveriaChat({
     locale,
@@ -95,6 +102,14 @@ export function AssistantCanvas({ locale }: AssistantCanvasProps) {
   )
 
   const messages: ChatMessageWithExtras[] = chat.messages
+
+  const allCitations = useMemo<CitationRef[]>(() => {
+    const flat: CitationRef[] = []
+    for (const m of messages) {
+      if (m.citations) flat.push(...m.citations)
+    }
+    return flat
+  }, [messages])
 
   return (
     <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_300px]">
@@ -165,6 +180,12 @@ export function AssistantCanvas({ locale }: AssistantCanvasProps) {
       </div>
 
       <aside className="space-y-5">
+        <SourcesPanel
+          citations={allCitations}
+          showSources={showSources}
+          onToggle={() => setShowSources((v) => !v)}
+        />
+
         <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-5">
           <h3 className="flex items-center gap-2 text-sm font-semibold">
             <MessageSquare className="h-4 w-4 text-accent" aria-hidden />

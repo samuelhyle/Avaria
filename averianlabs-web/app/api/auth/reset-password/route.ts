@@ -1,10 +1,12 @@
 import { users } from "@/db/schema"
 import { consumeToken, tokenIdentifiers } from "@/lib/auth/tokens"
 import { db, isDatabaseConfigured } from "@/lib/db"
+import { assertCsrfOr403 } from "@/lib/security/csrf"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { hash } from "argon2"
 import { eq } from "drizzle-orm"
+import { getTranslations } from "next-intl/server"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -15,6 +17,9 @@ const bodySchema = z.object({
 })
 
 export async function POST(req: Request) {
+  const csrf = assertCsrfOr403(req, { allowDevHosts: process.env.NODE_ENV !== "production" })
+  if (csrf) return csrf
+
   if (!isDatabaseConfigured()) {
     return NextResponse.json(
       { error: "Authentication is not available on this deployment." },

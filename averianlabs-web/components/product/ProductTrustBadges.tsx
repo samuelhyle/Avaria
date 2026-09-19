@@ -1,13 +1,17 @@
-import { Award, BadgeCheck, Lock, ShieldCheck, Truck } from "lucide-react"
+"use client"
 
-const items = [
-  { icon: ShieldCheck, label: "Third-party HPLC", sub: "Every batch verified" },
-  { icon: BadgeCheck, label: "Mass-spec identity", sub: "Confirmed at partner lab" },
-  { icon: Award, label: "ISO 17025 testing", sub: "Independent certification" },
-  { icon: Truck, label: "EU-wide 24h dispatch", sub: "Free over €150" },
-]
+import { Award, BadgeCheck, Lock, ShieldCheck, Truck } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 export function ProductTrustBadges() {
+  const t = useTranslations("product")
+  const items = [
+    { icon: ShieldCheck, label: t("trustBadge1"), sub: t("trustSub1") },
+    { icon: BadgeCheck, label: t("trustBadge2"), sub: t("trustSub2") },
+    { icon: Award, label: t("trustBadge3"), sub: t("trustSub3") },
+    { icon: Truck, label: t("trustBadge4"), sub: t("trustSub4") },
+  ]
+
   return (
     <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4">
       {items.map(({ icon: Icon, label, sub }) => (

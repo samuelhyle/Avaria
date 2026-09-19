@@ -1,4 +1,6 @@
 import { getCurrentMember, toggleReaction } from "@/lib/community"
+import { isDatabaseConfigured } from "@/lib/db"
+import { assertCsrfOr403 } from "@/lib/security/csrf"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -9,6 +11,12 @@ const Body = z.object({
 })
 
 export async function POST(req: Request) {
+  if (!isDatabaseConfigured()) {
+    return NextResponse.json({ error: "Community is offline." }, { status: 503 })
+  }
+  const csrf = assertCsrfOr403(req, { allowDevHosts: process.env.NODE_ENV !== "production" })
+  if (csrf) return csrf
+
   const member = await getCurrentMember()
   if (!member) {
     return NextResponse.json({ error: "Authentication required." }, { status: 401 })

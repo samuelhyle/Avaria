@@ -2,19 +2,22 @@
  * POST /api/webhooks/sanity
  *
  * Reindexes a single glossary term or blog post when Sanity publishes or
- * deletes a document. Protected by a shared secret header.
+ * deletes a document. Protected by HMAC-SHA256 signature verification.
  *
  * Sanity webhook config:
  *   URL:    https://<domain>/api/webhooks/sanity
- *   Header: x-sanity-secret: $SANITY_WEBHOOK_SECRET
+ *   Header: x-sanity-signature: sha256=<hex>
  *   Filter: _type in ["glossaryTerm", "post"]
  */
 
+import { createHmac, timingSafeEqual } from "node:crypto"
 import { purgeSource, reindexDocument } from "@/lib/ai/rag/indexer"
+import { logger } from "@/lib/logger"
 import { NextResponse } from "next/server"
 
-export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
+
+export const runtime = "nodejs"
 
 interface SanityWebhookBody {
   _type?: string
@@ -34,18 +37,29 @@ function slugOf(body: SanityWebhookBody): string | null {
   return null
 }
 
+function verifySignature(rawBody: string, signatureHeader: string | null, secret: string): boolean {
+  if (!signatureHeader) return false
+  const [algo, sig] = signatureHeader.split("=")
+  if (algo !== "sha256" || !sig) return false
+  const expected = createHmac("sha256", secret).update(rawBody).digest("hex")
+  return timingSafeEqual(Buffer.from(sig, "hex"), Buffer.from(expected, "hex"))
+}
+
 export async function POST(request: Request): Promise<NextResponse> {
   const secret = process.env.SANITY_WEBHOOK_SECRET
   if (!secret) {
     return NextResponse.json({ error: "webhook_not_configured" }, { status: 503 })
   }
-  if (request.headers.get("x-sanity-secret") !== secret) {
-    return NextResponse.json({ error: "unauthorized" }, { status: 401 })
+
+  const rawBody = await request.text()
+  const signature = request.headers.get("x-sanity-signature")
+  if (!verifySignature(rawBody, signature, secret)) {
+    return NextResponse.json({ error: "invalid_signature" }, { status: 401 })
   }
 
   let body: SanityWebhookBody
   try {
-    body = (await request.json()) as SanityWebhookBody
+    body = JSON.parse(rawBody) as SanityWebhookBody
   } catch {
     return NextResponse.json({ error: "invalid_json" }, { status: 400 })
   }
@@ -71,7 +85,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     }
     return NextResponse.json({ ok: true, action: "reindexed", source, slug, report })
   } catch (err) {
-    console.error("[sanity-webhook] reindex failed", err)
+    logger.error("[sanity-webhook] reindex failed", err)
     return NextResponse.json({ error: "reindex_failed" }, { status: 500 })
   }
 }

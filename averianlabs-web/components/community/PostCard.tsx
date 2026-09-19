@@ -55,7 +55,7 @@ export function PostCard({ post, isOriginal, isAuthed, currentUserId, reactions 
           </div>
           <div className="text-sm">
             <div className="font-medium text-ink">
-              {post.authorName ?? "Anonymous"}
+              {post.authorName ?? t("anonymous")}
               {isOriginal ? (
                 <span className="ml-2 text-xs text-ink-muted">· {t("threadOriginalPost")}</span>
               ) : null}
@@ -67,7 +67,7 @@ export function PostCard({ post, isOriginal, isAuthed, currentUserId, reactions 
               </time>
               {isEdited ? (
                 <Badge tone="muted" size="sm">
-                  edited
+                  {t("edited")}
                 </Badge>
               ) : null}
               {post.authorName ? (
@@ -107,10 +107,11 @@ function capitalize(s: string) {
 }
 
 export function SignInPrompt({ locale }: { locale: string }) {
+  const t = useTranslations("community")
   return (
     <div className="rounded-[var(--radius)] border border-line bg-accent-soft p-4 text-sm">
       <Link href={`/${locale}/account`} className="font-medium text-accent hover:underline">
-        Sign in to join the discussion →
+        {t("signInToJoin")}
       </Link>
     </div>
   )

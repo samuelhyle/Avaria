@@ -4,12 +4,14 @@ import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
 import { Textarea } from "@/components/ui/Textarea"
 import { Loader2 } from "lucide-react"
+import { useLocale } from "next-intl"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
 export function ContactForm() {
   const t = useTranslations("contact")
+  const locale = useLocale()
   const [loading, setLoading] = useState(false)
 
   return (
@@ -30,6 +32,7 @@ export function ContactForm() {
               email: formData.get("email"),
               subject: formData.get("subject"),
               message: formData.get("message"),
+              locale,
             }),
           })
 

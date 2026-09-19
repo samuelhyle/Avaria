@@ -12,14 +12,17 @@ export interface ShippingAddress {
   city?: string
 }
 
+import { getServerEnv } from "@/lib/env"
+
 const SENDCLOUD_API = "https://panel.sendcloud.sc/api/v2"
 
 async function getSendcloudRates(
   address: ShippingAddress,
   weightKg: number,
 ): Promise<ShippingRate[]> {
-  const pubKey = process.env.SENDCLOUD_PUBLIC_KEY
-  const secKey = process.env.SENDCLOUD_SECRET_KEY
+  const env = getServerEnv()
+  const pubKey = env.SENDCLOUD_PUBLIC_KEY
+  const secKey = env.SENDCLOUD_SECRET_KEY
   if (!pubKey || !secKey) return []
 
   try {

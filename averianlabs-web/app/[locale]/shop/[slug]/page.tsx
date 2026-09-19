@@ -2,7 +2,7 @@
 // the background every 10 minutes. This is the single largest TTFB win for
 // the storefront: product pages no longer hit Postgres on every request.
 export const revalidate = 600
-export const dynamicParams = true
+// DISABLED_FOR_DEMO_BUILD: export const dynamicParams = true
 
 import { DocumentList } from "@/components/documents/DocumentList"
 import { AskAveriaButton } from "@/components/product/AskAveriaButton"

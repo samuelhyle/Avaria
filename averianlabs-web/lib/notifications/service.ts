@@ -7,7 +7,9 @@
 
 import { notificationPreferences, notifications } from "@/db/schema"
 import { db } from "@/lib/db"
-import { and, desc, eq, isNull, sql } from "drizzle-orm"
+import { and, desc, eq, inArray, isNull, sql } from "drizzle-orm"
+
+type Preferences = typeof notificationPreferences.$inferSelect
 
 export type NotificationKind = "reply" | "reaction" | "mention" | "system" | "plan_shared"
 
@@ -90,25 +92,30 @@ export async function markNotificationsRead(userId: string, ids?: string[]) {
       .update(notifications)
       .set({ readAt: now })
       .where(and(eq(notifications.userId, userId), isNull(notifications.readAt)))
-  } else {
-    for (const id of ids) {
-      await db
-        .update(notifications)
-        .set({ readAt: now })
-        .where(and(eq(notifications.id, id), eq(notifications.userId, userId)))
-    }
+    return
   }
+  // Single batched update — keep the userId predicate so a forged client
+  // payload can't mark someone else's notifications read.
+  await db
+    .update(notifications)
+    .set({ readAt: now })
+    .where(and(inArray(notifications.id, ids), eq(notifications.userId, userId)))
 }
 
-export async function getOrCreatePreferences(userId: string) {
+export async function getOrCreatePreferences(userId: string): Promise<Preferences> {
   const existing = await db
     .select()
     .from(notificationPreferences)
     .where(eq(notificationPreferences.userId, userId))
     .limit(1)
-  if (existing[0]) return existing[0]
+  const found = existing[0]
+  if (found) return found
   const inserted = await db.insert(notificationPreferences).values({ userId }).returning()
-  return inserted[0]!
+  const created = inserted[0]
+  if (!created) {
+    throw new Error("Failed to create notification preferences")
+  }
+  return created
 }
 
 export async function updatePreferences(

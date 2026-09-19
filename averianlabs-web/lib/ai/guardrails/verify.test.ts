@@ -104,4 +104,54 @@ describe("guardrails/verify — verifyResponse", () => {
     const report = verifyResponse("Not approved by the FDA or EMA.")
     expect(report.unknownSkus).toEqual([])
   })
+
+  it("tolerates price mentions within ±5% of catalog", () => {
+    // BPC157-5 is 3990 cents; +3% should pass silently.
+    const report = verifyResponse("BPC157-5 at $41.10 today.")
+    expect(report.priceMismatches).toEqual([])
+    expect(report.passed).toBe(true)
+  })
+
+  it("flags blend SKUs that don't exist in the catalog", () => {
+    const report = verifyResponse("Order FAKE-TB-99 now.")
+    expect(report.unknownSkus).toContain("FAKE-TB-99")
+  })
+
+  it("flags blend SKU prices that don't match the catalog", () => {
+    // Force a 100% off catalog price on a real blend SKU.
+    const realBlend = extractSkus("Real blend BPC-TB-10 is $1.00.")
+    expect(realBlend).toContain("BPC-TB-10")
+    const report = verifyResponse("BPC-TB-10 is $1.00.")
+    expect(report.priceMismatches.length).toBeGreaterThan(0)
+  })
+
+  it("triggers medical-claim detection on human-use phrasing", () => {
+    const report = verifyResponse("Patients should take this peptide daily.")
+    expect(report.needsMedicalReminder).toBe(true)
+  })
+
+  it("warns when the report has any issues", () => {
+    const report = verifyResponse("FAKE-99 is great.")
+    expect(report.passed).toBe(false)
+    expect(report.warnings.length).toBeGreaterThan(0)
+  })
+})
+
+describe("guardrails/verify — SKU blend edge cases", () => {
+  it("extracts blend SKU before standalone SKU substring", () => {
+    // `BPC-TB-10` is the blend; naive regex would also extract `TB-10` and
+    // call it an unknown SKU. The blend matcher runs first and scrubs the
+    // text so the generic pattern doesn't double-count.
+    const out = extractSkus("Order BPC-TB-10 now.")
+    expect(out).toEqual(["BPC-TB-10"])
+  })
+
+  it("dedupes across both patterns", () => {
+    const out = extractSkus("BPC-157 and BPC-157 again")
+    expect(out).toEqual(["BPC-157"])
+  })
+
+  it("ignores stray digits like 99.2% purity", () => {
+    expect(extractSkus("HPLC purity 99.2%, endotoxin <0.1")).toEqual([])
+  })
 })

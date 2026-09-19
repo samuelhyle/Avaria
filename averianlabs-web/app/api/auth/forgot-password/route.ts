@@ -3,9 +3,11 @@ import { TOKEN_TTL_MS, createToken, tokenIdentifiers } from "@/lib/auth/tokens"
 import { db, isDatabaseConfigured } from "@/lib/db"
 import { passwordResetHtml, sendEmail } from "@/lib/email"
 import { locales } from "@/lib/i18n/config"
+import { assertCsrfOr403 } from "@/lib/security/csrf"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { eq } from "drizzle-orm"
+import { getTranslations } from "next-intl/server"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -15,6 +17,9 @@ const bodySchema = z.object({
 })
 
 export async function POST(req: Request) {
+  const csrf = assertCsrfOr403(req, { allowDevHosts: process.env.NODE_ENV !== "production" })
+  if (csrf) return csrf
+
   const ip = clientIp(req)
   const ipLimit = await rateLimit(`forgot:ip:${ip}`, { limit: 10, window: "1 h" })
   const ok = NextResponse.json({ ok: true })
@@ -53,10 +58,12 @@ export async function POST(req: Request) {
     )
     const origin = process.env.AUTH_URL?.trim() || new URL(req.url).origin
     const url = `${origin}/${parsed.data.locale}/reset-password?token=${encodeURIComponent(token)}&email=${encodeURIComponent(email)}`
+    const t = await getTranslations({ locale: parsed.data.locale, namespace: "email" })
+    const html = await passwordResetHtml({ url, locale: parsed.data.locale })
     await sendEmail({
       to: email,
-      subject: "Reset your AverianLabs password",
-      html: passwordResetHtml({ url }),
+      subject: t("resetPasswordSubject"),
+      html,
     })
   }
 

@@ -1,8 +1,10 @@
 "use client"
 
 import { Button } from "@/components/ui/Button"
+import { formatCurrency } from "@/lib/utils/format"
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import { Loader2 } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 
 interface PaymentStepProps {
@@ -14,6 +16,7 @@ interface PaymentStepProps {
 }
 
 export function PaymentStep({ orderId, orderTotal, locale, onSuccess, onError }: PaymentStepProps) {
+  const t = useTranslations("checkout")
   const stripe = useStripe()
   const elements = useElements()
   const [processing, setProcessing] = useState(false)
@@ -22,7 +25,7 @@ export function PaymentStep({ orderId, orderTotal, locale, onSuccess, onError }:
     e.preventDefault()
 
     if (!stripe || !elements) {
-      onError("Stripe is not loaded. Please refresh and try again.")
+      onError(t("stripeUnavailable"))
       return
     }
 
@@ -37,7 +40,7 @@ export function PaymentStep({ orderId, orderTotal, locale, onSuccess, onError }:
     })
 
     if (error) {
-      onError(error.message ?? "Payment failed. Please try again.")
+      onError(error.message ?? t("paymentFailedFallback"))
       setProcessing(false)
     } else {
       onSuccess()
@@ -58,10 +61,10 @@ export function PaymentStep({ orderId, orderTotal, locale, onSuccess, onError }:
         {processing ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" />
-            Processing payment…
+            {t("processingPayment")}
           </>
         ) : (
-          <>Pay €{(orderTotal / 100).toFixed(2)}</>
+          <>{t("payAmount", { amount: formatCurrency(orderTotal, "EUR", locale) })}</>
         )}
       </Button>
     </form>

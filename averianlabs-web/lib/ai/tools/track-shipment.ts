@@ -9,7 +9,7 @@
 import { orders, shipments } from "@/db/schema"
 import type { Tool, ToolContext, ToolResult } from "@/lib/ai/tools/registry"
 import { db } from "@/lib/db"
-import { and, eq, or } from "drizzle-orm"
+import { and, eq } from "drizzle-orm"
 
 interface Args {
   orderNumber?: string
@@ -98,11 +98,14 @@ export const trackShipmentTool: Tool = {
 
     if (filters.length === 0) return { content: { error: "missing_inputs" } }
 
-    const orderRows = await db
-      .select()
-      .from(orders)
-      .where(and(...filters, ctx.auth ? eq(orders.userId, ctx.auth.userId) : or(...filters)))
-      .limit(1)
+    // Signed-in users are scoped to their own orders; anonymous callers
+    // must match EVERY provided filter (so knowing only an order number is
+    // not enough to enumerate orders).
+    const whereExpr = ctx.auth
+      ? and(...filters, eq(orders.userId, ctx.auth.userId))
+      : and(...filters)
+
+    const orderRows = await db.select().from(orders).where(whereExpr).limit(1)
 
     const order = orderRows[0]
     if (!order) return { content: { error: "not_found" } }

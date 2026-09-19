@@ -34,7 +34,6 @@ export function ConsentBanner({ consent, onAccept, onDecline }: ConsentBannerPro
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 24 }}
           transition={{ type: "spring", stiffness: 280, damping: 30 }}
-          // biome-ignore lint/a11y/useSemanticElements: animated banner cannot use <dialog>
           role="dialog"
           aria-label={t("title")}
           className={cn(

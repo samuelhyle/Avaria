@@ -10,6 +10,8 @@
 import { supportTickets } from "@/db/schema"
 import type { Tool, ToolContext, ToolResult } from "@/lib/ai/tools/registry"
 import { db } from "@/lib/db"
+import { logger } from "@/lib/logger"
+import { safeUuid } from "@/lib/utils/uuid"
 
 interface Turn {
   role: "user" | "assistant"
@@ -25,11 +27,6 @@ interface Args {
   transcript?: Turn[]
   /** The conversation id, if available — used for traceability. */
   conversationId?: string
-}
-
-function uuid(): string {
-  if (typeof crypto !== "undefined" && "randomUUID" in crypto) return crypto.randomUUID()
-  return `t-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`
 }
 
 const CONFIRMATIONS: Record<string, string> = {
@@ -80,8 +77,20 @@ export const createSupportTicketTool: Tool = {
   async execute(rawArgs, ctx): Promise<ToolResult> {
     const args = (rawArgs ?? {}) as Args
 
-    if (!args.email || !args.subject || !args.body) {
+    // Treat every input as potentially hostile — Zod lives one layer up but
+    // the tool surface itself doesn't enforce schema, and a hallucinated
+    // tool call from a confused model can hand us `email: 42` or
+    // `body: undefined`.
+    const email = typeof args.email === "string" ? args.email.trim() : ""
+    const subject = typeof args.subject === "string" ? args.subject.trim() : ""
+    const body = typeof args.body === "string" ? args.body : ""
+
+    if (!email || !subject || !body) {
       return { content: { error: "missing_inputs", required: ["email", "subject", "body"] } }
+    }
+
+    if (!isPlausibleEmail(email)) {
+      return { content: { error: "invalid_email" } }
     }
 
     const transcript = args.transcript?.length ? args.transcript : (ctx.transcript ?? [])
@@ -89,7 +98,7 @@ export const createSupportTicketTool: Tool = {
       return { content: { error: "empty_transcript" } }
     }
 
-    const id = `t-${uuid()}`
+    const id = `t-${safeUuid()}`
     const trimmedTranscript = transcript.slice(-20)
 
     try {
@@ -97,16 +106,16 @@ export const createSupportTicketTool: Tool = {
         id,
         userId: ctx.auth?.userId ?? null,
         conversationId: args.conversationId ?? ctx.conversationId ?? null,
-        email: args.email.toLowerCase(),
-        subject: args.subject.slice(0, 200),
-        body: args.body.slice(0, 4000),
+        email: email.toLowerCase(),
+        subject: subject.slice(0, 200),
+        body: body.slice(0, 4000),
         source: "averia",
         status: "open",
         locale: ctx.locale,
         transcript: trimmedTranscript,
       })
     } catch (err) {
-      console.error("[averia] ticket insert failed", err)
+      logger.error("[averia] ticket insert failed", err)
       return { content: { error: "ticket_failed" } }
     }
 
@@ -119,4 +128,10 @@ export const createSupportTicketTool: Tool = {
       },
     }
   },
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+function isPlausibleEmail(value: string): boolean {
+  return value.length <= 320 && EMAIL_RE.test(value)
 }

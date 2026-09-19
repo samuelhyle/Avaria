@@ -25,6 +25,8 @@
     "sanity:seed-glossary": "tsx scripts/seed-glossary.ts",
     "ai:index": "tsx --env-file-if-exists=.env.local scripts/ai-index.ts",
     "ai:eval": "tsx --env-file-if-exists=.env.local scripts/ai-eval.ts",
+    "ai:chat-test": "tsx --env-file-if-exists=.env.local scripts/ai-chat-test.ts",
+    "ai:gc": "tsx --env-file-if-exists=.env.local scripts/ai-gc.ts",
     "studio": "sanity dev --project-path sanity",
     "build:demo": "./scripts/build-demo.sh",
     "postinstall": "lefthook install || true"
@@ -102,7 +104,8 @@
     "tailwindcss-animate": "^1.0.7",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
-    "vitest": "^2.1.8"
+    "vitest": "^2.1.8",
+    "@vitejs/plugin-react": "^4.7.0"
   },
   "engines": {
     "node": ">=22.0.0"
@@ -119,7 +122,9 @@
       "protobufjs"
     ],
     "overrides": {
-      "postcss": "8.5.28"
+      "postcss": "8.5.28",
+      "sharp": ">=0.35.4",
+      "adm-zip": ">=0.6.0"
     }
   }
 }

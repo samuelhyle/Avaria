@@ -186,12 +186,7 @@ export const searchProductsTool: Tool = {
   async execute(rawArgs, ctx): Promise<ToolResult> {
     const args = (rawArgs ?? {}) as Args
     const limit = Math.min(Math.max(args.limit ?? 5, 1), 10)
-    let results = products.filter(
-      (p) =>
-        !("status" in p) ||
-        (p as Record<string, unknown>).status === "active" ||
-        (p as Record<string, unknown>).status === undefined,
-    )
+    let results = products
 
     if (args.category && args.category !== "all") {
       results = results.filter((p) => p.category === args.category)

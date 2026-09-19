@@ -49,11 +49,15 @@ export function prepareAssistantContent(
   out = out.replace(/\[cite:[^\]\n]*$/gm, "")
 
   // 3. Rewrite `[N]` citation markers into markdown links. Supports any
-  //    digit count (the previous regex was capped at 2 digits).
+  //    digit count (the previous regex was capped at 2 digits). Build a
+  //    index-by-number once so the per-match lookup is O(1) instead of
+  //    O(n) — matters for long responses that cite 8+ sources repeatedly.
   if (citations && citations.length > 0) {
+    const byIndex = new Map<number, CitationRef>()
+    for (const c of citations) byIndex.set(c.index, c)
     out = out.replace(/\[(\d+)\](?!\()/g, (match, digits: string) => {
-      const citation = citations.find((c) => c.index === Number(digits))
-      return citation?.url ? `[${digits}](${citation.url})` : match
+      const url = byIndex.get(Number(digits))?.url
+      return url ? `[${digits}](${url})` : match
     })
   }
 

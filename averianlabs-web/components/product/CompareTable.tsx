@@ -4,12 +4,13 @@ import { Badge } from "@/components/ui/Badge"
 import { useCart } from "@/lib/cart/store"
 import { useCompare } from "@/lib/compare/store"
 import type { Locale, Product } from "@/lib/products/types"
+import { findCheapestVial } from "@/lib/products/vials"
 import { cn } from "@/lib/utils/cn"
 import { formatCurrency } from "@/lib/utils/format"
-import { Check, ChevronDown, FlaskConical, ShoppingBag, X } from "lucide-react"
+import { Check, FlaskConical, ShoppingBag, X } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
-import { type CSSProperties, useEffect, useMemo } from "react"
+import { type CSSProperties, useMemo } from "react"
 import { toast } from "sonner"
 
 interface CompareTableProps {
@@ -17,40 +18,70 @@ interface CompareTableProps {
   locale: Locale | string
 }
 
-const rows: Array<{
+interface RowDef {
   key: string
   label: string
   render: (p: Product, locale: string) => React.ReactNode
   mono?: boolean
-}> = [
-  {
-    key: "category",
-    label: "Category",
-    render: (p) => <span className="capitalize">{p.category}</span>,
-  },
-  { key: "cas", label: "CAS", render: (p) => p.casNumber ?? "—", mono: true },
-  { key: "formula", label: "Formula", render: (p) => p.molecularFormula ?? "—", mono: true },
-  { key: "mw", label: "MW (g/mol)", render: (p) => p.molecularWeight?.toLocaleString() ?? "—" },
-  { key: "sequence", label: "Sequence", render: (p) => p.sequence ?? "—", mono: true },
-  {
-    key: "purity",
-    label: "HPLC Purity",
-    render: (p) => (p.purityPercent ? `${p.purityPercent.toFixed(1)}%` : "—"),
-  },
-  {
-    key: "sizes",
-    label: "Vial sizes",
-    render: (p) => p.vials.map((v) => `${v.mg} mg`).join(" · "),
-  },
-  { key: "storage", label: "Storage", render: (p) => p.storageTemp },
-]
+}
 
 export function CompareTable({ products, locale }: CompareTableProps) {
+  const t = useTranslations("product")
   const tCommon = useTranslations("common")
+  const tCompare = useTranslations("compare")
   const selected = useCompare((s) => s.items)
   const toggle = useCompare((s) => s.toggle)
   const clear = useCompare((s) => s.clear)
   const max = useCompare((s) => s.max)
+
+  const rows: RowDef[] = useMemo(
+    () => [
+      {
+        key: "category",
+        label: tCompare("colCategory"),
+        render: (p) => <span className="capitalize">{p.category}</span>,
+      },
+      {
+        key: "cas",
+        label: tCompare("colCas"),
+        render: (p) => p.casNumber ?? "—",
+        mono: true,
+      },
+      {
+        key: "formula",
+        label: tCompare("colFormula"),
+        render: (p) => p.molecularFormula ?? "—",
+        mono: true,
+      },
+      {
+        key: "mw",
+        label: tCompare("colMw"),
+        render: (p) => p.molecularWeight?.toLocaleString(String(locale)) ?? "—",
+      },
+      {
+        key: "sequence",
+        label: tCompare("colSequence"),
+        render: (p) => p.sequence ?? "—",
+        mono: true,
+      },
+      {
+        key: "purity",
+        label: tCompare("colPurity"),
+        render: (p) => (p.purityPercent ? `${p.purityPercent.toFixed(1)}%` : "—"),
+      },
+      {
+        key: "sizes",
+        label: tCompare("colVialSizes"),
+        render: (p) => p.vials.map((v) => `${v.mg} mg`).join(" · "),
+      },
+      {
+        key: "storage",
+        label: tCompare("colStorage"),
+        render: (p) => p.storageTemp,
+      },
+    ],
+    [tCompare, locale],
+  )
 
   const list = useMemo(
     () => products.filter((p) => selected.includes(p.slug)),
@@ -59,8 +90,9 @@ export function CompareTable({ products, locale }: CompareTableProps) {
 
   const add = useCart((s) => s.add)
   const addAll = () => {
-    list.forEach((p) => {
-      const min = p.vials.reduce((m, v) => (v.priceCents < m.priceCents ? v : m), p.vials[0]!)
+    for (const p of list) {
+      const min = findCheapestVial(p)
+      if (!min) continue
       const translation = p.translations?.[locale as Locale] ?? p.defaultTranslation
       if (!min.contactOnly && min.priceCents > 0) {
         add({
@@ -72,8 +104,8 @@ export function CompareTable({ products, locale }: CompareTableProps) {
           unitPriceCents: min.priceCents,
         })
       }
-    })
-    toast.success(`Added ${list.length} products to cart`)
+    }
+    toast.success(t("addedToCart"), { description: tCompare("addAllToCart") })
   }
 
   return (
@@ -81,7 +113,7 @@ export function CompareTable({ products, locale }: CompareTableProps) {
       <div className="mb-6 rounded-[var(--radius-lg)] border border-line bg-surface p-4 shadow-sm">
         <div className="flex items-center justify-between gap-3">
           <p className="text-sm font-medium">
-            Choose products to compare ({selected.length}/{max})
+            {tCompare("pickerPrompt", { selected: selected.length, max })}
           </p>
           {selected.length > 0 ? (
             <button
@@ -89,7 +121,7 @@ export function CompareTable({ products, locale }: CompareTableProps) {
               onClick={clear}
               className="text-xs text-ink-muted hover:text-danger"
             >
-              Clear all
+              {tCompare("clearAll")}
             </button>
           ) : null}
         </div>
@@ -122,10 +154,8 @@ export function CompareTable({ products, locale }: CompareTableProps) {
       {list.length === 0 ? (
         <div className="rounded-[var(--radius-lg)] border border-dashed border-line bg-surface p-16 text-center">
           <FlaskConical className="mx-auto h-10 w-10 text-ink-subtle" />
-          <p className="mt-4 font-display text-lg">No products selected for comparison.</p>
-          <p className="mt-2 text-sm text-ink-muted">
-            Toggle products above, or tap the “Compare” button on any product card.
-          </p>
+          <p className="mt-4 font-display text-lg">{tCompare("emptyTitle")}</p>
+          <p className="mt-2 text-sm text-ink-muted">{tCompare("emptyBody")}</p>
         </div>
       ) : (
         <div className="overflow-x-auto rounded-[var(--radius-lg)] border border-line bg-surface shadow-sm">
@@ -133,7 +163,7 @@ export function CompareTable({ products, locale }: CompareTableProps) {
             <thead className="bg-surface-2">
               <tr>
                 <th className="sticky left-0 z-10 bg-surface-2 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-ink-subtle">
-                  Attribute
+                  {tCompare("headerAttribute")}
                 </th>
                 {list.map((p) => {
                   const translation = p.translations?.[locale as Locale] ?? p.defaultTranslation
@@ -181,18 +211,18 @@ export function CompareTable({ products, locale }: CompareTableProps) {
               ))}
               <tr>
                 <td className="sticky left-0 z-10 bg-surface px-4 py-3 text-xs font-semibold uppercase tracking-wider text-ink-subtle">
-                  Availability
+                  {tCompare("colAvailability")}
                 </td>
                 {list.map((p) => {
                   const total = p.vials.reduce((s, v) => s + v.stockQty, 0)
                   return (
                     <td key={p.slug} className="px-4 py-3">
                       {total === 0 ? (
-                        <Badge tone="muted">Contact</Badge>
+                        <Badge tone="muted">{tCompare("contact")}</Badge>
                       ) : total < 25 ? (
-                        <Badge tone="warn">Low ({total})</Badge>
+                        <Badge tone="warn">{tCompare("lowStock", { count: total })}</Badge>
                       ) : (
-                        <Badge tone="success">In stock ({total})</Badge>
+                        <Badge tone="success">{tCompare("inStockCount", { count: total })}</Badge>
                       )}
                     </td>
                   )
@@ -200,18 +230,21 @@ export function CompareTable({ products, locale }: CompareTableProps) {
               </tr>
               <tr>
                 <td className="sticky left-0 z-10 bg-surface px-4 py-3 text-xs font-semibold uppercase tracking-wider text-ink-subtle">
-                  From price
+                  {tCompare("fromPrice")}
                 </td>
                 {list.map((p) => {
-                  const min = p.vials.reduce(
-                    (m, v) => (v.priceCents < m.priceCents ? v : m),
-                    p.vials[0]!,
-                  )
+                  const min = findCheapestVial(p)
+                  if (!min)
+                    return (
+                      <td key={p.slug} className="px-4 py-3">
+                        —
+                      </td>
+                    )
                   const isContact = min.contactOnly === true || min.priceCents === 0
                   return (
                     <td key={p.slug} className="px-4 py-3">
                       {isContact ? (
-                        <Badge tone="muted">Quote</Badge>
+                        <Badge tone="muted">{tCompare("badgeQuote")}</Badge>
                       ) : (
                         <span className="font-display text-base font-semibold">
                           {formatCurrency(min.priceCents, "EUR", locale)}
@@ -223,13 +256,16 @@ export function CompareTable({ products, locale }: CompareTableProps) {
               </tr>
               <tr>
                 <td className="sticky left-0 z-10 bg-surface px-4 py-3 text-xs font-semibold uppercase tracking-wider text-ink-subtle">
-                  Add to cart
+                  {tCompare("actionAdd")}
                 </td>
                 {list.map((p) => {
-                  const min = p.vials.reduce(
-                    (m, v) => (v.priceCents < m.priceCents ? v : m),
-                    p.vials[0]!,
-                  )
+                  const min = findCheapestVial(p)
+                  if (!min)
+                    return (
+                      <td key={p.slug} className="px-4 py-3">
+                        —
+                      </td>
+                    )
                   const isContact = min.contactOnly === true || min.priceCents === 0
                   const oos = !isContact && min.stockQty === 0
                   return (
@@ -239,7 +275,11 @@ export function CompareTable({ products, locale }: CompareTableProps) {
                         className="inline-flex h-8 items-center gap-1 rounded-[var(--radius)] bg-accent px-3 text-xs font-semibold text-white hover:bg-accent-hover"
                       >
                         <ShoppingBag className="h-3 w-3" />
-                        {oos ? "Notify" : isContact ? "Quote" : "Add"}
+                        {oos
+                          ? tCompare("actionNotify")
+                          : isContact
+                            ? tCompare("badgeQuote")
+                            : tCompare("actionAdd")}
                       </Link>
                     </td>
                   )
@@ -253,7 +293,7 @@ export function CompareTable({ products, locale }: CompareTableProps) {
       {list.length > 0 ? (
         <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
           <p className="text-xs text-ink-muted">
-            Showing {list.length} of {max} products · saved across sessions in this browser
+            {tCompare("footerSummary", { visible: list.length, max })}
           </p>
           <button
             type="button"
@@ -261,7 +301,7 @@ export function CompareTable({ products, locale }: CompareTableProps) {
             className="inline-flex h-10 items-center gap-2 rounded-[var(--radius)] bg-accent px-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-accent-hover"
           >
             <ShoppingBag className="h-4 w-4" />
-            Add all to cart
+            {tCompare("addAllToCart")}
           </button>
         </div>
       ) : null}

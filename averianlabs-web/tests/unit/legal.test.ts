@@ -22,10 +22,14 @@ describe("getLegalIdentity", () => {
   it("returns safe placeholders when env vars are missing", () => {
     delete process.env.NEXT_PUBLIC_LEGAL_COMPANY_NAME
     delete process.env.NEXT_PUBLIC_LEGAL_BUSINESS_ID
+    delete process.env.NEXT_PUBLIC_LEGAL_VAT_ID
+    delete process.env.NEXT_PUBLIC_LEGAL_ADDRESS_LINE1
+    delete process.env.NEXT_PUBLIC_LEGAL_ADDRESS_LINE2
+    delete process.env.NEXT_PUBLIC_LEGAL_EMAIL
     const identity = getLegalIdentity()
     expect(identity.companyName).toBe("AverianLabs Oy")
-    expect(identity.businessId).toBe("FI-PENDING")
-    expect(identity.vatId).toBe("FI-PENDING")
+    expect(identity.businessId).toBe("rekisteröity Suomessa")
+    expect(identity.vatId).toBe("ALV-numero ilmoitetaan kuitissa")
   })
 
   it("reads overrides from env", () => {

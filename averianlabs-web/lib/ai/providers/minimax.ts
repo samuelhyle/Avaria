@@ -12,6 +12,8 @@
  */
 
 import { localEmbedText, localEmbedTexts } from "@/lib/ai/providers/local-embeddings"
+import { getServerEnv } from "@/lib/env"
+import { logger } from "@/lib/logger"
 
 export interface MinimaxConfig {
   apiKey: string
@@ -66,12 +68,13 @@ export interface ChatCompletionChunk {
 }
 
 export function getMinimaxConfig(): MinimaxConfig {
-  const apiKey = process.env.MINIMAX_API_KEY ?? ""
-  const baseURL = (process.env.MINIMAX_BASE_URL ?? "https://api.minimax.io/v1").replace(/\/$/, "")
-  const chatModel = process.env.MINIMAX_CHAT_MODEL ?? "MiniMax-M3"
-  const embeddingModel = process.env.MINIMAX_EMBEDDING_MODEL ?? "text-embedding-MiniMax-M3"
+  const e = getServerEnv()
+  const apiKey = e.MINIMAX_API_KEY ?? ""
+  const baseURL = (e.MINIMAX_BASE_URL ?? "https://api.minimax.io/v1").replace(/\/$/, "")
+  const chatModel = e.MINIMAX_CHAT_MODEL ?? "MiniMax-M3"
+  const embeddingModel = e.MINIMAX_EMBEDDING_MODEL ?? "text-embedding-MiniMax-M3"
 
-  const dimRaw = process.env.MINIMAX_EMBEDDING_DIMENSIONS
+  const dimRaw = e.MINIMAX_EMBEDDING_DIMENSIONS
   const embeddingDimensions = dimRaw ? Number.parseInt(dimRaw, 10) : undefined
 
   return {
@@ -84,7 +87,8 @@ export function getMinimaxConfig(): MinimaxConfig {
 }
 
 export function isMinimaxConfigured(): boolean {
-  return Boolean(process.env.MINIMAX_API_KEY && process.env.MINIMAX_API_KEY.length > 0)
+  const key = getServerEnv().MINIMAX_API_KEY
+  return Boolean(key && key.length > 0)
 }
 
 /**
@@ -160,16 +164,23 @@ export async function* streamMinimaxChat(input: {
         if (done) break
         buffer += decoder.decode(value, { stream: true })
         // SSE events are separated by blank lines (\n\n). MiniMax follows the
-        // standard, so we split on the boundary.
+        // standard, so we split on the boundary — but be defensive against a
+        // CRLF-terminating proxy by checking both shapes.
         let nlIdx = buffer.indexOf("\n\n")
+        if (nlIdx === -1) nlIdx = buffer.indexOf("\r\n\r\n")
+        let advance = nlIdx === -1 ? 0 : buffer.charCodeAt(nlIdx) === 13 ? 4 : 2
         while (nlIdx !== -1) {
           const event = buffer.slice(0, nlIdx)
-          buffer = buffer.slice(nlIdx + 2)
+          buffer = buffer.slice(nlIdx + advance)
+          let sawDone = false
           for (const line of event.split("\n")) {
             const trimmed = line.trim()
             if (!trimmed.startsWith("data:")) continue
             const payload = trimmed.slice(5).trim()
-            if (payload === "[DONE]") return
+            if (payload === "[DONE]") {
+              sawDone = true
+              break
+            }
             if (!payload) continue
             try {
               const json = JSON.parse(payload) as {
@@ -182,7 +193,10 @@ export async function* streamMinimaxChat(input: {
               // Skip malformed lines.
             }
           }
+          if (sawDone) return
           nlIdx = buffer.indexOf("\n\n")
+          if (nlIdx === -1) nlIdx = buffer.indexOf("\r\n\r\n")
+          advance = nlIdx === -1 ? 0 : buffer.charCodeAt(nlIdx) === 13 ? 4 : 2
         }
       }
       return
@@ -233,48 +247,76 @@ function backoff(attempt: number, signal?: AbortSignal): Promise<void> {
 /**
  * Single-shot (non-streaming) completion — used by the community moderator.
  * Shares the timeout + auth handling with the streaming path.
+ * Includes retry logic for transient errors (429, 5xx, network).
  */
 export async function completeMinimaxChat(input: {
   messages: ChatMessagePayload[]
   temperature?: number
   maxTokens?: number
   signal?: AbortSignal
+  /** Override retry budget (default 2 = one retry after the first failure). */
+  maxRetries?: number
 }): Promise<string> {
   const cfg = getMinimaxConfig()
   if (!cfg.apiKey) throw new Error("MiniMax is not configured")
 
-  const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(new Error("MiniMax request timed out")), 15_000)
-  const onAbort = () => controller.abort()
-  input.signal?.addEventListener("abort", onAbort, { once: true })
+  const maxRetries = input.maxRetries ?? 2
+  let attempt = 0
 
-  try {
-    const res = await fetch(`${cfg.baseURL}/chat/completions`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${cfg.apiKey}`,
-      },
-      body: JSON.stringify({
-        model: cfg.chatModel,
-        messages: input.messages,
-        temperature: input.temperature ?? 0.2,
-        max_tokens: input.maxTokens ?? 512,
-        stream: false,
-      }),
-      signal: controller.signal,
-    })
-    if (!res.ok) {
-      const text = await res.text().catch(() => "")
-      throw new Error(`MiniMax completion failed: ${res.status} ${text.slice(0, 200)}`)
+  while (true) {
+    const controller = new AbortController()
+    const timeout = setTimeout(
+      () => controller.abort(new Error("MiniMax request timed out")),
+      15_000,
+    )
+    const onAbort = () => controller.abort()
+    input.signal?.addEventListener("abort", onAbort, { once: true })
+
+    try {
+      const res = await fetch(`${cfg.baseURL}/chat/completions`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${cfg.apiKey}`,
+        },
+        body: JSON.stringify({
+          model: cfg.chatModel,
+          messages: input.messages,
+          temperature: input.temperature ?? 0.2,
+          max_tokens: input.maxTokens ?? 512,
+          stream: false,
+        }),
+        signal: controller.signal,
+      })
+
+      if (!res.ok) {
+        const text = await res.text().catch(() => "")
+        const transient = res.status === 429 || res.status >= 500
+        if (transient && attempt < maxRetries) {
+          attempt++
+          await backoff(attempt, input.signal)
+          continue
+        }
+        throw new Error(`MiniMax completion failed: ${res.status} ${text.slice(0, 200)}`)
+      }
+      const json = (await res.json()) as {
+        choices?: Array<{ message?: { content?: string } }>
+      }
+      return json.choices?.[0]?.message?.content ?? ""
+    } catch (err) {
+      const aborted = input.signal?.aborted || controller.signal.aborted
+      if (aborted) throw err
+      const transient = isTransientNetworkError(err)
+      if (transient && attempt < maxRetries) {
+        attempt++
+        await backoff(attempt, input.signal)
+        continue
+      }
+      throw err
+    } finally {
+      clearTimeout(timeout)
+      input.signal?.removeEventListener("abort", onAbort)
     }
-    const json = (await res.json()) as {
-      choices?: Array<{ message?: { content?: string } }>
-    }
-    return json.choices?.[0]?.message?.content ?? ""
-  } finally {
-    clearTimeout(timeout)
-    input.signal?.removeEventListener("abort", onAbort)
   }
 }
 
@@ -324,7 +366,7 @@ export async function embedTexts(inputs: string[]): Promise<Array<number[] | nul
   }
   // Rate-limit cooldown — switch to the local fallback for the next window.
   if (json.base_resp?.status_code === 1002) {
-    console.warn(
+    logger.warn(
       `[embedTexts] MiniMax embeddings rate limit hit (1002) — backing off for ${RATE_LIMIT_COOLDOWN_MS / 1000}s, switching to local fallback`,
     )
     embedRateLimitedUntil = Date.now() + RATE_LIMIT_COOLDOWN_MS
@@ -378,7 +420,7 @@ export async function embedText(input: string): Promise<number[] | null> {
     base_resp?: { status_code?: number; status_msg?: string }
   }
   if (json.base_resp?.status_code === 1002) {
-    console.warn(
+    logger.warn(
       `[embedText] MiniMax embeddings rate limit hit (1002) — backing off for ${RATE_LIMIT_COOLDOWN_MS / 1000}s, switching to local fallback`,
     )
     embedRateLimitedUntil = Date.now() + RATE_LIMIT_COOLDOWN_MS

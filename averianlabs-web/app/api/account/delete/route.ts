@@ -1,11 +1,18 @@
 import { gdprRequests } from "@/db/schema"
-import { db } from "@/lib/db"
+import { db, isDatabaseConfigured } from "@/lib/db"
 import { requireMember, softDeleteUser } from "@/lib/gdpr"
+import { logger } from "@/lib/logger"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
 
 export async function DELETE() {
-  const member = await requireMember().catch(() => null)
+  if (!isDatabaseConfigured()) {
+    return NextResponse.json({ error: "Account deletion is offline." }, { status: 503 })
+  }
+  const member = await requireMember().catch((err) => {
+    logger.error("[account:delete] auth lookup failed", err)
+    return null
+  })
   if (!member) return NextResponse.json({ error: "Authentication required." }, { status: 401 })
 
   const limit = await rateLimit(`account:delete:${member.id}`, { limit: 3, window: "1 h" })
@@ -23,7 +30,8 @@ export async function DELETE() {
       completedAt: new Date(),
     })
     return NextResponse.json({ ok: true })
-  } catch {
+  } catch (err) {
+    logger.error("[account:delete] soft delete failed", err)
     return NextResponse.json({ error: "Failed." }, { status: 500 })
   }
 }

@@ -10,8 +10,11 @@ import {
 } from "@/db/schema"
 import { db } from "@/lib/db"
 import { orderConfirmationHtml, sendEmail } from "@/lib/email"
+import type { Locale } from "@/lib/i18n/config"
 import { computeOrderTotals } from "@/lib/pricing"
+import { computeBulkDiscount } from "@/lib/pricing/bulk-discount"
 import { and, eq, gte, inArray, ne, sql } from "drizzle-orm"
+import { getTranslations } from "next-intl/server"
 
 export interface CreateOrderInput {
   email: string
@@ -36,6 +39,7 @@ export interface OrderRecord {
   number: string
   email: string
   status: string
+  /** POST-bulk-discount subtotal in cents. */
   subtotalCents: number
   shippingCents: number
   vatCents: number
@@ -44,6 +48,16 @@ export interface OrderRecord {
   userId: string | null
   locale: string
   placedAt: Date
+}
+
+/** Discount snapshot returned to the caller for UI/email rendering. */
+export interface BulkDiscountSnapshot {
+  /** Pre-discount line subtotals summed across the cart. */
+  originalSubtotalCents: number
+  /** Absolute savings applied to the subtotal. */
+  discountCents: number
+  /** True when at least one line crossed the 5-vial threshold. */
+  hasBulkTier: boolean
 }
 
 /** Errors that are safe to surface to API clients. */
@@ -100,7 +114,6 @@ export async function createOrder(input: CreateOrderInput): Promise<OrderRecord>
     const vialRows = await tx.select().from(vials).where(inArray(vials.sku, skus)).for("update")
     const vialMap = new Map(vialRows.map((v) => [v.sku, v]))
 
-    let subtotalCents = 0
     const orderItemRows: Array<{ vialId: string; qty: number; unitPriceCents: number }> = []
 
     for (const item of input.items) {
@@ -118,11 +131,29 @@ export async function createOrder(input: CreateOrderInput): Promise<OrderRecord>
         throw new OrderError(`Insufficient stock for ${item.sku}`, "out_of_stock")
       }
 
-      subtotalCents += vial.priceCents * item.qty
       orderItemRows.push({ vialId: vial.id, qty: item.qty, unitPriceCents: vial.priceCents })
     }
 
-    const { vatCents, totalCents } = computeOrderTotals(subtotalCents, input.shippingCents)
+    // Apply the per-SKU bulk discount BEFORE computing VAT + total. The
+    // post-discount subtotal is what we store on the order row; the
+    // pre-discount total is reconstructable from `orderItems` (priceCents ×
+    // qty) so we never lose accounting fidelity.
+    const bulk = computeBulkDiscount(
+      input.items.map((i) => {
+        const vial = vialMap.get(i.sku)
+        return {
+          sku: i.sku,
+          qty: i.qty,
+          unitPriceCents: vial?.priceCents ?? 0,
+        }
+      }),
+    )
+    const discountedSubtotalCents = bulk.discountedSubtotalCents
+
+    const { vatCents, totalCents } = computeOrderTotals(
+      discountedSubtotalCents,
+      input.shippingCents,
+    )
 
     let order: typeof orders.$inferSelect | undefined
     for (let attempt = 0; attempt < 5 && !order; attempt++) {
@@ -134,7 +165,7 @@ export async function createOrder(input: CreateOrderInput): Promise<OrderRecord>
             userId: input.userId ?? null,
             email: input.email,
             status: "pending",
-            subtotalCents,
+            subtotalCents: discountedSubtotalCents,
             shippingCents: input.shippingCents,
             vatCents,
             totalCents,
@@ -314,10 +345,12 @@ export async function sendOrderConfirmationEmail(orderId: string): Promise<void>
     return true
   })
 
+  const t = await getTranslations({ locale: (order.locale as Locale) ?? "en", namespace: "email" })
+
   await sendEmail({
     to: order.email,
-    subject: `Order confirmed — ${order.number}`,
-    html: orderConfirmationHtml({
+    subject: t("orderConfirmedSubject", { number: order.number }),
+    html: await orderConfirmationHtml({
       orderNumber: order.number,
       email: order.email,
       items: uniqueItems.map((i) => ({
@@ -330,6 +363,7 @@ export async function sendOrderConfirmationEmail(orderId: string): Promise<void>
       shippingCents: order.shippingCents,
       vatCents: order.vatCents,
       totalCents: order.totalCents,
+      locale: (order.locale as Locale) ?? "en",
     }),
   })
 }

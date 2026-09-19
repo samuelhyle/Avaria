@@ -3,6 +3,7 @@
 import { HelixGlyph } from "@/components/ai/icons/HelixGlyph"
 import { prepareAssistantContent } from "@/lib/ai/citations"
 import { proposedActionKey } from "@/lib/ai/types/events"
+import { useLocale } from "next-intl"
 
 import { ActionCard } from "./ActionCard"
 import { AssistantMarkdown } from "./AssistantMarkdown"
@@ -19,8 +20,9 @@ export function Message({
   onDismissAction,
   onFeedback,
 }: MessageProps) {
+  const locale = useLocale()
   const isUser = message.role === "user"
-  const products = isUser ? [] : extractProducts(message.toolTrace)
+  const products = isUser ? [] : extractProducts(message.toolTrace, locale)
   const renderedContent = isUser
     ? message.content
     : prepareAssistantContent(message.content, message.citations).text

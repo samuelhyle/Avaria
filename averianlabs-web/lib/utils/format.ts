@@ -1,5 +1,27 @@
-export function formatCurrency(cents: number, currency = "EUR", locale = "en-GB"): string {
-  return new Intl.NumberFormat(locale, {
+import type { Locale } from "@/lib/i18n/config"
+
+const LOCALE_TAG: Record<Locale, string> = {
+  en: "en-GB",
+  fi: "fi-FI",
+  de: "de-DE",
+  sv: "sv-SE",
+  nl: "nl-NL",
+}
+
+export function localeTag(locale: Locale): string {
+  return LOCALE_TAG[locale] ?? "en-GB"
+}
+
+export function formatCurrency(
+  cents: number,
+  currency = "EUR",
+  locale: Locale | string = "en-GB",
+): string {
+  const tag =
+    typeof locale === "string" && (locale as Locale) in LOCALE_TAG
+      ? localeTag(locale as Locale)
+      : locale
+  return new Intl.NumberFormat(tag, {
     style: "currency",
     currency,
     minimumFractionDigits: cents % 100 === 0 ? 0 : 2,
@@ -7,23 +29,42 @@ export function formatCurrency(cents: number, currency = "EUR", locale = "en-GB"
   }).format(cents / 100)
 }
 
-export function formatNumber(value: number, locale = "en-GB"): string {
-  return new Intl.NumberFormat(locale).format(value)
+export function formatNumber(value: number, locale: Locale | string = "en-GB"): string {
+  const tag =
+    typeof locale === "string" && (locale as Locale) in LOCALE_TAG
+      ? localeTag(locale as Locale)
+      : locale
+  return new Intl.NumberFormat(tag).format(value)
 }
 
-export function formatDate(date: Date | string, locale = "en-GB"): string {
+/**
+ * Finnish: "99,4 %" (comma decimal, space before %).
+ * Other locales fall back to en-GB.
+ */
+export function formatPercent(value: number, locale: Locale | string = "en-GB"): string {
+  const tag =
+    typeof locale === "string" && (locale as Locale) in LOCALE_TAG
+      ? localeTag(locale as Locale)
+      : locale
+  return new Intl.NumberFormat(tag, {
+    style: "percent",
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  }).format(value / 100)
+}
+
+/**
+ * Finnish: "18.7.2026". en-GB: "18 Jul 2026".
+ */
+export function formatDate(date: Date | string, locale: Locale | string = "en-GB"): string {
   const d = typeof date === "string" ? new Date(date) : date
-  return new Intl.DateTimeFormat(locale, {
+  const tag =
+    typeof locale === "string" && (locale as Locale) in LOCALE_TAG
+      ? localeTag(locale as Locale)
+      : locale
+  return new Intl.DateTimeFormat(tag, {
     day: "numeric",
     month: "short",
     year: "numeric",
   }).format(d)
-}
-
-export function clamp(value: number, min: number, max: number): number {
-  return Math.max(min, Math.min(max, value))
-}
-
-export function lerp(a: number, b: number, t: number): number {
-  return a + (b - a) * t
 }

@@ -7,25 +7,133 @@
  *
  * Idempotent — re-running with the same data replaces rows by (source,
  * source_id, locale) without duplicating chunks.
+ *
+ * Labels (category names, section headings) are locale-aware so the indexed
+ * content matches what the user actually reads on the site.
  */
 
 import { aiDocumentChunks, aiDocuments } from "@/db/schema/ai"
 import { type Chunk, chunkText } from "@/lib/ai/chunker"
 import { embedBatch } from "@/lib/ai/rag/embeddings"
 import { db } from "@/lib/db"
+import { logger } from "@/lib/logger"
 import { products as catalog } from "@/lib/products/data"
 import type { Product, Locale as ProductLocale } from "@/lib/products/types"
+import { safeUuid } from "@/lib/utils/uuid"
 import { and, eq, inArray } from "drizzle-orm"
 
 const SUPPORTED_LOCALES: ProductLocale[] = ["en", "fi", "de", "sv", "nl"]
-const CATEGORY_LABELS: Record<Product["category"], string> = {
-  metabolic: "Metabolic research",
-  recovery: "Recovery & tissue",
-  cognitive: "Cognitive research",
-  longevity: "Longevity research",
-  cosmetic: "Cosmetic research",
-  blend: "Blends",
-  supplies: "Lab supplies",
+
+const CATEGORY_LABELS: Record<ProductLocale, Record<Product["category"], string>> = {
+  en: {
+    metabolic: "Metabolism & receptor signaling",
+    recovery: "Recovery & tissue",
+    cognitive: "Cognitive research",
+    longevity: "Longevity research",
+    cosmetic: "Cosmetic research",
+    blend: "Blends",
+    supplies: "Lab supplies",
+  },
+  fi: {
+    metabolic: "Metabolia ja reseptorisignalointi",
+    recovery: "Palautuminen ja kudos",
+    cognitive: "Kognitiivinen tutkimus",
+    longevity: "Pitkäikäisyystutkimus",
+    cosmetic: "Kosmetiikkatutkimus",
+    blend: "Sekoitukset",
+    supplies: "Laboratoriotarvikkeet",
+  },
+  de: {
+    metabolic: "Stoffwechsel & Rezeptorsignalisierung",
+    recovery: "Regeneration & Gewebe",
+    cognitive: "Kognitionsforschung",
+    longevity: "Langlebigkeitsforschung",
+    cosmetic: "Kosmetikforschung",
+    blend: "Mischungen",
+    supplies: "Laborbedarf",
+  },
+  sv: {
+    metabolic: "Metabolism & receptorsignalering",
+    recovery: "Återhämtning & vävnad",
+    cognitive: "Kognitiv forskning",
+    longevity: "Livslängdsforskning",
+    cosmetic: "Kosmetikforskning",
+    blend: "Blandningar",
+    supplies: "Labbförbrukning",
+  },
+  nl: {
+    metabolic: "Metabolisme en receptorsignalering",
+    recovery: "Herstel en weefsel",
+    cognitive: "Cognitief onderzoek",
+    longevity: "Langlevensonderzoek",
+    cosmetic: "Cosmetisch onderzoek",
+    blend: "Mengsels",
+    supplies: "Labbenodigdheden",
+  },
+}
+
+const SECTION_LABELS: Record<ProductLocale, Record<string, string>> = {
+  en: {
+    description: "Description",
+    specifications: "Specifications",
+    availableVials: "Available vials",
+    latestBatch: "Latest batch",
+    inStock: "in stock",
+    outOfStock: "out of stock",
+    compareAt: "compare at",
+    researchUseOnly: "Research use only. Not for human or veterinary use.",
+    noBatch: "No batch data published.",
+  },
+  fi: {
+    description: "Kuvaus",
+    specifications: "Tekniset tiedot",
+    availableVials: "Saatavilla olevat pullot",
+    latestBatch: "Viimeisin erä",
+    inStock: "varastossa",
+    outOfStock: "loppu varastosta",
+    compareAt: "vertaushinta",
+    researchUseOnly: "Vain tutkimuskäyttöön. Ei ihmis- tai eläinkäyttöön.",
+    noBatch: "Erätietoja ei julkaistu.",
+  },
+  de: {
+    description: "Beschreibung",
+    specifications: "Spezifikationen",
+    availableVials: "Verfügbare Vials",
+    latestBatch: "Letzte Charge",
+    inStock: "auf Lager",
+    outOfStock: "nicht vorrätig",
+    compareAt: "Vergleichspreis",
+    researchUseOnly:
+      "Nur für Forschungszwecke. Nicht für den menschlichen oder tierärztlichen Gebrauch.",
+    noBatch: "Keine Chargendaten veröffentlicht.",
+  },
+  sv: {
+    description: "Beskrivning",
+    specifications: "Specifikationer",
+    availableVials: "Tillgängliga vials",
+    latestBatch: "Senaste batch",
+    inStock: "i lager",
+    outOfStock: "slut i lager",
+    compareAt: "jämförpris",
+    researchUseOnly: "Endast för forskningsändamål. Inte för humant eller veterinärt bruk.",
+    noBatch: "Inga batchdata publicerade.",
+  },
+  nl: {
+    description: "Beschrijving",
+    specifications: "Specificaties",
+    availableVials: "Beschikbare vials",
+    latestBatch: "Laatste batch",
+    inStock: "op voorraad",
+    outOfStock: "niet op voorraad",
+    compareAt: "vergelijkingsprijs",
+    researchUseOnly: "Alleen voor onderzoeksdoeleinden. Niet voor menselijk of veterinair gebruik.",
+    noBatch: "Geen batchgegevens gepubliceerd.",
+  },
+}
+
+function lbl(locale: ProductLocale, key: keyof (typeof SECTION_LABELS)["en"]): string {
+  const value = SECTION_LABELS[locale][key]
+  return value ?? key
 }
 
 interface IndexerReport {
@@ -48,57 +156,180 @@ function renderProductDocument(
   const name = tr.name
   const tagline = tr.tagline
   const description = tr.description
-  const category = CATEGORY_LABELS[product.category]
+  const category = CATEGORY_LABELS[locale][product.category]
 
+  const specLabels = getSpecLabels(locale)
   const specs: string[] = []
-  if (product.casNumber) specs.push(`CAS number: ${product.casNumber}`)
-  if (product.molecularFormula) specs.push(`Molecular formula: ${product.molecularFormula}`)
+  if (product.casNumber) specs.push(`${specLabels.cas}: ${product.casNumber}`)
+  if (product.molecularFormula) specs.push(`${specLabels.formula}: ${product.molecularFormula}`)
   if (product.molecularWeight !== undefined)
-    specs.push(`Molecular weight: ${product.molecularWeight} g/mol`)
-  if (product.sequence) specs.push(`Sequence: ${product.sequence}`)
-  specs.push(`Storage: ${product.storageTemp}`)
-  if (product.purityPercent !== undefined) specs.push(`HPLC purity: ${product.purityPercent}%`)
+    specs.push(`${specLabels.weight}: ${product.molecularWeight} g/mol`)
+  if (product.sequence) specs.push(`${specLabels.sequence}: ${product.sequence}`)
+  specs.push(`${specLabels.storage}: ${product.storageTemp}`)
+  if (product.purityPercent !== undefined)
+    specs.push(`${specLabels.purity}: ${product.purityPercent}%`)
 
   const vials = product.vials
     .map(
       (v) =>
         `- ${v.mg} mg vial · SKU ${v.sku} · €${(v.priceCents / 100).toFixed(2)} · ${
-          v.stockQty > 0 ? `${v.stockQty} in stock` : "out of stock"
-        }${v.compareAtCents ? ` (compare at €${(v.compareAtCents / 100).toFixed(2)})` : ""}`,
+          v.stockQty > 0 ? `${v.stockQty} ${lbl(locale, "inStock")}` : lbl(locale, "outOfStock")
+        }${v.compareAtCents ? ` (${lbl(locale, "compareAt")} €${(v.compareAtCents / 100).toFixed(2)})` : ""}`,
     )
     .join("\n")
 
+  const batchLabels = getBatchLabels(locale)
   const batch = product.latestBatch
-    ? `Latest batch ${product.latestBatch.code}: manufactured ${product.latestBatch.manufacturedAt}, expires ${product.latestBatch.expiresAt}, HPLC purity ${product.latestBatch.hplcPurity}%, endotoxin ${product.latestBatch.endotoxinEUPerMg} EU/mg, mass-spec confirmed: ${product.latestBatch.msConfirmed}, tested at ${product.latestBatch.lab}.`
-    : "No batch data published."
+    ? `${batchLabels.latest} ${product.latestBatch.code}: ${batchLabels.manufactured} ${product.latestBatch.manufacturedAt}, ${batchLabels.expires} ${product.latestBatch.expiresAt}, ${batchLabels.purity} ${product.latestBatch.hplcPurity}%, ${batchLabels.endotoxin} ${product.latestBatch.endotoxinEUPerMg} EU/mg, ${batchLabels.ms}: ${product.latestBatch.msConfirmed}, ${batchLabels.tested} ${product.latestBatch.lab}.`
+    : lbl(locale, "noBatch")
 
   const content = [
     `# ${name}`,
     tagline,
     "",
-    `Category: ${category}`,
+    `${batchLabels.category}: ${category}`,
     "",
-    "Description",
+    lbl(locale, "description"),
     description,
     "",
-    "Specifications",
+    lbl(locale, "specifications"),
     ...specs,
     "",
-    "Available vials",
+    lbl(locale, "availableVials"),
     vials,
     "",
-    "Latest batch",
+    lbl(locale, "latestBatch"),
     batch,
     "",
-    "Research use only. Not for human or veterinary use.",
+    lbl(locale, "researchUseOnly"),
   ].join("\n")
 
   return { title: name, content }
 }
 
-function uuid(): string {
-  if (typeof crypto !== "undefined" && "randomUUID" in crypto) return crypto.randomUUID()
-  return `id-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`
+const SPEC_LABELS: Record<
+  ProductLocale,
+  {
+    cas: string
+    formula: string
+    weight: string
+    sequence: string
+    storage: string
+    purity: string
+  }
+> = {
+  en: {
+    cas: "CAS number",
+    formula: "Molecular formula",
+    weight: "Molecular weight",
+    sequence: "Sequence",
+    storage: "Storage",
+    purity: "HPLC purity",
+  },
+  fi: {
+    cas: "CAS-numero",
+    formula: "Molekyylikaava",
+    weight: "Molekyylimassa",
+    sequence: "Sekvenssi",
+    storage: "Säilytys",
+    purity: "HPLC-puhtaus",
+  },
+  de: {
+    cas: "CAS-Nummer",
+    formula: "Molekülformel",
+    weight: "Molekülmasse",
+    sequence: "Sequenz",
+    storage: "Lagerung",
+    purity: "HPLC-Reinheit",
+  },
+  sv: {
+    cas: "CAS-nummer",
+    formula: "Molekylformel",
+    weight: "Molekylvikt",
+    sequence: "Sekvens",
+    storage: "Förvaring",
+    purity: "HPLC-renhet",
+  },
+  nl: {
+    cas: "CAS-nummer",
+    formula: "Molecuulformule",
+    weight: "Molecuulmassa",
+    sequence: "Sequentie",
+    storage: "Opslag",
+    purity: "HPLC-zuiverheid",
+  },
+}
+
+const BATCH_LABELS: Record<
+  ProductLocale,
+  {
+    latest: string
+    manufactured: string
+    expires: string
+    purity: string
+    endotoxin: string
+    ms: string
+    tested: string
+    category: string
+  }
+> = {
+  en: {
+    latest: "Latest batch",
+    manufactured: "manufactured",
+    expires: "expires",
+    purity: "HPLC purity",
+    endotoxin: "endotoxin",
+    ms: "mass-spec confirmed",
+    tested: "tested at",
+    category: "Category",
+  },
+  fi: {
+    latest: "Viimeisin erä",
+    manufactured: "valmistettu",
+    expires: "vanhenee",
+    purity: "HPLC-puhtaus",
+    endotoxin: "endotoksiini",
+    ms: "massaspektri vahvistettu",
+    tested: "testattu",
+    category: "Kategoria",
+  },
+  de: {
+    latest: "Letzte Charge",
+    manufactured: "hergestellt",
+    expires: "läuft ab",
+    purity: "HPLC-Reinheit",
+    endotoxin: "Endotoxin",
+    ms: "Massenspektrum bestätigt",
+    tested: "getestet bei",
+    category: "Kategorie",
+  },
+  sv: {
+    latest: "Senaste batch",
+    manufactured: "tillverkad",
+    expires: "löper ut",
+    purity: "HPLC-renhet",
+    endotoxin: "endotoxin",
+    ms: "masspektri bekräftat",
+    tested: "testad vid",
+    category: "Kategori",
+  },
+  nl: {
+    latest: "Laatste batch",
+    manufactured: "vervaardigd",
+    expires: "verloopt",
+    purity: "HPLC-zuiverheid",
+    endotoxin: "endotoxine",
+    ms: "massaspectrometrie bevestigd",
+    tested: "getest bij",
+    category: "Categorie",
+  },
+}
+
+function getSpecLabels(locale: ProductLocale) {
+  return SPEC_LABELS[locale]
+}
+function getBatchLabels(locale: ProductLocale) {
+  return BATCH_LABELS[locale]
 }
 
 async function indexOneDocument(
@@ -137,7 +368,7 @@ async function indexOneDocument(
   const skipped = embeddings.length - embedded
 
   const rows = chunks.map((c, i) => ({
-    id: uuid(),
+    id: safeUuid(),
     documentId: docId,
     locale,
     position: c.position,
@@ -174,14 +405,16 @@ function portableTextToPlain(value: unknown): string {
   return ""
 }
 
-/** Index glossary terms (Sanity-backed with static fallback). */
+/** Index glossary terms (Sanity-backed with static locale-aware fallback). */
 async function indexGlossary(
   addResult: (chunks: number, embedded: number, skipped: number) => void,
 ): Promise<void> {
   try {
     const { listGlossaryTerms } = await import("@/lib/glossary/sanity")
-    const terms = await listGlossaryTerms()
-    for (const term of terms) {
+    const sanityTerms = await listGlossaryTerms()
+    const sanitySlugs = new Set(sanityTerms.map((t) => t.slug))
+
+    for (const term of sanityTerms) {
       const content = [
         `# ${term.term}`,
         term.shortDefinition,
@@ -200,8 +433,70 @@ async function indexGlossary(
       )
       addResult(result.chunks.length, result.embedded, result.skipped)
     }
+
+    // Locale-aware static glossary — published once per locale for retrieval
+    // parity with the on-page rendering. Skipped if a Sanity entry with the
+    // same slug already exists so we never produce duplicates.
+    const { GLOSSARY: staticTerms } = await import("@/lib/knowledge/glossary")
+    const categoryLabelByLocale: Record<ProductLocale, Record<string, string>> = {
+      en: {
+        analysis: "Analysis",
+        sequence: "Sequence",
+        formulation: "Formulation",
+        storage: "Storage",
+        regulatory: "Regulatory",
+      },
+      fi: {
+        analysis: "Analyysi",
+        sequence: "Sekvenssi",
+        formulation: "Formulaatio",
+        storage: "Säilytys",
+        regulatory: "Sääntely",
+      },
+      de: {
+        analysis: "Analyse",
+        sequence: "Sequenz",
+        formulation: "Formulierung",
+        storage: "Lagerung",
+        regulatory: "Regulierung",
+      },
+      sv: {
+        analysis: "Analys",
+        sequence: "Sekvens",
+        formulation: "Formulering",
+        storage: "Förvaring",
+        regulatory: "Reglering",
+      },
+      nl: {
+        analysis: "Analyse",
+        sequence: "Sequentie",
+        formulation: "Formulering",
+        storage: "Opslag",
+        regulatory: "Regelgeving",
+      },
+    }
+
+    for (const term of staticTerms) {
+      if (sanitySlugs.has(term.slug)) continue
+      for (const locale of SUPPORTED_LOCALES) {
+        const tr = term.translations[locale]
+        const catLabel = categoryLabelByLocale[locale][term.category] ?? term.category
+        const content = [`# ${tr.term}`, tr.short, "", tr.long, "", `Category: ${catLabel}`].join(
+          "\n",
+        )
+        const result = await indexOneDocument(
+          "glossary",
+          term.slug,
+          locale,
+          tr.term,
+          content,
+          `/${locale}/glossary/${term.slug}`,
+        )
+        addResult(result.chunks.length, result.embedded, result.skipped)
+      }
+    }
   } catch (err) {
-    console.warn("[ai-index] glossary source skipped:", err instanceof Error ? err.message : err)
+    logger.warn("[ai-index] glossary source skipped:", err instanceof Error ? err.message : err)
   }
 }
 
@@ -230,7 +525,7 @@ async function indexBlog(
       addResult(result.chunks.length, result.embedded, result.skipped)
     }
   } catch (err) {
-    console.warn("[ai-index] blog source skipped:", err instanceof Error ? err.message : err)
+    logger.warn("[ai-index] blog source skipped:", err instanceof Error ? err.message : err)
   }
 }
 

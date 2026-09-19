@@ -1,4 +1,5 @@
 import { getCurrentMember } from "@/lib/community"
+import { isDatabaseConfigured } from "@/lib/db"
 import { updatePreferences } from "@/lib/notifications"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -12,6 +13,9 @@ const Body = z.object({
 })
 
 export async function POST(req: Request) {
+  if (!isDatabaseConfigured()) {
+    return NextResponse.json({ error: "Preferences are offline." }, { status: 503 })
+  }
   const member = await getCurrentMember()
   if (!member) return NextResponse.json({ error: "Authentication required." }, { status: 401 })
 

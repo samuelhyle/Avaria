@@ -1,11 +1,10 @@
-export const dynamic = "force-dynamic"
-
 import { ThreadListItem } from "@/components/community/ThreadListItem"
 import { Container } from "@/components/ui/Container"
 import { listThreads } from "@/lib/community"
 import { Activity, Sparkles } from "lucide-react"
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
+export const dynamic = "force-dynamic"
 
 export async function generateMetadata({
   params,
@@ -68,7 +67,6 @@ export default async function ActivityPage({
               <ThreadListItem
                 key={th.id}
                 locale={locale}
-                t={t as never}
                 thread={{
                   id: th.id,
                   slug: th.slug,

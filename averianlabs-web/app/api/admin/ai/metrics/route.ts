@@ -11,8 +11,9 @@ import { db } from "@/lib/db"
 import { and, eq, gte, sql } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
-export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
+
+export const runtime = "nodejs"
 
 export async function GET(): Promise<NextResponse> {
   const admin = await getAdminOrNull()

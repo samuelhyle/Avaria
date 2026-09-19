@@ -71,12 +71,12 @@ restore_all() {
     for f in "${PATCHED[@]}"; do
       [ -f "$f" ] || continue
       # Restore the disabled dynamic exports back to their originals.
+      perl -i -pe 's|^export const dynamicParams = false$|export const dynamicParams = true|' "$f"
+      # Drop the auto-injected patch block (dynamic export + generateStaticParams).
+      perl -i -0777 -pe 's|^// DISABLED_FOR_DEMO_BUILD: export const dynamic = "force-dynamic"\nexport async function generateStaticParams\(\) \{ return \[\] \}\n\n||m' "$f"
+      # Remove any standalone patched-line markers (defensive — should be
+      # covered by the slurp regex above).
       perl -i -pe 's|^// DISABLED_FOR_DEMO_BUILD: export const dynamic = "force-dynamic"$|export const dynamic = "force-dynamic"|' "$f"
-      perl -i -pe 's|^// DISABLED_FOR_DEMO_BUILD: export const dynamicParams = true$|export const dynamicParams = true|' "$f"
-      # Drop the auto-injected empty generateStaticParams so the file
-      # matches HEAD byte-for-byte. Patcher inserts one line plus one
-      # trailing newline, so removal is a single line + newline.
-      perl -i -0pe 's|^export async function generateStaticParams\(\) \{ return \[\] \}\n||m' "$f"
     done
   fi
 }
@@ -86,14 +86,27 @@ patch_force_dynamic() {
   log "Temporarily disabling \`export const dynamic = \"force-dynamic\"\` for static export…"
   while IFS= read -r f; do
     PATCHED+=("$f")
-    perl -i -pe 's|^export const dynamic = "force-dynamic"$|// DISABLED_FOR_DEMO_BUILD: export const dynamic = "force-dynamic"|' "$f"
-    # Force-dynamic routes almost always have [param] segments. Without an
-    # explicit generateStaticParams, Next.js can't statically export them
-    # and errors out. Inject a no-op generator right after the patched line.
+    # Comment the export out, capture it for re-insertion after the
+    # imports. Next.js's static-export walker is strict about top-level
+    # declarations appearing after `import` statements, so leaving the
+    # patched lines above the imports is brittle.
+    local captured
+    captured="$(grep -m1 '^export const dynamic = "force-dynamic"$' "$f" || true)"
+    if [ -z "$captured" ]; then
+      warn "Could not find dynamic export in $f"
+      continue
+    fi
+    perl -i -pe 's|^export const dynamic = "force-dynamic"$|// DISABLED_FOR_DEMO_BUILD: &|' "$f"
+    # Inject `generateStaticParams()` right after the last import — both it
+    # and the patched dynamic line move together so we can revert cleanly.
     if ! grep -q 'generateStaticParams' "$f"; then
-      # Insert on the same logical block — single \n so we don't leave a
-      # dangling blank line that survives restoration.
-      perl -i -0pe 's|^(// DISABLED_FOR_DEMO_BUILD: export const dynamic = "force-dynamic"\n)|$1export async function generateStaticParams() { return [] }\n|' "$f"
+      perl -i -0777 -pe '
+        my $insertion = q{// DISABLED_FOR_DEMO_BUILD: export const dynamic = "force-dynamic"\nexport async function generateStaticParams() { return [] }\n\n};
+        # Insert after the last import statement.
+        if (/^(?:import .* from .*;|import .*\n(?:\n .* from .*;)*)$/m) {
+          $_ = $` . $& . $insertion . $'\'';
+        }
+      ' "$f"
       if ! grep -q 'generateStaticParams' "$f"; then
         warn "Failed to inject generateStaticParams into $f"
       fi
@@ -108,7 +121,11 @@ patch_dynamic_params() {
   log "Temporarily disabling \`dynamicParams = true\` for static export…"
   while IFS= read -r f; do
     PATCHED+=("$f")
-    perl -i -pe 's|^export const dynamicParams = true$|// DISABLED_FOR_DEMO_BUILD: export const dynamicParams = true|' "$f"
+    # `output: "export"` rejects `dynamicParams = true`. Patch the value
+    # itself rather than commenting the export so Next.js still parses
+    # the file as a normal route module (comments above imports confuse
+    # the static walker).
+    perl -i -pe 's|^export const dynamicParams = true$|export const dynamicParams = false|' "$f"
   done < <(grep -rl 'export const dynamicParams = true' app 2>/dev/null || true)
 }
 
@@ -130,6 +147,7 @@ hide_non_demo_routes() {
   local routes=(
     "[locale]/account"
     "[locale]/admin"
+    "[locale]/coa/[batchCode]"
     "[locale]/community"
     "[locale]/checkout/confirm"
     "[locale]/documents"

@@ -37,18 +37,6 @@ export type ChatContext =
   | { kind: "support" }
   | { kind: "other"; path: string }
 
-/** Payload accepted by POST /api/ai/chat. */
-export interface ChatRequestBody {
-  messages: Array<{ role: "user" | "assistant"; content: string }>
-  context?: ChatContext
-  /** Locale used to localize the system prompt + greeting. */
-  locale?: string
-  /** Cart snapshot — sent on every request so the agent can reason about it. */
-  cart?: CartItem[]
-  /** Disable retrieval (used by eval / tests). */
-  noRetrieve?: boolean
-}
-
 export interface CitationRef {
   index: number
   source: string

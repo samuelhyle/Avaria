@@ -13,16 +13,23 @@ import { chromium } from "@playwright/test"
 
 const BASE_URL = process.env.BASE_URL ?? "http://localhost:3000"
 
+const LOCALES = ["en", "fi", "de", "sv", "nl"]
+
 const ROUTES = [
-  "/en",
-  "/fi",
-  "/en/shop",
-  "/en/shop/bpc-157",
-  "/en/community",
-  "/en/glossary",
-  "/en/lab-tests",
-  "/en/peptide-calculator",
+  "/",
+  "/shop",
+  "/shop/bpc-157",
+  "/community",
+  "/glossary",
+  "/lab-tests",
+  "/peptide-calculator",
 ]
+
+function buildRoutes() {
+  return LOCALES.flatMap((locale) => ROUTES.map((r) => `/${locale}${r}`))
+}
+
+const ALL_ROUTES = buildRoutes()
 
 const BLOCKING_IMPACTS = new Set(["critical", "serious"])
 
@@ -35,7 +42,7 @@ await context.addCookies([{ name: "averianlabs-age-confirmed", value: "1", url: 
 
 let failed = false
 
-for (const route of ROUTES) {
+for (const route of ALL_ROUTES) {
   const page = await context.newPage()
   try {
     const response = await page.goto(`${BASE_URL}${route}`, {

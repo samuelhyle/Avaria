@@ -11,6 +11,7 @@
  * Both buckets are checked. The first to exceed returns 429.
  */
 
+import { getServerEnv } from "@/lib/env"
 import { Ratelimit } from "@upstash/ratelimit"
 import { Redis } from "@upstash/redis"
 
@@ -98,8 +99,9 @@ function buildPair(
 function getLimiter(): LimiterSets {
   if (limiter) return limiter
 
-  const url = process.env.UPSTASH_REDIS_REST_URL
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN
+  const env = getServerEnv()
+  const url = env.UPSTASH_REDIS_REST_URL
+  const token = env.UPSTASH_REDIS_REST_TOKEN
   const redis = url && token ? new Redis({ url, token }) : null
 
   limiter = {

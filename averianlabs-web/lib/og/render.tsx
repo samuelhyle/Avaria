@@ -2,6 +2,7 @@
  * Shared OG image renderer. Used by every `/api/og/[type]/[slug]`
  * route handler so the visual language stays consistent.
  */
+import { getSiteUrl } from "@/lib/site"
 import { ImageResponse } from "next/og"
 
 export const OG_SIZE = { width: 1200, height: 630 } as const
@@ -25,7 +26,8 @@ export interface OgBase {
 }
 
 export async function renderOg(input: OgBase): Promise<ImageResponse> {
-  const { kind, title, subtitle, badge, meta, url = "averianlabs.eu" } = input
+  const { kind, title, subtitle, badge, meta, url } = input
+  const siteUrl = url ?? new URL(getSiteUrl()).host
   return new ImageResponse(
     <div
       style={{
@@ -63,7 +65,7 @@ export async function renderOg(input: OgBase): Promise<ImageResponse> {
           Æ
         </div>
         <div style={{ fontSize: 24, fontWeight: 600, letterSpacing: "-0.02em" }}>AVERIANLABS</div>
-        <div style={{ marginLeft: "auto", fontSize: 14, color: INK_MUTED }}>{url}</div>
+        <div style={{ marginLeft: "auto", fontSize: 14, color: INK_MUTED }}>{siteUrl}</div>
       </div>
 
       <div

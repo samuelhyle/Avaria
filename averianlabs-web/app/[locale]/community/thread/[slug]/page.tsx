@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic"
-
 import { PostCard } from "@/components/community/PostCard"
 import { ReplyBox } from "@/components/community/ReplyBox"
 import { DiscussionForumPostingJsonLd } from "@/components/seo/JsonLd"
@@ -18,6 +16,7 @@ import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+export const dynamic = "force-dynamic"
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>

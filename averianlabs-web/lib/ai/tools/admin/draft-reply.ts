@@ -16,6 +16,7 @@ import {
   streamMinimaxChat,
 } from "@/lib/ai/providers/minimax"
 import type { Tool, ToolContext, ToolResult } from "@/lib/ai/tools/registry"
+import { logger } from "@/lib/logger"
 
 interface Turn {
   role: "user" | "assistant"
@@ -142,7 +143,7 @@ Draft a reply now.`
         if (chunk.delta.content) draft += chunk.delta.content
       }
     } catch (err) {
-      console.error("[averia] draft-reply failed", err)
+      logger.error("[averia] draft-reply failed", err)
       return { content: { error: "draft_failed" } }
     }
 

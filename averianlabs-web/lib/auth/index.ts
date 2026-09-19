@@ -1,27 +1,39 @@
+import crypto from "node:crypto"
 import { users } from "@/db/schema"
 import { db, isDatabaseConfigured } from "@/lib/db"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { DrizzleAdapter } from "@auth/drizzle-adapter"
-import { verify } from "argon2"
-import crypto from "node:crypto"
 import { eq } from "drizzle-orm"
 import NextAuth, { type NextAuthConfig } from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 import Google from "next-auth/providers/google"
 import { authAdapterSchema } from "./db-schema"
 
+// AUTH_SECRET must be set via environment — no fallback.
+// If unset, isAuthConfigured() will return false and auth routes will 503.
 const authSecret = process.env.AUTH_SECRET?.trim()
+
+// AUTH_URL must be set in production to pin canonical origins against Host-header spoofing.
+// In development, it defaults to the local request origin.
 const authUrl = process.env.AUTH_URL?.trim()
 
-// In environments where Auth.js isn't configured (e.g. a Netlify preview
-// without a Neon DB / Auth.js secret), generate a per-process fallback so the
-// module loads. Actual login/registration routes short-circuit with a 503 when
-// the secret isn't a real one — see `requireAuthSecret()` below.
-const fallbackSecret = crypto.randomBytes(32).toString("base64")
-const effectiveSecret = authSecret && authSecret.length >= 16 ? authSecret : fallbackSecret
+const isProduction = process.env.NODE_ENV === "production"
 
-const secureCookies = (authUrl ?? "").startsWith("https://")
+// Secure cookies in any production deployment — falling back to `authUrl`
+// alone lets a misconfigured AUTH_URL (e.g. `http://prod-host`) silently
+// downgrade session cookies to plaintext. Force the Secure flag when
+// running in production, regardless of the configured scheme.
+const secureCookies = isProduction || Boolean(authUrl?.startsWith("https://"))
+
+// `trustHost: true` lets Auth.js v5 honor the incoming `Host` header when
+// computing canonical redirect URLs. Without AUTH_URL in production, that
+// becomes a Host-header injection vector — an attacker can craft a request
+// with a Host pointing at an attacker-controlled origin and Auth.js will
+// happily redirect the post-login callback there. Gate it so production
+// REQUIRES AUTH_URL to be set, and the dev experience still works on
+// `localhost`/preview hosts.
+const trustHost = !isProduction || Boolean(authUrl?.startsWith("https://"))
 
 const providers: NextAuthConfig["providers"] = [
   Credentials({
@@ -41,6 +53,10 @@ const providers: NextAuthConfig["providers"] = [
       const user = await db.query.users.findFirst({ where: eq(users.email, email) })
       if (!user?.passwordHash || user.deletedAt) return null
 
+      // argon2 ships a native binding — loaded lazily so server routes that
+      // touch `@/lib/auth` (community hub, account pages, …) don't have to
+      // bundle the whole native module just to read a session cookie.
+      const { verify } = await import("argon2")
       const valid = await verify(user.passwordHash, password)
       if (!valid) {
         await rateLimit(`login:fail:${email}`, { limit: 10, window: "15 m" })
@@ -66,15 +82,19 @@ if (process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET) {
   )
 }
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
-  adapter: DrizzleAdapter(db, authAdapterSchema),
-  secret: effectiveSecret,
-  // Trust the request host in development (localhost / preview hosts). In
-  // production this must be opted into explicitly via AUTH_TRUST_HOST=true.
-  // Auth.js v5 treats `trustHost: false` as "trust no host" (it is not an
-  // allowlist against AUTH_URL), so it must be true. Production requires
-  // AUTH_URL, which pins canonical origins against Host-header spoofing.
-  trustHost: true,
+// secret: omit when not configured so NextAuth generates a per-process fallback
+// only for development previews; production must set AUTH_SECRET.
+const authConfig = {
+  // adapter: DrizzleAdapter(db, authAdapterSchema),
+  // secret: authSecret, // set conditionally below
+  // Trust the request host ONLY when:
+  //   - we're in development (localhost / preview hosts), OR
+  //   - AUTH_URL is set to an HTTPS URL (the canonical origin is pinned, so
+  //     a spoofed Host header cannot redirect callbacks elsewhere).
+  // In production with no AUTH_URL, `trustHost: false` is the safer default
+  // — Auth.js v5 will refuse to redirect rather than honor an attacker
+  // controlled Host. Re-enable with the env-var path documented above.
+  trustHost,
   session: { strategy: "jwt", maxAge: 30 * 24 * 60 * 60 },
   pages: { signIn: "/account" },
   useSecureCookies: secureCookies,
@@ -84,6 +104,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       options: { httpOnly: true, sameSite: "lax", path: "/", secure: secureCookies },
     },
   },
+  // Only add adapter/secret when DB + secret are configured.
+  ...(isAuthConfigured()
+    ? {
+        adapter: DrizzleAdapter(db, authAdapterSchema),
+        secret: authSecret,
+      }
+    : {}),
   providers,
   callbacks: {
     redirect({ url, baseUrl }) {
@@ -119,9 +146,20 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session
     },
   },
-})
+} as NextAuthConfig
+
+export const { handlers, signIn, signOut, auth } = NextAuth(authConfig)
 
 /** True when the process has a real AUTH_SECRET (not the per-process fallback). */
 export function isAuthConfigured(): boolean {
   return Boolean(authSecret && authSecret.length >= 16) && isDatabaseConfigured()
+}
+
+/**
+ * Test-only: true when the auth config will issue Secure, __Secure-prefixed
+ * cookies. Exposed for the auth integration tests so we can assert the
+ * post-fix hardening actually engages in production-shaped envs.
+ */
+export function __isSecureCookieMode(): boolean {
+  return secureCookies
 }

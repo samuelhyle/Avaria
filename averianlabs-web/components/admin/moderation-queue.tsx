@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/Button"
 import { cn } from "@/lib/utils/cn"
 import { Check, Eye, X } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import { useState, useTransition } from "react"
 import { toast } from "sonner"
@@ -28,6 +29,7 @@ interface QueueActionsProps {
 
 export function ModerationQueue({ items }: QueueActionsProps) {
   const router = useRouter()
+  const t = useTranslations("admin.moderationQueue")
   const [busyId, setBusyId] = useState<string | null>(null)
   const [, startTransition] = useTransition()
   const [expanded, setExpanded] = useState<string | null>(null)
@@ -42,10 +44,10 @@ export function ModerationQueue({ items }: QueueActionsProps) {
       })
       setBusyId(null)
       if (!res.ok) {
-        toast.error("Couldn't record the verdict. Try again.")
+        toast.error(t("verdictError"))
         return
       }
-      toast.success("Verdict recorded.")
+      toast.success(t("verdictRecorded"))
       router.refresh()
     })
   }
@@ -53,7 +55,7 @@ export function ModerationQueue({ items }: QueueActionsProps) {
   if (items.length === 0) {
     return (
       <div className="rounded-[var(--radius-lg)] border border-dashed border-line bg-surface p-10 text-center text-sm text-ink-muted">
-        Queue empty. Every flagged post has been reviewed.
+        {t("queueEmpty")}
       </div>
     )
   }
@@ -97,12 +99,14 @@ export function ModerationQueue({ items }: QueueActionsProps) {
                   {item.body ? (
                     truncate(item.body, 240)
                   ) : (
-                    <span className="italic text-ink-muted">(post body unavailable)</span>
+                    <span className="italic text-ink-muted">{t("postBodyUnavailable")}</span>
                   )}
                 </p>
                 {item.note ? <p className="mt-1 text-xs text-ink-muted">{item.note}</p> : null}
                 {item.authorName ? (
-                  <p className="mt-1 text-xs text-ink-muted">by {item.authorName}</p>
+                  <p className="mt-1 text-xs text-ink-muted">
+                    {t("byAuthor", { name: item.authorName })}
+                  </p>
                 ) : null}
               </div>
               <div className="flex items-center gap-1">
@@ -111,10 +115,10 @@ export function ModerationQueue({ items }: QueueActionsProps) {
                     type="button"
                     onClick={() => setExpanded(isOpen ? null : item.id)}
                     className="inline-flex h-8 items-center gap-1 rounded-[var(--radius)] border border-line bg-surface px-2 text-xs text-ink-muted hover:bg-surface-2"
-                    title="View full post"
+                    title={t("viewFullPost")}
                   >
                     <Eye className="h-3 w-3" />
-                    {isOpen ? "Hide" : "View"}
+                    {isOpen ? t("hide") : t("view")}
                   </button>
                 ) : null}
                 {isReport ? (
@@ -124,20 +128,20 @@ export function ModerationQueue({ items }: QueueActionsProps) {
                       variant="ghost"
                       onClick={() => decide(item, "dismiss")}
                       disabled={busyId === item.id}
-                      title="Dismiss — no action needed"
+                      title={t("dismissTitle")}
                     >
                       <Check className="h-3.5 w-3.5 text-success" />
-                      Dismiss
+                      {t("dismiss")}
                     </Button>
                     <Button
                       size="sm"
                       variant="danger"
                       onClick={() => decide(item, "remove")}
                       disabled={busyId === item.id}
-                      title="Remove — take the post down"
+                      title={t("removePostTitle")}
                     >
                       <X className="h-3.5 w-3.5" />
-                      Remove post
+                      {t("removePost")}
                     </Button>
                   </>
                 ) : (
@@ -147,29 +151,29 @@ export function ModerationQueue({ items }: QueueActionsProps) {
                       variant="ghost"
                       onClick={() => decide(item, "allow")}
                       disabled={busyId === item.id}
-                      title="Allow — keep visible, mark reviewed"
+                      title={t("allowTitle")}
                     >
                       <Check className="h-3.5 w-3.5 text-success" />
-                      Allow
+                      {t("allow")}
                     </Button>
                     <Button
                       size="sm"
                       variant="ghost"
                       onClick={() => decide(item, "keep")}
                       disabled={busyId === item.id}
-                      title="Keep flagged — reviewed, leave visible"
+                      title={t("keepTitle")}
                     >
-                      Keep
+                      {t("keep")}
                     </Button>
                     <Button
                       size="sm"
                       variant="danger"
                       onClick={() => decide(item, "remove")}
                       disabled={busyId === item.id}
-                      title="Remove — set post status to removed"
+                      title={t("removeTitle")}
                     >
                       <X className="h-3.5 w-3.5" />
-                      Remove
+                      {t("remove")}
                     </Button>
                   </>
                 )}
@@ -191,7 +195,7 @@ export function ModerationQueue({ items }: QueueActionsProps) {
                 rel="noreferrer"
                 className="mt-2 inline-block text-xs text-accent hover:underline"
               >
-                Open thread →
+                {t("openThread")}
               </a>
             ) : null}
           </div>

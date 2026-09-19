@@ -18,8 +18,7 @@ export function isDemoBuild(): boolean {
 export function assertNotDemo(feature: string): void {
   if (isDemoBuild()) {
     throw new Error(
-      `[demo] Feature "${feature}" is not available in the Netlify demo build. ` +
-        `The demo only ships static marketing + catalogue pages.`,
+      `[demo] Feature "${feature}" is not available in the Netlify demo build. The demo only ships static marketing + catalogue pages.`,
     )
   }
 }

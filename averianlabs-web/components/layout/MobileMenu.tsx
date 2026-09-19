@@ -20,6 +20,7 @@ interface MobileMenuProps {
 export function MobileMenu({ locale, productsCount }: MobileMenuProps) {
   const t = useTranslations("nav")
   const tShop = useTranslations("shop")
+  const tHome = useTranslations("home")
   const [open, setOpen] = useState(false)
   const count = useCart((s) => s.count())
   const openCart = useCart((s) => s.open)
@@ -102,7 +103,7 @@ export function MobileMenu({ locale, productsCount }: MobileMenuProps) {
                       <span className="font-mono text-3xs text-ink-subtle">{productsCount}</span>
                     </Link>
                   </li>
-                  {CATEGORIES.map(({ slug, icon: Icon, hue }) => (
+                  {CATEGORIES.map(({ slug, key, icon: Icon, hue }) => (
                     <li key={slug}>
                       <Link
                         href={`/${locale}/shop?category=${slug}`}
@@ -115,7 +116,9 @@ export function MobileMenu({ locale, productsCount }: MobileMenuProps) {
                         >
                           <Icon className="h-3.5 w-3.5" />
                         </div>
-                        <span className="flex-1 capitalize">{slug}</span>
+                        <span className="flex-1">
+                          {tHome(`cat${key.charAt(0).toUpperCase() + key.slice(1)}` as never)}
+                        </span>
                         <ChevronRight className="h-3.5 w-3.5" />
                       </Link>
                     </li>

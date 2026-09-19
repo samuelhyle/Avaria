@@ -1,10 +1,11 @@
 "use client"
 
 import { Check, ShoppingCart, Sparkles, X } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 import type { ActionResolution, ProposedAction } from "@/lib/ai/types/events"
 import { cn } from "@/lib/utils/cn"
+import { formatCurrency } from "@/lib/utils/format"
 
 export function ActionCard({
   action,
@@ -18,6 +19,7 @@ export function ActionCard({
   onDismiss: () => void
 }) {
   const t = useTranslations("averia")
+  const locale = useLocale()
   if (action.kind === "add_to_cart") {
     if (resolved === "dismissed") return null
     const totalCents = action.unitPriceCents * action.qty
@@ -44,7 +46,7 @@ export function ActionCard({
               })}
             </p>
             <p className="mt-0.5 text-xs text-ink-muted">
-              {(totalCents / 100).toFixed(2)} € · SKU {action.sku}
+              {formatCurrency(totalCents, "EUR", locale)} · SKU {action.sku}
             </p>
           </div>
         </div>

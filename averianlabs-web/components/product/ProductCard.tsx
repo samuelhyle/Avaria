@@ -6,9 +6,18 @@ import { Badge } from "@/components/ui/Badge"
 import { useCart } from "@/lib/cart/store"
 import { useCompare } from "@/lib/compare/store"
 import type { Locale, Product } from "@/lib/products/types"
+import { findCheapestVial } from "@/lib/products/vials"
 import { cn } from "@/lib/utils/cn"
-import { formatCurrency } from "@/lib/utils/format"
-import { ArrowRight, Beaker, FlaskConical, GitCompare, Plus, ShoppingBag } from "lucide-react"
+import { formatCurrency, formatPercent, localeTag } from "@/lib/utils/format"
+import {
+  ArrowRight,
+  Beaker,
+  FileCheck2,
+  FlaskConical,
+  GitCompare,
+  Plus,
+  ShoppingBag,
+} from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
 import type { CSSProperties } from "react"
@@ -24,10 +33,8 @@ export function ProductCard({ product, locale, className, variant = "grid" }: Pr
   const t = useTranslations("shop")
   const tCommon = useTranslations("common")
   const translation = product.translations?.[locale as Locale] ?? product.defaultTranslation
-  const minVial = product.vials.reduce(
-    (min, v) => (v.priceCents < min.priceCents ? v : min),
-    product.vials[0]!,
-  )
+  const minVial = findCheapestVial(product)
+  if (!minVial) return null
   const totalStock = product.vials.reduce((s, v) => s + v.stockQty, 0)
   const isContact = minVial.contactOnly === true || minVial.priceCents === 0
   const isOut = !isContact && totalStock === 0
@@ -75,7 +82,7 @@ export function ProductCard({ product, locale, className, variant = "grid" }: Pr
               </h3>
               {product.latestBatch ? (
                 <span className="font-mono text-3xs text-ink-subtle">
-                  {product.latestBatch.code}
+                  {t("batchLabel", { code: product.latestBatch.code })}
                 </span>
               ) : null}
             </div>
@@ -159,7 +166,9 @@ export function ProductCard({ product, locale, className, variant = "grid" }: Pr
           {product.purityPercent ? (
             <Badge tone="accent" className="bg-surface/85 shadow-sm backdrop-blur-md">
               <Beaker className="h-3 w-3" />
-              {t("purityBadge", { purity: product.purityPercent.toFixed(1) })}
+              {t("purityHplcLabel", {
+                purity: formatPercent(product.purityPercent, localeTag(locale as Locale)),
+              })}
             </Badge>
           ) : null}
         </div>
@@ -209,7 +218,7 @@ export function ProductCard({ product, locale, className, variant = "grid" }: Pr
         </div>
 
         {/* Stock state inline with title — replaces the floating badge. */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex flex-wrap items-center gap-1.5">
           {isContact ? (
             <Badge tone="muted">{t("carouselPricingOnRequest")}</Badge>
           ) : isOut ? (
@@ -229,7 +238,15 @@ export function ProductCard({ product, locale, className, variant = "grid" }: Pr
             </Badge>
           )}
           {product.latestBatch ? (
-            <span className="font-mono text-2xs text-ink-subtle">{product.latestBatch.code}</span>
+            <>
+              <span className="font-mono text-2xs text-ink-subtle">
+                {t("batchLabel", { code: product.latestBatch.code })}
+              </span>
+              <Badge tone="success" className="text-3xs">
+                <FileCheck2 className="h-3 w-3" />
+                {t("coaAvailable")}
+              </Badge>
+            </>
           ) : null}
         </div>
 

@@ -43,7 +43,11 @@ services:
       NODE_ENV: production
       PORT: "3000"
       HOSTNAME: "0.0.0.0"
-      DATABASE_URL: ${DATABASE_URL:-postgres://averianlabs:averianlabs@postgres:5432/averianlabs}
+      # Hard-code the in-network URL — `${DATABASE_URL}` from host .env points
+      # at host-side localhost, which inside the container is *itself*, not
+      # the postgres service. Override the host .env value so chat retrieval
+      # (RAG) and persistence work from inside the web container.
+      DATABASE_URL: postgres://averianlabs:averianlabs@postgres:5432/averianlabs
       AUTH_SECRET: ${AUTH_SECRET:?AUTH_SECRET must be set — generate one with openssl rand -base64 32}
       AUTH_URL: ${AUTH_URL:-http://localhost:3000}
       CRON_SECRET: ${CRON_SECRET:-}

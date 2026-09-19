@@ -1,8 +1,7 @@
+import { SseParseError, parseSseStream } from "@/lib/ai/streaming/sse"
 import { describe, expect, it } from "vitest"
-import { parseSseStream, SseParseError } from "@/lib/ai/streaming/sse"
 
 function streamFromChunks(chunks: Uint8Array[]): ReadableStream<Uint8Array> {
-  const encoder = new TextEncoder()
   return new ReadableStream({
     start(controller) {
       for (const chunk of chunks) controller.enqueue(chunk)
@@ -49,34 +48,59 @@ describe("parseSseStream", () => {
 
   it("ignores non-data lines and empty payloads", async () => {
     const stream = streamFromChunks([
-      new TextEncoder().encode(
-        'event: ping\ndata: \n\ndata: {"type":"text","delta":"ok"}\n\n',
-      ),
+      new TextEncoder().encode('event: ping\ndata: \n\ndata: {"type":"text","delta":"ok"}\n\n'),
     ])
     const events = await collect(stream)
     expect(events).toEqual([{ type: "text", delta: "ok" }])
   })
 
   it("throws SseParseError on malformed JSON", async () => {
-    const stream = streamFromChunks([
-      new TextEncoder().encode("data: not-json\n\n"),
-    ])
+    const stream = streamFromChunks([new TextEncoder().encode("data: not-json\n\n")])
     await expect(collect(stream)).rejects.toBeInstanceOf(SseParseError)
   })
 
   it("flushes a trailing frame without a closing blank line", async () => {
     const stream = streamFromChunks([
-      new TextEncoder().encode('data: {"type":"done","usage":{"tokensIn":1,"tokensOut":2,"latencyMs":3}}'),
+      new TextEncoder().encode(
+        'data: {"type":"done","usage":{"tokensIn":1,"tokensOut":2,"latencyMs":3}}',
+      ),
     ])
     const events = await collect(stream)
     expect(events).toEqual([{ type: "done", usage: { tokensIn: 1, tokensOut: 2, latencyMs: 3 } }])
   })
 
   it("emits no events for a stream of only heartbeats", async () => {
-    const stream = streamFromChunks([
-      new TextEncoder().encode(": heartbeat\n\n"),
-    ])
+    const stream = streamFromChunks([new TextEncoder().encode(": heartbeat\n\n")])
     const events = await collect(stream)
     expect(events).toEqual([])
+  })
+
+  it("drops the [DONE] sentinel and continues with subsequent frames", async () => {
+    const stream = streamFromChunks([
+      new TextEncoder().encode('data: [DONE]\n\ndata: {"type":"text","delta":"after done"}\n\n'),
+    ])
+    const events = await collect(stream)
+    expect(events).toEqual([{ type: "text", delta: "after done" }])
+  })
+
+  it("joins multi-line data: blocks per the SSE spec", async () => {
+    const stream = streamFromChunks([
+      new TextEncoder().encode('data: {"type":"text",\ndata: "delta":"split"}\n\n'),
+    ])
+    const events = await collect(stream)
+    expect(events).toEqual([{ type: "text", delta: "split" }])
+  })
+
+  it("treats CRLF boundaries the same as LF (defensive against misconfigured proxies)", async () => {
+    const stream = streamFromChunks([
+      new TextEncoder().encode(
+        'data: {"type":"text","delta":"crlf"}\r\n\r\ndata: {"type":"text","delta":"after"}\r\n\r\n',
+      ),
+    ])
+    const events = await collect(stream)
+    expect(events).toEqual([
+      { type: "text", delta: "crlf" },
+      { type: "text", delta: "after" },
+    ])
   })
 })

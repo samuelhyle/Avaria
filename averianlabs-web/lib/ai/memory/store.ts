@@ -15,6 +15,7 @@
 
 import { aiConversations, aiMessages, userMemories } from "@/db/schema/ai"
 import { db } from "@/lib/db"
+import { safeUuid } from "@/lib/utils/uuid"
 import { and, desc, eq, inArray, sql } from "drizzle-orm"
 
 export type ConversationOwner =
@@ -43,6 +44,13 @@ export interface MessageInsert {
     citations?: unknown[]
     toolTrace?: unknown[]
     proposedActions?: unknown[]
+    verification?: {
+      passed: boolean
+      warnings: string[]
+      unknownSkus: string[]
+      priceMismatches: Array<{ sku: string; citedCents: number; catalogCents: number }>
+      needsMedicalReminder: boolean
+    }
   } | null
   tokensIn?: number
   tokensOut?: number
@@ -62,10 +70,12 @@ export interface MessageRow {
   createdAt: Date
 }
 
-function uuid(): string {
-  if (typeof crypto !== "undefined" && "randomUUID" in crypto) return crypto.randomUUID()
-  return `m-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`
-}
+// Re-export so other modules in this package can use the same UUID generator
+// without each declaring a redundant local helper.
+export { safeUuid as uuidFn }
+
+// (Legacy `safeUuid()` retained above for any in-file callsites that may be
+// added later — currently unused; safeUuid is the canonical helper.)
 
 export async function getOrCreateConversation(input: {
   owner: ConversationOwner
@@ -97,7 +107,7 @@ export async function getOrCreateConversation(input: {
     return existing[0]
   }
 
-  const id = `c-${uuid()}`
+  const id = `c-${safeUuid()}`
   const row = {
     id,
     userId: input.owner.kind === "user" ? input.owner.userId : null,
@@ -257,7 +267,7 @@ export async function upsertMemory(input: {
       updatedAt: new Date(),
     } as MemoryRow
   }
-  const id = `mem-${uuid()}`
+  const id = `mem-${safeUuid()}`
   const row = {
     id,
     userId: input.userId,
@@ -271,10 +281,26 @@ export async function upsertMemory(input: {
   return row as MemoryRow
 }
 
-export async function deleteMemory(userId: string, key: string): Promise<void> {
+export async function deleteMemory(
+  userId: string,
+  key: string,
+  auditActor?: { id: string; email: string },
+): Promise<void> {
   await db
     .delete(userMemories)
     .where(and(eq(userMemories.userId, userId), eq(userMemories.key, key)))
+  // Audit-log destructive memory deletes so a user can later ask "who
+  // removed this fact about me" and we can answer. Best-effort — never
+  // throw from the audit log path itself.
+  if (auditActor) {
+    const { logAudit } = await import("@/lib/audit/log")
+    await logAudit({
+      actor: auditActor,
+      action: "memory.delete",
+      entity: "userMemory",
+      entityId: `${userId}:${key}`,
+    }).catch(() => {})
+  }
 }
 
 export async function deleteAllMemories(userId: string): Promise<void> {

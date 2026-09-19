@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic"
-
 import { CategoryCard } from "@/components/community/CategoryCard"
 import { Leaderboard } from "@/components/community/Leaderboard"
 import { ThreadListItem } from "@/components/community/ThreadListItem"
@@ -11,6 +9,7 @@ import { Plus, ScrollText } from "lucide-react"
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import Link from "next/link"
+export const dynamic = "force-dynamic"
 
 export async function generateMetadata({
   params,
@@ -131,7 +130,6 @@ export default async function CommunityHubPage({
                     <ThreadListItem
                       key={th.id}
                       locale={locale}
-                      t={t as never}
                       thread={{
                         id: th.id,
                         slug: th.slug,
@@ -168,7 +166,6 @@ export default async function CommunityHubPage({
                 reputationTier: m.reputationTier ?? "new",
               }),
             )}
-            t={t as never}
           />
           <div className="rounded-[var(--radius-lg)] border border-line bg-surface-2 p-5 text-xs text-ink-muted">
             <Badge tone="accent" size="sm" className="mb-2">

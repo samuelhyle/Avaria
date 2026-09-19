@@ -99,7 +99,7 @@ export function ThreadComposer({
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         maxLength={140}
-        placeholder="Be specific…"
+        placeholder={t("titlePlaceholder")}
       />
 
       <div>
@@ -112,7 +112,7 @@ export function ThreadComposer({
           onChange={(e) => setBody(e.target.value)}
           rows={8}
           maxLength={8000}
-          placeholder="Markdown supported. Cite sources where possible."
+          placeholder={t("bodyPlaceholder")}
           className={cn(
             "w-full rounded-[var(--radius)] border border-line bg-surface px-3 py-2 text-sm leading-relaxed placeholder:text-ink-subtle focus:border-accent focus:outline-none",
             error && "border-danger focus:border-danger",

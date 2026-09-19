@@ -5,6 +5,7 @@ import type { Locale, Product } from "@/lib/products/types"
 import { cn } from "@/lib/utils/cn"
 import { formatCurrency } from "@/lib/utils/format"
 import { ShoppingBag } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 
 interface StickyMobileAtcProps {
@@ -24,6 +25,7 @@ export function StickyMobileAtc({
   priceCents,
   vialLabel,
 }: StickyMobileAtcProps) {
+  const t = useTranslations("product")
   const [show, setShow] = useState(false)
   const name = product.translations?.[locale as Locale]?.name ?? product.defaultTranslation.name
 
@@ -57,7 +59,7 @@ export function StickyMobileAtc({
         </div>
         <Button size="md" disabled={disabled} onClick={onAddToCart}>
           <ShoppingBag className="h-4 w-4" />
-          Add
+          {t("stickyAdd")}
         </Button>
       </div>
     </div>

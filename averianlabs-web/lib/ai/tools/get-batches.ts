@@ -9,6 +9,7 @@
 import { batches, products as productsTable, vials } from "@/db/schema"
 import type { Tool, ToolContext, ToolResult } from "@/lib/ai/tools/registry"
 import { db } from "@/lib/db"
+import { logger } from "@/lib/logger"
 import { products } from "@/lib/products/data"
 import { desc, eq } from "drizzle-orm"
 
@@ -56,7 +57,7 @@ async function batchesFromDb(slug: string, limit: number): Promise<BatchView[] |
       lab: r.lab,
     }))
   } catch (err) {
-    console.warn("[getBatches] DB lookup failed, falling back to catalog:", err)
+    logger.warn("[getBatches] DB lookup failed, falling back to catalog:", err)
     return null
   }
 }

@@ -1,5 +1,5 @@
 import * as schema from "@/db/schema"
-import { drizzle, type PostgresJsDatabase } from "drizzle-orm/postgres-js"
+import { type PostgresJsDatabase, drizzle } from "drizzle-orm/postgres-js"
 import postgres, { type Sql } from "postgres"
 
 declare global {
@@ -69,7 +69,15 @@ function buildClient(): Sql {
     ? { max: 1, idle_timeout: 20, max_lifetime: 60 * 30, connect_timeout: 10, prepare: false }
     : { max: 10, idle_timeout: 30, max_lifetime: 60 * 30, connect_timeout: 10 }
 
-  return postgres(url, clientConfig)
+  // postgres() runs `new URL(url)` at construction; some build environments
+  // surface this as a hard "Invalid URL" failure during Next.js's static
+  // page-data collection. Falling back to the stub keeps the build green —
+  // any actual query will still surface a readable error at request time.
+  try {
+    return postgres(url, clientConfig)
+  } catch {
+    return buildStubClient()
+  }
 }
 
 let cachedClient: Sql | null = null

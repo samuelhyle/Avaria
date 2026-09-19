@@ -2,7 +2,9 @@
 
 import { CATEGORIES } from "@/lib/products/categories"
 import type { Locale, Product } from "@/lib/products/types"
+import { findCheapestVial, isContactOnly } from "@/lib/products/vials"
 import { cn } from "@/lib/utils/cn"
+import { formatCurrency } from "@/lib/utils/format"
 import { ArrowRight, ChevronDown, FlaskConical } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
@@ -17,6 +19,7 @@ export function MegaMenu({ locale, products }: MegaMenuProps) {
   const t = useTranslations("nav")
   const tShop = useTranslations("shop")
   const tHome = useTranslations("home")
+  const tCommon = useTranslations("common")
   const [openSlug, setOpenSlug] = useState<string | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
@@ -150,10 +153,8 @@ export function MegaMenu({ locale, products }: MegaMenuProps) {
                 <ul className="mt-3 space-y-1">
                   {products.slice(0, 4).map((p) => {
                     const translation = p.translations?.[locale as Locale] ?? p.defaultTranslation
-                    const minVial = p.vials.reduce(
-                      (min, v) => (v.priceCents < min.priceCents ? v : min),
-                      p.vials[0]!,
-                    )
+                    const minVial = findCheapestVial(p)
+                    if (!minVial) return null
                     return (
                       <li key={p.slug}>
                         <Link
@@ -171,9 +172,9 @@ export function MegaMenu({ locale, products }: MegaMenuProps) {
                             <p className="font-mono text-3xs text-ink-subtle">{minVial.sku}</p>
                           </div>
                           <span className="text-xs font-medium text-ink-muted">
-                            {minVial.contactOnly
-                              ? "Quote"
-                              : `€${(minVial.priceCents / 100).toFixed(2)}`}
+                            {isContactOnly(minVial)
+                              ? tCommon("quote")
+                              : formatCurrency(minVial.priceCents, "EUR", locale)}
                           </span>
                         </Link>
                       </li>

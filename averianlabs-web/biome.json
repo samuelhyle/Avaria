@@ -3,7 +3,7 @@
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "files": {
     "ignoreUnknown": true,
-    "ignore": [".next", "node_modules", "dist", ".turbo", "coverage"]
+    "ignore": [".next", "node_modules", "dist", ".turbo", "coverage", "db/migrations/meta"]
   },
   "formatter": {
     "enabled": true,
@@ -18,11 +18,17 @@
     "rules": {
       "recommended": true,
       "style": { "noNonNullAssertion": "warn", "useImportType": "error" },
-      "suspicious": { "noExplicitAny": "warn" },
+      "suspicious": {
+        "noExplicitAny": "warn",
+        "noArrayIndexKey": "warn"
+      },
       "security": { "noDangerouslySetInnerHtml": "warn" },
       "complexity": { "noBannedTypes": "error" },
       "correctness": { "noUnusedVariables": "warn", "useExhaustiveDependencies": "warn" },
-      "a11y": { "useSemanticElements": "off" }
+      "a11y": { "useSemanticElements": "off" },
+      "performance": {
+        "noDelete": "off"
+      }
     }
   },
   "javascript": {

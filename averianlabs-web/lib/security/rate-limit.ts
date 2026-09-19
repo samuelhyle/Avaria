@@ -1,4 +1,5 @@
 import { getServerEnv } from "@/lib/env"
+import { logger } from "@/lib/logger"
 import { Ratelimit } from "@upstash/ratelimit"
 import { Redis } from "@upstash/redis"
 
@@ -96,7 +97,7 @@ export async function rateLimit(
       const result = await limiter.limit(key)
       return { success: result.success, remaining: result.remaining, reset: result.reset }
     } catch (err) {
-      console.error("[rate-limit] Upstash unavailable", err)
+      logger.error("[rate-limit] Upstash unavailable", err)
       if (failMode === "closed")
         return { success: false, remaining: 0, reset: Date.now() + windowMs }
       if (failMode === "open")

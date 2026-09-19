@@ -6,6 +6,7 @@ import { useCart } from "@/lib/cart/store"
 import { useCompare } from "@/lib/compare/store"
 import { products } from "@/lib/products/data"
 import type { Locale } from "@/lib/products/types"
+import { findCheapestVial } from "@/lib/products/vials"
 import { useWishlist } from "@/lib/wishlist/store"
 import { GitCompare, Heart, ShoppingBag } from "lucide-react"
 import Link from "next/link"
@@ -46,8 +47,9 @@ export function WishlistView({ locale }: { locale: Locale | string }) {
 
   const addAllToCart = () => {
     let added = 0
-    list.forEach((p) => {
-      const min = p.vials.reduce((m, v) => (v.priceCents < m.priceCents ? v : m), p.vials[0]!)
+    for (const p of list) {
+      const min = findCheapestVial(p)
+      if (!min) continue
       if (!min.contactOnly && min.priceCents > 0) {
         add({
           productSlug: p.slug,
@@ -59,12 +61,12 @@ export function WishlistView({ locale }: { locale: Locale | string }) {
         })
         added++
       }
-    })
+    }
     toast.success(`Added ${added} products to cart`)
   }
 
   const addAllToCompare = () => {
-    list.forEach((p) => compareToggle(p.slug))
+    for (const p of list) compareToggle(p.slug)
     toast.success("Updated compare list")
   }
 
@@ -92,7 +94,11 @@ export function WishlistView({ locale }: { locale: Locale | string }) {
             <ShoppingBag className="h-3.5 w-3.5" />
             Add all to cart
           </button>
-          <button onClick={clear} className="text-xs text-ink-muted hover:text-danger">
+          <button
+            type="button"
+            onClick={clear}
+            className="text-xs text-ink-muted hover:text-danger"
+          >
             Clear all
           </button>
         </div>

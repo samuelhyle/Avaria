@@ -3,9 +3,11 @@
 import { useCompare } from "@/lib/compare/store"
 import { cn } from "@/lib/utils/cn"
 import { GitCompare, X } from "lucide-react"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 
 export function CompareFloatingBar({ locale }: { locale: string }) {
+  const t = useTranslations("compare")
   const items = useCompare((s) => s.items)
   const remove = useCompare((s) => s.remove)
   const clear = useCompare((s) => s.clear)
@@ -16,7 +18,7 @@ export function CompareFloatingBar({ locale }: { locale: string }) {
   return (
     <div
       role="region"
-      aria-label="Compare bar"
+      aria-label={t("barLabel")}
       className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 px-4 py-3 shadow-2xl backdrop-blur-xl"
     >
       <div className="mx-auto flex max-w-6xl items-center gap-3">
@@ -25,10 +27,8 @@ export function CompareFloatingBar({ locale }: { locale: string }) {
             <GitCompare className="h-4 w-4" />
           </span>
           <div className="leading-tight">
-            <p className="text-sm font-semibold">
-              Compare {items.length}/{max}
-            </p>
-            <p className="text-3xs text-ink-muted">Side-by-side spec comparison</p>
+            <p className="text-sm font-semibold">{t("barTitle", { count: items.length, max })}</p>
+            <p className="text-3xs text-ink-muted">{t("barSub")}</p>
           </div>
         </div>
         <div className="ml-2 hidden flex-1 flex-wrap gap-1.5 md:flex">
@@ -41,7 +41,7 @@ export function CompareFloatingBar({ locale }: { locale: string }) {
               <button
                 type="button"
                 onClick={() => remove(slug)}
-                aria-label={`Remove ${slug} from compare`}
+                aria-label={t("removeFromCompareA11y", { slug })}
                 className="-mr-1 inline-flex h-6 w-6 items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-surface-3 hover:text-danger"
               >
                 <X className="h-3 w-3" />
@@ -55,7 +55,7 @@ export function CompareFloatingBar({ locale }: { locale: string }) {
             onClick={clear}
             className="text-xs text-ink-muted hover:text-danger"
           >
-            Clear
+            {t("clear")}
           </button>
           <Link
             href={`/${locale}/compare?${items.map((s) => `slug=${s}`).join("&")}`}
@@ -65,7 +65,7 @@ export function CompareFloatingBar({ locale }: { locale: string }) {
             )}
             aria-disabled={items.length < 2}
           >
-            Compare
+            {t("compare")}
           </Link>
         </div>
       </div>

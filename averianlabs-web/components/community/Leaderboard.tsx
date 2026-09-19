@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/Badge"
 import { tierFor } from "@/lib/community/reputation"
 import { cn } from "@/lib/utils/cn"
 import { Award } from "lucide-react"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 
 export interface LeaderEntry {
@@ -14,10 +15,10 @@ export interface LeaderEntry {
 
 interface LeaderboardProps {
   members: LeaderEntry[]
-  t: (key: string) => string
 }
 
-export function Leaderboard({ members, t }: LeaderboardProps) {
+export function Leaderboard({ members }: LeaderboardProps) {
+  const t = useTranslations("community")
   if (members.length === 0) {
     return (
       <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-5 text-sm text-ink-muted">
@@ -41,7 +42,7 @@ export function Leaderboard({ members, t }: LeaderboardProps) {
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-surface-2 text-xs font-semibold text-ink">
                 {(m.name ?? "?")[0]?.toUpperCase()}
               </span>
-              <span className="flex-1 truncate text-ink">{m.name ?? "Anonymous"}</span>
+              <span className="flex-1 truncate text-ink">{m.name ?? t("anonymous")}</span>
               <Badge tone={tier.color} size="sm">
                 {m.reputation}
               </Badge>

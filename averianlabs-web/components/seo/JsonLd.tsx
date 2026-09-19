@@ -1,4 +1,6 @@
 import type { Product } from "@/lib/products/types"
+import { findCheapestVial, isContactOnly } from "@/lib/products/vials"
+import { absoluteUrl, getSiteUrl } from "@/lib/site"
 import { formatCurrency } from "@/lib/utils/format"
 
 interface JsonLdProps {
@@ -16,6 +18,7 @@ export function JsonLd({ data, id }: JsonLdProps) {
     <script
       type="application/ld+json"
       id={id}
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD requires raw <script>; content is JSON.stringify'd + `<` escaped by serializeJsonLd.
       dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
     />
   )
@@ -28,12 +31,57 @@ interface ProductJsonLdProps {
 }
 
 export function ProductJsonLd({ product, locale, url }: ProductJsonLdProps) {
-  const minVial = product.vials.reduce(
-    (min, v) => (v.priceCents < min.priceCents ? v : min),
-    product.vials[0]!,
-  )
+  const minVial = findCheapestVial(product)
+  if (!minVial) return null
   const translation = product.translations?.[locale as "en"] ?? product.defaultTranslation
-  const isContact = minVial.contactOnly === true || minVial.priceCents === 0
+  const isContact = isContactOnly(minVial)
+  const batch = product.latestBatch
+
+  const additionalProperties: Array<{ "@type": string; name: string; value: unknown }> = []
+  if (product.purityPercent) {
+    additionalProperties.push({
+      "@type": "PropertyValue",
+      name: "HPLC Purity",
+      value: `${product.purityPercent}%`,
+    })
+  }
+  if (batch) {
+    additionalProperties.push({
+      "@type": "PropertyValue",
+      name: "Batch code",
+      value: batch.code,
+    })
+    additionalProperties.push({
+      "@type": "PropertyValue",
+      name: "Batch HPLC purity",
+      value: `${batch.hplcPurity.toFixed(2)}%`,
+    })
+    additionalProperties.push({
+      "@type": "PropertyValue",
+      name: "Endotoxin (EU/mg)",
+      value: batch.endotoxinEUPerMg.toFixed(2),
+    })
+    additionalProperties.push({
+      "@type": "PropertyValue",
+      name: "Mass spec confirmed",
+      value: batch.msConfirmed ? "true" : "false",
+    })
+    additionalProperties.push({
+      "@type": "PropertyValue",
+      name: "Testing lab",
+      value: batch.lab,
+    })
+    additionalProperties.push({
+      "@type": "PropertyValue",
+      name: "Manufactured",
+      value: batch.manufacturedAt,
+    })
+    additionalProperties.push({
+      "@type": "PropertyValue",
+      name: "Expires",
+      value: batch.expiresAt,
+    })
+  }
 
   const data = {
     "@context": "https://schema.org/",
@@ -42,19 +90,18 @@ export function ProductJsonLd({ product, locale, url }: ProductJsonLdProps) {
     description: translation.tagline,
     url,
     sku: minVial.sku,
-    mpn: product.latestBatch?.code,
+    mpn: batch?.code,
     category: product.category,
     brand: { "@type": "Brand", name: "AverianLabs" },
     ...(product.casNumber ? { identifier: product.casNumber } : {}),
-    ...(product.purityPercent
+    ...(additionalProperties.length > 0 ? { additionalProperty: additionalProperties } : {}),
+    ...(batch
       ? {
-          additionalProperty: [
-            {
-              "@type": "PropertyValue",
-              name: "HPLC Purity",
-              value: `${product.purityPercent}%`,
-            },
-          ],
+          subjectOf: {
+            "@type": "WebPage",
+            name: `Certificate of Analysis · ${batch.code}`,
+            url: absoluteUrl(`/${locale}/coa/${batch.code}`),
+          },
         }
       : {}),
     offers: isContact
@@ -69,6 +116,9 @@ export function ProductJsonLd({ product, locale, url }: ProductJsonLdProps) {
           "@type": "Offer",
           url,
           priceCurrency: "EUR",
+          // JSON-LD requires a "." decimal separator (schema.org); we
+          // intentionally do NOT pipe this through formatCurrency() since
+          // Intl would emit "44,99 €" or "€44.99" depending on the locale.
           price: (minVial.priceCents / 100).toFixed(2),
           availability:
             minVial.stockQty > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
@@ -93,7 +143,7 @@ export function BreadcrumbJsonLd({ items }: { items: Array<{ name: string; href:
           "@type": "ListItem",
           position: i + 1,
           name: item.name,
-          item: `https://averianlabs.eu${item.href}`,
+          item: `${getSiteUrl()}${item.href}`,
         })),
       }}
     />
@@ -108,8 +158,8 @@ export function OrganizationJsonLd() {
         "@context": "https://schema.org",
         "@type": "Organization",
         name: "AverianLabs",
-        url: "https://averianlabs.eu",
-        logo: "https://averianlabs.eu/og/logo.png",
+        url: getSiteUrl(),
+        logo: `${getSiteUrl()}/og/logo.png`,
         description: "Premium research-grade peptides for laboratory research.",
         sameAs: ["https://twitter.com/averianlabs", "https://linkedin.com/company/averianlabs"],
         contactPoint: {
@@ -124,6 +174,7 @@ export function OrganizationJsonLd() {
 }
 
 export function WebsiteJsonLd() {
+  const site = getSiteUrl()
   return (
     <JsonLd
       id="ld-website"
@@ -131,12 +182,12 @@ export function WebsiteJsonLd() {
         "@context": "https://schema.org",
         "@type": "WebSite",
         name: "AverianLabs",
-        url: "https://averianlabs.eu",
+        url: site,
         potentialAction: {
           "@type": "SearchAction",
           target: {
             "@type": "EntryPoint",
-            urlTemplate: "https://averianlabs.eu/{locale}/shop?q={search_term_string}",
+            urlTemplate: `${site}/{locale}/shop?q={search_term_string}`,
           },
           "query-input": "required name=search_term_string",
         },
@@ -166,7 +217,7 @@ export function GlossaryTermJsonLd({
         inDefinedTermSet: {
           "@type": "DefinedTermSet",
           name: "AverianLabs Glossary",
-          url: `https://averianlabs.eu/${locale}/glossary`,
+          url: absoluteUrl(`/${locale}/glossary`),
         },
         url,
       }}
@@ -206,7 +257,7 @@ export function DiscussionForumPostingJsonLd({
         isPartOf: {
           "@type": "WebSite",
           name: "AverianLabs",
-          url: `https://averianlabs.eu/${locale}`,
+          url: absoluteUrl(`/${locale}`),
         },
       }}
     />
@@ -241,7 +292,7 @@ export function ItemListJsonLd({
         isPartOf: {
           "@type": "WebSite",
           name: "AverianLabs",
-          url: `https://averianlabs.eu/${locale}`,
+          url: absoluteUrl(`/${locale}`),
         },
       }}
     />

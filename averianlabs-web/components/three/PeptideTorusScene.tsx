@@ -27,7 +27,7 @@ function Scene({ products, reducedMotion, onSelect }: PeptideTorusProps) {
   const { gl, camera } = useThree()
   const angleRef = useRef(0)
   const velocityRef = useRef(0.001)
-  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null)
+  const [hoveredIdx, _setHoveredIdx] = useState<number | null>(null)
   const draggingRef = useRef(false)
   const lastX = useRef(0)
   const lastT = useRef(0)
@@ -131,6 +131,14 @@ function Scene({ products, reducedMotion, onSelect }: PeptideTorusProps) {
               hovered: hoveredIdx === i,
             }
           })}
+          onSelect={
+            onSelect
+              ? (i) => {
+                  const product = products[i]
+                  if (product) onSelect(product)
+                }
+              : undefined
+          }
         />
       </group>
       <ParticleField />

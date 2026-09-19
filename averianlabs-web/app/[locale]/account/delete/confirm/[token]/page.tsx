@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic"
-
 import { Badge } from "@/components/ui/Badge"
 import { Container } from "@/components/ui/Container"
 import { gdprRequests } from "@/db/schema"
@@ -12,6 +10,7 @@ import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+export const dynamic = "force-dynamic"
 
 interface Props {
   params: Promise<{ locale: string; token: string }>

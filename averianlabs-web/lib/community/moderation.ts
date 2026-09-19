@@ -5,6 +5,7 @@
  * Fails to the human queue on any error — never silently allows.
  */
 import { completeMinimaxChat, isMinimaxConfigured } from "@/lib/ai/providers/minimax"
+import { logger } from "@/lib/logger"
 import type { GuardResult } from "./guard"
 
 export type ModeratorVerdict = "allow" | "warn" | "remove"
@@ -83,7 +84,7 @@ export function moderateAsync(input: { postId: string; body: string; lexical: Gu
     try {
       result = await callLLM(prompt, input.body)
     } catch (err) {
-      console.error("[community] moderation LLM failed:", err)
+      logger.error("[community] moderation LLM failed:", err)
       result = MODERATOR_UNAVAILABLE
     }
     await persistModerationEvent({

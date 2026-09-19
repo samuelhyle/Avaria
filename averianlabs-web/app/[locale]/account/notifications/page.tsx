@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic"
-
 import { NotificationPreferences } from "@/components/account/NotificationPreferences"
 import { Badge } from "@/components/ui/Badge"
 import { Container } from "@/components/ui/Container"
@@ -8,6 +6,7 @@ import { getOrCreatePreferences, listUnreadNotifications } from "@/lib/notificat
 import { Bell, BellOff } from "lucide-react"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import Link from "next/link"
+export const dynamic = "force-dynamic"
 
 export default async function NotificationsPage({
   params,

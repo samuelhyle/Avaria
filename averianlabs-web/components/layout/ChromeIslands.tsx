@@ -40,7 +40,7 @@ export function ChromeIslands({ locale }: { locale: string }) {
   return (
     <>
       <AgeGate />
-      <CookieBanner locale={locale} />
+      <CookieBanner />
       <CartDrawer locale={locale} />
       <CartHydration />
       <CommandPalette locale={locale} products={products} />

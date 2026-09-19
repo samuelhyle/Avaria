@@ -16,6 +16,7 @@ const FREE_SHIPPING_THRESHOLD_CENTS = 15000
 
 export function CartDrawer({ locale }: { locale: string }) {
   const t = useTranslations("cart")
+  const tCheckout = useTranslations("checkout")
   const tCommon = useTranslations("common")
   const isOpen = useCart((s) => s.isOpen)
   const items = useCart((s) => s.items)
@@ -176,7 +177,7 @@ export function CartDrawer({ locale }: { locale: string }) {
                 </div>
                 <div className="flex justify-between text-xs text-ink-subtle">
                   <span>{t("vat")}</span>
-                  <span>incl.</span>
+                  <span>{tCheckout("vatIncluded")}</span>
                 </div>
                 <div className="flex justify-between border-t border-line pt-2 font-display text-base font-semibold">
                   <span>{t("total")}</span>

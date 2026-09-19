@@ -1,3 +1,4 @@
+import { logger } from "@/lib/logger"
 import { getCachedShippingRates } from "@/lib/shipping/cached"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -25,7 +26,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ rates })
   } catch (err) {
-    console.error("[shipping] rate lookup failed", err)
+    logger.error("[shipping] rate lookup failed", err)
     return NextResponse.json({ error: "Unable to fetch shipping rates." }, { status: 400 })
   }
 }

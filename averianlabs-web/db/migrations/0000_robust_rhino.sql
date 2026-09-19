@@ -1,4 +1,6 @@
--- pgvector is required by ai_document_chunks.embedding (vector(1024)).
+-- pgvector is required by ai_document_chunks.embedding (vector(1024) here,
+-- aligned to vector(384) in `0001_align_embedding_dim.sql` to match
+-- EMBEDDING_DIM = 384 — the dim of the local embedder / schema).
 -- On Neon this is supported directly; other providers may need superuser.
 CREATE EXTENSION IF NOT EXISTS vector;--> statement-breakpoint
 CREATE TABLE "ai_conversations" (

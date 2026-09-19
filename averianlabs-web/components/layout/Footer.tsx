@@ -35,7 +35,7 @@ export async function Footer({ locale }: FooterProps) {
         { href: `/${locale}/quality`, label: t("quality") },
         { href: `/${locale}/partner`, label: t("partner") },
         { href: `/${locale}/contact`, label: t("contact") },
-        { href: `/${locale}/rewards`, label: t("rewards") ?? "Rewards" },
+        { href: `/${locale}/rewards`, label: t("rewards") },
       ],
     },
     {
@@ -99,15 +99,15 @@ export async function Footer({ locale }: FooterProps) {
           <div className="flex flex-wrap items-center gap-4">
             <span className="flex items-center gap-1.5">
               <ShieldCheck className="h-3.5 w-3.5 text-success" />
-              Stripe-secured
+              {t("stripeSecured")}
             </span>
             <span className="flex items-center gap-1.5">
               <Lock className="h-3.5 w-3.5 text-success" />
-              GDPR compliant
+              {t("gdprCompliant")}
             </span>
             <span className="flex items-center gap-1.5">
               <Truck className="h-3.5 w-3.5 text-accent" />
-              24h EU dispatch
+              {t("euDispatch")}
             </span>
           </div>
           <PaymentIcons />
@@ -123,7 +123,7 @@ export async function Footer({ locale }: FooterProps) {
               © {year} {legal.companyName} · {t("rightsReserved", { year })}
             </span>
             <span className="font-mono">
-              Y-tunnus {legal.businessId} · VAT {legal.vatId}
+              {t("businessIdLabel")} {legal.businessId} · {t("vatLabel")} {legal.vatId}
             </span>
             <address className="not-italic">
               <a href={`mailto:${legal.contactEmail}`} className="hover:text-ink hover:underline">

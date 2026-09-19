@@ -11,6 +11,7 @@ import {
   restoreStock,
 } from "@/lib/orders"
 import { stripe } from "@/lib/payments/stripe"
+import { assertCsrfOr403 } from "@/lib/security/csrf"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { getCachedShippingRates } from "@/lib/shipping/cached"
@@ -26,13 +27,21 @@ const addressSchema = z.object({
   country: z.string().length(2),
 })
 
+/**
+ * Max vials per SKU on a single checkout line. Must stay >= the bulk
+ * discount's top tier (21) so the −20% promise on the homepage is honored
+ * end-to-end, and >= the cart store's MAX_QTY (99) so a client that
+ * pushed the cart to the limit isn't silently truncated at checkout.
+ */
+const MAX_QTY_PER_LINE = 99
+
 const bodySchema = z.object({
   email: z.string().email().max(254),
   items: z
     .array(
       z.object({
         sku: z.string().min(1).max(64),
-        qty: z.number().int().min(1).max(20),
+        qty: z.number().int().min(1).max(MAX_QTY_PER_LINE),
       }),
     )
     .min(1)
@@ -91,6 +100,13 @@ async function createCoinbaseCharge(opts: {
 }
 
 export async function POST(request: Request) {
+  // CSRF guard — refuses cross-origin POSTs that don't carry a matching
+  // Origin / Referer header. Auth.js's SameSite=Lax cookie covers most
+  // vectors; this is the second layer against subdomain / forged-form
+  // attacks that bypass Lax (see lib/security/csrf.ts for the why).
+  const csrf = assertCsrfOr403(request, { allowDevHosts: process.env.NODE_ENV !== "production" })
+  if (csrf) return csrf
+
   const ip = clientIp(request)
   const limit = await rateLimit(`checkout:ip:${ip}`, { limit: 20, window: "1 h" })
   if (!limit.success) {

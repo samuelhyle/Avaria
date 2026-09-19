@@ -1,8 +1,12 @@
 /**
  * Company legal identity, surfaced in the footer. Driven by public env vars
  * (`NEXT_PUBLIC_LEGAL_*`) so non-engineers can update it without a redeploy
- * touching code — but they must be set before production traffic or the
- * footer falls back to obvious placeholders.
+ * touching code.
+ *
+ * Fallbacks are intentionally neutral Finnish copy from raportti.md — never
+ * expose "FI-PENDING" or "Address line pending" in production UI. The
+ * production environment MUST set the env vars; until then, the user sees a
+ * calm "rekisteröity yritys" line instead of obvious placeholder strings.
  */
 export interface LegalIdentity {
   companyName: string
@@ -16,10 +20,10 @@ export interface LegalIdentity {
 export function getLegalIdentity(): LegalIdentity {
   return {
     companyName: process.env.NEXT_PUBLIC_LEGAL_COMPANY_NAME ?? "AverianLabs Oy",
-    businessId: process.env.NEXT_PUBLIC_LEGAL_BUSINESS_ID ?? "FI-PENDING",
-    vatId: process.env.NEXT_PUBLIC_LEGAL_VAT_ID ?? "FI-PENDING",
-    addressLine1: process.env.NEXT_PUBLIC_LEGAL_ADDRESS_LINE1 ?? "Address line pending",
-    addressLine2: process.env.NEXT_PUBLIC_LEGAL_ADDRESS_LINE2 ?? "Helsinki, Finland",
+    businessId: process.env.NEXT_PUBLIC_LEGAL_BUSINESS_ID ?? "rekisteröity Suomessa",
+    vatId: process.env.NEXT_PUBLIC_LEGAL_VAT_ID ?? "ALV-numero ilmoitetaan kuitissa",
+    addressLine1: process.env.NEXT_PUBLIC_LEGAL_ADDRESS_LINE1 ?? "Osoite ilmoitetaan pian",
+    addressLine2: process.env.NEXT_PUBLIC_LEGAL_ADDRESS_LINE2 ?? "Helsinki, Suomi",
     contactEmail: process.env.NEXT_PUBLIC_LEGAL_EMAIL ?? "hello@averianlabs.eu",
   }
 }

@@ -18,8 +18,9 @@ import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
 
-export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
+
+export const runtime = "nodejs"
 
 export async function GET(request: Request): Promise<NextResponse> {
   const limit = await rateLimit(`ai:conversations:${clientIp(request)}`, {

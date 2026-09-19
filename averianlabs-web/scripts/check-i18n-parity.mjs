@@ -11,7 +11,7 @@
  *   node scripts/check-i18n-parity.mjs --write-missing  # write empty stubs
  */
 
-import { readdirSync, readFileSync, writeFileSync, statSync } from "node:fs"
+import { readFileSync, readdirSync, statSync, writeFileSync } from "node:fs"
 import { dirname, join, relative } from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -79,7 +79,7 @@ function main() {
     }
     if (WRITE_MISSING) {
       writeMissing(file, missing)
-      console.error(`    (wrote empty stubs for missing keys)`)
+      console.error("    (wrote empty stubs for missing keys)")
     }
   }
 

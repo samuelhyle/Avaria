@@ -1,8 +1,10 @@
 import { orderItems, orders, productTranslations, products, shipments, vials } from "@/db/schema"
 import { db } from "@/lib/db"
 import { reviewRequestHtml, sendEmail } from "@/lib/email"
+import type { Locale } from "@/lib/i18n/config"
 import { isAuthorizedCronRequest } from "@/lib/security/cron"
 import { and, eq, isNull, lt } from "drizzle-orm"
+import { getTranslations } from "next-intl/server"
 import { NextResponse } from "next/server"
 
 const REVIEW_DELAY_DAYS = 5
@@ -53,17 +55,19 @@ export async function POST(req: Request) {
       .where(eq(orderItems.orderId, order.id))
 
     const firstName = order.email.split("@")[0]?.split(".")[0] ?? "Researcher"
+    const locale = (order.locale as Locale) ?? "en"
 
-    const html = reviewRequestHtml({
+    const html = await reviewRequestHtml({
       orderNumber: order.number,
       customerName: firstName.charAt(0).toUpperCase() + firstName.slice(1),
       items: items.map((i) => ({ name: i.name ?? "Peptide", mg: i.mg ?? 0 })),
-      locale: order.locale ?? "en",
+      locale,
     })
+    const t = await getTranslations({ locale, namespace: "email" })
 
     const ok = await sendEmail({
       to: order.email,
-      subject: `How did your peptides perform? Review order ${order.number}`,
+      subject: t("reviewRequestSubject", { number: order.number }),
       html,
     })
 
