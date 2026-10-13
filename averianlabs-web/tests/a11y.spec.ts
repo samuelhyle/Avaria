@@ -60,6 +60,29 @@ for (const path of ROUTES) {
 }
 
 for (const locale of ["en", "fi"]) {
+  test(`a11y: ${locale} mobile empty-cart steps remain visible and accessible`, async ({
+    cleanPage: page,
+  }) => {
+    for (const width of [320, 390, 414]) {
+      await page.setViewportSize({ width, height: 844 })
+      await page.goto(`/${locale}/checkout/cart`)
+      const steps = page.locator("main ol").first()
+      await expect(steps.getByRole("listitem")).toHaveCount(4)
+      expect(
+        await steps.evaluate((node) => node.scrollWidth <= node.clientWidth + 1),
+        `All checkout steps should fit at ${width}px without hidden scrolling`,
+      ).toBe(true)
+      const result = await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+        .analyze()
+      expect(
+        result.violations
+          .filter((v) => v.impact === "serious" || v.impact === "critical")
+          .map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })),
+      ).toEqual([])
+    }
+  })
+
   test(`a11y: ${locale} populated checkout email/address/shipping/payment has no blocking violations`, async ({
     cleanPage: page,
   }) => {
