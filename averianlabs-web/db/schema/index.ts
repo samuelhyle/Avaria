@@ -210,6 +210,8 @@ export const vials = pgTable(
     sizeValue: doublePrecision("size_value").notNull(),
     sizeUnit: text("size_unit").notNull(),
     sku: text("sku").notNull().unique(),
+    /** Explicit batch allocation for this SKU; FK is defined in migration 0003. */
+    activeBatchId: text("active_batch_id"),
     /**
      * Nullable: rows with `purchase_mode = 'quotation'` MUST have a null price.
      * Enforced by `vials_purchase_mode_price_check` below.
@@ -268,7 +270,17 @@ export const batches = pgTable(
     reviewedBy: text("reviewed_by"),
     reviewedAt: timestamp("reviewed_at", { withTimezone: true }),
   },
-  (t) => [index("batches_vial_idx").on(t.vialId)],
+  (t) => [
+    index("batches_vial_idx").on(t.vialId),
+    check(
+      "batches_verification_status_check",
+      sql`${t.verificationStatus} IN ('pending', 'released', 'rejected')`,
+    ),
+    check(
+      "batches_release_review_check",
+      sql`${t.verificationStatus} <> 'released' OR (${t.reviewedBy} IS NOT NULL AND ${t.reviewedAt} IS NOT NULL)`,
+    ),
+  ],
 )
 
 export const coaTests = pgTable(
@@ -393,9 +405,7 @@ export const inventoryReservations = pgTable(
   },
   (t) => [
     index("inventory_reservations_vial_idx").on(t.vialId, t.releasedAt),
-    index("inventory_reservations_expires_idx")
-      .on(t.expiresAt)
-      .where(sql`${t.releasedAt} IS NULL`),
+    index("inventory_reservations_expires_idx").on(t.expiresAt).where(sql`${t.releasedAt} IS NULL`),
     check("inventory_reservations_qty_positive", sql`${t.qty} > 0`),
   ],
 )
@@ -746,7 +756,10 @@ export const documents = pgTable(
      * the current locale are filtered out of the public view but remain
      * visible in the admin queue.
      */
-    displayLocales: text("display_locales").array().notNull().default(sql`ARRAY['en','fi','de','sv','nl']::text[]`),
+    displayLocales: text("display_locales")
+      .array()
+      .notNull()
+      .default(sql`ARRAY['en','fi','de','sv','nl']::text[]`),
     /** Hidden behind authentication when true. Default false. */
     requiresLogin: boolean("requires_login").notNull().default(false),
     /** Tracked so admin tools can warn when a signed URL is about to lapse. */
@@ -794,21 +807,25 @@ export const webhookEvents = pgTable(
 )
 
 /** Durable delivery queue. A state change and its notification are committed together. */
-export const emailOutbox = pgTable("email_outbox", {
-  id: text("id").primaryKey().default(sql`gen_random_uuid()`),
-  dedupeKey: text("dedupe_key").notNull().unique(),
-  recipient: text("recipient").notNull(),
-  replyTo: text("reply_to"),
-  subject: text("subject").notNull(),
-  html: text("html").notNull(),
-  status: text("status").notNull().default("pending"),
-  attempts: integer("attempts").notNull().default(0),
-  nextAttemptAt: timestamp("next_attempt_at", { withTimezone: true }).notNull().defaultNow(),
-  leaseUntil: timestamp("lease_until", { withTimezone: true }),
-  lastError: text("last_error"),
-  sentAt: timestamp("sent_at", { withTimezone: true }),
-  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-})
+export const emailOutbox = pgTable(
+  "email_outbox",
+  {
+    id: text("id").primaryKey().default(sql`gen_random_uuid()`),
+    dedupeKey: text("dedupe_key").notNull().unique(),
+    recipient: text("recipient").notNull(),
+    replyTo: text("reply_to"),
+    subject: text("subject").notNull(),
+    html: text("html").notNull(),
+    status: text("status").notNull().default("pending"),
+    attempts: integer("attempts").notNull().default(0),
+    nextAttemptAt: timestamp("next_attempt_at", { withTimezone: true }).notNull().defaultNow(),
+    leaseUntil: timestamp("lease_until", { withTimezone: true }),
+    lastError: text("last_error"),
+    sentAt: timestamp("sent_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("email_outbox_due_idx").on(t.nextAttemptAt).where(sql`${t.status} <> 'sent'`)],
+)
 
 export const quoteRequests = pgTable("quote_requests", {
   id: text("id").primaryKey().default(sql`gen_random_uuid()`),
