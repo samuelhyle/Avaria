@@ -8,6 +8,20 @@
       "when": 1789406101358,
       "tag": "0000_robust_rhino",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791735000000,
+      "tag": "0001_phase2_catalogue",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791907200000,
+      "tag": "0002_research_customer_reliability",
+      "breakpoints": true
     }
   ]
 }

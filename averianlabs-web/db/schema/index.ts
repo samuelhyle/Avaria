@@ -1,6 +1,7 @@
 import { relations, sql } from "drizzle-orm"
 import {
   boolean,
+  check,
   doublePrecision,
   index,
   integer,
@@ -136,10 +137,44 @@ export const products = pgTable(
     purityPercent: doublePrecision("purity_percent"),
     hue: integer("hue").notNull().default(214),
     status: text("status").notNull().default("active"),
+    /**
+     * The batch currently being sold. The product page MUST render
+     * `batches.hplcPurity` (via this FK) rather than `products.purityPercent`
+     * to keep product and COA registry values consistent (DATA-01).
+     * NULL means the product has no released batch and is not buyable.
+     *
+     * Foreign-key constraint is declared in the migration (`0001_phase2_catalogue.sql`)
+     * rather than via `.references()` to keep the schema free of the
+     * forward-reference cycle that TypeScript can't infer. Drizzle's relations
+     * block below declares the relationship for query-builder consumers.
+     */
+    activeBatchId: text("active_batch_id"),
+    /**
+     * Discriminator for type-specific templates (TYPE-01):
+     *   - `peptide`   — existing peptide template
+     *   - `cosmetic`  — peptide + dermal-research-only framing
+     *   - `reagent`   — solvents, diluents (sterility / endotoxin focus)
+     *   - `supplies`  — kits, water, packaging
+     * Default `peptide` keeps the pre-migration catalogue unchanged.
+     */
+    productType: text("product_type").notNull().default("peptide"),
+    /**
+     * Type-specific spec bag, validated by per-type Zod schemas in
+     * `lib/products/specs/`. See `PHASE2_CATALOGUE_DESIGN.md` §6.
+     */
+    specJson: jsonb("spec_json").notNull().default(sql`'{}'::jsonb`),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   },
-  (t) => [index("products_status_idx").on(t.status)],
+  (t) => [
+    index("products_status_idx").on(t.status),
+    index("products_active_batch_idx").on(t.activeBatchId),
+    index("products_product_type_idx").on(t.productType),
+    check(
+      "products_product_type_check",
+      sql`${t.productType} IN ('peptide', 'cosmetic', 'reagent', 'supplies')`,
+    ),
+  ],
 )
 
 export const productTranslations = pgTable(
@@ -165,14 +200,53 @@ export const vials = pgTable(
     productId: text("product_id")
       .notNull()
       .references(() => products.id, { onDelete: "cascade" }),
-    sizeMg: doublePrecision("size_mg").notNull(),
+    /**
+     * Typed size for both peptide actives (Mass) and reagents (Volume / Count).
+     * Replaces the old `sizeMg` column (kept in this release for backward
+     * compatibility; drop in a follow-up migration once all consumers
+     * are migrated). See `PHASE2_CATALOGUE_DESIGN.md` §2.2.
+     */
+    sizeMg: doublePrecision("size_mg"),
+    sizeValue: doublePrecision("size_value").notNull(),
+    sizeUnit: text("size_unit").notNull(),
     sku: text("sku").notNull().unique(),
-    priceCents: integer("price_cents").notNull(),
+    /**
+     * Nullable: rows with `purchase_mode = 'quotation'` MUST have a null price.
+     * Enforced by `vials_purchase_mode_price_check` below.
+     */
+    priceCents: integer("price_cents"),
     compareAtCents: integer("compare_at_cents"),
     stockQty: integer("stock_qty").notNull().default(0),
-    lowStockThreshold: integer("low_stock_threshold").notNull().default(5),
+    /**
+     * Nullable: NULL suppresses the "low stock" badge entirely (used for
+     * `quotation` and `unavailable` rows that have no meaningful stock UX).
+     */
+    lowStockThreshold: integer("low_stock_threshold").default(5),
+    /**
+     * How this vial is sold:
+     *   - `direct`       — payable via standard checkout.
+     *   - `quotation`    — never payable; renders a "Contact for quote" CTA.
+     *   - `unavailable`  — visible for context, not buyable.
+     * Default `direct` is the safe pre-migration state; backfill updates AOD-5.
+     */
+    purchaseMode: text("purchase_mode").notNull().default("direct"),
   },
-  (t) => [index("vials_product_idx").on(t.productId)],
+  (t) => [
+    index("vials_product_idx").on(t.productId),
+    index("vials_purchase_mode_idx").on(t.purchaseMode),
+    check(
+      "vials_purchase_mode_check",
+      sql`${t.purchaseMode} IN ('direct', 'quotation', 'unavailable')`,
+    ),
+    check(
+      "vials_size_unit_check",
+      sql`${t.sizeUnit} IS NULL OR ${t.sizeUnit} IN ('mg', 'g', 'mcg', 'mL', 'uL', 'vial')`,
+    ),
+    check(
+      "vials_purchase_mode_price_check",
+      sql`(${t.purchaseMode} = 'quotation' AND ${t.priceCents} IS NULL) OR (${t.purchaseMode} IN ('direct', 'unavailable'))`,
+    ),
+  ],
 )
 
 export const batches = pgTable(
@@ -190,6 +264,9 @@ export const batches = pgTable(
     msConfirmed: boolean("ms_confirmed").notNull().default(true),
     lab: text("lab").notNull(),
     coaPdfR2Key: text("coa_pdf_r2_key"),
+    verificationStatus: text("verification_status").notNull().default("pending"),
+    reviewedBy: text("reviewed_by"),
+    reviewedAt: timestamp("reviewed_at", { withTimezone: true }),
   },
   (t) => [index("batches_vial_idx").on(t.vialId)],
 )
@@ -220,6 +297,13 @@ export const orders = pgTable(
     email: text("email").notNull(),
     status: text("status").notNull().default("pending"),
     currency: text("currency").notNull().default("EUR"),
+    /**
+     * Guardrail: orders are EUR-only at present but every line is tagged
+     * with the currency it was priced in, so a future multi-currency SKU
+     * cannot silently convert. See `PHASE2_CATALOGUE_DESIGN.md` §2.6
+     * (INV-2).
+     */
+    currencyPerLine: text("currency_per_line").notNull().default("EUR"),
     subtotalCents: integer("subtotal_cents").notNull(),
     shippingCents: integer("shipping_cents").notNull().default(0),
     vatCents: integer("vat_cents").notNull().default(0),
@@ -229,10 +313,25 @@ export const orders = pgTable(
     cryptoTxHash: text("crypto_tx_hash"),
     billingAddressId: text("billing_address_id").references(() => addresses.id),
     shippingAddressId: text("shipping_address_id").references(() => addresses.id),
+    /** Coinbase hosted-page URL — surfaced in receipts and admin queues. */
+    invoiceUrl: text("invoice_url"),
+    /**
+     * Populated at confirmation time. EUR is the commercial total; for crypto
+     * orders the EUR / crypto rate at confirmation is preserved for
+     * accounting reconciliation (§10 of the plan).
+     */
+    paymentProviderFeeCents: integer("payment_provider_fee_cents"),
+    exchangeRateEurPerUnit: doublePrecision("exchange_rate_eur_per_unit"),
     placedAt: timestamp("placed_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
     reviewRequestedAt: timestamp("review_requested_at", { withTimezone: true }),
     locale: text("locale").notNull().default("en"),
+    termsAcceptedAt: timestamp("terms_accepted_at", { withTimezone: true }),
+    termsVersion: text("terms_version"),
+    checkoutKey: text("checkout_key").unique(),
+    checkoutHash: text("checkout_hash"),
+    paymentMethod: text("payment_method").notNull().default("stripe"),
+    vatId: text("vat_id"),
   },
   (t) => [
     index("orders_user_placed_idx").on(t.userId, t.placedAt),
@@ -253,10 +352,51 @@ export const orderItems = pgTable(
     qty: integer("qty").notNull(),
     unitPriceCents: integer("unit_price_cents").notNull(),
     batchId: text("batch_id").references(() => batches.id),
+    skuSnapshot: text("sku_snapshot"),
+    batchCodeSnapshot: text("batch_code_snapshot"),
+    nameSnapshot: text("name_snapshot"),
+    sizeValueSnapshot: doublePrecision("size_value_snapshot"),
+    sizeUnitSnapshot: text("size_unit_snapshot"),
   },
   (t) => [
     uniqueIndex("order_items_order_vial_idx").on(t.orderId, t.vialId),
     index("order_items_vial_idx").on(t.vialId),
+  ],
+)
+
+/**
+ * Inventory reservations — TTL-aware hold against a vial while payment is in flight.
+ *
+ * Replaces the previous "decrement vials.stockQty at order time, restore on
+ * failure" pattern with a reservation whose `expires_at` is set at order
+ * creation (default +15 minutes). The Stripe / Coinbase webhook handlers and
+ * the explicit failure path both set `released_at`; a cron reaper
+ * (`releaseExpiredReservations`) frees stuck holds every 5 minutes.
+ *
+ * INV-1: stock decrements used to have no TTL, so a stuck checkout could
+ * hold inventory indefinitely. See `PHASE2_CATALOGUE_DESIGN.md` §2.4.
+ */
+export const inventoryReservations = pgTable(
+  "inventory_reservations",
+  {
+    id: text("id").primaryKey().default(sql`gen_random_uuid()`),
+    orderId: text("order_id")
+      .notNull()
+      .references(() => orders.id, { onDelete: "cascade" }),
+    vialId: text("vial_id")
+      .notNull()
+      .references(() => vials.id, { onDelete: "cascade" }),
+    qty: integer("qty").notNull(),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    releasedAt: timestamp("released_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("inventory_reservations_vial_idx").on(t.vialId, t.releasedAt),
+    index("inventory_reservations_expires_idx")
+      .on(t.expiresAt)
+      .where(sql`${t.releasedAt} IS NULL`),
+    check("inventory_reservations_qty_positive", sql`${t.qty} > 0`),
   ],
 )
 
@@ -600,6 +740,17 @@ export const documents = pgTable(
     version: text("version").notNull().default("1.0"),
     fileR2Key: text("file_r2_key"),
     externalUrl: text("external_url"),
+    /**
+     * Per-locale visibility for the public documents index. The plan launches
+     * with FI + EN reviewed; rows whose `display_locales` does not include
+     * the current locale are filtered out of the public view but remain
+     * visible in the admin queue.
+     */
+    displayLocales: text("display_locales").array().notNull().default(sql`ARRAY['en','fi','de','sv','nl']::text[]`),
+    /** Hidden behind authentication when true. Default false. */
+    requiresLogin: boolean("requires_login").notNull().default(false),
+    /** Tracked so admin tools can warn when a signed URL is about to lapse. */
+    signedUrlExpiresAt: timestamp("signed_url_expires_at", { withTimezone: true }),
     publishedAt: timestamp("published_at", { withTimezone: true }).notNull().defaultNow(),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
@@ -642,6 +793,36 @@ export const webhookEvents = pgTable(
   (t) => [index("webhook_events_provider_idx").on(t.provider, t.receivedAt)],
 )
 
+/** Durable delivery queue. A state change and its notification are committed together. */
+export const emailOutbox = pgTable("email_outbox", {
+  id: text("id").primaryKey().default(sql`gen_random_uuid()`),
+  dedupeKey: text("dedupe_key").notNull().unique(),
+  recipient: text("recipient").notNull(),
+  replyTo: text("reply_to"),
+  subject: text("subject").notNull(),
+  html: text("html").notNull(),
+  status: text("status").notNull().default("pending"),
+  attempts: integer("attempts").notNull().default(0),
+  nextAttemptAt: timestamp("next_attempt_at", { withTimezone: true }).notNull().defaultNow(),
+  leaseUntil: timestamp("lease_until", { withTimezone: true }),
+  lastError: text("last_error"),
+  sentAt: timestamp("sent_at", { withTimezone: true }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+})
+
+export const quoteRequests = pgTable("quote_requests", {
+  id: text("id").primaryKey().default(sql`gen_random_uuid()`),
+  requestKey: text("request_key").notNull().unique(),
+  sku: text("sku").notNull(),
+  email: text("email").notNull(),
+  name: text("name").notNull(),
+  organisation: text("organisation"),
+  message: text("message"),
+  locale: text("locale").notNull().default("en"),
+  status: text("status").notNull().default("open"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+})
+
 /**
  * Newsletter subscribers — double opt-in (EU/GDPR requirement).
  * Only `confirmed` subscribers may receive marketing email.
@@ -674,40 +855,11 @@ export {
   userMemories,
 } from "./ai"
 
-export const usersRelations = relations(users, ({ many }) => ({
-  accounts: many(accounts),
-  addresses: many(addresses),
-  orders: many(orders),
-  passkeys: many(passkeys),
-}))
-
-export const productsRelations = relations(products, ({ many, one }) => ({
-  vials: many(vials),
-  translations: many(productTranslations),
-  category: one(categories, { fields: [products.categoryId], references: [categories.id] }),
-}))
-
-export const forumCategoriesRelations = relations(forumCategories, ({ many }) => ({
-  threads: many(forumThreads),
-}))
-
-export const forumThreadsRelations = relations(forumThreads, ({ one, many }) => ({
-  category: one(forumCategories, {
-    fields: [forumThreads.categoryId],
-    references: [forumCategories.id],
-  }),
-  author: one(users, { fields: [forumThreads.authorId], references: [users.id] }),
-  posts: many(forumPosts),
-}))
-
-export const forumPostsRelations = relations(forumPosts, ({ one, many }) => ({
-  thread: one(forumThreads, { fields: [forumPosts.threadId], references: [forumThreads.id] }),
-  author: one(users, { fields: [forumPosts.authorId], references: [users.id] }),
-  reactions: many(forumReactions),
-  reports: many(forumReports),
-}))
-
-export const forumReactionsRelations = relations(forumReactions, ({ one }) => ({
-  post: one(forumPosts, { fields: [forumReactions.postId], references: [forumPosts.id] }),
-  user: one(users, { fields: [forumReactions.userId], references: [users.id] }),
-}))
+/**
+ * Relations live in `./relations` to break the runtime cycle that would
+ * otherwise form between this file and the relations module (which imports
+ * the table objects from here). Import relations directly from
+ * `@/db/schema/relations` when needed. No current consumer in the app
+ * references the relations symbols, so removing the re-export from
+ * `@/db/schema` is safe.
+ */
