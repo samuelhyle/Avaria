@@ -1,7 +1,8 @@
 import { users } from "@/db/schema"
 import { TOKEN_TTL_MS, createToken, tokenIdentifiers } from "@/lib/auth/tokens"
 import { db } from "@/lib/db"
-import { sendEmail, verifyEmailHtml } from "@/lib/email"
+import { actionEmailSubject, verifyEmailHtml } from "@/lib/email"
+import { deliverEmailOutbox, enqueueEmail } from "@/lib/email/outbox"
 import { getServerEnv } from "@/lib/env"
 import { locales } from "@/lib/i18n/config"
 import { clientIp } from "@/lib/security/ip"
@@ -53,27 +54,34 @@ export async function POST(req: Request) {
 
   const passwordHash = await hash(parsed.data.password)
 
-  await db.insert(users).values({
-    email,
-    name: parsed.data.name ?? null,
-    passwordHash,
-    locale: parsed.data.locale,
-    role: "customer",
-  })
+  await db.transaction(async (tx) => {
+    await tx.insert(users).values({
+      email,
+      name: parsed.data.name ?? null,
+      passwordHash,
+      locale: parsed.data.locale,
+      role: "customer",
+    })
 
-  if (env.RESEND_API_KEY) {
     const token = await createToken(
       tokenIdentifiers.emailVerification(email),
       TOKEN_TTL_MS.emailVerification,
+      tx,
     )
     const origin = env.AUTH_URL ?? new URL(req.url).origin
-    const url = `${origin}/${parsed.data.locale}/verify-email?token=${encodeURIComponent(token)}&email=${encodeURIComponent(email)}`
-    await sendEmail({
-      to: email,
-      subject: "Confirm your AverianLabs account",
-      html: verifyEmailHtml({ url }),
-    })
-  }
+    const locale = parsed.data.locale
+    const url = `${origin}/${locale}/verify-email?token=${encodeURIComponent(token)}&email=${encodeURIComponent(email)}`
+    await enqueueEmail(
+      {
+        to: email,
+        subject: actionEmailSubject("verify", locale),
+        html: verifyEmailHtml({ url, locale }),
+      },
+      `verify:${token}`,
+      tx,
+    )
+  })
+  await deliverEmailOutbox().catch(() => undefined)
 
   return NextResponse.json({ ok: true })
 }

@@ -1,10 +1,11 @@
 import { gdprRequests } from "@/db/schema"
 import { getCurrentMember } from "@/lib/community"
 import { db } from "@/lib/db"
-import { accountDeletionHtml, sendEmail } from "@/lib/email"
+import { accountDeletionHtml, actionEmailSubject } from "@/lib/email"
+import { deliverEmailOutbox, enqueueEmail } from "@/lib/email/outbox"
 import { getServerEnv } from "@/lib/env"
 import { recordExportRequest } from "@/lib/gdpr"
-import { cookies } from "next/headers"
+import { locales } from "@/lib/i18n/config"
 import { NextResponse } from "next/server"
 
 const TOKEN_TTL_MS = 24 * 60 * 60 * 1000
@@ -43,27 +44,30 @@ export async function POST(req: Request) {
     // delete — generate a one-time confirmation token and email the link.
     const token = crypto.randomUUID().replace(/-/g, "")
     const expires = new Date(Date.now() + TOKEN_TTL_MS)
-    await db.insert(gdprRequests).values({
-      id: crypto.randomUUID(),
-      userId: member.id,
-      kind: "delete",
-      status: "pending",
-      token,
-      tokenExpiresAt: expires,
-    })
-
-    const env = getServerEnv()
-    if (env.RESEND_API_KEY) {
-      const store = await cookies()
-      const locale = store.get("NEXT_LOCALE")?.value ?? "en"
-      const origin = env.AUTH_URL ?? new URL(req.url).origin
-      const url = `${origin}/${locale}/account/delete/confirm/${token}`
-      await sendEmail({
-        to: member.email,
-        subject: "Confirm your AverianLabs account deletion",
-        html: accountDeletionHtml({ url }),
+    const requestedLocale = (body as { locale?: string }).locale
+    const locale = locales.find((l) => l === requestedLocale) ?? "en"
+    await db.transaction(async (tx) => {
+      await tx.insert(gdprRequests).values({
+        id: crypto.randomUUID(),
+        userId: member.id,
+        kind: "delete",
+        status: "pending",
+        token,
+        tokenExpiresAt: expires,
       })
-    }
+      const origin = getServerEnv().AUTH_URL ?? new URL(req.url).origin
+      const url = `${origin}/${locale}/account/delete/confirm/${token}`
+      await enqueueEmail(
+        {
+          to: member.email,
+          subject: actionEmailSubject("deletion", locale),
+          html: accountDeletionHtml({ url, locale }),
+        },
+        `deletion:${token}`,
+        tx,
+      )
+    })
+    await deliverEmailOutbox().catch(() => undefined)
 
     return NextResponse.json({
       ok: true,

@@ -2,12 +2,13 @@ import crypto from "node:crypto"
 import { newsletterSubscribers } from "@/db/schema"
 import { hashToken } from "@/lib/auth/tokens"
 import { db } from "@/lib/db"
-import { newsletterConfirmHtml, sendEmail } from "@/lib/email"
+import { actionEmailSubject, newsletterConfirmHtml } from "@/lib/email"
+import { deliverEmailOutbox, enqueueEmail } from "@/lib/email/outbox"
 import { getServerEnv } from "@/lib/env"
 import { locales } from "@/lib/i18n/config"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
-import { eq } from "drizzle-orm"
+import { eq, sql } from "drizzle-orm"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -40,51 +41,50 @@ export async function POST(request: Request) {
   const email = parsed.data.email.trim().toLowerCase()
   const locale = parsed.data.locale
 
-  const existing = await db.query.newsletterSubscribers.findFirst({
-    where: eq(newsletterSubscribers.email, email),
-    columns: { status: true },
-  })
-
-  // Already confirmed — nothing to do, and no duplicate email.
-  if (existing?.status === "confirmed") {
-    return NextResponse.json({ ok: true })
-  }
-
-  const token = crypto.randomBytes(32).toString("base64url")
-  const tokenHash = hashToken(token)
-  const expires = new Date(Date.now() + CONFIRM_TTL_MS)
-
-  if (existing) {
-    await db
-      .update(newsletterSubscribers)
-      .set({
-        locale,
-        status: "pending",
-        confirmToken: tokenHash,
-        confirmExpiresAt: expires,
-        updatedAt: new Date(),
+  try {
+    await db.transaction(async (tx) => {
+      await tx.execute(
+        sql`SELECT pg_advisory_xact_lock(hashtextextended(${`newsletter:${email}`}, 0))`,
+      )
+      const existing = await tx.query.newsletterSubscribers.findFirst({
+        where: eq(newsletterSubscribers.email, email),
       })
-      .where(eq(newsletterSubscribers.email, email))
-  } else {
-    await db.insert(newsletterSubscribers).values({
-      email,
-      locale,
-      status: "pending",
-      confirmToken: tokenHash,
-      confirmExpiresAt: expires,
+      if (
+        existing?.status === "confirmed" ||
+        (existing?.status === "pending" &&
+          existing.confirmExpiresAt &&
+          existing.confirmExpiresAt > new Date())
+      )
+        return
+      const token = crypto.randomBytes(32).toString("base64url")
+      const values = {
+        locale,
+        status: "pending" as const,
+        confirmToken: hashToken(token),
+        confirmExpiresAt: new Date(Date.now() + CONFIRM_TTL_MS),
+        updatedAt: new Date(),
+      }
+      if (existing)
+        await tx
+          .update(newsletterSubscribers)
+          .set(values)
+          .where(eq(newsletterSubscribers.email, email))
+      else await tx.insert(newsletterSubscribers).values({ email, ...values })
+      const origin = getServerEnv().AUTH_URL ?? new URL(request.url).origin
+      const url = `${origin}/${locale}/newsletter/confirm?token=${encodeURIComponent(token)}&email=${encodeURIComponent(email)}`
+      await enqueueEmail(
+        {
+          to: email,
+          subject: actionEmailSubject("newsletter", locale),
+          html: newsletterConfirmHtml({ url, locale }),
+        },
+        `newsletter:${hashToken(token)}`,
+        tx,
+      )
     })
+    await deliverEmailOutbox().catch(() => undefined)
+    return NextResponse.json({ ok: true })
+  } catch {
+    return NextResponse.json({ error: "submission_failed" }, { status: 503 })
   }
-
-  const env = getServerEnv()
-  if (env.RESEND_API_KEY) {
-    const origin = env.AUTH_URL ?? new URL(request.url).origin
-    const url = `${origin}/${locale}/newsletter/confirm?token=${encodeURIComponent(token)}&email=${encodeURIComponent(email)}`
-    await sendEmail({
-      to: email,
-      subject: "Confirm your AverianLabs subscription",
-      html: newsletterConfirmHtml({ url }),
-    })
-  }
-
-  return NextResponse.json({ ok: true })
 }

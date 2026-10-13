@@ -1,14 +1,17 @@
 import crypto from "node:crypto"
 import { supportTickets } from "@/db/schema"
 import { db } from "@/lib/db"
-import { contactNotificationHtml, sendEmail } from "@/lib/email"
-import { getServerEnv } from "@/lib/env"
+import { contactNotificationHtml } from "@/lib/email"
+import { deliverEmailOutbox, enqueueEmail } from "@/lib/email/outbox"
+import { locales } from "@/lib/i18n/config"
+import { getLegalIdentity } from "@/lib/legal"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
 const bodySchema = z.object({
+  locale: z.enum(locales).default("en"),
   name: z.string().min(2).max(200),
   email: z.string().email().max(254),
   subject: z.string().min(2).max(200),
@@ -34,26 +37,27 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid input." }, { status: 400 })
   }
 
-  const { name, email, subject, message } = parsed.data
-
-  await db.insert(supportTickets).values({
-    id: crypto.randomUUID(),
-    email,
-    subject,
-    body: message,
-    source: "email",
-    status: "open",
-  })
-
-  const env = getServerEnv()
-  if (env.RESEND_API_KEY) {
-    await sendEmail({
-      to: "support@averianlabs.eu",
-      replyTo: email,
-      subject: `[Contact] ${subject}`,
-      html: contactNotificationHtml({ name, email, subject, message }),
+  const { name, email, subject, message, locale } = parsed.data
+  try {
+    await db.transaction(async (tx) => {
+      const id = crypto.randomUUID()
+      await tx
+        .insert(supportTickets)
+        .values({ id, email, subject, body: message, locale, source: "email", status: "open" })
+      await enqueueEmail(
+        {
+          to: getLegalIdentity().contactEmail,
+          replyTo: email,
+          subject,
+          html: contactNotificationHtml({ name, email, subject, message, locale }),
+        },
+        `contact:${id}`,
+        tx,
+      )
     })
+    await deliverEmailOutbox().catch(() => undefined)
+    return NextResponse.json({ ok: true })
+  } catch {
+    return NextResponse.json({ error: "submission_failed" }, { status: 503 })
   }
-
-  return NextResponse.json({ ok: true })
 }

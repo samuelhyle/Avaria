@@ -38,7 +38,8 @@ import { isMinimaxConfigured } from "@/lib/ai/providers/minimax"
 import { type ChatIdentity, checkChatRateLimit } from "@/lib/ai/rate-limit"
 import type { ChatErrorBody } from "@/lib/ai/types"
 import { auth } from "@/lib/auth"
-import type { Locale } from "@/lib/i18n/config"
+import { type Locale, locales } from "@/lib/i18n/config"
+import { getStorefrontCatalogue } from "@/lib/products/catalogue"
 import { clientIp } from "@/lib/security/ip"
 import { z } from "zod"
 
@@ -57,14 +58,17 @@ const cartItemSchema = z.object({
   sku: z.string(),
   productSlug: z.string(),
   name: z.string(),
-  mg: z.number(),
-  qty: z.number(),
-  unitPriceCents: z.number(),
+  mg: z.number().finite(),
+  sizeValue: z.number().finite().positive(),
+  sizeUnit: z.enum(["mg", "g", "mcg", "mL", "uL", "vial"]),
+  purchaseMode: z.enum(["direct", "quotation", "unavailable"]),
+  qty: z.number().int().min(1).max(20),
+  unitPriceCents: z.number().int().nonnegative(),
 })
 
 const bodySchema = z.object({
   messages: z.array(messageSchema).min(1).max(50),
-  locale: z.string().min(2).max(5).optional(),
+  locale: z.enum(locales).optional(),
   context: z
     .object({
       kind: z.enum(["home", "shop", "product", "category", "cart", "blog", "support", "other"]),
@@ -92,18 +96,6 @@ function jsonError(body: ChatErrorBody, status: number): Response {
 }
 
 export async function POST(request: Request): Promise<Response> {
-  if (!isMinimaxConfigured()) {
-    return jsonError(
-      {
-        error: true,
-        code: "provider_unavailable",
-        message:
-          "Averia is not configured on this environment. Set MINIMAX_API_KEY to enable the chat.",
-      },
-      503,
-    )
-  }
-
   let parsed: z.infer<typeof bodySchema>
   try {
     const raw = (await request.json()) as unknown
@@ -136,7 +128,14 @@ export async function POST(request: Request): Promise<Response> {
   const rl = await checkChatRateLimit(identity)
   if (!rl.ok) {
     return jsonError(
-      { error: true, code: "rate_limited", message: "Too many requests. Please slow down." },
+      {
+        error: true,
+        code: "rate_limited",
+        message:
+          locale === "fi"
+            ? "Liian monta pyyntöä. Odota hetki ja yritä uudelleen."
+            : "Too many requests. Please slow down.",
+      },
       429,
     )
   }
@@ -144,7 +143,14 @@ export async function POST(request: Request): Promise<Response> {
   // ── Input guardrail ───────────────────────────────────────────────────
   const lastMsg = parsed.messages[parsed.messages.length - 1]
   if (!lastMsg) {
-    return jsonError({ error: true, code: "invalid_request", message: "Empty conversation." }, 400)
+    return jsonError(
+      {
+        error: true,
+        code: "invalid_request",
+        message: locale === "fi" ? "Keskustelu on tyhjä." : "Empty conversation.",
+      },
+      400,
+    )
   }
 
   const inputCheck = preflightInput(lastMsg.content, locale)
@@ -180,6 +186,20 @@ export async function POST(request: Request): Promise<Response> {
         "x-accel-buffering": "no",
       },
     })
+  }
+
+  if (!isMinimaxConfigured()) {
+    return jsonError(
+      {
+        error: true,
+        code: "provider_unavailable",
+        message:
+          locale === "fi"
+            ? "Avustaja ei ole tällä hetkellä käytettävissä. Ota yhteyttä tukeen."
+            : "The assistant is currently unavailable. Please contact support.",
+      },
+      503,
+    )
   }
 
   const consent = getConsentFromRequest(request)
@@ -323,7 +343,10 @@ export async function POST(request: Request): Promise<Response> {
             console.error("[averia] agent failed", err)
             sink.enqueue({
               type: "error",
-              message: "Averia hit a problem. Please try again in a moment.",
+              message:
+                locale === "fi"
+                  ? "Avustajassa tapahtui virhe. Yritä hetken kuluttua uudelleen."
+                  : "Averia hit a problem. Please try again in a moment.",
             })
           }
         })
@@ -332,7 +355,7 @@ export async function POST(request: Request): Promise<Response> {
           // Strip model reasoning blocks before verification + persistence
           // (the client also hides them at render time).
           accumulatedText = accumulatedText.replace(/<think>[\s\S]*?(<\/think>|$)/gi, "").trim()
-          const report = verifyResponse(accumulatedText)
+          const report = verifyResponse(accumulatedText, await getStorefrontCatalogue())
           if (
             report.unknownSkus.length > 0 ||
             report.priceMismatches.length > 0 ||

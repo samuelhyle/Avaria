@@ -1,7 +1,8 @@
 import { users } from "@/db/schema"
 import { TOKEN_TTL_MS, createToken, tokenIdentifiers } from "@/lib/auth/tokens"
 import { db } from "@/lib/db"
-import { passwordResetHtml, sendEmail } from "@/lib/email"
+import { actionEmailSubject, passwordResetHtml } from "@/lib/email"
+import { deliverEmailOutbox, enqueueEmail } from "@/lib/email/outbox"
 import { getServerEnv } from "@/lib/env"
 import { locales } from "@/lib/i18n/config"
 import { clientIp } from "@/lib/security/ip"
@@ -44,19 +45,26 @@ export async function POST(req: Request) {
   if (!user?.passwordHash || user.deletedAt) return ok
 
   const env = getServerEnv()
-  if (env.RESEND_API_KEY) {
+  await db.transaction(async (tx) => {
     const token = await createToken(
       tokenIdentifiers.passwordReset(email),
       TOKEN_TTL_MS.passwordReset,
+      tx,
     )
     const origin = env.AUTH_URL ?? new URL(req.url).origin
-    const url = `${origin}/${parsed.data.locale}/reset-password?token=${encodeURIComponent(token)}&email=${encodeURIComponent(email)}`
-    await sendEmail({
-      to: email,
-      subject: "Reset your AverianLabs password",
-      html: passwordResetHtml({ url }),
-    })
-  }
+    const locale = parsed.data.locale
+    const url = `${origin}/${locale}/reset-password?token=${encodeURIComponent(token)}&email=${encodeURIComponent(email)}`
+    await enqueueEmail(
+      {
+        to: email,
+        subject: actionEmailSubject("reset", locale),
+        html: passwordResetHtml({ url, locale }),
+      },
+      `reset:${token}`,
+      tx,
+    )
+  })
+  await deliverEmailOutbox().catch(() => undefined)
 
   return ok
 }

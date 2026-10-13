@@ -1,13 +1,17 @@
-import { renderOg } from "@/lib/og/render"
+import { ogLocale, renderOg } from "@/lib/og/render"
 
 export const runtime = "nodejs"
 
-export async function GET() {
+export async function GET(request: Request) {
+  const locale = ogLocale(request)
   return renderOg({
-    kind: "Research store",
-    title: "Precision peptides for serious research",
+    locale,
+    kind: locale === "fi" ? "Tutkimusmateriaalit" : "Research materials",
+    title: locale === "fi" ? "Materiaaleja laboratoriotyöhön" : "Materials for laboratory research",
     subtitle:
-      "EU-dispatched, third-party HPLC-verified research peptides. Batch-specific COA on every vial.",
-    meta: "averianlabs.eu · Research use only",
+      locale === "fi"
+        ? "Tutustu tuotteisiin, tarkista erän asiakirjat ja kysy saatavuudesta ennen tilaamista."
+        : "Browse products, check batch documentation and confirm availability before ordering.",
+    meta: "averianlabs.eu",
   })
 }
