@@ -20,7 +20,7 @@
   # by the plugin). The static demo build still exists for local preview:
   #   pnpm build:demo --serve
   # but it is no longer what we publish.
-  command = "pnpm install --frozen-lockfile && pnpm build"
+  command = "pnpm install --frozen-lockfile && node scripts/netlify-build.mjs"
   publish = ".next"
 
 [build.environment]
@@ -30,13 +30,7 @@
   NODE_ENV = "production"
   NEXT_TELEMETRY_DISABLED = "1"
 
-# Cache pnpm store between builds to keep install fast.
-[[cache]]
-  path = "averianlabs-web/node_modules/.pnpm-store"
-
-# Pin the official Next.js Runtime plugin. Without this, Netlify auto-detects
-# Next and installs whatever version it ships with — pinning avoids surprise
-# upgrades and lets us opt into `nodeVersion = 22` consistently.
+# Use the official Next.js Runtime to package server and edge routes.
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
@@ -51,7 +45,6 @@
   for = "/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
-    Cache-Control = "public, max-age=0, must-revalidate"
 
 # Long-cache hashed assets emitted by Next/Tailwind.
 [[headers]]

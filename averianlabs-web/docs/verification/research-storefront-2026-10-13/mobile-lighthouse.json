@@ -4,21 +4,21 @@
   "results": [
     {
       "route": "/en",
-      "fetchedAt": "2026-10-13T14:46:49.237Z",
+      "fetchedAt": "2026-10-13T15:06:03.837Z",
       "mode": "mobile-simulated",
       "beneathAgeGate": true,
       "consent": "essential",
       "warnings": [],
       "scores": {
-        "performance": 0.95,
+        "performance": 0.96,
         "accessibility": null,
         "best-practices": 1,
         "seo": 1
       },
-      "lcpMs": 2085.4393,
-      "tbtMs": 213.50000000000023,
+      "lcpMs": 1664.43125,
+      "tbtMs": 222.5,
       "cls": 0,
-      "fcpMs": 1058.8131,
+      "fcpMs": 1076.88625,
       "diagnostics": [
         {
           "key": "unused-javascript",
@@ -34,7 +34,7 @@
         {
           "key": "server-response-time",
           "title": "Initial server response time was short",
-          "value": "Root document took 30 ms",
+          "value": "Root document took 40 ms",
           "score": 1
         },
         {
@@ -47,21 +47,21 @@
     },
     {
       "route": "/fi",
-      "fetchedAt": "2026-10-13T14:47:03.917Z",
+      "fetchedAt": "2026-10-13T15:06:18.982Z",
       "mode": "mobile-simulated",
       "beneathAgeGate": true,
       "consent": "essential",
       "warnings": [],
       "scores": {
-        "performance": 0.93,
+        "performance": 0.89,
         "accessibility": null,
         "best-practices": 1,
         "seo": 1
       },
-      "lcpMs": 1080.2178,
-      "tbtMs": 315.5000000000001,
+      "lcpMs": 1179.18705,
+      "tbtMs": 446.5,
       "cls": 0,
-      "fcpMs": 994.1452,
+      "fcpMs": 993.18705,
       "diagnostics": [
         {
           "key": "unused-javascript",
@@ -90,21 +90,21 @@
     },
     {
       "route": "/en/shop",
-      "fetchedAt": "2026-10-13T14:47:17.553Z",
+      "fetchedAt": "2026-10-13T15:06:32.734Z",
       "mode": "mobile-simulated",
       "beneathAgeGate": true,
       "consent": "essential",
       "warnings": [],
       "scores": {
-        "performance": 0.96,
+        "performance": 0.91,
         "accessibility": null,
         "best-practices": 1,
         "seo": 1
       },
-      "lcpMs": 1229.6153608886718,
-      "tbtMs": 221.9999999999999,
+      "lcpMs": 1378.5789603454589,
+      "tbtMs": 385.4999999999999,
       "cls": 0,
-      "fcpMs": 867.16585,
+      "fcpMs": 882.14785,
       "diagnostics": [
         {
           "key": "unused-javascript",
@@ -133,21 +133,21 @@
     },
     {
       "route": "/fi/shop",
-      "fetchedAt": "2026-10-13T14:47:48.158Z",
+      "fetchedAt": "2026-10-13T15:06:46.456Z",
       "mode": "mobile-simulated",
       "beneathAgeGate": true,
       "consent": "essential",
       "warnings": [],
       "scores": {
-        "performance": 0.88,
+        "performance": 0.89,
         "accessibility": null,
         "best-practices": 1,
         "seo": 1
       },
-      "lcpMs": 959.26315,
-      "tbtMs": 493,
+      "lcpMs": 944.18475,
+      "tbtMs": 437.4999999999999,
       "cls": 0,
-      "fcpMs": 894.26315,
+      "fcpMs": 944.18475,
       "diagnostics": [
         {
           "key": "unused-javascript",
@@ -163,7 +163,7 @@
         {
           "key": "server-response-time",
           "title": "Initial server response time was short",
-          "value": "Root document took 50 ms",
+          "value": "Root document took 30 ms",
           "score": 1
         },
         {

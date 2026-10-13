@@ -4,16 +4,16 @@ Next.js 15 (App Router) + React 19 + TypeScript + Tailwind v4 + React Three Fibe
 
 ## Deployment targets
 
-This project ships to two distinct targets with different intents. Keep them separate.
+The existing online project is [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app). It runs the full Next.js application with the site's configured database and secrets and remains a `noindex` review site. The custom domain `averianlabs.eu` was not resolving during the 13 October 2026 deployment check; its production setup and merchant release approval are still pending.
 
 | Target | URL | What it is | Build mode | `X-Robots-Tag` |
 |---|---|---|---|---|
-| **Canonical production** | `https://averianlabs.eu` (Vercel, region `fra1`) | Live store — checkout, payments, fulfilment | `output: "standalone"`, Sentry sourcemaps, full API routes | `index, follow` |
-| **Preview / demo** | Netlify (auto-generated per branch) | Pre-production preview, no live payments | `output: "export"` only via `BUILD_MODE=demo`, or full Next.js app on the Netlify Runtime plugin | `noindex, nofollow` |
+| **Planned canonical production** | `https://averianlabs.eu` | Requires domain/hosting setup and the release approvals in the runbook | Full server runtime | Set when approved |
+| **Existing online review site** | `https://averianlabs-demo.netlify.app` | Full application for stakeholder review; no merchant release approval | Next.js Runtime plugin, hosted build | `noindex, nofollow` |
 
-The Netlify URL is **not** the canonical site. It exists for stakeholder review and CI checks. The canonical production URL is Vercel.
+The repository-root `netlify.toml` sets the monorepo base directory. Hosted builds check the database migration ledger, apply forward migrations and insert missing draft references without overwriting existing records, then build the app and check bundle budgets. Private routes retain the application's cache headers.
 
-> If you intend to deploy from a different Git branch, open a PR — the Vercel preview URL will reflect the PR. Netlify previews remain `noindex` until promoted by the ops lead.
+See [the release runbook](docs/RESEARCH_CUSTOMER_RELEASE_RUNBOOK.md) before enabling real orders. The existing Netlify Git connection tracks `demo`; a hosted source archive can deploy the current local snapshot when GitHub write access is unavailable.
 
 ## Quick start (one command)
 

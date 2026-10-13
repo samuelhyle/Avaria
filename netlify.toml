@@ -1,0 +1,78 @@
+# Netlify config for the AverianLabs Next.js app.
+#
+# Build pipeline:
+#   1. `pnpm install`         – restore deps
+#   2. `pnpm build`           – standard `next build`; the Next.js Runtime
+#                               plugin below packages the result into Netlify
+#                               Functions + Edge Functions automatically.
+#
+# `app/api/` ships intact — route handlers run as Node Functions and read
+# secrets (`MINIMAX_API_KEY`, etc.) from Netlify env vars at invocation
+# time. Never put server-only secrets in `NEXT_PUBLIC_*`, in this file,
+# or in `.env*` committed to git; set them under
+#   Site settings → Environment variables → Production / Preview / Branch
+# and the Netlify Next.js plugin will surface them to the function runtime.
+
+[build]
+  base    = "averianlabs-web"
+  # `BUILD_MODE` is intentionally not set here so the non-demo branch of
+  # `next.config.ts` runs (`output: "standalone"` → bundled into Functions
+  # by the plugin). The static demo build still exists for local preview:
+  #   pnpm build:demo --serve
+  # but it is no longer what we publish.
+  command = "pnpm install --frozen-lockfile && node scripts/netlify-build.mjs"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  PNPM_VERSION = "10"
+  # Declared explicitly so the deploy context matches the local intent.
+  NODE_ENV = "production"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Use the official Next.js Runtime to package server and edge routes.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Locale-prefix redirect: the production app uses middleware to 307 → /en/...
+# when a request hits a non-locale path. With the Next.js Runtime the
+# middleware executes server-side per request, so we no longer need the
+# static-export rewrite engine that the previous demo required. Root only.
+
+# Noindex headers on every response (the Netlify deploy is still a
+# preview/demo — the canonical site is Vercel).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# Long-cache hashed assets emitted by Next/Tailwind.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Long-cache OG image + favicon.
+[[headers]]
+  for = "/og-default.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/favicon.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Security headers mirroring next.config.ts. Netlify adds HSTS automatically
+# via the dashboard once HTTPS is enabled, but we keep an explicit one for
+# deploys that bypass the UI (CLI, API).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-origin"

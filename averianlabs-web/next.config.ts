@@ -9,6 +9,18 @@ const isDemoBuild = process.env.BUILD_MODE === "demo"
 // Next.js dev mode (webpack HMR + source maps) requires `unsafe-eval`.
 // Never allow it in production.
 const isDev = process.env.NODE_ENV === "development"
+const documentOrigins = [
+  process.env.R2_PUBLIC_URL,
+  process.env.R2_PUBLIC_BASE_URL,
+  process.env.NEXT_PUBLIC_R2_BASE_URL,
+].flatMap((value) => {
+  try {
+    const url = new URL(value ?? "")
+    return url.protocol === "https:" ? [url.origin] : []
+  } catch {
+    return []
+  }
+})
 // NOTE: `'unsafe-inline'` is required for script-src because the storefront is
 // statically generated/ISR — Next.js only stamps nonces onto inline scripts for
 // dynamically rendered pages. A nonce-based CSP is tracked post-launch
@@ -32,6 +44,9 @@ const csp = [
   "font-src 'self' data:",
   [
     "connect-src 'self'",
+    "https://*.r2.cloudflarestorage.com",
+    "https://*.r2.dev",
+    ...documentOrigins,
     "https://*.sanity.io",
     "https://eu.i.posthog.com",
     "https://eu-assets.i.posthog.com",

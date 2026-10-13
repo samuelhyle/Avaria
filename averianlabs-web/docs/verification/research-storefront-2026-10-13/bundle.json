@@ -3,7 +3,7 @@
   "routes": [
     {
       "route": "/[locale]/page",
-      "gzipBytes": 290524,
+      "gzipBytes": 290539,
       "budget": 307200,
       "passed": true,
       "files": [
@@ -11,10 +11,10 @@
         "static/chunks/121b6f03-037b23fc1c09df7d.js",
         "static/chunks/c1a87517-e73f533f96a6fa67.js",
         "static/chunks/9d81e687-8a1f3ef355ee4346.js",
-        "static/chunks/277-1bb0e519bfeec691.js",
-        "static/chunks/main-app-bd95113048630b63.js",
+        "static/chunks/277-9850bb124b0a9d5d.js",
+        "static/chunks/main-app-2bf583cd327567a9.js",
         "static/chunks/app/layout-fb8c0b2a12e473ec.js",
-        "static/css/4f8a00d7610e7bf7.css",
+        "static/css/8e7c44a3dfc918a6.css",
         "static/chunks/6498-a2749136d2163117.js",
         "static/chunks/2679-0e5798c0da53978e.js",
         "static/chunks/8553-56dcebdc149058d0.js",
@@ -25,12 +25,12 @@
         "static/chunks/app/[locale]/layout-b09f253fcb084476.js",
         "static/chunks/2782-fa7cb3d4fafc6797.js",
         "static/chunks/283-4d4ca10d2be32e55.js",
-        "static/chunks/app/[locale]/page-164e955004a8ea92.js"
+        "static/chunks/app/[locale]/page-6233543dd5d3e6d1.js"
       ]
     },
     {
       "route": "/[locale]/shop/page",
-      "gzipBytes": 284433,
+      "gzipBytes": 284439,
       "budget": 358400,
       "passed": true,
       "files": [
@@ -38,10 +38,10 @@
         "static/chunks/121b6f03-037b23fc1c09df7d.js",
         "static/chunks/c1a87517-e73f533f96a6fa67.js",
         "static/chunks/9d81e687-8a1f3ef355ee4346.js",
-        "static/chunks/277-1bb0e519bfeec691.js",
-        "static/chunks/main-app-bd95113048630b63.js",
+        "static/chunks/277-9850bb124b0a9d5d.js",
+        "static/chunks/main-app-2bf583cd327567a9.js",
         "static/chunks/app/layout-fb8c0b2a12e473ec.js",
-        "static/css/4f8a00d7610e7bf7.css",
+        "static/css/8e7c44a3dfc918a6.css",
         "static/chunks/6498-a2749136d2163117.js",
         "static/chunks/2679-0e5798c0da53978e.js",
         "static/chunks/8553-56dcebdc149058d0.js",
@@ -56,7 +56,7 @@
     },
     {
       "route": "/[locale]/shop/[slug]/page",
-      "gzipBytes": 300078,
+      "gzipBytes": 300084,
       "budget": 358400,
       "passed": true,
       "files": [
@@ -64,10 +64,10 @@
         "static/chunks/121b6f03-037b23fc1c09df7d.js",
         "static/chunks/c1a87517-e73f533f96a6fa67.js",
         "static/chunks/9d81e687-8a1f3ef355ee4346.js",
-        "static/chunks/277-1bb0e519bfeec691.js",
-        "static/chunks/main-app-bd95113048630b63.js",
+        "static/chunks/277-9850bb124b0a9d5d.js",
+        "static/chunks/main-app-2bf583cd327567a9.js",
         "static/chunks/app/layout-fb8c0b2a12e473ec.js",
-        "static/css/4f8a00d7610e7bf7.css",
+        "static/css/8e7c44a3dfc918a6.css",
         "static/chunks/6498-a2749136d2163117.js",
         "static/chunks/2679-0e5798c0da53978e.js",
         "static/chunks/8553-56dcebdc149058d0.js",
@@ -84,7 +84,7 @@
     },
     {
       "route": "/[locale]/checkout/cart/page",
-      "gzipBytes": 278167,
+      "gzipBytes": 278183,
       "budget": 358400,
       "passed": true,
       "files": [
@@ -92,10 +92,10 @@
         "static/chunks/121b6f03-037b23fc1c09df7d.js",
         "static/chunks/c1a87517-e73f533f96a6fa67.js",
         "static/chunks/9d81e687-8a1f3ef355ee4346.js",
-        "static/chunks/277-1bb0e519bfeec691.js",
-        "static/chunks/main-app-bd95113048630b63.js",
+        "static/chunks/277-9850bb124b0a9d5d.js",
+        "static/chunks/main-app-2bf583cd327567a9.js",
         "static/chunks/app/layout-fb8c0b2a12e473ec.js",
-        "static/css/4f8a00d7610e7bf7.css",
+        "static/css/8e7c44a3dfc918a6.css",
         "static/chunks/6498-a2749136d2163117.js",
         "static/chunks/2679-0e5798c0da53978e.js",
         "static/chunks/8553-56dcebdc149058d0.js",
@@ -105,12 +105,12 @@
         "static/chunks/9194-e1bce003e87f88ff.js",
         "static/chunks/app/[locale]/layout-b09f253fcb084476.js",
         "static/chunks/app/[locale]/checkout/layout-692b59466afaac13.js",
-        "static/chunks/app/[locale]/checkout/cart/page-36eb27dc60d12ca9.js"
+        "static/chunks/app/[locale]/checkout/cart/page-3ccc8abd2e5032f0.js"
       ]
     },
     {
       "route": "/[locale]/checkout/payment/page",
-      "gzipBytes": 282579,
+      "gzipBytes": 282585,
       "budget": 409600,
       "passed": true,
       "files": [
@@ -118,10 +118,10 @@
         "static/chunks/121b6f03-037b23fc1c09df7d.js",
         "static/chunks/c1a87517-e73f533f96a6fa67.js",
         "static/chunks/9d81e687-8a1f3ef355ee4346.js",
-        "static/chunks/277-1bb0e519bfeec691.js",
-        "static/chunks/main-app-bd95113048630b63.js",
+        "static/chunks/277-9850bb124b0a9d5d.js",
+        "static/chunks/main-app-2bf583cd327567a9.js",
         "static/chunks/app/layout-fb8c0b2a12e473ec.js",
-        "static/css/4f8a00d7610e7bf7.css",
+        "static/css/8e7c44a3dfc918a6.css",
         "static/chunks/6498-a2749136d2163117.js",
         "static/chunks/2679-0e5798c0da53978e.js",
         "static/chunks/8553-56dcebdc149058d0.js",
@@ -138,7 +138,7 @@
     }
   ],
   "chunkBudget": 819200,
-  "totalAllChunksGzipBytes": 3424387,
+  "totalAllChunksGzipBytes": 3424418,
   "largestOptionalOrSharedChunks": [
     {
       "file": "static/chunks/7fe1dd84.8ce77a3a0cc124a5.js",
@@ -161,12 +161,12 @@
       "gzipBytes": 139134
     },
     {
-      "file": "static/chunks/main-724619921b7d8091.js",
+      "file": "static/chunks/main-da8bd7d8c1002d26.js",
       "gzipBytes": 132050
     },
     {
-      "file": "static/chunks/277-1bb0e519bfeec691.js",
-      "gzipBytes": 107157
+      "file": "static/chunks/277-9850bb124b0a9d5d.js",
+      "gzipBytes": 107156
     },
     {
       "file": "static/chunks/9328ae3d.9b7c43272a907507.js",

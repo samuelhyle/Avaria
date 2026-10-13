@@ -3,6 +3,8 @@
 Keep this file with the deployment. It is the first thing to open during an
 incident and the last thing to update before a release.
 
+**Current hosting, verified 13 October 2026:** the existing online site is [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app), on Netlify with a configured Neon database. `averianlabs.eu` and its staging subdomain were not resolving. The Vercel/Neon environment and deploy instructions below are legacy intended configuration, not confirmation of a connected production deployment. Use [the current release and operations runbook](docs/RESEARCH_CUSTOMER_RELEASE_RUNBOOK.md) for supported application behavior and prerequisites.
+
 ## Environments
 
 | Env | Host | URL | DB | Notes |

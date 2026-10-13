@@ -1,0 +1,137 @@
+{
+  "recordedAt": "2026-10-13T15:09:17.125489+00:00",
+  "sourceHeadAtVerification": "2603828bae892273f3406be6c444ddb17deac026",
+  "buildId": "k1XNf9efgdzwJCej1UI7j",
+  "environment": {
+    "node": "22.20.0",
+    "pnpmUsed": "9.10.0",
+    "pnpmPinned": "10.0.0",
+    "next": "15.5.27",
+    "browser": "Chromium via Playwright",
+    "database": "isolated local PostgreSQL 16 with pgvector",
+    "externalProviders": "disabled for browser runs; mocked for database integration"
+  },
+  "checks": {
+    "productionBuild": {
+      "passed": true,
+      "command": "pnpm build with NEXT_DIST_DIR=.next-implementation and explicit local test configuration"
+    },
+    "typecheck": {
+      "passed": true,
+      "command": "pnpm typecheck",
+      "afterTemporaryBuildCleanup": true
+    },
+    "lint": {
+      "passed": true,
+      "errors": 0,
+      "warnings": 52,
+      "command": "pnpm lint",
+      "checkedFiles": 492
+    },
+    "unit": {
+      "passed": 175,
+      "failed": 0,
+      "skipped": 0,
+      "command": "RUN_LOCAL_EMBED_TESTS=1 pnpm test",
+      "nativeModelTestsPassed": 4
+    },
+    "databaseIntegration": {
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0,
+      "command": "pnpm test:integration",
+      "providersMocked": true
+    },
+    "browser": {
+      "passed": 100,
+      "failed": 0,
+      "skipped": 2,
+      "total": 102,
+      "command": "pnpm test:e2e --workers=2",
+      "skipReason": "Two streamed live AI-provider journeys require unavailable MINIMAX_API_KEY configuration. Core checkout/database journeys are executed."
+    },
+    "accessibility": {
+      "standaloneRoutesPassed": 20,
+      "browserCasesPassed": 20,
+      "criticalOrSeriousViolations": 0,
+      "standaloneMinorViolations": 0,
+      "command": "pnpm test:a11y and browser axe checks",
+      "limitations": "Automated checks do not certify WCAG conformance or human screen-reader usability."
+    },
+    "translations": {
+      "locales": 5,
+      "leafKeys": 1057,
+      "missing": 0,
+      "literalUsagePassed": true,
+      "command": "pnpm check:i18n and pnpm check:i18n:usage",
+      "limitations": "Scientific/editorial human approval remains pending. DE/SV/NL contain new English fallback text."
+    },
+    "bundle": {
+      "passed": true,
+      "artifact": "bundle.json",
+      "command": "NEXT_DIST_DIR=.next-implementation pnpm check:bundle"
+    },
+    "dependencyAudit": {
+      "productionDependencies": 759,
+      "high": 0,
+      "critical": 0,
+      "moderate": 1,
+      "remaining": {
+        "package": "sprintf-js",
+        "severity": "moderate",
+        "advisory": "https://github.com/advisories/GHSA-hp3w-g68c-fv3c",
+        "fixedVersionReported": false,
+        "reachabilityProvedAbsent": false
+      }
+    },
+    "legalReadiness": {
+      "passed": false,
+      "expectedFailure": true,
+      "missingSettings": 6
+    },
+    "technicalReleaseReadiness": {
+      "passed": false,
+      "expectedFailure": true,
+      "missing": "Actual HTTPS target, payment/email/scheduler configuration and approved saleable records; company identity is checked separately.",
+      "afterFixtureCleanup": true
+    },
+    "diffWhitespace": {
+      "passed": true,
+      "command": "git diff --check"
+    }
+  },
+  "mobileLab": {
+    "tool": "Lighthouse",
+    "version": "12.6.1",
+    "artifact": "mobile-lighthouse.json",
+    "runsPerRoute": 1,
+    "fieldInpMeasured": false,
+    "limitations": "Simulated local mobile measurements with essential consent and satisfied age gate; not production Core Web Vitals. Lighthouse accessibility score unavailable, axe checked independently."
+  },
+  "artifacts": {
+    "aboveFold": ["fi-390-above-fold.png", "fi-1440-above-fold.png"],
+    "fullPage": [
+      "fi-320-final.png",
+      "fi-390-final.png",
+      "fi-414-final.png",
+      "fi-768-final.png",
+      "fi-1280-final.png"
+    ],
+    "screenshotContext": "Isolated review database; any visible QA products are explicitly named test fixtures, not supplier evidence."
+  },
+  "releaseRequirements": [
+    "Approved chemical identities, original batch reports and methods",
+    "Registered seller identity and approved buyer/VAT/shipping/returns/retention policies",
+    "Actual payment, email, storage and fulfilment sandbox rehearsals",
+    "Human Finnish/English scientific editorial approval",
+    "Production scheduler configuration and backup/restore rehearsal"
+  ],
+  "deployed": false,
+  "cleanup": {
+    "reviewServerStopped": true,
+    "temporaryBuildRemoved": true,
+    "browserCatalogueFixturesRemoved": true,
+    "isolatedDatabaseContainerStopped": true,
+    "customerDataModified": false
+  }
+}

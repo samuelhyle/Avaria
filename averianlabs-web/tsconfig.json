@@ -31,8 +31,7 @@
     "**/*.tsx",
     ".next-verify/types/**/*.ts",
     ".next/types/**/*.ts",
-    "next-env.d.ts",
-    ".next-implementation/types/**/*.ts"
+    "next-env.d.ts"
   ],
   "exclude": ["node_modules", ".next", ".next-verify", "dist", "tests"]
 }
