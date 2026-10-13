@@ -14,6 +14,9 @@ export interface CheckoutState {
   b2b: boolean
   vatId: string
   shippingMethod: string
+  pendingOrderId: string
+  pendingOrderUrl: string
+  setPendingOrder: (id: string, url: string) => void
 
   setEmail: (email: string) => void
   setAddress: (addr: Partial<Omit<CheckoutState, keyof CheckoutActions>>) => void
@@ -24,6 +27,7 @@ export interface CheckoutState {
 }
 
 interface CheckoutActions {
+  setPendingOrder: (id: string, url: string) => void
   setEmail: (email: string) => void
   setAddress: (addr: Partial<Omit<CheckoutState, keyof CheckoutActions>>) => void
   setB2b: (b2b: boolean) => void
@@ -43,12 +47,15 @@ const initialState = {
   b2b: false,
   vatId: "",
   shippingMethod: "",
+  pendingOrderId: "",
+  pendingOrderUrl: "",
 }
 
 export const useCheckout = create<CheckoutState>()(
   persist(
     (set) => ({
       ...initialState,
+      setPendingOrder: (id, url) => set({ pendingOrderId: id, pendingOrderUrl: url }),
       setEmail: (email) => set({ email }),
       setAddress: (addr) => set((s) => ({ ...s, ...addr })),
       setB2b: (b2b) => set({ b2b }),

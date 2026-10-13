@@ -62,8 +62,11 @@ export function ChatWidget({ locale, demoMode = false }: ChatWidgetProps) {
       productSlug: i.productSlug,
       name: i.name,
       mg: i.mg,
+      sizeValue: i.sizeValue,
+      sizeUnit: i.sizeUnit,
       qty: i.qty,
-      unitPriceCents: i.unitPriceCents,
+      unitPriceCents: i.unitPriceCents ?? 0,
+      purchaseMode: i.purchaseMode,
     })),
     onSend: () => setUnread(false),
   })
@@ -121,8 +124,11 @@ export function ChatWidget({ locale, demoMode = false }: ChatWidgetProps) {
           productSlug: action.productSlug,
           name: action.productName,
           mg: action.mg,
+          sizeValue: action.mg, // legacy fallback; AI tools don't yet emit typed units
+          sizeUnit: "mg",
           qty: action.qty,
           unitPriceCents: action.unitPriceCents,
+          purchaseMode: "direct",
         })
         chat.resolveAction(messageId, action, "added")
         toast.success(t("actions.addedToast", { name: action.productName }))

@@ -1,92 +1,40 @@
 import crypto from "node:crypto"
 import { getServerEnv } from "@/lib/env"
 import { logger } from "@/lib/logger"
-import {
-  forgetWebhookEvent,
-  getOrderSkuQuantities,
-  markOrderFailed,
-  markOrderPaid,
-  recordCryptoTxHash,
-  recordWebhookEvent,
-  restoreStock,
-  sendOrderConfirmationEmail,
-} from "@/lib/orders"
-import { type NextRequest, NextResponse } from "next/server"
+import { getOrderById, hasProcessedWebhookEvent, markOrderFailed, markOrderPaid, recordCryptoTxHash, recordWebhookEvent, OrderError } from "@/lib/orders"
+import { NextResponse, type NextRequest } from "next/server"
+import { z } from "zod"
 
-interface CoinbaseWebhookPayload {
-  event?: {
-    id?: string
-    type?: string
-    data?: {
-      id?: string
-      metadata?: { orderId?: string; orderNumber?: string }
-      payments?: Array<{ transaction_id?: string }>
-    }
-  }
-}
+const payloadSchema = z.object({ event: z.object({ id: z.string().min(1), type: z.string(), data: z.object({ id: z.string(), metadata: z.object({ orderId: z.string().optional() }).optional(), pricing: z.object({ local: z.object({ amount: z.string(), currency: z.string() }) }).optional(), payments: z.array(z.object({ transaction_id: z.string().optional() })).optional() }) }) })
 
-export async function POST(req: NextRequest) {
-  const sig = req.headers.get("x-cc-webhook-signature")
-  if (!sig) return NextResponse.json({ error: "no signature" }, { status: 400 })
-
+export async function POST(request: NextRequest) {
+  const signature = request.headers.get("x-cc-webhook-signature")
+  if (!signature) return NextResponse.json({ code: "no_signature" }, { status: 400 })
   const secret = getServerEnv().COINBASE_COMMERCE_WEBHOOK_SECRET
-  if (!secret) {
-    logger.error("[coinbase] COINBASE_COMMERCE_WEBHOOK_SECRET is not configured")
-    return NextResponse.json({ error: "webhook not configured" }, { status: 503 })
-  }
-
-  const body = await req.text()
+  if (!secret) return NextResponse.json({ code: "webhook_unavailable" }, { status: 503 })
+  const body = await request.text()
   const expected = crypto.createHmac("sha256", secret).update(body).digest("hex")
-
-  const provided = Buffer.from(sig)
-  const wanted = Buffer.from(expected)
-  if (provided.length !== wanted.length || !crypto.timingSafeEqual(provided, wanted)) {
-    return NextResponse.json({ error: "invalid signature" }, { status: 400 })
-  }
-
-  let payload: CoinbaseWebhookPayload
+  if (!/^[a-f0-9]{64}$/.test(signature) || !crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected))) return NextResponse.json({ code: "invalid_signature" }, { status: 400 })
+  const parsed = payloadSchema.safeParse(JSON.parse(body || "null"))
+  if (!parsed.success) return NextResponse.json({ code: "invalid_payload" }, { status: 400 })
+  const event = parsed.data.event
   try {
-    payload = JSON.parse(body) as CoinbaseWebhookPayload
-  } catch {
-    return NextResponse.json({ error: "invalid payload" }, { status: 400 })
-  }
-
-  const event = payload.event
-  if (!event?.id || typeof event.id !== "string" || !event.type) {
-    return NextResponse.json({ error: "invalid payload" }, { status: 400 })
-  }
-
-  // At-least-once delivery: process each event id exactly once.
-  if (!(await recordWebhookEvent("coinbase", event.id))) {
-    return NextResponse.json({ received: true })
-  }
-
-  try {
-    const orderId = event.data?.metadata?.orderId
-    switch (event.type) {
-      case "charge:confirmed": {
-        if (!orderId) break
-        const chargeId = event.data?.id ?? event.id
-        if (await markOrderPaid(orderId, chargeId, "coinbase")) {
-          const txHash = event.data?.payments?.[0]?.transaction_id
-          if (txHash) await recordCryptoTxHash(orderId, txHash)
-          await sendOrderConfirmationEmail(orderId)
-        }
-        break
-      }
-      case "charge:failed": {
-        // Coinbase charges are final once failed — release reserved stock.
-        if (orderId && (await markOrderFailed(orderId))) {
-          await restoreStock(await getOrderSkuQuantities(orderId))
-        }
-        break
-      }
+    if (await hasProcessedWebhookEvent("coinbase", event.id)) return NextResponse.json({ received: true })
+    if (["charge:confirmed", "charge:failed"].includes(event.type)) {
+      const id = event.data.metadata?.orderId
+      const order = id ? await getOrderById(id) : null
+      const price = event.data.pricing?.local
+      if (!order || order.paymentMethod !== "coinbase" || (order.cryptoChargeId && order.cryptoChargeId !== event.data.id) || !price || !Number.isFinite(Number(price.amount)) || Math.round(Number(price.amount) * 100) !== order.totalCents || price.currency.toUpperCase() !== order.currency) throw new OrderError("Payment mismatch", "payment_mismatch")
+      if (event.type === "charge:confirmed") {
+        await markOrderPaid(order.id, event.data.id, "coinbase")
+        const hash = event.data.payments?.[0]?.transaction_id
+        if (hash) await recordCryptoTxHash(order.id, hash)
+      } else await markOrderFailed(order.id)
     }
-  } catch (err) {
-    await forgetWebhookEvent("coinbase", event.id).catch(() => {})
-    logger.error("[coinbase] handler failed", err)
-    return NextResponse.json({ error: "processing failed" }, { status: 500 })
+    await recordWebhookEvent("coinbase", event.id)
+    return NextResponse.json({ received: true })
+  } catch (error) {
+    logger.error("[coinbase] webhook processing failed", error)
+    return NextResponse.json({ code: "processing_failed" }, { status: 500 })
   }
-
-  return NextResponse.json({ received: true })
 }

@@ -37,6 +37,8 @@ export function useOverlay<T extends HTMLElement = HTMLDivElement>({
 }: UseOverlayOptions): RefObject<T | null> {
   const containerRef = useRef<T | null>(null)
   const returnFocusRef = useRef<HTMLElement | null>(null)
+  const onCloseRef = useRef(onClose)
+  onCloseRef.current = onClose
 
   useEffect(() => {
     if (!open) return
@@ -52,7 +54,7 @@ export function useOverlay<T extends HTMLElement = HTMLDivElement>({
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         e.preventDefault()
-        onClose()
+        onCloseRef.current()
         return
       }
       if (e.key !== "Tab") return
@@ -80,7 +82,7 @@ export function useOverlay<T extends HTMLElement = HTMLDivElement>({
       document.body.style.overflow = previousOverflow
       returnFocusRef.current?.focus?.()
     }
-  }, [open, onClose, initialFocusRef])
+  }, [open, initialFocusRef])
 
   return containerRef
 }

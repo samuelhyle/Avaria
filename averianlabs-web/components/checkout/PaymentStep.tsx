@@ -1,69 +1,25 @@
 "use client"
 
 import { Button } from "@/components/ui/Button"
+import { formatCurrency } from "@/lib/utils/format"
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
-import { Loader2 } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 
-interface PaymentStepProps {
-  orderId: string
-  orderTotal: number
-  locale: string
-  onSuccess: () => void
-  onError: (message: string) => void
-}
-
-export function PaymentStep({ orderId, orderTotal, locale, onSuccess, onError }: PaymentStepProps) {
+export function PaymentStep({ orderTotal, locale, confirmationUrl, onSuccess, onError }: { orderTotal: number; locale: string; confirmationUrl: string; onSuccess: () => void; onError: (message: string) => void }) {
   const stripe = useStripe()
   const elements = useElements()
+  const t = useTranslations("research")
   const [processing, setProcessing] = useState(false)
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-
-    if (!stripe || !elements) {
-      onError("Stripe is not loaded. Please refresh and try again.")
-      return
-    }
-
+  return <form className="space-y-6" onSubmit={async (event) => {
+    event.preventDefault()
+    if (!stripe || !elements || processing) return
     setProcessing(true)
-
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `${window.location.origin}/${locale}/checkout/confirm/${orderId}`,
-      },
-      redirect: "if_required",
-    })
-
-    if (error) {
-      onError(error.message ?? "Payment failed. Please try again.")
-      setProcessing(false)
-    } else {
-      onSuccess()
-    }
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <PaymentElement
-        options={{
-          layout: {
-            type: "tabs",
-            defaultCollapsed: false,
-          },
-        }}
-      />
-      <Button type="submit" size="lg" fullWidth disabled={!stripe || processing}>
-        {processing ? (
-          <>
-            <Loader2 className="h-4 w-4 animate-spin" />
-            Processing payment…
-          </>
-        ) : (
-          <>Pay €{(orderTotal / 100).toFixed(2)}</>
-        )}
-      </Button>
-    </form>
-  )
+    try {
+      const result = await stripe.confirmPayment({ elements, confirmParams: { return_url: confirmationUrl }, redirect: "if_required" })
+      if (result.error) onError(result.error.message ?? t("checkoutFailed"))
+      else if (["succeeded", "processing"].includes(result.paymentIntent?.status ?? "")) onSuccess()
+      else onError(t("checkoutFailed"))
+    } catch { onError(t("checkoutFailed")) } finally { setProcessing(false) }
+  }}><PaymentElement options={{ layout: { type: "tabs", defaultCollapsed: false } }} /><Button type="submit" fullWidth size="lg" disabled={!stripe || !elements || processing}>{processing ? t("processingPayment") : `${t("card")} · ${formatCurrency(orderTotal, "EUR", locale)}`}</Button></form>
 }

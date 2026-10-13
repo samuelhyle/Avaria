@@ -13,7 +13,18 @@ export const products: Product[] = [
     category: "supplies",
     hue: 198,
     storageTemp: "Room temperature, away from light",
-    vials: [{ mg: 10, sku: "BACW-10", priceCents: 995, stockQty: 240, lowStockThreshold: 30 }],
+    vials: [
+      {
+        mg: 10,
+        sizeValue: 10,
+        sizeUnit: "mL",
+        sku: "BACW-10",
+        priceCents: 995,
+        stockQty: 240,
+        lowStockThreshold: 30,
+        purchaseMode: "direct",
+      },
+    ],
     latestBatch: {
       code: batchCode("BAC", "08"),
       manufacturedAt: "2026-08-04",
@@ -68,14 +79,17 @@ export const products: Product[] = [
     storageTemp: "2–8 °C",
     purityPercent: 98.7,
     vials: [
-      { mg: 20, sku: "RETA-20", priceCents: 9900, stockQty: 28, lowStockThreshold: 8 },
+      { mg: 20, sizeValue: 20, sizeUnit: 'mg', sku: "RETA-20", priceCents: 9900, stockQty: 28, lowStockThreshold: 8, purchaseMode: 'direct' },
       {
         mg: 30,
+        sizeValue: 30,
+        sizeUnit: "mg",
         sku: "RETA-30",
         priceCents: 12900,
         compareAtCents: 13900,
         stockQty: 11,
         lowStockThreshold: 6,
+        purchaseMode: "direct",
       },
     ],
     latestBatch: {
@@ -128,14 +142,26 @@ export const products: Product[] = [
     storageTemp: "2–8 °C",
     purityPercent: 99.5,
     vials: [
-      { mg: 50, sku: "GHKCU-50", priceCents: 3990, stockQty: 142, lowStockThreshold: 20 },
+      {
+        mg: 50,
+        sizeValue: 50,
+        sizeUnit: "mg",
+        sku: "GHKCU-50",
+        priceCents: 3990,
+        stockQty: 142,
+        lowStockThreshold: 20,
+        purchaseMode: "direct",
+      },
       {
         mg: 100,
+        sizeValue: 100,
+        sizeUnit: "mg",
         sku: "GHKCU-100",
         priceCents: 6990,
         compareAtCents: 7900,
         stockQty: 58,
         lowStockThreshold: 10,
+        purchaseMode: "direct",
       },
     ],
     latestBatch: {
@@ -190,7 +216,7 @@ export const products: Product[] = [
     sequence: "MRWQEMGYIFYPRKLR",
     storageTemp: "−20 °C, desiccated",
     purityPercent: 99.1,
-    vials: [{ mg: 10, sku: "MOTSC-10", priceCents: 4200, stockQty: 47, lowStockThreshold: 10 }],
+    vials: [{ mg: 10, sizeValue: 10, sizeUnit: 'mg', sku: "MOTSC-10", priceCents: 4200, stockQty: 47, lowStockThreshold: 10, purchaseMode: 'direct' }],
     latestBatch: {
       code: batchCode("MOTS", "07"),
       manufacturedAt: "2026-07-22",
@@ -243,7 +269,7 @@ export const products: Product[] = [
     sequence: "Ac-Nle-cyclo[Asp-His-D-Phe-Arg-Trp-Lys]-NH₂",
     storageTemp: "−20 °C, desiccated",
     purityPercent: 99.0,
-    vials: [{ mg: 10, sku: "MT2-10", priceCents: 1000, stockQty: 312, lowStockThreshold: 40 }],
+    vials: [{ mg: 10, sizeValue: 10, sizeUnit: 'mg', sku: "MT2-10", priceCents: 1000, stockQty: 312, lowStockThreshold: 40, purchaseMode: 'direct' }],
     latestBatch: {
       code: batchCode("MT2", "08"),
       manufacturedAt: "2026-08-08",
@@ -297,7 +323,7 @@ export const products: Product[] = [
     sequence: "Nicotinamide adenine dinucleotide (oxidised)",
     storageTemp: "−20 °C, desiccated, dark",
     purityPercent: 99.8,
-    vials: [{ mg: 1000, sku: "NAD-1000", priceCents: 9000, stockQty: 36, lowStockThreshold: 8 }],
+    vials: [{ mg: 1000, sizeValue: 1000, sizeUnit: 'mg', sku: "NAD-1000", priceCents: 9000, stockQty: 36, lowStockThreshold: 8, purchaseMode: 'direct' }],
     latestBatch: {
       code: batchCode("NAD", "07"),
       manufacturedAt: "2026-07-30",
@@ -350,8 +376,8 @@ export const products: Product[] = [
     storageTemp: "−20 °C, desiccated",
     purityPercent: 99.2,
     vials: [
-      { mg: 5, sku: "BPC157-5", priceCents: 3990, stockQty: 124, lowStockThreshold: 15 },
-      { mg: 10, sku: "BPC157-10", priceCents: 6900, stockQty: 73, lowStockThreshold: 12 },
+      { mg: 5, sizeValue: 5, sizeUnit: 'mg', sku: "BPC157-5", priceCents: 3990, stockQty: 124, lowStockThreshold: 15, purchaseMode: 'direct' },
+      { mg: 10, sizeValue: 10, sizeUnit: 'mg', sku: "BPC157-10", priceCents: 6900, stockQty: 73, lowStockThreshold: 12, purchaseMode: 'direct' },
     ],
     latestBatch: {
       code: batchCode("BPC", "07"),
@@ -405,7 +431,7 @@ export const products: Product[] = [
     sequence: "Ac-Ser-Tyr-Ser-Nle-Glu-His-D-Phe-Arg-Trp-Gly-Lys-Pro-Val-NH₂",
     storageTemp: "−20 °C, desiccated",
     purityPercent: 98.9,
-    vials: [{ mg: 10, sku: "MT1-10", priceCents: 3900, stockQty: 86, lowStockThreshold: 12 }],
+    vials: [{ mg: 10, sizeValue: 10, sizeUnit: 'mg', sku: "MT1-10", priceCents: 3900, stockQty: 86, lowStockThreshold: 12, purchaseMode: 'direct' }],
     latestBatch: {
       code: batchCode("MT1", "07"),
       manufacturedAt: "2026-07-25",
@@ -450,7 +476,7 @@ export const products: Product[] = [
     category: "blend",
     hue: 280,
     storageTemp: "−20 °C, desiccated",
-    vials: [{ mg: 80, sku: "KLOW-80", priceCents: 13000, stockQty: 18, lowStockThreshold: 6 }],
+    vials: [{ mg: 80, sizeValue: 80, sizeUnit: 'mg', sku: "KLOW-80", priceCents: 13000, stockQty: 18, lowStockThreshold: 6, purchaseMode: 'direct' }],
     latestBatch: {
       code: batchCode("KLOW", "08"),
       manufacturedAt: "2026-08-12",
@@ -498,7 +524,7 @@ export const products: Product[] = [
     category: "blend",
     hue: 210,
     storageTemp: "−20 °C, desiccated",
-    vials: [{ mg: 10, sku: "BPC-TB-10", priceCents: 6000, stockQty: 64, lowStockThreshold: 10 }],
+    vials: [{ mg: 10, sizeValue: 10, sizeUnit: 'mg', sku: "BPC-TB-10", priceCents: 6000, stockQty: 64, lowStockThreshold: 10, purchaseMode: 'direct' }],
     latestBatch: {
       code: batchCode("BPCTB", "07"),
       manufacturedAt: "2026-07-28",
@@ -553,8 +579,8 @@ export const products: Product[] = [
     storageTemp: "−20 °C, desiccated",
     purityPercent: 99.3,
     vials: [
-      { mg: 5, sku: "SELK-5", priceCents: 2200, stockQty: 132, lowStockThreshold: 18 },
-      { mg: 10, sku: "SELK-10", priceCents: 3900, stockQty: 51, lowStockThreshold: 10 },
+      { mg: 5, sizeValue: 5, sizeUnit: 'mg', sku: "SELK-5", priceCents: 2200, stockQty: 132, lowStockThreshold: 18, purchaseMode: 'direct' },
+      { mg: 10, sizeValue: 10, sizeUnit: 'mg', sku: "SELK-10", priceCents: 3900, stockQty: 51, lowStockThreshold: 10, purchaseMode: 'direct' },
     ],
     latestBatch: {
       code: batchCode("SELK", "08"),
@@ -610,14 +636,26 @@ export const products: Product[] = [
     storageTemp: "−20 °C, desiccated",
     purityPercent: 99.1,
     vials: [
-      { mg: 5, sku: "SEMX-5", priceCents: 2200, stockQty: 58, lowStockThreshold: 10 },
+      {
+        mg: 5,
+        sizeValue: 5,
+        sizeUnit: "mg",
+        sku: "SEMX-5",
+        priceCents: 2200,
+        stockQty: 58,
+        lowStockThreshold: 10,
+        purchaseMode: "direct",
+      },
       {
         mg: 10,
+        sizeValue: 10,
+        sizeUnit: "mg",
         sku: "SEMX-10",
         priceCents: 3900,
         compareAtCents: 4400,
         stockQty: 22,
         lowStockThreshold: 8,
+        purchaseMode: "direct",
       },
     ],
     latestBatch: {
@@ -674,7 +712,7 @@ export const products: Product[] = [
       "Tyr-Glu-Ala-Ile-Asp-Val-Ile-Thr-Lys-Ala-Ser-Gln-Lys-Glu-Phe-Ile-Ala-Trp-Leu-Glu-Asp-Gly-Glu-Lys (no DAC)",
     storageTemp: "−20 °C, desiccated",
     purityPercent: 98.8,
-    vials: [{ mg: 1, sku: "CJC-1", priceCents: 5990, stockQty: 41, lowStockThreshold: 10 }],
+    vials: [{ mg: 1, sizeValue: 1, sizeUnit: 'mg', sku: "CJC-1", priceCents: 5990, stockQty: 41, lowStockThreshold: 10, purchaseMode: 'direct' }],
     latestBatch: {
       code: batchCode("CJC", "08"),
       manufacturedAt: "2026-08-01",
@@ -727,7 +765,17 @@ export const products: Product[] = [
     storageTemp: "−20 °C, desiccated",
     purityPercent: 98.6,
     vials: [
-      { mg: 5, sku: "AOD-5", priceCents: 0, stockQty: 0, lowStockThreshold: 0, contactOnly: true },
+      {
+        mg: 5,
+        sizeValue: 5,
+        sizeUnit: "mg",
+        sku: "AOD-5",
+        priceCents: 0,
+        stockQty: 0,
+        lowStockThreshold: null,
+        purchaseMode: "quotation",
+        contactOnly: true,
+      },
     ],
     latestBatch: {
       code: batchCode("AOD", "Q3"),
@@ -781,7 +829,7 @@ export const products: Product[] = [
     sequence: "hGH(176-191)",
     storageTemp: "−20 °C, desiccated",
     purityPercent: 98.9,
-    vials: [{ mg: 5, sku: "HGHFR-5", priceCents: 4500, stockQty: 72, lowStockThreshold: 12 }],
+    vials: [{ mg: 5, sizeValue: 5, sizeUnit: 'mg', sku: "HGHFR-5", priceCents: 4500, stockQty: 72, lowStockThreshold: 12, purchaseMode: 'direct' }],
     latestBatch: {
       code: batchCode("HGHFR", "08"),
       manufacturedAt: "2026-08-10",
@@ -832,6 +880,41 @@ export function getProduct(slug: string): Product | undefined {
 
 export function getFeaturedProducts(): Product[] {
   return products.slice(0, 7)
+}
+
+/**
+ * The six products shown in the homepage hero 3D carousel. The selection
+ * is curated, not just `slice(0, 6)`, to keep the carousel visually varied
+ * (different hues, different categories) and to omit supplies like
+ * `bac-water` which are not the marquee peptides.
+ *
+ * Used by `app/[locale]/page.tsx` to drive the hero chips and the floating
+ * product card. The order here is the canonical rotation order.
+ */
+const HERO_HERO_SLUGS = [
+  "bpc-157",
+  "tb-500",
+  "ghk-cu",
+  "ipamorelin",
+  "semax",
+  "nad-plus",
+] as const
+
+export function getFeaturedHeroProducts(): Product[] {
+  const out: Product[] = []
+  for (const slug of HERO_HERO_SLUGS) {
+    const p = products.find((x) => x.slug === slug)
+    if (p) out.push(p)
+  }
+  // Fall back to the first N products if the curated list is missing slugs
+  // (so the hero never renders empty after a catalogue edit).
+  if (out.length < 6) {
+    for (const p of products) {
+      if (out.length >= 6) break
+      if (!out.includes(p)) out.push(p)
+    }
+  }
+  return out
 }
 
 export function getProductsByCategory(category: Product["category"]): Product[] {

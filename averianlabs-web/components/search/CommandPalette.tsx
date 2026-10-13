@@ -80,7 +80,7 @@ export function CommandPalette({ locale, products }: CommandPaletteProps) {
               <Search className="h-4 w-4 text-ink-subtle" />
               <Command.Input
                 placeholder="Search peptides, batch IDs, articles…"
-                aria-label="Search"
+                aria-label="Search peptides, batch IDs, articles"
                 className="h-14 w-full bg-transparent text-base text-ink placeholder:text-ink-subtle focus:outline-none"
               />
               <kbd className="hidden font-mono text-3xs text-ink-subtle sm:inline">ESC</kbd>
@@ -97,7 +97,7 @@ export function CommandPalette({ locale, products }: CommandPaletteProps) {
                 {products.map((p) => {
                   const translation = p.translations?.[locale as Locale] ?? p.defaultTranslation
                   const minVial = p.vials.reduce(
-                    (min, v) => (v.priceCents < min.priceCents ? v : min),
+                    (min, v) => ((v.priceCents ?? 0) < (min.priceCents ?? 0) ? v : min),
                     p.vials[0]!,
                   )
                   const isContact = minVial.contactOnly === true || minVial.priceCents === 0

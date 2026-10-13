@@ -1,15 +1,9 @@
 import { logger } from "@/lib/logger"
 import { Resend } from "resend"
 
-/** Escapes user-controlled values before interpolating them into HTML emails. */
-export function escapeHtml(value: string): string {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;")
-}
+import { escapeHtml } from "./html"
+import { renderOrderReceipt, type OrderReceiptInput } from "./receipt"
+export { escapeHtml } from "./html"
 
 let _resend: Resend | null = null
 
@@ -27,6 +21,7 @@ interface SendEmailOptions {
   subject: string
   html: string
   replyTo?: string
+  idempotencyKey?: string
 }
 
 export async function sendEmail({
@@ -34,6 +29,7 @@ export async function sendEmail({
   subject,
   html,
   replyTo,
+  idempotencyKey,
 }: SendEmailOptions): Promise<boolean> {
   const resend = getResend()
   if (!resend) {
@@ -42,13 +38,17 @@ export async function sendEmail({
   }
 
   try {
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from: FROM_EMAIL,
       to,
       subject,
       html,
       replyTo: replyTo ?? "support@averianlabs.eu",
-    })
+    }, { idempotencyKey })
+    if (result.error) {
+      logger.error("[email] provider rejected delivery", result.error)
+      return false
+    }
     return true
   } catch (err) {
     logger.error("[email] Failed to send:", err)
@@ -215,98 +215,8 @@ export function contactNotificationHtml(opts: {
 </html>`
 }
 
-export function orderConfirmationHtml(opts: {
-  orderNumber: string
-  email: string
-  items: Array<{ name: string; mg: number; qty: number; priceCents: number }>
-  subtotalCents: number
-  shippingCents: number
-  vatCents: number
-  totalCents: number
-}): string {
-  const itemRows = opts.items
-    .map(
-      (i) => `
-    <tr>
-      <td style="padding:12px 16px;border-bottom:1px solid #eee;font-size:14px;">
-        ${escapeHtml(i.name)} ${i.mg}mg
-      </td>
-      <td style="padding:12px 16px;border-bottom:1px solid #eee;font-size:14px;text-align:center;">
-        ${i.qty}
-      </td>
-      <td style="padding:12px 16px;border-bottom:1px solid #eee;font-size:14px;text-align:right;">
-        €${((i.priceCents * i.qty) / 100).toFixed(2)}
-      </td>
-    </tr>`,
-    )
-    .join("")
-
-  return `
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"></head>
-<body style="margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;">
-  <div style="max-width:600px;margin:0 auto;padding:32px 16px;">
-    <div style="text-align:center;margin-bottom:32px;">
-      <h1 style="font-size:24px;font-weight:700;color:#0f1e50;margin:0;">AverianLabs</h1>
-      <p style="font-size:14px;color:#6b7280;margin-top:4px;">Precision peptides for serious research</p>
-    </div>
-
-    <div style="background:white;border-radius:12px;border:1px solid #e5e7eb;overflow:hidden;">
-      <div style="padding:24px;border-bottom:1px solid #e5e7eb;">
-        <h2 style="font-size:20px;font-weight:600;color:#0f1e50;margin:0;">Order confirmed</h2>
-        <p style="font-size:14px;color:#6b7280;margin-top:4px;">
-          Order <span style="font-family:monospace;font-weight:600;">${escapeHtml(opts.orderNumber)}</span>
-        </p>
-      </div>
-
-      <table style="width:100%;border-collapse:collapse;">
-        <thead>
-          <tr style="background:#f9fafb;">
-            <th style="padding:12px 16px;text-align:left;font-size:12px;font-weight:600;color:#6b7280;text-transform:uppercase;">Product</th>
-            <th style="padding:12px 16px;text-align:center;font-size:12px;font-weight:600;color:#6b7280;text-transform:uppercase;">Qty</th>
-            <th style="padding:12px 16px;text-align:right;font-size:12px;font-weight:600;color:#6b7280;text-transform:uppercase;">Price</th>
-          </tr>
-        </thead>
-        <tbody>${itemRows}</tbody>
-      </table>
-
-      <div style="padding:16px;background:#f9fafb;">
-        <table style="width:100%;font-size:14px;">
-          <tr>
-            <td style="padding:4px 0;color:#6b7280;">Subtotal</td>
-            <td style="padding:4px 0;text-align:right;">€${(opts.subtotalCents / 100).toFixed(2)}</td>
-          </tr>
-          <tr>
-            <td style="padding:4px 0;color:#6b7280;">Shipping</td>
-            <td style="padding:4px 0;text-align:right;">€${(opts.shippingCents / 100).toFixed(2)}</td>
-          </tr>
-          <tr>
-            <td style="padding:4px 0;color:#6b7280;">VAT (24%)</td>
-            <td style="padding:4px 0;text-align:right;">€${(opts.vatCents / 100).toFixed(2)}</td>
-          </tr>
-          <tr style="font-weight:700;font-size:16px;">
-            <td style="padding:8px 0;border-top:1px solid #e5e7eb;">Total</td>
-            <td style="padding:8px 0;text-align:right;border-top:1px solid #e5e7eb;">€${(opts.totalCents / 100).toFixed(2)}</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-
-    <div style="margin-top:24px;padding:16px;background:white;border-radius:12px;border:1px solid #e5e7eb;">
-      <p style="font-size:13px;color:#6b7280;margin:0;">
-        <strong>What's next?</strong> Your batch-specific Certificate of Analysis (COA), endotoxin report,
-        and mass-spec confirmation will be available in your account once the order ships.
-      </p>
-    </div>
-
-    <p style="font-size:11px;color:#9ca3af;text-align:center;margin-top:24px;">
-      AverianLabs · Helsinki, Finland · Research use only<br>
-      This email was sent to ${escapeHtml(opts.email)}. Questions? Reply to this email or contact support@averianlabs.eu.
-    </p>
-  </div>
-</body>
-</html>`
+export function orderConfirmationHtml(opts: OrderReceiptInput): string {
+  return renderOrderReceipt(opts)
 }
 
 export function shippingConfirmationHtml(opts: {
