@@ -15,7 +15,7 @@ The repository-root `netlify.toml` sets the monorepo base directory. Hosted buil
 
 See [the release runbook](docs/RESEARCH_CUSTOMER_RELEASE_RUNBOOK.md) before enabling real orders. The existing Netlify Git connection tracks `demo`; a hosted source archive can deploy the current local snapshot when GitHub write access is unavailable.
 
-## Quick start (one command)
+The 13 October 2026 update is online. See [the deployment record](docs/NETLIFY_DEPLOYMENT_2026-10-13.md) for its source, checks, database backups and publication lock while remote Git source remains unsynchronized.
 
 ## Quick start (one command)
 
@@ -48,7 +48,7 @@ production build + `pnpm start`.
 - **i18n**: next-intl 4 (en, fi, de, sv, nl)
 - **Shipping**: Sendcloud
 - **Search**: Meilisearch
-- **Hosting**: Vercel (fra1) canonical + Netlify preview; Cloudflare in front of R2
+- **Hosting**: Netlify full application for online review; canonical custom domain and merchant release remain pending
 
 ## Architecture
 

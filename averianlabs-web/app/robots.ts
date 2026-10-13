@@ -5,7 +5,7 @@ import type { MetadataRoute } from "next"
 export const dynamic = "force-static"
 
 export default function robots(): MetadataRoute.Robots {
-  if (isDemoBuild()) {
+  if (isDemoBuild() || process.env.NEXT_PUBLIC_REVIEW_SITE === "true") {
     return {
       rules: [{ userAgent: "*", disallow: "/" }],
     }

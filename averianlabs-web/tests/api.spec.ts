@@ -56,7 +56,12 @@ test.describe("public APIs", () => {
     const res = await request.get("/robots.txt")
     expect(res.status()).toBe(200)
     const body = await res.text()
-    expect(body).toMatch(/GPTBot|CCBot/i)
-    expect(body).toContain("/admin/")
+    if (/User-Agent:\s*\*\s*\r?\nDisallow:\s*\/\s*(?:\r?\n|$)/i.test(body)) {
+      // A review site blocks every crawler and route, including these private paths.
+      expect(body).not.toMatch(/^Allow:\s*\//im)
+    } else {
+      expect(body).toMatch(/GPTBot|CCBot/i)
+      expect(body).toContain("/admin/")
+    }
   })
 })

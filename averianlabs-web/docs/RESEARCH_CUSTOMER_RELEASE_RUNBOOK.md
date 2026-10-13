@@ -20,6 +20,10 @@ Build-only `NODE_OPTIONS=--max-old-space-size=4096` permits Next.js dependency t
 
 Keep the previous published deployment locked while building and checking the new deployment at its unique HTTPS URL. Check both Finnish and English pages, health, invalid request validation and browser accessibility without creating customer records. Unlock and publish the new ready deployment only after those checks pass, then repeat them on the public project URL. Application rollback must remain compatible with applied migrations; never reset the database to make a deployment succeed.
 
+The [13 October deployment record](NETLIFY_DEPLOYMENT_2026-10-13.md) identifies the current published release. It remains locked because the linked remote `demo` branch is older than the uploaded local source. Sync the release commits to the intended remote branch, check the connected branch and build settings, and verify the resulting hosted build before unlocking automatic publication. Local GitHub push authorization was unavailable during this release; no remote commits were pushed.
+
+`NEXT_PUBLIC_REVIEW_SITE=true` also applies `X-Robots-Tag: noindex, nofollow` through Next.js response headers, sets matching page metadata and disallows crawlers in `robots.txt`. Netlify's static TOML headers alone do not apply to server-rendered responses on the public project domain; preview URLs can receive platform `noindex` independently. Check the main published URL as well as the preview. Remove the review flag and static noindex rules only when the merchant release and canonical domain are approved. See [Netlify's custom-header limitations](https://docs.netlify.com/manage/routing/headers/#limitations).
+
 ## Supported behavior
 
 Direct checkout supports Finland, EUR, card payments and prices including 25.5% Finnish VAT. Shipping is free when product subtotal reaches €150; otherwise the selected rate is included in the total. A VAT ID records invoice information and does not activate reverse charge. Additional destinations require a quotation and an approved tax policy.

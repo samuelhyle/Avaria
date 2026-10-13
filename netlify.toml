@@ -29,6 +29,7 @@
   # Declared explicitly so the deploy context matches the local intent.
   NODE_ENV = "production"
   NEXT_TELEMETRY_DISABLED = "1"
+  NEXT_PUBLIC_REVIEW_SITE = "true"
   # CPU libraries are already included in the npm package. Netlify has no CUDA GPU.
   ONNXRUNTIME_NODE_INSTALL = "skip"
   # Next.js tracing needs more than Node's default 2 GiB heap for this app.

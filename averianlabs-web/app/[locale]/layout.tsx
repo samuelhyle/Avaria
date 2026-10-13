@@ -100,9 +100,10 @@ export async function generateMetadata({
       description: t("description"),
       images: [isDemoBuild() ? "/og-default.svg" : `/api/og/default?locale=${locale}`],
     },
-    robots: isDemoBuild()
-      ? { index: false, follow: false, googleBot: { index: false, follow: false } }
-      : { index: true, follow: true, googleBot: { index: true, follow: true } },
+    robots:
+      isDemoBuild() || process.env.NEXT_PUBLIC_REVIEW_SITE === "true"
+        ? { index: false, follow: false, googleBot: { index: false, follow: false } }
+        : { index: true, follow: true, googleBot: { index: true, follow: true } },
     icons: {
       icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
     },

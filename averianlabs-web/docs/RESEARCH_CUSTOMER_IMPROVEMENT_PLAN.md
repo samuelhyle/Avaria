@@ -137,7 +137,13 @@ These are laboratory measurements, not production field Core Web Vitals. Total b
 
 Artifacts: [verification record](verification/research-storefront-2026-10-13/verification.json), [route bundle report](verification/research-storefront-2026-10-13/bundle.json), [mobile Lighthouse report](verification/research-storefront-2026-10-13/mobile-lighthouse.json), [Finnish mobile screenshot](verification/research-storefront-2026-10-13/fi-390-above-fold.png) and [Finnish desktop screenshot](verification/research-storefront-2026-10-13/fi-1440-above-fold.png). Full-page Finnish screenshots cover 320/390/414/768/1280 px. Screenshots reflect the isolated review database, including clearly named test fixtures where visible.
 
-The production build was checked locally; this work did not deploy or configure real provider accounts. Temporary review infrastructure is stopped after verification. Re-run the release runbook with approved records and the actual target configuration before accepting customer orders.
+The verification run above checked a local production build and did not deploy or configure merchant provider accounts. Temporary review infrastructure was stopped after that run. The later authorized online deployment is recorded separately below. Re-run the release runbook with approved records and the actual target configuration before accepting customer orders.
+
+### Online deployment on 13 October 2026
+
+The implementation is now published on the existing [Netlify review site](https://averianlabs-demo.netlify.app). Hosted database preparation takes a verified private snapshot, adopts the strictly checked original schema when needed and applies five forward migrations without resetting data. The online catalogue contains 15 draft, zero-stock reference products and no approved batch reports; publishing the application does not make them saleable.
+
+Online mobile checks exposed a scrollable checkout progress list that could not receive keyboard focus. Progress now wraps on narrow screens, identifies the current step with `aria-current`, and has FI/EN regression checks at 320, 390 and 414 px. See [the deployment record](NETLIFY_DEPLOYMENT_2026-10-13.md) for the exact deployed source, hosted checks, final browser/API results, provider smoke scope and remaining release inputs. The original local verification artifacts retain their historical scope.
 
 ### Release requirements still outstanding
 
@@ -145,7 +151,7 @@ The production build was checked locally; this work did not deploy or configure 
 2. Supply the registered seller identity and approve buyer eligibility, Finland VAT/shipping/returns/retention policies. The legal check currently fails on six missing identity settings; no fictional values were introduced to make it pass.
 3. Configure actual storage, card/email sandbox accounts, verified sender and authenticated scheduler. Complete real successful/declined/3DS/refund payment, carrier, expiring-document and email-delivery rehearsals in the runbook. Local provider mocks do not certify these services.
 4. Have a human scientific editor approve the final Finnish and English content and original reports. German/Swedish/Dutch key parity is automated; new fallback content in those languages has not had editorial approval.
-5. Activate the maintenance workflow only after the correct target URL and secret are configured. It is implemented in the repository; this work did not configure a production scheduler or deploy the site.
+5. Activate the maintenance workflow only after the correct target URL and secret are configured. It is implemented in the repository; a production scheduler has not been configured.
 
 ### Next improvement order after approval
 
