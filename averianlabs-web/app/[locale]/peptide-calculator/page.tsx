@@ -12,17 +12,15 @@ export default async function PeptideCalculatorPage({
 }) {
   const { locale } = await params
   setRequestLocale(locale)
-  const _t = await getTranslations({ locale, namespace: "product" })
+  const t = await getTranslations({ locale, namespace: "research" })
 
   return (
     <Container className="py-16">
       <header className="mb-10 max-w-2xl">
         <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
-          Reconstitution calculator
+          {t("calculator")}
         </h1>
-        <p className="mt-3 text-ink-muted">
-          Calculate draw volumes, concentrations, and remaining doses for any peptide vial.
-        </p>
+        <p className="mt-3 text-ink-muted">{t("calculatorNotice")}</p>
       </header>
 
       <Calculator />

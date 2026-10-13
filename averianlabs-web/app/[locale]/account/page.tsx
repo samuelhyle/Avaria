@@ -19,10 +19,11 @@ export default async function AccountPage({ params }: { params: Promise<{ locale
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations("account")
+  const r = await getTranslations("research")
   const tAuth = await getTranslations("auth")
   const member = await getCurrentMember()
   const [plans, orders] = await Promise.all([
-    member ? listPlansForOwner(member.id).catch(() => []) : Promise.resolve([]),
+    member ? listPlansForOwner(member.id, locale).catch(() => []) : Promise.resolve([]),
     member ? listOrdersForUser(member.id).catch(() => []) : Promise.resolve([]),
   ])
 
@@ -31,7 +32,7 @@ export default async function AccountPage({ params }: { params: Promise<{ locale
       <header className="mb-10 flex flex-wrap items-start justify-between gap-4">
         <div>
           <Badge tone="accent" className="mb-3">
-            Account
+            {t("title")}
           </Badge>
           <h1 className="font-display text-4xl font-semibold tracking-tight">
             {member ? `${t("welcome")}, ${member.name ?? ""}` : tAuth("signInTitle")}
@@ -53,18 +54,28 @@ export default async function AccountPage({ params }: { params: Promise<{ locale
             {[
               {
                 icon: Package,
-                label: "Orders",
+                label: t("orders"),
                 count: orders.length,
                 href: `/${locale}/account/orders` as Route,
               },
               {
                 icon: FileText,
-                label: "COA library",
-                count: 0,
+                label: r("documents"),
+                count: null,
                 href: `/${locale}/documents` as Route,
               },
-              { icon: Heart, label: "Subscriptions", count: 0, href: "#" as Route },
-              { icon: Settings, label: "Security", count: 0, href: "#" as Route },
+              {
+                icon: Heart,
+                label: r("wishlist"),
+                count: null,
+                href: `/${locale}/wishlist` as Route,
+              },
+              {
+                icon: Settings,
+                label: r("notifications"),
+                count: null,
+                href: `/${locale}/account/notifications` as Route,
+              },
             ].map(({ icon: Icon, label, count, href }) => (
               <Link
                 key={label}
@@ -73,7 +84,9 @@ export default async function AccountPage({ params }: { params: Promise<{ locale
               >
                 <Icon className="h-5 w-5 text-accent" />
                 <p className="mt-3 font-display text-lg font-semibold">{label}</p>
-                <p className="mt-1 text-xs text-ink-muted">{count} items</p>
+                <p className="mt-1 text-xs text-ink-muted">
+                  {count !== null ? r("itemsCount", { count }) : ""}
+                </p>
               </Link>
             ))}
           </div>
@@ -93,9 +106,7 @@ export default async function AccountPage({ params }: { params: Promise<{ locale
               <div className="mt-6 flex items-center justify-between rounded-[var(--radius)] border border-dashed border-line bg-surface-2 p-6">
                 <div>
                   <p className="text-sm text-ink-muted">{t("noPlans")}</p>
-                  <p className="mt-1 text-xs text-ink-subtle">
-                    Bundle products you use together and share publicly with a link.
-                  </p>
+                  <p className="mt-1 text-xs text-ink-subtle">{r("plansIntro")}</p>
                 </div>
                 <BookmarkPlus className="h-5 w-5 text-accent" />
               </div>
@@ -107,10 +118,10 @@ export default async function AccountPage({ params }: { params: Promise<{ locale
                     href={`/${locale}/account/plans/${p.id}`}
                     className="rounded-[var(--radius)] border border-line bg-surface-2 p-4 transition-colors hover:border-accent/40"
                   >
-                    <p className="font-medium text-ink">{p.title || "Untitled plan"}</p>
+                    <p className="font-medium text-ink">{p.title || r("untitledPlan")}</p>
                     <p className="mt-1 text-xs text-ink-muted">
-                      {p.items.length} {p.items.length === 1 ? "product" : "products"} ·{" "}
-                      {p.isPublic ? "Public" : "Private"}
+                      {r("itemsCount", { count: p.items.length })} ·{" "}
+                      {r(p.isPublic ? "publicPlan" : "privatePlan")}
                     </p>
                   </Link>
                 ))}

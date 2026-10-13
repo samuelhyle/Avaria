@@ -1,9 +1,10 @@
 import { listPosts } from "@/lib/blog/posts"
 import { listGlossaryTerms } from "@/lib/glossary"
 import { locales } from "@/lib/i18n/config"
+import { getStorefrontCatalogue } from "@/lib/products/catalogue"
 import type { MetadataRoute } from "next"
 
-export const dynamic = "force-static"
+export const dynamic = "force-dynamic"
 
 const SITE = "https://averianlabs.eu"
 
@@ -50,40 +51,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  // 2. Blog posts (Sanity) + fallback slugs
-  try {
-    const posts = await listPosts()
-    for (const p of posts) {
-      for (const locale of locales) {
-        urls.push(
-          entry(locale, `/blog/${p.slug}`, {
-            lastModified: new Date(p.publishedAt),
-            changeFrequency: "monthly",
-            priority: 0.6,
-          }),
-        )
-      }
-    }
-  } catch {
-    // Sanity unavailable — skip
+  for (const product of await getStorefrontCatalogue()) {
+    for (const locale of locales)
+      urls.push(entry(locale, `/shop/${product.slug}`, { priority: 0.8 }))
   }
-
-  // 3. Glossary terms (Sanity)
-  try {
-    const terms = await listGlossaryTerms()
-    for (const t of terms) {
-      for (const locale of locales) {
-        urls.push(
-          entry(locale, `/glossary/${t.slug}`, {
-            changeFrequency: "monthly",
-            priority: 0.5,
-          }),
-        )
-      }
-    }
-  } catch {
-    // Skip
+  // Index approved content only in its actual language.
+  for (const locale of locales) {
+    const [posts, terms] = await Promise.all([
+      listPosts(locale).catch(() => []),
+      listGlossaryTerms(locale).catch(() => []),
+    ])
+    for (const post of posts)
+      urls.push({
+        url: `${SITE}/${locale}/blog/${post.slug}`,
+        lastModified: new Date(post.publishedAt),
+        priority: 0.6,
+      })
+    for (const term of terms)
+      urls.push({ url: `${SITE}/${locale}/glossary/${term.slug}`, priority: 0.5 })
   }
-
   return urls
 }

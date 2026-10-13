@@ -1,4 +1,5 @@
-export const revalidate = 300
+// Sharing can be revoked immediately; never cache a private plan's former URL.
+export const dynamic = "force-dynamic"
 
 // Demo builds skip DB-backed dynamic routes; production runs them on-demand.
 export const generateStaticParams = () => []
@@ -19,9 +20,9 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params
-  const plan = await getPlanByShareSlug(slug).catch(() => null)
-  if (!plan) return { title: "Plan not found" }
+  const plan = await getPlanByShareSlug(slug, locale).catch(() => null)
   const t = await getTranslations({ locale, namespace: "plans" })
+  if (!plan) return { title: t("notFound"), robots: { index: false } }
   return {
     title: t("sharedPlanTitle", { title: plan.title }),
     description: t("sharedPlanSubtitle"),
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: t("sharedPlanTitle", { title: plan.title }),
       description: t("sharedPlanSubtitle"),
       type: "article",
-      images: [`/api/og/plan/${slug}`],
+      images: [`/api/og/plan/${slug}?locale=${locale}`],
     },
   }
 }
@@ -38,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function PublicPlanPage({ params }: Props) {
   const { locale, slug } = await params
   setRequestLocale(locale)
-  const plan = await getPlanByShareSlug(slug)
+  const plan = await getPlanByShareSlug(slug, locale)
   if (!plan) notFound()
   const t = await getTranslations("plans")
 
@@ -77,7 +78,7 @@ export default async function PublicPlanPage({ params }: Props) {
         ) : null}
         <p className="mt-3 inline-flex items-center gap-1.5 text-xs text-ink-subtle">
           <Calendar className="h-3 w-3" />
-          {t("sharedOn", { date: new Date(plan.createdAt).toLocaleDateString() })}
+          {t("sharedOn", { date: new Date(plan.createdAt).toLocaleDateString(locale) })}
         </p>
       </header>
 

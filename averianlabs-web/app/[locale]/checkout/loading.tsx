@@ -6,8 +6,8 @@ export default function CheckoutLoading() {
       <div className="mx-auto max-w-2xl">
         {/* Step indicator skeleton */}
         <div className="mb-8 flex items-center justify-center gap-4">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="flex items-center gap-2">
+          {Array.from({ length: 4 }, (_, n) => `skeleton-${n}`).map((key, i) => (
+            <div key={key} className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-full bg-surface-2 animate-pulse" />
               {i < 3 && <div className="h-px w-12 bg-line" />}
             </div>

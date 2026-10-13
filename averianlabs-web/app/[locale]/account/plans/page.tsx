@@ -32,8 +32,9 @@ export default async function PlansListPage({
 }) {
   const { locale } = await params
   setRequestLocale(locale)
+  const r = await getTranslations({ locale, namespace: "research" })
   const member = await getCurrentMember()
-  const plans = member ? await listPlansForOwner(member.id) : []
+  const plans = member ? await listPlansForOwner(member.id, locale) : []
   const t = await getTranslations("plans")
 
   return (
@@ -54,12 +55,12 @@ export default async function PlansListPage({
       {!member ? (
         <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-8 text-center">
           <Lock className="mx-auto mb-3 h-6 w-6 text-ink-subtle" />
-          <p className="text-sm text-ink-muted">Sign in to create research plans.</p>
+          <p className="text-sm text-ink-muted">{r("signInRequired")}</p>
           <Link
             href={`/${locale}/account`}
             className="mt-3 inline-block text-sm text-accent hover:underline"
           >
-            Sign in →
+            {r("signIn")}
           </Link>
         </div>
       ) : plans.length === 0 ? (
@@ -95,7 +96,7 @@ export default async function PlansListPage({
               <div className="mt-auto flex items-center justify-between text-xs text-ink-subtle">
                 <span className="inline-flex items-center gap-1">
                   <Calendar className="h-3 w-3" />
-                  {new Date(p.updatedAt).toLocaleDateString()}
+                  {new Date(p.updatedAt).toLocaleDateString(locale)}
                 </span>
                 <span>{t("itemsCount", { count: p.items.length })}</span>
               </div>

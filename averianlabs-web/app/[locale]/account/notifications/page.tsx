@@ -16,18 +16,19 @@ export default async function NotificationsPage({
 }) {
   const { locale } = await params
   setRequestLocale(locale)
+  const r = await getTranslations({ locale, namespace: "research" })
   const member = await getCurrentMember()
   if (!member) {
     return (
       <Container size="narrow" className="py-16">
         <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-8 text-center">
           <BellOff className="mx-auto mb-3 h-6 w-6 text-ink-subtle" />
-          <p className="text-sm text-ink-muted">Sign in to view notifications.</p>
+          <p className="text-sm text-ink-muted">{r("signInRequired")}</p>
           <Link
             href={`/${locale}/account`}
             className="mt-3 inline-block text-sm text-accent hover:underline"
           >
-            Sign in →
+            {r("signIn")}
           </Link>
         </div>
       </Container>
@@ -43,11 +44,11 @@ export default async function NotificationsPage({
       <header className="mb-6">
         <Badge tone="muted" size="sm" className="mb-2">
           <Bell className="h-3 w-3" />
-          Notifications
+          {r("notificationsTitle")}
         </Badge>
-        <h1 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">Inbox</h1>
+        <h1 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">{r("inbox")}</h1>
         <p className="mt-1 text-sm text-ink-muted">
-          Replies, reactions, and shared plans. {notifications.length} unread.
+          {r("notificationCount", { count: notifications.length })}
         </p>
       </header>
 
@@ -67,14 +68,14 @@ export default async function NotificationsPage({
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0 flex-1">
                       <p className="text-sm text-ink">
-                        <span className="font-medium">{n.actorName ?? "Someone"}</span>{" "}
+                        <span className="font-medium">{n.actorName ?? r("someone")}</span>{" "}
                         {n.kind === "reply"
-                          ? "replied to your thread"
+                          ? r("notificationReply")
                           : n.kind === "reaction"
-                            ? "reacted to your post"
+                            ? r("notificationReaction")
                             : n.kind === "plan_shared"
-                              ? "shared a research plan"
-                              : "notified you"}
+                              ? r("notificationPlan")
+                              : r("notificationOther")}
                         {n.targetTitle ? (
                           <>
                             {" "}
@@ -98,7 +99,7 @@ export default async function NotificationsPage({
                       ) : null}
                     </div>
                     <time className="shrink-xs-0 text-xs text-ink-subtle">
-                      {new Date(n.createdAt).toLocaleDateString()}
+                      {new Date(n.createdAt).toLocaleDateString(locale)}
                     </time>
                   </div>
                 </li>

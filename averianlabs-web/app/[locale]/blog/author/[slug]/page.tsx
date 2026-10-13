@@ -37,8 +37,9 @@ export default async function AuthorPage({ params }: Props) {
   const author = await getAuthorBySlug(slug)
   if (!author) notFound()
   const t = await getTranslations("nav")
+  const r = await getTranslations({ locale, namespace: "research" })
 
-  const posts = await getAuthorPosts(slug).catch(() => [])
+  const posts = await getAuthorPosts(slug, locale).catch(() => [])
 
   return (
     <Container size="narrow" className="py-16">
@@ -83,16 +84,16 @@ export default async function AuthorPage({ params }: Props) {
       {posts.length === 0 ? (
         <section className="rounded-[var(--radius-lg)] border border-line bg-surface-2 p-8 text-center text-sm text-ink-muted">
           <Calendar className="mx-auto mb-2 h-5 w-5 text-ink-subtle" />
-          No posts from this author yet. Browse all{" "}
+          {r("authorNoPosts")}{" "}
           <Link href={`/${locale}/blog`} className="font-medium text-accent hover:underline">
-            research articles
+            {r("allResearch")}
           </Link>
           .
         </section>
       ) : (
         <section className="space-y-3">
           <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-ink-subtle">
-            Posts by {author.name}
+            {r("authorPosts", { name: author.name })}
           </h2>
           {posts.map((p) => (
             <Link
@@ -111,7 +112,8 @@ export default async function AuthorPage({ params }: Props) {
                 </div>
                 <p className="mt-0.5 text-xs text-ink-subtle">
                   <Calendar className="mr-1 inline h-3 w-3" />
-                  {p.publishedAt?.slice(0, 10) ?? ""} · {p.readMin ?? 5} min
+                  {new Date(p.publishedAt).toLocaleDateString(locale)} ·{" "}
+                  {r("readMinutes", { count: p.readMin ?? 5 })}
                 </p>
               </div>
               <ArrowRight className="h-4 w-4 text-ink-subtle" />

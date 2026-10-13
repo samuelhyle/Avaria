@@ -35,7 +35,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 gradient-mesh opacity-60" aria-hidden="true" />
         <Container>
-          <div className="relative grid min-h-[88vh] items-center gap-8 py-12 lg:grid-cols-[1.05fr_1fr] lg:gap-12">
+          <div className="relative grid min-h-[88vh] items-center gap-8 py-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-12">
             <BrandBlock locale={locale} />
             <Hero3D products={heroProducts} locale={locale} />
           </div>
@@ -89,10 +89,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             {CATEGORIES.map(({ key, slug, icon: Icon, hue }, i) => {
               const count = allProducts.filter((p) => p.category === slug).length
               return (
-                <Reveal key={key} delay={i * 50}>
+                <Reveal className="min-w-0" key={key} delay={i * 50}>
                   <Link
                     href={`/${locale}/shop?category=${slug}`}
-                    className="hue-tile group relative flex items-start gap-4 overflow-hidden rounded-[var(--radius-lg)] border border-line p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-lg"
+                    className="hue-tile group relative flex min-w-0 items-start gap-4 overflow-hidden rounded-[var(--radius-lg)] border border-line p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-lg"
                     style={{ "--cat-hue": hue } as CSSProperties}
                   >
                     {/* Hover glow */}
@@ -100,7 +100,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     <div className="hue-chip relative flex h-12 w-12 shrink-0 items-center justify-center rounded-[var(--radius)] transition-transform duration-300 group-hover:scale-110">
                       <Icon className="h-5 w-5" />
                     </div>
-                    <div className="relative flex-1">
+                    <div className="relative min-w-0 flex-1 break-words hyphens-auto [overflow-wrap:anywhere]">
                       <h3 className="font-display text-lg font-semibold">
                         {t(`cat${key.charAt(0).toUpperCase() + key.slice(1)}` as never)}
                       </h3>
@@ -175,7 +175,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
 
             {/* Research community — surface card with ActivityFeed */}
-            <div className="grid gap-6 rounded-[var(--radius-2xl)] border border-line bg-surface p-10 sm:p-12 lg:grid-cols-[1fr_240px]">
+            <div className="grid gap-6 rounded-[var(--radius-2xl)] border border-line bg-surface p-10 sm:p-12 2xl:grid-cols-[minmax(0,1fr)_240px]">
               <div className="max-w-md">
                 <h2 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
                   {r("communityTitle")}

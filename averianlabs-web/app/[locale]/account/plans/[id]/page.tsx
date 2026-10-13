@@ -18,8 +18,11 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, id } = await params
   const member = await getCurrentMember()
-  const plan = member ? await getPlanForOwner(id, member.id).catch(() => null) : null
-  if (!plan) return { title: "Plan not found", robots: { index: false, follow: false } }
+  const plan = member ? await getPlanForOwner(id, member.id, locale).catch(() => null) : null
+  if (!plan) {
+    const t = await getTranslations({ locale, namespace: "plans" })
+    return { title: t("notFound"), robots: { index: false, follow: false } }
+  }
   return {
     title: plan.title,
     alternates: { canonical: `/${locale}/account/plans/${id}` },
@@ -30,25 +33,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function PlanDetailPage({ params }: Props) {
   const { locale, id } = await params
   setRequestLocale(locale)
+  const r = await getTranslations({ locale, namespace: "research" })
   const member = await getCurrentMember()
   if (!member) {
     return (
       <Container size="narrow" className="py-16">
         <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-8 text-center">
           <Lock className="mx-auto mb-3 h-6 w-6 text-ink-subtle" />
-          <p className="text-sm text-ink-muted">Sign in to view your research plan.</p>
+          <p className="text-sm text-ink-muted">{r("signInRequired")}</p>
           <Link
             href={`/${locale}/account`}
             className="mt-3 inline-block text-sm text-accent hover:underline"
           >
-            Sign in →
+            {r("signIn")}
           </Link>
         </div>
       </Container>
     )
   }
 
-  const plan = await getPlanForOwner(id, member.id)
+  const plan = await getPlanForOwner(id, member.id, locale)
   if (!plan) notFound()
   const t = await getTranslations("plans")
 

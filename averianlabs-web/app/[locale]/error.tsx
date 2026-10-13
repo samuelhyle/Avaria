@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button"
 import { Container } from "@/components/ui/Container"
 import * as Sentry from "@sentry/nextjs"
 import { AlertTriangle, ArrowLeft, RefreshCw } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
 import Link from "next/link"
 import { useEffect } from "react"
 
@@ -14,6 +15,8 @@ export default function ErrorPage({
   error: Error & { digest?: string }
   reset: () => void
 }) {
+  const r = useTranslations("research")
+  const locale = useLocale()
   useEffect(() => {
     Sentry.captureException(error)
   }, [error])
@@ -24,22 +27,20 @@ export default function ErrorPage({
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-danger-soft text-danger">
           <AlertTriangle className="h-7 w-7" />
         </div>
-        <p className="mt-6 font-mono text-xs uppercase tracking-widest text-danger">Error</p>
+        <p className="mt-6 font-mono text-xs uppercase tracking-widest text-danger">{r("error")}</p>
         <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-          Something went wrong
+          {r("errorTitle")}
         </h1>
-        <p className="mt-4 text-ink-muted text-pretty">
-          An unexpected error occurred. Please try again or return to the home page.
-        </p>
+        <p className="mt-4 text-ink-muted text-pretty">{r("errorBody")}</p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button size="lg" onClick={reset}>
             <RefreshCw className="h-4 w-4" />
-            Try again
+            {r("retry")}
           </Button>
           <Button asChild size="lg" variant="outline">
-            <Link href="/">
+            <Link href={`/${locale}`}>
               <ArrowLeft className="h-4 w-4" />
-              Back to home
+              {r("home")}
             </Link>
           </Button>
         </div>

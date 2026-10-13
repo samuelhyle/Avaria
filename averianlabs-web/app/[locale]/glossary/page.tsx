@@ -34,8 +34,12 @@ export default async function GlossaryIndexPage({
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations("glossary")
+  const r = await getTranslations("research")
 
-  const [grouped, all] = await Promise.all([getGlossaryTermsByCategory(), listGlossaryTerms()])
+  const [grouped, all] = await Promise.all([
+    getGlossaryTermsByCategory(locale),
+    listGlossaryTerms(locale),
+  ])
 
   const totalCount = all.length
   const categories = Object.keys(grouped) as GlossaryCategory[]
@@ -52,7 +56,7 @@ export default async function GlossaryIndexPage({
           </h1>
           <p className="mt-2 max-w-2xl text-base text-ink-muted">{t("subtitle")}</p>
           <p className="mt-2 text-xs text-ink-subtle">
-            {totalCount} {totalCount === 1 ? "term" : "terms"}
+            {r("glossaryCount", { count: totalCount })}
           </p>
         </div>
       </header>
@@ -72,7 +76,7 @@ export default async function GlossaryIndexPage({
                   href={`#cat-${cat}`}
                   className="flex items-center justify-between rounded-[var(--radius)] border border-line bg-surface px-3 py-2 transition-colors hover:border-accent/40 hover:bg-accent-soft/40"
                 >
-                  <span className="font-medium text-ink">{CATEGORY_LABELS[cat]}</span>
+                  <span className="font-medium text-ink">{r(`glossaryCategories.${cat}`)}</span>
                   <Badge tone="muted" size="sm">
                     {grouped[cat].length}
                   </Badge>
@@ -86,7 +90,7 @@ export default async function GlossaryIndexPage({
               grouped[cat].length === 0 ? null : (
                 <section key={cat} id={`cat-${cat}`}>
                   <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-ink-subtle">
-                    {CATEGORY_LABELS[cat]}
+                    {r(`glossaryCategories.${cat}`)}
                   </h2>
                   <div className="grid gap-2 sm:grid-cols-2">
                     {grouped[cat].map((term) => (

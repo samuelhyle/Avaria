@@ -1,24 +1,8 @@
-import { getCurrentMember } from "@/lib/community"
 import { DocumentList } from "@/components/documents/DocumentList"
 import { PdfViewer } from "@/components/documents/PdfViewer"
-import { Badge } from "@/components/ui/Badge"
-import { Button } from "@/components/ui/Button"
 import { Container } from "@/components/ui/Container"
-import { DOCUMENT_TYPE_DESCRIPTIONS, DOCUMENT_TYPE_LABELS } from "@/lib/documents"
+import { getCurrentMember } from "@/lib/community"
 import { getDocumentById, listRecentDocuments, resolveDocumentUrl } from "@/lib/documents/service"
-import {
-  Activity,
-  ArrowLeft,
-  Atom,
-  Calendar,
-  Download,
-  ExternalLink,
-  FileWarning,
-  FlaskConical,
-  ListChecks,
-  Microscope,
-  ShieldAlert,
-} from "lucide-react"
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import Link from "next/link"
@@ -27,154 +11,95 @@ import { notFound } from "next/navigation"
 interface Props {
   params: Promise<{ locale: string; id: string }>
 }
-
-const TYPE_ICON: Record<string, typeof FlaskConical> = {
-  coa: FlaskConical,
-  sds: ShieldAlert,
-  hplc: Activity,
-  method: ListChecks,
-  nmr: Atom,
-  spec: Microscope,
-  msds: FileWarning,
-}
-
-export const revalidate = 3600
-
-// Demo builds skip DB-backed dynamic routes; production runs them on-demand.
-export const generateStaticParams = () => []
-
+export const dynamic = "force-dynamic"
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, id } = await params
+  const t = await getTranslations({ locale, namespace: "research" })
   const doc = await getDocumentById(id, locale).catch(() => null)
-  if (!doc) return { title: "Document not found" }
   return {
-    title: `${doc.title} (${DOCUMENT_TYPE_LABELS[doc.type]})`,
-    description: `${DOCUMENT_TYPE_LABELS[doc.type]} · ${doc.title}`,
+    title: doc?.title ?? t("documentsTitle"),
+    description: t("documentsIntro"),
     alternates: { canonical: `/${locale}/documents/${id}` },
     robots: { index: false, follow: false },
-    openGraph: {
-      title: doc.title,
-      description: `${DOCUMENT_TYPE_LABELS[doc.type]} · ${doc.title}`,
-      type: "article",
-      images: [`/api/og/document/${id}`],
-    },
   }
 }
-
 export default async function DocumentPage({ params }: Props) {
   const { locale, id } = await params
   setRequestLocale(locale)
   const member = await getCurrentMember().catch(() => null)
   const doc = await getDocumentById(id, locale, Boolean(member)).catch(() => null)
   if (!doc) notFound()
-  const t = await getTranslations("documents")
+  const t = await getTranslations("research")
+  const d = await getTranslations("documents")
   const fileUrl = await resolveDocumentUrl(doc)
-  const Icon = TYPE_ICON[doc.type] ?? FileWarning
-
-  const sameProduct = doc.productId
-    ? await listRecentDocuments({ productId: doc.productId, limit: 8, locale }).catch(() => [])
+  const related = doc.productId
+    ? await listRecentDocuments({ productId: doc.productId, locale, limit: 8 }).catch(() => [])
     : []
-  const otherDocs = sameProduct.filter((d) => d.id !== doc.id)
-
   return (
-    <Container size="wide" className="py-10">
-      <div className="mb-6">
-        <Link
-          href={`/${locale}/lab-tests`}
-          className="inline-flex items-center gap-1.5 text-sm text-ink-muted hover:text-accent"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          {t("back")}
-        </Link>
-      </div>
-
-      <header className="mb-8 flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <Badge tone="muted" size="sm" className="mb-2">
-            <Icon className="h-3 w-3" />
-            {DOCUMENT_TYPE_LABELS[doc.type]}
-          </Badge>
-          <h1 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">
-            {doc.title}
-          </h1>
-          <p className="mt-2 max-w-2xl text-sm text-ink-muted">
-            {DOCUMENT_TYPE_DESCRIPTIONS[doc.type]}
-          </p>
-          <dl className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 text-xs sm:grid-cols-4">
+    <Container className="py-12">
+      <Link
+        href={`/${locale}/documents`}
+        className="text-sm text-accent underline underline-offset-4"
+      >
+        ← {t("documentsTitle")}
+      </Link>
+      <header className="mt-6 mb-8">
+        <p className="text-sm text-ink-muted">{t(`docLabels.${doc.type}`)}</p>
+        <h1 className="mt-2 font-display text-3xl font-semibold">{doc.title}</h1>
+        <dl className="mt-6 flex flex-wrap gap-8 text-sm">
+          <div>
+            <dt>{t("version")}</dt>
+            <dd>{doc.version}</dd>
+          </div>
+          <div>
+            <dt>{t("published")}</dt>
+            <dd>
+              {new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(doc.publishedAt)}
+            </dd>
+          </div>
+          {doc.batchCode && (
             <div>
-              <dt className="text-ink-subtle">Version</dt>
-              <dd className="mt-0.5 font-mono text-ink">{doc.version}</dd>
+              <dt>{t("batch")}</dt>
+              <dd className="font-mono">{doc.batchCode}</dd>
             </div>
+          )}
+          {doc.productSlug && (
             <div>
-              <dt className="text-ink-subtle">Published</dt>
-              <dd className="mt-0.5 font-mono text-ink">
-                {doc.publishedAt.toISOString().slice(0, 10)}
+              <dt>{t("product")}</dt>
+              <dd>
+                <Link className="text-accent underline" href={`/${locale}/shop/${doc.productSlug}`}>
+                  {doc.productName ?? doc.productSlug}
+                </Link>
               </dd>
             </div>
-            {doc.productSlug ? (
-              <div>
-                <dt className="text-ink-subtle">Product</dt>
-                <dd className="mt-0.5">
-                  <Link
-                    href={`/${locale}/shop/${doc.productSlug}`}
-                    className="text-accent hover:underline"
-                  >
-                    {doc.productName ?? doc.productSlug}
-                  </Link>
-                </dd>
-              </div>
-            ) : null}
-            {doc.batchCode ? (
-              <div>
-                <dt className="text-ink-subtle">Batch</dt>
-                <dd className="mt-0.5 font-mono text-ink">{doc.batchCode}</dd>
-              </div>
-            ) : null}
-          </dl>
-        </div>
-
-        <div className="flex items-center gap-2">
-          {fileUrl ? (
-            <a href={fileUrl} target="_blank" rel="noreferrer">
-              <Button variant="outline" size="sm">
-                <ExternalLink className="h-3.5 w-3.5" />
-                {t("openOriginal")}
-              </Button>
-            </a>
-          ) : null}
-          {fileUrl ? (
-            <a href={fileUrl} download>
-              <Button size="sm">
-                <Download className="h-3.5 w-3.5" />
-                {t("download")}
-              </Button>
-            </a>
-          ) : (
-            <Badge tone="warn" size="sm">
-              <FileWarning className="h-3 w-3" />
-              File unavailable
-            </Badge>
           )}
-        </div>
+        </dl>
       </header>
-
       {fileUrl ? (
-        <PdfViewer url={fileUrl} title={doc.title} />
+        <>
+          <a
+            href={fileUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex rounded-[var(--radius)] border border-line bg-surface px-4 py-2 text-sm text-accent underline underline-offset-4"
+          >
+            {t("download")} ↗
+          </a>
+          <div className="mt-6">
+            <PdfViewer url={fileUrl} title={doc.title} />
+          </div>
+        </>
       ) : (
-        <div className="rounded-[var(--radius-lg)] border border-dashed border-line bg-surface p-12 text-center text-sm text-ink-muted">
-          <FileWarning className="mx-auto mb-3 h-6 w-6 text-warn" />
-          This document's file is not currently available. Metadata shown above.
-        </div>
+        <p role="status" className="rounded-[var(--radius)] border border-line p-6 text-ink-muted">
+          {t("fileUnavailable")}
+        </p>
       )}
-
-      {otherDocs.length > 0 ? (
+      {related.some((row) => row.id !== doc.id) && (
         <section className="mt-12">
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-ink-subtle">
-            {t("otherForProduct")}
-          </h2>
-          <DocumentList docs={otherDocs} locale={locale} />
+          <h2 className="mb-4 text-xl font-semibold">{d("otherForProduct")}</h2>
+          <DocumentList docs={related.filter((row) => row.id !== doc.id)} locale={locale} />
         </section>
-      ) : null}
+      )}
     </Container>
   )
 }

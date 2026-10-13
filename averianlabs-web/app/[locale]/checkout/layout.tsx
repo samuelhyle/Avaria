@@ -1,3 +1,5 @@
+export const metadata = { robots: { index: false, follow: false } }
+
 import { CheckoutSteps } from "@/components/checkout/CheckoutSteps"
 import { Container } from "@/components/ui/Container"
 import { getTranslations, setRequestLocale } from "next-intl/server"

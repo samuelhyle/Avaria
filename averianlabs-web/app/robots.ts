@@ -1,4 +1,5 @@
 import { isDemoBuild } from "@/lib/demo"
+import { locales } from "@/lib/i18n/config"
 import type { MetadataRoute } from "next"
 
 export const dynamic = "force-static"
@@ -14,7 +15,17 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/admin/", "/_next/"],
+        disallow: [
+          "/api/",
+          "/admin/",
+          "/studio/",
+          "/_next/",
+          ...locales.flatMap((locale) =>
+            ["account", "checkout", "admin", "assistant", "reset-password", "verify-email"].map(
+              (route) => `/${locale}/${route}`,
+            ),
+          ),
+        ],
       },
       { userAgent: "GPTBot", disallow: "/" },
       { userAgent: "ClaudeBot", disallow: "/" },

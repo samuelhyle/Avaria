@@ -1,10 +1,27 @@
 import { ShopCatalog } from "@/components/shop/ShopCatalog"
 import { Container } from "@/components/ui/Container"
+import { locales } from "@/lib/i18n/config"
+import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Suspense } from "react"
 
 // Static shell — filters/sorting/3D are handled by the client catalog island.
 export const revalidate = 3600
+
+export async function generateMetadata({
+  params,
+}: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: "shop" })
+  return {
+    title: t("title"),
+    description: t("subtitle"),
+    alternates: {
+      canonical: `/${locale}/shop`,
+      languages: Object.fromEntries(locales.map((language) => [language, `/${language}/shop`])),
+    },
+  }
+}
 
 export default async function ShopPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
@@ -14,7 +31,7 @@ export default async function ShopPage({ params }: { params: Promise<{ locale: s
   return (
     <Container className="py-12">
       <header className="mb-8 flex flex-col gap-3">
-        <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+        <h1 className="font-display break-words hyphens-auto [overflow-wrap:anywhere] text-3xl font-semibold tracking-tight sm:text-5xl">
           {t("title")}
         </h1>
         <p className="text-ink-muted">{t("subtitle")}</p>

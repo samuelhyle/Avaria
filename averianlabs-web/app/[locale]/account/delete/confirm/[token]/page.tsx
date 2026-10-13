@@ -1,11 +1,11 @@
 export const dynamic = "force-dynamic"
 
+import { ConfirmDelete } from "@/components/account/ConfirmDelete"
 import { Badge } from "@/components/ui/Badge"
 import { Container } from "@/components/ui/Container"
 import { gdprRequests } from "@/db/schema"
 import { getCurrentMember } from "@/lib/community"
 import { db } from "@/lib/db"
-import { confirmDeleteRequest } from "@/lib/gdpr"
 import { and, eq, gt } from "drizzle-orm"
 import { AlertTriangle, CheckCircle2 } from "lucide-react"
 import type { Metadata } from "next"
@@ -25,6 +25,7 @@ export default async function ConfirmDeletePage({ params }: Props) {
   const { locale, token } = await params
   setRequestLocale(locale)
   const t = await getTranslations("gdpr")
+  const r = await getTranslations("research")
   const member = await getCurrentMember()
 
   // Find the pending request matching this token.
@@ -46,24 +47,17 @@ export default async function ConfirmDeletePage({ params }: Props) {
       <Container size="narrow" className="py-16">
         <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-8 text-center">
           <AlertTriangle className="mx-auto mb-3 h-6 w-6 text-warn" />
-          <h1 className="text-xl font-semibold text-ink">Sign in to confirm</h1>
-          <p className="mt-2 text-sm text-ink-muted">
-            Sign in to the account whose deletion you want to confirm.
-          </p>
+          <h1 className="text-xl font-semibold text-ink">{r("signInConfirm")}</h1>
+          <p className="mt-2 text-sm text-ink-muted">{r("signInConfirm")}</p>
           <Link
             href={`/${locale}/account`}
             className="mt-4 inline-block text-sm text-accent hover:underline"
           >
-            ← Sign in
+            ← {r("signInConfirm")}
           </Link>
         </div>
       </Container>
     )
-  }
-
-  // If the request is still pending, finalize the delete.
-  if (request.status === "pending") {
-    await confirmDeleteRequest(request.id)
   }
 
   return (
@@ -71,16 +65,14 @@ export default async function ConfirmDeletePage({ params }: Props) {
       <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-8 text-center">
         <CheckCircle2 className="mx-auto mb-3 h-8 w-8 text-success" />
         <Badge tone="success" size="sm" className="mb-3">
-          Confirmed
+          {t("deleteTitle")}
         </Badge>
         <h1 className="text-2xl font-semibold text-ink">{t("deleteTitle")}</h1>
         <p className="mt-3 text-sm text-ink-muted">{t("deleteDescription")}</p>
-        <p className="mt-4 text-xs text-ink-subtle">
-          Your personal data is queued for hard-deletion in 30 days. Until then, it's anonymised in
-          the database but recoverable by support if you change your mind.
-        </p>
+        <p className="mt-4 text-xs text-ink-subtle">{r("deletionImmediate")}</p>
+        <ConfirmDelete token={token} />
         <Link href={`/${locale}`} className="mt-6 inline-block text-sm text-accent hover:underline">
-          ← Home
+          ← {r("home")}
         </Link>
       </div>
     </Container>

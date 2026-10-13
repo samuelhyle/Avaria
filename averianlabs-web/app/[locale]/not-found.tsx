@@ -14,7 +14,7 @@ export default async function NotFound() {
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent-soft text-accent-ink">
           <FlaskConical className="h-7 w-7" />
         </div>
-        <p className="mt-6 font-mono text-xs uppercase tracking-widest text-accent">Error 404</p>
+        <p className="mt-6 font-mono text-xs uppercase tracking-widest text-accent">{t("code")}</p>
         <h1 className="mt-3 font-display text-5xl font-semibold tracking-tight sm:text-6xl text-balance">
           {t("title")}
         </h1>

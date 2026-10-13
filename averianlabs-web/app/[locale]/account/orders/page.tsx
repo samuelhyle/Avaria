@@ -20,6 +20,7 @@ export default async function OrdersPage({ params }: { params: Promise<{ locale:
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations("account")
+  const r = await getTranslations("research")
   const member = await getCurrentMember()
   const orders = member ? await listOrdersForUser(member.id).catch(() => []) : []
 
@@ -62,7 +63,7 @@ export default async function OrdersPage({ params }: { params: Promise<{ locale:
                 <div>
                   <p className="font-mono text-sm font-medium">{order.number}</p>
                   <p className="mt-1 text-xs text-ink-muted">
-                    {new Date(order.placedAt).toLocaleDateString("en-GB", {
+                    {new Date(order.placedAt).toLocaleDateString(locale, {
                       year: "numeric",
                       month: "long",
                       day: "numeric",
@@ -70,9 +71,11 @@ export default async function OrdersPage({ params }: { params: Promise<{ locale:
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Badge tone={STATUS_TONES[order.status] ?? "muted"}>{order.status}</Badge>
+                  <Badge tone={STATUS_TONES[order.status] ?? "muted"}>{r(order.status)}</Badge>
                   <span className="font-display text-lg font-semibold">
-                    €{(order.totalCents / 100).toFixed(2)}
+                    {new Intl.NumberFormat(locale, { style: "currency", currency: "EUR" }).format(
+                      order.totalCents / 100,
+                    )}
                   </span>
                 </div>
               </div>

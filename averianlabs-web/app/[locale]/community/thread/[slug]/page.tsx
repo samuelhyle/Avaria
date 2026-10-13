@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: thread.title,
       type: "article",
-      images: [`/api/og/thread/${slug}`],
+      images: [`/api/og/thread/${slug}?locale=${locale}`],
     },
   }
 }
@@ -42,6 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ThreadPage({ params }: Props) {
   const { locale, slug } = await params
   setRequestLocale(locale)
+  const r = await getTranslations({ locale, namespace: "research" })
 
   const thread = await getThreadBySlug(slug).catch(() => null)
   if (!thread || thread.status === "removed") notFound()
@@ -65,7 +66,7 @@ export default async function ThreadPage({ params }: Props) {
         title={thread.title}
         url={`https://averianlabs.eu/${locale}/community/thread/${slug}`}
         datePublished={thread.lastActivityAt.toISOString()}
-        authorName={thread.authorName ?? "Anonymous"}
+        authorName={thread.authorName ?? r("anonymousMember")}
         commentCount={Math.max(0, thread.replyCount - 1)}
         locale={locale}
       />
@@ -93,7 +94,7 @@ export default async function ThreadPage({ params }: Props) {
           {t("threadMeta", {
             replies: thread.replyCount,
             views: thread.viewCount,
-            author: thread.authorName ?? "Anonymous",
+            author: thread.authorName ?? r("anonymousMember"),
           })}
         </p>
         {thread.status === "locked" ? (
@@ -119,7 +120,7 @@ export default async function ThreadPage({ params }: Props) {
                   status: p.status,
                   createdAt: p.createdAt,
                   authorId: p.authorId,
-                  authorName: p.authorName ?? "Anonymous",
+                  authorName: p.authorName ?? r("anonymousMember"),
                   authorReputation: p.authorReputation ?? 0,
                 }}
                 isOriginal={idx === 0}
@@ -148,12 +149,9 @@ export default async function ThreadPage({ params }: Props) {
         <aside className="space-y-4">
           <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-4 text-xs text-ink-muted">
             <Badge tone="muted" size="sm" className="mb-2">
-              Moderation
+              {r("moderation")}
             </Badge>
-            <p>
-              New posts are checked by an automated moderator before going live. The human queue
-              reviews flagged content.
-            </p>
+            <p>{r("moderationBody")}</p>
           </div>
           <Link
             href={`/${locale}/community/rules`}

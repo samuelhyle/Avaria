@@ -15,61 +15,6 @@ interface IndexPost {
   tag: string
 }
 
-const FALLBACK_INDEX: IndexPost[] = [
-  {
-    slug: "bpc-157-overview",
-    title: "BPC-157: a 15-amino-acid fragment and what it does in tissue models",
-    excerpt:
-      "We review the in-vitro and in-vivo literature on BPC-157's role in angiogenesis, fibroblast activity, and the gut–tendon axis.",
-    date: "2026-08-12",
-    readMin: 9,
-    tag: "Recovery",
-  },
-  {
-    slug: "semaglutide-research",
-    title: "Semaglutide: the long-acting GLP-1 analog, mechanism by mechanism",
-    excerpt:
-      "A walkthrough of the structural modifications that give semaglutide its 7-day half-life, and the assays used to verify it.",
-    date: "2026-07-21",
-    readMin: 12,
-    tag: "Metabolic",
-  },
-  {
-    slug: "tirzepatide-dual-agonist",
-    title: "Tirzepatide and the GIP/GLP-1 dual-agonist story",
-    excerpt:
-      "How a single peptide binds two receptors — and why that matters in metabolic disease research.",
-    date: "2026-07-04",
-    readMin: 8,
-    tag: "Metabolic",
-  },
-  {
-    slug: "ghk-cu-copper",
-    title: "GHK-Cu and the renaissance of copper-peptide cosmetic research",
-    excerpt: "From 1973 to 2026 — the rediscovery of a tripeptide that was always quietly working.",
-    date: "2026-06-18",
-    readMin: 6,
-    tag: "Cosmetic",
-  },
-  {
-    slug: "tb-500-thymosin",
-    title: "TB-500 fragment: what Thymosin β4 actually does in actin sequestration",
-    excerpt: "The actin-binding story behind the most-studied tissue-recovery peptide fragment.",
-    date: "2026-06-02",
-    readMin: 7,
-    tag: "Recovery",
-  },
-  {
-    slug: "epithalon-telomerase",
-    title: "Epithalon and telomerase: what the 4-amino-acid tetrapeptide actually does",
-    excerpt:
-      "Pineal-gland research, telomerase expression, and the limits of what a 4-amino-acid tetrapeptide can claim.",
-    date: "2026-05-20",
-    readMin: 10,
-    tag: "Longevity",
-  },
-]
-
 export async function generateMetadata({
   params,
 }: {
@@ -93,7 +38,8 @@ export default async function BlogPage({
   const t = await getTranslations({ locale, namespace: "home" })
 
   // Prefer Sanity. Empty array means no posts / not configured → fall back.
-  const sanity = await listPosts().catch(() => [])
+  const r = await getTranslations("research")
+  const sanity = await listPosts(locale).catch(() => [])
   const posts: IndexPost[] =
     sanity.length > 0
       ? sanity.map((p) => ({
@@ -104,22 +50,21 @@ export default async function BlogPage({
           readMin: p.readMin ?? 5,
           tag: p.tag,
         }))
-      : FALLBACK_INDEX
+      : []
 
   return (
     <Container className="py-16">
       <header className="mb-12 max-w-2xl">
         <Badge tone="accent" className="mb-4">
-          Research desk
+          {r("blog")}
         </Badge>
         <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
           {t("blogHeading")}
         </h1>
-        <p className="mt-3 text-ink-muted">
-          Long-form, citation-backed essays on the peptides we sell.
-        </p>
+        <p className="mt-3 text-ink-muted">{r("aboutEvidenceBody")}</p>
       </header>
 
+      {posts.length === 0 && <p className="text-ink-muted">{r("articlesEmpty")}</p>}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
           <Link
@@ -140,7 +85,7 @@ export default async function BlogPage({
                 {post.date}
               </span>
               <span className="flex items-center gap-1">
-                {post.readMin} min <ArrowRight className="h-3 w-3" />
+                {r("readMinutes", { count: post.readMin })} <ArrowRight className="h-3 w-3" />
               </span>
             </div>
           </Link>

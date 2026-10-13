@@ -28,6 +28,7 @@ export default async function ActivityPage({
 }) {
   const { locale } = await params
   setRequestLocale(locale)
+  const r = await getTranslations("research")
 
   const threads = await listThreads({ limit: 30 })
   const t = await getTranslations("community")
@@ -77,7 +78,7 @@ export default async function ActivityPage({
                   replyCount: th.replyCount,
                   viewCount: th.viewCount,
                   lastActivityAt: th.lastActivityAt,
-                  authorName: th.authorName ?? "Anonymous",
+                  authorName: th.authorName ?? r("anonymousMember"),
                   authorReputation: th.authorReputation ?? 0,
                 }}
               />

@@ -5,8 +5,8 @@ export default function ProductLoading() {
     <Container className="py-12">
       {/* Breadcrumb skeleton */}
       <div className="mb-6 flex items-center gap-2">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="flex items-center gap-1">
+        {Array.from({ length: 4 }, (_, n) => `skeleton-${n}`).map((key, i) => (
+          <div key={key} className="flex items-center gap-1">
             <div className="h-4 w-16 rounded bg-surface-2 animate-pulse" />
             {i < 3 && <div className="h-3 w-3 rounded bg-surface-2 animate-pulse" />}
           </div>

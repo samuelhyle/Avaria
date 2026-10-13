@@ -25,7 +25,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, term } = await params
-  const record = await getGlossaryTermBySlug(term).catch(() => null)
+  const record = await getGlossaryTermBySlug(term, locale).catch(() => null)
   if (!record) return { title: "Not found" }
   return {
     title: record.term,
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: record.term,
       description: record.shortDefinition,
       type: "article",
-      images: [`/api/og/glossary/${term}`],
+      images: [`/api/og/glossary/${term}?locale=${locale}`],
     },
   }
 }
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function GlossaryTermPage({ params }: Props) {
   const { locale, term: slug } = await params
   setRequestLocale(locale)
-  const record = await getGlossaryTermBySlug(slug).catch(() => null)
+  const record = await getGlossaryTermBySlug(slug, locale).catch(() => null)
   if (!record) notFound()
   const t = await getTranslations("glossary")
 

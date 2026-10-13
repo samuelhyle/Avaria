@@ -1,17 +1,5 @@
-import type { MetadataRoute } from "next"
-
+import { storefrontManifest } from "@/lib/seo/manifest"
 export const dynamic = "force-static"
-
-export default function manifest(): MetadataRoute.Manifest {
-  return {
-    name: "AverianLabs — Research peptides",
-    short_name: "AverianLabs",
-    description:
-      "EU-dispatched, third-party HPLC-verified research peptides with batch-specific COA.",
-    start_url: "/en",
-    display: "standalone",
-    background_color: "#fbfcfe",
-    theme_color: "#2563eb",
-    icons: [{ src: "/favicon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" }],
-  }
+export default function manifest() {
+  return storefrontManifest()
 }

@@ -27,6 +27,7 @@ import "../../styles/globals.css"
  */
 const CLIENT_NAMESPACES = [
   "a11y",
+  "notFound",
   "research",
   "account",
   "admin",
@@ -69,6 +70,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "meta" })
   return {
     metadataBase: new URL("https://averianlabs.eu"),
+    manifest: `/${locale}/manifest.webmanifest`,
     title: { default: t("title"), template: "%s · AverianLabs" },
     description: t("description"),
     keywords: t("keywords").split(","),
@@ -85,7 +87,7 @@ export async function generateMetadata({
       description: t("description"),
       images: [
         {
-          url: isDemoBuild() ? "/og-default.svg" : "/api/og/default",
+          url: isDemoBuild() ? "/og-default.svg" : `/api/og/default?locale=${locale}`,
           width: 1200,
           height: 630,
           alt: t("title"),
@@ -96,7 +98,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: t("title"),
       description: t("description"),
-      images: [isDemoBuild() ? "/og-default.svg" : "/api/og/default"],
+      images: [isDemoBuild() ? "/og-default.svg" : `/api/og/default?locale=${locale}`],
     },
     robots: isDemoBuild()
       ? { index: false, follow: false, googleBot: { index: false, follow: false } }

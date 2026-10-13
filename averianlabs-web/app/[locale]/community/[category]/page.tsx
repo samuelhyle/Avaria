@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CategoryPage({ params }: Props) {
   const { locale, category } = await params
   setRequestLocale(locale)
+  const r = await getTranslations("research")
 
   const cat = await getCategoryBySlug(category)
   if (!cat) notFound()
@@ -80,7 +81,7 @@ export default async function CategoryPage({ params }: Props) {
                   replyCount: th.replyCount,
                   viewCount: th.viewCount,
                   lastActivityAt: th.lastActivityAt,
-                  authorName: th.authorName ?? "Anonymous",
+                  authorName: th.authorName ?? r("anonymousMember"),
                   authorReputation: th.authorReputation ?? 0,
                 }}
               />

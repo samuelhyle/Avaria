@@ -7,9 +7,9 @@ export default function AccountLoading() {
         {/* Sidebar skeleton */}
         <div className="space-y-3">
           <div className="h-10 w-full rounded-[var(--radius)] bg-surface-2 animate-pulse" />
-          {Array.from({ length: 5 }).map((_, i) => (
+          {Array.from({ length: 5 }, (_, n) => `skeleton-${n}`).map((key) => (
             <div
-              key={i}
+              key={key}
               className="h-9 w-full rounded-[var(--radius-sm)] bg-surface-2 animate-pulse"
             />
           ))}
@@ -19,8 +19,11 @@ export default function AccountLoading() {
         <div className="space-y-6">
           <div className="h-8 w-48 rounded bg-surface-2 animate-pulse" />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <div key={i} className="rounded-[var(--radius-lg)] border border-line bg-surface p-6">
+            {Array.from({ length: 3 }, (_, n) => `skeleton-${n}`).map((key) => (
+              <div
+                key={key}
+                className="rounded-[var(--radius-lg)] border border-line bg-surface p-6"
+              >
                 <div className="h-5 w-24 rounded bg-surface-2 animate-pulse" />
                 <div className="mt-2 h-8 w-16 rounded bg-surface-2 animate-pulse" />
               </div>
@@ -29,9 +32,9 @@ export default function AccountLoading() {
           <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-6">
             <div className="h-6 w-32 rounded bg-surface-2 animate-pulse" />
             <div className="mt-4 space-y-3">
-              {Array.from({ length: 4 }).map((_, i) => (
+              {Array.from({ length: 4 }, (_, n) => `skeleton-${n}`).map((key) => (
                 <div
-                  key={i}
+                  key={key}
                   className="h-16 w-full rounded-[var(--radius)] bg-surface-2 animate-pulse"
                 />
               ))}

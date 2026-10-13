@@ -16,8 +16,10 @@ interface Props {
   searchParams: Promise<{ token?: string; email?: string }>
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  return { title: "Newsletter", robots: { index: false, follow: false } }
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: "newsletter" })
+  return { title: t("confirmTitle"), robots: { index: false, follow: false } }
 }
 
 export default async function NewsletterConfirmPage({ params, searchParams }: Props) {
@@ -25,6 +27,7 @@ export default async function NewsletterConfirmPage({ params, searchParams }: Pr
   const { token, email: rawEmail } = await searchParams
   setRequestLocale(locale)
   const t = await getTranslations("newsletter")
+  const r = await getTranslations("research")
 
   let state: "success" | "invalid" | "missing" = "missing"
   if (token && rawEmail) {
@@ -78,7 +81,7 @@ export default async function NewsletterConfirmPage({ params, searchParams }: Pr
         <p className="mt-3 text-sm text-ink-muted">{message}</p>
         <Link href={`/${locale}`} className="mt-6 inline-block">
           <Button variant="secondary" size="sm">
-            ← Home
+            ← {r("home")}
           </Button>
         </Link>
       </div>

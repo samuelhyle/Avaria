@@ -1,3 +1,6 @@
+import { makeCheckoutMetadata } from "@/lib/seo/metadata"
+export const generateMetadata = makeCheckoutMetadata("payment")
+
 import { CheckoutForm } from "@/components/checkout/CheckoutForm"
 
 export default async function PaymentStep({ params }: { params: Promise<{ locale: string }> }) {

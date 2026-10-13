@@ -33,6 +33,7 @@ export default async function CommunityHubPage({
 }) {
   const { locale } = await params
   setRequestLocale(locale)
+  const r = await getTranslations({ locale, namespace: "research" })
 
   const [categories, recent, leaders] = await Promise.all([
     listCategories(),
@@ -54,7 +55,7 @@ export default async function CommunityHubPage({
         <div className="max-w-2xl">
           <p className="mb-2 inline-flex items-center gap-2 rounded-full border border-line bg-accent-soft px-3 py-1 text-xs font-medium text-accent">
             <ScrollText className="h-3 w-3" />
-            Research-only · moderated
+            {r("moderated")}
           </p>
           <h1 className="text-3xl font-semibold tracking-tight text-ink md:text-4xl">
             {t("title")}
@@ -140,7 +141,7 @@ export default async function CommunityHubPage({
                         replyCount: th.replyCount,
                         viewCount: th.viewCount,
                         lastActivityAt: th.lastActivityAt,
-                        authorName: th.authorName ?? "Anonymous",
+                        authorName: th.authorName ?? r("anonymousMember"),
                         authorReputation: th.authorReputation ?? 0,
                       }}
                     />
@@ -172,12 +173,9 @@ export default async function CommunityHubPage({
           />
           <div className="rounded-[var(--radius-lg)] border border-line bg-surface-2 p-5 text-xs text-ink-muted">
             <Badge tone="accent" size="sm" className="mb-2">
-              Moderation
+              {r("moderation")}
             </Badge>
-            <p>
-              Posts are checked by a lexical guard before they go live, then asynchronously reviewed
-              by an LLM moderator. A human queue handles edge cases.
-            </p>
+            <p>{r("moderationBody")}</p>
           </div>
         </aside>
       </div>
