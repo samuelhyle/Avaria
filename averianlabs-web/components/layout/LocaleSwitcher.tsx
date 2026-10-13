@@ -27,7 +27,7 @@ export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
     } else {
       segments.unshift(target)
     }
-    const newPath = `/${segments.join("/")}`
+    const newPath = `/${segments.join("/")}${window.location.search}${window.location.hash}`
     startTransition(() => router.push(newPath))
   }
 

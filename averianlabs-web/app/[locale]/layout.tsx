@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"
+
 import { LazyChatWidget } from "@/components/ai/chat/LazyChatWidget"
 import { Chrome } from "@/components/layout/Chrome"
 import { MotionProvider } from "@/components/layout/MotionProvider"
@@ -24,6 +26,8 @@ import "../../styles/globals.css"
  * Keep this list in sync when adding a namespace to a client component.
  */
 const CLIENT_NAMESPACES = [
+  "a11y",
+  "research",
   "account",
   "admin",
   "ageGate",

@@ -2,7 +2,7 @@ import { NewsletterForm } from "@/components/home/NewsletterForm"
 import { Logo } from "@/components/layout/Logo"
 import { Container } from "@/components/ui/Container"
 import { getLegalIdentity } from "@/lib/legal"
-import { FlaskConical, Github, Linkedin, Lock, ShieldCheck, Truck, Twitter } from "lucide-react"
+import { FlaskConical } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import Link from "next/link"
 
@@ -69,6 +69,13 @@ export async function Footer({ locale }: FooterProps) {
             <p className="mt-3 max-w-md text-sm text-ink-muted text-pretty">{t("tagline")}</p>
 
             <NewsletterForm className="mt-6 max-w-md" />
+
+            <Link
+              href={`/${locale}/lab-tests`}
+              className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-accent hover:text-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+            >
+              {t("verifiedBy")} →
+            </Link>
           </div>
 
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
@@ -96,21 +103,10 @@ export async function Footer({ locale }: FooterProps) {
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line py-4 text-xs text-ink-muted">
-          <div className="flex flex-wrap items-center gap-4">
-            <span className="flex items-center gap-1.5">
-              <ShieldCheck className="h-3.5 w-3.5 text-success" />
-              Stripe-secured
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Lock className="h-3.5 w-3.5 text-success" />
-              GDPR compliant
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Truck className="h-3.5 w-3.5 text-accent" />
-              24h EU dispatch
-            </span>
-          </div>
-          <PaymentIcons />
+          <span className="font-semibold uppercase tracking-wider text-ink-subtle">
+            {t("paymentsTitle")}
+          </span>
+          <PaymentIcons stripeCaption={t("stripeCaption")} coinbaseCaption={t("coinbaseCaption")} />
         </div>
 
         <div className="flex flex-col gap-3 border-t border-line py-6 sm:flex-row sm:items-center sm:justify-between">
@@ -139,77 +135,41 @@ export async function Footer({ locale }: FooterProps) {
   )
 }
 
-function PaymentIcons() {
-  const items = [
-    {
-      label: "Visa",
-      svg: (
-        <path d="M14.5 4.5h2.7l-2 11h-2.7l2-11zm6.8 7.4-1.2-3.3-1.4 3.3h2.6zm.6 3.6h2.5l-2.2-11h-2.3c-.5 0-1 .3-1.2.7l-4 10.3h2.8l.6-1.7h3.4l.3 1.7zm-7.6-9.6-4.2 11h-2.9l-2.1-8.5c-.1-.5-.3-.7-.7-.9-1.1-.5-2.2-.9-3.4-1.3l.1-.3h5.2c.6 0 1.2.4 1.3 1.2l1.1 5.8 2.7-7h2.9z" />
-      ),
-    },
-    {
-      label: "Mastercard",
-      svg: (
-        <g>
-          <circle cx="9" cy="12" r="5.5" />
-          <circle cx="15" cy="12" r="5.5" />
-        </g>
-      ),
-    },
-    {
-      label: "Amex",
-      svg: (
-        <path d="M2 6h20v12H2V6zm3 2v8h14V8H5zm3 2h4v1.5H9V13H8v-3zm6 0h2v3l-1.5-2-1.5 2v-3h1z" />
-      ),
-    },
-    {
-      label: "PayPal",
-      svg: (
-        <path d="M7.5 5h6.7c1.6 0 2.6 1.1 2.3 2.6-.5 2.4-2.4 3.7-4.7 3.7h-1.4c-.4 0-.7.3-.8.7l-.7 4c0 .2-.2.4-.4.4H6.2c-.2 0-.4-.2-.4-.4l1.3-7.6c.1-.5.5-.9 1-1.1.4-.2.9-.3 1.4-.3zm.3 1.5-.7 4h1.4c1.3 0 2.5-.5 2.7-2 .1-.8-.4-1.5-1.2-1.7-.5-.2-1-.2-1.5-.2-.3 0-.6-.1-.7-.1z" />
-      ),
-    },
-    {
-      label: "Apple Pay",
-      svg: (
-        <path d="M16.5 13.5c0-2.4 2-3.5 2-3.6-1.1-1.6-2.8-1.8-3.4-1.9-1.5-.1-2.8.9-3.6.9-.7 0-1.9-.8-3.1-.8-1.6 0-3 .9-3.9 2.4-1.7 2.9-.4 7.2 1.2 9.5.8 1.1 1.7 2.4 3 2.3 1.2 0 1.6-.8 3.1-.8 1.4 0 1.8.8 3.1.8 1.3 0 2.1-1.1 2.9-2.3.9-1.3 1.3-2.6 1.3-2.7-.1-.1-2.6-1-2.6-3.8zM14 6.4c.7-.8 1.1-1.9 1-3-1 0-2.2.6-2.9 1.4-.6.7-1.2 1.9-1 3 1.1.1 2.2-.5 2.9-1.4z" />
-      ),
-    },
-    {
-      label: "Google Pay",
-      svg: (
-        <g>
-          <path d="M12 11v2.4h3.4c-.1.7-.7 2-2.4 2-1.5 0-2.6-1.2-2.6-2.6s1.2-2.6 2.6-2.6c.8 0 1.4.4 1.7.7l2-2c-.9-.8-2.1-1.4-3.7-1.4-3.1 0-5.6 2.5-5.6 5.6s2.5 5.6 5.6 5.6c3.2 0 5.3-2.3 5.3-5.5 0-.4 0-.7-.1-1H12z" />
-        </g>
-      ),
-    },
-    {
-      label: "Coinbase",
-      svg: <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="2" />,
-    },
-    {
-      label: "SEPA",
-      svg: (
-        <text x="12" y="16" textAnchor="middle" fontSize="9" fontWeight="700">
-          SEPA
-        </text>
-      ),
-    },
-  ]
+/**
+ * Only the methods actually wired into checkout are listed (PAY-01).
+ * Visa / Mastercard / Amex / PayPal / Apple Pay / Google Pay / SEPA were
+ * decorative icons and have been removed until the corresponding payment
+ * providers are integrated and live-tested.
+ */
+function PaymentIcons({
+  stripeCaption,
+  coinbaseCaption,
+}: {
+  stripeCaption: string
+  coinbaseCaption: string
+}) {
   return (
     <div className="flex flex-wrap items-center gap-2">
-      {items.map((it) => (
-        <span
-          key={it.label}
-          role="img"
-          title={it.label}
-          aria-label={it.label}
-          className="inline-flex h-7 min-w-[36px] items-center justify-center rounded border border-line bg-surface px-1.5 text-ink-muted"
-        >
-          <svg viewBox="0 0 24 24" className="h-3.5 w-7" fill="currentColor" aria-hidden="true">
-            {it.svg}
-          </svg>
-        </span>
-      ))}
+      <span
+        role="img"
+        aria-label={stripeCaption}
+        className="inline-flex h-7 items-center gap-1.5 rounded border border-line bg-surface px-2 text-2xs font-medium text-ink-muted"
+      >
+        <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden="true">
+          <path d="M13.5 10.5c0-.8.7-1.1 1.7-1.1 1.5 0 3.5.5 5 1.3V7.2c-1.7-.7-3.3-1-5-1-4 0-6.7 2.1-6.7 5.6 0 5.5 7.5 4.6 7.5 7 0 1-.9 1.3-2 1.3-1.7 0-4-.7-5.7-1.7v3.6c2 .8 3.8 1.2 5.7 1.2 4.2 0 7-2 7-5.6 0-5.9-7.5-4.8-7.5-7.1Z" />
+        </svg>
+        <span>{stripeCaption}</span>
+      </span>
+      <span
+        role="img"
+        aria-label={coinbaseCaption}
+        className="inline-flex h-7 items-center gap-1.5 rounded border border-line bg-surface px-2 text-2xs font-medium text-ink-muted"
+      >
+        <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="2" />
+        </svg>
+        <span>{coinbaseCaption}</span>
+      </span>
     </div>
   )
 }

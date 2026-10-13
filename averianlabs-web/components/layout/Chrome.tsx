@@ -1,5 +1,7 @@
 import { ChromeIslands } from "@/components/layout/ChromeIslands"
 import { Footer } from "@/components/layout/Footer"
+import { CatalogueProvider } from "@/components/product/CatalogueProvider"
+import { getStorefrontCatalogue } from "@/lib/products/catalogue"
 import { Header } from "@/components/layout/Header"
 
 /**
@@ -17,14 +19,15 @@ export async function Chrome({
   locale: string
   children: React.ReactNode
 }) {
+  const products = await getStorefrontCatalogue()
   return (
-    <>
+    <CatalogueProvider products={products}>
       <Header locale={locale} />
       <main id="main" className="min-h-[calc(100vh-64px)]">
         {children}
       </main>
       <Footer locale={locale} />
       <ChromeIslands locale={locale} />
-    </>
+    </CatalogueProvider>
   )
 }

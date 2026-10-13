@@ -8,21 +8,10 @@ import { ThemeToggle } from "@/components/layout/ThemeToggle"
 import { Container } from "@/components/ui/Container"
 import { useCart } from "@/lib/cart/store"
 import { useCompare } from "@/lib/compare/store"
-import { products } from "@/lib/products/data"
+import { useCatalogue } from "@/components/product/CatalogueProvider"
 import { cn } from "@/lib/utils/cn"
 import { useWishlist } from "@/lib/wishlist/store"
-import {
-  Clock,
-  FlaskConical,
-  GitCompare,
-  Globe,
-  Heart,
-  Search,
-  ShieldCheck,
-  ShoppingCart,
-  Truck,
-  User,
-} from "lucide-react"
+import { GitCompare, Heart, Search, ShoppingCart, User } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
 
@@ -31,6 +20,7 @@ interface HeaderProps {
 }
 
 export function Header({ locale }: HeaderProps) {
+  const products = useCatalogue()
   const t = useTranslations("nav")
   const cartCount = useCart((s) => s.count())
   const openCart = useCart((s) => s.open)
@@ -41,12 +31,14 @@ export function Header({ locale }: HeaderProps) {
     window.dispatchEvent(new CustomEvent("averianlabs:open-search"))
   }
 
+  // Primary nav (Plan §6): Products · Batch verification · Quality · Support · Company.
+  // Secondary resources (calculator, blog, community, glossary, documents, partner)
+  // live inside the Mega Menu or the mobile menu — they are reachable but not in
+  // the top-level chrome.
   const navItems = [
-    { href: `/${locale}/shop`, label: t("shop") },
-    { href: `/${locale}/lab-tests`, label: t("labTests") },
-    { href: `/${locale}/peptide-calculator`, label: t("calculator") },
-    { href: `/${locale}/community`, label: t("community") },
-    { href: `/${locale}/blog`, label: t("blog") },
+    { href: `/${locale}/coa`, label: t("coaLibrary") },
+    { href: `/${locale}/quality`, label: t("quality") },
+    { href: `/${locale}/contact`, label: t("support") },
     { href: `/${locale}/about`, label: t("about") },
   ]
 
@@ -59,52 +51,13 @@ export function Header({ locale }: HeaderProps) {
         {t("skipToContent")}
       </a>
 
-      <div className="border-b border-line/60 bg-accent-soft/60">
-        <Container>
-          <div className="flex h-8 items-center justify-center gap-3 text-2xs font-medium text-accent-ink">
-            <span className="hidden items-center gap-1.5 sm:inline-flex">
-              <Globe className="h-3 w-3" aria-hidden />
-              {t("topbar.euDispatched")}
-            </span>
-            <span className="mx-1 hidden sm:inline opacity-30" aria-hidden>
-              ·
-            </span>
-            <span className="hidden items-center gap-1.5 md:inline-flex">
-              <FlaskConical className="h-3 w-3" aria-hidden />
-              {t("topbar.hplcVerified")}
-            </span>
-            <span className="mx-1 hidden md:inline opacity-30" aria-hidden>
-              ·
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Truck className="h-3 w-3" aria-hidden />
-              {t("topbar.freeShipping")}
-            </span>
-            <span className="mx-1 hidden lg:inline opacity-30" aria-hidden>
-              ·
-            </span>
-            <span className="hidden items-center gap-1.5 lg:inline-flex">
-              <ShieldCheck className="h-3 w-3" aria-hidden />
-              {t("topbar.coaEveryBatch")}
-            </span>
-            <span className="mx-1 hidden xl:inline opacity-30" aria-hidden>
-              ·
-            </span>
-            <span className="hidden items-center gap-1.5 xl:inline-flex">
-              <Clock className="h-3 w-3" aria-hidden />
-              {t("topbar.dispatch24h")}
-            </span>
-          </div>
-        </Container>
-      </div>
-
       <Container>
-        <div className="flex h-16 items-center gap-6">
+        <div className="flex h-16 min-w-0 items-center gap-2 xl:gap-4">
           <Logo href={`/${locale}`} size="md" glow showWordmark="responsive" className="h-11" />
 
           <nav className="hidden lg:flex items-center gap-1 text-sm">
             <MegaMenu locale={locale} products={products} />
-            {navItems.slice(1).map((item) => (
+            {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -121,22 +74,21 @@ export function Header({ locale }: HeaderProps) {
             <button
               type="button"
               onClick={openSearch}
-              aria-label={t("search")}
-              className="hidden md:inline-flex h-9 items-center gap-2 rounded-[var(--radius)] border border-line bg-surface px-3 text-sm text-ink-subtle transition-colors hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+              aria-label={`${t("search")}, open command palette`}
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-[var(--radius)] border border-line bg-surface text-sm text-ink-subtle transition-colors hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg xl:w-auto xl:px-3"
             >
               <Search className="h-4 w-4" />
-              <span>{t("search")}</span>
-              <span className="font-mono text-xs">⌘K</span>
+              <span className="hidden xl:inline">{t("search")}</span>
+              <span className="hidden xl:inline font-mono text-xs">⌘K</span>
             </button>
 
-            <LocaleSwitcher currentLocale={locale} />
-
-            <ThemeToggle />
+            <div className="hidden xl:block"><LocaleSwitcher currentLocale={locale} /></div>
+            <div className="hidden xl:block"><ThemeToggle /></div>
 
             <Link
               href={`/${locale}/account`}
               aria-label={t("account")}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+              className="hidden xl:inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
             >
               <User className="h-4 w-4" />
             </Link>
@@ -144,11 +96,11 @@ export function Header({ locale }: HeaderProps) {
             <Link
               href={`/${locale}/compare`}
               aria-label={t("compare")}
-              className="relative inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+              className="relative hidden xl:inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
             >
               <GitCompare className="h-4 w-4" />
               {compareCount > 0 ? (
-                <span className="absolute -right-1 -top-1 inline-flex h-4 min-w-[16px] items-center justify-center rounded-full bg-accent px-1 text-3xs font-semibold text-white">
+                <span className="absolute -right-1 -top-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-accent px-1 text-3xs font-semibold text-white">
                   {compareCount}
                 </span>
               ) : null}
@@ -157,11 +109,11 @@ export function Header({ locale }: HeaderProps) {
             <Link
               href={`/${locale}/wishlist`}
               aria-label={t("wishlist")}
-              className="relative inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+              className="relative hidden xl:inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
             >
               <Heart className="h-4 w-4" />
               {wishlistCount > 0 ? (
-                <span className="absolute -right-1 -top-1 inline-flex h-4 min-w-[16px] items-center justify-center rounded-full bg-accent px-1 text-3xs font-semibold text-white">
+                <span className="absolute -right-1 -top-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-accent px-1 text-3xs font-semibold text-white">
                   {wishlistCount}
                 </span>
               ) : null}
@@ -176,7 +128,7 @@ export function Header({ locale }: HeaderProps) {
               <ShoppingCart className="h-4 w-4" aria-hidden />
               <span className="hidden sm:inline">{t("cart")}</span>
               {cartCount > 0 ? (
-                <span className="inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-accent px-1.5 text-3xs font-semibold text-white">
+                <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-accent px-1.5 text-3xs font-semibold text-white">
                   {cartCount}
                 </span>
               ) : null}

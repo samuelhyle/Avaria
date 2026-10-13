@@ -1,7 +1,7 @@
 "use client"
 
 import { CompareFloatingBar } from "@/components/compare/CompareFloatingBar"
-import { products } from "@/lib/products/data"
+import { useCatalogue } from "@/components/product/CatalogueProvider"
 import dynamic from "next/dynamic"
 
 // Every interactive shell element lives here as a lazy, ssr:false island so
@@ -27,16 +27,13 @@ const CommandPalette = dynamic(
   () => import("@/components/search/CommandPalette").then((m) => m.CommandPalette),
   { ssr: false, loading: () => null },
 )
-const NewsletterModal = dynamic(
-  () => import("@/components/home/NewsletterModal").then((m) => m.NewsletterModal),
-  { ssr: false, loading: () => null },
-)
 const BackToTop = dynamic(() => import("@/components/ui/BackToTop").then((m) => m.BackToTop), {
   ssr: false,
   loading: () => null,
 })
 
 export function ChromeIslands({ locale }: { locale: string }) {
+  const products = useCatalogue()
   return (
     <>
       <AgeGate />
@@ -44,7 +41,6 @@ export function ChromeIslands({ locale }: { locale: string }) {
       <CartDrawer locale={locale} />
       <CartHydration />
       <CommandPalette locale={locale} products={products} />
-      <NewsletterModal />
       <BackToTop />
       <CompareFloatingBar locale={locale} />
     </>

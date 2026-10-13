@@ -151,7 +151,7 @@ export function MegaMenu({ locale, products }: MegaMenuProps) {
                   {products.slice(0, 4).map((p) => {
                     const translation = p.translations?.[locale as Locale] ?? p.defaultTranslation
                     const minVial = p.vials.reduce(
-                      (min, v) => (v.priceCents < min.priceCents ? v : min),
+                      (min, v) => ((v.priceCents ?? 0) < (min.priceCents ?? 0) ? v : min),
                       p.vials[0]!,
                     )
                     return (

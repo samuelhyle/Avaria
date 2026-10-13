@@ -130,6 +130,7 @@ export function MobileMenu({ locale, productsCount }: MobileMenuProps) {
                 <ul className="mt-2 space-y-1">
                   {[
                     { href: `/${locale}/lab-tests`, label: t("labTests") },
+                    { href: `/${locale}/quality`, label: t("quality") },
                     { href: `/${locale}/peptide-calculator`, label: t("calculator") },
                     { href: `/${locale}/blog`, label: t("blog") },
                     { href: `/${locale}/glossary`, label: t("glossary") },
@@ -157,6 +158,7 @@ export function MobileMenu({ locale, productsCount }: MobileMenuProps) {
                 </h3>
                 <ul className="mt-2 space-y-1">
                   {[
+                    { href: `/${locale}/contact`, label: t("support") },
                     { href: `/${locale}/about`, label: t("about") },
                     { href: `/${locale}/partner`, label: t("partner") },
                     { href: `/${locale}/account`, label: t("account") },

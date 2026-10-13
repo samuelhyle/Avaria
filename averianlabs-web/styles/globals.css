@@ -368,6 +368,20 @@
       transform: translateY(-8px);
     }
   }
+
+  /* Tiny fade-in for the hero product card when the focused product
+     changes. duration is short enough that it doesn't compete with the
+     3D canvas's first paint. */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
