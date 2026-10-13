@@ -61,7 +61,11 @@ loadEnvFile(resolve(process.cwd(), ".env.local"))
 const required = z.object({
   DATABASE_URL: z
     .string()
-    .min(1, "DATABASE_URL is required (e.g. postgres://user:pass@host:5432/db)"),
+    .url("DATABASE_URL must be a valid PostgreSQL URL")
+    .refine(
+      (value) => /^postgres(?:ql)?:\/\//.test(value),
+      "DATABASE_URL must use postgres:// or postgresql://",
+    ),
   AUTH_SECRET: z
     .string()
     .min(32, "AUTH_SECRET must be at least 32 characters (use `openssl rand -base64 32`)"),

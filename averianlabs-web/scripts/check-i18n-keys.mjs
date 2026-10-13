@@ -23,7 +23,7 @@
  * as leaves; we only check presence, not content.
  */
 import { readFileSync, readdirSync, statSync } from "node:fs"
-import { resolve, join } from "node:path"
+import { join, resolve } from "node:path"
 
 const argv = process.argv.slice(2)
 const jsonOut = argv.includes("--json")
@@ -100,21 +100,21 @@ const totalMissing = [...missing.values()].reduce((sum, s) => sum + s.size, 0)
 
 if (jsonOut) {
   process.stdout.write(
-    JSON.stringify(
+    `${JSON.stringify(
       {
         locales,
         totalKeys,
         totalMissing,
-        missing: Object.fromEntries(
-          [...missing.entries()].map(([l, s]) => [l, [...s].sort()]),
-        ),
+        missing: Object.fromEntries([...missing.entries()].map(([l, s]) => [l, [...s].sort()])),
       },
       null,
       2,
-    ) + "\n",
+    )}\n`,
   )
 } else {
-  console.log(`[i18n:check] ${locales.length} locales · ${totalKeys} leaf keys · ${totalMissing} missing`)
+  console.log(
+    `[i18n:check] ${locales.length} locales · ${totalKeys} leaf keys · ${totalMissing} missing`,
+  )
   if (totalMissing > 0) {
     for (const [locale, miss] of [...missing.entries()].sort()) {
       console.log(`  ${locale}: ${miss.size} missing`)

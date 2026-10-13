@@ -56,6 +56,20 @@ export const blogPost = defineType({
   type: "document",
   fields: [
     defineField({
+      name: "language",
+      type: "string",
+      initialValue: "en",
+      options: { list: ["en", "fi", "de", "sv", "nl"] },
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: "reviewed",
+      type: "boolean",
+      initialValue: false,
+      description: "Scientific and language review completed for this version.",
+    }),
+
+    defineField({
       name: "slug",
       type: "slug",
       options: { source: "title" },
@@ -95,6 +109,7 @@ export const author = defineType({
   title: "Author",
   type: "document",
   fields: [
+    defineField({ name: "credentialsReviewed", type: "boolean", initialValue: false }),
     defineField({ name: "name", type: "string", validation: (r) => r.required() }),
     defineField({ name: "role", type: "string" }),
     defineField({ name: "bio", type: "text", rows: 3 }),
@@ -107,6 +122,20 @@ export const glossaryTerm = defineType({
   title: "Glossary term",
   type: "document",
   fields: [
+    defineField({
+      name: "language",
+      type: "string",
+      initialValue: "en",
+      options: { list: ["en", "fi", "de", "sv", "nl"] },
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: "reviewed",
+      type: "boolean",
+      initialValue: false,
+      description: "Scientific and language review completed for this version.",
+    }),
+
     defineField({ name: "term", type: "string", validation: (r) => r.required() }),
     defineField({
       name: "slug",

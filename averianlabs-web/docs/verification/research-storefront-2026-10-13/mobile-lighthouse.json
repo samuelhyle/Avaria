@@ -1,0 +1,178 @@
+{
+  "tool": "Lighthouse",
+  "limitations": "One local simulated mobile run per route. TBT is a lab measurement, not field INP. Does not establish production Core Web Vitals.",
+  "results": [
+    {
+      "route": "/en",
+      "fetchedAt": "2026-10-13T14:46:49.237Z",
+      "mode": "mobile-simulated",
+      "beneathAgeGate": true,
+      "consent": "essential",
+      "warnings": [],
+      "scores": {
+        "performance": 0.95,
+        "accessibility": null,
+        "best-practices": 1,
+        "seo": 1
+      },
+      "lcpMs": 2085.4393,
+      "tbtMs": 213.50000000000023,
+      "cls": 0,
+      "fcpMs": 1058.8131,
+      "diagnostics": [
+        {
+          "key": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "value": "Est savings of 56 KiB",
+          "score": 0.5
+        },
+        {
+          "key": "render-blocking-resources",
+          "title": "Eliminate render-blocking resources",
+          "score": 1
+        },
+        {
+          "key": "server-response-time",
+          "title": "Initial server response time was short",
+          "value": "Root document took 30 ms",
+          "score": 1
+        },
+        {
+          "key": "legacy-javascript",
+          "title": "Avoid serving legacy JavaScript to modern browsers",
+          "value": "",
+          "score": 0.5
+        }
+      ]
+    },
+    {
+      "route": "/fi",
+      "fetchedAt": "2026-10-13T14:47:03.917Z",
+      "mode": "mobile-simulated",
+      "beneathAgeGate": true,
+      "consent": "essential",
+      "warnings": [],
+      "scores": {
+        "performance": 0.93,
+        "accessibility": null,
+        "best-practices": 1,
+        "seo": 1
+      },
+      "lcpMs": 1080.2178,
+      "tbtMs": 315.5000000000001,
+      "cls": 0,
+      "fcpMs": 994.1452,
+      "diagnostics": [
+        {
+          "key": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "value": "",
+          "score": 1
+        },
+        {
+          "key": "render-blocking-resources",
+          "title": "Eliminate render-blocking resources",
+          "score": 1
+        },
+        {
+          "key": "server-response-time",
+          "title": "Initial server response time was short",
+          "value": "Root document took 30 ms",
+          "score": 1
+        },
+        {
+          "key": "legacy-javascript",
+          "title": "Avoid serving legacy JavaScript to modern browsers",
+          "value": "",
+          "score": 0.5
+        }
+      ]
+    },
+    {
+      "route": "/en/shop",
+      "fetchedAt": "2026-10-13T14:47:17.553Z",
+      "mode": "mobile-simulated",
+      "beneathAgeGate": true,
+      "consent": "essential",
+      "warnings": [],
+      "scores": {
+        "performance": 0.96,
+        "accessibility": null,
+        "best-practices": 1,
+        "seo": 1
+      },
+      "lcpMs": 1229.6153608886718,
+      "tbtMs": 221.9999999999999,
+      "cls": 0,
+      "fcpMs": 867.16585,
+      "diagnostics": [
+        {
+          "key": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "value": "",
+          "score": 1
+        },
+        {
+          "key": "render-blocking-resources",
+          "title": "Eliminate render-blocking resources",
+          "score": 1
+        },
+        {
+          "key": "server-response-time",
+          "title": "Initial server response time was short",
+          "value": "Root document took 20 ms",
+          "score": 1
+        },
+        {
+          "key": "legacy-javascript",
+          "title": "Avoid serving legacy JavaScript to modern browsers",
+          "value": "",
+          "score": 0.5
+        }
+      ]
+    },
+    {
+      "route": "/fi/shop",
+      "fetchedAt": "2026-10-13T14:47:48.158Z",
+      "mode": "mobile-simulated",
+      "beneathAgeGate": true,
+      "consent": "essential",
+      "warnings": [],
+      "scores": {
+        "performance": 0.88,
+        "accessibility": null,
+        "best-practices": 1,
+        "seo": 1
+      },
+      "lcpMs": 959.26315,
+      "tbtMs": 493,
+      "cls": 0,
+      "fcpMs": 894.26315,
+      "diagnostics": [
+        {
+          "key": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "value": "",
+          "score": 1
+        },
+        {
+          "key": "render-blocking-resources",
+          "title": "Eliminate render-blocking resources",
+          "score": 1
+        },
+        {
+          "key": "server-response-time",
+          "title": "Initial server response time was short",
+          "value": "Root document took 50 ms",
+          "score": 1
+        },
+        {
+          "key": "legacy-javascript",
+          "title": "Avoid serving legacy JavaScript to modern browsers",
+          "value": "",
+          "score": 0.5
+        }
+      ]
+    }
+  ]
+}

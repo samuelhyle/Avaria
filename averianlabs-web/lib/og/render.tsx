@@ -15,7 +15,12 @@ const INK = "#0a1834"
 const INK_MUTED = "#64748b"
 const BORDER = "#e2e8f0"
 
+export function ogLocale(request: Request): "en" | "fi" {
+  return new URL(request.url).searchParams.get("locale") === "fi" ? "fi" : "en"
+}
+
 export interface OgBase {
+  locale?: "en" | "fi"
   kind: string // "Thread" | "Glossary" | "Plan" | "Document"
   title: string
   subtitle?: string
@@ -25,7 +30,7 @@ export interface OgBase {
 }
 
 export async function renderOg(input: OgBase): Promise<ImageResponse> {
-  const { kind, title, subtitle, badge, meta, url = "averianlabs.eu" } = input
+  const { kind, title, subtitle, badge, meta, locale = "en", url = "averianlabs.eu" } = input
   return new ImageResponse(
     <div
       style={{
@@ -143,7 +148,9 @@ export async function renderOg(input: OgBase): Promise<ImageResponse> {
           <div style={{ fontSize: 16, color: INK_MUTED }}>{meta}</div>
         ) : (
           <div style={{ fontSize: 16, color: INK_MUTED }}>
-            Precision peptides for serious research.
+            {locale === "fi"
+              ? "Materiaaleja laboratoriotutkimukseen."
+              : "Materials for laboratory research."}
           </div>
         )}
         <div
@@ -155,7 +162,7 @@ export async function renderOg(input: OgBase): Promise<ImageResponse> {
             color: INK_MUTED,
           }}
         >
-          Research use only
+          {locale === "fi" ? "Vain laboratoriotutkimukseen" : "For laboratory research only"}
         </div>
       </div>
     </div>,

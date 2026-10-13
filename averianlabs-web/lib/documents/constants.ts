@@ -18,11 +18,11 @@ export const DOCUMENT_TYPE_LABELS: Record<DocumentType, string> = {
 }
 
 export const DOCUMENT_TYPE_DESCRIPTIONS: Record<DocumentType, string> = {
-  coa: "Verifies purity, identity, endotoxin, mass-spec confirmation for the specific batch.",
+  coa: "Reports the tests and results stated for a specific batch; scope depends on the original report.",
   sds: "Hazard identification, handling, storage, and disposal information.",
   hplc: "Raw chromatogram showing the purity profile of the batch.",
   method: "Detailed analytical method used to characterise the product.",
-  nmr: "Nuclear magnetic resonance spectrum confirming molecular structure.",
+  nmr: "Nuclear magnetic resonance spectrum with the reported interpretation and applicable sample details.",
   spec: "Product specification sheet — appearance, purity, storage, handling.",
   msds: "Legacy material safety data sheet (now consolidated under SDS).",
 }

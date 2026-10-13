@@ -1,4 +1,10 @@
-import { productTranslations, products, researchPlanItems, researchPlans } from "@/db/schema"
+import {
+  activityEvents,
+  productTranslations,
+  products,
+  researchPlanItems,
+  researchPlans,
+} from "@/db/schema"
 import { emitActivity } from "@/lib/activity/emit"
 import { requireMember } from "@/lib/community/auth"
 import { db } from "@/lib/db"
@@ -77,7 +83,10 @@ function toPlanView(plan: PlanRow, items: PlanItemView[]): PlanView {
 }
 
 /** Loads items for many plans in one query (previously one query per plan). */
-async function loadItemsByPlan(planIds: string[]): Promise<Map<string, PlanItemView[]>> {
+async function loadItemsByPlan(
+  planIds: string[],
+  locale = "en",
+): Promise<Map<string, PlanItemView[]>> {
   const grouped = new Map<string, PlanItemView[]>()
   if (planIds.length === 0) return grouped
 
@@ -96,7 +105,7 @@ async function loadItemsByPlan(planIds: string[]): Promise<Map<string, PlanItemV
     .innerJoin(products, eq(researchPlanItems.productId, products.id))
     .leftJoin(
       productTranslations,
-      and(eq(productTranslations.productId, products.id), eq(productTranslations.locale, "en")),
+      and(eq(productTranslations.productId, products.id), eq(productTranslations.locale, locale)),
     )
     .where(inArray(researchPlanItems.planId, planIds))
     .orderBy(asc(researchPlanItems.sortOrder))
@@ -109,7 +118,7 @@ async function loadItemsByPlan(planIds: string[]): Promise<Map<string, PlanItemV
   return grouped
 }
 
-export async function listPlansForOwner(ownerId: string): Promise<PlanView[]> {
+export async function listPlansForOwner(ownerId: string, locale = "en"): Promise<PlanView[]> {
   const rows = await db
     .select()
     .from(researchPlans)
@@ -118,31 +127,40 @@ export async function listPlansForOwner(ownerId: string): Promise<PlanView[]> {
 
   if (rows.length === 0) return []
 
-  const itemsByPlan = await loadItemsByPlan(rows.map((p) => p.id))
+  const itemsByPlan = await loadItemsByPlan(
+    rows.map((p) => p.id),
+    locale,
+  )
   return rows.map((p) => toPlanView(p, itemsByPlan.get(p.id) ?? []))
 }
 
-export async function getPlanForOwner(planId: string, ownerId: string): Promise<PlanView | null> {
+export async function getPlanForOwner(
+  planId: string,
+  ownerId: string,
+  locale = "en",
+): Promise<PlanView | null> {
   const [plan] = await db
     .select()
     .from(researchPlans)
     .where(and(eq(researchPlans.id, planId), eq(researchPlans.ownerId, ownerId)))
     .limit(1)
   if (!plan) return null
-  const items = await loadItemsByPlan([plan.id])
+  const items = await loadItemsByPlan([plan.id], locale)
   return toPlanView(plan, items.get(plan.id) ?? [])
 }
 
-export const getPlanByShareSlug = cache(async (slug: string): Promise<PlanView | null> => {
-  const [plan] = await db
-    .select()
-    .from(researchPlans)
-    .where(and(eq(researchPlans.shareSlug, slug), eq(researchPlans.isPublic, true)))
-    .limit(1)
-  if (!plan) return null
-  const items = await loadItemsByPlan([plan.id])
-  return toPlanView(plan, items.get(plan.id) ?? [])
-})
+export const getPlanByShareSlug = cache(
+  async (slug: string, locale = "en"): Promise<PlanView | null> => {
+    const [plan] = await db
+      .select()
+      .from(researchPlans)
+      .where(and(eq(researchPlans.shareSlug, slug), eq(researchPlans.isPublic, true)))
+      .limit(1)
+    if (!plan) return null
+    const items = await loadItemsByPlan([plan.id], locale)
+    return toPlanView(plan, items.get(plan.id) ?? [])
+  },
+)
 
 export interface CreatePlanInput {
   title: string
@@ -207,7 +225,12 @@ export async function deletePlan(
     .limit(1)
   if (!existing) return { ok: false, reason: "Plan not found." }
   if (existing.ownerId !== member.id) return { ok: false, reason: "Not your plan." }
-  await db.delete(researchPlans).where(eq(researchPlans.id, planId))
+  await db.transaction(async (tx) => {
+    await tx
+      .delete(activityEvents)
+      .where(and(eq(activityEvents.targetType, "plan"), eq(activityEvents.targetId, planId)))
+    await tx.delete(researchPlans).where(eq(researchPlans.id, planId))
+  })
   return { ok: true }
 }
 
@@ -309,10 +332,15 @@ export async function sharePlan(
     })
   } else {
     shareSlug = null
-    await db
-      .update(researchPlans)
-      .set({ isPublic: false, shareSlug: null, updatedAt: new Date() })
-      .where(eq(researchPlans.id, planId))
+    await db.transaction(async (tx) => {
+      await tx
+        .update(researchPlans)
+        .set({ isPublic: false, shareSlug: null, updatedAt: new Date() })
+        .where(eq(researchPlans.id, planId))
+      await tx
+        .delete(activityEvents)
+        .where(and(eq(activityEvents.targetType, "plan"), eq(activityEvents.targetId, planId)))
+    })
   }
   return { ok: true, shareSlug }
 }
