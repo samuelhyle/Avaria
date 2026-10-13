@@ -27,16 +27,44 @@ export interface ChatWidgetProps {
 }
 
 const AGE_COOKIE = "averianlabs-age-confirmed"
+const CONSENT_KEY = "averianlabs-cookie-consent"
 
 function isAgeConfirmed(): boolean {
   if (typeof document === "undefined") return false
   return document.cookie.split("; ").some((c) => c.startsWith(`${AGE_COOKIE}=`))
 }
 
+/**
+ * Has the user made a cookie-consent choice? The chat widget only mounts
+ * its floating bubble once a choice has been recorded — otherwise the
+ * bubble would render on top of the cookie banner's primary buttons,
+ * and the chat session itself should not start until the user has
+ * acknowledged the consent surface.
+ */
+function readConsent(): "all" | "essential" | null {
+  if (typeof window === "undefined") return null
+  try {
+    const v = window.localStorage.getItem(CONSENT_KEY)
+    if (v === "all" || v === "essential") return v
+  } catch {
+    /* localStorage blocked — fall through */
+  }
+  return null
+}
+
 export function ChatWidget({ locale, demoMode = false }: ChatWidgetProps) {
   const t = useTranslations("averia")
   const [open, setOpen] = useState(false)
   const [unread, setUnread] = useState(false)
+  const [consent, setConsent] = useState<"all" | "essential" | null>(null)
+
+  useEffect(() => {
+    setConsent(readConsent())
+    const onConsent = () => setConsent(readConsent())
+    window.addEventListener("cookie-consent", onConsent)
+    return () => window.removeEventListener("cookie-consent", onConsent)
+  }, [])
+
   const cart = useCart((s) => s.items)
   const cartCount = useCart((s) => s.count())
   const context = usePageContext({ itemCount: cartCount })
@@ -175,7 +203,7 @@ export function ChatWidget({ locale, demoMode = false }: ChatWidgetProps) {
   return (
     <>
       <AnimatePresence>
-        {!open ? <ChatBubble unread={unread} onOpen={handleOpen} /> : null}
+        {!open && consent ? <ChatBubble unread={unread} onOpen={handleOpen} /> : null}
       </AnimatePresence>
 
       {/* Only prompt for memory consent once the researcher actually opens

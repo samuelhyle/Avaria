@@ -53,7 +53,7 @@ export function Hero3DProductChips({
       <div
         role="group"
         aria-label={t("heroChipsLabel")}
-        className="flex w-full snap-x snap-mandatory gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        className="flex w-full snap-x snap-mandatory gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0,black_24px,black_calc(100%-24px),transparent_100%)]"
       >
         {products.map((p) => {
           const isFocused = (focusedSlug ?? internal) === p.slug
@@ -67,7 +67,7 @@ export function Hero3DProductChips({
               type="button"
               onClick={() => handleClick(p.slug)}
               className={cn(
-                "group relative inline-flex shrink-0 snap-start items-center gap-2 rounded-full border bg-surface px-3.5 py-1.5 text-left text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg active:scale-[0.97]",
+                "group relative inline-flex shrink-0 snap-start items-center gap-1.5 rounded-full border bg-surface px-3 py-1 text-left text-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg active:scale-[0.97] sm:gap-2 sm:px-3.5 sm:py-1.5 sm:text-sm",
                 isFocused
                   ? "border-accent bg-accent-soft text-accent-ink shadow-sm"
                   : "border-line text-ink hover:border-accent/40 hover:bg-accent-soft/40",
@@ -75,12 +75,12 @@ export function Hero3DProductChips({
             >
               <span
                 aria-hidden="true"
-                className="h-2.5 w-2.5 shrink-0 rounded-full"
+                className="h-2 w-2 shrink-0 rounded-full sm:h-2.5 sm:w-2.5"
                 style={{ background: `hsl(${p.hue} 60% 50%)` }}
               />
               <span className="font-medium">{translation.name}</span>
               {minVial ? (
-                <span className="font-mono text-3xs text-ink-subtle">
+                <span className="hidden font-mono text-3xs text-ink-subtle sm:inline">
                   · {minVial.sizeValue}
                   {minVial.sizeUnit}
                 </span>

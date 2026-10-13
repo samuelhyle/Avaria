@@ -1,7 +1,7 @@
 "use client"
 
 import type { Locale, Product } from "@/lib/products/types"
-import { formatCurrency } from "@/lib/utils/format"
+import { formatCurrency, formatSize, formatPercent } from "@/lib/utils/format"
 import { ArrowUpRight, FlaskConical } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
@@ -22,6 +22,7 @@ export interface Hero3DProductCardProps {
  */
 export function Hero3DProductCard({ product, locale }: Hero3DProductCardProps) {
   const t = useTranslations("home")
+  const r = useTranslations("research")
   const translation = product.translations?.[locale as Locale] ?? product.defaultTranslation
   const minVial = product.vials.length
     ? product.vials.reduce((min, v) => (v.priceCents < min.priceCents ? v : min), product.vials[0]!)
@@ -31,10 +32,12 @@ export function Hero3DProductCard({ product, locale }: Hero3DProductCardProps) {
     <div
       role="group"
       aria-label={translation.name}
-      className="absolute right-4 top-1/2 z-10 w-[280px] -translate-y-1/2 animate-[fadeIn_220ms_ease-out] sm:right-6 lg:right-8"
+      className="relative z-10 mx-auto mt-3 w-[calc(100%-1.5rem)] max-w-[280px] animate-[fadeIn_220ms_ease-out] sm:absolute sm:right-6 sm:top-1/2 sm:z-10 sm:mx-0 sm:mt-0 sm:w-[280px] sm:-translate-y-1/2 lg:right-8"
     >
       <div className="relative overflow-hidden rounded-[var(--radius-lg)] border border-line bg-surface/95 shadow-2xl backdrop-blur-md">
-        {/* Notch on the left edge — visually connects the card to the canvas. */}
+        {/* Notch on the left edge — visually connects the card to the canvas
+            when the card is overlaid on the right side (sm+). Hidden on
+            mobile because the card is stacked below the canvas there. */}
         <span
           aria-hidden="true"
           className="absolute left-0 top-1/2 hidden h-12 w-1 -translate-y-1/2 rounded-r-full bg-accent sm:block"
@@ -66,7 +69,7 @@ export function Hero3DProductCard({ product, locale }: Hero3DProductCardProps) {
             <dt className="text-ink-subtle">HPLC</dt>
             <dd className="text-right font-mono text-ink">
               {product.latestBatch && product.latestBatch.hplcPurity > 0
-                ? `${product.latestBatch.hplcPurity.toFixed(1)}%`
+                ? formatPercent(product.latestBatch.hplcPurity, locale)
                 : "—"}
             </dd>
             <dt className="text-ink-subtle">{t("heroFrom")}</dt>
@@ -83,7 +86,7 @@ export function Hero3DProductCard({ product, locale }: Hero3DProductCardProps) {
               {t("heroFrom")}
             </span>
             <span className="font-display text-2xl font-semibold tabular-nums text-ink">
-              {minVial ? formatCurrency(minVial.priceCents, "EUR", locale) : "—"}
+              {minVial?.purchaseMode === "direct" ? formatCurrency(minVial.priceCents, "EUR", locale) : r("quote")}
             </span>
           </div>
           <Link

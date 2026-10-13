@@ -24,7 +24,7 @@ export async function BrandBlock({ locale }: { locale: string }) {
         </p>
       </div>
 
-      <h1 className="font-display text-5xl font-semibold tracking-tight text-ink text-balance sm:text-6xl lg:text-7xl">
+      <h1 className="font-display text-[2.5rem] font-semibold leading-[1.05] tracking-tight text-ink text-balance sm:text-6xl lg:text-7xl">
         {t("heroTitle")}
       </h1>
 
