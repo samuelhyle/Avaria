@@ -103,6 +103,27 @@ const config: NextConfig = isDemoBuild
       // clobber a running dev server's `.next` cache.
       distDir: process.env.NEXT_DIST_DIR ?? ".next",
       outputFileTracingRoot: process.cwd(),
+      // Netlify functions run on Linux without a GPU. Keep Linux CPU bindings
+      // and shared library; shipping every ONNX platform/CUDA library exceeds
+      // the function upload limit. Other deployment targets retain their traces.
+      ...(process.env.NETLIFY
+        ? {
+            outputFileTracingExcludes: {
+              "/*": [
+                "./node_modules/**/onnxruntime-node/bin/napi-v*/darwin/**",
+                "./node_modules/**/onnxruntime-node/bin/napi-v*/win32/**",
+                "./node_modules/**/onnxruntime-node/bin/napi-v*/linux/*/libonnxruntime_providers_cuda.so",
+                "./node_modules/**/onnxruntime-node/bin/napi-v*/linux/*/libonnxruntime_providers_tensorrt.so",
+              ],
+            },
+            outputFileTracingIncludes: {
+              "/api/ai/*": [
+                "./node_modules/**/onnxruntime-node/bin/napi-v*/linux/*/onnxruntime_binding.node",
+                "./node_modules/**/onnxruntime-node/bin/napi-v*/linux/*/libonnxruntime.so.1",
+              ],
+            },
+          }
+        : {}),
       experimental: {
         serverActions: { bodySizeLimit: "2mb" },
       },
