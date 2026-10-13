@@ -1,10 +1,10 @@
 {
   "meta": {
-    "title": "AverianLabs — Precisiepeptiden voor serieus onderzoek",
-    "description": "Vanuit de EU verzonden, HPLC-geverifieerde onderzoekspeptiden. COA per batch.",
+    "title": "AverianLabs — Laboratory research materials",
+    "description": "A catalogue of research materials and batch documents for laboratory research.",
     "keywords": "onderzoekspeptiden, BPC-157, semaglutide, tirzepatide, TB-500, GHK-Cu, EU, Finland, COA, HPLC",
     "home": {
-      "title": "AverianLabs — Precisiepeptiden voor onderzoek",
+      "title": "AverianLabs — Laboratory research materials",
       "description": "Vanuit de EU verzonden, HPLC-geverifieerde onderzoekspeptiden. COA bij elke batch."
     },
     "about": {
@@ -13,11 +13,11 @@
     },
     "contact": {
       "title": "Contact",
-      "description": "Neem contact op met het AverianLabs-labteam — hoofdkantoor Helsinki, onderzoeksondersteuning en B2B-aanvragen."
+      "description": "Contact AverianLabs about product documents, your order or purchasing for an organisation."
     },
     "faq": {
       "title": "Veelgestelde vragen",
-      "description": "Antwoorden over onderzoekslicenties, verzending, COA's, betaling, B2B-prijzen en landen."
+      "description": "Answers about laboratory use, batch documents, checkout and supported delivery destinations."
     },
     "labTests": {
       "title": "Labtests — HPLC, endotoxine, massaspectrometrie",
@@ -28,12 +28,12 @@
       "description": "Openbaar register van elke batch — HPLC-zuiverheid, endotoxine, massaspectrometrie en laboratorium."
     },
     "compare": {
-      "title": "Peptiden vergelijken",
-      "description": "Vergelijking van zuiverheid, flesformaten, sequentie, molecuulgewicht en opslag."
+      "title": "Compare materials",
+      "description": "Compare documented product specifications, sizes and current availability."
     },
     "calculator": {
       "title": "Reconstitutiecalculator",
-      "description": "Bereken volume, werkconcentratie en resterende doses voor elke peptide-flacon."
+      "description": "Laboratory concentration calculation only. This tool does not determine a biological activity or an administration dose."
     },
     "quality": {
       "title": "Kwaliteitsborging",
@@ -41,35 +41,35 @@
     },
     "partner": {
       "title": "Partnerprogramma",
-      "description": "Institutionele prijzen tot 35% korting, NET-14-facturering, accountmanager, white-label opties."
+      "description": "Tell us about your organisation, required quantities and documentation. Our team will review the request and discuss available purchasing arrangements."
     },
     "rewards": {
       "title": "AverianLabs Rewards",
-      "description": "Verdien punten bij elke bestelling, ontgrendel niveaus en verwijs een lab voor €15 korting."
+      "description": "Rewards and referral discounts are not currently available at checkout. Contact us to discuss purchasing for your organisation."
     },
     "wishlist": {
       "title": "Verlanglijst",
-      "description": "Je opgeslagen onderzoekspeptiden — volg voorraad en batch-updates."
+      "description": "Browse the products saved in your browser and check current availability."
     },
     "shippingReturns": {
       "title": "Verzending & retouren",
-      "description": "Vervoerders (Posti, DHL, DPD), 24-uurs verzending, koelketen en retourbeleid."
+      "description": "Direct checkout currently supports Finland. Contact us for other destinations and purchasing arrangements."
     },
     "legalCookies": {
       "title": "Cookiebeleid",
-      "description": "Essentiële vs analysecookies (PostHog, Plausible). Toestemming intrekken."
+      "description": "Essential browser storage supports sign-in, your cart, checkout progress, saved products and your consent choices. Optional analytics require your consent."
     },
     "legalPrivacy": {
       "title": "Privacybeleid",
-      "description": "AVG-conform privacybeleid: gegevensverzameling, rechtsgrondslag, subverwerkers, bewaring, rechten."
+      "description": "This notice describes the storefront’s personal data processing. For questions about your information, contact the seller using the details below."
     },
     "legalResearchDisclaimer": {
-      "title": "Onderzoeksdisclaimer",
-      "description": "Licentievoorwaarden alleen voor onderzoek: geen medische claims, koperverantwoordelijkheid, naleving."
+      "title": "Research use restrictions",
+      "description": "Catalogue information supports the evaluation and purchase of laboratory materials."
     },
     "legalTerms": {
       "title": "Servicevoorwaarden",
-      "description": "Geschiktheid, onderzoekslicentie, prijzen & btw, verzending, retouren, aansprakelijkheidsbeperking, Fins recht."
+      "description": "These purchasing terms describe the currently supported storefront. Obtain the seller’s registered details and approved commercial terms before placing an order."
     }
   },
   "research": {
@@ -83,7 +83,7 @@
     "download": "Open original document",
     "product": "Product",
     "batch": "Batch ID",
-    "lab": "Testing laboratory",
+    "lab": "Laboratory",
     "published": "Published",
     "status": "Status",
     "documentAvailable": "Document available",
@@ -190,11 +190,11 @@
     "processingPayment": "Payment is processing",
     "processingPaymentBody": "Your payment has not yet been confirmed. This page will update after the payment provider confirms its status.",
     "paidTitle": "Payment confirmed",
-    "paidBody": "Your payment has been confirmed. Your order receipt is queued for email delivery.",
+    "paidBody": "Your payment has been confirmed. The order details are shown below.",
     "failedTitle": "Payment not completed",
     "failedBody": "This order has not been paid. Return to your cart to try again.",
     "reviewTitle": "Payment requires review",
-    "reviewBody": "A payment was received after the order could be fulfilled automatically. Contact support with your order number; do not submit another payment.",
+    "reviewBody": "A payment was received, but the order could not be fulfilled automatically. Contact support with your order number; do not submit another payment.",
     "notFound": "Order not found",
     "notFoundBody": "Open the secure order link from your checkout or email.",
     "orderNumber": "Order number",
@@ -238,7 +238,157 @@
       "cosmetic": "Cosmetic research",
       "blend": "Blends",
       "supplies": "Laboratory supplies"
-    }
+    },
+    "resumePayment": "Resume payment",
+    "refundedTitle": "Payment refunded",
+    "refundedBody": "The payment for this order has been refunded. Contact support if you need further information.",
+    "businessId": "Business ID",
+    "legalPending": "Seller registration details are awaiting confirmation. Contact us before placing an order.",
+    "documentsTitle": "Published documents",
+    "documentsIntro": "Find available certificates of analysis, safety data sheets, analytical reports and product specifications.",
+    "version": "Version",
+    "fileUnavailable": "The original file is currently unavailable. Contact us for the document.",
+    "pdfFailed": "The PDF preview could not be loaded. Open the original document below.",
+    "pdfLoading": "Loading PDF…",
+    "previous": "Previous",
+    "next": "Next",
+    "partnerTitle": "Institutional purchasing",
+    "partnerIntro": "Tell us about your organisation, required quantities and documentation. Our team will review the request and discuss available purchasing arrangements.",
+    "partnerApply": "Submit an enquiry",
+    "rewardsTitle": "Customer programmes",
+    "rewardsIntro": "Rewards and referral discounts are not currently available at checkout. Contact us to discuss purchasing for your organisation.",
+    "articlesEmpty": "No reviewed articles are published in this language yet.",
+    "readMinutes": "{count} min read",
+    "privacyTitle": "Privacy notice",
+    "privacyIntro": "This notice describes the storefront’s personal data processing. For questions about your information, contact the seller using the details below.",
+    "privacyDataTitle": "Information and purposes",
+    "privacyDataBody": "Accounts store your email, name and a password hash or a connected sign-in identity. Orders store contact details, addresses, purchased items and payment references. Quote requests and support messages store the details you submit. These records support purchasing, account access and customer service.",
+    "privacyAnalyticsTitle": "Optional analytics and the assistant",
+    "privacyAnalyticsBody": "Optional analytics load only after you accept them. You can withdraw consent using Cookie settings in the footer. Private account and checkout pages are excluded from analytics. If you use the assistant, your submitted messages are processed by the configured AI provider; saved conversation memory requires its separate consent setting.",
+    "privacyBasisTitle": "Legal bases and service providers",
+    "privacyBasisBody": "Order processing relies on performance of a contract and accounting records on applicable legal obligations. Optional analytics and saved assistant memory rely on consent. Security and support processing must be documented under the appropriate legal basis. Configured payment, email, hosting, storage and AI providers process the data needed to provide their services. The seller must make its approved provider list and transfer safeguards available before accepting orders.",
+    "privacyRightsTitle": "Your rights",
+    "privacyRightsBody": "You may request access, correction, erasure, restriction or portability of your personal data and object where applicable. Account settings provide an export and deletion request. You may also contact Finland’s Office of the Data Protection Ombudsman (tietosuoja.fi). The EU General Data Protection Regulation and Finland’s Data Protection Act (1050/2018) apply.",
+    "privacyRetentionTitle": "Retention and deletion",
+    "privacyRetentionBody": "Deleting an account disables access and removes sign-in credentials and private account content immediately. This cannot be undone. Purchase records and other records subject to legal retention are retained separately. The seller must approve and publish the retention periods for accounting, support, logs, backups and external providers before launch.",
+    "cookiesTitle": "Cookies and browser storage",
+    "cookiesIntro": "Essential browser storage supports sign-in, your cart, checkout progress, saved products and your consent choices. Optional analytics require your consent.",
+    "cookiesEssentialTitle": "Essential storage",
+    "cookiesEssentialBody": "The age confirmation and cookie choice are stored for up to one year. The sign-in session lasts up to 30 days. Cart, checkout progress, saved products and comparisons use browser local storage until you clear them. Payment providers may use storage required to process your payment.",
+    "cookiesAnalyticsTitle": "Optional analytics",
+    "cookiesAnalyticsBody": "When configured, PostHog and Vercel Analytics or Speed Insights load after you accept optional analytics. PostHog session recording and automatic interaction capture are disabled. Analytics exclude private account and checkout routes, and page URLs omit query parameters.",
+    "cookiesChoiceTitle": "Change your choice",
+    "cookiesChoiceBody": "Use Cookie settings in the footer to reopen the choice. Selecting essential only stops optional analytics collection. You can also clear saved cart, checkout and consent information through your browser settings.",
+    "termsTitle": "Terms of sale",
+    "termsIntro": "These purchasing terms describe the currently supported storefront. Obtain the seller’s registered details and approved commercial terms before placing an order.",
+    "termsUseTitle": "Laboratory research",
+    "termsUseBody": "Materials are intended for laboratory research. They are not supplied for human or veterinary administration. Review the product-specific specification, handling information and original batch reports before deciding whether a material is suitable for your research.",
+    "termsPriceTitle": "Prices and payment",
+    "termsPriceBody": "Direct checkout currently supports delivery to Finland in euros. Displayed product and delivery prices include Finnish VAT at 25.5%. Checkout shows the final total before payment. Entering a VAT ID does not enable reverse charge or remove VAT. Other destinations and tax arrangements require a separate quote.",
+    "termsAvailabilityTitle": "Availability and order status",
+    "termsAvailabilityBody": "Direct purchase requires an approved product specification, an assigned released batch, a published report and available stock. Stock is reserved temporarily during payment. An order is shown as paid only after the payment provider confirms it. A late payment that cannot be fulfilled automatically is held for review.",
+    "termsDeliveryTitle": "Delivery and returns",
+    "termsDeliveryBody": "Available delivery methods, charges and estimates appear at checkout. Dispatch timing, handling conditions and return arrangements must be confirmed for the order. Contact support with the order number to report damage, an incorrect item or a return request. Statutory rights remain unaffected.",
+    "disclaimerTitle": "Laboratory research information",
+    "disclaimerIntro": "Catalogue information supports the evaluation and purchase of laboratory materials.",
+    "disclaimerUseTitle": "Intended use",
+    "disclaimerUseBody": "The catalogue and concentration calculator do not provide medical advice, treatment recommendations or administration instructions. Product documentation does not establish suitability for human or veterinary use.",
+    "disclaimerEvidenceTitle": "Evaluate the evidence",
+    "disclaimerEvidenceBody": "Chromatographic purity, identity and material content are different measurements. Assess the original test method, result, units and batch identity. A document link does not imply that every test has passed or that every product has been tested in the same way.",
+    "shippingTitle": "Shipping and returns",
+    "shippingIntro": "Direct checkout currently supports Finland. Contact us for other destinations and purchasing arrangements.",
+    "shippingRatesTitle": "Delivery charges",
+    "shippingRatesBody": "Checkout calculates delivery using the selected method. Delivery is free when the product subtotal is at least €150. Displayed delivery prices include VAT. Estimates depend on the carrier and destination.",
+    "shippingHandlingTitle": "Handling and dispatch",
+    "shippingHandlingBody": "Use the product-specific handling documents for storage requirements. Contact support if your work requires special transport conditions or a confirmed dispatch date.",
+    "shippingReturnsTitle": "Support and return requests",
+    "shippingReturnsBody": "Contact support with your order number before sending an item back. Include the item, batch and the reason for your request. Report damage or a mismatch with the order as soon as you can.",
+    "deletedTitle": "Account access removed",
+    "signInConfirm": "Sign in to confirm account deletion.",
+    "home": "Home",
+    "cancel": "Cancel",
+    "confirmed": "Confirmed",
+    "requestFailed": "Your request could not be completed. Please try again.",
+    "cartUpdated": "Your cart has been updated with the current product information.",
+    "quoteChanged": "Prices or availability changed. Review your cart before trying again.",
+    "orderExpired": "The payment reservation expired. Review your cart to start a new checkout.",
+    "contactPersisted": "Your message has been recorded. Our team will contact you by email.",
+    "accountNoOrders": "No orders yet.",
+    "accountNoOrdersBody": "Your orders will appear here after checkout.",
+    "paid": "Paid",
+    "pending": "Pending",
+    "failed": "Failed",
+    "expired": "Expired",
+    "payment_review": "Payment requires review",
+    "refunded": "Refunded",
+    "shipped": "Shipped",
+    "delivered": "Delivered",
+    "orders": "Orders",
+    "orderDate": "Order date",
+    "docLabels": {
+      "coa": "Certificate of Analysis (COA)",
+      "sds": "Safety data sheet (SDS)",
+      "hplc": "HPLC report",
+      "method": "Method statement",
+      "nmr": "NMR report",
+      "spec": "Product specification",
+      "msds": "Material safety data sheet (MSDS)"
+    },
+    "previewDocument": "Show PDF preview",
+    "glossaryCount": "{count, plural, one {# term} other {# terms}}",
+    "glossaryCategories": {
+      "analytical": "Analytical methods",
+      "chemistry": "Chemistry",
+      "compliance": "Compliance",
+      "logistics": "Logistics",
+      "product": "Products",
+      "regulatory": "Regulation"
+    },
+    "cardProcessing": "Card details are entered into the payment provider’s form. Order status updates after the provider confirms the payment.",
+    "contactTitle": "Contact us",
+    "contactIntro": "Ask about products, documentation, availability or an existing order. Include the SKU or order number when available.",
+    "savedIntro": "Save products to revisit their specifications and availability.",
+    "plansIntro": "Organise product references for your research purchasing. Sharing a plan makes its contents visible through the link.",
+    "itemsCount": "{count} items",
+    "publicPlan": "Public",
+    "privatePlan": "Private",
+    "untitledPlan": "Untitled plan",
+    "notifications": "Notifications",
+    "notificationsIntro": "Replies, reactions and shared plans.",
+    "notificationsEmpty": "No unread notifications.",
+    "unread": "{count} unread",
+    "notificationPreferences": "Notification preferences",
+    "notificationPreferencesIntro": "Choose what appears in your inbox.",
+    "edited": "Edited",
+    "locked": "Locked",
+    "moderation": "Moderation",
+    "moderationBody": "Posts are checked against the community rules. Flagged content may be held for moderator review. Community posts do not replace original evidence or professional advice.",
+    "signIn": "Sign in",
+    "errorTitle": "Something went wrong",
+    "errorBody": "Please try again or return to the home page.",
+    "retry": "Try again",
+    "clearAll": "Clear all",
+    "fullDetails": "Full product details",
+    "minPurity": "Minimum HPLC purity",
+    "allResearch": "All research articles",
+    "signInRequired": "Sign in to continue.",
+    "notificationsTitle": "Notifications",
+    "inbox": "Inbox",
+    "notificationCount": "{count} unread notifications.",
+    "someone": "A member",
+    "notificationReply": "replied to your thread",
+    "notificationReaction": "reacted to your post",
+    "notificationPlan": "shared a research plan",
+    "notificationOther": "sent you a notification",
+    "moderated": "Research discussions · moderated",
+    "joinDiscussion": "Sign in to join the discussion",
+    "compareHelp": "Compare product specifications",
+    "error": "Error",
+    "authorNoPosts": "No approved articles from this author in this language.",
+    "authorPosts": "Articles by {name}",
+    "vat": "VAT",
+    "remove": "Remove",
+    "anonymousMember": "Anonymous member"
   },
   "nav": {
     "shop": "Winkel",
@@ -256,11 +406,11 @@
     "compare": "Vergelijken",
     "wishlist": "Verlanglijst",
     "topbar": {
-      "euDispatched": "Verzending uit de EU",
-      "hplcVerified": "HPLC + endotoxine geverifieerd",
+      "euDispatched": "Finland checkout",
+      "hplcVerified": "Review batch evidence",
       "freeShipping": "Gratis verzending boven €150",
-      "coaEveryBatch": "COA bij elke batch",
-      "dispatch24h": "24u verzending"
+      "coaEveryBatch": "Check available COAs",
+      "dispatch24h": "Delivery details at checkout"
     },
     "glossary": "Woordenlijst",
     "documents": "Documenten",
@@ -296,12 +446,12 @@
     "heroProductSize": "{mg, number} mg flacon",
     "heroFrom": "vanaf",
     "trustHeading": "Waarom onderzoekers AverianLabs kiezen",
-    "trustBadge1": "EU-GMP-leveranciersnetwerk",
-    "trustBadge2": "HPLC-zuiverheid ≥ 98%",
-    "trustBadge3": "Endotoxine < 5 EU/mg",
-    "trustBadge4": "24u EU-verzending",
-    "trustBadge5": "ISO 17025 labpartner",
-    "trustBadge6": "AVG-conform",
+    "trustBadge1": "Product source records",
+    "trustBadge2": "Check analytical methods",
+    "trustBadge3": "Batch-specific results",
+    "trustBadge4": "Confirm availability",
+    "trustBadge5": "Review laboratory evidence",
+    "trustBadge6": "Privacy controls",
     "featuredHeading": "Uitgelichte onderzoekspeptiden",
     "featuredSub": "Elke batch wordt geleverd met het eigen analyserapport.",
     "threeDHeading": "Bekijk elke vial in 3D",
@@ -321,7 +471,7 @@
     "labHeading": "Labtransparantie, per batch",
     "labSub": "Elke flacon wordt verzonden met een openbaar analysecertificaat.",
     "labEmptyTitle": "Nog geen vrijgegeven batch gekoppeld",
-    "labEmptyBody": "De eerste batch van elk product wordt op de Labtests-pagina gepubliceerd zodra het analysecertificaat is goedgekeurd. Tot die tijd is het product niet te koop.",
+    "labEmptyBody": "Only published, reviewed documents appear here. A missing document is not a test result.",
     "labPurityLabel": "HPLC-zuiverheid",
     "labViewCta": "Bekijk labtests",
     "labBatchCode": "COA",
@@ -337,13 +487,13 @@
     "labRowExpires": "Verloopt",
     "labMassSpecPending": "In afwachting",
     "labMassSpecConfirmed": "Bevestigd",
-    "heroStat1": "98,9 % gemiddelde zuiverheid",
-    "heroStat2": "Geverifieerd labnetwerk",
-    "heroStat3": "Verzending uit de EU",
-    "evidenceRow1": "Elke batch wordt door een derde partij getest",
-    "evidenceRow2": "Elk COA wordt openbaar gearchiveerd",
-    "evidenceRow3": "Elke bestelling wordt uit de EU verzonden",
-    "verifiedBy": "Geverifieerd door {lab}",
+    "heroStat1": "Batch-specific records",
+    "heroStat2": "Review laboratory evidence",
+    "heroStat3": "Finland checkout",
+    "evidenceRow1": "Review the actual batch report",
+    "evidenceRow2": "Published reports where available",
+    "evidenceRow3": "Confirm delivery at checkout",
+    "verifiedBy": "Report source: {lab}",
     "calcHeading": "Reconstitutierekenmachine",
     "calcSub": "Stop met rekenen in uw hoofd.",
     "calcCta": "Open rekenmachine",
@@ -351,19 +501,21 @@
     "partnerHeading": "Onderzoeksinstellingen & resellers",
     "partnerSub": "Volumeprijzen, NET-14-facturering.",
     "partnerCta": "Vraag partnerprijzen aan",
-    "newsletterHeading": "Maandelijkse onderzoeksupdates",
-    "newsletterSub": "Nieuwe peptiden, literatuur, labnotities.",
+    "newsletterHeading": "Research updates",
+    "newsletterSub": "Optional updates about products and published documentation. Email confirmation is required.",
     "newsletterPlaceholder": "u@instituut.nl",
     "newsletterCta": "Abonneer",
     "catBlends": "Mengsels & combinaties",
     "catBlendsDesc": "KLOW, BPC+TB-500, op maat gemaakte peptidecombinaties",
     "catSupplies": "Benodigdheden",
-    "catSuppliesDesc": "BAC-water, spuiten, flesjes"
+    "catSuppliesDesc": "BAC-water, spuiten, flesjes",
+    "heroHeadline": "Onderzoeksmaterialen voor laboratoriumwerk.",
+    "heroSub": "Bekijk producten, controleer batchdocumenten en vraag naar de beschikbaarheid voordat u bestelt."
   },
   "shop": {
     "title": "Onderzoekscatalogus",
-    "subtitle": "Alle producten · HPLC-getest · COA per batch",
-    "search": "Zoek peptiden…",
+    "subtitle": "Check SKU availability and original batch documents before ordering.",
+    "search": "Search products…",
     "searchHint": "Druk op ⌘K",
     "filters": "Filters",
     "category": "Categorie",
@@ -437,7 +589,7 @@
     "tabCitations": "Onderzoek",
     "tabFaq": "FAQ",
     "relatedHeading": "Gerelateerde peptiden",
-    "stockIn": "Op voorraad — 24u verzending",
+    "stockIn": "In stock",
     "stockLow": "Nog {n} flacons",
     "stockOut": "Uitverkocht — meld me",
     "vatNote": "Incl. BTW.",
@@ -445,7 +597,10 @@
     "viewCoa": "Bekijk COA",
     "lab": "Getest in {lab}",
     "notifyMe": "Waarschuw mij",
-    "notifySubmitted": "We mailen u."
+    "notifySubmitted": "We mailen u.",
+    "outOfStock": "Out of stock",
+    "inStock": "In stock",
+    "lowStock": "{count} remaining"
   },
   "cart": {
     "title": "Winkelwagen",
@@ -467,8 +622,9 @@
     "recommendationsHeading": "Best sellers",
     "continueShopping": "Continue shopping",
     "secureCheckout": "Secure checkout",
-    "freeShippingProgress": "Add {amount} more for free EU shipping",
-    "freeShippingUnlocked": "Gratis EU-verzending ontgrendeld"
+    "freeShippingProgress": "Add {amount} more for free delivery within Finland",
+    "freeShippingUnlocked": "Free delivery within Finland unlocked",
+    "vatIncluded": "Inbegrepen"
   },
   "checkout": {
     "email": "E-mail",
@@ -478,7 +634,7 @@
     "shipping": "Verzending",
     "payment": "Betaling",
     "confirm": "Bevestiging",
-    "b2bToggle": "Ik heb een BTW-nummer (zakelijke aankoop)",
+    "b2bToggle": "Add a business VAT ID (VAT remains included)",
     "vatId": "BTW-nummer",
     "vatValidating": "Valideren…",
     "vatValid": "✓ Geldig EU BTW-nummer",
@@ -489,7 +645,7 @@
     "processing": "Verwerken…",
     "orderConfirmed": "Bestelling bevestigd",
     "orderNumber": "Bestelling #{number}",
-    "orderEmail": "Bon en COA-PDF's naar {email}",
+    "orderEmail": "A payment confirmation is delivered by email when the message service is available.",
     "continueShopping": "Verder winkelen",
     "firstName": "Voornaam",
     "lastName": "Achternaam",
@@ -501,7 +657,7 @@
     "title": "Afrekenen"
   },
   "footer": {
-    "tagline": "Precisiepeptiden voor serieus onderzoek.",
+    "tagline": "Laboratory materials and product-specific documents for research purchasing.",
     "research": "Onderzoek",
     "company": "Bedrijf",
     "legal": "Juridisch",
@@ -529,10 +685,12 @@
     "glossary": "Woordenlijst",
     "documents": "Documenten",
     "community": "Community",
-    "verifiedBy": "Bekijk geverifieerde batchgegevens",
+    "verifiedBy": "Understanding test results",
     "paymentsTitle": "Geaccepteerde betaalmethoden",
     "stripeCaption": "Kaart (EUR)",
-    "coinbaseCaption": "Crypto"
+    "coinbaseCaption": "Crypto",
+    "rewards": "Customer programmes",
+    "account": "Account"
   },
   "cookie": {
     "title": "Cookies & analytics",
@@ -566,8 +724,8 @@
     "orderSummary": "Bestellingsoverzicht",
     "free": "Gratis",
     "subscribe": "Abonneren",
-    "subscribed": "Geabonneerd op onderzoeksdigest",
-    "subscribedDesc": "We sturen je één keer per maand nieuwe peptiden, verse literatuur en lab-notities.",
+    "subscribed": "Request saved",
+    "subscribedDesc": "Your request was saved. Email confirmation is required before activation.",
     "subscribeFailed": "Aanmelden mislukt. Probeer het opnieuw.",
     "backToTop": "Naar boven",
     "switchToLight": "Naar licht thema",
@@ -615,13 +773,13 @@
     "errorBody": "Averia kon zojuist niet antwoorden. Probeer het zo opnieuw.",
     "retry": "Opnieuw proberen",
     "consent": {
-      "title": "Dit gesprek onthouden?",
-      "body": "Averia kan je gesprek opslaan zodat je verder kunt gaan waar je gebleven was, en je voorkeuren leren (favoriete flesgroottes, onderzoeksfocus).",
-      "benefit1": "Behoudt context tussen bezoeken op dit apparaat",
-      "benefit2": "Je kunt alles altijd wissen, exporteren of verwijderen",
-      "accept": "Toestaan en opslaan",
-      "decline": "Niet opslaan",
-      "dismiss": "Sluiten"
+      "title": "Save conversation memory?",
+      "body": "Allow saved conversations and preferences to personalise future answers. You can turn this off and delete saved data in your account.",
+      "benefit1": "Return to earlier conversations",
+      "benefit2": "Keep preferences you choose to save",
+      "accept": "Allow saving",
+      "decline": "Continue without saving",
+      "dismiss": "Close"
     },
     "quickActions": {
       "recommend": {
@@ -642,7 +800,7 @@
       }
     },
     "actions": {
-      "addPrompt": "{qty}× {name} {mg} mg toevoegen?",
+      "addPrompt": "Add {qty} × {name} {size} to the cart?",
       "addToCart": "In winkelwagen",
       "added": "Toegevoegd",
       "dismiss": "Negeren",
@@ -651,16 +809,17 @@
       "rememberPrompt": "Deze voorkeur opslaan?",
       "remember": "Onthouden",
       "remembered": "Opgeslagen",
-      "rememberedToast": "Voorkeur opgeslagen"
+      "rememberedToast": "Voorkeur opgeslagen",
+      "unavailable": "This SKU is no longer available. Review the product page."
     },
     "feedback": {
       "helpful": "Nuttig",
       "notHelpful": "Niet nuttig"
     },
     "askButton": {
-      "title": "Vraag Averia over dit peptide",
-      "body": "Krijg direct antwoorden over toepassingen, reconstitutie, zuiverheid en opslag van onze AI-onderzoeksgids.",
-      "prompt": "Vertel me over {product} — belangrijke onderzoeksdoeleinden, zuiverheid, reconstitutie en opslag."
+      "title": "Ask the assistant",
+      "body": "Ask about product information and available documents.",
+      "prompt": "Show the current documentation for {name}."
     },
     "citation": {
       "sources": "Bronnen:",
@@ -682,13 +841,13 @@
     },
     "viewProduct": "Product bekijken",
     "assistant": {
-      "newChat": "Nieuw gesprek",
-      "tipsTitle": "De beste antwoorden",
-      "tip1": "Noem een peptide, SKU of CAS-nummer en ik haal live catalogusdata op.",
-      "tip2": "Vraag om vergelijkingen — ik maak een tabel voor maximaal vier producten.",
-      "tip3": "Ik kan items aan je winkelwagen toevoegen, maar jij bevestigt altijd eerst.",
-      "privacyNote": "Gesprekken worden alleen opgeslagen met jouw toestemming. Je kunt ze altijd exporteren of verwijderen —",
-      "privacyLink": "privacybeleid"
+      "newChat": "New conversation",
+      "tipsTitle": "Ask about research purchasing",
+      "tip1": "Find a product or SKU",
+      "tip2": "Check available batch documents",
+      "tip3": "Calculate a laboratory concentration",
+      "privacyNote": "Saved conversations require your consent.",
+      "privacyLink": "Privacy notice"
     },
     "send": "Verzenden",
     "stop": "Stoppen",
@@ -855,7 +1014,17 @@
     "subtitle": "Samengestelde productbundels voor je onderzoek. Privé opslaan of openbaar delen.",
     "title": "Opgeslagen onderzoeksplannen",
     "untitled": "Naamloos plan",
-    "viewOriginal": "Product bekijken"
+    "viewOriginal": "Product bekijken",
+    "account": {
+      "title": "Your research plans"
+    },
+    "deleteConfirmPhrase": "Type DELETE to confirm",
+    "titlePlaceholder": "Laboratory comparison panel",
+    "notesPlaceholder": "Research question, in vitro conditions and planned measurements…",
+    "copyLink": "Copy link",
+    "copyFailed": "Could not copy the link. Select it and copy it manually.",
+    "privateShare": "This plan is private. Make it public to create a share link.",
+    "notFound": "Research plan not found"
   },
   "activity": {
     "title": "Activiteit",
@@ -876,9 +1045,9 @@
     "exportData": "Gegevens exporteren",
     "deleteAccount": "Account verwijderen",
     "deleteButton": "Account verwijderen",
-    "deleteConfirm": "Typ VERWIJDEREN om te bevestigen. Na 30 dagen niet meer ongedaan te maken.",
+    "deleteConfirm": "Type DELETE to confirm. Account access and private content are removed immediately. This cannot be undone.",
     "deleteConfirmPhrase": "VERWIJDEREN",
-    "deleteDescription": "Verwijder je account en alle bijbehorende gegevens permanent. Na 30 dagen niet meer ongedaan te maken.",
+    "deleteDescription": "Deleting your account removes access immediately. This action cannot be undone. Records that must be retained are handled separately.",
     "deleteTitle": "Je account verwijderen",
     "exportButton": "Export aanvragen",
     "exportDescription": "Download een JSON-archief met alles wat we over je hebben — bestellingen, plannen, forumberichten, account.",
@@ -909,13 +1078,17 @@
     "aiConsentOnToast": "Gesprekken opslaan ingeschakeld.",
     "aiConsentOffToast": "Gesprekken opslaan uitgeschakeld.",
     "createPlan": "Plan aanmaken",
-    "deletedPending": "Accountverwijdering is in behandeling. Wordt binnen 30 dagen verwerkt.",
+    "deletedPending": "Deleting your account removes access immediately. This action cannot be undone. Records that must be retained are handled separately.",
     "exportReady": "Data-export is klaar. Check je e-mail.",
     "noPlans": "Je hebt nog geen plannen aangemaakt.",
     "sectionGdpr": "Privacy & gegevens",
     "sectionResearchPlans": "Opgeslagen onderzoeksplannen",
     "viewPlans": "Plannen bekijken",
-    "welcome": "Welkom terug"
+    "welcome": "Welkom terug",
+    "backToAccount": "Back to account",
+    "noOrders": "No orders yet.",
+    "noOrdersSub": "Your orders will appear here after checkout.",
+    "browseShop": "Browse products"
   },
   "contact": {
     "name": "Naam",
@@ -925,11 +1098,11 @@
     "send": "Bericht verzenden",
     "sending": "Verzenden…",
     "sentTitle": "Bericht verzonden",
-    "sentBody": "We reageren binnen 24 uur.",
+    "sentBody": "Your message has been recorded. Our team will contact you by email.",
     "errorTitle": "Er ging iets mis"
   },
   "newsletter": {
-    "title": "Ontvang de maandelijkse onderzoeksdigest.",
+    "title": "Get research updates.",
     "body": "Nieuwe peptiden, recente literatuur, labnotities — één keer per maand in je inbox. Geen spam, altijd opzegbaar.",
     "subscribe": "Abonneren",
     "subscribing": "Abonneren…",
@@ -937,7 +1110,7 @@
     "error": "Er ging iets mis. Probeer het opnieuw.",
     "privacyPre": "Door je te abonneren ga je akkoord met ons",
     "privacyLink": "privacybeleid",
-    "privacyPost": ". GDPR-vriendelijk.",
+    "privacyPost": ".",
     "confirmTitle": "Newsletter subscription",
     "confirmSuccess": "Your subscription is confirmed. Welcome aboard.",
     "confirmInvalid": "This confirmation link is invalid or has expired.",
@@ -1003,10 +1176,34 @@
     "statsRecentThreads": "Nieuwe discussies",
     "statsRecentThreadsSub": "gebeurtenissen laatste 24u",
     "statsTotalDocs": "Totaal documenten",
-    "statsTotalDocsSub": "alle 7 typen"
+    "statsTotalDocsSub": "alle 7 typen",
+    "averiaConversations": "Assistant conversations",
+    "averiaConversationsSub": "Review saved assistant conversations.",
+    "statsNewThreads": "New threads"
   },
   "a11y": {
     "illustrative3D": "Illustratieve 3D-rendering van de peptide-flacon — het weergegeven product is een grafische weergave, geen foto van het werkelijke product.",
     "illustrativeBadge": "Illustratieve weergave"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page may have moved. Browse the catalogue or return home.",
+    "backHome": "Back to home",
+    "browseCatalog": "Browse products",
+    "searchHint": "Search by product name, SKU or batch ID.",
+    "code": "Error 404"
+  },
+  "notifications": {
+    "title": "Notification preferences",
+    "intro": "Choose which community notifications appear in your account.",
+    "reply": "Replies to your threads",
+    "replySub": "When someone replies to a thread you started.",
+    "reaction": "Reactions to your posts",
+    "reactionSub": "When someone reacts to your post.",
+    "planShared": "Shared research plans",
+    "planSharedSub": "When a research plan is shared.",
+    "on": "On",
+    "off": "Off",
+    "error": "Preferences could not be saved. Try again."
   }
 }

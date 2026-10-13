@@ -1,10 +1,10 @@
 {
   "meta": {
-    "title": "AverianLabs — Tarkkoja peptidejä vaativaan tutkimukseen",
-    "description": "EU:sta toimitettavat, kolmannen osapuolen HPLC-verifioimat tutkimuspeptidit. Analyysitodistus jokaiselle erälle.",
+    "title": "AverianLabs — Materiaalit laboratoriotutkimukseen",
+    "description": "Tutkimusmateriaalien luettelo ja eräkohtaiset asiakirjat laboratoriotutkimuksen tarpeisiin.",
     "keywords": "tutkimuspeptidit, BPC-157, semaglutidi, tirzepatidi, TB-500, GHK-Cu, EU, Suomi, analyysitodistus, HPLC",
     "home": {
-      "title": "AverianLabs — Tutkimuskäyttöön tarkoitetut peptidit",
+      "title": "AverianLabs — Materiaalit laboratoriotutkimukseen",
       "description": "Tutustu tuotteisiin, tarkista erän asiakirjat ja kysy saatavuudesta ennen tilaamista."
     },
     "about": {
@@ -13,11 +13,11 @@
     },
     "contact": {
       "title": "Yhteystiedot",
-      "description": "Ota yhteyttä AverianLabsin tutkimustiimiin — Helsingin pääkonttori, tutkimustuki ja B2B-kumppanuudet."
+      "description": "Ota yhteyttä AverianLabsiin tuotteen asiakirjoista, tilauksestasi tai organisaation hankinnoista."
     },
     "faq": {
       "title": "Usein kysytyt kysymykset",
-      "description": "Vastauksia tutkimuskäyttöluvista, toimituksista, analyysitodistuksista, maksutavoista, B2B-hinnoittelusta ja tuetut maat."
+      "description": "Vastauksia laboratoriokäytöstä, eräasiakirjoista, tilaamisesta ja tuetuista toimitusmaista."
     },
     "labTests": {
       "title": "Laboratoriotestaus — HPLC, endotoksiini, massaspektri",
@@ -28,12 +28,12 @@
       "description": "Etsi julkaistut asiakirjat tuotteen tai erätunnuksen perusteella. Asiakirjalinkki ei ole yleinen hyväksymismerkintä. Arvioi menetelmät ja tulokset alkuperäisestä raportista."
     },
     "compare": {
-      "title": "Vertaile peptidejä",
-      "description": "Rinnakkavertailu puhtaudesta, pullokoosta, sekvenssistä, molekyylipainosta, endotoksiinitasosta ja säilytysolosuhteista koko AverianLabs-valikoimassa."
+      "title": "Vertaa materiaaleja",
+      "description": "Vertaa dokumentoituja tuotetietoja, kokoja ja ajantasaista saatavuutta."
     },
     "calculator": {
       "title": "Liuotuslaskuri",
-      "description": "Laske vetomäärät, työskentelypitoisuudet ja jäljellä olevat annokset mille tahansa peptidipullokoolle — mikrolitran tarkkuudella."
+      "description": "Vain laboratoriopitoisuuden laskentaan. Laskuri ei määritä biologista aktiivisuutta tai annostusta."
     },
     "quality": {
       "title": "Laadunvarmistus",
@@ -41,35 +41,35 @@
     },
     "partner": {
       "title": "Kumppanuusohjelma",
-      "description": "Institutionaalinen hinnoittelu jopa 35 % alennuksella, NET-14-laskutus, oma tilinhoitaja ja white-label-vaihtoehdot B2B-kumppaneille."
+      "description": "Kerro organisaatiostasi, tarvittavista määristä ja asiakirjoista. Tiimimme käsittelee pyynnön ja selvittää kanssasi saatavilla olevat hankintavaihtoehdot."
     },
     "rewards": {
       "title": "AverianLabs Rewards",
-      "description": "Ansaitse pisteitä joka tilauksesta, avaa tasojäsenyyksiä (Apex, Crystal, Aurora) ja suosittele kollegaa — 15 € alennus kummallekin."
+      "description": "Kanta-asiakasetuja ja suosittelualennuksia ei tällä hetkellä voi käyttää kassalla. Ota meihin yhteyttä organisaatiosi hankinnoista."
     },
     "wishlist": {
       "title": "Toivelista",
-      "description": "Tallentamasi tutkimuspeptidit — seuraa varastoa ja eräpäivityksiä haluamillesi tuotteille, jotta uudet erät eivät jää väliin."
+      "description": "Selaa selaimeesi tallennettuja tuotteita ja tarkista ajantasainen saatavuus."
     },
     "shippingReturns": {
       "title": "Toimitus ja palautukset",
-      "description": "Kuljettajat (Posti, DHL, DPD), 24 tunnin lähetys, kylmäketjukäsittely, alueelliset toimituskulut ja palautuskäytäntö."
+      "description": "Kassalla voi tällä hetkellä tilata Suomeen. Ota yhteyttä muiden toimitusmaiden ja hankintajärjestelyjen osalta."
     },
     "legalCookies": {
       "title": "Evästekäytäntö",
-      "description": "Välttämättömät vs. analytiikkaevästeet (PostHog, Plausible). Suostumuksen peruuttaminen milloin tahansa."
+      "description": "Välttämätön selaintallennus mahdollistaa kirjautumisen, ostoskorin, kassan etenemisen, tallennetut tuotteet ja suostumusvalinnat. Valinnainen analytiikka edellyttää suostumustasi."
     },
     "legalPrivacy": {
       "title": "Tietosuojakäytäntö",
-      "description": "GDPR-yhteensopiva tietosuojakäytäntö: kerättävät tiedot, oikeusperusta, alihankkijat, säilytys, oikeutesi ja tietosuojavastaavan yhteystiedot."
+      "description": "Tässä selosteessa kuvataan verkkokaupan henkilötietojen käsittelyä. Jos sinulla on kysyttävää tiedoistasi, ota yhteyttä myyjään alla olevilla yhteystiedoilla."
     },
     "legalResearchDisclaimer": {
-      "title": "Tutkimuskäyttödisclaimer",
-      "description": "Vain tutkimuskäyttöön -lisenssiehdot: ei lääketieteellisiä väitteitä, ostajan vastuu, lainkäyttöalueiden noudattaminen."
+      "title": "Tutkimuskäytön rajoitukset",
+      "description": "Tuoteluettelon tiedot tukevat laboratoriomateriaalien arviointia ja hankintaa."
     },
     "legalTerms": {
       "title": "Käyttöehdot",
-      "description": "Kelpoisuus, tutkimuskäyttölupa, hinnoittelu ja ALV, toimitus, palautukset, vastuunrajoitus ja sovellettava laki (Suomi)."
+      "description": "Nämä hankintaehdot kuvaavat verkkokaupan tällä hetkellä tukemia toimintoja. Tarkista myyjän rekisteritiedot ja hyväksytyt kaupalliset ehdot ennen tilaamista."
     }
   },
   "research": {
@@ -83,7 +83,7 @@
     "download": "Avaa alkuperäinen asiakirja",
     "product": "Tuote",
     "batch": "Erätunnus",
-    "lab": "Analyysin tehnyt laboratorio",
+    "lab": "Laboratorio",
     "published": "Julkaistu",
     "status": "Tila",
     "documentAvailable": "Asiakirja saatavilla",
@@ -190,11 +190,11 @@
     "processingPayment": "Maksua käsitellään",
     "processingPaymentBody": "Maksuasi ei ole vielä vahvistettu. Sivu päivittyy, kun maksupalvelu vahvistaa maksun tilan.",
     "paidTitle": "Maksu vahvistettu",
-    "paidBody": "Maksusi on vahvistettu. Tilauksen kuitti on jonossa sähköpostitoimitusta varten.",
+    "paidBody": "Maksusi on vahvistettu. Tilaustiedot näkyvät alla.",
     "failedTitle": "Maksu ei valmistunut",
     "failedBody": "Tätä tilausta ei ole maksettu. Palaa ostoskoriin yrittääksesi uudelleen.",
     "reviewTitle": "Maksu edellyttää tarkistusta",
-    "reviewBody": "Maksu vastaanotettiin, mutta tilausta ei voitu enää käsitellä automaattisesti. Ota yhteyttä asiakastukeen ja ilmoita tilausnumerosi. Älä maksa uudelleen.",
+    "reviewBody": "Maksu vastaanotettiin, mutta tilausta ei voitu toteuttaa automaattisesti. Ota yhteyttä asiakaspalveluun ja ilmoita tilausnumero. Älä maksa uudelleen.",
     "notFound": "Tilausta ei löytynyt",
     "notFoundBody": "Avaa tilauksen suojattu linkki kassalta tai sähköpostistasi.",
     "orderNumber": "Tilausnumero",
@@ -238,7 +238,157 @@
       "cosmetic": "Kosmeettinen tutkimus",
       "blend": "Seokset",
       "supplies": "Laboratoriotarvikkeet"
-    }
+    },
+    "resumePayment": "Jatka maksamista",
+    "refundedTitle": "Maksu palautettu",
+    "refundedBody": "Tämän tilauksen maksu on palautettu. Ota yhteyttä asiakastukeen, jos tarvitset lisätietoja.",
+    "businessId": "Y-tunnus",
+    "legalPending": "Myyjän rekisteritiedot odottavat vahvistusta. Ota meihin yhteyttä ennen tilaamista.",
+    "documentsTitle": "Julkaistut asiakirjat",
+    "documentsIntro": "Hae saatavilla olevia analyysitodistuksia, käyttöturvallisuustiedotteita, analyysiraportteja ja tuotemäärittelyjä.",
+    "version": "Versio",
+    "fileUnavailable": "Alkuperäinen tiedosto ei ole tällä hetkellä saatavilla. Pyydä asiakirja meiltä.",
+    "pdfFailed": "PDF-esikatselun lataaminen epäonnistui. Avaa alkuperäinen asiakirja alla olevasta linkistä.",
+    "pdfLoading": "Ladataan PDF-tiedostoa…",
+    "previous": "Edellinen",
+    "next": "Seuraava",
+    "partnerTitle": "Hankinnat tutkimusorganisaatioille",
+    "partnerIntro": "Kerro organisaatiostasi, tarvittavista määristä ja asiakirjoista. Tiimimme käsittelee pyynnön ja selvittää kanssasi saatavilla olevat hankintavaihtoehdot.",
+    "partnerApply": "Lähetä yhteydenottopyyntö",
+    "rewardsTitle": "Asiakasohjelmat",
+    "rewardsIntro": "Kanta-asiakasetuja ja suosittelualennuksia ei tällä hetkellä voi käyttää kassalla. Ota meihin yhteyttä organisaatiosi hankinnoista.",
+    "articlesEmpty": "Tällä kielellä ei ole vielä julkaistu tarkistettuja artikkeleita.",
+    "readMinutes": "Lukuaika {count} min",
+    "privacyTitle": "Tietosuojaseloste",
+    "privacyIntro": "Tässä selosteessa kuvataan verkkokaupan henkilötietojen käsittelyä. Jos sinulla on kysyttävää tiedoistasi, ota yhteyttä myyjään alla olevilla yhteystiedoilla.",
+    "privacyDataTitle": "Tiedot ja käyttötarkoitukset",
+    "privacyDataBody": "Asiakastilille tallennetaan sähköpostiosoite, nimi ja salasanan tiiviste tai ulkoisen kirjautumispalvelun tunniste. Tilauksille tallennetaan yhteystiedot, osoitteet, ostetut tuotteet ja maksun viitetiedot. Tarjouspyyntöihin ja tukiviesteihin tallennetaan lähettämäsi tiedot. Tietoja käytetään tilaamiseen, asiakastilin käyttöön ja asiakaspalveluun.",
+    "privacyAnalyticsTitle": "Valinnainen analytiikka ja avustaja",
+    "privacyAnalyticsBody": "Valinnainen analytiikka ladataan vasta hyväksyntäsi jälkeen. Voit peruuttaa suostumuksen sivun alareunan Evästeasetukset-painikkeesta. Asiakastilin ja kassan sivut on rajattu analytiikan ulkopuolelle. Jos käytät avustajaa, sen tekoälypalveluntarjoaja käsittelee lähettämäsi viestit. Keskustelumuistin tallentaminen edellyttää erillistä suostumusta.",
+    "privacyBasisTitle": "Käsittelyperusteet ja palveluntarjoajat",
+    "privacyBasisBody": "Tilausten käsittely perustuu sopimuksen täytäntöönpanoon ja kirjanpitoaineiston säilyttäminen sovellettaviin lakisääteisiin velvoitteisiin. Valinnainen analytiikka ja avustajan keskustelumuisti perustuvat suostumukseen. Tietoturvan ja asiakaspalvelun käsittelyperusteet on dokumentoitava asianmukaisesti. Käytössä olevat maksu-, sähköposti-, palvelin-, tallennus- ja tekoälypalvelut käsittelevät palvelun tuottamiseen tarvittavia tietoja. Myyjän on julkaistava hyväksytty palveluntarjoajaluettelo ja tiedonsiirtojen suojatoimet ennen tilausten vastaanottamista.",
+    "privacyRightsTitle": "Oikeutesi",
+    "privacyRightsBody": "Voit pyytää pääsyä tietoihisi, tietojen oikaisua, poistamista, käsittelyn rajoittamista tai siirtämistä sekä vastustaa käsittelyä soveltuvin osin. Asiakastilin asetuksista voit ladata tietosi ja pyytää tilin poistamista. Voit myös ottaa yhteyttä tietosuojavaltuutetun toimistoon (tietosuoja.fi). Käsittelyyn sovelletaan EU:n yleistä tietosuoja-asetusta ja Suomen tietosuojalakia (1050/2018).",
+    "privacyRetentionTitle": "Säilyttäminen ja poistaminen",
+    "privacyRetentionBody": "Tilin poistaminen estää tilin käytön ja poistaa kirjautumistiedot sekä yksityisen tilisisällön heti. Poistoa ei voi perua. Ostotiedot ja muut lakisääteisesti säilytettävät tiedot säilytetään erikseen. Myyjän on hyväksyttävä ja julkaistava kirjanpidon, asiakaspalvelun, lokien, varmuuskopioiden ja ulkoisten palvelujen säilytysajat ennen käyttöönottoa.",
+    "cookiesTitle": "Evästeet ja selaimen tallennustila",
+    "cookiesIntro": "Välttämätön selaintallennus mahdollistaa kirjautumisen, ostoskorin, kassan etenemisen, tallennetut tuotteet ja suostumusvalinnat. Valinnainen analytiikka edellyttää suostumustasi.",
+    "cookiesEssentialTitle": "Välttämätön tallennus",
+    "cookiesEssentialBody": "Ikävahvistus ja evästevalinta säilytetään enintään vuoden ajan. Kirjautumisistunto kestää enintään 30 päivää. Ostoskori, kassan eteneminen, tallennetut tuotteet ja vertailut säilyvät selaimen paikallisessa tallennustilassa, kunnes poistat ne. Maksupalvelu voi käyttää maksun käsittelyssä tarvittavaa tallennusta.",
+    "cookiesAnalyticsTitle": "Valinnainen analytiikka",
+    "cookiesAnalyticsBody": "Jos palvelut on otettu käyttöön, PostHog ja Vercel Analytics tai Speed Insights ladataan vasta valinnaisen analytiikan hyväksymisen jälkeen. PostHogin istuntotallennus ja automaattinen toimintojen seuranta on poistettu käytöstä. Asiakastilin ja kassan sivuja ei seurata, ja sivuosoitteista poistetaan kyselyparametrit.",
+    "cookiesChoiceTitle": "Valinnan muuttaminen",
+    "cookiesChoiceBody": "Avaa valinta uudelleen sivun alareunan Evästeasetukset-painikkeesta. Valitse vain välttämättömät, jos haluat lopettaa valinnaisen analytiikan keräämisen. Voit myös poistaa tallennetut ostoskori-, kassa- ja suostumustiedot selaimen asetuksista.",
+    "termsTitle": "Myyntiehdot",
+    "termsIntro": "Nämä hankintaehdot kuvaavat verkkokaupan tällä hetkellä tukemia toimintoja. Tarkista myyjän rekisteritiedot ja hyväksytyt kaupalliset ehdot ennen tilaamista.",
+    "termsUseTitle": "Laboratoriotutkimus",
+    "termsUseBody": "Materiaalit on tarkoitettu laboratoriotutkimukseen. Niitä ei toimiteta annettavaksi ihmisille tai eläimille. Tarkista tuotekohtainen määrittely, käsittelyohjeet ja alkuperäiset eräraportit ennen kuin arvioit materiaalin soveltuvuutta tutkimukseesi.",
+    "termsPriceTitle": "Hinnat ja maksaminen",
+    "termsPriceBody": "Kassalla voi tällä hetkellä tilata Suomeen euroissa. Tuotteiden ja toimituksen hinnat sisältävät Suomen arvonlisäveron 25,5 %. Lopullinen kokonaishinta näkyy ennen maksamista. ALV-tunnuksen lisääminen ei ota käyttöön käännettyä verovelvollisuutta eikä poista veroa. Muut toimitusmaat ja verojärjestelyt edellyttävät erillistä tarjousta.",
+    "termsAvailabilityTitle": "Saatavuus ja tilauksen tila",
+    "termsAvailabilityBody": "Suora ostaminen edellyttää hyväksyttyä tuotemäärittelyä, tuotteelle osoitettua vapautettua erää, julkaistua raporttia ja varastossa olevaa määrää. Varasto varataan väliaikaisesti maksamisen ajaksi. Tilaus merkitään maksetuksi vasta maksupalvelun vahvistuksen jälkeen. Myöhässä saapunut maksu siirtyy tarkistettavaksi, jos tilausta ei voida toteuttaa automaattisesti.",
+    "termsDeliveryTitle": "Toimitus ja palautukset",
+    "termsDeliveryBody": "Saatavilla olevat toimitustavat, hinnat ja arviot näkyvät kassalla. Lähetysaika, käsittelyolosuhteet ja palautusjärjestelyt on vahvistettava tilauskohtaisesti. Ilmoita tilausnumero asiakaspalvelulle, kun ilmoitat vauriosta, väärästä tuotteesta tai palautuspyynnöstä. Lakisääteiset oikeudet säilyvät ennallaan.",
+    "disclaimerTitle": "Laboratoriotutkimusta koskevat tiedot",
+    "disclaimerIntro": "Tuoteluettelon tiedot tukevat laboratoriomateriaalien arviointia ja hankintaa.",
+    "disclaimerUseTitle": "Käyttötarkoitus",
+    "disclaimerUseBody": "Tuoteluettelo ja pitoisuuslaskuri eivät anna lääketieteellisiä neuvoja, hoitosuosituksia tai annosteluohjeita. Tuoteasiakirjat eivät osoita soveltuvuutta ihmis- tai eläinkäyttöön.",
+    "disclaimerEvidenceTitle": "Arvioi näyttö",
+    "disclaimerEvidenceBody": "Kromatografinen puhtaus, identiteetti ja materiaalin pitoisuus ovat eri mittauksia. Arvioi alkuperäinen testimenetelmä, tulos, yksikkö ja erätunnus. Asiakirjalinkki ei tarkoita, että kaikki testit on läpäisty tai että kaikki tuotteet on testattu samalla tavalla.",
+    "shippingTitle": "Toimitus ja palautukset",
+    "shippingIntro": "Kassalla voi tällä hetkellä tilata Suomeen. Ota yhteyttä muiden toimitusmaiden ja hankintajärjestelyjen osalta.",
+    "shippingRatesTitle": "Toimitusmaksut",
+    "shippingRatesBody": "Kassa laskee toimitusmaksun valitun toimitustavan mukaan. Toimitus on maksuton, kun tuotteiden välisummaa on vähintään 150 €. Toimitushinnat sisältävät arvonlisäveron. Toimitusarviot riippuvat kuljetusyhtiöstä ja määränpäästä.",
+    "shippingHandlingTitle": "Käsittely ja lähettäminen",
+    "shippingHandlingBody": "Tarkista säilytysvaatimukset tuotekohtaisista asiakirjoista. Ota yhteyttä asiakaspalveluun, jos tutkimuksesi edellyttää erityisiä kuljetusolosuhteita tai vahvistettua lähetyspäivää.",
+    "shippingReturnsTitle": "Asiakaspalvelu ja palautuspyynnöt",
+    "shippingReturnsBody": "Ota yhteyttä asiakaspalveluun ja ilmoita tilausnumero ennen tuotteen palauttamista. Kerro tuote, erä ja pyynnön syy. Ilmoita vauriosta tai tilauksesta poikkeavasta tuotteesta mahdollisimman pian.",
+    "deletedTitle": "Tilin käyttö estetty",
+    "signInConfirm": "Kirjaudu sisään vahvistaaksesi tilin poistamisen.",
+    "home": "Etusivu",
+    "cancel": "Peruuta",
+    "confirmed": "Vahvistettu",
+    "requestFailed": "Pyyntöä ei voitu käsitellä. Yritä uudelleen.",
+    "cartUpdated": "Ostoskori päivitettiin nykyisillä tuotetiedoilla.",
+    "quoteChanged": "Hinnat tai saatavuus muuttuivat. Tarkista ostoskori ennen uutta yritystä.",
+    "orderExpired": "Maksamisen varausaika päättyi. Tarkista ostoskori ja aloita maksaminen uudelleen.",
+    "contactPersisted": "Viestisi on tallennettu. Tiimimme ottaa sinuun yhteyttä sähköpostitse.",
+    "accountNoOrders": "Ei vielä tilauksia.",
+    "accountNoOrdersBody": "Tilauksesi näkyvät täällä kassalla asioinnin jälkeen.",
+    "paid": "Maksettu",
+    "pending": "Odottaa",
+    "failed": "Epäonnistunut",
+    "expired": "Vanhentunut",
+    "payment_review": "Maksu odottaa tarkistusta",
+    "refunded": "Hyvitetty",
+    "shipped": "Lähetetty",
+    "delivered": "Toimitettu",
+    "orders": "Tilaukset",
+    "orderDate": "Tilauspäivä",
+    "docLabels": {
+      "coa": "Analyysitodistus (COA)",
+      "sds": "Käyttöturvallisuustiedote (SDS)",
+      "hplc": "HPLC-raportti",
+      "method": "Menetelmäkuvaus",
+      "nmr": "NMR-raportti",
+      "spec": "Tuotemäärittely",
+      "msds": "Käyttöturvallisuustiedote (MSDS)"
+    },
+    "previewDocument": "Näytä PDF-esikatselu",
+    "glossaryCount": "{count} termiä",
+    "glossaryCategories": {
+      "analytical": "Analyysimenetelmät",
+      "chemistry": "Kemia",
+      "compliance": "Vaatimustenmukaisuus",
+      "logistics": "Logistiikka",
+      "product": "Tuotteet",
+      "regulatory": "Sääntely"
+    },
+    "cardProcessing": "Korttitiedot syötetään maksupalvelun lomakkeelle. Tilauksen tila päivittyy, kun maksupalvelu vahvistaa maksun.",
+    "contactTitle": "Ota yhteyttä",
+    "contactIntro": "Kysy tuotteista, asiakirjoista, saatavuudesta tai tilauksesta. Ilmoita SKU-tunnus tai tilausnumero, jos se on saatavilla.",
+    "savedIntro": "Tallenna tuotteita, jotta voit palata niiden tietoihin ja saatavuuteen.",
+    "plansIntro": "Järjestä tuoteviitteet tutkimushankintojasi varten. Jaetun suunnitelman sisältö näkyy linkin kautta.",
+    "itemsCount": "{count} kohdetta",
+    "publicPlan": "Julkinen",
+    "privatePlan": "Yksityinen",
+    "untitledPlan": "Nimetön suunnitelma",
+    "notifications": "Ilmoitukset",
+    "notificationsIntro": "Vastaukset, reaktiot ja jaetut suunnitelmat.",
+    "notificationsEmpty": "Ei lukemattomia ilmoituksia.",
+    "unread": "{count} lukematonta",
+    "notificationPreferences": "Ilmoitusasetukset",
+    "notificationPreferencesIntro": "Valitse, mitä postilaatikossasi näkyy.",
+    "edited": "Muokattu",
+    "locked": "Lukittu",
+    "moderation": "Moderointi",
+    "moderationBody": "Viestien sääntöjenmukaisuutta tarkistetaan. Sääntöjen vastaiseksi epäilty viesti voidaan siirtää moderaattorin tarkistettavaksi. Yhteisön viestit eivät korvaa alkuperäisiä lähteitä tai ammattilaisen neuvontaa.",
+    "signIn": "Kirjaudu sisään",
+    "errorTitle": "Jokin meni pieleen",
+    "errorBody": "Yritä uudelleen tai palaa etusivulle.",
+    "retry": "Yritä uudelleen",
+    "clearAll": "Tyhjennä kaikki",
+    "fullDetails": "Tuotteen kaikki tiedot",
+    "minPurity": "HPLC-puhtauden alaraja",
+    "allResearch": "Kaikki tutkimusartikkelit",
+    "signInRequired": "Kirjaudu sisään jatkaaksesi.",
+    "notificationsTitle": "Ilmoitukset",
+    "inbox": "Saapuneet",
+    "notificationCount": "{count} lukematonta ilmoitusta.",
+    "someone": "Jäsen",
+    "notificationReply": "vastasi keskusteluusi",
+    "notificationReaction": "reagoi viestiisi",
+    "notificationPlan": "jakoi tutkimussuunnitelman",
+    "notificationOther": "lähetti sinulle ilmoituksen",
+    "moderated": "Tutkimuskeskustelut · moderoitu",
+    "joinDiscussion": "Kirjaudu sisään osallistuaksesi keskusteluun",
+    "compareHelp": "Vertaa tuotetietoja",
+    "error": "Virhe",
+    "authorNoPosts": "Tältä kirjoittajalta ei ole hyväksyttyjä artikkeleita tällä kielellä.",
+    "authorPosts": "Kirjoittajan {name} artikkelit",
+    "vat": "ALV",
+    "remove": "Poista",
+    "anonymousMember": "Nimetön jäsen"
   },
   "nav": {
     "shop": "Kauppa",
@@ -256,11 +406,11 @@
     "compare": "Vertaile",
     "wishlist": "Toivelista",
     "topbar": {
-      "euDispatched": "Lähetys EU:sta",
-      "hplcVerified": "HPLC- ja endotoksiinivarmennus",
+      "euDispatched": "Toimitukset Suomeen",
+      "hplcVerified": "Tarkista erän asiakirjat",
       "freeShipping": "Ilmainen toimitus yli 150 €",
-      "coaEveryBatch": "Analyysitodistus jokaisessa erässä",
-      "dispatch24h": "24 tunnin lähetys"
+      "coaEveryBatch": "Saatavilla olevat analyysitodistukset",
+      "dispatch24h": "Toimitustiedot kassalla"
     },
     "glossary": "Sanasto",
     "documents": "Dokumentit",
@@ -296,12 +446,12 @@
     "heroProductSize": "{mg, number} mg pullo",
     "heroFrom": "alkaen",
     "trustHeading": "Miksi laboratoriot valitsevat AverianLabsin",
-    "trustBadge1": "EU-GMP-toimittajaverkosto",
-    "trustBadge2": "HPLC-puhtaus ≥ 98 %",
-    "trustBadge3": "Endotoksiini < 5 EU/mg",
-    "trustBadge4": "24 tunnin EU-lähetys",
-    "trustBadge5": "ISO 17025 -laboratoriokumppani",
-    "trustBadge6": "GDPR-yhteensopiva",
+    "trustBadge1": "Tuotteen lähdetiedot",
+    "trustBadge2": "Tarkista analyysimenetelmät",
+    "trustBadge3": "Eräkohtaiset tulokset",
+    "trustBadge4": "Varmista saatavuus",
+    "trustBadge5": "Tarkista laboratorioasiakirjat",
+    "trustBadge6": "Tietosuoja-asetukset",
     "featuredHeading": "Esitellyt tutkimuspeptidit",
     "featuredSub": "Tuotekohtaiset tiedot ja saatavuus yhdessä paikassa.",
     "threeDHeading": "Tutustu tuotevalikoimaan",
@@ -309,19 +459,19 @@
     "threeDCta": "Selaa kaikkia tuotteita",
     "categoriesHeading": "Selaa tutkimusalueittain",
     "catWeight": "Metabolinen tutkimus",
-    "catWeightDesc": "GLP-1- ja GIP-reseptorisignalointi in vitro. Reseptorimääritykset, soluviljelmät, ADME-profilointi.",
-    "catRecovery": "Toipuminen ja kudos",
-    "catRecoveryDesc": "Angiogeeninen ja kudosremodelointitutkimus. Solumigraatiomallit, fibroblastiaktiivisuus, haavamallit.",
-    "catCognitive": "Kognitiivinen",
-    "catCognitiveDesc": "Neurotropiinit ja hermosoluviljelmät. BDNF-signalointi, in vitro -neurotutkimus.",
-    "catLongevity": "Pitkäikäisyys",
-    "catLongevityDesc": "Telomeeribiologia ja NAD⁺-signalointi. Soluvanhenemismallit, mitokondriofunktio.",
+    "catWeightDesc": "Laboratorion aineenvaihduntatutkimukseen ryhmitellyt materiaalit. Tarkista tuotekohtaiset asiakirjat ja soveltuvat menetelmät.",
+    "catRecovery": "Kudostutkimus",
+    "catRecoveryDesc": "Kudos- ja solututkimukseen ryhmitellyt materiaalit. Tarkista tuotteen identiteetti ja erän asiakirjat ennen materiaalin valintaa.",
+    "catCognitive": "Neurobiologia",
+    "catCognitiveDesc": "Laboratorion neurobiologiseen tutkimukseen ryhmitellyt materiaalit. Soveltuvuus riippuu tutkimusmenetelmästäsi.",
+    "catLongevity": "Solujen vanheneminen",
+    "catLongevityDesc": "Solujen vanhenemisen tutkimukseen ryhmitellyt materiaalit. Tuoteryhmä ei osoita biologista aktiivisuutta.",
     "catCosmetic": "Kosmeettinen tutkimus",
-    "catCosmeticDesc": "Melanogeneesi ja ihokudosmallit. Keratinosyyttiviljelmät, melanosyyttisignalointi.",
+    "catCosmeticDesc": "Ihon ja kosmetiikan laboratoriotutkimukseen ryhmitellyt materiaalit. Tuotteet on tarkoitettu vain laboratoriotutkimukseen.",
     "labHeading": "Tarkista erän asiakirjat",
     "labSub": "Tutustu alkuperäisiin analyysiraportteihin. Raporttien saatavuus ilmoitetaan erikseen.",
     "labEmptyTitle": "Julkaistua erää ei vielä linkitetty",
-    "labEmptyBody": "Jokaisen tuotteen ensimmäinen erä julkaistaan Laboratoriotestit-sivulle heti, kun sen kolmannen osapuolen analyysitodistus on hyväksytty. Siihen asti tuote ei ole myynnissä.",
+    "labEmptyBody": "Vain julkaistut ja tarkistetut asiakirjat näkyvät täällä. Asiakirjan puuttuminen ei ole testitulos.",
     "labPurityLabel": "HPLC-puhtaus",
     "labViewCta": "Näytä laboratoriotestit",
     "labBatchCode": "COA",
@@ -337,13 +487,13 @@
     "labRowExpires": "Vanhenee",
     "labMassSpecPending": "Odottaa",
     "labMassSpecConfirmed": "Vahvistettu",
-    "heroStat1": "98,9 % keskimääräinen puhtaus",
-    "heroStat2": "Varmennettu laboratorioverkosto",
-    "heroStat3": "Lähetys EU:sta",
-    "evidenceRow1": "Jokainen erä testataan kolmannen osapuolen toimesta",
-    "evidenceRow2": "Jokainen analyysitodistus arkistoidaan julkisesti",
-    "evidenceRow3": "Jokainen tilaus lähetetään EU:sta",
-    "verifiedBy": "Varmentanut {lab}",
+    "heroStat1": "Eräkohtaiset asiakirjat",
+    "heroStat2": "Tarkista laboratorioasiakirjat",
+    "heroStat3": "Toimitukset Suomeen",
+    "evidenceRow1": "Tarkista kyseisen erän asiakirja",
+    "evidenceRow2": "Julkaistut asiakirjat saatavuuden mukaan",
+    "evidenceRow3": "Varmista toimitus kassalla",
+    "verifiedBy": "Asiakirjan lähde: {lab}",
     "calcHeading": "Pitoisuuksien ja osanäytteiden laskenta",
     "calcSub": "Laske laboratorioliuoksen pitoisuus ja osanäytteiden tilavuus.",
     "calcCta": "Avaa pitoisuuslaskuri",
@@ -351,21 +501,21 @@
     "partnerHeading": "Tutkimuslaitoksille ja jälleenmyyjille",
     "partnerSub": "Kysy tuotteista, tarvitsemistasi asiakirjoista ja hankintamääristä.",
     "partnerCta": "Hae kumppanihinnoittelua",
-    "newsletterHeading": "Kuukausittainen tutkimuskatsaus",
-    "newsletterSub": "Uusia SKU:ja, koostettuja vertaisarvioituja tutkimuksia ja laboratoriomuistiinpanoja tutkimustiimiltämme. Yksi sähköposti kuussa. Ei roskapostia — voit peruuttaa yhdellä klikkauksella.",
+    "newsletterHeading": "Tutkimusuutiset",
+    "newsletterSub": "Vapaaehtoisia päivityksiä tuotteista ja julkaistuista asiakirjoista. Tilaus edellyttää sähköpostivahvistusta.",
     "newsletterPlaceholder": "sinun@lab.fi",
     "newsletterCta": "Tilaa",
     "catBlends": "Yhdistelmät",
-    "catBlendsDesc": "KLOW, BPC + TB-500, räätälöidyt peptidiseokset",
+    "catBlendsDesc": "Peptidiseokset. Tarkista ilmoitetut aineosat ja niiden osuudet hyväksytyistä tuotetiedoista.",
     "catSupplies": "Tarvikkeet",
-    "catSuppliesDesc": "BAC-vesi, ruiskut, ampullit",
+    "catSuppliesDesc": "Laboratorioreagenssit ja tarvikkeet. Tarkista koko, yksikkö ja materiaalikohtaiset asiakirjat.",
     "heroHeadline": "Tutkimusmateriaalit laboratoriotyöhön.",
     "heroSub": "Tutustu tuotteisiin, tarkista erän asiakirjat ja kysy saatavuudesta ennen tilaamista."
   },
   "shop": {
-    "title": "Tutkimusvalikoima",
-    "subtitle": "Kaikki tuotteet · HPLC-testattu · Analyysitodistus jokaisessa erässä",
-    "search": "Hae peptidejä…",
+    "title": "Tuotevalikoima",
+    "subtitle": "Tarkista tuotetunnuksen saatavuus ja alkuperäiset eräasiakirjat ennen tilaamista.",
+    "search": "Hae tuotteita…",
     "searchHint": "Paina ⌘K",
     "filters": "Suodattimet",
     "category": "Kategoria",
@@ -439,7 +589,7 @@
     "tabCitations": "Tutkimus",
     "tabFaq": "UKK",
     "relatedHeading": "Liittyvät peptidit",
-    "stockIn": "Varastossa — lähtee 24 tunnin sisällä",
+    "stockIn": "Varastossa",
     "stockLow": "Vain {n} pulloa jäljellä",
     "stockOut": "Loppu — ilmoita minulle",
     "vatNote": "Sisältää ALV:n 25,5 %. Toimituskulut näytetään kassalla.",
@@ -447,7 +597,10 @@
     "viewCoa": "Näytä analyysitodistus",
     "lab": "Testattu laboratoriossa {lab}",
     "notifyMe": "Ilmoita, kun saatavilla",
-    "notifySubmitted": "Ilmoitamme sinulle sähköpostilla."
+    "notifySubmitted": "Ilmoitamme sinulle sähköpostilla.",
+    "outOfStock": "Ei varastossa",
+    "inStock": "Varastossa",
+    "lowStock": "Jäljellä {count}"
   },
   "cart": {
     "title": "Ostoskori",
@@ -469,8 +622,9 @@
     "recommendationsHeading": "Suosituimmat",
     "continueShopping": "Jatka ostoksia",
     "secureCheckout": "Turvallinen kassa",
-    "freeShippingProgress": "Lisää {amount} vielä — ilmainen EU-toimitus",
-    "freeShippingUnlocked": "Ilmainen EU-toimitus avattu"
+    "freeShippingProgress": "Lisää {amount}, niin saat maksuttoman toimituksen Suomeen",
+    "freeShippingUnlocked": "Maksuton toimitus Suomeen",
+    "vatIncluded": "Sisältyy"
   },
   "checkout": {
     "email": "Sähköposti",
@@ -480,7 +634,7 @@
     "shipping": "Toimitus",
     "payment": "Maksu",
     "confirm": "Vahvistus",
-    "b2bToggle": "Minulla on ALV-tunnus (yritysosto)",
+    "b2bToggle": "Lisää yrityksen ALV-tunnus (vero sisältyy hintaan)",
     "vatId": "ALV-tunnus",
     "vatValidating": "Vahvistetaan…",
     "vatValid": "✓ Voimassa oleva EU:n ALV-tunnus",
@@ -491,7 +645,7 @@
     "processing": "Käsitellään…",
     "orderConfirmed": "Tilaus vahvistettu",
     "orderNumber": "Tilaus #{number}",
-    "orderEmail": "Lähetimme kuitin ja analyysitodistuksen PDF-tiedostot osoitteeseen {email}",
+    "orderEmail": "Maksuvahvistus toimitetaan sähköpostitse, kun viestipalvelu on käytettävissä.",
     "continueShopping": "Jatka ostoksia",
     "firstName": "Etunimi",
     "lastName": "Sukunimi",
@@ -503,7 +657,7 @@
     "title": "Kassa"
   },
   "footer": {
-    "tagline": "Tarkkoja peptidejä vaativaan tutkimukseen.",
+    "tagline": "Laboratoriomateriaalit ja tuotekohtaiset asiakirjat tutkimushankintojen tueksi.",
     "research": "Tutkimus",
     "company": "Yritys",
     "legal": "Oikeudelliset",
@@ -524,17 +678,19 @@
     "terms": "Ehdot",
     "privacy": "Tietosuoja",
     "cookies": "Evästeet",
-    "disclaimer": "Tutkimuskäyttödisclaimer",
+    "disclaimer": "Tutkimuskäytön ehdot",
     "subscribe": "Uutiskirje",
     "subscribeCta": "Tilaa",
     "rightsReserved": "© {year} AverianLabs. Kaikki oikeudet pidätetään.",
     "vatIdLabel": "ALV-tunnus",
     "researchUse": "Vain tutkimuskäyttöön. Ei ihmisravinnoksi.",
     "coa": "Analyysitodistusarkisto",
-    "verifiedBy": "Näytä varmennetut erätiedot",
+    "verifiedBy": "Testitulosten tulkinta",
     "paymentsTitle": "Hyväksytyt maksutavat",
     "stripeCaption": "Kortti (EUR)",
-    "coinbaseCaption": "Krypto"
+    "coinbaseCaption": "Krypto",
+    "rewards": "Asiakasohjelmat",
+    "account": "Asiakastili"
   },
   "cookie": {
     "title": "Evästeet ja analytiikka",
@@ -568,8 +724,8 @@
     "orderSummary": "Tilauksen yhteenveto",
     "free": "Ilmainen",
     "subscribe": "Tilaa",
-    "subscribed": "Tutkimuskatsaus tilattu",
-    "subscribedDesc": "Lähetämme kerran kuussa uusia peptidejä, tuoretta kirjallisuutta ja laboratoriomuistiinpanoja.",
+    "subscribed": "Pyyntö tallennettu",
+    "subscribedDesc": "Pyyntösi on tallennettu. Tilaus aktivoituu vasta sähköpostivahvistuksen jälkeen.",
     "subscribeFailed": "Tilaus epäonnistui. Yritä uudelleen.",
     "backToTop": "Takaisin ylös",
     "switchToLight": "Vaihda vaaleaan teemaan",
@@ -597,12 +753,12 @@
     "errorBody": "Averia ei vastannut juuri nyt. Yritä hetken kuluttua uudelleen.",
     "retry": "Yritä uudelleen",
     "consent": {
-      "title": "Muistetaanko tämä keskustelu?",
-      "body": "Averia voi tallentaa keskustelun, jotta voit jatkaa siitä, mihin jäit, ja oppia asetuksesi (suosikkipullokoot, tutkimuskohde).",
-      "benefit1": "Konteksti säilyy laitteellasi tulevillakin käynneillä",
-      "benefit2": "Voit tyhjentää, viedä tai poistaa kaiken milloin tahansa",
-      "accept": "Salli ja tallenna",
-      "decline": "Älä tallenna",
+      "title": "Tallennetaanko keskustelumuisti?",
+      "body": "Salli keskustelujen ja asetusten tallentaminen tulevien vastausten mukauttamiseen. Voit poistaa tallennuksen käytöstä ja poistaa tiedot asiakastililtäsi.",
+      "benefit1": "Palaa aiempiin keskusteluihin",
+      "benefit2": "Säilytä valitsemasi asetukset",
+      "accept": "Salli tallennus",
+      "decline": "Jatka tallentamatta",
       "dismiss": "Sulje"
     },
     "quickActions": {
@@ -642,7 +798,7 @@
       }
     },
     "actions": {
-      "addPrompt": "Lisätäänkö {qty}× {name} {mg} mg?",
+      "addPrompt": "Lisätäänkö {qty} × {name} {size} ostoskoriin?",
       "addToCart": "Lisää ostoskoriin",
       "added": "Lisätty",
       "dismiss": "Ohita",
@@ -651,26 +807,27 @@
       "rememberPrompt": "Tallennetaanko tämä asetus?",
       "remember": "Tallenna",
       "remembered": "Tallennettu",
-      "rememberedToast": "Asetus tallennettu"
+      "rememberedToast": "Asetus tallennettu",
+      "unavailable": "Tämä SKU-tunnus ei ole enää saatavilla. Tarkista tuotesivu."
     },
     "feedback": {
       "helpful": "Hyödyllinen",
       "notHelpful": "Ei hyödyllinen"
     },
     "askButton": {
-      "title": "Kysy Averialta tästä peptidistä",
-      "body": "Saat tekoälytutkimusneuvojalta heti vastauksia käyttökohteisiin, liuotukseen, puhtauteen ja säilytykseen.",
-      "prompt": "Kerro minulle peptidistä {product} — keskeiset tutkimuskäyttökohteet, puhtaus, liuotus ja säilytys."
+      "title": "Kysy avustajalta",
+      "body": "Kysy tuotetiedoista ja saatavilla olevista asiakirjoista.",
+      "prompt": "Näytä tuotteen {name} nykyiset asiakirjat."
     },
     "viewProduct": "Näytä tuote",
     "assistant": {
       "newChat": "Uusi keskustelu",
-      "tipsTitle": "Näin saat parhaat vastaukset",
-      "tip1": "Mainitse peptidi, SKU tai CAS-numero, niin haen ajantasaiset tuotetiedot.",
-      "tip2": "Pyydä vertailua — voin koostaa taulukon enintään neljästä tuotteesta.",
-      "tip3": "Voin lisätä tuotteita ostoskoriin, mutta vahvistat aina ennen muutoksia.",
-      "privacyNote": "Keskustelut tallennetaan vain luvallasi. Voit viedä tai poistaa ne milloin tahansa —",
-      "privacyLink": "tietosuojakäytäntö"
+      "tipsTitle": "Kysy tutkimushankinnoista",
+      "tip1": "Hae tuote tai SKU-tunnus",
+      "tip2": "Tarkista saatavilla olevat eräasiakirjat",
+      "tip3": "Laske laboratorioliuoksen pitoisuus",
+      "privacyNote": "Keskustelujen tallentaminen edellyttää suostumustasi.",
+      "privacyLink": "Tietosuojaseloste"
     },
     "send": "Lähetä",
     "stop": "Pysäytä",
@@ -702,7 +859,10 @@
     "statsRecentThreads": "Uudet ketjut",
     "statsRecentThreadsSub": "tapahtumaa viimeisen 24 tunnin aikana",
     "statsTotalDocs": "Dokumentteja yhteensä",
-    "statsTotalDocsSub": "kaikki 7 tyyppiä"
+    "statsTotalDocsSub": "kaikki 7 tyyppiä",
+    "averiaConversations": "Avustajan keskustelut",
+    "averiaConversationsSub": "Tarkista tallennetut avustajan keskustelut.",
+    "statsNewThreads": "Uudet keskustelut"
   },
   "community": {
     "title": "Yhteisö",
@@ -878,7 +1038,17 @@
     "sharedPlanSubtitle": "Kuratoitu paketti AverianLabs-yhteisön jäseneltä.",
     "signInCta": "Kirjaudu sisään tallentaaksesi",
     "saveFailed": "Suunnitelmaan tallentaminen ei onnistunut. Yritä uudelleen.",
-    "addedToPlan": "Tallennettu suunnitelmaan."
+    "addedToPlan": "Tallennettu suunnitelmaan.",
+    "account": {
+      "title": "Tutkimussuunnitelmasi"
+    },
+    "deleteConfirmPhrase": "Vahvista kirjoittamalla DELETE",
+    "titlePlaceholder": "Laboratorion vertailupaneeli",
+    "notesPlaceholder": "Tutkimuskysymys, in vitro -olosuhteet ja suunnitellut mittaukset…",
+    "copyLink": "Kopioi linkki",
+    "copyFailed": "Linkin kopiointi ei onnistunut. Valitse linkki ja kopioi se käsin.",
+    "privateShare": "Suunnitelma on yksityinen. Julkaise se luodaksesi jakolinkin.",
+    "notFound": "Tutkimussuunnitelmaa ei löytynyt"
   },
   "activity": {
     "title": "Mitä on tapahtunut",
@@ -904,9 +1074,9 @@
     "exportButton": "Pyydä vientiä",
     "exportPending": "Vienti pyydetty. Tarkista sähköpostisi.",
     "deleteTitle": "Poista tilisi",
-    "deleteDescription": "Poista tilisi ja kaikki siihen liittyvät tiedot pysyvästi. 30 päivän kuluttua toimintoa ei voi peruuttaa.",
+    "deleteDescription": "Tilin poistaminen sulkee käyttöoikeuden heti. Toimintoa ei voi peruuttaa. Säilytettävät tiedot käsitellään erikseen.",
     "deleteButton": "Poista tili",
-    "deleteConfirm": "Kirjoita DELETE vahvistaaksesi. 30 päivän kuluttua toimintoa ei voi peruuttaa.",
+    "deleteConfirm": "Kirjoita DELETE vahvistaaksesi. Tilin käyttö ja yksityinen sisältö poistetaan heti. Poistoa ei voi perua.",
     "deleteConfirmPhrase": "DELETE",
     "deleteAccount": "Poista tilisi"
   },
@@ -923,7 +1093,7 @@
     "viewPlans": "Näytä suunnitelmat",
     "createPlan": "Luo suunnitelma",
     "noPlans": "Et ole vielä luonut suunnitelmia.",
-    "deletedPending": "Tilin poisto on vireillä. Se käsitellään 30 päivän kuluessa.",
+    "deletedPending": "Tilin poistaminen sulkee käyttöoikeuden heti. Toimintoa ei voi peruuttaa. Säilytettävät tiedot käsitellään erikseen.",
     "exportReady": "Tietojen vienti on valmis. Tarkista sähköpostisi.",
     "sectionAi": "Averia ja tallennetut tiedot",
     "aiMemoryTitle": "Averian muisti",
@@ -940,7 +1110,11 @@
     "aiSourceExplicit": "Pyysit muistamaan tämän",
     "aiSourceInferred": "Päätelty keskusteluistasi",
     "aiConsentOnToast": "Keskustelujen tallennus otettu käyttöön.",
-    "aiConsentOffToast": "Keskustelujen tallennus poistettu käytöstä."
+    "aiConsentOffToast": "Keskustelujen tallennus poistettu käytöstä.",
+    "backToAccount": "Takaisin asiakastilille",
+    "noOrders": "Ei vielä tilauksia.",
+    "noOrdersSub": "Tilauksesi näkyvät täällä kassalla asioinnin jälkeen.",
+    "browseShop": "Selaa tuotteita"
   },
   "contact": {
     "name": "Nimi",
@@ -950,7 +1124,7 @@
     "send": "Lähetä viesti",
     "sending": "Lähetetään…",
     "sentTitle": "Viesti lähetetty",
-    "sentBody": "Vastaamme 24 tunnin sisällä.",
+    "sentBody": "Viestisi on tallennettu. Tiimimme ottaa sinuun yhteyttä sähköpostitse.",
     "errorTitle": "Jotain meni pieleen"
   },
   "auth": {
@@ -995,15 +1169,15 @@
     "backToAccount": "Siirry tilille"
   },
   "newsletter": {
-    "title": "Tilaa kuukausittainen tutkimuskatsaus.",
-    "body": "Uusia peptidejä, tuoretta kirjallisuutta ja laboratoriomuistiinpanoja — suoraan sähköpostiisi kerran kuussa. Ei roskapostia, voit peruuttaa milloin tahansa.",
+    "title": "Tilaa tutkimusuutiset.",
+    "body": "Vapaaehtoisia tuote- ja laboratoriopäivityksiä sähköpostitse. Vahvista osoitteesi ennen päivitysten vastaanottamista. Voit perua suostumuksesi milloin tahansa ottamalla yhteyttä tukeen.",
     "subscribe": "Tilaa",
     "subscribing": "Tilataan…",
     "success": "Tilattu! Tarkista sähköpostistasi vahvistusviesti.",
     "error": "Jotain meni pieleen. Yritä uudelleen.",
     "privacyPre": "Tilaamalla hyväksyt",
     "privacyLink": "tietosuojakäytännön",
-    "privacyPost": ". GDPR-ystävällinen.",
+    "privacyPost": ".",
     "confirmTitle": "Uutiskirjetilaus",
     "confirmSuccess": "Tilauksesi on vahvistettu. Tervetuloa mukaan!",
     "confirmInvalid": "Vahvistuslinkki on virheellinen tai vanhentunut.",
@@ -1012,5 +1186,26 @@
   "a11y": {
     "illustrative3D": "Havainnollinen 3D-malli peptidipullosta — renderöity tuote on graafinen esitys, ei valokuva todellisesta tuotteesta.",
     "illustrativeBadge": "Havainnollinen renderöinti"
+  },
+  "notFound": {
+    "title": "Sivua ei löytynyt",
+    "body": "Sivu on saattanut siirtyä. Selaa tuoteluetteloa tai palaa etusivulle.",
+    "backHome": "Takaisin etusivulle",
+    "browseCatalog": "Selaa tuotteita",
+    "searchHint": "Hae tuotteen nimellä, SKU-tunnuksella tai erätunnuksella.",
+    "code": "Virhe 404"
+  },
+  "notifications": {
+    "title": "Ilmoitusasetukset",
+    "intro": "Valitse, mitkä yhteisön ilmoitukset näkyvät tililläsi.",
+    "reply": "Vastaukset keskusteluihisi",
+    "replySub": "Kun joku vastaa aloittamaasi keskusteluun.",
+    "reaction": "Reaktiot viesteihisi",
+    "reactionSub": "Kun joku reagoi viestiisi.",
+    "planShared": "Jaetut tutkimussuunnitelmat",
+    "planSharedSub": "Kun tutkimussuunnitelma jaetaan.",
+    "on": "Käytössä",
+    "off": "Pois käytöstä",
+    "error": "Asetuksia ei voitu tallentaa. Yritä uudelleen."
   }
 }
