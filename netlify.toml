@@ -32,6 +32,9 @@
 
 # Use the official Next.js Runtime to package server and edge routes.
 [[plugins]]
+  package = "./netlify/plugins/database-release"
+
+[[plugins]]
   package = "@netlify/plugin-nextjs"
 
 # Locale-prefix redirect: the production app uses middleware to 307 → /en/...

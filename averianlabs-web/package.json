@@ -33,6 +33,7 @@
     "build:demo": "./scripts/build-demo.sh",
     "postinstall": "lefthook install || true",
     "test:integration": "vitest run --config vitest.integration.config.ts",
+    "test:deployment": "node --test scripts/legacy-baseline.test.mjs",
     "check:i18n:usage": "node scripts/check-i18n-usage.mjs",
     "release:check": "pnpm env:check && pnpm legal:check && tsx scripts/check-release.ts"
   },
@@ -92,6 +93,7 @@
     "@axe-core/playwright": "4.10.2",
     "@biomejs/biome": "^1.9.4",
     "@lhci/cli": "^0.15.1",
+    "@netlify/blobs": "11.1.3",
     "@playwright/test": "^1.49.1",
     "@sanity/vision": "^3.99.0",
     "@tailwindcss/postcss": "^4.0.0-beta.7",
