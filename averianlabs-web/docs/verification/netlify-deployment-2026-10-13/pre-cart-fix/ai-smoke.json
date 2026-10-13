@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-10-13T16:34:16.548Z",
+  "baseUrl": "https://6ace5c5f43fc5d278c70bc65--averianlabs-demo.netlify.app",
+  "status": 200,
+  "locale": "fi",
+  "streamedCompletion": true,
+  "latencyMs": 13723,
+  "responseCharacters": 2629,
+  "eventTypes": ["thinking", "text", "done"],
+  "usage": {
+    "tokensIn": 1489,
+    "tokensOut": 822,
+    "latencyMs": 11489
+  },
+  "noPersistence": true,
+  "retrievalDisabled": true,
+  "limitations": "One provider smoke request; not a scientific accuracy certification or hosted native embedding test."
+}

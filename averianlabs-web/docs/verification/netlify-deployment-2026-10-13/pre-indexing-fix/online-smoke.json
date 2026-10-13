@@ -1,0 +1,189 @@
+{
+  "checkedAt": "2026-10-13T16:46:01.324Z",
+  "baseUrl": "https://6ace5eb6b3324e70d2db5b46--averianlabs-demo.netlify.app",
+  "readOnly": true,
+  "results": [
+    {
+      "path": "/api/health",
+      "status": 200,
+      "cache": "no-store",
+      "robots": "noindex",
+      "health": {
+        "status": "ok",
+        "checks": {
+          "env": true,
+          "db": true
+        },
+        "latencyMs": 923,
+        "version": "unknown"
+      }
+    },
+    {
+      "path": "/en",
+      "status": 200,
+      "cache": "private,no-cache,no-store,max-age=0,must-revalidate",
+      "robots": "noindex"
+    },
+    {
+      "path": "/fi",
+      "status": 200,
+      "cache": "private,no-cache,no-store,max-age=0,must-revalidate",
+      "robots": "noindex"
+    },
+    {
+      "path": "/en/shop",
+      "status": 200,
+      "cache": "private,no-cache,no-store,max-age=0,must-revalidate",
+      "robots": "noindex"
+    },
+    {
+      "path": "/fi/shop",
+      "status": 200,
+      "cache": "private,no-cache,no-store,max-age=0,must-revalidate",
+      "robots": "noindex"
+    },
+    {
+      "path": "/en/lab-tests",
+      "status": 200,
+      "cache": "private,no-cache,no-store,max-age=0,must-revalidate",
+      "robots": "noindex"
+    },
+    {
+      "path": "/fi/lab-tests",
+      "status": 200,
+      "cache": "private,no-cache,no-store,max-age=0,must-revalidate",
+      "robots": "noindex"
+    },
+    {
+      "path": "/en/quality",
+      "status": 200,
+      "cache": "private,no-cache,no-store,max-age=0,must-revalidate",
+      "robots": "noindex"
+    },
+    {
+      "path": "/fi/quality",
+      "status": 200,
+      "cache": "private,no-cache,no-store,max-age=0,must-revalidate",
+      "robots": "noindex"
+    },
+    {
+      "path": "/en/account",
+      "status": 200,
+      "cache": "private,no-cache,no-store,max-age=0,must-revalidate",
+      "robots": "noindex"
+    },
+    {
+      "path": "/fi/account",
+      "status": 200,
+      "cache": "private,no-cache,no-store,max-age=0,must-revalidate",
+      "robots": "noindex"
+    },
+    {
+      "path": "/en/checkout/cart",
+      "status": 200,
+      "cache": "private,no-cache,no-store,max-age=0,must-revalidate",
+      "robots": "noindex"
+    },
+    {
+      "path": "/fi/checkout/cart",
+      "status": 200,
+      "cache": "private,no-cache,no-store,max-age=0,must-revalidate",
+      "robots": "noindex"
+    },
+    {
+      "path": "/api/cron/maintenance",
+      "status": 401,
+      "unauthenticatedAccessBlocked": true
+    },
+    {
+      "path": "/api/quotes",
+      "method": "POST",
+      "invalidPayloadStatus": 400,
+      "mutatedCustomerData": false
+    },
+    {
+      "path": "/api/checkout/quote",
+      "method": "POST",
+      "invalidPayloadStatus": 400,
+      "mutatedCustomerData": false
+    },
+    {
+      "path": "/api/ai/chat",
+      "method": "POST",
+      "invalidPayloadStatus": 400,
+      "mutatedCustomerData": false
+    },
+    {
+      "path": "/en",
+      "viewport": 390,
+      "heading": "Research materials for laboratory work.",
+      "horizontalOverflow": false,
+      "pageErrors": [],
+      "accessibilityBlocking": 0,
+      "otherAccessibilityFindings": []
+    },
+    {
+      "path": "/fi",
+      "viewport": 390,
+      "heading": "Tutkimusmateriaalit laboratoriotyöhön.",
+      "horizontalOverflow": false,
+      "pageErrors": [],
+      "accessibilityBlocking": 0,
+      "otherAccessibilityFindings": []
+    },
+    {
+      "path": "/en/shop",
+      "viewport": 390,
+      "heading": "Research catalog",
+      "horizontalOverflow": false,
+      "pageErrors": [],
+      "accessibilityBlocking": 0,
+      "otherAccessibilityFindings": []
+    },
+    {
+      "path": "/fi/shop",
+      "viewport": 390,
+      "heading": "Tuotevalikoima",
+      "horizontalOverflow": false,
+      "pageErrors": [],
+      "accessibilityBlocking": 0,
+      "otherAccessibilityFindings": []
+    },
+    {
+      "path": "/en/account",
+      "viewport": 390,
+      "heading": "Sign in",
+      "horizontalOverflow": false,
+      "pageErrors": [],
+      "accessibilityBlocking": 0,
+      "otherAccessibilityFindings": []
+    },
+    {
+      "path": "/fi/account",
+      "viewport": 390,
+      "heading": "Kirjaudu sisään",
+      "horizontalOverflow": false,
+      "pageErrors": [],
+      "accessibilityBlocking": 0,
+      "otherAccessibilityFindings": []
+    },
+    {
+      "path": "/en/checkout/cart",
+      "viewport": 390,
+      "heading": "Checkout",
+      "horizontalOverflow": false,
+      "pageErrors": [],
+      "accessibilityBlocking": 0,
+      "otherAccessibilityFindings": []
+    },
+    {
+      "path": "/fi/checkout/cart",
+      "viewport": 390,
+      "heading": "Kassa",
+      "horizontalOverflow": false,
+      "pageErrors": [],
+      "accessibilityBlocking": 0,
+      "otherAccessibilityFindings": []
+    }
+  ]
+}

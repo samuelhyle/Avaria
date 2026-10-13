@@ -1,0 +1,56 @@
+{
+  "baseUrl": "https://6ace5c5f43fc5d278c70bc65--averianlabs-demo.netlify.app",
+  "sourceCommit": "50abc79",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "path": "/en/checkout/cart",
+  "findings": [
+    {
+      "id": "scrollable-region-focusable",
+      "impact": "serious",
+      "tags": [
+        "cat.keyboard",
+        "wcag2a",
+        "wcag211",
+        "wcag213",
+        "TTv5",
+        "TT4.a",
+        "EN-301-549",
+        "EN-9.2.1.1",
+        "EN-9.2.1.3"
+      ],
+      "description": "Ensure elements that have scrollable content are accessible by keyboard",
+      "help": "Scrollable region must have keyboard access",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/scrollable-region-focusable?application=playwright",
+      "nodes": [
+        {
+          "any": [
+            {
+              "id": "focusable-content",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element should have focusable content"
+            },
+            {
+              "id": "focusable-element",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element should be focusable"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": "serious",
+          "html": "<ol class=\"flex items-center gap-2 overflow-x-auto rounded-[var(--radius-lg)] border border-line bg-surface p-2 shadow-sm\">",
+          "target": ["ol"],
+          "failureSummary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+        }
+      ]
+    }
+  ],
+  "resolution": "Checkout steps wrap without scrolling; current step has aria-current. Regression tests cover FI/EN at 320, 390 and 414 px."
+}
