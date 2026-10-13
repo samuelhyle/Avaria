@@ -1,9 +1,22 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
   "files": {
     "ignoreUnknown": true,
-    "ignore": [".next", "node_modules", "dist", ".turbo", "coverage"]
+    "ignore": [
+      ".next",
+      "node_modules",
+      "dist",
+      ".turbo",
+      "coverage",
+      "docs/lightning/lighthouse-baseline-*",
+      "docs/lightning/**/*.report.json",
+      ".next-implementation"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -12,20 +25,40 @@
     "lineWidth": 100,
     "lineEnding": "lf"
   },
-  "organizeImports": { "enabled": true },
+  "organizeImports": {
+    "enabled": true
+  },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
-      "style": { "noNonNullAssertion": "warn", "useImportType": "error" },
-      "suspicious": { "noExplicitAny": "warn" },
-      "security": { "noDangerouslySetInnerHtml": "warn" },
-      "complexity": { "noBannedTypes": "error" },
-      "correctness": { "noUnusedVariables": "warn", "useExhaustiveDependencies": "warn" },
-      "a11y": { "useSemanticElements": "off" }
+      "style": {
+        "noNonNullAssertion": "warn",
+        "useImportType": "error"
+      },
+      "suspicious": {
+        "noExplicitAny": "warn"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "warn"
+      },
+      "complexity": {
+        "noBannedTypes": "error"
+      },
+      "correctness": {
+        "noUnusedVariables": "warn",
+        "useExhaustiveDependencies": "warn"
+      },
+      "a11y": {
+        "useSemanticElements": "off"
+      }
     }
   },
   "javascript": {
-    "formatter": { "quoteStyle": "double", "semicolons": "asNeeded", "trailingCommas": "all" }
+    "formatter": {
+      "quoteStyle": "double",
+      "semicolons": "asNeeded",
+      "trailingCommas": "all"
+    }
   }
 }

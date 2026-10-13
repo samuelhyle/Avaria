@@ -7,7 +7,8 @@ export default defineConfig({
   testDir: "./tests",
   // Vitest unit tests live under tests/unit/ and would crash Playwright's
   // runner; exclude them.
-  testIgnore: ["**/tests/unit/**", "**/*.unit.test.ts"],
+  testMatch: "**/*.spec.ts",
+  testIgnore: ["**/tests/unit/**", "**/tests/integration/**", "**/*.unit.test.ts"],
   fullyParallel: true,
   forbidOnly: process.env.CI === "true",
   retries: process.env.CI === "true" ? 2 : 0,
@@ -41,7 +42,7 @@ export default defineConfig({
     stderr: "pipe",
     env: {
       NEXT_TELEMETRY_DISABLED: "1",
-      // Tests must not require a real DB — we filter routes that need one at runtime.
+      // Reliability journeys require an explicitly isolated, migrated and seeded DB.
       DATABASE_URL: process.env.DATABASE_URL ?? "",
     },
   },

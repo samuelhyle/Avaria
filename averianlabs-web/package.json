@@ -31,7 +31,10 @@
     "ai:eval": "tsx --env-file-if-exists=.env.local scripts/ai-eval.ts",
     "studio": "sanity dev --project-path sanity",
     "build:demo": "./scripts/build-demo.sh",
-    "postinstall": "lefthook install || true"
+    "postinstall": "lefthook install || true",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "check:i18n:usage": "node scripts/check-i18n-usage.mjs",
+    "release:check": "pnpm env:check && pnpm legal:check && tsx scripts/check-release.ts"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.3",
@@ -63,11 +66,12 @@
     "lucide-react": "^0.471.0",
     "meilisearch": "^0.45.0",
     "motion": "^11.15.0",
-    "next": "15.5.25",
+    "next": "15.5.27",
     "next-auth": "5.0.0-beta.32",
     "next-intl": "^4.0.0-beta.10",
     "next-themes": "^0.4.4",
     "postgres": "^3.4.5",
+    "posthog-js": "^1.438.9",
     "postprocessing": "^6.36.4",
     "react": "19.2.1",
     "react-dom": "19.2.1",
@@ -123,7 +127,15 @@
       "protobufjs"
     ],
     "overrides": {
-      "postcss": "8.5.28"
+      "postcss": "8.5.28",
+      "shell-quote": "1.11.0",
+      "sharp": "0.35.5",
+      "adm-zip": "0.6.1",
+      "brace-expansion@5": "5.0.12",
+      "fast-uri@3": "3.1.8",
+      "source-map-js": "1.2.2",
+      "dompurify": "3.4.16",
+      "@huggingface/transformers>onnxruntime-node": "1.23.2"
     }
   }
 }

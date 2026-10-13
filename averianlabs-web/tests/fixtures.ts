@@ -17,17 +17,12 @@ type Fixtures = {
 export const test = base.extend<Fixtures>({
   cleanPage: async ({ context, page }, use) => {
     await context.addCookies([AGE_GATE_COOKIE])
-    // Wait for networkidle so lazy-imported widgets (Averia chat, search
-    // palette) have time to mount. `domcontentloaded` fires before the
-    // requestIdleCallback-triggered dynamic imports resolve.
-    await page.goto("/en", { waitUntil: "networkidle" })
-    await page.evaluate(() => {
-      try {
-        localStorage.clear()
-        sessionStorage.clear()
-      } catch {
-        // ignore — storage may be disabled
-      }
+    await context.addInitScript(() => {
+      if (sessionStorage.getItem("test-initialized")) return
+      localStorage.clear()
+      sessionStorage.clear()
+      localStorage.setItem("averianlabs-cookie-consent", "essential")
+      sessionStorage.setItem("test-initialized", "1")
     })
     await use(page)
   },

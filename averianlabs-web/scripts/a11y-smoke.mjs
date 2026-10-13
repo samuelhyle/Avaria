@@ -13,16 +13,20 @@ import { chromium } from "@playwright/test"
 
 const BASE_URL = process.env.BASE_URL ?? "http://localhost:3000"
 
-const ROUTES = [
-  "/en",
-  "/fi",
-  "/en/shop",
-  "/en/shop/bpc-157",
-  "/en/community",
-  "/en/glossary",
-  "/en/lab-tests",
-  "/en/peptide-calculator",
-]
+const ROUTES = ["en", "fi"].flatMap((locale) =>
+  [
+    "",
+    "/shop",
+    "/shop/bpc-157",
+    "/community",
+    "/glossary",
+    "/lab-tests",
+    "/peptide-calculator",
+    "/checkout/cart",
+    "/contact",
+    "/legal/privacy",
+  ].map((route) => `/${locale}${route}`),
+)
 
 const BLOCKING_IMPACTS = new Set(["critical", "serious"])
 
@@ -33,6 +37,8 @@ const context = await browser.newContext()
 // Skip the age gate so it doesn't overlay the page during scans.
 await context.addCookies([{ name: "averianlabs-age-confirmed", value: "1", url: BASE_URL }])
 
+await context.addInitScript(() => localStorage.setItem("averianlabs-cookie-consent", "essential"))
+
 let failed = false
 
 for (const route of ROUTES) {
@@ -42,12 +48,7 @@ for (const route of ROUTES) {
       waitUntil: "networkidle",
       timeout: 60_000,
     })
-    // Routes that need a database are skipped when the environment has none
-    // (e.g. CI without DATABASE_URL) instead of failing on the error page.
-    if ((response?.status() ?? 500) >= 500) {
-      console.log(`SKIP ${route} (HTTP ${response?.status()})`)
-      continue
-    }
+    if (!response?.ok()) throw new Error(`HTTP ${response?.status()}`)
     await page.waitForTimeout(1500)
 
     const results = await new AxeBuilder({ page })

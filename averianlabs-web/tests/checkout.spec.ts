@@ -20,17 +20,33 @@ test.describe("checkout flow", () => {
 
   test("shipping step uses fieldset/legend for radio groups", async ({ cleanPage }) => {
     // Seed the cart via API/store first by visiting a PDP and clicking ATC.
-    await cleanPage.goto("/en/shop/bpc-157")
+    await cleanPage.goto("/en/shop/qa-peptide")
     const add = cleanPage.getByRole("button", { name: /add to cart/i }).first()
     await add.scrollIntoViewIfNeeded()
     await add.click()
 
-    // Go to checkout, advance past email step manually to reach shipping.
+    await cleanPage.keyboard.press("Escape")
     await cleanPage.goto("/en/checkout/shipping")
-    const fieldsets = cleanPage.locator("fieldset")
-    if ((await fieldsets.count()) > 0) {
-      // The shipping step wraps its options in a <fieldset> per a11y improvement.
-      await expect(fieldsets.first()).toBeVisible()
-    }
+    await cleanPage.waitForURL("**/en/checkout/email")
+    await cleanPage
+      .locator("main")
+      .getByRole("textbox", { name: "Email", exact: true })
+      .fill("checkout-qa@example.invalid")
+    await cleanPage
+      .locator("main")
+      .getByRole("button", { name: /continue as guest/i })
+      .click()
+    await cleanPage.waitForURL("**/en/checkout/address")
+    await cleanPage.getByRole("textbox", { name: /first name/i }).fill("Test")
+    await cleanPage.getByRole("textbox", { name: /last name/i }).fill("User")
+    await cleanPage.getByRole("textbox", { name: /street/i }).fill("Test street 1")
+    await cleanPage.getByRole("textbox", { name: /postal/i }).fill("00100")
+    await cleanPage.getByRole("textbox", { name: /city/i }).fill("Helsinki")
+    await cleanPage.getByRole("button", { name: /continue to shipping/i }).click()
+    await cleanPage.waitForURL("**/en/checkout/shipping")
+    await expect(cleanPage.locator("main fieldset")).toBeVisible()
+    await expect(cleanPage.getByRole("radio")).toHaveCount(2)
+    await cleanPage.getByRole("radio").last().check()
+    await expect(cleanPage.getByRole("button", { name: /continue to payment/i })).toBeEnabled()
   })
 })

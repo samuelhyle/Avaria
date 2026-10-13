@@ -7,12 +7,16 @@ import { expect, test } from "@playwright/test"
  * the label on the front of the vial.
  */
 test("3D hero on PDP renders the vial label after rotation", async ({ page }) => {
-  await page
-    .context()
-    .addCookies([{ name: "averianlabs-age-confirmed", value: "1", url: "http://localhost:3000" }])
-  await page.goto("http://localhost:3000/en/shop/bpc-157", { waitUntil: "domcontentloaded" })
+  await page.context().addCookies([
+    {
+      name: "averianlabs-age-confirmed",
+      value: "1",
+      url: process.env.BASE_URL ?? "http://localhost:3000",
+    },
+  ])
+  await page.goto("/en/shop/bpc-157", { waitUntil: "domcontentloaded" })
   await page.waitForTimeout(3000)
-  await page.getByRole("button", { name: /Show 3D view/i }).click()
+  await page.getByRole("button", { name: /3D/i }).click()
   // Let the auto-rotate spin until the label faces the camera.
   await page.waitForTimeout(8000)
   const canvas = page.locator("canvas").first()
@@ -22,10 +26,14 @@ test("3D hero on PDP renders the vial label after rotation", async ({ page }) =>
 })
 
 test("3D shop carousel renders a non-empty canvas", async ({ page }) => {
-  await page
-    .context()
-    .addCookies([{ name: "averianlabs-age-confirmed", value: "1", url: "http://localhost:3000" }])
-  await page.goto("http://localhost:3000/en/shop?view=3d", { waitUntil: "domcontentloaded" })
+  await page.context().addCookies([
+    {
+      name: "averianlabs-age-confirmed",
+      value: "1",
+      url: process.env.BASE_URL ?? "http://localhost:3000",
+    },
+  ])
+  await page.goto("/en/shop?view=3d", { waitUntil: "domcontentloaded" })
   await page.waitForTimeout(5000)
   const carousel = page.getByRole("region", { name: /3D product carousel/i })
   await expect(carousel).toBeVisible({ timeout: 15_000 })

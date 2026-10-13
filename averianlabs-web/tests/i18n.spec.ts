@@ -3,11 +3,11 @@ import { LOCALES, expect, test } from "@/tests/fixtures"
 test.describe("internationalization", () => {
   test("each locale resolves with a translated title", async ({ request }) => {
     const needles: Record<string, string> = {
-      en: "Precision peptides",
-      fi: "Tutkimuskäyttöön",
-      de: "Präzisionspeptide",
-      sv: "Forskningspeptider",
-      nl: "Precisiepeptiden",
+      en: "Laboratory research materials",
+      fi: "Materiaalit laboratoriotutkimukseen",
+      de: "Laboratory research materials",
+      sv: "Laboratory research materials",
+      nl: "Laboratory research materials",
     }
     for (const locale of LOCALES) {
       const html = await (await request.get(`/${locale}`)).text()

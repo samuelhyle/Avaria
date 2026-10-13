@@ -7,7 +7,9 @@ test.describe("homepage", () => {
     // The hero exposes a chip group with one chip per featured product.
     // The group is rendered with role=group + an aria-label that we set
     // in the i18n catalogue.
-    const chipGroup = cleanPage.getByRole("group", { name: /featured products|valitut tuotteet/i }).first()
+    const chipGroup = cleanPage
+      .getByRole("group", { name: /featured products|valitut tuotteet/i })
+      .first()
     await expect(chipGroup).toBeVisible()
 
     // The hero card links to the focused product's detail page.
@@ -33,11 +35,11 @@ test.describe("homepage", () => {
 
   test("translates metadata per locale", async ({ request }) => {
     const checks = [
-      { path: "/en", needle: "Precision peptides" },
-      { path: "/fi", needle: "Tutkimuskäyttöön" },
-      { path: "/de", needle: "Präzisionspeptide" },
-      { path: "/sv", needle: "Forskningspeptider" },
-      { path: "/nl", needle: "Precisiepeptiden" },
+      { path: "/en", needle: "Laboratory research materials" },
+      { path: "/fi", needle: "Materiaalit laboratoriotutkimukseen" },
+      { path: "/de", needle: "Laboratory research materials" },
+      { path: "/sv", needle: "Laboratory research materials" },
+      { path: "/nl", needle: "Laboratory research materials" },
     ]
     for (const { path, needle } of checks) {
       const html = await (await request.get(path)).text()

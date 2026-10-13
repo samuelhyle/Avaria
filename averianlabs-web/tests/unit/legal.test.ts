@@ -19,13 +19,13 @@ describe("getLegalIdentity", () => {
     process.env = { ...original }
   })
 
-  it("returns safe placeholders when env vars are missing", () => {
-    delete process.env.NEXT_PUBLIC_LEGAL_COMPANY_NAME
-    delete process.env.NEXT_PUBLIC_LEGAL_BUSINESS_ID
+  it("does not invent registered company details when configuration is missing", () => {
+    Reflect.deleteProperty(process.env, "NEXT_PUBLIC_LEGAL_COMPANY_NAME")
+    Reflect.deleteProperty(process.env, "NEXT_PUBLIC_LEGAL_BUSINESS_ID")
     const identity = getLegalIdentity()
-    expect(identity.companyName).toBe("AverianLabs Oy")
-    expect(identity.businessId).toBe("FI-PENDING")
-    expect(identity.vatId).toBe("FI-PENDING")
+    expect(identity.companyName).toBe("AverianLabs")
+    expect(identity.businessId).toBe("")
+    expect(identity.vatId).toBe("")
   })
 
   it("reads overrides from env", () => {

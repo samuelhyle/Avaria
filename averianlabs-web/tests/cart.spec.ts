@@ -11,7 +11,7 @@ test.describe("cart drawer + add-to-cart", () => {
   test("a product detail page renders the qty stepper with descriptive aria-labels", async ({
     cleanPage,
   }) => {
-    await cleanPage.goto("/en/shop/bpc-157")
+    await cleanPage.goto("/en/shop/qa-peptide")
     await cleanPage.waitForLoadState("networkidle").catch(() => {})
 
     // Both ProductDetailActions (inline) and the sticky ATC expose qty
@@ -32,7 +32,7 @@ test.describe("cart drawer + add-to-cart", () => {
     await inlineInc.click()
 
     // The inline qty <span className="w-12 ..."> shows the running count.
-    const qtySpan = cleanPage.locator("main span.w-12").first()
+    const qtySpan = cleanPage.locator("main span.w-10").first()
     await expect(qtySpan).toHaveText(/^3$/)
 
     const inlineDec = cleanPage
@@ -44,7 +44,7 @@ test.describe("cart drawer + add-to-cart", () => {
   })
 
   test("add-to-cart opens the cart drawer and shows the subtotal", async ({ cleanPage }) => {
-    await cleanPage.goto("/en/shop/bpc-157")
+    await cleanPage.goto("/en/shop/qa-peptide")
     // Click an add-to-cart button within main, not the sticky bar's footer variant.
     const add = cleanPage
       .locator("main")
@@ -62,7 +62,7 @@ test.describe("cart drawer + add-to-cart", () => {
   })
 
   test("wishlist button announces its action in plain English", async ({ cleanPage }) => {
-    await cleanPage.goto("/en/shop/bpc-157")
+    await cleanPage.goto("/en/shop/qa-peptide")
     await cleanPage.waitForLoadState("networkidle").catch(() => {})
 
     // There are likely 2 wishlist buttons on the page (inline + sticky),
