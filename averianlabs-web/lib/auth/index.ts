@@ -88,17 +88,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     async jwt({ token, user }) {
       if (user && "id" in user && user.id) token.sub = user.id
-      // Hydrate the role once per issued token; it is cached in the JWT after.
-      if (token.sub && !token.role) {
-        try {
-          const row = await db.query.users.findFirst({
-            where: eq(users.id, token.sub),
-            columns: { role: true },
-          })
-          if (row?.role) token.role = row.role
-        } catch {
-          // Keep the session usable if the role lookup fails.
-        }
+      // Recheck account state on every session read; JWTs outlive database sessions.
+      if (token.sub) {
+        const row = await db.query.users.findFirst({
+          where: eq(users.id, token.sub),
+          columns: { role: true, deletedAt: true },
+        })
+        if (!row || row.deletedAt) return null
+        token.role = row.role
       }
       return token
     },

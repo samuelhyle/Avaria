@@ -48,12 +48,13 @@ function isConfigured(): boolean {
 }
 
 export const listGlossaryTerms = demoCache(
-  async (): Promise<GlossaryTermRecord[]> => {
+  async (locale = "en"): Promise<GlossaryTermRecord[]> => {
     if (isDemoBuild()) return DEMO_GLOSSARY
     if (!isConfigured()) return []
     try {
       return await sanity.fetch<GlossaryTermRecord[]>(
-        `*[_type == "glossaryTerm"] | order(term asc) { ${FRAGMENT} }`,
+        `*[_type == "glossaryTerm" && language == $locale && reviewed == true] | order(term asc) { ${FRAGMENT} }`,
+        { locale },
       )
     } catch {
       return []
@@ -64,13 +65,13 @@ export const listGlossaryTerms = demoCache(
 )
 
 export const getGlossaryTermBySlug = demoCache(
-  async (slug: string): Promise<GlossaryTermRecord | null> => {
+  async (slug: string, locale = "en"): Promise<GlossaryTermRecord | null> => {
     if (isDemoBuild()) return DEMO_GLOSSARY.find((t) => t.slug === slug) ?? null
     if (!isConfigured()) return null
     try {
       const result = await sanity.fetch<GlossaryTermRecord | null>(
-        `*[_type == "glossaryTerm" && slug.current == $slug][0] { ${FRAGMENT} }`,
-        { slug },
+        `*[_type == "glossaryTerm" && slug.current == $slug && language == $locale && reviewed == true][0] { ${FRAGMENT} }`,
+        { slug, locale },
       )
       return result ?? null
     } catch {
@@ -81,10 +82,10 @@ export const getGlossaryTermBySlug = demoCache(
   { revalidate: 3600, tags: ["glossary"] },
 )
 
-export async function getGlossaryTermsByCategory(): Promise<
-  Record<GlossaryCategory, GlossaryTermRecord[]>
-> {
-  const all = await listGlossaryTerms()
+export async function getGlossaryTermsByCategory(
+  locale = "en",
+): Promise<Record<GlossaryCategory, GlossaryTermRecord[]>> {
+  const all = await listGlossaryTerms(locale)
   const grouped: Record<GlossaryCategory, GlossaryTermRecord[]> = {
     analytical: [],
     chemistry: [],

@@ -13,6 +13,8 @@ export type ProposedActionAddToCart = {
   productSlug: string
   productName: string
   mg: number
+  sizeValue?: number
+  sizeUnit?: import("@/lib/products/types").SizeUnit
   qty: number
   unitPriceCents: number
 }

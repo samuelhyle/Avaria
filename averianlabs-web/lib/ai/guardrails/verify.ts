@@ -12,7 +12,7 @@
  * observability-first, Phase A7 may escalate to re-generation.
  */
 
-import { type Product, products } from "@/lib/products/data"
+import type { Product } from "@/lib/products/types"
 
 export interface PriceRef {
   sku: string
@@ -128,7 +128,7 @@ export function extractPrices(text: string): Array<{ sku?: string; cents: number
   return results
 }
 
-function buildCatalogIndex() {
+function buildCatalogIndex(products: Product[]) {
   const bySku = new Map<string, { product: Product; mg: number; cents: number }>()
   for (const p of products) {
     for (const v of p.vials) {
@@ -138,12 +138,12 @@ function buildCatalogIndex() {
   return bySku
 }
 
-export function verifyResponse(text: string): VerificationReport {
+export function verifyResponse(text: string, products: Product[] = []): VerificationReport {
   const warnings: string[] = []
   const unknownSkus: string[] = []
   const priceMismatches: Array<{ sku: string; citedCents: number; catalogCents: number }> = []
 
-  const catalog = buildCatalogIndex()
+  const catalog = buildCatalogIndex(products)
 
   // SKU check
   const skus = extractSkus(text)

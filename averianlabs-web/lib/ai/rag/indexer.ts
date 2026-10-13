@@ -13,8 +13,9 @@ import { aiDocumentChunks, aiDocuments } from "@/db/schema/ai"
 import { type Chunk, chunkText } from "@/lib/ai/chunker"
 import { embedBatch } from "@/lib/ai/rag/embeddings"
 import { db } from "@/lib/db"
-import { products as catalog } from "@/lib/products/data"
+import { getStorefrontCatalogue } from "@/lib/products/catalogue"
 import type { Product, Locale as ProductLocale } from "@/lib/products/types"
+import { formatSize } from "@/lib/utils/format"
 import { and, eq, inArray } from "drizzle-orm"
 
 const SUPPORTED_LOCALES: ProductLocale[] = ["en", "fi", "de", "sv", "nl"]
@@ -59,18 +60,9 @@ function renderProductDocument(
   specs.push(`Storage: ${product.storageTemp}`)
   if (product.purityPercent !== undefined) specs.push(`HPLC purity: ${product.purityPercent}%`)
 
-  const vials = product.vials
-    .map(
-      (v) =>
-        `- ${v.mg} mg vial · SKU ${v.sku} · €${(v.priceCents / 100).toFixed(2)} · ${
-          v.stockQty > 0 ? `${v.stockQty} in stock` : "out of stock"
-        }${v.compareAtCents ? ` (compare at €${(v.compareAtCents / 100).toFixed(2)})` : ""}`,
-    )
-    .join("\n")
-
-  const batch = product.latestBatch
-    ? `Latest batch ${product.latestBatch.code}: manufactured ${product.latestBatch.manufacturedAt}, expires ${product.latestBatch.expiresAt}, HPLC purity ${product.latestBatch.hplcPurity}%, endotoxin ${product.latestBatch.endotoxinEUPerMg} EU/mg, mass-spec confirmed: ${product.latestBatch.msConfirmed}, tested at ${product.latestBatch.lab}.`
-    : "No batch data published."
+  const vials = product.vials.map((v) => `- ${formatSize(v, locale)}; SKU ${v.sku}`).join("\n")
+  const batch =
+    "Use getProduct and getBatches for current prices, stock and batch evidence. Indexed text does not establish current availability."
 
   const content = [
     `# ${name}`,
@@ -113,24 +105,6 @@ async function indexOneDocument(
   const chunks = chunkText(content, { maxTokens: 700, overlapTokens: 150 })
   if (chunks.length === 0) return { chunks: [], embedded: 0, skipped: 0 }
 
-  // Upsert document row.
-  await db
-    .insert(aiDocuments)
-    .values({
-      id: docId,
-      source,
-      sourceId,
-      locale,
-      title,
-      url,
-      metadata: { category: source },
-      updatedAt: new Date(),
-    })
-    .onConflictDoUpdate({
-      target: aiDocuments.id,
-      set: { title, url, updatedAt: new Date() },
-    })
-
   // Embed in parallel before starting the DB transaction to minimize lock time.
   const embeddings = await embedBatch(chunks.map((c) => c.content))
   const embedded = embeddings.filter((e): e is number[] => e !== null).length
@@ -148,6 +122,29 @@ async function indexOneDocument(
 
   // Atomic delete + insert — prevents data loss on crash between the two.
   await db.transaction(async (tx) => {
+    // Upsert document row.
+    await tx
+      .insert(aiDocuments)
+      .values({
+        id: docId,
+        source,
+        sourceId,
+        locale,
+        title,
+        url,
+        metadata: { category: source, reviewVersion: "research-reviewed-v1" },
+        updatedAt: new Date(),
+      })
+      .onConflictDoUpdate({
+        target: aiDocuments.id,
+        set: {
+          title,
+          url,
+          metadata: { category: source, reviewVersion: "research-reviewed-v1" },
+          updatedAt: new Date(),
+        },
+      })
+
     await tx.delete(aiDocumentChunks).where(eq(aiDocumentChunks.documentId, docId))
     const INSERT_BATCH = 200
     for (let i = 0; i < rows.length; i += INSERT_BATCH) {
@@ -248,6 +245,7 @@ export async function indexAll(): Promise<IndexerReport> {
     totalSkipped += skipped
   }
 
+  const catalog = await getStorefrontCatalogue()
   for (const product of catalog) {
     for (const locale of SUPPORTED_LOCALES) {
       const { title, content } = renderProductDocument(product, locale)
@@ -288,6 +286,7 @@ export async function reindexDocument(
   let totalDocs = 0
 
   if (source === "product") {
+    const catalog = await getStorefrontCatalogue()
     const product = catalog.find((p) => p.slug === sourceId)
     if (!product) return null
     for (const locale of SUPPORTED_LOCALES) {

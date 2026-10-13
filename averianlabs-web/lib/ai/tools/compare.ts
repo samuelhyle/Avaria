@@ -6,7 +6,8 @@
  */
 
 import type { Tool, ToolContext, ToolResult } from "@/lib/ai/tools/registry"
-import { products } from "@/lib/products/data"
+import { getStorefrontCatalogue } from "@/lib/products/catalogue"
+import { formatSize } from "@/lib/utils/format"
 
 interface Args {
   slugs: string[]
@@ -31,6 +32,7 @@ export const compareProductsTool: Tool = {
   },
   async execute(rawArgs, ctx): Promise<ToolResult> {
     const args = (rawArgs ?? {}) as Args
+    const products = await getStorefrontCatalogue()
     const found = args.slugs
       .map((s) => products.find((p) => p.slug === s))
       .filter((p): p is (typeof products)[number] => Boolean(p))
@@ -51,13 +53,15 @@ export const compareProductsTool: Tool = {
                     | Record<string, import("@/lib/products/types").ProductTranslation>
                     | undefined
                 )?.[ctx.locale] ?? p.defaultTranslation)
-          const minPrice = Math.min(...p.vials.map((v) => v.priceCents))
+          const minPrice = Math.min(
+            ...p.vials.filter((v) => v.purchaseMode === "direct").map((v) => v.priceCents),
+          )
           return {
             slug: p.slug,
             name: tr.name,
             category: p.category,
             purityPercent: p.purityPercent ?? null,
-            vialSizes: p.vials.map((v) => `${v.mg}mg`),
+            vialSizes: p.vials.map((v) => formatSize(v, ctx.locale)),
             fromPriceCents: Number.isFinite(minPrice) ? minPrice : null,
             url: `/${ctx.locale}/shop/${p.slug}`,
             latestBatch: p.latestBatch

@@ -1,17 +1,8 @@
 /**
- * Local embeddings fallback — uses `@huggingface/transformers` (ONNX runtime)
- * to run `Xenova/all-MiniLM-L6-v2` (384-dim) inside Node. No network calls,
- * no GPU, ~23 MB model bundled into node_modules.
- *
- * Why this exists: MiniMax's hosted `/v1/embeddings` endpoint returns HTTP
- * 200 with `base_resp.status_code 1002 (rate limit exceeded)` for this
- * account — the API shape is correct (`texts` + required `type`), but the
- * quota is gone. Rather than block RAG entirely, this module provides a
- * drop-in local embedder. The retrieval layer (RRF) still combines it with
- * BM25, so the agent's answers stay grounded.
- *
- * The model is lazy-loaded on first use (load takes ~9s on a warm cache);
- * subsequent calls share the same pipeline instance.
+ * Optional local embedding fallback using a quantized ONNX model.
+ * The model is downloaded from Hugging Face on first use and cached locally;
+ * it is not bundled with the application. Later calls reuse the pipeline.
+ * Unavailable model/runtime returns null so retrieval can use lexical search.
  */
 
 import type { FeatureExtractionPipeline } from "@huggingface/transformers"

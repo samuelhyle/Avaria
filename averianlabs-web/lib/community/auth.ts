@@ -28,7 +28,7 @@ async function loadCurrentMember(): Promise<Member | null> {
     const { users } = await import("@/db/schema")
     const { eq } = await import("drizzle-orm")
     const row = await db.query.users.findFirst({ where: eq(users.id, userId) })
-    if (!row) return null
+    if (!row || row.deletedAt) return null
     const reputation = row.reputation ?? 0
     const forumRole: ForumRole =
       row.role === "admin" ? "admin" : row.role === "moderator" ? "moderator" : "member"

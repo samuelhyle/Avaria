@@ -63,7 +63,7 @@ export async function embedBatch(
       attempt++
     }
 
-    if (vectors && vectors.some((v) => v !== null)) {
+    if (vectors?.some((v) => v !== null)) {
       for (let i = 0; i < slice.length; i++) {
         results[start + i] = vectors[i] ?? null
       }

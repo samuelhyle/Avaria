@@ -14,6 +14,10 @@ export interface CheckoutState {
   b2b: boolean
   vatId: string
   shippingMethod: string
+  attemptKey: string
+  attemptFingerprint: string
+  setAttempt: (fingerprint: string, key: string) => void
+  clearAttempt: () => void
   pendingOrderId: string
   pendingOrderUrl: string
   setPendingOrder: (id: string, url: string) => void
@@ -27,6 +31,8 @@ export interface CheckoutState {
 }
 
 interface CheckoutActions {
+  setAttempt: (fingerprint: string, key: string) => void
+  clearAttempt: () => void
   setPendingOrder: (id: string, url: string) => void
   setEmail: (email: string) => void
   setAddress: (addr: Partial<Omit<CheckoutState, keyof CheckoutActions>>) => void
@@ -47,6 +53,8 @@ const initialState = {
   b2b: false,
   vatId: "",
   shippingMethod: "",
+  attemptKey: "",
+  attemptFingerprint: "",
   pendingOrderId: "",
   pendingOrderUrl: "",
 }
@@ -55,6 +63,8 @@ export const useCheckout = create<CheckoutState>()(
   persist(
     (set) => ({
       ...initialState,
+      setAttempt: (fingerprint, key) => set({ attemptFingerprint: fingerprint, attemptKey: key }),
+      clearAttempt: () => set({ attemptFingerprint: "", attemptKey: "" }),
       setPendingOrder: (id, url) => set({ pendingOrderId: id, pendingOrderUrl: url }),
       setEmail: (email) => set({ email }),
       setAddress: (addr) => set((s) => ({ ...s, ...addr })),
@@ -63,6 +73,15 @@ export const useCheckout = create<CheckoutState>()(
       setShippingMethod: (shippingMethod) => set({ shippingMethod }),
       reset: () => set(initialState),
     }),
-    { name: "averianlabs-checkout-v2" },
+    {
+      name: "averianlabs-checkout-v2",
+      version: 1,
+      migrate: (saved) => ({
+        ...initialState,
+        ...(saved as object),
+        country: "FI",
+        shippingMethod: "",
+      }),
+    },
   ),
 )

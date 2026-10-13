@@ -144,6 +144,7 @@ export async function retrieveContext(opts: RetrieveOptions): Promise<RetrievedC
       content: aiDocumentChunks.content,
       locale: aiDocumentChunks.locale,
       source: aiDocuments.source,
+      metadata: aiDocuments.metadata,
       sourceId: aiDocuments.sourceId,
       title: aiDocuments.title,
       url: aiDocuments.url,
@@ -155,6 +156,12 @@ export async function retrieveContext(opts: RetrieveOptions): Promise<RetrievedC
   for (const row of rows) {
     const existing = byId.get(row.id)
     if (!existing) continue
+    if (
+      (row.metadata as { reviewVersion?: string } | null)?.reviewVersion !== "research-reviewed-v1"
+    ) {
+      byId.delete(row.id)
+      continue
+    }
     existing.documentId = row.documentId
     existing.position = row.position
     existing.content = row.content
@@ -166,6 +173,7 @@ export async function retrieveContext(opts: RetrieveOptions): Promise<RetrievedC
   }
 
   return Array.from(byId.values())
+    .filter((chunk) => chunk.documentId)
     .sort((a, b) => b.score - a.score)
     .slice(0, topK)
 }

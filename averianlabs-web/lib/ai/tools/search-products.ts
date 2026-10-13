@@ -6,7 +6,7 @@
  */
 
 import type { Tool, ToolContext, ToolResult } from "@/lib/ai/tools/registry"
-import { products } from "@/lib/products/data"
+import { getStorefrontCatalogue } from "@/lib/products/catalogue"
 import type { Product, ProductCategory } from "@/lib/products/types"
 
 interface Args {
@@ -185,6 +185,7 @@ export const searchProductsTool: Tool = {
   },
   async execute(rawArgs, ctx): Promise<ToolResult> {
     const args = (rawArgs ?? {}) as Args
+    const products = await getStorefrontCatalogue()
     const limit = Math.min(Math.max(args.limit ?? 5, 1), 10)
     let results = products.filter(
       (p) =>
@@ -201,7 +202,9 @@ export const searchProductsTool: Tool = {
       results = results.filter((p) => (p.purityPercent ?? 0) >= min)
     }
     if (args.inStockOnly) {
-      results = results.filter((p) => p.vials.some((v) => v.stockQty > 0))
+      results = results.filter((p) =>
+        p.vials.some((v) => v.purchaseMode === "direct" && v.stockQty > 0),
+      )
     }
     if (args.q) {
       const tokens = tokenize(args.q)
@@ -214,11 +217,7 @@ export const searchProductsTool: Tool = {
       }
     }
 
-    results = results.slice(0, limit).map((p) => ({
-      ...p,
-      // strip translations — they're heavy and the model doesn't need them here
-      translations: undefined,
-    }))
+    results = results.slice(0, limit)
 
     return {
       content: {
@@ -238,7 +237,9 @@ export const searchProductsTool: Tool = {
             casNumber: p.casNumber ?? null,
             vials: p.vials.map((v) => ({
               sku: v.sku,
-              mg: v.mg,
+              sizeValue: v.sizeValue,
+              sizeUnit: v.sizeUnit,
+              purchaseMode: v.purchaseMode,
               priceCents: v.priceCents,
               stockQty: v.stockQty,
             })),

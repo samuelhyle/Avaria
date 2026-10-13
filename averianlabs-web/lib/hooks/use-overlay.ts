@@ -48,6 +48,23 @@ export function useOverlay<T extends HTMLElement = HTMLDivElement>({
     const target = initialFocusRef?.current ?? getFocusable(container)[0] ?? container
     if (target && "focus" in target) target.focus()
 
+    const background: Array<{ element: HTMLElement; inert: boolean }> = []
+    let branch: HTMLElement | null = container
+    while (branch && branch !== document.body) {
+      const parent: HTMLElement | null = branch.parentElement
+      for (const sibling of Array.from(parent?.children ?? [])) {
+        if (
+          sibling !== branch &&
+          sibling instanceof HTMLElement &&
+          !["SCRIPT", "STYLE"].includes(sibling.tagName)
+        ) {
+          background.push({ element: sibling, inert: sibling.inert })
+          sibling.inert = true
+        }
+      }
+      branch = parent
+    }
+
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = "hidden"
 
@@ -70,7 +87,7 @@ export function useOverlay<T extends HTMLElement = HTMLDivElement>({
       if (e.shiftKey && (active === first || !container?.contains(active))) {
         e.preventDefault()
         last.focus()
-      } else if (!e.shiftKey && active === last) {
+      } else if (!e.shiftKey && (active === last || !container?.contains(active))) {
         e.preventDefault()
         first.focus()
       }
@@ -79,6 +96,7 @@ export function useOverlay<T extends HTMLElement = HTMLDivElement>({
     document.addEventListener("keydown", onKeyDown, true)
     return () => {
       document.removeEventListener("keydown", onKeyDown, true)
+      for (const { element, inert } of background) element.inert = inert
       document.body.style.overflow = previousOverflow
       returnFocusRef.current?.focus?.()
     }

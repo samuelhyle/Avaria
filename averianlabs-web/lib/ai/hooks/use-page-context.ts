@@ -7,12 +7,10 @@
  * hands the widget a path-shaped object on mount.
  */
 
+import { useCatalogue } from "@/components/product/CatalogueProvider"
 import type { ChatContext } from "@/lib/ai/types"
-import { products } from "@/lib/products/data"
 import { usePathname } from "next/navigation"
 import { useMemo } from "react"
-
-const PRODUCT_BY_SLUG = new Map(products.map((p) => [p.slug, p]))
 
 export interface PageContextOptions {
   /** Live cart quantity — only used on cart/checkout pages. */
@@ -22,6 +20,7 @@ export interface PageContextOptions {
 export function usePageContext({
   itemCount = 0,
 }: PageContextOptions = {}): ChatContext | undefined {
+  const products = useCatalogue()
   const pathname = usePathname()
 
   return useMemo(() => {
@@ -35,7 +34,7 @@ export function usePageContext({
     const productMatch = rest.match(/^\/shop\/([^/]+)$/)
     if (productMatch?.[1]) {
       const slug = productMatch[1]
-      const product = PRODUCT_BY_SLUG.get(slug)
+      const product = products.find((p) => p.slug === slug)
       return { kind: "product", slug, name: product?.defaultTranslation.name ?? slug }
     }
 
@@ -52,5 +51,5 @@ export function usePageContext({
     if (rest.startsWith("/support") || rest.startsWith("/faq")) return { kind: "support" }
 
     return { kind: "other", path: pathname }
-  }, [pathname, itemCount])
+  }, [pathname, itemCount, products])
 }

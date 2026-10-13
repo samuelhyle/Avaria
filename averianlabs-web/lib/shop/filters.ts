@@ -11,28 +11,47 @@ export interface ShopFilters {
 
 export const defaultFilters: ShopFilters = {
   category: [],
-  inStock: true,
+  inStock: false,
   quoteOnly: false,
-  purityMin: 95,
+  purityMin: 0,
   sort: "newest",
 }
 
 export function parseFiltersFromSearch(params: URLSearchParams): ShopFilters {
+  const categories = [
+    "metabolic",
+    "recovery",
+    "cognitive",
+    "longevity",
+    "cosmetic",
+    "blend",
+    "supplies",
+  ]
+  const sorts: SortOption[] = ["newest", "price-asc", "price-desc", "name", "purity-desc"]
+  const purity = Number(params.get("purityMin") ?? 0)
+  const sort = params.get("sort")
   return {
-    category: params.get("category")?.split(",").filter(Boolean) ?? [],
-    inStock: params.get("inStock") !== "false",
+    category: [
+      ...new Set(
+        params
+          .get("category")
+          ?.split(",")
+          .filter((value) => categories.includes(value)) ?? [],
+      ),
+    ],
+    inStock: params.get("inStock") === "true",
     quoteOnly: params.get("quoteOnly") === "true",
-    purityMin: Number(params.get("purityMin") ?? 95),
-    sort: (params.get("sort") as SortOption) ?? "newest",
+    purityMin: Number.isFinite(purity) ? Math.max(0, Math.min(100, purity)) : 0,
+    sort: sorts.includes(sort as SortOption) ? (sort as SortOption) : "newest",
   }
 }
 
 export function serializeFilters(filters: ShopFilters): URLSearchParams {
   const p = new URLSearchParams()
   if (filters.category.length > 0) p.set("category", filters.category.join(","))
-  if (!filters.inStock) p.set("inStock", "false")
+  if (filters.inStock) p.set("inStock", "true")
   if (filters.quoteOnly) p.set("quoteOnly", "true")
-  if (filters.purityMin !== 95) p.set("purityMin", String(filters.purityMin))
+  if (filters.purityMin !== 0) p.set("purityMin", String(filters.purityMin))
   if (filters.sort !== "newest") p.set("sort", filters.sort)
   return p
 }

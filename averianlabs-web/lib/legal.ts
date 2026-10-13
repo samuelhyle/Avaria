@@ -15,11 +15,11 @@ export interface LegalIdentity {
 
 export function getLegalIdentity(): LegalIdentity {
   return {
-    companyName: process.env.NEXT_PUBLIC_LEGAL_COMPANY_NAME ?? "AverianLabs Oy",
-    businessId: process.env.NEXT_PUBLIC_LEGAL_BUSINESS_ID ?? "FI-PENDING",
-    vatId: process.env.NEXT_PUBLIC_LEGAL_VAT_ID ?? "FI-PENDING",
-    addressLine1: process.env.NEXT_PUBLIC_LEGAL_ADDRESS_LINE1 ?? "Address line pending",
-    addressLine2: process.env.NEXT_PUBLIC_LEGAL_ADDRESS_LINE2 ?? "Helsinki, Finland",
+    companyName: process.env.NEXT_PUBLIC_LEGAL_COMPANY_NAME ?? "AverianLabs",
+    businessId: process.env.NEXT_PUBLIC_LEGAL_BUSINESS_ID ?? "",
+    vatId: process.env.NEXT_PUBLIC_LEGAL_VAT_ID ?? "",
+    addressLine1: process.env.NEXT_PUBLIC_LEGAL_ADDRESS_LINE1 ?? "",
+    addressLine2: process.env.NEXT_PUBLIC_LEGAL_ADDRESS_LINE2 ?? "",
     contactEmail: process.env.NEXT_PUBLIC_LEGAL_EMAIL ?? "hello@averianlabs.eu",
   }
 }

@@ -1,4 +1,4 @@
-import { activityEvents } from "@/db/schema"
+import { activityEvents, researchPlans } from "@/db/schema"
 /**
  * Activity event emitter — append-only public-safe log.
  *
@@ -62,10 +62,23 @@ export function emitActivity(input: EmitInput): void {
 }
 
 export async function recentActivity(limit = 12) {
-  const { desc } = await import("drizzle-orm")
+  const { and, desc, eq, getTableColumns, ne, or } = await import("drizzle-orm")
   return db
-    .select()
+    .select(getTableColumns(activityEvents))
     .from(activityEvents)
+    .leftJoin(
+      researchPlans,
+      and(eq(activityEvents.targetType, "plan"), eq(activityEvents.targetId, researchPlans.id)),
+    )
+    .where(
+      or(
+        ne(activityEvents.kind, "plan_shared"),
+        and(
+          eq(researchPlans.isPublic, true),
+          eq(researchPlans.shareSlug, activityEvents.targetSlug),
+        ),
+      ),
+    )
     .orderBy(desc(activityEvents.createdAt))
     .limit(Math.min(limit, 50))
 }

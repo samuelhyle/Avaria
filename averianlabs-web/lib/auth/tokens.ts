@@ -1,6 +1,7 @@
 import crypto from "node:crypto"
 import { verificationTokens } from "@/db/schema"
 import { db } from "@/lib/db"
+import type { DbExecutor } from "@/lib/email/outbox"
 import { and, eq } from "drizzle-orm"
 
 export const TOKEN_TTL_MS = {
@@ -22,31 +23,26 @@ function generateToken(): string {
   return crypto.randomBytes(32).toString("base64url")
 }
 
-export async function createToken(identifier: string, ttlMs: number): Promise<string> {
+export async function createToken(
+  identifier: string,
+  ttlMs: number,
+  executor: DbExecutor = db,
+): Promise<string> {
   const token = generateToken()
-  await db.delete(verificationTokens).where(eq(verificationTokens.identifier, identifier))
-  await db.insert(verificationTokens).values({
-    identifier,
-    token: hashToken(token),
-    expires: new Date(Date.now() + ttlMs),
-  })
+  await executor.delete(verificationTokens).where(eq(verificationTokens.identifier, identifier))
+  await executor
+    .insert(verificationTokens)
+    .values({ identifier, token: hashToken(token), expires: new Date(Date.now() + ttlMs) })
   return token
 }
 
 /** Single-use: deletes the row whether or not it had expired. */
 export async function consumeToken(identifier: string, token: string): Promise<boolean> {
   const hashed = hashToken(token)
+  // DELETE RETURNING is atomic: concurrent requests cannot both consume a token.
   const [row] = await db
-    .select()
-    .from(verificationTokens)
-    .where(and(eq(verificationTokens.identifier, identifier), eq(verificationTokens.token, hashed)))
-    .limit(1)
-
-  if (!row) return false
-
-  await db
     .delete(verificationTokens)
     .where(and(eq(verificationTokens.identifier, identifier), eq(verificationTokens.token, hashed)))
-
-  return row.expires.getTime() > Date.now()
+    .returning({ expires: verificationTokens.expires })
+  return Boolean(row && row.expires.getTime() > Date.now())
 }

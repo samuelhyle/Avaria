@@ -1,6 +1,6 @@
+import { formatCurrency, formatSize } from "@/lib/utils/format"
 import en from "@/messages/en.json"
 import fi from "@/messages/fi.json"
-import { formatCurrency, formatSize } from "@/lib/utils/format"
 import { escapeHtml } from "./html"
 
 export interface OrderReceiptInput {
@@ -8,7 +8,15 @@ export interface OrderReceiptInput {
   email: string
   locale?: string
   orderUrl?: string
-  items: Array<{ name: string; sku?: string; batchCode?: string; sizeValue: number; sizeUnit: string; qty: number; priceCents: number }>
+  items: Array<{
+    name: string
+    sku?: string
+    batchCode?: string
+    sizeValue: number
+    sizeUnit: string
+    qty: number
+    priceCents: number
+  }>
   documents?: Array<{ title: string; url: string }>
   subtotalCents: number
   shippingCents: number

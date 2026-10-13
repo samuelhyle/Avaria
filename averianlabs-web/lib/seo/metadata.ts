@@ -54,3 +54,11 @@ export function makePageMetadata(key: SeoKey, path?: string) {
     }
   }
 }
+
+export function makeCheckoutMetadata(step: "email" | "address" | "shipping" | "payment") {
+  return async ({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> => {
+    const { locale } = await params
+    const t = await getTranslations({ locale, namespace: "checkout" })
+    return { title: `${t(step)} · ${t("title")}`, robots: { index: false, follow: false } }
+  }
+}

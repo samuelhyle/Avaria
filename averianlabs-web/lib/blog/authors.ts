@@ -47,16 +47,16 @@ function isConfigured(): boolean {
 }
 
 export async function listAuthors(): Promise<AuthorRecord[]> {
-  if (!isConfigured()) return SEED_AUTHORS
+  if (!isConfigured()) return []
   try {
     const fromSanity = await sanity.fetch<AuthorRecord[]>(
-      `*[_type == "author"] | order(name asc) {
+      `*[_type == "author" && credentialsReviewed == true] | order(name asc) {
         _id, "id": _id, "slug": slug.current, name, role, bio, "avatarUrl": avatar.asset->url
       }`,
     )
-    return fromSanity.length > 0 ? fromSanity : SEED_AUTHORS
+    return fromSanity
   } catch {
-    return SEED_AUTHORS
+    return []
   }
 }
 

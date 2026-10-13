@@ -3,7 +3,7 @@
  */
 
 import type { Tool, ToolContext, ToolResult } from "@/lib/ai/tools/registry"
-import { products } from "@/lib/products/data"
+import { getStorefrontCatalogue } from "@/lib/products/catalogue"
 
 interface Args {
   slug: string
@@ -27,6 +27,7 @@ export const getProductTool: Tool = {
   },
   async execute(rawArgs, ctx): Promise<ToolResult> {
     const args = (rawArgs ?? {}) as Args
+    const products = await getStorefrontCatalogue()
     const p = products.find((x) => x.slug === args.slug)
     if (!p) return { content: { error: "not_found", slug: args.slug } }
     const tr =

@@ -13,22 +13,17 @@ import {
   passkeys,
   researchPlanItems,
   researchPlans,
+  rewardsAccounts,
   sessions,
   users,
 } from "@/db/schema"
 import { aiConversations, aiMessages, supportTickets, userMemories } from "@/db/schema/ai"
 import { requireMember } from "@/lib/community/auth"
-/**
- * GDPR endpoints — Art. 17 (delete) + Art. 20 (export).
- *
- * Returns a JSON archive of all user-owned rows. Soft-delete sets
- * `users.deletedAt` to a future timestamp; the actual hard-delete is
- * a separate cron after 30 days.
- */
+/** Account deletion immediately revokes access and removes private content. */
 import { db } from "@/lib/db"
-import { desc, eq, inArray } from "drizzle-orm"
+import { and, desc, eq, inArray, isNotNull, lte } from "drizzle-orm"
 
-const GRACE_DAYS = 30
+const CLEANUP_DAYS = 30
 
 export async function exportUserData(userId: string): Promise<Record<string, unknown>> {
   const [
@@ -147,37 +142,91 @@ export async function exportUserData(userId: string): Promise<Record<string, unk
   }
 }
 
-/**
- * Soft-delete a user. After GRACE_DAYS, a separate cron would do the hard delete.
- * Until then, personal fields are cleared and forum content is anonymised.
- */
+/** Irreversible removal of account credentials and private content. Orders are retained separately. */
 export async function softDeleteUser(userId: string): Promise<void> {
-  const expiresAt = new Date(Date.now() + GRACE_DAYS * 24 * 60 * 60 * 1000)
-  await db
-    .update(users)
-    .set({ deletedAt: expiresAt, name: null, image: null, passwordHash: null })
-    .where(eq(users.id, userId))
+  await db.transaction(async (tx) => {
+    const [user] = await tx.select().from(users).where(eq(users.id, userId)).for("update")
+    if (!user || user.deletedAt) return
+    await tx
+      .update(users)
+      .set({
+        deletedAt: new Date(),
+        email: `${userId}@deleted.invalid`,
+        emailVerifiedAt: null,
+        name: null,
+        image: null,
+        passwordHash: null,
+      })
+      .where(eq(users.id, userId))
+    await tx.update(forumThreads).set({ authorId: null }).where(eq(forumThreads.authorId, userId))
+    await tx.update(forumPosts).set({ authorId: null }).where(eq(forumPosts.authorId, userId))
+    await tx.delete(forumReactions).where(eq(forumReactions.userId, userId))
+    await tx.delete(sessions).where(eq(sessions.userId, userId))
+    await tx.delete(accounts).where(eq(accounts.userId, userId))
+    await tx.delete(passkeys).where(eq(passkeys.userId, userId))
+    await tx.delete(notifications).where(eq(notifications.userId, userId))
+    await tx.delete(notificationPreferences).where(eq(notificationPreferences.userId, userId))
+    await tx.delete(userMemories).where(eq(userMemories.userId, userId))
+    await tx.delete(aiConversations).where(eq(aiConversations.userId, userId))
+    await tx
+      .update(activityEvents)
+      .set({ actorId: null, actorName: null })
+      .where(eq(activityEvents.actorId, userId))
+    await tx
+      .delete(activityEvents)
+      .where(
+        and(
+          eq(activityEvents.targetType, "plan"),
+          inArray(
+            activityEvents.targetId,
+            tx
+              .select({ id: researchPlans.id })
+              .from(researchPlans)
+              .where(eq(researchPlans.ownerId, userId)),
+          ),
+        ),
+      )
+    await tx.delete(researchPlans).where(eq(researchPlans.ownerId, userId))
+    const orderAddresses = await tx
+      .select({ shipping: orders.shippingAddressId, billing: orders.billingAddressId })
+      .from(orders)
+      .where(eq(orders.userId, userId))
+    const retainedIds = orderAddresses
+      .flatMap((row) => [row.shipping, row.billing])
+      .filter((id): id is string => Boolean(id))
+    const personalAddresses = await tx
+      .select({ id: addresses.id })
+      .from(addresses)
+      .where(eq(addresses.userId, userId))
+    const unusedIds = personalAddresses
+      .map((row) => row.id)
+      .filter((id) => !retainedIds.includes(id))
+    if (unusedIds.length) await tx.delete(addresses).where(inArray(addresses.id, unusedIds))
+    await tx.update(addresses).set({ userId: null }).where(eq(addresses.userId, userId))
+  })
+}
 
-  // Anonymise forum content (preserve the conversation; remove the actor)
-  await db.update(forumThreads).set({ authorId: null }).where(eq(forumThreads.authorId, userId))
-  await db.update(forumPosts).set({ authorId: null }).where(eq(forumPosts.authorId, userId))
-  await db.delete(forumReactions).where(eq(forumReactions.userId, userId))
-
-  // Revoke credentials and clear personal side-data
-  await db.delete(sessions).where(eq(sessions.userId, userId))
-  await db.delete(accounts).where(eq(accounts.userId, userId))
-  await db.delete(passkeys).where(eq(passkeys.userId, userId))
-  await db.delete(notifications).where(eq(notifications.userId, userId))
-  await db.delete(notificationPreferences).where(eq(notificationPreferences.userId, userId))
-  await db.delete(userMemories).where(eq(userMemories.userId, userId))
-  await db.delete(aiConversations).where(eq(aiConversations.userId, userId))
-  await db
-    .update(activityEvents)
-    .set({ actorId: null, actorName: null })
-    .where(eq(activityEvents.actorId, userId))
-
-  // Plans: hard delete (private data, no value after user leaves)
-  await db.delete(researchPlans).where(eq(researchPlans.ownerId, userId))
+/** Remove disabled account shells after 30 days without deleting purchase records. */
+export async function purgeDeletedUsers(now = new Date()): Promise<number> {
+  return db.transaction(async (tx) => {
+    const cutoff = new Date(now.getTime() - CLEANUP_DAYS * 86400000)
+    const rows = await tx
+      .select({ id: users.id })
+      .from(users)
+      .where(and(isNotNull(users.deletedAt), lte(users.deletedAt, cutoff)))
+      .limit(100)
+      .for("update", { skipLocked: true })
+    const ids = rows.map((row) => row.id)
+    if (!ids.length) return 0
+    await tx.update(orders).set({ userId: null }).where(inArray(orders.userId, ids))
+    await tx
+      .update(rewardsAccounts)
+      .set({ referredBy: null })
+      .where(inArray(rewardsAccounts.referredBy, ids))
+    await tx.update(supportTickets).set({ userId: null }).where(inArray(supportTickets.userId, ids))
+    await tx.delete(users).where(inArray(users.id, ids))
+    return ids.length
+  })
 }
 
 export async function recordExportRequest(userId: string): Promise<string> {

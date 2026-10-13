@@ -1,5 +1,8 @@
 import { extractPrices, extractSkus, verifyResponse } from "@/lib/ai/guardrails/verify"
+import { products } from "@/lib/products/data"
 import { describe, expect, it } from "vitest"
+
+const verifyWithFixture = (text: string) => verifyResponse(text, products)
 
 describe("guardrails/verify — extractSkus", () => {
   it("matches canonical peptide-name SKUs like BPC-157", () => {
@@ -75,33 +78,33 @@ describe("guardrails/verify — extractPrices", () => {
 
 describe("guardrails/verify — verifyResponse", () => {
   it("passes clean responses", () => {
-    const report = verifyResponse("BPC157-10 is $69.00 and 99.2% pure.")
+    const report = verifyWithFixture("BPC157-10 is $69.00 and 99.2% pure.")
     expect(report.passed).toBe(true)
     expect(report.unknownSkus).toEqual([])
     expect(report.priceMismatches).toEqual([])
   })
 
   it("flags SKU mentions not in the catalog", () => {
-    const report = verifyResponse("I recommend FAKE-99 for you.")
+    const report = verifyWithFixture("I recommend FAKE-99 for you.")
     expect(report.unknownSkus).toContain("FAKE-99")
     expect(report.warnings.some((w) => w.startsWith("unknown_sku"))).toBe(true)
   })
 
   it("flags prices that don't match the catalog (±5% tolerance)", () => {
     // BPC157-5 is 3990 cents — 100% off should trigger.
-    const report = verifyResponse("BPC157-5 at $10.00 today.")
+    const report = verifyWithFixture("BPC157-5 at $10.00 today.")
     expect(report.priceMismatches).toHaveLength(1)
     expect(report.priceMismatches[0]?.sku).toBe("BPC157-5")
   })
 
   it("triggers medical-claim detection", () => {
-    const report = verifyResponse("This peptide is for treating chronic pain in patients.")
+    const report = verifyWithFixture("This peptide is for treating chronic pain in patients.")
     expect(report.needsMedicalReminder).toBe(true)
   })
 
   it("does not flag regulatory agency names as SKUs", () => {
     // Regression: previously the regex would catch "FDA-approved" as a fake SKU.
-    const report = verifyResponse("Not approved by the FDA or EMA.")
+    const report = verifyWithFixture("Not approved by the FDA or EMA.")
     expect(report.unknownSkus).toEqual([])
   })
 })

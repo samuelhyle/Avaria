@@ -8,11 +8,13 @@
  */
 
 import type { Tool, ToolContext, ToolResult } from "@/lib/ai/tools/registry"
-import { products } from "@/lib/products/data"
+import { getStorefrontCatalogue } from "@/lib/products/catalogue"
+import { formatSize } from "@/lib/utils/format"
 
 interface Args {
   slug: string
-  mg: number
+  sku: string
+  mg?: number
   qty?: number
 }
 
@@ -25,20 +27,23 @@ export const addToCartTool: Tool = {
       type: "object",
       properties: {
         slug: { type: "string", description: "Product slug." },
-        mg: { type: "number", description: "Vial size in mg." },
-        qty: { type: "number", description: "Quantity (default 1, max 99)." },
+        sku: { type: "string", description: "Exact SKU from the current product lookup." },
+        qty: { type: "number", description: "Quantity (default 1, max 20)." },
       },
-      required: ["slug", "mg"],
+      required: ["slug", "sku"],
     },
   },
   async execute(rawArgs, ctx): Promise<ToolResult> {
     const args = (rawArgs ?? {}) as Args
-    const qty = Math.min(Math.max(args.qty ?? 1, 1), 99)
+    const products = await getStorefrontCatalogue()
+    const qty = args.qty ?? 1
+    if (!Number.isInteger(qty) || qty < 1 || qty > 20)
+      return { content: { error: "invalid_quantity" } }
     const product = products.find((p) => p.slug === args.slug)
     if (!product) {
       return { content: { error: "not_found", slug: args.slug } }
     }
-    const vial = product.vials.find((v) => v.mg === args.mg)
+    const vial = product.vials.find((v) => v.sku === args.sku)
     if (!vial) {
       return {
         content: {
@@ -49,7 +54,7 @@ export const addToCartTool: Tool = {
         },
       }
     }
-    if (vial.stockQty < qty) {
+    if (vial.purchaseMode !== "direct" || vial.stockQty < qty) {
       return {
         content: {
           error: "insufficient_stock",
@@ -70,20 +75,13 @@ export const addToCartTool: Tool = {
               | undefined
           )?.[ctx.locale] ?? product.defaultTranslation)
 
-    const confirmMessage: Record<string, (name: string, qty: number, mg: number) => string> = {
-      en: (n, q, m) => `Add ${q}× ${n} ${m}mg to the cart?`,
-      fi: (n, q, m) => `Lisätäänkö ${q}× ${n} ${m}mg ostoskoriin?`,
-      de: (n, q, m) => `${q}× ${n} ${m}mg in den Warenkorb legen?`,
-      sv: (n, q, m) => `Lägga till ${q}× ${n} ${m}mg i varukorgen?`,
-      nl: (n, q, m) => `${q}× ${n} ${m}mg aan winkelwagen toevoegen?`,
-    }
-    const enFormat = (n: string, q: number, m: number) => `Add ${q}× ${n} ${m}mg to the cart?`
-    const format = confirmMessage[ctx.locale as keyof typeof confirmMessage] ?? enFormat
-
     return {
       content: {
         ok: true,
-        message: format(tr.name, qty, vial.mg),
+        message:
+          ctx.locale === "fi"
+            ? `Lisätäänkö ${qty} × ${tr.name} ${formatSize(vial, ctx.locale)} ostoskoriin?`
+            : `Add ${qty} × ${tr.name} ${formatSize(vial, ctx.locale)} to the cart?`,
       },
       proposedAction: {
         kind: "add_to_cart",
@@ -91,6 +89,8 @@ export const addToCartTool: Tool = {
         productSlug: product.slug,
         productName: tr.name,
         mg: vial.mg,
+        sizeValue: vial.sizeValue,
+        sizeUnit: vial.sizeUnit,
         qty,
         unitPriceCents: vial.priceCents,
       },

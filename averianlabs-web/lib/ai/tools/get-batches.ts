@@ -6,59 +6,10 @@
  * no rows or is unreachable — so stock/COA answers never silently go stale.
  */
 
-import { batches, products as productsTable, vials } from "@/db/schema"
 import type { Tool, ToolContext, ToolResult } from "@/lib/ai/tools/registry"
-import { db } from "@/lib/db"
-import { products } from "@/lib/products/data"
-import { desc, eq } from "drizzle-orm"
-
+import { getStorefrontCatalogue } from "@/lib/products/catalogue"
 interface Args {
   slug: string
-}
-
-interface BatchView {
-  code: string
-  manufacturedAt: string
-  expiresAt: string
-  hplcPurity: number
-  endotoxinEUPerMg: number
-  msConfirmed: boolean
-  lab: string
-}
-
-async function batchesFromDb(slug: string, limit: number): Promise<BatchView[] | null> {
-  try {
-    const rows = await db
-      .select({
-        code: batches.code,
-        manufacturedAt: batches.manufacturedAt,
-        expiresAt: batches.expiresAt,
-        hplcPurity: batches.hplcPurity,
-        endotoxinEUPerMg: batches.endotoxinEUPerMg,
-        msConfirmed: batches.msConfirmed,
-        lab: batches.lab,
-      })
-      .from(batches)
-      .innerJoin(vials, eq(vials.id, batches.vialId))
-      .innerJoin(productsTable, eq(productsTable.id, vials.productId))
-      .where(eq(productsTable.slug, slug))
-      .orderBy(desc(batches.manufacturedAt))
-      .limit(limit)
-
-    if (rows.length === 0) return null
-    return rows.map((r) => ({
-      code: r.code,
-      manufacturedAt: r.manufacturedAt.toISOString().slice(0, 10),
-      expiresAt: r.expiresAt.toISOString().slice(0, 10),
-      hplcPurity: r.hplcPurity,
-      endotoxinEUPerMg: r.endotoxinEUPerMg,
-      msConfirmed: r.msConfirmed,
-      lab: r.lab,
-    }))
-  } catch (err) {
-    console.warn("[getBatches] DB lookup failed, falling back to catalog:", err)
-    return null
-  }
 }
 
 export const getBatchesTool: Tool = {
@@ -79,27 +30,24 @@ export const getBatchesTool: Tool = {
   },
   async execute(rawArgs, _ctx: ToolContext): Promise<ToolResult> {
     const args = (rawArgs ?? {}) as Args
-    const p = products.find((x) => x.slug === args.slug)
-
-    const dbBatches = args.slug ? await batchesFromDb(args.slug, 3) : null
-    if (dbBatches && dbBatches.length > 0) {
-      return {
-        content: {
-          slug: args.slug,
-          productName: p?.defaultTranslation.name ?? args.slug,
-          source: "database",
-          batches: dbBatches,
-        },
-      }
-    }
-
-    if (!p) return { content: { error: "not_found", slug: args.slug, batches: [] } }
+    const p = (await getStorefrontCatalogue()).find((product) => product.slug === args.slug)
+    if (!p) return { content: { error: "not_found", batches: [] } }
     return {
       content: {
         slug: p.slug,
-        productName: p.defaultTranslation.name,
-        source: "catalog",
-        batches: p.latestBatch ? [p.latestBatch] : [],
+        source: p.dataSource,
+        batches: p.vials.flatMap((vial) =>
+          vial.batch
+            ? [
+                {
+                  ...vial.batch,
+                  sku: vial.sku,
+                  hplcPurity: p.productType === "supplies" ? null : vial.batch.hplcPurity || null,
+                  endotoxinEUPerMg: null,
+                },
+              ]
+            : [],
+        ),
       },
     }
   },

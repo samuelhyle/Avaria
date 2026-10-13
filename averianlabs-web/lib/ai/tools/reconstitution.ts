@@ -6,12 +6,11 @@
  */
 
 import type { Tool, ToolContext, ToolResult } from "@/lib/ai/tools/registry"
-
+import { calculateAliquots } from "@/lib/calculations"
 interface Args {
   vialMg: number
   solventMl: number
-  doseMcg: number
-  syringeIU?: number
+  aliquotMcg: number
 }
 
 const HUMAN_USE_PATTERNS: RegExp[] = [
@@ -22,58 +21,32 @@ export const reconstitutionTool: Tool = {
   definition: {
     name: "getReconstitution",
     description:
-      "Compute the volume to draw for a given reconstitution scenario. Inputs: peptide mass (mg), solvent volume (mL), desired dose (mcg). Optional syringe IU per mL (default 100 IU/mL for 1 mL insulin syringes). Returns concentration, volume per dose, IU per dose, and total doses remaining.",
+      "Calculate laboratory solution concentration and aliquot volume from material mass (mg), solution volume (mL) and mass per aliquot (micrograms). Does not determine biological activity, syringe units or an administration dose.",
     parameters: {
       type: "object",
       properties: {
-        vialMg: { type: "number", description: "Mass of peptide in the vial, in milligrams." },
-        solventMl: {
-          type: "number",
-          description: "Volume of bacteriostatic water added, in milliliters.",
-        },
-        doseMcg: { type: "number", description: "Target dose per draw, in micrograms." },
-        syringeIU: {
-          type: "number",
-          description:
-            "IU per mL on the syringe (default 100). 1 mL insulin syringe = 100 IU; 0.5 mL = 50 IU.",
-        },
+        vialMg: { type: "number" },
+        solventMl: { type: "number" },
+        aliquotMcg: { type: "number" },
       },
-      required: ["vialMg", "solventMl", "doseMcg"],
+      required: ["vialMg", "solventMl", "aliquotMcg"],
     },
   },
   async execute(rawArgs, _ctx: ToolContext): Promise<ToolResult> {
     const args = (rawArgs ?? {}) as Args
-    const { vialMg, solventMl, doseMcg, syringeIU = 100 } = args
-
-    if ([vialMg, solventMl, doseMcg].some((v) => !Number.isFinite(v) || v <= 0)) {
-      return { content: { error: "invalid_inputs" } }
-    }
-
-    const totalMcg = vialMg * 1000
-    const concentrationMgPerMl = vialMg / solventMl
-    const concentrationMcgPerMl = concentrationMgPerMl * 1000
-    const volumePerDoseMl = doseMcg / concentrationMcgPerMl
-    const dosesTotal = Math.floor(totalMcg / doseMcg)
-    const iuPerDose = volumePerDoseMl * syringeIU
-
+    const result = calculateAliquots(args.vialMg, args.solventMl, args.aliquotMcg)
+    if (!result) return { content: { error: "invalid_inputs" } }
     return {
       content: {
-        inputs: { vialMg, solventMl, doseMcg, syringeIU },
-        concentration: {
-          mgPerMl: round(concentrationMgPerMl),
-          mcgPerMl: round(concentrationMcgPerMl),
-        },
-        perDose: { volumeMl: round(volumePerDoseMl), iu: round(iuPerDose) },
-        dosesRemaining: dosesTotal,
+        inputs: args,
+        ...result,
         reminder:
-          "For research/laboratory contexts only. Verify calculations against your protocol and lab SOPs.",
+          _ctx.locale === "fi"
+            ? "Laboratoriolaskelma. Tarkista tulos tutkimusmenetelmäsi mukaisesti."
+            : "Laboratory calculation. Verify against your research protocol.",
       },
     }
   },
-}
-
-function round(n: number): number {
-  return Math.round(n * 100) / 100
 }
 
 // Exported for A6 guardrail tests.

@@ -38,7 +38,7 @@ function isConfigured(): boolean {
 }
 
 const POSTS_QUERY = /* groq */ `
-  *[_type == "blogPost"] | order(publishedAt desc) {
+  *[_type == "blogPost" && reviewed == true && language == $locale && publishedAt <= now()] | order(publishedAt desc) {
     "slug": slug.current,
     title,
     excerpt,
@@ -47,13 +47,13 @@ const POSTS_QUERY = /* groq */ `
     readMin,
     "authorSlug": author->slug.current,
     relatedSlugs,
-    body,
+    "body": coalesce(body, content),
     "i18n": { "fi": i18n.fi->slug.current, "de": i18n.de->slug.current, "sv": i18n.sv->slug.current, "nl": i18n.nl->slug.current }
   }
 `
 
 const POST_BY_SLUG_QUERY = /* groq */ `
-  *[_type == "blogPost" && slug.current == $slug][0] {
+  *[_type == "blogPost" && slug.current == $slug && language == $locale && reviewed == true && publishedAt <= now()][0] {
     "slug": slug.current,
     title,
     excerpt,
@@ -62,17 +62,17 @@ const POST_BY_SLUG_QUERY = /* groq */ `
     readMin,
     "authorSlug": author->slug.current,
     relatedSlugs,
-    body,
+    "body": coalesce(body, content),
     "i18n": { "fi": i18n.fi->slug.current, "de": i18n.de->slug.current, "sv": i18n.sv->slug.current, "nl": i18n.nl->slug.current }
   }
 `
 
 export const listPosts = demoCache(
-  async (): Promise<BlogPostRecord[]> => {
+  async (locale = "en"): Promise<BlogPostRecord[]> => {
     if (isDemoBuild()) return DEMO_POSTS
     if (!isConfigured()) return []
     try {
-      return await sanity.fetch<BlogPostRecord[]>(POSTS_QUERY)
+      return await sanity.fetch<BlogPostRecord[]>(POSTS_QUERY, { locale })
     } catch {
       return []
     }
@@ -82,11 +82,11 @@ export const listPosts = demoCache(
 )
 
 export const getPostBySlug = demoCache(
-  async (slug: string): Promise<BlogPostRecord | null> => {
+  async (slug: string, locale = "en"): Promise<BlogPostRecord | null> => {
     if (isDemoBuild()) return DEMO_POSTS.find((p) => p.slug === slug) ?? null
     if (!isConfigured()) return null
     try {
-      const r = await sanity.fetch<BlogPostRecord | null>(POST_BY_SLUG_QUERY, { slug })
+      const r = await sanity.fetch<BlogPostRecord | null>(POST_BY_SLUG_QUERY, { slug, locale })
       return r ?? null
     } catch {
       return null
@@ -97,12 +97,12 @@ export const getPostBySlug = demoCache(
 )
 
 export const getAuthorPosts = demoCache(
-  async (authorSlug: string): Promise<BlogPostRecord[]> => {
+  async (authorSlug: string, locale = "en"): Promise<BlogPostRecord[]> => {
     if (isDemoBuild()) return DEMO_POSTS.filter((p) => p.authorSlug === authorSlug)
     if (!isConfigured()) return []
     try {
       return await sanity.fetch<BlogPostRecord[]>(
-        `*[_type == "blogPost" && author->slug.current == $slug] | order(publishedAt desc) {
+        `*[_type == "blogPost" && author->slug.current == $slug && language == $locale && reviewed == true && publishedAt <= now()] | order(publishedAt desc) {
         "slug": slug.current,
         title,
         excerpt,
@@ -113,7 +113,7 @@ export const getAuthorPosts = demoCache(
         relatedSlugs,
         body
       }`,
-        { slug: authorSlug },
+        { slug: authorSlug, locale },
       )
     } catch {
       return []

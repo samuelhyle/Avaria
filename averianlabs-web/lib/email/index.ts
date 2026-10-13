@@ -2,7 +2,7 @@ import { logger } from "@/lib/logger"
 import { Resend } from "resend"
 
 import { escapeHtml } from "./html"
-import { renderOrderReceipt, type OrderReceiptInput } from "./receipt"
+import { type OrderReceiptInput, renderOrderReceipt } from "./receipt"
 export { escapeHtml } from "./html"
 
 let _resend: Resend | null = null
@@ -38,13 +38,16 @@ export async function sendEmail({
   }
 
   try {
-    const result = await resend.emails.send({
-      from: FROM_EMAIL,
-      to,
-      subject,
-      html,
-      replyTo: replyTo ?? "support@averianlabs.eu",
-    }, { idempotencyKey })
+    const result = await resend.emails.send(
+      {
+        from: FROM_EMAIL,
+        to,
+        subject,
+        html,
+        replyTo: replyTo ?? "support@averianlabs.eu",
+      },
+      { idempotencyKey },
+    )
     if (result.error) {
       logger.error("[email] provider rejected delivery", result.error)
       return false
@@ -56,324 +59,129 @@ export async function sendEmail({
   }
 }
 
-export function verifyEmailHtml(opts: { url: string }): string {
-  return `
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"></head>
-<body style="margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;">
-  <div style="max-width:600px;margin:0 auto;padding:32px 16px;">
-    <div style="text-align:center;margin-bottom:32px;">
-      <h1 style="font-size:24px;font-weight:700;color:#0f1e50;margin:0;">AverianLabs</h1>
-      <p style="font-size:14px;color:#6b7280;margin-top:4px;">Precision peptides for serious research</p>
-    </div>
-    <div style="background:white;border-radius:12px;border:1px solid #e5e7eb;padding:24px;">
-      <h2 style="font-size:20px;font-weight:600;color:#0f1e50;margin:0;">Confirm your email</h2>
-      <p style="font-size:14px;color:#6b7280;margin-top:8px;">
-        Confirm this address to activate your account. The link expires in 24 hours.
-      </p>
-      <div style="margin-top:20px;text-align:center;">
-        <a href="${escapeHtml(opts.url)}" style="display:inline-block;padding:12px 32px;background:#2563eb;color:white;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none;">
-          Confirm email
-        </a>
-      </div>
-      <p style="font-size:12px;color:#9ca3af;margin-top:20px;">
-        If you didn't create an account, you can ignore this email.
-      </p>
-    </div>
-    <p style="font-size:11px;color:#9ca3af;text-align:center;margin-top:24px;">
-      AverianLabs · Helsinki, Finland · Research use only
-    </p>
-  </div>
-</body>
-</html>`
+type EmailLocale = { locale?: string }
+const emailCopy = {
+  en: {
+    verify: [
+      "Confirm your AverianLabs account",
+      "Confirm your email",
+      "Confirm this address. The link expires in 24 hours.",
+      "Confirm email",
+    ],
+    reset: [
+      "Reset your AverianLabs password",
+      "Reset your password",
+      "The password reset link expires in one hour. Your password changes only after you submit a new one.",
+      "Reset password",
+    ],
+    deletion: [
+      "Confirm account deletion",
+      "Confirm account deletion",
+      "Open the link to review and confirm deletion. Confirmation immediately disables your account and removes or anonymises personal profile data. Required order records are retained. There is no account restoration period. The link expires in 24 hours.",
+      "Review deletion",
+    ],
+    newsletter: [
+      "Confirm your subscription",
+      "Confirm your subscription",
+      "Confirm this address to receive optional AverianLabs updates. The link expires in 24 hours. Contact support to withdraw your consent at any time.",
+      "Confirm subscription",
+    ],
+    ignore: "If you did not request this, you can ignore this email.",
+    footer: "For laboratory research only.",
+    shipped: "Your order has shipped",
+    tracking: "Track shipment",
+    feedback: "Feedback about your order",
+    feedbackBody: "Contact us if you have questions or feedback about this order.",
+    contact: "Contact support",
+    cart: "Review your cart",
+    cartBody: "Check current availability, prices and shipping at checkout.",
+  },
+  fi: {
+    verify: [
+      "Vahvista AverianLabs-tilisi",
+      "Vahvista sähköpostiosoitteesi",
+      "Vahvista tämä sähköpostiosoite. Linkki on voimassa 24 tuntia.",
+      "Vahvista sähköposti",
+    ],
+    reset: [
+      "Vaihda AverianLabs-salasanasi",
+      "Vaihda salasanasi",
+      "Salasanan vaihtolinkki on voimassa tunnin. Salasana muuttuu vasta, kun olet tallentanut uuden salasanan.",
+      "Vaihda salasana",
+    ],
+    deletion: [
+      "Vahvista tilin poistaminen",
+      "Vahvista tilin poistaminen",
+      "Avaa linkki tarkistaaksesi ja vahvistaaksesi poistamisen. Vahvistaminen sulkee tilisi heti ja poistaa tai anonymisoi henkilökohtaiset profiilitiedot. Lakisääteisesti säilytettävät tilaustiedot säilyvät. Tiliä ei voi palauttaa. Linkki on voimassa 24 tuntia.",
+      "Tarkista poistaminen",
+    ],
+    newsletter: [
+      "Vahvista uutiskirjeen tilaus",
+      "Vahvista uutiskirjeen tilaus",
+      "Vahvista tämä osoite saadaksesi AverianLabsin vapaaehtoisia päivityksiä. Linkki on voimassa 24 tuntia. Voit perua suostumuksesi milloin tahansa ottamalla yhteyttä tukeen.",
+      "Vahvista tilaus",
+    ],
+    ignore: "Jos et tehnyt tätä pyyntöä, voit jättää viestin huomiotta.",
+    footer: "Vain laboratoriotutkimukseen.",
+    shipped: "Tilauksesi on lähetetty",
+    tracking: "Seuraa lähetystä",
+    feedback: "Palaute tilauksestasi",
+    feedbackBody: "Ota yhteyttä, jos sinulla on kysyttävää tai palautetta tästä tilauksesta.",
+    contact: "Ota yhteyttä tukeen",
+    cart: "Tarkista ostoskorisi",
+    cartBody: "Tarkista ajantasainen saatavuus, hinnat ja toimitus kassalla.",
+  },
+} as const
+export type ActionEmailKind = "verify" | "reset" | "deletion" | "newsletter"
+const copyFor = (locale?: string) => emailCopy[locale === "fi" ? "fi" : "en"]
+export const actionEmailSubject = (kind: ActionEmailKind, locale?: string) =>
+  copyFor(locale)[kind][0]
+function emailShell(title: string, content: string, locale?: string) {
+  return `<!doctype html><html lang="${locale === "fi" ? "fi" : "en"}"><head><meta charset="utf-8"></head><body style="font-family:system-ui;line-height:1.6;padding:24px;color:#182332"><main style="max-width:600px;margin:auto"><p>AverianLabs</p><h1>${escapeHtml(title)}</h1>${content}<p style="font-size:12px">${copyFor(locale).footer}</p></main></body></html>`
 }
-
-export function passwordResetHtml(opts: { url: string }): string {
-  return `
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"></head>
-<body style="margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;">
-  <div style="max-width:600px;margin:0 auto;padding:32px 16px;">
-    <div style="text-align:center;margin-bottom:32px;">
-      <h1 style="font-size:24px;font-weight:700;color:#0f1e50;margin:0;">AverianLabs</h1>
-    </div>
-    <div style="background:white;border-radius:12px;border:1px solid #e5e7eb;padding:24px;">
-      <h2 style="font-size:20px;font-weight:600;color:#0f1e50;margin:0;">Reset your password</h2>
-      <p style="font-size:14px;color:#6b7280;margin-top:8px;">
-        We received a request to reset your password. The link expires in 1 hour.
-      </p>
-      <div style="margin-top:20px;text-align:center;">
-        <a href="${escapeHtml(opts.url)}" style="display:inline-block;padding:12px 32px;background:#2563eb;color:white;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none;">
-          Reset password
-        </a>
-      </div>
-      <p style="font-size:12px;color:#9ca3af;margin-top:20px;">
-        If you didn't request this, you can safely ignore this email — your password won't change.
-      </p>
-    </div>
-    <p style="font-size:11px;color:#9ca3af;text-align:center;margin-top:24px;">
-      AverianLabs · Helsinki, Finland · Research use only
-    </p>
-  </div>
-</body>
-</html>`
+function actionHtml(kind: ActionEmailKind, opts: EmailLocale & { url: string }) {
+  const copy = copyFor(opts.locale)
+  const [, title, body, button] = copy[kind]
+  return emailShell(
+    title,
+    `<p>${body}</p><p><a href="${escapeHtml(opts.url)}">${button}</a></p><p>${copy.ignore}</p>`,
+    opts.locale,
+  )
 }
-
-export function accountDeletionHtml(opts: { url: string }): string {
-  return `
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"></head>
-<body style="margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;">
-  <div style="max-width:600px;margin:0 auto;padding:32px 16px;">
-    <div style="text-align:center;margin-bottom:32px;">
-      <h1 style="font-size:24px;font-weight:700;color:#0f1e50;margin:0;">AverianLabs</h1>
-    </div>
-    <div style="background:white;border-radius:12px;border:1px solid #e5e7eb;padding:24px;">
-      <h2 style="font-size:20px;font-weight:600;color:#0f1e50;margin:0;">Confirm account deletion</h2>
-      <p style="font-size:14px;color:#6b7280;margin-top:8px;">
-        This will delete your account and personal data. You have 30 days to change your mind
-        before it is permanently removed. The link expires in 24 hours.
-      </p>
-      <div style="margin-top:20px;text-align:center;">
-        <a href="${escapeHtml(opts.url)}" style="display:inline-block;padding:12px 32px;background:#dc2626;color:white;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none;">
-          Confirm deletion
-        </a>
-      </div>
-      <p style="font-size:12px;color:#9ca3af;margin-top:20px;">
-        If you didn't request this, ignore this email — your account stays active.
-      </p>
-    </div>
-    <p style="font-size:11px;color:#9ca3af;text-align:center;margin-top:24px;">
-      AverianLabs · Helsinki, Finland · Research use only
-    </p>
-  </div>
-</body>
-</html>`
-}
-
-export function newsletterConfirmHtml(opts: { url: string }): string {
-  return `
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"></head>
-<body style="margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;">
-  <div style="max-width:600px;margin:0 auto;padding:32px 16px;">
-    <div style="text-align:center;margin-bottom:32px;">
-      <h1 style="font-size:24px;font-weight:700;color:#0f1e50;margin:0;">AverianLabs</h1>
-    </div>
-    <div style="background:white;border-radius:12px;border:1px solid #e5e7eb;padding:24px;">
-      <h2 style="font-size:20px;font-weight:600;color:#0f1e50;margin:0;">Confirm your subscription</h2>
-      <p style="font-size:14px;color:#6b7280;margin-top:8px;">
-        Confirm this address to receive batch releases, new COAs and research notes.
-        The link expires in 24 hours.
-      </p>
-      <div style="margin-top:20px;text-align:center;">
-        <a href="${escapeHtml(opts.url)}" style="display:inline-block;padding:12px 32px;background:#2563eb;color:white;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none;">
-          Confirm subscription
-        </a>
-      </div>
-      <p style="font-size:12px;color:#9ca3af;margin-top:20px;">
-        If you didn't request this, ignore this email — you won't be subscribed.
-      </p>
-    </div>
-    <p style="font-size:11px;color:#9ca3af;text-align:center;margin-top:24px;">
-      AverianLabs · Helsinki, Finland · Research use only
-    </p>
-  </div>
-</body>
-</html>`
-}
-
+export const verifyEmailHtml = (opts: EmailLocale & { url: string }) => actionHtml("verify", opts)
+export const passwordResetHtml = (opts: EmailLocale & { url: string }) => actionHtml("reset", opts)
+export const accountDeletionHtml = (opts: EmailLocale & { url: string }) =>
+  actionHtml("deletion", opts)
+export const newsletterConfirmHtml = (opts: EmailLocale & { url: string }) =>
+  actionHtml("newsletter", opts)
 export function contactNotificationHtml(opts: {
   name: string
   email: string
   subject: string
   message: string
+  locale?: string
 }): string {
-  return `
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"></head>
-<body style="margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;">
-  <div style="max-width:600px;margin:0 auto;padding:32px 16px;">
-    <div style="background:white;border-radius:12px;border:1px solid #e5e7eb;padding:24px;">
-      <h2 style="font-size:18px;font-weight:600;color:#0f1e50;margin:0;">New contact form message</h2>
-      <p style="font-size:14px;color:#6b7280;margin-top:8px;">
-        <strong>${escapeHtml(opts.name)}</strong> &lt;${escapeHtml(opts.email)}&gt;
-      </p>
-      <p style="font-size:14px;color:#0f1e50;margin-top:16px;"><strong>${escapeHtml(opts.subject)}</strong></p>
-      <p style="font-size:14px;color:#374151;margin-top:8px;white-space:pre-wrap;">${escapeHtml(opts.message)}</p>
-    </div>
-    <p style="font-size:11px;color:#9ca3af;text-align:center;margin-top:24px;">
-      AverianLabs · contact form · reply directly to this email
-    </p>
-  </div>
-</body>
-</html>`
+  return emailShell(
+    opts.subject,
+    `<p>${escapeHtml(opts.name)} &lt;${escapeHtml(opts.email)}&gt;</p><p style="white-space:pre-wrap">${escapeHtml(opts.message)}</p>`,
+    opts.locale,
+  )
 }
-
 export function orderConfirmationHtml(opts: OrderReceiptInput): string {
   return renderOrderReceipt(opts)
 }
-
-export function shippingConfirmationHtml(opts: {
-  orderNumber: string
-  carrier: string
-  trackingNumber: string
-  trackingUrl?: string
-}): string {
-  return `
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"></head>
-<body style="margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;">
-  <div style="max-width:600px;margin:0 auto;padding:32px 16px;">
-    <div style="text-align:center;margin-bottom:32px;">
-      <h1 style="font-size:24px;font-weight:700;color:#0f1e50;margin:0;">AverianLabs</h1>
-    </div>
-
-    <div style="background:white;border-radius:12px;border:1px solid #e5e7eb;padding:24px;">
-      <h2 style="font-size:20px;font-weight:600;color:#0f1e50;margin:0;">Your order has shipped</h2>
-      <p style="font-size:14px;color:#6b7280;margin-top:4px;">
-        Order <span style="font-family:monospace;font-weight:600;">${escapeHtml(opts.orderNumber)}</span>
-      </p>
-
-      <div style="margin-top:16px;padding:16px;background:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;">
-        <p style="font-size:14px;margin:0;">
-          <strong>${escapeHtml(opts.carrier)}</strong><br>
-          Tracking: <span style="font-family:monospace;">${escapeHtml(opts.trackingNumber)}</span>
-        </p>
-        ${opts.trackingUrl ? `<a href="${escapeHtml(opts.trackingUrl)}" style="display:inline-block;margin-top:8px;padding:8px 16px;background:#2563eb;color:white;border-radius:6px;font-size:13px;text-decoration:none;">Track shipment</a>` : ""}
-      </div>
-    </div>
-
-    <p style="font-size:11px;color:#9ca3af;text-align:center;margin-top:24px;">
-      AverianLabs · Helsinki, Finland · Research use only
-    </p>
-  </div>
-</body>
-</html>`
-}
-
-export function reviewRequestHtml(opts: {
-  orderNumber: string
-  customerName: string
-  items: Array<{ name: string; mg: number }>
-  locale: string
-}): string {
-  const itemNames = opts.items.map((i) => `${escapeHtml(i.name)} ${i.mg}mg`).join(", ")
-  const reviewUrl = `https://averianlabs.eu/${opts.locale}/account/orders`
-
-  return `
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"></head>
-<body style="margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;">
-  <div style="max-width:600px;margin:0 auto;padding:32px 16px;">
-    <div style="text-align:center;margin-bottom:32px;">
-      <h1 style="font-size:24px;font-weight:700;color:#0f1e50;margin:0;">AverianLabs</h1>
-      <p style="font-size:14px;color:#6b7280;margin-top:4px;">Precision peptides for serious research</p>
-    </div>
-
-    <div style="background:white;border-radius:12px;border:1px solid #e5e7eb;padding:24px;">
-      <h2 style="font-size:20px;font-weight:600;color:#0f1e50;margin:0;">How did your peptides perform?</h2>
-      <p style="font-size:14px;color:#6b7280;margin-top:8px;">
-        Hi ${escapeHtml(opts.customerName)}, your order <span style="font-family:monospace;font-weight:600;">${escapeHtml(opts.orderNumber)}</span> containing ${itemNames} was delivered a few days ago.
-      </p>
-      <p style="font-size:14px;color:#6b7280;margin-top:12px;">
-        Your feedback helps other researchers make informed decisions and helps us maintain our quality standards. Would you take a minute to share your experience?
-      </p>
-
-      <div style="margin-top:20px;text-align:center;">
-        <a href="${reviewUrl}" style="display:inline-block;padding:12px 32px;background:#2563eb;color:white;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none;">
-          Leave a review
-        </a>
-      </div>
-
-      <div style="margin-top:20px;padding:16px;background:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;">
-        <p style="font-size:13px;color:#166534;margin:0;">
-          <strong>What to review:</strong> Purity consistency, packaging quality, COA accuracy, delivery speed, or anything that stood out during your research.
-        </p>
-      </div>
-    </div>
-
-    <div style="margin-top:24px;padding:16px;background:white;border-radius:12px;border:1px solid #e5e7eb;">
-      <p style="font-size:13px;color:#6b7280;margin:0;">
-        <strong>Need help?</strong> Reply to this email or reach our support team at support@averianlabs.eu. We respond within 2 hours during business days.
-      </p>
-    </div>
-
-    <p style="font-size:11px;color:#9ca3af;text-align:center;margin-top:24px;">
-      AverianLabs · Helsinki, Finland · Research use only<br>
-      You received this because you placed an order with us. We won't email you again unless you ask us to.
-    </p>
-  </div>
-</body>
-</html>`
-}
-
-export function abandonedCartHtml(opts: {
-  customerEmail: string
-  items: Array<{ name: string; mg: number; priceCents: number }>
-  locale: string
-}): string {
-  const cartUrl = `https://averianlabs.eu/${opts.locale}/checkout/cart`
-  const itemRows = opts.items
-    .map(
-      (i) => `
-    <tr>
-      <td style="padding:12px 16px;border-bottom:1px solid #eee;font-size:14px;">
-        ${escapeHtml(i.name)} ${i.mg}mg
-      </td>
-      <td style="padding:12px 16px;border-bottom:1px solid #eee;font-size:14px;text-align:right;">
-        €${(i.priceCents / 100).toFixed(2)}
-      </td>
-    </tr>`,
-    )
-    .join("")
-
-  return `
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"></head>
-<body style="margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;">
-  <div style="max-width:600px;margin:0 auto;padding:32px 16px;">
-    <div style="text-align:center;margin-bottom:32px;">
-      <h1 style="font-size:24px;font-weight:700;color:#0f1e50;margin:0;">AverianLabs</h1>
-      <p style="font-size:14px;color:#6b7280;margin-top:4px;">Precision peptides for serious research</p>
-    </div>
-
-    <div style="background:white;border-radius:12px;border:1px solid #e5e7eb;padding:24px;">
-      <h2 style="font-size:20px;font-weight:600;color:#0f1e50;margin:0;">You left items in your cart</h2>
-      <p style="font-size:14px;color:#6b7280;margin-top:8px;">
-        You have research peptides waiting for you. Complete your order before stock runs low on your selected batch.
-      </p>
-
-      <table style="width:100%;border-collapse:collapse;margin-top:16px;">
-        <tbody>${itemRows}</tbody>
-      </table>
-
-      <div style="margin-top:20px;text-align:center;">
-        <a href="${cartUrl}" style="display:inline-block;padding:12px 32px;background:#2563eb;color:white;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none;">
-          Complete your order
-        </a>
-      </div>
-
-      <div style="margin-top:16px;padding:12px;background:#eff6ff;border-radius:8px;border:1px solid #bfdbfe;">
-        <p style="font-size:13px;color:#1e40af;margin:0;">
-          <strong>Free EU shipping</strong> on orders over €150. Your cart may qualify.
-        </p>
-      </div>
-    </div>
-
-    <p style="font-size:11px;color:#9ca3af;text-align:center;margin-top:24px;">
-      AverianLabs · Helsinki, Finland · Research use only<br>
-      You received this because you started an order at averianlabs.eu. We'll only send one reminder.
-    </p>
-  </div>
-</body>
-</html>`
+export function shippingConfirmationHtml(
+  opts: EmailLocale & {
+    orderNumber: string
+    carrier: string
+    trackingNumber: string
+    trackingUrl?: string
+  },
+): string {
+  const copy = copyFor(opts.locale)
+  return emailShell(
+    copy.shipped,
+    `<p>${escapeHtml(opts.orderNumber)}</p><p>${escapeHtml(opts.carrier)} · ${escapeHtml(opts.trackingNumber)}</p>${opts.trackingUrl && /^https:\/\//.test(opts.trackingUrl) ? `<p><a href="${escapeHtml(opts.trackingUrl)}">${copy.tracking}</a></p>` : ""}`,
+    opts.locale,
+  )
 }

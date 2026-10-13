@@ -60,33 +60,24 @@ export const useCart = create<CartState>()(
       isOpen: false,
       add: (item) =>
         set((state) => {
-          // Quotation / unavailable items are kept in the cart for display
-          // (so the user can see the "Contact for quote" badge) but they
-          // never merge with direct-purchase items: the SKU is unique per
-          // purchase mode in practice, and treating them as separate lines
-          // keeps the totals honest.
-          const addQty = item.qty ?? 1
-          const existing = state.items.find(
-            (i) => i.sku === item.sku && i.purchaseMode === item.purchaseMode,
+          if (
+            item.purchaseMode !== "direct" ||
+            !Number.isInteger(item.unitPriceCents) ||
+            item.unitPriceCents <= 0
           )
-          if (existing && item.purchaseMode === "direct") {
-            const totalQty = existing.qty + addQty
-            // Blend unit prices so line totals stay exact when the same SKU is
-            // added again at a different price (e.g. bundle discounts).
-            const existingPrice = existing.unitPriceCents ?? 0
-            const newPrice = item.unitPriceCents ?? 0
-            const unitPriceCents = Math.round(
-              (existingPrice * existing.qty + newPrice * addQty) / totalQty,
-            )
+            return state
+          const addQty = Math.min(20, Math.max(1, Math.floor(item.qty ?? 1)))
+          if (!Number.isFinite(addQty)) return state
+          const existing = state.items.find((line) => line.sku === item.sku)
+          if (existing)
             return {
-              items: state.items.map((i) =>
-                i.sku === item.sku && i.purchaseMode === item.purchaseMode
-                  ? { ...i, qty: totalQty, unitPriceCents }
-                  : i,
+              items: state.items.map((line) =>
+                line.sku === item.sku
+                  ? { ...item, qty: Math.min(20, existing.qty + addQty) }
+                  : line,
               ),
               isOpen: true,
             }
-          }
           return {
             items: [...state.items, { ...item, qty: addQty }],
             isOpen: true,
@@ -95,7 +86,11 @@ export const useCart = create<CartState>()(
       remove: (sku) => set((state) => ({ items: state.items.filter((i) => i.sku !== sku) })),
       setQty: (sku, qty) =>
         set((state) => ({
-          items: state.items.map((i) => (i.sku === sku ? { ...i, qty: Math.max(1, qty) } : i)),
+          items: state.items.map((i) =>
+            i.sku === sku
+              ? { ...i, qty: Number.isFinite(qty) ? Math.min(20, Math.max(1, Math.floor(qty))) : 1 }
+              : i,
+          ),
         })),
       clear: () => set({ items: [] }),
       open: () => set({ isOpen: true }),
