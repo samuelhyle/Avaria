@@ -88,3 +88,35 @@ test("refuses missing indexes", () => {
     ),
   )
 })
+
+const embeddingSnapshot = {
+  tables: {
+    "public.ai_document_chunks": {
+      name: "ai_document_chunks",
+      columns: { embedding: { name: "embedding", type: "vector(1024)", notNull: false } },
+    },
+  },
+}
+const embeddingSchema = (type) => ({
+  columns: [
+    {
+      table_name: "ai_document_chunks",
+      column_name: "embedding",
+      type,
+      not_null: false,
+      generated: "",
+      default_value: null,
+    },
+  ],
+  constraints: [],
+  indexes: [],
+})
+test("accepts the known embedding variant without changing stored vectors", () => {
+  assert.deepEqual(compareBaseline(embeddingSnapshot, embeddingSchema("vector(1024)")), [])
+  assert.deepEqual(compareBaseline(embeddingSnapshot, embeddingSchema("vector(384)")), [])
+})
+test("refuses other embedding dimensions", () => {
+  assert.deepEqual(compareBaseline(embeddingSnapshot, embeddingSchema("vector(256)")), [
+    "Different type: ai_document_chunks.embedding",
+  ])
+})

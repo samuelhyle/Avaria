@@ -29,6 +29,13 @@
       "when": 1791907201000,
       "tag": "0003_explicit_sku_batch",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1791907202000,
+      "tag": "0004_embedding_dimensions",
+      "breakpoints": true
     }
   ]
 }

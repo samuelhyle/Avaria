@@ -21,6 +21,12 @@ export async function onPreBuild() {
     let needsBaseline = false
     const backup = await sql.begin("isolation level repeatable read read only", async (tx) => {
       const schema = await inspectSchema(tx)
+      console.log(
+        "[deploy] Existing embedding column type:",
+        schema.columns.find(
+          (c) => c.table_name === "ai_document_chunks" && c.column_name === "embedding",
+        )?.type ?? "absent",
+      )
       const [{ ledger }] = await tx`select to_regclass('drizzle.__drizzle_migrations') as ledger`
       const migrations = ledger
         ? await tx`select * from drizzle.__drizzle_migrations order by id`
