@@ -341,7 +341,7 @@ export function Shop3DCarousel({ products, locale, reducedMotion }: ShopCarousel
   const translation = active?.translations?.[locale as Locale] ?? active?.defaultTranslation
   const firstVial = active?.vials[0]
   const minVial = firstVial
-    ? active.vials.reduce((min, v) => (v.priceCents < min.priceCents ? v : min), firstVial)
+    ? active.vials.reduce((min, v) => ((v.priceCents ?? 0) < (min.priceCents ?? 0) ? v : min), firstVial)
     : undefined
   const totalStock = active?.vials.reduce((s, v) => s + v.stockQty, 0) ?? 0
   const isContact = minVial?.contactOnly === true || minVial?.priceCents === 0

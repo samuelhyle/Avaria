@@ -2,6 +2,21 @@
 
 Next.js 15 (App Router) + React 19 + TypeScript + Tailwind v4 + React Three Fiber.
 
+## Deployment targets
+
+This project ships to two distinct targets with different intents. Keep them separate.
+
+| Target | URL | What it is | Build mode | `X-Robots-Tag` |
+|---|---|---|---|---|
+| **Canonical production** | `https://averianlabs.eu` (Vercel, region `fra1`) | Live store — checkout, payments, fulfilment | `output: "standalone"`, Sentry sourcemaps, full API routes | `index, follow` |
+| **Preview / demo** | Netlify (auto-generated per branch) | Pre-production preview, no live payments | `output: "export"` only via `BUILD_MODE=demo`, or full Next.js app on the Netlify Runtime plugin | `noindex, nofollow` |
+
+The Netlify URL is **not** the canonical site. It exists for stakeholder review and CI checks. The canonical production URL is Vercel.
+
+> If you intend to deploy from a different Git branch, open a PR — the Vercel preview URL will reflect the PR. Netlify previews remain `noindex` until promoted by the ops lead.
+
+## Quick start (one command)
+
 ## Quick start (one command)
 
 ```bash
@@ -33,7 +48,7 @@ production build + `pnpm start`.
 - **i18n**: next-intl 4 (en, fi, de, sv, nl)
 - **Shipping**: Sendcloud
 - **Search**: Meilisearch
-- **Hosting**: Vercel (fra1) + Cloudflare
+- **Hosting**: Vercel (fra1) canonical + Netlify preview; Cloudflare in front of R2
 
 ## Architecture
 

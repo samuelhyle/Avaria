@@ -17,7 +17,7 @@ interface ProductVialSceneProps {
 function VialContainer({ product, autoRotate }: { product: Product; autoRotate: boolean }) {
   const ref = useRef<Group>(null)
   const minVial = product.vials.reduce(
-    (min, v) => (v.priceCents < min.priceCents ? v : min),
+    (min, v) => ((v.priceCents ?? 0) < (min.priceCents ?? 0) ? v : min),
     product.vials[0]!,
   )
 

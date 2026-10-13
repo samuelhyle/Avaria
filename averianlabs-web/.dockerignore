@@ -5,6 +5,9 @@ dist/
 build/
 coverage/
 
+# Sanity studio source is dev-only; the runtime image does not need it.
+sanity/
+
 # Dependencies (re-installed inside the image)
 node_modules/
 
