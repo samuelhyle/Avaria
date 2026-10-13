@@ -26,3 +26,6 @@ next-env.d.ts
 .routes-demo-backup/
 .next-demo/
 .lighthouseci/
+
+# Isolated local production verification output
+.next-implementation/
