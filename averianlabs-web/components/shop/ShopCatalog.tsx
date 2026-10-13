@@ -6,7 +6,7 @@ import { ShopFilterSidebar } from "@/components/product/ShopFilterSidebar"
 import { ShopToolbar } from "@/components/product/ShopToolbar"
 import { TrustStrip } from "@/components/product/TrustStrip"
 import { Badge } from "@/components/ui/Badge"
-import { products } from "@/lib/products/data"
+import { useCatalogue } from "@/components/product/CatalogueProvider"
 import type { Locale } from "@/lib/products/types"
 import { type ShopFilters, defaultFilters, parseFiltersFromSearch } from "@/lib/shop/filters"
 import { useTranslations } from "next-intl"
@@ -25,6 +25,7 @@ const Shop3DCarousel = dynamic(
  * no longer opts into dynamic rendering.
  */
 export function ShopCatalog({ locale }: { locale: string }) {
+  const products = useCatalogue()
   const t = useTranslations("shop")
   const sp = useSearchParams()
   const params = new URLSearchParams(sp?.toString() ?? "")

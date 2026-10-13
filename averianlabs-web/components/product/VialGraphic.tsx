@@ -17,8 +17,12 @@ interface VialGraphicProps {
 export function VialGraphic({ hue, name, sku, showLabel = true, className }: VialGraphicProps) {
   const style = { "--vial-hue": hue } as CSSProperties
 
+  // Decorative — the product name and SKU are already announced by the
+  // parent card / list-item context, so the duplicate text inside the
+  // vial label would be read twice. `role="presentation"` makes the
+  // relationship explicit for screen-reader users.
   return (
-    <div className={cn("relative", className)} style={style}>
+    <div aria-hidden="true" role="presentation" className={cn("relative", className)} style={style}>
       {/* Vial body */}
       <div
         className="absolute inset-x-[28%] inset-y-0 rounded-[35%] shadow-lg"

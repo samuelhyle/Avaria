@@ -73,10 +73,10 @@ function FilterContent({
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h3 className="flex items-center gap-2 font-display text-sm font-semibold">
+        <h2 className="flex items-center gap-2 font-display text-sm font-semibold">
           <SlidersHorizontal className="h-4 w-4" />
           {t("filters")}
-        </h3>
+        </h2>
         <button type="button" onClick={clearAll} className="text-xs text-ink-muted hover:text-ink">
           {t("clearAll")}
         </button>

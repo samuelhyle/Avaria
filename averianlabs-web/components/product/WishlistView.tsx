@@ -4,7 +4,7 @@ import { ProductCard } from "@/components/product/ProductCard"
 import { Button } from "@/components/ui/Button"
 import { useCart } from "@/lib/cart/store"
 import { useCompare } from "@/lib/compare/store"
-import { products } from "@/lib/products/data"
+import { useCatalogue } from "@/components/product/CatalogueProvider"
 import type { Locale } from "@/lib/products/types"
 import { useWishlist } from "@/lib/wishlist/store"
 import { GitCompare, Heart, ShoppingBag } from "lucide-react"
@@ -13,6 +13,7 @@ import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
 export function WishlistView({ locale }: { locale: Locale | string }) {
+  const products = useCatalogue()
   const [hydrated, setHydrated] = useState(false)
   const items = useWishlist((s) => s.items)
   const clear = useWishlist((s) => s.clear)
@@ -47,15 +48,19 @@ export function WishlistView({ locale }: { locale: Locale | string }) {
   const addAllToCart = () => {
     let added = 0
     list.forEach((p) => {
-      const min = p.vials.reduce((m, v) => (v.priceCents < m.priceCents ? v : m), p.vials[0]!)
-      if (!min.contactOnly && min.priceCents > 0) {
+      const min = p.vials.reduce((m, v) =>
+        (v.priceCents ?? 0) < (m.priceCents ?? 0) ? v : m, p.vials[0]!)
+      if (!min.contactOnly && (min.priceCents ?? 0) > 0) {
         add({
           productSlug: p.slug,
           sku: min.sku,
           name: `${p.defaultTranslation.name} ${min.mg}mg`,
           mg: min.mg,
-          qty: 1,
+          sizeValue: min.sizeValue,
+          sizeUnit: min.sizeUnit,
           unitPriceCents: min.priceCents,
+          purchaseMode: min.purchaseMode,
+          qty: 1,
         })
         added++
       }

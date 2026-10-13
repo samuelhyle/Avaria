@@ -1,3 +1,4 @@
+import { getCurrentMember } from "@/lib/community"
 import { DocumentList } from "@/components/documents/DocumentList"
 import { PdfViewer } from "@/components/documents/PdfViewer"
 import { Badge } from "@/components/ui/Badge"
@@ -44,7 +45,7 @@ export const generateStaticParams = () => []
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, id } = await params
-  const doc = await getDocumentById(id).catch(() => null)
+  const doc = await getDocumentById(id, locale).catch(() => null)
   if (!doc) return { title: "Document not found" }
   return {
     title: `${doc.title} (${DOCUMENT_TYPE_LABELS[doc.type]})`,
@@ -63,14 +64,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function DocumentPage({ params }: Props) {
   const { locale, id } = await params
   setRequestLocale(locale)
-  const doc = await getDocumentById(id)
+  const member = await getCurrentMember().catch(() => null)
+  const doc = await getDocumentById(id, locale, Boolean(member)).catch(() => null)
   if (!doc) notFound()
   const t = await getTranslations("documents")
-  const fileUrl = resolveDocumentUrl(doc)
+  const fileUrl = await resolveDocumentUrl(doc)
   const Icon = TYPE_ICON[doc.type] ?? FileWarning
 
   const sameProduct = doc.productId
-    ? await listRecentDocuments({ productId: doc.productId, limit: 8 }).catch(() => [])
+    ? await listRecentDocuments({ productId: doc.productId, limit: 8, locale }).catch(() => [])
     : []
   const otherDocs = sameProduct.filter((d) => d.id !== doc.id)
 

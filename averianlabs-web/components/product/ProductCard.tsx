@@ -25,7 +25,7 @@ export function ProductCard({ product, locale, className, variant = "grid" }: Pr
   const tCommon = useTranslations("common")
   const translation = product.translations?.[locale as Locale] ?? product.defaultTranslation
   const minVial = product.vials.reduce(
-    (min, v) => (v.priceCents < min.priceCents ? v : min),
+    (min, v) => ((v.priceCents ?? 0) < (min.priceCents ?? 0) ? v : min),
     product.vials[0]!,
   )
   const totalStock = product.vials.reduce((s, v) => s + v.stockQty, 0)
@@ -48,7 +48,10 @@ export function ProductCard({ product, locale, className, variant = "grid" }: Pr
       sku: minVial.sku,
       name: translation.name,
       mg: minVial.mg,
+      sizeValue: minVial.sizeValue,
+      sizeUnit: minVial.sizeUnit,
       unitPriceCents: minVial.priceCents,
+      purchaseMode: minVial.purchaseMode,
     })
   }
 

@@ -1,211 +1,33 @@
 "use client"
 
+import { QuoteForm } from "@/components/product/QuoteForm"
+import { StickyDesktopAtc } from "@/components/product/StickyDesktopAtc"
 import { StickyMobileAtc } from "@/components/product/StickyMobileAtc"
-import { SaveToPlanWrapper } from "@/components/research-plans/SaveToPlanWrapper"
-import { Badge } from "@/components/ui/Badge"
 import { Button } from "@/components/ui/Button"
-import { Input } from "@/components/ui/Input"
 import { useCart } from "@/lib/cart/store"
 import type { Locale, Product } from "@/lib/products/types"
 import { cn } from "@/lib/utils/cn"
-import { formatCurrency } from "@/lib/utils/format"
-import { Check, Mail, ShoppingBag } from "lucide-react"
+import { formatCurrency, formatSize, formatPercent } from "@/lib/utils/format"
 import { useTranslations } from "next-intl"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { toast } from "sonner"
 
-interface ProductDetailActionsProps {
-  product: Product
-  locale: Locale | string
-}
-
-interface PlanSummary {
-  id: string
-  title: string
-}
-
-export function ProductDetailActions({ product, locale }: ProductDetailActionsProps) {
+export function ProductDetailActions({ product, locale }: { product: Product; locale: string }) {
   const t = useTranslations("product")
-  const tCommon = useTranslations("common")
-  const translation = product.translations?.[locale as Locale] ?? product.defaultTranslation
-  const [vialIdx, setVialIdx] = useState(0)
+  const r = useTranslations("research")
+  const common = useTranslations("common")
+  const [index, setIndex] = useState(() => Math.max(0, product.vials.findIndex((v) => v.purchaseMode === "direct" && v.stockQty > 0)))
   const [qty, setQty] = useState(1)
-  const [isAuthed, setIsAuthed] = useState<boolean | null>(null)
-  const [plans, setPlans] = useState<PlanSummary[]>([])
   const add = useCart((s) => s.add)
-
-  // Resolve the session + saved plans after hydration so the product page can
-  // be statically rendered (previously `auth()` forced it dynamic).
-  useEffect(() => {
-    let cancelled = false
-    async function load() {
-      try {
-        const sessionRes = await fetch("/api/auth/session")
-        const session = sessionRes.ok ? await sessionRes.json() : null
-        if (cancelled) return
-        const authed = Boolean(session?.user?.id)
-        setIsAuthed(authed)
-        if (!authed) return
-
-        const plansRes = await fetch("/api/plans")
-        if (!plansRes.ok) return
-        const data = (await plansRes.json()) as { plans?: PlanSummary[] }
-        if (cancelled) return
-        setPlans(
-          (data.plans ?? []).map((p) => ({
-            id: p.id,
-            title: p.title,
-          })),
-        )
-      } catch {
-        if (!cancelled) setIsAuthed(false)
-      }
-    }
-    void load()
-    return () => {
-      cancelled = true
-    }
-  }, [])
-
-  const vial = product.vials[vialIdx]
+  const vial = product.vials[index]
   if (!vial) return null
-  const isContact = vial.contactOnly === true || vial.priceCents === 0
-  const disabled = !isContact && vial.stockQty === 0
-
-  if (isContact) {
-    return (
-      <div className="mt-8 rounded-[var(--radius-lg)] border border-line bg-surface-2 p-6">
-        <h3 className="font-display text-lg font-semibold">Request quote</h3>
-        <p className="mt-1 text-sm text-ink-muted">
-          Pricing and current batch availability on request. We reply within 24h.
-        </p>
-        <form
-          className="mt-4 space-y-3"
-          onSubmit={(e) => {
-            e.preventDefault()
-            toast.success("Quote request sent", {
-              description: `We'll email you current pricing for ${translation.name}.`,
-            })
-          }}
-        >
-          <Input type="email" placeholder="you@lab.eu" required />
-          <Button type="submit" size="lg" fullWidth>
-            <Mail className="h-4 w-4" />
-            Request quote
-          </Button>
-        </form>
-      </div>
-    )
-  }
-
+  const name = (product.translations?.[locale as Locale] ?? product.defaultTranslation).name
+  const direct = vial.purchaseMode === "direct" && vial.priceCents > 0 && vial.stockQty > 0
+  const changeVial = (next: number) => { setIndex(next); setQty(1) }
   const handleAdd = () => {
-    add({
-      productSlug: product.slug,
-      sku: vial.sku,
-      name: `${translation.name} ${vial.mg}mg`,
-      mg: vial.mg,
-      qty,
-      unitPriceCents: vial.priceCents,
-    })
-    toast.success("Added to cart", { description: `${translation.name} ${vial.mg}mg × ${qty}` })
+    if (!direct) return
+    add({ productSlug: product.slug, sku: vial.sku, name, mg: vial.mg, sizeValue: vial.sizeValue, sizeUnit: vial.sizeUnit, qty, unitPriceCents: vial.priceCents, purchaseMode: vial.purchaseMode })
+    toast.success(r("added"), { description: `${name} · ${formatSize(vial, locale)} × ${qty}` })
   }
-
-  return (
-    <>
-      <div className="mt-8 space-y-5">
-        <div>
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-ink-subtle">
-            {t("selectVialSize")}
-          </h3>
-          <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
-            {product.vials.map((v, i) => (
-              <button
-                key={v.sku}
-                type="button"
-                onClick={() => {
-                  setVialIdx(i)
-                  setQty(1)
-                }}
-                disabled={v.stockQty === 0}
-                className={cn(
-                  "flex flex-col items-start gap-1 rounded-[var(--radius)] border p-3 text-left transition-colors",
-                  vialIdx === i
-                    ? "border-accent bg-accent-soft"
-                    : "border-line bg-surface hover:border-accent/40",
-                  v.stockQty === 0 && "opacity-50",
-                )}
-              >
-                <span className="font-display text-lg font-semibold">{v.mg} mg</span>
-                <span className="font-mono text-3xs text-ink-subtle">{v.sku}</span>
-                <span className="font-display text-sm">
-                  {formatCurrency(v.priceCents, "EUR", locale)}
-                </span>
-                {v.compareAtCents ? <Badge tone="warn">Sale</Badge> : null}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-ink-subtle">
-            {t("quantity")}
-          </h3>
-          <div className="mt-3 inline-flex items-center rounded-[var(--radius)] border border-line bg-surface">
-            <button
-              type="button"
-              onClick={() => setQty((q) => Math.max(1, q - 1))}
-              className="inline-flex h-10 w-10 items-center justify-center text-ink-muted hover:text-ink"
-              aria-label={tCommon("decreaseQuantity")}
-            >
-              −
-            </button>
-            <span className="w-12 text-center font-mono">{qty}</span>
-            <button
-              type="button"
-              onClick={() => setQty((q) => Math.min(vial.stockQty, q + 1))}
-              className="inline-flex h-10 w-10 items-center justify-center text-ink-muted hover:text-ink"
-              aria-label={tCommon("increaseQuantity")}
-            >
-              +
-            </button>
-          </div>
-        </div>
-
-        <Button size="lg" fullWidth disabled={disabled} onClick={handleAdd}>
-          {disabled ? (
-            <Badge tone="danger">Out of stock</Badge>
-          ) : (
-            <>
-              <ShoppingBag className="h-4 w-4" />
-              {t("addToCart")} · {formatCurrency(vial.priceCents * qty, "EUR", locale)}
-            </>
-          )}
-        </Button>
-
-        <div className="flex items-center gap-2 text-xs text-ink-muted">
-          <Check className="h-3 w-3 text-success" />
-          <span>Free shipping over €150 EU-wide</span>
-        </div>
-
-        {isAuthed !== null ? (
-          <SaveToPlanWrapper
-            productSlug={product.slug}
-            productName={translation.name}
-            locale={String(locale)}
-            isAuthed={isAuthed}
-            plans={plans}
-          />
-        ) : null}
-      </div>
-
-      <StickyMobileAtc
-        product={product}
-        locale={String(locale)}
-        onAddToCart={handleAdd}
-        disabled={disabled}
-        priceCents={vial.priceCents * qty}
-        vialLabel={`${vial.mg} mg · ${vial.sku}`}
-      />
-    </>
-  )
+  return <><div className="mt-8 space-y-5"><fieldset><legend className="text-sm font-medium">{t("selectVialSize")}</legend><div className="mt-3 flex flex-wrap gap-2">{product.vials.map((variant, i) => <button key={variant.sku} type="button" aria-pressed={index === i} onClick={() => changeVial(i)} className={cn("min-w-28 rounded-[var(--radius)] border p-3 text-left", index === i ? "border-accent bg-accent-soft" : "border-line bg-surface")}><span className="block font-semibold">{formatSize(variant, locale)}</span><span className="block font-mono text-xs text-ink-muted">{variant.sku}</span><span className="block text-sm">{variant.purchaseMode === "direct" ? formatCurrency(variant.priceCents, "EUR", locale) : variant.purchaseMode === "quotation" ? r("quote") : r("unavailable")}</span></button>)}</div></fieldset>{direct ? <><div><p className="text-sm font-medium">{t("quantity")}</p><div className="mt-3 inline-flex items-center rounded-[var(--radius)] border border-line"><button type="button" aria-label={common("decreaseQuantity")} onClick={() => setQty(Math.max(1, qty - 1))} className="h-11 w-11">−</button><span className="w-10 text-center font-mono" aria-live="polite">{qty}</span><button type="button" aria-label={common("increaseQuantity")} onClick={() => setQty(Math.min(20, vial.stockQty, qty + 1))} className="h-11 w-11">+</button></div></div><Button size="lg" fullWidth onClick={handleAdd}>{t("addToCart")} · {formatCurrency(vial.priceCents * qty, "EUR", locale)}</Button><p className="text-xs text-ink-muted">{t("vatNote")} {r("shippingAtCheckout")}</p></> : <QuoteForm key={vial.sku} sku={vial.sku} locale={locale} />}{vial.batch ? <div className="rounded-[var(--radius)] border border-line p-4 text-sm"><p className="font-medium">{r("batch")}: <span className="font-mono">{vial.batch.code}</span></p>{product.productType !== "supplies" && vial.batch.hplcPurity > 0 ? <p>{r("purity")}: {formatPercent(vial.batch.hplcPurity, locale)}</p> : null}<a href={`/${locale}/coa?q=${encodeURIComponent(vial.batch.code)}`} className="mt-2 inline-block text-accent underline">{r("viewDocuments")}</a></div> : <p className="text-sm text-ink-muted">{r("batchPending")}</p>}</div>{direct ? <><StickyMobileAtc product={product} locale={locale} onAddToCart={handleAdd} disabled={!direct} priceCents={vial.priceCents * qty} vialLabel={`${formatSize(vial, locale)} · ${vial.sku}`} /><StickyDesktopAtc product={product} locale={locale} index={index} qty={qty} onVialChange={changeVial} onAdd={handleAdd} /></> : null}</>
 }

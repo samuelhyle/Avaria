@@ -60,7 +60,8 @@ export function CompareTable({ products, locale }: CompareTableProps) {
   const add = useCart((s) => s.add)
   const addAll = () => {
     list.forEach((p) => {
-      const min = p.vials.reduce((m, v) => (v.priceCents < m.priceCents ? v : m), p.vials[0]!)
+      const min = p.vials.reduce((m, v) =>
+        (v.priceCents ?? 0) < (m.priceCents ?? 0) ? v : m, p.vials[0]!)
       const translation = p.translations?.[locale as Locale] ?? p.defaultTranslation
       if (!min.contactOnly && min.priceCents > 0) {
         add({
@@ -68,8 +69,11 @@ export function CompareTable({ products, locale }: CompareTableProps) {
           sku: min.sku,
           name: `${translation.name} ${min.mg}mg`,
           mg: min.mg,
-          qty: 1,
+          sizeValue: min.sizeValue,
+          sizeUnit: min.sizeUnit,
           unitPriceCents: min.priceCents,
+          purchaseMode: min.purchaseMode,
+          qty: 1,
         })
       }
     })
@@ -204,7 +208,7 @@ export function CompareTable({ products, locale }: CompareTableProps) {
                 </td>
                 {list.map((p) => {
                   const min = p.vials.reduce(
-                    (m, v) => (v.priceCents < m.priceCents ? v : m),
+                    (m, v) => ((v.priceCents ?? 0) < (m.priceCents ?? 0) ? v : m),
                     p.vials[0]!,
                   )
                   const isContact = min.contactOnly === true || min.priceCents === 0
@@ -227,7 +231,7 @@ export function CompareTable({ products, locale }: CompareTableProps) {
                 </td>
                 {list.map((p) => {
                   const min = p.vials.reduce(
-                    (m, v) => (v.priceCents < m.priceCents ? v : m),
+                    (m, v) => ((v.priceCents ?? 0) < (m.priceCents ?? 0) ? v : m),
                     p.vials[0]!,
                   )
                   const isContact = min.contactOnly === true || min.priceCents === 0

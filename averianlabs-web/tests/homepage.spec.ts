@@ -1,24 +1,17 @@
 import { expect, test } from "@/tests/fixtures"
 
 test.describe("homepage", () => {
-  test("renders the 3D product carousel heading and a select-the-next button", async ({
-    cleanPage,
-  }) => {
+  test("renders the 3D product hero with focusable product chips", async ({ cleanPage }) => {
     await cleanPage.goto("/en")
 
-    // The homepage renders the 3D carousel with a translated label accessible
-    // via its region role.
-    const carousel = (page) => page.getByRole("region", { name: /3D product carousel/i })
-    await expect(carousel(cleanPage)).toBeVisible()
+    // The hero exposes a chip group with one chip per featured product.
+    // The group is rendered with role=group + an aria-label that we set
+    // in the i18n catalogue.
+    const chipGroup = cleanPage.getByRole("group", { name: /featured products|valitut tuotteet/i }).first()
+    await expect(chipGroup).toBeVisible()
 
-    // Carousel exposes prev/next controls (icon-only buttons, identified by aria-label).
-    await expect(
-      cleanPage.getByRole("button", { name: /previous product/i }).first(),
-    ).toHaveAttribute("aria-label", /previous product/i)
-    await expect(cleanPage.getByRole("button", { name: /next product/i }).first()).toHaveAttribute(
-      "aria-label",
-      /next product/i,
-    )
+    // The hero card links to the focused product's detail page.
+    await expect(cleanPage.getByRole("link", { name: /view/i }).first()).toBeVisible()
   })
 
   test("emits a translated title and full hreflang set", async ({ request }) => {

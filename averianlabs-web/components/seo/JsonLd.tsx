@@ -29,7 +29,7 @@ interface ProductJsonLdProps {
 
 export function ProductJsonLd({ product, locale, url }: ProductJsonLdProps) {
   const minVial = product.vials.reduce(
-    (min, v) => (v.priceCents < min.priceCents ? v : min),
+    (min, v) => ((v.priceCents ?? 0) < (min.priceCents ?? 0) ? v : min),
     product.vials[0]!,
   )
   const translation = product.translations?.[locale as "en"] ?? product.defaultTranslation

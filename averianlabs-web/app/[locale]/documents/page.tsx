@@ -28,7 +28,7 @@ export default async function DocumentsIndexPage({
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations("documents")
-  const docs = await listRecentDocuments({ limit: 100 })
+  const docs = await listRecentDocuments({ limit: 100, locale }).catch(() => [])
 
   return (
     <Container className="py-12">

@@ -50,8 +50,11 @@ export function QuickView({ product, locale, open, onOpenChange }: QuickViewProp
       sku: vial.sku,
       name: `${translation.name} ${vial.mg}mg`,
       mg: vial.mg,
+      sizeValue: vial.sizeValue,
+      sizeUnit: vial.sizeUnit,
       qty: 1,
       unitPriceCents: vial.priceCents,
+      purchaseMode: vial.purchaseMode,
     })
     toast.success("Added to cart", { description: `${translation.name} ${vial.mg}mg` })
     onOpenChange(false)
