@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto"
-import { getStore } from "@netlify/blobs"
+import { getDeployStore } from "@netlify/blobs"
 import postgres from "postgres"
 import {
   adoptBaseline,
@@ -54,13 +54,10 @@ export async function onPreBuild() {
       })
     })
     const digest = createHash("sha256").update(backup).digest("hex")
-    const key = `${process.env.DEPLOY_ID}/pre-migration.json`
-    // Site-wide private storage, persisted across deploys; never an asset in the public publish directory.
-    const store = getStore({
-      name: "database-release-backups",
-      region: "eu-central-1",
-      consistency: "strong",
-    })
+    const key = "database-release-backups/pre-migration.json"
+    // Private deployment-scoped storage, never a public publish asset.
+    // Export this backup before deleting the associated deployment.
+    const store = getDeployStore({ consistency: "strong" })
     await store.set(key, backup, { metadata: { sha256: digest } })
     const saved = await store.get(key, { type: "text", consistency: "strong" })
     if (saved === null || createHash("sha256").update(saved).digest("hex") !== digest)
