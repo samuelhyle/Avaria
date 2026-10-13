@@ -1,7 +1,7 @@
 "use client"
 
 import type { Locale, Product } from "@/lib/products/types"
-import { formatCurrency, formatSize, formatPercent } from "@/lib/utils/format"
+import { formatCurrency, formatPercent, formatSize } from "@/lib/utils/format"
 import { ArrowUpRight, FlaskConical } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
@@ -49,10 +49,7 @@ export function Hero3DProductCard({ product, locale }: Hero3DProductCardProps) {
             <span>
               {t("heroFrom")}{" "}
               {minVial ? (
-                <span className="text-ink">
-                  {minVial.sizeValue}
-                  {minVial.sizeUnit}
-                </span>
+                <span className="text-ink normal-case">{formatSize(minVial, locale)}</span>
               ) : null}
             </span>
           </div>
@@ -73,10 +70,7 @@ export function Hero3DProductCard({ product, locale }: Hero3DProductCardProps) {
                 : "—"}
             </dd>
             <dt className="text-ink-subtle">{t("heroFrom")}</dt>
-            <dd className="text-right font-mono text-ink">
-              {minVial.sizeValue}
-              {minVial.sizeUnit}
-            </dd>
+            <dd className="text-right font-mono text-ink">{formatSize(minVial, locale)}</dd>
           </dl>
         ) : null}
 
@@ -86,7 +80,9 @@ export function Hero3DProductCard({ product, locale }: Hero3DProductCardProps) {
               {t("heroFrom")}
             </span>
             <span className="font-display text-2xl font-semibold tabular-nums text-ink">
-              {minVial?.purchaseMode === "direct" ? formatCurrency(minVial.priceCents, "EUR", locale) : r("quote")}
+              {minVial?.purchaseMode === "direct"
+                ? formatCurrency(minVial.priceCents, "EUR", locale)
+                : r("quote")}
             </span>
           </div>
           <Link

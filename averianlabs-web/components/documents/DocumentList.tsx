@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/Badge"
 import { DOCUMENT_TYPE_LABELS } from "@/lib/documents"
 import { Calendar, Download, FileWarning } from "lucide-react"
+import { getTranslations } from "next-intl/server"
 import Link from "next/link"
 
 interface DocumentListItem {
@@ -19,11 +20,12 @@ interface DocumentListProps {
   emptyMessage?: string
 }
 
-export function DocumentList({ docs, locale, emptyMessage }: DocumentListProps) {
+export async function DocumentList({ docs, locale, emptyMessage }: DocumentListProps) {
+  const t = await getTranslations({ locale, namespace: "research" })
   if (docs.length === 0) {
     return (
       <p className="rounded-[var(--radius)] border border-dashed border-line bg-surface p-6 text-center text-sm text-ink-muted">
-        {emptyMessage ?? "No documents."}
+        {emptyMessage ?? t("noDocuments")}
       </p>
     )
   }
@@ -38,13 +40,16 @@ export function DocumentList({ docs, locale, emptyMessage }: DocumentListProps) 
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
                 <Badge tone="muted" size="sm">
-                  {DOCUMENT_TYPE_LABELS[d.type as keyof typeof DOCUMENT_TYPE_LABELS] ?? d.type}
+                  {t(`docLabels.${d.type}`)}
                 </Badge>
                 <p className="truncate text-sm font-medium text-ink">{d.title}</p>
               </div>
               <p className="mt-0.5 text-xs text-ink-subtle">
                 <Calendar className="mr-1 inline h-3 w-3" />
-                {new Date(d.publishedAt).toISOString().slice(0, 10)} · v{d.version}
+                {new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(
+                  new Date(d.publishedAt),
+                )}{" "}
+                · v{d.version}
                 {d.productName ? <> · {d.productName}</> : null}
               </p>
             </div>

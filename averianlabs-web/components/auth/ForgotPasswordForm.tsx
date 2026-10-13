@@ -10,14 +10,16 @@ export function ForgotPasswordForm({ locale }: { locale: string }) {
   const t = useTranslations("auth")
   const [pending, setPending] = useState(false)
   const [sent, setSent] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setPending(true)
+    setError(null)
 
     const form = new FormData(event.currentTarget)
     try {
-      await fetch("/api/auth/forgot-password", {
+      const res = await fetch("/api/auth/forgot-password", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
@@ -25,9 +27,12 @@ export function ForgotPasswordForm({ locale }: { locale: string }) {
           locale,
         }),
       })
+      if (!res.ok) throw new Error("request failed")
+      setSent(true)
+    } catch {
+      setError(t("genericError"))
     } finally {
       setPending(false)
-      setSent(true)
     }
   }
 
@@ -55,6 +60,11 @@ export function ForgotPasswordForm({ locale }: { locale: string }) {
         required
         maxLength={254}
       />
+      {error ? (
+        <p role="alert" className="text-sm text-danger">
+          {error}
+        </p>
+      ) : null}
       <Button type="submit" loading={pending} fullWidth>
         {pending ? t("sending") : t("sendResetLink")}
       </Button>

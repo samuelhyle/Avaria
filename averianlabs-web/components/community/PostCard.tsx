@@ -3,7 +3,7 @@
 import { Badge } from "@/components/ui/Badge"
 import { tierFor } from "@/lib/community/reputation"
 import { cn } from "@/lib/utils/cn"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import Link from "next/link"
 import { PostMarkdown } from "./PostMarkdown"
 import { ReactionBar } from "./ReactionBar"
@@ -33,6 +33,8 @@ interface PostCardProps {
 }
 
 export function PostCard({ post, isOriginal, isAuthed, currentUserId, reactions }: PostCardProps) {
+  const locale = useLocale()
+  const r = useTranslations("research")
   const t = useTranslations("community")
   const tier = tierFor(post.authorReputation ?? 0)
   const isOwnPost = !!currentUserId && post.authorId === currentUserId
@@ -55,19 +57,19 @@ export function PostCard({ post, isOriginal, isAuthed, currentUserId, reactions 
           </div>
           <div className="text-sm">
             <div className="font-medium text-ink">
-              {post.authorName ?? "Anonymous"}
+              {post.authorName ?? r("someone")}
               {isOriginal ? (
                 <span className="ml-2 text-xs text-ink-muted">· {t("threadOriginalPost")}</span>
               ) : null}
             </div>
             <div className="flex items-center gap-2 text-xs text-ink-muted">
               <time dateTime={created.toISOString()}>
-                {created.toLocaleDateString()}{" "}
-                {created.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                {created.toLocaleDateString(locale)}{" "}
+                {created.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })}
               </time>
               {isEdited ? (
                 <Badge tone="muted" size="sm">
-                  edited
+                  {r("edited")}
                 </Badge>
               ) : null}
               {post.authorName ? (
@@ -107,10 +109,11 @@ function capitalize(s: string) {
 }
 
 export function SignInPrompt({ locale }: { locale: string }) {
+  const r = useTranslations("research")
   return (
     <div className="rounded-[var(--radius)] border border-line bg-accent-soft p-4 text-sm">
       <Link href={`/${locale}/account`} className="font-medium text-accent hover:underline">
-        Sign in to join the discussion →
+        {r("joinDiscussion")}
       </Link>
     </div>
   )

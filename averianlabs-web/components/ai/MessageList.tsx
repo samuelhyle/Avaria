@@ -9,6 +9,7 @@ import {
   proposedActionKey,
 } from "@/lib/ai/types/events"
 import { cn } from "@/lib/utils/cn"
+import { formatCurrency, formatSize } from "@/lib/utils/format"
 import {
   Beaker,
   Calculator,
@@ -26,7 +27,7 @@ import {
   UserPlus,
   X,
 } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import Link from "next/link"
 import { useEffect, useRef } from "react"
 import ReactMarkdown from "react-markdown"
@@ -115,6 +116,7 @@ function extractProducts(trace?: ToolTrace[]): ProductCardData[] {
 
 function InlineProducts({ products }: { products: ProductCardData[] }) {
   const t = useTranslations("averia")
+  const locale = useLocale()
   return (
     <ul className="flex flex-col gap-1.5">
       {products.map((p) => (
@@ -282,6 +284,7 @@ function FeedbackBar({
   onFeedback: (feedback: "up" | "down") => void
 }) {
   const t = useTranslations("averia")
+  const locale = useLocale()
   return (
     <div className="flex items-center gap-1 px-1">
       <button
@@ -357,6 +360,7 @@ function ActionCard({
   onDismiss: () => void
 }) {
   const t = useTranslations("averia")
+  const locale = useLocale()
   if (action.kind === "add_to_cart") {
     if (resolved === "dismissed") return null
     const totalCents = action.unitPriceCents * action.qty
@@ -379,11 +383,14 @@ function ActionCard({
               {t("actions.addPrompt", {
                 qty: action.qty,
                 name: action.productName,
-                mg: action.mg,
+                size:
+                  action.sizeValue && action.sizeUnit
+                    ? formatSize({ sizeValue: action.sizeValue, sizeUnit: action.sizeUnit }, locale)
+                    : "",
               })}
             </p>
             <p className="mt-0.5 text-xs text-ink-muted">
-              {(totalCents / 100).toFixed(2)} € · SKU {action.sku}
+              {formatCurrency(totalCents, "EUR", locale)} · SKU {action.sku}
             </p>
           </div>
         </div>

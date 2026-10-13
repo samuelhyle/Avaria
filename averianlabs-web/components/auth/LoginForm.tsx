@@ -18,18 +18,22 @@ export function LoginForm({ locale }: { locale: string }) {
     setError(null)
 
     const form = new FormData(event.currentTarget)
-    const result = await signIn("credentials", {
-      email: String(form.get("email") ?? ""),
-      password: String(form.get("password") ?? ""),
-      redirect: false,
-    })
-
-    setPending(false)
-    if (result?.error) {
-      setError(t("invalidCredentials"))
-      return
+    try {
+      const result = await signIn("credentials", {
+        email: String(form.get("email") ?? ""),
+        password: String(form.get("password") ?? ""),
+        redirect: false,
+      })
+      if (!result?.ok || result.error) {
+        setError(t("invalidCredentials"))
+        return
+      }
+      window.location.assign(`/${locale}/account`)
+    } catch {
+      setError(t("genericError"))
+    } finally {
+      setPending(false)
     }
-    window.location.assign(`/${locale}/account`)
   }
 
   return (

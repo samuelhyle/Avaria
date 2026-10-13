@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/Button"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/Dialog"
-import { Copy, Globe2, Loader2, Lock, Share2, Trash2, X } from "lucide-react"
+import { Copy, Globe2, Loader2, Lock, Share2, Trash2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import { useState, useTransition } from "react"
@@ -22,9 +22,11 @@ export function PlanDetailActions({
   title,
   locale,
 }: PlanDetailActionsProps) {
+  const r = useTranslations("research")
   const t = useTranslations("plans")
   const router = useRouter()
   const [busy, setBusy] = useState<string | null>(null)
+  const [error, setError] = useState("")
   const [, startTransition] = useTransition()
   const [shareOpen, setShareOpen] = useState(false)
   const [deleteOpen, setDeleteOpen] = useState(false)
@@ -36,15 +38,23 @@ export function PlanDetailActions({
 
   const togglePublic = () => {
     setBusy("share")
+    setError("")
     startTransition(async () => {
-      await fetch(`/api/plans/${planId}`, {
-        method: "PATCH",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ isPublic: !isPublic }),
-      })
-      setBusy(null)
-      setShareOpen(true)
-      router.refresh()
+      try {
+        const res = await fetch(`/api/plans/${planId}`, {
+          method: "PATCH",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ isPublic: !isPublic }),
+        })
+        const data = (await res.json()) as { ok: boolean }
+        if (!res.ok || !data.ok) throw new Error("save failed")
+        setShareOpen(!isPublic)
+        router.refresh()
+      } catch {
+        setError(t("saveFailed"))
+      } finally {
+        setBusy(null)
+      }
     })
   }
 
@@ -55,22 +65,35 @@ export function PlanDetailActions({
       setBusy("copy")
       setTimeout(() => setBusy(null), 1200)
     } catch {
-      // ignore
+      setError(t("copyFailed"))
     }
   }
 
   const destroy = () => {
     if (confirmPhrase !== "DELETE") return
     setBusy("delete")
+    setError("")
     startTransition(async () => {
-      await fetch(`/api/plans/${planId}`, { method: "DELETE" })
-      setBusy(null)
-      router.push(`/${locale}/account/plans`)
+      try {
+        const res = await fetch(`/api/plans/${planId}`, { method: "DELETE" })
+        const data = (await res.json()) as { ok: boolean }
+        if (!res.ok || !data.ok) throw new Error("delete failed")
+        router.push(`/${locale}/account/plans`)
+      } catch {
+        setError(t("saveFailed"))
+      } finally {
+        setBusy(null)
+      }
     })
   }
 
   return (
     <div className="flex flex-wrap items-center gap-2">
+      {error ? (
+        <p role="alert" className="w-full text-sm text-danger">
+          {error}
+        </p>
+      ) : null}
       <Button variant="ghost" size="sm" onClick={togglePublic} disabled={busy !== null}>
         {isPublic ? <Lock className="h-3.5 w-3.5" /> : <Globe2 className="h-3.5 w-3.5" />}
         {isPublic ? t("makePrivate") : t("makePublic")}
@@ -89,18 +112,21 @@ export function PlanDetailActions({
       <Dialog open={shareOpen} onOpenChange={setShareOpen}>
         <DialogContent className="max-w-md">
           <DialogTitle>{t("shareTitle")}</DialogTitle>
-          <p className="mt-1 text-sm text-ink-muted">{t("shareDescription")}</p>
+          <p className="mt-1 text-sm text-ink-muted">
+            {isPublic ? t("shareDescription") : t("privateShare")}
+          </p>
           {shareUrl ? (
             <div className="mt-4 flex items-center gap-2">
               <input
                 readOnly
+                aria-label={t("shareTitle")}
                 value={shareUrl}
                 className="h-10 flex-1 rounded-[var(--radius)] border border-line bg-surface-2 px-3 font-mono text-xs text-ink"
                 onFocus={(e) => e.currentTarget.select()}
               />
               <Button size="sm" variant="outline" onClick={copy}>
                 <Copy className="h-3.5 w-3.5" />
-                {busy === "copy" ? t("shareCopied") : "Copy"}
+                {busy === "copy" ? t("shareCopied") : t("copyLink")}
               </Button>
             </div>
           ) : null}
@@ -115,12 +141,18 @@ export function PlanDetailActions({
             type="text"
             value={confirmPhrase}
             onChange={(e) => setConfirmPhrase(e.target.value)}
-            placeholder={t("deleteConfirmPhrase") ?? "DELETE"}
+            placeholder={t("deleteConfirmPhrase")}
+            aria-label={t("deleteConfirmPhrase")}
             className="mt-3 h-10 w-full rounded-[var(--radius)] border border-line bg-surface px-3 font-mono text-sm text-ink focus:border-danger focus:outline-none"
           />
+          {error ? (
+            <p role="alert" className="mt-2 text-sm text-danger">
+              {error}
+            </p>
+          ) : null}
           <div className="mt-4 flex justify-end gap-2">
             <Button variant="ghost" size="sm" onClick={() => setDeleteOpen(false)}>
-              Cancel
+              {r("cancel")}
             </Button>
             <Button
               variant="danger"

@@ -5,6 +5,7 @@ import { ConsentBanner } from "@/components/ai/ConsentBanner"
 import { type ChatMessage, MessageList, type ProposedAction } from "@/components/ai/MessageList"
 import { QuickActions } from "@/components/ai/QuickActions"
 import { HelixGlyph } from "@/components/ai/icons/HelixGlyph"
+import { useCatalogue } from "@/components/product/CatalogueProvider"
 import { Button } from "@/components/ui/Button"
 import { type ChatMessageWithExtras, useAveriaChat } from "@/lib/ai/hooks/use-averia-chat"
 import { usePageContext } from "@/lib/ai/hooks/use-page-context"
@@ -25,6 +26,7 @@ interface AssistantCanvasProps {
  */
 export function AssistantCanvas({ locale }: AssistantCanvasProps) {
   const t = useTranslations("averia")
+  const products = useCatalogue()
   const tAssistant = useTranslations("averia.assistant")
   const cart = useCart((s) => s.items)
   const cartCount = useCart((s) => s.count())
@@ -51,16 +53,22 @@ export function AssistantCanvas({ locale }: AssistantCanvasProps) {
   const handleConfirmAction = useCallback(
     (action: ProposedAction, messageId: string) => {
       if (action.kind === "add_to_cart") {
+        const product = products.find((p) => p.slug === action.productSlug)
+        const vial = product?.vials.find((v) => v.sku === action.sku)
+        if (!product || !vial || vial.purchaseMode !== "direct" || vial.stockQty < action.qty) {
+          toast.error(t("actions.unavailable"))
+          return
+        }
         cartAdd({
-          sku: action.sku,
-          productSlug: action.productSlug,
+          sku: vial.sku,
+          productSlug: product.slug,
           name: action.productName,
-          mg: action.mg,
-          sizeValue: action.mg, // legacy fallback; AI tools don't yet emit typed units
-          sizeUnit: "mg",
+          mg: vial.mg,
+          sizeValue: vial.sizeValue,
+          sizeUnit: vial.sizeUnit,
           qty: action.qty,
-          unitPriceCents: action.unitPriceCents,
-          purchaseMode: "direct",
+          unitPriceCents: vial.priceCents,
+          purchaseMode: vial.purchaseMode,
         })
         chat.resolveAction(messageId, action, "added")
         toast.success(t("actions.addedToast", { name: action.productName }))
@@ -78,7 +86,7 @@ export function AssistantCanvas({ locale }: AssistantCanvasProps) {
         toast.success(t("actions.rememberedToast"))
       }
     },
-    [cartAdd, cartRemove, chat, t],
+    [products, cartAdd, cartRemove, chat, t],
   )
 
   const handleDismissAction = useCallback(

@@ -129,7 +129,7 @@ export function PostMarkdown({ body }: { body: string }) {
         if (tk.kind === "code") {
           return (
             <pre
-              key={`code-${i}`}
+              key={`code-${i}:${tk.text}`}
               className="overflow-x-auto rounded-[var(--radius)] border border-line bg-surface-2 p-3 font-mono text-xs text-ink"
             >
               <code>{tk.text}</code>
@@ -139,7 +139,7 @@ export function PostMarkdown({ body }: { body: string }) {
         if (tk.kind === "blockquote") {
           return (
             <blockquote
-              key={`bq-${i}`}
+              key={`bq-${i}:${tk.text}`}
               className="border-l-2 border-accent pl-3 italic text-ink-muted"
             >
               <Inline text={tk.text} />
@@ -151,9 +151,9 @@ export function PostMarkdown({ body }: { body: string }) {
           // Easier: split on newlines if present, else single-line marker fallback
           const split = tk.text.includes("\n") ? tk.text.split("\n") : items
           return (
-            <ul key={`ul-${i}`} className="ml-5 list-disc space-y-1 text-ink">
+            <ul key={`ul-${i}:${tk.text}`} className="ml-5 list-disc space-y-1 text-ink">
               {split.map((it, j) => (
-                <li key={`ul-${i}-${j}`}>
+                <li key={`ul-${i}-${j}:${it}`}>
                   <Inline text={it} />
                 </li>
               ))}
@@ -163,9 +163,9 @@ export function PostMarkdown({ body }: { body: string }) {
         if (tk.kind === "ol") {
           const items = tk.text.split("\n")
           return (
-            <ol key={`ol-${i}`} className="ml-5 list-decimal space-y-1 text-ink">
+            <ol key={`ol-${i}:${tk.text}`} className="ml-5 list-decimal space-y-1 text-ink">
               {items.map((it, j) => (
-                <li key={`ol-${i}-${j}`}>
+                <li key={`ol-${i}-${j}:${it}`}>
                   <Inline text={it} />
                 </li>
               ))}
@@ -173,7 +173,7 @@ export function PostMarkdown({ body }: { body: string }) {
           )
         }
         return (
-          <p key={`p-${i}`} className="whitespace-pre-wrap text-ink">
+          <p key={`p-${i}:${tk.text}`} className="whitespace-pre-wrap text-ink">
             <Inline text={tk.text} />
           </p>
         )

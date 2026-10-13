@@ -44,7 +44,7 @@ export function RecentlyViewed({
   const spacingClasses = spacing === "section" ? "mt-16 border-t pt-12" : "mt-24 border-t pt-16"
 
   return (
-    <section className={spacingClasses + " border-line"}>
+    <section className={`${spacingClasses} border-line`}>
       <div className="mb-6 flex items-end justify-between gap-4">
         <div className="flex items-center gap-2">
           <Clock className="h-4 w-4 text-ink-muted" />

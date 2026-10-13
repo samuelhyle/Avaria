@@ -1,100 +1,89 @@
 "use client"
-
 import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
-import { Loader2 } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
 import { useState } from "react"
-import { toast } from "sonner"
-
 export function PartnerApplicationForm() {
-  const [submitted, setSubmitted] = useState(false)
-  const [loading, setLoading] = useState(false)
-
-  if (submitted) {
-    return (
-      <div className="rounded-[var(--radius)] border border-success/30 bg-success-soft/40 p-6 text-sm">
-        <p className="font-semibold text-success">Application received.</p>
-        <p className="mt-1 text-ink-muted">
-          We&apos;ll review your details and respond within 48 hours. Check your inbox for next
-          steps.
-        </p>
-      </div>
-    )
-  }
-
+  const t = useTranslations("research")
+  const locale = useLocale()
+  const [state, setState] = useState("idle")
+  if (state === "done") return <p role="status">{t("contactPersisted")}</p>
   return (
     <form
-      className="mt-6 space-y-4"
-      onSubmit={async (e) => {
-        e.preventDefault()
-        const form = e.currentTarget
-        const formData = new FormData(form)
-
-        setLoading(true)
+      className="space-y-4"
+      onSubmit={async (event) => {
+        event.preventDefault()
+        const data = new FormData(event.currentTarget)
+        setState("pending")
         try {
           const res = await fetch("/api/partner", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "content-type": "application/json" },
             body: JSON.stringify({
-              orgName: formData.get("orgName"),
-              contactEmail: formData.get("contactEmail"),
-              country: formData.get("country"),
-              volume: Number(formData.get("volume")) || undefined,
-              useCase: formData.get("useCase") || undefined,
+              orgName: data.get("orgName"),
+              contactEmail: data.get("contactEmail"),
+              country: data.get("country"),
+              volume: data.get("volume") ? Number(data.get("volume")) : undefined,
+              useCase: data.get("useCase"),
+              locale,
             }),
           })
-
-          if (!res.ok) {
-            const data = await res.json()
-            throw new Error(data.error || "Submission failed")
-          }
-
-          setSubmitted(true)
-          toast.success("Application submitted")
-        } catch (err) {
-          toast.error(err instanceof Error ? err.message : "Something went wrong")
-        } finally {
-          setLoading(false)
+          setState(res.ok ? "done" : "error")
+        } catch {
+          setState("error")
         }
       }}
     >
-      <div className="grid gap-3 sm:grid-cols-2">
-        <Input name="orgName" placeholder="Institution name" required />
-        <Input name="country" placeholder="Country" required />
-      </div>
-      <Input name="contactEmail" type="email" placeholder="contact@institution.eu" required />
-      <div className="grid gap-3 sm:grid-cols-2">
-        <Input
-          name="volume"
-          placeholder="Estimated monthly volume (vials)"
-          type="number"
-          required
-        />
-        <select
-          name="useCase"
-          className="h-10 rounded-[var(--radius)] border border-line bg-surface px-3 text-sm focus:outline-none focus:border-accent"
-        >
-          <option>Research lab</option>
-          <option>University</option>
-          <option>Reseller</option>
-          <option>Clinic</option>
-        </select>
-      </div>
-      <textarea
-        name="useCaseDetail"
-        rows={3}
-        placeholder="Use case / research focus"
-        className="w-full rounded-[var(--radius)] border border-line bg-surface px-3 py-2 text-sm placeholder:text-ink-subtle focus:border-accent focus:outline-none"
+      <Input
+        name="orgName"
+        label={t("quoteOrganisation").replace(/\s*\([^)]*\)/, "")}
+        required
+        minLength={2}
+        maxLength={200}
+        autoComplete="organization"
       />
-      <Button type="submit" size="lg" fullWidth disabled={loading}>
-        {loading ? (
-          <>
-            <Loader2 className="h-4 w-4 animate-spin" />
-            Submitting…
-          </>
-        ) : (
-          "Submit application"
-        )}
+      <Input
+        name="contactEmail"
+        type="email"
+        label={t("quoteEmail")}
+        required
+        autoComplete="email"
+      />
+      <Input
+        name="country"
+        label={locale === "fi" ? "Maa" : "Country"}
+        required
+        minLength={2}
+        maxLength={100}
+        autoComplete="country-name"
+      />
+      <Input
+        name="volume"
+        type="number"
+        min={0}
+        step={1}
+        label={
+          locale === "fi"
+            ? "Arvioitu määrä näytepulloja kuukaudessa (valinnainen)"
+            : "Estimated vials per month (optional)"
+        }
+      />
+      <label className="block text-sm">
+        {t("quoteMessage")}
+        <textarea
+          name="useCase"
+          rows={4}
+          maxLength={2000}
+          className="mt-2 w-full rounded-[var(--radius)] border border-line bg-surface p-3"
+        />
+      </label>
+      {state === "error" && (
+        <p role="alert" className="text-sm text-danger">
+          {t("requestFailed")}
+        </p>
+      )}
+      <Button type="submit" disabled={state === "pending"} fullWidth>
+        {t(state === "pending" ? "quoteSending" : "partnerApply")}
       </Button>
     </form>
   )

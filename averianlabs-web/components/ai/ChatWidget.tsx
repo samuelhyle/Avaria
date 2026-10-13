@@ -11,6 +11,7 @@ import { ChatBubble } from "@/components/ai/ChatBubble"
 import { ChatDrawer } from "@/components/ai/ChatDrawer"
 import { ConsentBanner } from "@/components/ai/ConsentBanner"
 import type { ProposedAction } from "@/components/ai/MessageList"
+import { useCatalogue } from "@/components/product/CatalogueProvider"
 import { type ChatMessageWithExtras, useAveriaChat } from "@/lib/ai/hooks/use-averia-chat"
 import { usePageContext } from "@/lib/ai/hooks/use-page-context"
 import { useCart } from "@/lib/cart/store"
@@ -54,6 +55,7 @@ function readConsent(): "all" | "essential" | null {
 
 export function ChatWidget({ locale, demoMode = false }: ChatWidgetProps) {
   const t = useTranslations("averia")
+  const products = useCatalogue()
   const [open, setOpen] = useState(false)
   const [unread, setUnread] = useState(false)
   const [consent, setConsent] = useState<"all" | "essential" | null>(null)
@@ -147,16 +149,22 @@ export function ChatWidget({ locale, demoMode = false }: ChatWidgetProps) {
   const handleConfirmAction = useCallback(
     (action: ProposedAction, messageId: string) => {
       if (action.kind === "add_to_cart") {
+        const product = products.find((p) => p.slug === action.productSlug)
+        const vial = product?.vials.find((v) => v.sku === action.sku)
+        if (!product || !vial || vial.purchaseMode !== "direct" || vial.stockQty < action.qty) {
+          toast.error(t("actions.unavailable"))
+          return
+        }
         cartAdd({
-          sku: action.sku,
-          productSlug: action.productSlug,
+          sku: vial.sku,
+          productSlug: product.slug,
           name: action.productName,
-          mg: action.mg,
-          sizeValue: action.mg, // legacy fallback; AI tools don't yet emit typed units
-          sizeUnit: "mg",
+          mg: vial.mg,
+          sizeValue: vial.sizeValue,
+          sizeUnit: vial.sizeUnit,
           qty: action.qty,
-          unitPriceCents: action.unitPriceCents,
-          purchaseMode: "direct",
+          unitPriceCents: vial.priceCents,
+          purchaseMode: vial.purchaseMode,
         })
         chat.resolveAction(messageId, action, "added")
         toast.success(t("actions.addedToast", { name: action.productName }))
@@ -174,7 +182,7 @@ export function ChatWidget({ locale, demoMode = false }: ChatWidgetProps) {
         toast.success(t("actions.rememberedToast"))
       }
     },
-    [cartAdd, cartRemove, chat, t],
+    [products, cartAdd, cartRemove, chat, t],
   )
 
   const handleDismissAction = useCallback(

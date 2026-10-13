@@ -10,5 +10,14 @@ export function ProductTrustBadges() {
     { id: "eu-dispatch-24h", icon: Truck, label: t("heroTrustDispatch") },
   ].filter((item) => isAllowed(item.id))
   if (!items.length) return null
-  return <ul className="grid gap-3 sm:grid-cols-3">{items.map(({ id, icon: Icon, label }) => <li key={id} className="flex items-center gap-2 text-sm"><Icon className="h-4 w-4" aria-hidden />{label}</li>)}</ul>
+  return (
+    <ul className="grid gap-3 sm:grid-cols-3">
+      {items.map(({ id, icon: Icon, label }) => (
+        <li key={id} className="flex items-center gap-2 text-sm">
+          <Icon className="h-4 w-4" aria-hidden />
+          {label}
+        </li>
+      ))}
+    </ul>
+  )
 }

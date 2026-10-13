@@ -2,6 +2,7 @@
 
 import { Elements } from "@stripe/react-stripe-js"
 import { type Stripe, loadStripe } from "@stripe/stripe-js"
+import { useLocale } from "next-intl"
 import { useTheme } from "next-themes"
 import { type ReactNode, useMemo } from "react"
 
@@ -22,6 +23,7 @@ interface StripeProviderProps {
 }
 
 export function StripeProvider({ clientSecret, children }: StripeProviderProps) {
+  const locale = useLocale()
   const stripe = useMemo(() => getStripe(), [])
   const { resolvedTheme } = useTheme()
   const isDark = resolvedTheme === "dark"
@@ -35,6 +37,7 @@ export function StripeProvider({ clientSecret, children }: StripeProviderProps) 
       stripe={stripe}
       options={{
         clientSecret,
+        locale: locale === "fi" ? "fi" : "en",
         appearance: {
           theme: isDark ? "night" : "stripe",
           variables: {

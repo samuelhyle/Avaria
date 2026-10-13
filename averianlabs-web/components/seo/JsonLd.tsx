@@ -1,5 +1,5 @@
+import { getLegalIdentity } from "@/lib/legal"
 import type { Product } from "@/lib/products/types"
-import { formatCurrency } from "@/lib/utils/format"
 
 interface JsonLdProps {
   data: Record<string, unknown>
@@ -28,55 +28,32 @@ interface ProductJsonLdProps {
 }
 
 export function ProductJsonLd({ product, locale, url }: ProductJsonLdProps) {
-  const minVial = product.vials.reduce(
-    (min, v) => ((v.priceCents ?? 0) < (min.priceCents ?? 0) ? v : min),
-    product.vials[0]!,
-  )
   const translation = product.translations?.[locale as "en"] ?? product.defaultTranslation
-  const isContact = minVial.contactOnly === true || minVial.priceCents === 0
-
+  const direct = product.vials.filter((v) => v.purchaseMode === "direct" && v.priceCents > 0)
   const data = {
     "@context": "https://schema.org/",
     "@type": "Product",
     name: translation.name,
-    description: translation.tagline,
+    description: translation.description,
     url,
-    sku: minVial.sku,
-    mpn: product.latestBatch?.code,
     category: product.category,
-    brand: { "@type": "Brand", name: "AverianLabs" },
-    ...(product.casNumber ? { identifier: product.casNumber } : {}),
-    ...(product.purityPercent
+    ...(product.casNumber && product.specificationsVerified
+      ? { identifier: product.casNumber }
+      : {}),
+    ...(direct.length
       ? {
-          additionalProperty: [
-            {
-              "@type": "PropertyValue",
-              name: "HPLC Purity",
-              value: `${product.purityPercent}%`,
-            },
-          ],
+          offers: direct.map((v) => ({
+            "@type": "Offer",
+            sku: v.sku,
+            url,
+            priceCurrency: "EUR",
+            price: (v.priceCents / 100).toFixed(2),
+            availability:
+              v.stockQty > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+            seller: { "@type": "Organization", name: getLegalIdentity().companyName },
+          })),
         }
       : {}),
-    offers: isContact
-      ? {
-          "@type": "Offer",
-          availability: "https://schema.org/PreOrder",
-          priceCurrency: "EUR",
-          price: 0,
-          seller: { "@type": "Organization", name: "AverianLabs" },
-        }
-      : {
-          "@type": "Offer",
-          url,
-          priceCurrency: "EUR",
-          price: (minVial.priceCents / 100).toFixed(2),
-          availability:
-            minVial.stockQty > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-          seller: { "@type": "Organization", name: "AverianLabs" },
-          priceValidUntil: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000)
-            .toISOString()
-            .slice(0, 10),
-        },
   }
 
   return <JsonLd data={data} id="ld-product" />
@@ -101,22 +78,20 @@ export function BreadcrumbJsonLd({ items }: { items: Array<{ name: string; href:
 }
 
 export function OrganizationJsonLd() {
+  const identity = getLegalIdentity()
   return (
     <JsonLd
       id="ld-org"
       data={{
         "@context": "https://schema.org",
         "@type": "Organization",
-        name: "AverianLabs",
+        name: identity.companyName,
         url: "https://averianlabs.eu",
-        logo: "https://averianlabs.eu/og/logo.png",
-        description: "Premium research-grade peptides for laboratory research.",
-        sameAs: ["https://twitter.com/averianlabs", "https://linkedin.com/company/averianlabs"],
         contactPoint: {
           "@type": "ContactPoint",
           contactType: "customer support",
-          email: "hello@averianlabs.eu",
-          availableLanguage: ["en", "fi", "de", "sv", "nl"],
+          email: identity.contactEmail,
+          availableLanguage: ["en", "fi"],
         },
       }}
     />
@@ -136,7 +111,7 @@ export function WebsiteJsonLd() {
           "@type": "SearchAction",
           target: {
             "@type": "EntryPoint",
-            urlTemplate: "https://averianlabs.eu/{locale}/shop?q={search_term_string}",
+            urlTemplate: "https://averianlabs.eu/en/shop?q={search_term_string}",
           },
           "query-input": "required name=search_term_string",
         },

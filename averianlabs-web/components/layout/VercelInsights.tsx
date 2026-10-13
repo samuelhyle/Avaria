@@ -1,24 +1,24 @@
 "use client"
 
+import { analyticsAllowed, publicAnalyticsPath, useAnalyticsConsent } from "@/lib/privacy/consent"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/react"
-
-// These both render `null` and inject their scripts client-side only, so they
-// are hydration-safe. The Next-specific entry points wrap their internals in
-// a client Suspense boundary, which React 19 flags as a hydration mismatch.
-//
-// The first-party script routes (`/_vercel/insights/*`) only exist on Vercel
-// deployments, so mount them only there — otherwise local/self-hosted builds
-// log noisy 404s for both scripts.
-const onVercel = Boolean(process.env.NEXT_PUBLIC_VERCEL_ENV)
+import { usePathname } from "next/navigation"
 
 export function VercelInsights() {
-  if (!onVercel) return null
-
+  const allowed = useAnalyticsConsent()
+  const pathname = usePathname()
+  if (!process.env.NEXT_PUBLIC_VERCEL_ENV || !allowed || !publicAnalyticsPath(pathname)) return null
+  const clean = <T extends { url: string }>(event: T): T | null => {
+    if (!analyticsAllowed()) return null
+    const url = new URL(event.url)
+    if (!publicAnalyticsPath(url.pathname)) return null
+    return { ...event, url: `${url.origin}${url.pathname}` }
+  }
   return (
     <>
-      <Analytics />
-      <SpeedInsights />
+      <Analytics beforeSend={clean} />
+      <SpeedInsights beforeSend={clean} />
     </>
   )
 }

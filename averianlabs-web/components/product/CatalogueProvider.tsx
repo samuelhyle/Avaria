@@ -5,7 +5,10 @@ import { createContext, useContext } from "react"
 
 const CatalogueContext = createContext<Product[]>([])
 
-export function CatalogueProvider({ products, children }: { products: Product[]; children: React.ReactNode }) {
+export function CatalogueProvider({
+  products,
+  children,
+}: { products: Product[]; children: React.ReactNode }) {
   return <CatalogueContext.Provider value={products}>{children}</CatalogueContext.Provider>
 }
 

@@ -17,6 +17,7 @@ interface ShopToolbarProps {
 
 export function ShopToolbar({ initialView, locale, filters, activeFilterCount }: ShopToolbarProps) {
   const t = useTranslations("shop")
+  const r = useTranslations("research")
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -35,20 +36,20 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
   const chips = [
     ...filters.category.map((c) => ({
       key: `category.${c}`,
-      label: c,
+      label: r(`categories.${c}`),
       onRemove: () => update("category", filters.category.filter((x) => x !== c).join(",") || null),
     })),
-    ...(filters.purityMin !== 95
+    ...(filters.purityMin !== 0
       ? [
           {
             key: "purity",
-            label: `≥ ${filters.purityMin}% purity`,
+            label: `≥ ${new Intl.NumberFormat(locale).format(filters.purityMin)}% HPLC`,
             onRemove: () => update("purityMin", null),
           },
         ]
       : []),
     ...(filters.quoteOnly
-      ? [{ key: "quote", label: "Quote only", onRemove: () => update("quoteOnly", null) }]
+      ? [{ key: "quote", label: r("quote"), onRemove: () => update("quoteOnly", null) }]
       : []),
   ]
 
@@ -65,13 +66,13 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
           <span className="ml-auto hidden font-mono text-3xs text-ink-subtle sm:inline">⌘K</span>
         </button>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Link
             href={`/${locale}/compare`}
             className="hidden md:inline-flex h-10 items-center gap-2 rounded-[var(--radius)] border border-line bg-surface px-3 text-sm text-ink-muted hover:bg-surface-2 hover:text-ink"
           >
             <GitCompare className="h-4 w-4" />
-            Compare
+            {r("compare")}
           </Link>
 
           <button
@@ -88,7 +89,7 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
             ) : null}
           </button>
 
-          <div className="inline-flex h-10 items-center rounded-[var(--radius)] border border-line bg-surface p-0.5">
+          <div className="inline-flex h-10 shrink-0 items-center rounded-[var(--radius)] border border-line bg-surface p-0.5">
             {[
               { v: "grid", icon: LayoutGrid, label: t("viewGrid") },
               { v: "3d", icon: Box, label: t("view3D") },
@@ -131,7 +132,7 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
             onClick={() => router.push(pathname)}
             className="text-xs text-ink-muted hover:text-ink"
           >
-            Clear all
+            {r("clearAll")}
           </button>
         </div>
       ) : null}

@@ -55,8 +55,7 @@ export function StickyDesktopAtc({
   const vial = product.vials[activeIndex]
   if (!vial || !show) return null
 
-  const name =
-    (product.translations?.[locale as Locale] ?? product.defaultTranslation).name
+  const name = (product.translations?.[locale as Locale] ?? product.defaultTranslation).name
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-30 hidden border-t border-line bg-surface/95 backdrop-blur-xl lg:block">

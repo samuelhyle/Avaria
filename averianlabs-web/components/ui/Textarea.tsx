@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils/cn"
-import { type HTMLAttributes, forwardRef, useId } from "react"
+import { type TextareaHTMLAttributes, forwardRef, useId } from "react"
 
-interface TextareaProps extends HTMLAttributes<HTMLTextAreaElement> {
+interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string
   hint?: string
   error?: string

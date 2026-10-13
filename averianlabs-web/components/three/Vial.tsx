@@ -60,6 +60,7 @@ export function Vial({
 
   return (
     <group position={position} rotation={rotation}>
+      {/* biome-ignore lint/a11y/useKeyWithClickEvents: This is a Three.js scene node; equivalent controls are provided outside the canvas. */}
       <group
         ref={groupRef}
         onPointerOver={(e) => {

@@ -27,11 +27,12 @@ const KIND_ROUTE: Record<
 
 export async function ActivityFeed({ locale }: { locale: string }) {
   const t = await getTranslations("activity")
+  const r = await getTranslations("research")
   const events = await recentActivity(8).catch(() => [])
 
   if (events.length === 0) {
     return (
-      <div className="rounded-[var(--radius-lg)] border border-dashed border-line bg-surface p-8 text-center text-sm text-ink-muted">
+      <div className="min-w-0 break-words [overflow-wrap:anywhere] rounded-[var(--radius-lg)] border border-dashed border-line bg-surface p-8 text-center text-sm text-ink-muted">
         <Activity className="mx-auto mb-2 h-5 w-5 text-ink-subtle" />
         {t("empty")}
       </div>
@@ -39,8 +40,8 @@ export async function ActivityFeed({ locale }: { locale: string }) {
   }
 
   return (
-    <div className="rounded-[var(--radius-lg)] border border-line bg-surface">
-      <div className="flex items-center justify-between border-b border-line px-4 py-3">
+    <div className="min-w-0 break-words [overflow-wrap:anywhere] rounded-[var(--radius-lg)] border border-line bg-surface">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line px-4 py-3">
         <div className="flex items-center gap-2">
           <Activity className="h-4 w-4 text-accent" />
           <h3 className="text-sm font-semibold text-ink">{t("title")}</h3>
@@ -64,12 +65,14 @@ export async function ActivityFeed({ locale }: { locale: string }) {
                 {icon}
               </span>
               <span className="min-w-0 flex-1 text-sm">
-                <span className="font-medium text-ink">{e.actorName ?? "Someone"}</span>{" "}
+                <span className="font-medium text-ink">{e.actorName ?? r("anonymousMember")}</span>{" "}
                 <span className="text-ink-muted">{verb}</span>{" "}
                 {e.targetTitle ? (
                   <span className="font-medium text-ink">"{truncate(e.targetTitle, 60)}"</span>
                 ) : null}
-                <span className="ml-2 text-xs text-ink-subtle">{relative(ts)}</span>
+                <span className="ml-2 text-xs text-ink-subtle">
+                  {new Intl.RelativeTimeFormat(locale, { numeric: "auto" }).format(...relative(ts))}
+                </span>
               </span>
             </span>
           )
@@ -97,12 +100,12 @@ function truncate(s: string, n: number): string {
   return s.length > n ? `${s.slice(0, n)}…` : s
 }
 
-function relative(d: Date): string {
-  const diff = Math.max(0, Date.now() - d.getTime())
-  const min = Math.round(diff / 60_000)
-  if (min < 1) return "now"
-  if (min < 60) return `${min}m`
-  const h = Math.round(min / 60)
-  if (h < 24) return `${h}h`
-  return `${Math.round(h / 24)}d`
+function relative(d: Date): [number, Intl.RelativeTimeFormatUnit] {
+  const seconds = Math.floor(Math.max(0, Date.now() - d.getTime()) / 1000)
+  if (seconds < 60) return [-seconds, "second"]
+  const minutes = Math.floor(seconds / 60)
+  if (minutes < 60) return [-minutes, "minute"]
+  const hours = Math.floor(minutes / 60)
+  if (hours < 24) return [-hours, "hour"]
+  return [-Math.floor(hours / 24), "day"]
 }

@@ -20,6 +20,7 @@ interface MobileMenuProps {
 export function MobileMenu({ locale, productsCount }: MobileMenuProps) {
   const t = useTranslations("nav")
   const tShop = useTranslations("shop")
+  const r = useTranslations("research")
   const [open, setOpen] = useState(false)
   const count = useCart((s) => s.count())
   const openCart = useCart((s) => s.open)
@@ -43,13 +44,13 @@ export function MobileMenu({ locale, productsCount }: MobileMenuProps) {
         aria-label={t("openMenu")}
         aria-expanded={open}
         aria-controls="mobile-menu-panel"
-        className="lg:hidden inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] text-ink-muted hover:bg-surface-2 hover:text-ink"
+        className="xl:hidden inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] text-ink-muted hover:bg-surface-2 hover:text-ink"
       >
         <Menu className="h-4 w-4" aria-hidden />
       </button>
 
       {open ? (
-        <div className="fixed inset-0 z-50 lg:hidden">
+        <div className="fixed inset-0 z-50 xl:hidden">
           <button
             type="button"
             aria-label={t("close")}
@@ -115,7 +116,7 @@ export function MobileMenu({ locale, productsCount }: MobileMenuProps) {
                         >
                           <Icon className="h-3.5 w-3.5" />
                         </div>
-                        <span className="flex-1 capitalize">{slug}</span>
+                        <span className="flex-1">{r(`categories.${slug}`)}</span>
                         <ChevronRight className="h-3.5 w-3.5" />
                       </Link>
                     </li>
@@ -162,6 +163,8 @@ export function MobileMenu({ locale, productsCount }: MobileMenuProps) {
                     { href: `/${locale}/about`, label: t("about") },
                     { href: `/${locale}/partner`, label: t("partner") },
                     { href: `/${locale}/account`, label: t("account") },
+                    { href: `/${locale}/wishlist`, label: t("wishlist") },
+                    { href: `/${locale}/compare`, label: t("compare") },
                   ].map((link) => (
                     <li key={link.href}>
                       <Link

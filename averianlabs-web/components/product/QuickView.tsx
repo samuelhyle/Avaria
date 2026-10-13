@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/Button"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/Dialog"
 import { useCart } from "@/lib/cart/store"
 import { useCompare } from "@/lib/compare/store"
+import { defaultVial } from "@/lib/products/selection"
 import type { Locale, Product } from "@/lib/products/types"
 import { cn } from "@/lib/utils/cn"
-import { formatCurrency } from "@/lib/utils/format"
+import { formatCurrency, formatPercent, formatSize } from "@/lib/utils/format"
 import { useWishlist } from "@/lib/wishlist/store"
 import { ExternalLink, GitCompare, Heart, ShoppingBag, X } from "lucide-react"
 import { useTranslations } from "next-intl"
@@ -24,6 +25,8 @@ interface QuickViewProps {
 }
 
 export function QuickView({ product, locale, open, onOpenChange }: QuickViewProps) {
+  const t = useTranslations("research")
+  const pt = useTranslations("product")
   const tCommon = useTranslations("common")
   const [vialIdx, setVialIdx] = useState(0)
   const add = useCart((s) => s.add)
@@ -33,22 +36,23 @@ export function QuickView({ product, locale, open, onOpenChange }: QuickViewProp
   const inCompare = useCompare((s) => (product ? s.items.includes(product.slug) : false))
 
   useEffect(() => {
-    if (open) setVialIdx(0)
-  }, [open, product?.slug])
+    if (open && product) setVialIdx(product.vials.indexOf(defaultVial(product)))
+  }, [open, product])
 
   if (!product) return null
 
   const vial = product.vials[vialIdx]
   if (!vial) return null
-  const isContact = vial.contactOnly === true || vial.priceCents === 0
+  const isContact = vial.purchaseMode !== "direct"
   const totalStock = product.vials.reduce((s, v) => s + v.stockQty, 0)
   const translation = product.translations?.[locale as Locale] ?? product.defaultTranslation
 
   const handleAdd = () => {
+    if (vial.purchaseMode !== "direct" || vial.stockQty < 1) return
     add({
       productSlug: product.slug,
       sku: vial.sku,
-      name: `${translation.name} ${vial.mg}mg`,
+      name: `${translation.name} ${formatSize(vial, locale)}`,
       mg: vial.mg,
       sizeValue: vial.sizeValue,
       sizeUnit: vial.sizeUnit,
@@ -56,14 +60,14 @@ export function QuickView({ product, locale, open, onOpenChange }: QuickViewProp
       unitPriceCents: vial.priceCents,
       purchaseMode: vial.purchaseMode,
     })
-    toast.success("Added to cart", { description: `${translation.name} ${vial.mg}mg` })
+    toast.success(t("added"), { description: `${translation.name} ${formatSize(vial, locale)}` })
     onOpenChange(false)
   }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="left-1/2 top-1/2 max-w-3xl -translate-x-1/2 -translate-y-1/2 border-line bg-surface p-0 shadow-2xl">
-        <DialogTitle className="sr-only">Quick view: {translation.name}</DialogTitle>
+        <DialogTitle className="sr-only">{translation.name}</DialogTitle>
 
         <div className="grid gap-0 sm:grid-cols-2">
           <div
@@ -89,7 +93,7 @@ export function QuickView({ product, locale, open, onOpenChange }: QuickViewProp
           <div className="flex flex-col gap-4 p-6">
             <div>
               <Badge tone="muted" className="mb-2 capitalize">
-                {product.category}
+                {t(`categories.${product.category}`)}
               </Badge>
               <h2 className="font-display text-2xl font-semibold tracking-tight">
                 {translation.name}
@@ -99,7 +103,9 @@ export function QuickView({ product, locale, open, onOpenChange }: QuickViewProp
 
             <div className="flex items-baseline gap-2">
               {isContact ? (
-                <span className="font-display text-2xl font-semibold">Request quote</span>
+                <span className="font-display text-2xl font-semibold">
+                  {t(vial.purchaseMode === "quotation" ? "quote" : "unavailable")}
+                </span>
               ) : (
                 <>
                   <span className="font-display text-2xl font-semibold">
@@ -107,7 +113,7 @@ export function QuickView({ product, locale, open, onOpenChange }: QuickViewProp
                   </span>
                   {product.vials.length > 1 ? (
                     <span className="text-xs text-ink-subtle">
-                      from · {product.vials.length} sizes
+                      {t("sizes", { count: product.vials.length })}
                     </span>
                   ) : null}
                 </>
@@ -121,7 +127,7 @@ export function QuickView({ product, locale, open, onOpenChange }: QuickViewProp
                     key={v.sku}
                     type="button"
                     onClick={() => setVialIdx(i)}
-                    disabled={v.stockQty === 0}
+                    aria-pressed={vialIdx === i}
                     className={cn(
                       "rounded-[var(--radius)] border px-2.5 py-1.5 text-xs transition-colors",
                       vialIdx === i
@@ -130,7 +136,10 @@ export function QuickView({ product, locale, open, onOpenChange }: QuickViewProp
                       v.stockQty === 0 && "opacity-50",
                     )}
                   >
-                    {v.mg} mg · {formatCurrency(v.priceCents, "EUR", locale)}
+                    {formatSize(v, locale)} ·{" "}
+                    {v.purchaseMode === "direct"
+                      ? formatCurrency(v.priceCents, "EUR", locale)
+                      : t(v.purchaseMode === "quotation" ? "quote" : "unavailable")}
                   </button>
                 ))}
               </div>
@@ -138,25 +147,27 @@ export function QuickView({ product, locale, open, onOpenChange }: QuickViewProp
 
             <div className="flex items-center gap-2">
               {isContact ? (
-                <Badge tone="muted">Quote only</Badge>
+                <Badge tone="muted">
+                  {t(vial.purchaseMode === "quotation" ? "quote" : "unavailable")}
+                </Badge>
               ) : totalStock === 0 ? (
-                <Badge tone="danger">Out of stock</Badge>
+                <Badge tone="danger">{pt("outOfStock")}</Badge>
               ) : totalStock < 25 ? (
-                <Badge tone="warn">Low · {totalStock} left</Badge>
+                <Badge tone="warn">{pt("lowStock", { count: totalStock })}</Badge>
               ) : (
                 <Badge tone="success">
-                  <span className="h-1.5 w-1.5 rounded-full bg-success" /> In stock
+                  <span className="h-1.5 w-1.5 rounded-full bg-success" /> {pt("inStock")}
                 </Badge>
               )}
               {product.purityPercent ? (
-                <Badge tone="accent">{product.purityPercent.toFixed(1)}% HPLC</Badge>
+                <Badge tone="accent">{formatPercent(product.purityPercent, locale)} HPLC</Badge>
               ) : null}
             </div>
 
             <div className="mt-auto flex flex-col gap-2 pt-2">
-              <Button size="lg" disabled={isContact || totalStock === 0} onClick={handleAdd}>
+              <Button size="lg" disabled={isContact || vial.stockQty === 0} onClick={handleAdd}>
                 <ShoppingBag className="h-4 w-4" />
-                Add to cart · {formatCurrency(vial.priceCents, "EUR", locale)}
+                {pt("addToCart")} · {formatCurrency(vial.priceCents, "EUR", locale)}
               </Button>
               <div className="flex gap-2">
                 <button
@@ -197,7 +208,7 @@ export function QuickView({ product, locale, open, onOpenChange }: QuickViewProp
                   onClick={() => onOpenChange(false)}
                 >
                   <ExternalLink className="h-3.5 w-3.5" />
-                  Full details
+                  {t("fullDetails")}
                 </Link>
               </div>
             </div>

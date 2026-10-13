@@ -46,48 +46,48 @@ export function SaveToPlanButton({
   const add = (planId: string) => {
     setBusyPlanId(planId)
     startTransition(async () => {
-      const res = await fetch(`/api/plans/${planId}/items`, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ productId }),
-      })
-      if (!res.ok) {
-        setBusyPlanId(null)
+      try {
+        const res = await fetch(`/api/plans/${planId}/items`, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ productId }),
+        })
+        if (!res.ok) throw new Error("save failed")
+        setOpen(false)
+        toast.success(t("addedToPlan"))
+        router.refresh()
+      } catch {
         toast.error(t("saveFailed"))
-        return
+      } finally {
+        setBusyPlanId(null)
       }
-      setBusyPlanId(null)
-      setOpen(false)
-      toast.success(t("addedToPlan"))
-      router.refresh()
     })
   }
 
   const create = () => {
-    if (!newTitle.trim()) return
+    if (newTitle.trim().length < 3 || isPending) return
     startTransition(async () => {
-      const res = await fetch("/api/plans", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ title: newTitle }),
-      })
-      const data = (await res.json()) as { ok: boolean; planId?: string }
-      if (data.ok && data.planId) {
+      try {
+        const res = await fetch("/api/plans", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ title: newTitle.trim() }),
+        })
+        const data = (await res.json()) as { ok: boolean; planId?: string }
+        if (!res.ok || !data.ok || !data.planId) throw new Error("create failed")
+        setNewTitle("")
         const itemRes = await fetch(`/api/plans/${data.planId}/items`, {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({ productId }),
-        }).catch(() => null)
-        if (!itemRes?.ok) {
-          toast.error(t("saveFailed"))
-          return
-        }
-        setNewTitle("")
+        })
+        if (!itemRes.ok) throw new Error("save failed")
         setOpen(false)
         toast.success(t("addedToPlan"))
-        router.refresh()
-      } else {
+      } catch {
         toast.error(t("saveFailed"))
+      } finally {
+        router.refresh()
       }
     })
   }
@@ -130,10 +130,16 @@ export function SaveToPlanButton({
                 label={t("fieldTitle")}
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
-                placeholder="e.g. Tendon repair panel"
+                placeholder={t("titlePlaceholder")}
+                minLength={3}
+                maxLength={140}
               />
               <div className="mt-2 flex justify-end">
-                <Button size="sm" onClick={create} disabled={isPending || !newTitle.trim()}>
+                <Button
+                  size="sm"
+                  onClick={create}
+                  disabled={isPending || newTitle.trim().length < 3}
+                >
                   {isPending ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : null}
                   {t("createAndAdd")}
                 </Button>

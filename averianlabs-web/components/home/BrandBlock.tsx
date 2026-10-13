@@ -16,7 +16,7 @@ export async function BrandBlock({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: "home" })
 
   return (
-    <div className="relative z-10 flex max-w-2xl flex-col gap-6">
+    <div className="relative z-10 flex min-w-0 max-w-2xl flex-col gap-6">
       <div className="flex flex-col gap-4">
         <BrandMark locale={locale} />
         <p className="font-mono text-3xs uppercase tracking-[0.2em] text-accent-ink">
@@ -24,7 +24,7 @@ export async function BrandBlock({ locale }: { locale: string }) {
         </p>
       </div>
 
-      <h1 className="font-display text-[2.5rem] font-semibold leading-[1.05] tracking-tight text-ink text-balance sm:text-6xl lg:text-7xl">
+      <h1 className="font-display break-words [overflow-wrap:anywhere] hyphens-auto text-[2.5rem] font-semibold leading-[1.05] tracking-tight text-ink text-balance sm:text-6xl lg:text-7xl">
         {t("heroTitle")}
       </h1>
 

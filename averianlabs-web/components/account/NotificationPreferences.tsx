@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/Button"
 import { Loader2 } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { useState, useTransition } from "react"
+import { useState } from "react"
 
 interface Props {
   userId: string
@@ -17,24 +17,28 @@ interface Props {
 }
 
 export function NotificationPreferences({ userId, initial }: Props) {
-  const t = useTranslations("notifications" as never) as unknown as (k: string) => string
+  const t = useTranslations("notifications")
   void userId // not used in this client component — server passes initial
   const [prefs, setPrefs] = useState(initial)
+  const [error, setError] = useState(false)
   const [busy, setBusy] = useState(false)
 
   const toggle = (key: keyof typeof prefs) => async () => {
     setBusy(true)
+    setError(false)
     const next = { ...prefs, [key]: !prefs[key] }
     setPrefs(next)
     try {
-      await fetch("/api/account/preferences", {
+      const response = await fetch("/api/account/preferences", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ [key]: next[key] }),
       })
+      if (!response.ok) throw new Error("preferences_failed")
     } catch {
       // revert on failure
       setPrefs(prefs)
+      setError(true)
     }
     setBusy(false)
   }
@@ -42,30 +46,26 @@ export function NotificationPreferences({ userId, initial }: Props) {
   const rows: { key: keyof typeof prefs; label: string; sub: string }[] = [
     {
       key: "replyEnabled",
-      label: t("reply") ?? "Replies to your threads",
-      sub: t("replySub") ?? "When someone replies to a thread you started.",
+      label: t("reply"),
+      sub: t("replySub"),
     },
     {
       key: "reactionEnabled",
-      label: t("reaction") ?? "Reactions to your posts",
-      sub: t("reactionSub") ?? "Helpful / Insightful / Thanks.",
+      label: t("reaction"),
+      sub: t("reactionSub"),
     },
     {
       key: "planSharedEnabled",
-      label: t("planShared") ?? "Shared research plans",
-      sub: t("planSharedSub") ?? "When someone shares a plan publicly.",
-    },
-    {
-      key: "emailDigest",
-      label: t("emailDigest") ?? "Weekly email digest",
-      sub: t("emailDigestSub") ?? "A roundup of activity, every Monday.",
+      label: t("planShared"),
+      sub: t("planSharedSub"),
     },
   ]
 
   return (
     <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-5">
-      <h3 className="text-sm font-semibold text-ink">Notification preferences</h3>
-      <p className="mt-1 text-xs text-ink-muted">Choose what shows up in your inbox.</p>
+      <h3 className="text-sm font-semibold text-ink">{t("title")}</h3>
+      <p className="mt-1 text-xs text-ink-muted">{t("intro")}</p>
+      {error && <p role="alert">{t("error")}</p>}
       <ul className="mt-4 space-y-3">
         {rows.map(({ key, label, sub }) => (
           <li
@@ -83,8 +83,16 @@ export function NotificationPreferences({ userId, initial }: Props) {
                 void toggle(key)()
               }}
               disabled={busy}
+              aria-pressed={prefs[key]}
+              aria-label={`${label}: ${prefs[key] ? t("on") : t("off")}`}
             >
-              {busy ? <Loader2 className="h-3 w-3 animate-spin" /> : prefs[key] ? "On" : "Off"}
+              {busy ? (
+                <Loader2 className="h-3 w-3 animate-spin" />
+              ) : prefs[key] ? (
+                t("on")
+              ) : (
+                t("off")
+              )}
             </Button>
           </li>
         ))}

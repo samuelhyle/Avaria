@@ -6,7 +6,7 @@ import { useOverlay } from "@/lib/hooks/use-overlay"
 import { getProduct } from "@/lib/products/data"
 import type { Locale } from "@/lib/products/types"
 import { cn } from "@/lib/utils/cn"
-import { formatCurrency } from "@/lib/utils/format"
+import { formatCurrency, formatSize } from "@/lib/utils/format"
 import { ArrowRight, Minus, Plus, ShoppingBag, Truck, X } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
@@ -116,7 +116,7 @@ export function CartDrawer({ locale }: { locale: string }) {
                       style={{ "--cat-hue": hue } as React.CSSProperties}
                     >
                       <span className="mb-1.5 font-mono text-3xs font-semibold text-ink-muted">
-                        {item.mg}mg
+                        {formatSize(item, locale)}
                       </span>
                     </div>
                     <div className="flex flex-1 flex-col">
@@ -176,7 +176,7 @@ export function CartDrawer({ locale }: { locale: string }) {
                 </div>
                 <div className="flex justify-between text-xs text-ink-subtle">
                   <span>{t("vat")}</span>
-                  <span>incl.</span>
+                  <span>{t("vatIncluded")}</span>
                 </div>
                 <div className="flex justify-between border-t border-line pt-2 font-display text-base font-semibold">
                   <span>{t("total")}</span>

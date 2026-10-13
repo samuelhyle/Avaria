@@ -1,12 +1,12 @@
 "use client"
 
+import { useCatalogue } from "@/components/product/CatalogueProvider"
 import { ProductCard } from "@/components/product/ProductCard"
 import { RecentlyViewed } from "@/components/product/RecentlyViewed"
 import { ShopFilterSidebar } from "@/components/product/ShopFilterSidebar"
 import { ShopToolbar } from "@/components/product/ShopToolbar"
 import { TrustStrip } from "@/components/product/TrustStrip"
 import { Badge } from "@/components/ui/Badge"
-import { useCatalogue } from "@/components/product/CatalogueProvider"
 import type { Locale } from "@/lib/products/types"
 import { type ShopFilters, defaultFilters, parseFiltersFromSearch } from "@/lib/shop/filters"
 import { useTranslations } from "next-intl"
@@ -27,6 +27,7 @@ const Shop3DCarousel = dynamic(
 export function ShopCatalog({ locale }: { locale: string }) {
   const products = useCatalogue()
   const t = useTranslations("shop")
+  const r = useTranslations("research")
   const sp = useSearchParams()
   const params = new URLSearchParams(sp?.toString() ?? "")
   const filters: ShopFilters = { ...defaultFilters, ...parseFiltersFromSearch(params) }
@@ -35,13 +36,17 @@ export function ShopCatalog({ locale }: { locale: string }) {
   if (filters.category.length > 0) {
     filtered = filtered.filter((p) => filters.category.includes(p.category))
   }
-  if (filters.inStock) {
+  if (filters.inStock && !filters.quoteOnly) {
     filtered = filtered.filter((p) => p.vials.some((v) => v.stockQty > 0))
   }
   if (filters.quoteOnly) {
-    filtered = filtered.filter((p) => p.vials.some((v) => v.contactOnly || v.priceCents === 0))
+    filtered = filtered.filter((p) => p.vials.some((v) => v.purchaseMode === "quotation"))
   }
-  filtered = filtered.filter((p) => !p.purityPercent || p.purityPercent >= filters.purityMin)
+  filtered = filtered.filter(
+    (p) =>
+      filters.purityMin <= 95 ||
+      (p.purityPercent !== undefined && p.purityPercent >= filters.purityMin),
+  )
 
   filtered = [...filtered].sort((a, b) => {
     switch (filters.sort) {
@@ -56,11 +61,14 @@ export function ShopCatalog({ locale }: { locale: string }) {
           Math.min(...a.vials.map((v) => v.priceCents))
         )
       case "name":
-        return a.defaultTranslation.name.localeCompare(b.defaultTranslation.name)
+        return (a.translations?.[locale as Locale] ?? a.defaultTranslation).name.localeCompare(
+          (b.translations?.[locale as Locale] ?? b.defaultTranslation).name,
+          locale,
+        )
       case "purity-desc":
         return (b.purityPercent ?? 0) - (a.purityPercent ?? 0)
       default:
-        return 0
+        return (b.createdAt ?? "").localeCompare(a.createdAt ?? "")
     }
   })
 
@@ -93,9 +101,7 @@ export function ShopCatalog({ locale }: { locale: string }) {
           {filtered.length === 0 ? (
             <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-16 text-center">
               <p className="font-display text-lg">{t("empty")}</p>
-              <p className="mt-2 text-sm text-ink-muted">
-                Try clearing some filters or browsing all products.
-              </p>
+              <p className="mt-2 text-sm text-ink-muted">{r("emptyFilters")}</p>
             </div>
           ) : view === "3d" ? (
             <Shop3DCarousel products={filtered} locale={locale} />

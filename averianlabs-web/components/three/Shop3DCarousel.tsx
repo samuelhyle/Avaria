@@ -221,6 +221,7 @@ function Scene({
 }
 
 export function Shop3DCarousel({ products, locale, reducedMotion }: ShopCarouselProps) {
+  const r = useTranslations("research")
   const t = useTranslations("shop")
   const [activeIdx, setActiveIdx] = useState(0)
   const [autoRotate, setAutoRotate] = useState(!reducedMotion)
@@ -330,7 +331,7 @@ export function Shop3DCarousel({ products, locale, reducedMotion }: ShopCarousel
         rootRef.current.removeEventListener("keydown", handleKeyDown)
       }
     }
-  }, [activeIdx, autoRotate, products.length])
+  }, [autoRotate, products.length])
 
   const slotAngle = useCallback(
     (i: number) => (i / products.length) * Math.PI * 2,
@@ -341,7 +342,10 @@ export function Shop3DCarousel({ products, locale, reducedMotion }: ShopCarousel
   const translation = active?.translations?.[locale as Locale] ?? active?.defaultTranslation
   const firstVial = active?.vials[0]
   const minVial = firstVial
-    ? active.vials.reduce((min, v) => ((v.priceCents ?? 0) < (min.priceCents ?? 0) ? v : min), firstVial)
+    ? active.vials.reduce(
+        (min, v) => ((v.priceCents ?? 0) < (min.priceCents ?? 0) ? v : min),
+        firstVial,
+      )
     : undefined
   const totalStock = active?.vials.reduce((s, v) => s + v.stockQty, 0) ?? 0
   const isContact = minVial?.contactOnly === true || minVial?.priceCents === 0
@@ -583,7 +587,7 @@ export function Shop3DCarousel({ products, locale, reducedMotion }: ShopCarousel
         {active?.latestBatch && (
           <div className="rounded-[var(--radius)] bg-surface-2/60 p-3 text-xs">
             <div className="flex justify-between mb-1">
-              <span className="text-ink-muted">Batch:</span>
+              <span className="text-ink-muted">{r("batch")}:</span>
               <span className="font-mono font-medium">{active.latestBatch.code}</span>
             </div>
             <div className="flex justify-between mb-1">
@@ -593,7 +597,7 @@ export function Shop3DCarousel({ products, locale, reducedMotion }: ShopCarousel
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-ink-muted">Lab:</span>
+              <span className="text-ink-muted">{r("lab")}:</span>
               <span className="font-mono font-medium">{active.latestBatch.lab}</span>
             </div>
           </div>

@@ -92,13 +92,13 @@ function patchLabelForAtlas(mat: LabelMaterial) {
   mat.onBeforeCompile = (shader) => {
     shader.vertexShader = shader.vertexShader
       .replace(
-        `#include <common>`,
+        "#include <common>",
         `#include <common>
 attribute vec2 aAtlasOffset;
 attribute vec2 aAtlasRepeat;`,
       )
       .replace(
-        `#include <uv_vertex>`,
+        "#include <uv_vertex>",
         `#include <uv_vertex>
 vMapUv = uv * aAtlasRepeat + aAtlasOffset;`,
       )

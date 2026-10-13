@@ -26,6 +26,7 @@ function FilterContent({
   onClose?: () => void
 }) {
   const t = useTranslations("shop")
+  const r = useTranslations("research")
   const router = useRouter()
   const pathname = usePathname()
   const sp = useSearchParams()
@@ -44,11 +45,11 @@ function FilterContent({
       const p = new URLSearchParams(sp?.toString())
       if (merged.category.length > 0) p.set("category", merged.category.join(","))
       else p.delete("category")
-      if (!merged.inStock) p.set("inStock", "false")
+      if (merged.inStock) p.set("inStock", "true")
       else p.delete("inStock")
       if (merged.quoteOnly) p.set("quoteOnly", "true")
       else p.delete("quoteOnly")
-      if (merged.purityMin !== 95) p.set("purityMin", String(merged.purityMin))
+      if (merged.purityMin !== 0) p.set("purityMin", String(merged.purityMin))
       else p.delete("purityMin")
       if (merged.sort !== "newest") p.set("sort", merged.sort)
       else p.delete("sort")
@@ -121,7 +122,7 @@ function FilterContent({
                     className="hue-dot h-2 w-2 rounded-full"
                     style={{ "--cat-hue": hue } as CSSProperties}
                   />
-                  <span className="flex-1 text-left capitalize">{slug}</span>
+                  <span className="flex-1 text-left capitalize">{r(`categories.${slug}`)}</span>
                   <span className="font-mono text-3xs text-ink-subtle">{count}</span>
                 </button>
               </li>
@@ -137,11 +138,11 @@ function FilterContent({
         <div className="mt-3">
           <div className="flex items-center justify-between text-xs">
             <span className="font-mono">{initial.purityMin}%</span>
-            <span className="text-ink-subtle">min HPLC</span>
+            <span className="text-ink-subtle">{r("minPurity")}</span>
           </div>
           <input
             type="range"
-            min={95}
+            min={0}
             max={100}
             step={0.1}
             value={initial.purityMin}
@@ -196,6 +197,7 @@ function FilterContent({
 
 export function ShopFilterSidebar({ initial, counts }: ShopFilterSidebarProps) {
   const t = useTranslations("shop")
+  const r = useTranslations("research")
   const tCommon = useTranslations("common")
   const [mobileOpen, setMobileOpen] = useState(false)
   const containerRef = useOverlay({ open: mobileOpen, onClose: () => setMobileOpen(false) })

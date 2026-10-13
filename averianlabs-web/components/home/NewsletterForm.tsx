@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
 import { cn } from "@/lib/utils/cn"
 import { Loader2, Mail } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -21,6 +21,7 @@ export function NewsletterForm({
   size = "md",
   className,
 }: NewsletterFormProps) {
+  const locale = useLocale()
   const t = useTranslations("common")
   const [email, setEmail] = useState("")
   const [submitting, setSubmitting] = useState(false)
@@ -33,7 +34,7 @@ export function NewsletterForm({
       const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, locale }),
       })
       if (!res.ok) {
         const data = await res.json().catch(() => ({}))

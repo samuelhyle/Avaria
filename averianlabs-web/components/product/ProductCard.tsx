@@ -5,9 +5,10 @@ import { WishlistButton } from "@/components/product/WishlistButton"
 import { Badge } from "@/components/ui/Badge"
 import { useCart } from "@/lib/cart/store"
 import { useCompare } from "@/lib/compare/store"
+import { defaultVial } from "@/lib/products/selection"
 import type { Locale, Product } from "@/lib/products/types"
 import { cn } from "@/lib/utils/cn"
-import { formatCurrency } from "@/lib/utils/format"
+import { formatCurrency, formatPercent } from "@/lib/utils/format"
 import { ArrowRight, Beaker, FlaskConical, GitCompare, Plus, ShoppingBag } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
@@ -24,15 +25,12 @@ export function ProductCard({ product, locale, className, variant = "grid" }: Pr
   const t = useTranslations("shop")
   const tCommon = useTranslations("common")
   const translation = product.translations?.[locale as Locale] ?? product.defaultTranslation
-  const minVial = product.vials.reduce(
-    (min, v) => ((v.priceCents ?? 0) < (min.priceCents ?? 0) ? v : min),
-    product.vials[0]!,
-  )
+  const minVial = defaultVial(product)
   const totalStock = product.vials.reduce((s, v) => s + v.stockQty, 0)
   const isContact = minVial.contactOnly === true || minVial.priceCents === 0
   const isOut = !isContact && totalStock === 0
   const isLow = !isContact && totalStock > 0 && totalStock < 25
-  const canAdd = !isContact && !isOut
+  const canAdd = minVial.purchaseMode === "direct" && minVial.stockQty > 0 && !isContact
 
   const toggleCompare = useCompare((s) => s.toggle)
   const inCompare = useCompare((s) => s.has(product.slug))

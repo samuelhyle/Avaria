@@ -1,110 +1,84 @@
 "use client"
 
+import { useCatalogue } from "@/components/product/CatalogueProvider"
 import { ProductCard } from "@/components/product/ProductCard"
-import { Button } from "@/components/ui/Button"
 import { useCart } from "@/lib/cart/store"
 import { useCompare } from "@/lib/compare/store"
-import { useCatalogue } from "@/components/product/CatalogueProvider"
+import { defaultVial } from "@/lib/products/selection"
 import type { Locale } from "@/lib/products/types"
 import { useWishlist } from "@/lib/wishlist/store"
-import { GitCompare, Heart, ShoppingBag } from "lucide-react"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
-export function WishlistView({ locale }: { locale: Locale | string }) {
+export function WishlistView({ locale }: { locale: string }) {
+  const t = useTranslations("research")
   const products = useCatalogue()
-  const [hydrated, setHydrated] = useState(false)
-  const items = useWishlist((s) => s.items)
-  const clear = useWishlist((s) => s.clear)
-  const add = useCart((s) => s.add)
-  const compareToggle = useCompare((s) => s.toggle)
-
-  useEffect(() => {
-    setHydrated(true)
-  }, [])
-
-  if (!hydrated) return null
-
-  const list = products.filter((p) => items.includes(p.slug))
-
-  if (list.length === 0) {
+  const selected = useWishlist((state) => state.items)
+  const clear = useWishlist((state) => state.clear)
+  const add = useCart((state) => state.add)
+  const compare = useCompare((state) => state.toggle)
+  const [ready, setReady] = useState(false)
+  useEffect(() => setReady(true), [])
+  if (!ready) return null
+  const list = products.filter((product) => selected.includes(product.slug))
+  if (!list.length)
     return (
-      <div className="rounded-[var(--radius-lg)] border border-dashed border-line bg-surface p-16 text-center">
-        <Heart className="mx-auto h-10 w-10 text-ink-subtle" />
-        <h2 className="mt-4 font-display text-lg">No saved peptides yet.</h2>
-        <p className="mt-2 text-sm text-ink-muted">
-          Tap the heart on any product to save it for later.
-        </p>
-        <Button asChild>
-          <Link href={`/${locale}/shop`} className="mt-6 inline-block">
-            Browse catalog
-          </Link>
-        </Button>
+      <div className="rounded border border-line p-8">
+        <h2 className="text-xl font-semibold">{t("savedEmpty")}</h2>
+        <p className="mt-3 text-ink-muted">{t("savedEmptyBody")}</p>
+        <Link href={`/${locale}/shop`} className="mt-5 inline-block text-accent underline">
+          {t("browse")}
+        </Link>
       </div>
     )
-  }
-
-  const addAllToCart = () => {
-    let added = 0
-    list.forEach((p) => {
-      const min = p.vials.reduce((m, v) =>
-        (v.priceCents ?? 0) < (m.priceCents ?? 0) ? v : m, p.vials[0]!)
-      if (!min.contactOnly && (min.priceCents ?? 0) > 0) {
-        add({
-          productSlug: p.slug,
-          sku: min.sku,
-          name: `${p.defaultTranslation.name} ${min.mg}mg`,
-          mg: min.mg,
-          sizeValue: min.sizeValue,
-          sizeUnit: min.sizeUnit,
-          unitPriceCents: min.priceCents,
-          purchaseMode: min.purchaseMode,
-          qty: 1,
-        })
-        added++
-      }
-    })
-    toast.success(`Added ${added} products to cart`)
-  }
-
-  const addAllToCompare = () => {
-    list.forEach((p) => compareToggle(p.slug))
-    toast.success("Updated compare list")
-  }
-
   return (
     <div>
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-[var(--radius-lg)] border border-line bg-surface p-4 shadow-sm">
-        <p className="text-sm text-ink-muted">
-          <span className="font-semibold text-ink">{list.length}</span> saved peptide
-          {list.length !== 1 ? "s" : ""}
-        </p>
-        <div className="flex flex-wrap items-center gap-2">
-          <button
-            type="button"
-            onClick={addAllToCompare}
-            className="inline-flex h-9 items-center gap-1.5 rounded-[var(--radius)] border border-line bg-surface px-3 text-xs font-medium hover:bg-surface-2"
-          >
-            <GitCompare className="h-3.5 w-3.5" />
-            Add all to compare
-          </button>
-          <button
-            type="button"
-            onClick={addAllToCart}
-            className="inline-flex h-9 items-center gap-1.5 rounded-[var(--radius)] bg-accent px-3 text-xs font-semibold text-white hover:bg-accent-hover"
-          >
-            <ShoppingBag className="h-3.5 w-3.5" />
-            Add all to cart
-          </button>
-          <button onClick={clear} className="text-xs text-ink-muted hover:text-danger">
-            Clear all
-          </button>
-        </div>
+      <div className="mb-6 flex flex-wrap gap-3">
+        <button type="button" className="rounded border border-line p-3" onClick={clear}>
+          {t("clearSaved")}
+        </button>
+        <button
+          type="button"
+          className="rounded border border-line p-3"
+          onClick={() => {
+            let count = 0
+            for (const product of list) {
+              const vial = defaultVial(product)
+              if (vial.purchaseMode !== "direct" || vial.stockQty < 1) continue
+              add({
+                productSlug: product.slug,
+                sku: vial.sku,
+                name: (product.translations?.[locale as Locale] ?? product.defaultTranslation).name,
+                mg: vial.mg,
+                sizeValue: vial.sizeValue,
+                sizeUnit: vial.sizeUnit,
+                unitPriceCents: vial.priceCents,
+                purchaseMode: vial.purchaseMode,
+              })
+              count++
+            }
+            toast.success(t("addedCount", { count }))
+          }}
+        >
+          {t("addAvailable")}
+        </button>
+        <button
+          type="button"
+          className="rounded border border-line p-3"
+          onClick={() => {
+            for (const product of list)
+              if (!useCompare.getState().items.includes(product.slug)) compare(product.slug)
+            toast.success(t("compareUpdated"))
+          }}
+        >
+          {t("compare")}
+        </button>
       </div>
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {list.map((p) => (
-          <ProductCard key={p.slug} product={p} locale={locale as Locale} />
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {list.map((product) => (
+          <ProductCard key={product.slug} product={product} locale={locale as Locale} />
         ))}
       </div>
     </div>

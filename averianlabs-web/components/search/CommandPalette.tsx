@@ -7,9 +7,12 @@ import {
   DialogPortal,
   DialogTitle,
 } from "@/components/ui/Dialog"
+import { defaultVial } from "@/lib/products/selection"
 import type { Locale, Product } from "@/lib/products/types"
+import { formatCurrency } from "@/lib/utils/format"
 import { Command } from "cmdk"
 import { ArrowRight, FlaskConical, Layers, Search, ShoppingBag } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
 
@@ -18,17 +21,17 @@ interface CommandPaletteProps {
   products: Product[]
 }
 
-const QUICK_LINKS = (locale: string) => [
-  { href: `/${locale}/shop`, label: "Browse all peptides", icon: FlaskConical },
-  { href: `/${locale}/lab-tests`, label: "Lab test methodology", icon: Layers },
-  { href: `/${locale}/peptide-calculator`, label: "Reconstitution calculator", icon: FlaskConical },
-  { href: `/${locale}/blog`, label: "Research blog", icon: FlaskConical },
-  { href: `/${locale}/partner`, label: "Partner program", icon: ShoppingBag },
-]
-
 const RECENT_KEY = "averianlabs-recent-searches"
 
 export function CommandPalette({ locale, products }: CommandPaletteProps) {
+  const t = useTranslations("research")
+  const nav = useTranslations("nav")
+  const links = [
+    { href: `/${locale}/shop`, label: t("browse"), icon: FlaskConical },
+    { href: `/${locale}/lab-tests`, label: t("methodology"), icon: Layers },
+    { href: `/${locale}/peptide-calculator`, label: t("calculator"), icon: FlaskConical },
+    { href: `/${locale}/coa`, label: t("coaTitle"), icon: ShoppingBag },
+  ]
   const [open, setOpen] = useState(false)
   const [recent, setRecent] = useState<string[]>([])
   const router = useRouter()
@@ -52,7 +55,13 @@ export function CommandPalette({ locale, products }: CommandPaletteProps) {
   useEffect(() => {
     if (!open) return
     const saved = localStorage.getItem(RECENT_KEY)
-    if (saved) setRecent(JSON.parse(saved))
+    try {
+      const values = JSON.parse(saved ?? "[]")
+      if (Array.isArray(values))
+        setRecent(values.filter((v): v is string => typeof v === "string").slice(0, 5))
+    } catch {
+      setRecent([])
+    }
   }, [open])
 
   const pushRecent = useCallback(
@@ -74,37 +83,33 @@ export function CommandPalette({ locale, products }: CommandPaletteProps) {
       <DialogPortal>
         <DialogOverlay className="bg-ink/40 backdrop-blur-sm" />
         <DialogContent className="left-1/2 top-[12vh] max-w-2xl -translate-x-1/2 translate-y-0 border-line bg-surface/95 p-0 shadow-2xl backdrop-blur-xl">
-          <DialogTitle className="sr-only">Search</DialogTitle>
-          <Command label="Search AverianLabs" className="rounded-[var(--radius-lg)]">
+          <DialogTitle className="sr-only">{nav("search")}</DialogTitle>
+          <Command label={nav("search")} className="rounded-[var(--radius-lg)]">
             <div className="flex items-center gap-3 border-b border-line px-4">
               <Search className="h-4 w-4 text-ink-subtle" />
               <Command.Input
-                placeholder="Search peptides, batch IDs, articles…"
-                aria-label="Search peptides, batch IDs, articles"
+                placeholder={t("searchPlaceholder")}
+                aria-label={t("searchPlaceholder")}
                 className="h-14 w-full bg-transparent text-base text-ink placeholder:text-ink-subtle focus:outline-none"
               />
               <kbd className="hidden font-mono text-3xs text-ink-subtle sm:inline">ESC</kbd>
             </div>
             <Command.List className="max-h-[60vh] overflow-y-auto p-2">
               <Command.Empty className="px-4 py-12 text-center text-sm text-ink-muted">
-                No results. Try a peptide name like &ldquo;BPC-157&rdquo; or a CAS number.
+                {t("searchEmpty")}
               </Command.Empty>
 
               <Command.Group
-                heading="Products"
+                heading={nav("allProducts")}
                 className="px-1 pb-2 [&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-3xs [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wider [&_[cmdk-group-heading]]:text-ink-subtle"
               >
                 {products.map((p) => {
                   const translation = p.translations?.[locale as Locale] ?? p.defaultTranslation
-                  const minVial = p.vials.reduce(
-                    (min, v) => ((v.priceCents ?? 0) < (min.priceCents ?? 0) ? v : min),
-                    p.vials[0]!,
-                  )
-                  const isContact = minVial.contactOnly === true || minVial.priceCents === 0
+                  const minVial = defaultVial(p)
                   return (
                     <Command.Item
                       key={p.slug}
-                      value={`${p.slug} ${translation.name} ${p.casNumber ?? ""} ${minVial.sku}`}
+                      value={`${p.slug} ${translation.name} ${p.casNumber ?? ""} ${p.vials.map((v) => `${v.sku} ${v.batch?.code ?? ""}`).join(" ")}`}
                       onSelect={() => {
                         pushRecent(translation.name)
                         navigate(`/${locale}/shop/${p.slug}`)
@@ -129,7 +134,11 @@ export function CommandPalette({ locale, products }: CommandPaletteProps) {
                         </div>
                       </div>
                       <div className="text-xs font-medium text-ink-muted">
-                        {isContact ? "Quote" : `€${(minVial.priceCents / 100).toFixed(2)}`}
+                        {minVial.purchaseMode === "direct"
+                          ? formatCurrency(minVial.priceCents, "EUR", locale)
+                          : minVial.purchaseMode === "quotation"
+                            ? t("quote")
+                            : t("unavailable")}
                       </div>
                       <ArrowRight className="h-3.5 w-3.5 text-ink-subtle" />
                     </Command.Item>
@@ -140,10 +149,10 @@ export function CommandPalette({ locale, products }: CommandPaletteProps) {
               <Command.Separator className="my-1 h-px bg-line" />
 
               <Command.Group
-                heading="Quick links"
+                heading={t("quickLinks")}
                 className="px-1 pb-2 [&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-3xs [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wider [&_[cmdk-group-heading]]:text-ink-subtle"
               >
-                {QUICK_LINKS(locale).map((link) => (
+                {links.map((link) => (
                   <Command.Item
                     key={link.href}
                     value={link.label}
@@ -161,14 +170,14 @@ export function CommandPalette({ locale, products }: CommandPaletteProps) {
                 <>
                   <Command.Separator className="my-1 h-px bg-line" />
                   <Command.Group
-                    heading="Recent"
+                    heading={t("recent")}
                     className="px-1 pb-2 [&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-3xs [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wider [&_[cmdk-group-heading]]:text-ink-subtle"
                   >
                     {recent.map((term) => (
                       <Command.Item
                         key={term}
                         value={term}
-                        onSelect={() => navigate(`/${locale}/shop`)}
+                        onSelect={() => navigate(`/${locale}/shop?q=${encodeURIComponent(term)}`)}
                         className="flex cursor-pointer items-center gap-3 rounded-[var(--radius)] px-3 py-2 text-sm text-ink-muted aria-selected:bg-accent-soft aria-selected:text-accent-ink"
                       >
                         <Search className="h-3.5 w-3.5" />
@@ -184,17 +193,18 @@ export function CommandPalette({ locale, products }: CommandPaletteProps) {
               <div className="flex items-center gap-3">
                 <span className="flex items-center gap-1">
                   <kbd className="rounded border border-line bg-surface px-1 font-mono">↑↓</kbd>{" "}
-                  navigate
+                  {t("navigate")}
                 </span>
                 <span className="flex items-center gap-1">
-                  <kbd className="rounded border border-line bg-surface px-1 font-mono">↵</kbd> open
+                  <kbd className="rounded border border-line bg-surface px-1 font-mono">↵</kbd>{" "}
+                  {t("open")}
                 </span>
                 <span className="flex items-center gap-1">
                   <kbd className="rounded border border-line bg-surface px-1 font-mono">esc</kbd>{" "}
-                  close
+                  {t("close")}
                 </span>
               </div>
-              <span className="font-mono">{products.length} products indexed</span>
+              <span className="font-mono">{t("indexed", { count: products.length })}</span>
             </div>
           </Command>
         </DialogContent>

@@ -1,51 +1,45 @@
 "use client"
 
-import { usePathname, useSearchParams } from "next/navigation"
-import Script from "next/script"
-import { useEffect, useState } from "react"
-
-const CONSENT_KEY = "averianlabs-cookie-consent"
+import { analyticsAllowed, publicAnalyticsPath, useAnalyticsConsent } from "@/lib/privacy/consent"
+import { usePathname } from "next/navigation"
+import type { PostHog } from "posthog-js"
+import { useEffect, useRef } from "react"
 
 export function PostHogProvider({ children }: { children?: React.ReactNode }) {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const allowed = useAnalyticsConsent()
+  const instance = useRef<PostHog | null>(null)
   const key = process.env.NEXT_PUBLIC_POSTHOG_KEY
   const host = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://eu.i.posthog.com"
-
-  const [consented, setConsented] = useState(false)
-
   useEffect(() => {
-    const saved = localStorage.getItem(CONSENT_KEY)
-    if (saved === "all") {
-      setConsented(true)
+    let active = true
+    if (!allowed) {
+      instance.current?.opt_out_capturing()
+      return
     }
-    const handler = (e: Event) => {
-      const detail = (e as CustomEvent).detail
-      if (detail === "all") setConsented(true)
+    if (!key) return
+    import("posthog-js").then(({ default: posthog }) => {
+      if (!active || !analyticsAllowed()) return
+      if (!instance.current) {
+        posthog.init(key, {
+          api_host: host,
+          capture_pageview: false,
+          capture_pageleave: false,
+          autocapture: false,
+          disable_session_recording: true,
+          disable_persistence: true,
+          opt_out_capturing_by_default: true,
+          person_profiles: "never",
+        })
+        instance.current = posthog
+      }
+      posthog.opt_in_capturing()
+      if (publicAnalyticsPath(pathname))
+        posthog.capture("$pageview", { $current_url: `${window.location.origin}${pathname}` })
+    })
+    return () => {
+      active = false
     }
-    window.addEventListener("cookie-consent", handler)
-    return () => window.removeEventListener("cookie-consent", handler)
-  }, [])
-
-  useEffect(() => {
-    if (!consented || !key || typeof window === "undefined") return
-    const w = window as unknown as {
-      posthog?: { capture: (event: string, opts?: Record<string, unknown>) => void }
-    }
-    w.posthog?.capture("$pageview", { path: pathname + (searchParams?.toString() ?? "") })
-  }, [pathname, searchParams, key, consented])
-
-  if (!key || !consented) return <>{children}</>
-
-  return (
-    <>
-      <Script id="posthog-init" strategy="afterInteractive">
-        {`
-          !function(t,e){var o,n,p,r;e.__SV=1.2.4,e.posthog=e.posthog||function(){(e.posthog.q=e.posthog.q||[]).push(arguments)};o=t.createElement("script"),o.type="text/javascript",o.async=!0,o.src="${host}/static/array.js";n=t.getElementsByTagName("script")[0],n.parentNode.insertBefore(o,n)}(document,window);
-          posthog.init("${key}",{api_host:"${host}",capture_pageview:false,person_profiles:"identified_only"});
-        `}
-      </Script>
-      {children}
-    </>
-  )
+  }, [allowed, key, host, pathname])
+  return <>{children}</>
 }

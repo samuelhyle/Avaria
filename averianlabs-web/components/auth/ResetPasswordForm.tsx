@@ -26,22 +26,27 @@ export function ResetPasswordForm({
     setError(null)
 
     const form = new FormData(event.currentTarget)
-    const res = await fetch("/api/auth/reset-password", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        email,
-        token,
-        password: String(form.get("password") ?? ""),
-      }),
-    })
+    try {
+      const res = await fetch("/api/auth/reset-password", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          email,
+          token,
+          password: String(form.get("password") ?? ""),
+        }),
+      })
 
-    setPending(false)
-    if (!res.ok) {
-      setError(res.status === 400 ? t("resetInvalid") : t("genericError"))
-      return
+      if (!res.ok) {
+        setError(res.status === 400 ? t("resetInvalid") : t("genericError"))
+        return
+      }
+      setDone(true)
+    } catch {
+      setError(t("genericError"))
+    } finally {
+      setPending(false)
     }
-    setDone(true)
   }
 
   if (done) {

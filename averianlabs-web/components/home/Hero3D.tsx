@@ -11,8 +11,7 @@ import dynamic from "next/dynamic"
 import { useState } from "react"
 
 const PeptideTorusCanvas = dynamic(
-  () =>
-    import("@/components/three/PeptideTorusCanvas").then((module) => module.PeptideTorusCanvas),
+  () => import("@/components/three/PeptideTorusCanvas").then((module) => module.PeptideTorusCanvas),
   { ssr: false },
 )
 

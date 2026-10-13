@@ -8,6 +8,8 @@ import { useState, useTransition } from "react"
 
 export function GdprPanel() {
   const t = useTranslations("gdpr")
+  const r = useTranslations("research")
+  const [error, setError] = useState(false)
   const [exportPending, setExportPending] = useState(false)
   const [deleteOpen, setDeleteOpen] = useState(false)
   const [phrase, setPhrase] = useState("")
@@ -17,29 +19,42 @@ export function GdprPanel() {
   const exportData = () => {
     setExportPending(true)
     startTransition(async () => {
-      const res = await fetch("/api/account/export", { method: "POST" })
-      if (!res.ok) {
+      setError(false)
+      try {
+        const res = await fetch("/api/account/export", { method: "POST" })
+        if (!res.ok) {
+          setError(true)
+          return
+        }
+        const blob = await res.blob()
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement("a")
+        a.href = url
+        a.download = "averianlabs-data.json"
+        a.click()
+        URL.revokeObjectURL(url)
+      } catch {
+        setError(true)
+      } finally {
         setExportPending(false)
-        return
       }
-      const blob = await res.blob()
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement("a")
-      a.href = url
-      a.download = "averianlabs-data.json"
-      a.click()
-      URL.revokeObjectURL(url)
-      setExportPending(false)
     })
   }
 
   const confirmDelete = () => {
     if (phrase !== "DELETE") return
     startTransition(async () => {
-      const res = await fetch("/api/account/delete", { method: "DELETE" })
-      if (res.ok) {
-        setDeleted(true)
-        setDeleteOpen(false)
+      setError(false)
+      try {
+        const res = await fetch("/api/account/delete", { method: "DELETE" })
+        if (res.ok) {
+          setDeleted(true)
+          setDeleteOpen(false)
+        } else {
+          setError(true)
+        }
+      } catch {
+        setError(true)
       }
     })
   }
@@ -47,14 +62,19 @@ export function GdprPanel() {
   if (deleted) {
     return (
       <div className="rounded-[var(--radius-lg)] border border-warn/30 bg-warn-soft p-5 text-sm text-warn">
-        <p className="font-medium">Account deletion scheduled.</p>
-        <p className="mt-1 text-xs">All your data will be permanently deleted in 30 days.</p>
+        <p className="font-medium">{r("deletedTitle")}</p>
+        <p className="mt-1 text-xs">{r("deletionImmediate")}</p>
       </div>
     )
   }
 
   return (
     <div className="space-y-3">
+      {error && (
+        <p role="alert" className="text-sm text-danger">
+          {r("requestFailed")}
+        </p>
+      )}
       <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-5">
         <h3 className="text-sm font-semibold text-ink">{t("exportTitle")}</h3>
         <p className="mt-1 text-sm text-ink-muted">{t("exportDescription")}</p>
@@ -96,18 +116,19 @@ export function GdprPanel() {
             type="text"
             value={phrase}
             onChange={(e) => setPhrase(e.target.value.toUpperCase())}
+            aria-label={t("deleteConfirm")}
             placeholder="DELETE"
             className="mt-3 h-10 w-full rounded-[var(--radius)] border border-line bg-surface px-3 font-mono text-sm text-ink focus:border-danger focus:outline-none"
           />
           <div className="mt-4 flex justify-end gap-2">
             <Button variant="ghost" size="sm" onClick={() => setDeleteOpen(false)}>
-              Cancel
+              {r("cancel")}
             </Button>
             <Button
               variant="danger"
               size="sm"
               onClick={confirmDelete}
-              disabled={phrase !== "DELETE"}
+              disabled={phrase !== "DELETE" || isPending}
             >
               {t("deleteButton")}
             </Button>

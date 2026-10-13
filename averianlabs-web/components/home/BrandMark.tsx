@@ -13,7 +13,7 @@ import Link from "next/link"
  * the brand leads with. Two colour variants: `accent` (the brand blue) for
  * the default, and a muted pair for footer / monochrome contexts.
  *
- * The whole thing wraps in a `<Link href="/">` by default so the mark is
+ * The whole thing wraps in a `<Link href={`/${locale}`}>` by default so the mark is
  * the home affordance. Set `asLink={false}` for non-clickable contexts.
  */
 export function BrandMark({ locale, asLink = true }: { locale: string; asLink?: boolean }) {
@@ -25,7 +25,7 @@ export function BrandMark({ locale, asLink = true }: { locale: string; asLink?: 
           AverianLabs
         </span>
         <span className="font-mono text-2xs uppercase tracking-[0.2em] text-ink-subtle">
-          {locale.toUpperCase()} · research
+          {locale.toUpperCase()} · {locale === "fi" ? "tutkimus" : "research"}
         </span>
       </span>
     </span>
@@ -33,9 +33,9 @@ export function BrandMark({ locale, asLink = true }: { locale: string; asLink?: 
   if (!asLink) return inner
   return (
     <Link
-      href="/"
+      href={`/${locale}`}
       className="group inline-flex items-center gap-3 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
-      aria-label="AverianLabs, home"
+      aria-label={locale === "fi" ? "AverianLabs, etusivu" : "AverianLabs, home"}
     >
       {inner}
     </Link>
