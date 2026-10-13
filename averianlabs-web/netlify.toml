@@ -2,9 +2,9 @@
 #
 # Build pipeline:
 #   1. `pnpm install`         – restore deps
-#   2. `pnpm build`           – standard `next build`; the Next.js Runtime
-#                               plugin below packages the result into Netlify
-#                               Functions + Edge Functions automatically.
+#   2. Private database snapshot and reviewed legacy schema adoption.
+#   3. Forward migrations, non-overwriting draft seed, build and bundle checks.
+#   4. The Next.js Runtime packages Functions + Edge Functions.
 #
 # `app/api/` ships intact — route handlers run as Node Functions and read
 # secrets (`MINIMAX_API_KEY`, etc.) from Netlify env vars at invocation
@@ -42,8 +42,8 @@
 # middleware executes server-side per request, so we no longer need the
 # static-export rewrite engine that the previous demo required. Root only.
 
-# Noindex headers on every response (the Netlify deploy is still a
-# preview/demo — the canonical site is Vercel).
+# Noindex headers on every response while merchant release inputs are pending.
+# The planned canonical custom domain has not been connected to this project.
 [[headers]]
   for = "/*"
   [headers.values]

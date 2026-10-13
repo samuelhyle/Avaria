@@ -2,6 +2,20 @@
 
 Updated: 13 October 2026. This accompanies [the implementation plan](RESEARCH_CUSTOMER_IMPROVEMENT_PLAN.md).
 
+## Current hosting and deployment
+
+The connected full Next.js application is hosted at [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app), Netlify project `averianlabs-demo`, site ID `a10936e5-0fc8-4d2b-8ccd-58207323cd6f`. It retains `noindex, nofollow` while merchant inputs remain pending. The planned `averianlabs.eu` domain and older Vercel deployment descriptions are not evidence of a connected live custom domain.
+
+The Git repository root contains `netlify.toml` and `.github/workflows`; the application is in `averianlabs-web`. Build base is `averianlabs-web`. The nested Netlify configuration is synchronized with the root configuration because Netlify can resolve either depending on project settings. The linked remote branch is `demo`; the 13 October release uses a committed source ZIP uploaded to Netlify's hosted build API. A local CLI build cannot retrieve write-only hosted secrets. Publishing a ZIP does not push commits to GitHub or change that linked branch.
+
+Each hosted build first stores and reads back a SHA-256-verified private snapshot of public application tables, schema metadata and the Drizzle migration ledger. Its deploy-scoped Blobs key is `database-release-backups/pre-migration.json`. This is an application logical snapshot, not a full database-cluster backup or a replacement for provider recovery. Export it to private storage before deleting its associated deployment. It is never a public asset or repository artifact.
+
+An existing database without migration history is adopted only if its complete public schema matches the original reviewed snapshot. PostgreSQL 18 not-null constraints are checked through column nullability. The existing deployment's 384-dimension embedding column is the only accepted variation from the original 1024-dimension snapshot. Adoption inserts migration 0000's hash and timestamp transactionally under an advisory lock; it does not recreate tables. Unknown schema differences stop the build. Forward migrations and the non-overwriting draft seed run before compilation. Migration 0004 aligns fresh embedding columns with the runtime's 384 dimensions and refuses incompatible non-null vectors rather than discarding them.
+
+Netlify's production build-scoped `SECRETS_SCAN_OMIT_KEYS` contains only `NEON_BRANCH,MINIMAX_BASE_URL,MINIMAX_CHAT_MODEL,MINIMAX_EMBEDDING_MODEL`. The scan flagged these public branch/provider/model identifiers already present in source code as secrets. Database URLs, authentication secrets and provider keys remain scanned; scanning itself remains enabled. Reassess these four exceptions when changing configuration. See [Netlify's documented key-specific exclusions](https://docs.netlify.com/build/environment-variables/secrets-controller/#configure-secret-scanning).
+
+Keep the previous published deployment locked while building and checking the new deployment at its unique HTTPS URL. Check both Finnish and English pages, health, invalid request validation and browser accessibility without creating customer records. Unlock and publish the new ready deployment only after those checks pass, then repeat them on the public project URL. Application rollback must remain compatible with applied migrations; never reset the database to make a deployment succeed.
+
 ## Supported behavior
 
 Direct checkout supports Finland, EUR, card payments and prices including 25.5% Finnish VAT. Shipping is free when product subtotal reaches €150; otherwise the selected rate is included in the total. A VAT ID records invoice information and does not activate reverse charge. Additional destinations require a quotation and an approved tax policy.
@@ -30,6 +44,7 @@ pnpm typecheck
 pnpm check:i18n
 pnpm check:i18n:usage
 pnpm test
+pnpm test:deployment
 pnpm audit --prod --audit-level=high
 pnpm build
 pnpm check:bundle
