@@ -31,6 +31,8 @@
   NEXT_TELEMETRY_DISABLED = "1"
   # CPU libraries are already included in the npm package. Netlify has no CUDA GPU.
   ONNXRUNTIME_NODE_INSTALL = "skip"
+  # Next.js tracing needs more than Node's default 2 GiB heap for this app.
+  NODE_OPTIONS = "--max-old-space-size=4096"
 
 # Use the official Next.js Runtime to package server and edge routes.
 [[plugins]]

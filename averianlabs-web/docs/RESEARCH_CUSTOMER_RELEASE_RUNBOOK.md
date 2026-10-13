@@ -16,6 +16,8 @@ Netlify's production build-scoped `SECRETS_SCAN_OMIT_KEYS` contains only `NEON_B
 
 Netlify's server function uses Linux CPU inference. `ONNXRUNTIME_NODE_INSTALL=skip` prevents optional CUDA downloads during dependency installation. For this build target only, Next.js traces exclude ONNX binaries for macOS, Windows and unused CUDA/TensorRT providers. Explicit trace includes and `scripts/check-server-traces.mjs` verify that Linux x64 and ARM CPU bindings and shared libraries remain present. Other targets retain their platform traces. Check upload success and the actual hosted runtime when upgrading these packages; a successful local native model test alone cannot establish serverless compatibility.
 
+Build-only `NODE_OPTIONS=--max-old-space-size=4096` permits Next.js dependency tracing beyond Node's default 2 GiB heap. Native-file globs target the pinned package's pnpm store directory rather than recursively traversing all `node_modules` directories. Neither setting increases a function's runtime memory allocation.
+
 Keep the previous published deployment locked while building and checking the new deployment at its unique HTTPS URL. Check both Finnish and English pages, health, invalid request validation and browser accessibility without creating customer records. Unlock and publish the new ready deployment only after those checks pass, then repeat them on the public project URL. Application rollback must remain compatible with applied migrations; never reset the database to make a deployment succeed.
 
 ## Supported behavior

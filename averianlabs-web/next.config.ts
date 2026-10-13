@@ -110,16 +110,16 @@ const config: NextConfig = isDemoBuild
         ? {
             outputFileTracingExcludes: {
               "/*": [
-                "./node_modules/**/onnxruntime-node/bin/napi-v*/darwin/**",
-                "./node_modules/**/onnxruntime-node/bin/napi-v*/win32/**",
-                "./node_modules/**/onnxruntime-node/bin/napi-v*/linux/*/libonnxruntime_providers_cuda.so",
-                "./node_modules/**/onnxruntime-node/bin/napi-v*/linux/*/libonnxruntime_providers_tensorrt.so",
+                "./node_modules/.pnpm/onnxruntime-node@*/node_modules/onnxruntime-node/bin/napi-v*/darwin/**",
+                "./node_modules/.pnpm/onnxruntime-node@*/node_modules/onnxruntime-node/bin/napi-v*/win32/**",
+                "./node_modules/.pnpm/onnxruntime-node@*/node_modules/onnxruntime-node/bin/napi-v*/linux/*/libonnxruntime_providers_cuda.so",
+                "./node_modules/.pnpm/onnxruntime-node@*/node_modules/onnxruntime-node/bin/napi-v*/linux/*/libonnxruntime_providers_tensorrt.so",
               ],
             },
             outputFileTracingIncludes: {
               "/api/ai/*": [
-                "./node_modules/**/onnxruntime-node/bin/napi-v*/linux/*/onnxruntime_binding.node",
-                "./node_modules/**/onnxruntime-node/bin/napi-v*/linux/*/libonnxruntime.so.1",
+                "./node_modules/.pnpm/onnxruntime-node@*/node_modules/onnxruntime-node/bin/napi-v*/linux/*/onnxruntime_binding.node",
+                "./node_modules/.pnpm/onnxruntime-node@*/node_modules/onnxruntime-node/bin/napi-v*/linux/*/libonnxruntime.so.1",
               ],
             },
           }
