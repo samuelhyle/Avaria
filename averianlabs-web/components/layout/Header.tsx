@@ -5,10 +5,10 @@ import { Logo } from "@/components/layout/Logo"
 import { MegaMenu } from "@/components/layout/MegaMenu"
 import { MobileMenu } from "@/components/layout/MobileMenu"
 import { ThemeToggle } from "@/components/layout/ThemeToggle"
+import { useCatalogue } from "@/components/product/CatalogueProvider"
 import { Container } from "@/components/ui/Container"
 import { useCart } from "@/lib/cart/store"
 import { useCompare } from "@/lib/compare/store"
-import { useCatalogue } from "@/components/product/CatalogueProvider"
 import { cn } from "@/lib/utils/cn"
 import { useWishlist } from "@/lib/wishlist/store"
 import { GitCompare, Heart, Search, ShoppingCart, User } from "lucide-react"
@@ -55,14 +55,15 @@ export function Header({ locale }: HeaderProps) {
         <div className="flex h-16 min-w-0 items-center gap-2 xl:gap-4">
           <Logo href={`/${locale}`} size="md" glow showWordmark="responsive" className="h-11" />
 
-          <nav className="hidden lg:flex items-center gap-1 text-sm">
+          <nav className="hidden xl:flex items-center gap-1 text-sm">
             <MegaMenu locale={locale} products={products} />
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "inline-flex h-9 items-center rounded-[var(--radius)] px-3 text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink",
+                  "relative inline-flex h-9 items-center rounded-[var(--radius)] px-3 text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink",
+                  "before:absolute before:inset-x-3 before:bottom-1 before:h-px before:origin-left before:scale-x-0 before:bg-accent before:transition-transform before:duration-300 before:ease-[var(--ease-crystal)] before:content-[''] hover:before:scale-x-100",
                 )}
               >
                 {item.label}
@@ -74,7 +75,7 @@ export function Header({ locale }: HeaderProps) {
             <button
               type="button"
               onClick={openSearch}
-              aria-label={`${t("search")}, open command palette`}
+              aria-label={t("search")}
               className="inline-flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-[var(--radius)] border border-line bg-surface text-sm text-ink-subtle transition-colors hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg xl:w-auto xl:px-3"
             >
               <Search className="h-4 w-4" />
@@ -82,8 +83,12 @@ export function Header({ locale }: HeaderProps) {
               <span className="hidden xl:inline font-mono text-xs">⌘K</span>
             </button>
 
-            <div className="hidden xl:block"><LocaleSwitcher currentLocale={locale} /></div>
-            <div className="hidden xl:block"><ThemeToggle /></div>
+            <div className="hidden xl:block">
+              <LocaleSwitcher currentLocale={locale} />
+            </div>
+            <div className="hidden xl:block">
+              <ThemeToggle />
+            </div>
 
             <Link
               href={`/${locale}/account`}

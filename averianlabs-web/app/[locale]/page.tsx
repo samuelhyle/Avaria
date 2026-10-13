@@ -8,15 +8,12 @@ import { Badge } from "@/components/ui/Badge"
 import { Button } from "@/components/ui/Button"
 import { Container } from "@/components/ui/Container"
 import { Reveal } from "@/components/ui/Reveal"
+import { getStorefrontCatalogue } from "@/lib/products/catalogue"
 import { CATEGORIES } from "@/lib/products/categories"
-import {
-  products as allProducts,
-  getFeaturedHeroProducts,
-  getFeaturedProducts,
-} from "@/lib/products/data"
+import type { Product } from "@/lib/products/types"
 import type { Locale } from "@/lib/products/types"
 import { makePageMetadata } from "@/lib/seo/metadata"
-import { ArrowRight, Check, Lock } from "lucide-react"
+import { ArrowRight, Check, FlaskConical, Lock } from "lucide-react"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import Link from "next/link"
 import type { CSSProperties } from "react"
@@ -28,8 +25,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: "home" })
 
-  const featured = getFeaturedProducts()
-  const heroProducts = getFeaturedHeroProducts()
+  const allProducts = await getStorefrontCatalogue()
+  const featured = allProducts.filter((product) => product.category !== "supplies").slice(0, 7)
+  const heroProducts = featured.slice(0, 6)
+  const r = await getTranslations({ locale, namespace: "research" })
 
   return (
     <>
@@ -61,30 +60,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <p className="mt-3 text-ink-muted text-pretty">{t("threeDSub")}</p>
               </div>
               <Link
-                href={`/${locale}/shop?view=3d`}
-                className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-accent hover:text-accent-hover"
+                href={`/${locale}/shop`}
+                className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-accent transition-transform duration-300 hover:translate-x-0.5 hover:text-accent-hover"
               >
                 {t("threeDCta")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </Reveal>
-          <ThreeDShell className="block" size="carousel">
-            <LazyShop3DCarousel products={allProducts} locale={locale} />
-          </ThreeDShell>
-        </Container>
-      </section>
-
-      <section className="py-24">
-        <Container>
-          <Reveal>
-            <ProductCarousel
-              products={featured}
-              locale={locale as Locale}
-              heading={t("featuredHeading")}
-              subheading={t("featuredSub")}
-            />
-          </Reveal>
+          <ProductCarousel
+            products={allProducts.slice(0, 8)}
+            locale={locale as Locale}
+            heading={t("threeDHeading")}
+          />
         </Container>
       </section>
 
@@ -120,7 +108,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                         {t(`cat${key.charAt(0).toUpperCase() + key.slice(1)}Desc` as never)}
                       </p>
                       <span className="mt-2 inline-block font-mono text-3xs text-ink-subtle">
-                        {count} {count === 1 ? "product" : "products"}
+                        {r("indexed", { count })}
                       </span>
                     </div>
                     <ArrowRight className="relative h-4 w-4 translate-x-0 text-ink-subtle transition-transform duration-300 group-hover:translate-x-1 group-hover:text-accent" />
@@ -139,7 +127,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <div>
                 <Badge tone="ice" className="mb-4">
                   <Lock className="h-3 w-3" />
-                  Full lab transparency
+                  {r("documents")}
                 </Badge>
                 <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
                   {t("labHeading")}
@@ -149,7 +137,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   href={`/${locale}/lab-tests`}
                   className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-accent-hover"
                 >
-                  Learn about our methodology <ArrowRight className="h-4 w-4" />
+                  {r("methodology")} <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
             </Reveal>
@@ -166,37 +154,36 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </Container>
       </section>
 
-      <section className="border-y border-line bg-gradient-to-br from-accent-soft via-bg to-ice-soft py-20">
-        <Container>
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-              {t("calcHeading")}
-            </h2>
-            <p className="mt-4 text-ink-muted text-pretty">{t("calcSub")}</p>
-            <Button asChild size="lg">
-              <Link href={`/${locale}/peptide-calculator`} className="mt-6 inline-block">
-                {t("calcCta")}
-              </Link>
-            </Button>
-          </div>
-        </Container>
-      </section>
-
       <section className="border-y border-line bg-surface-2/40 py-20">
         <Container>
-          <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
-            <div className="max-w-2xl">
-              <Reveal>
-                <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-                  From the community
+          <div className="grid gap-6 lg:grid-cols-2">
+            {/* Concentration calculator — light card */}
+            <div className="flex flex-col justify-between gap-6 rounded-[var(--radius-2xl)] border border-line bg-gradient-to-br from-accent-soft/40 via-bg to-ice-soft/40 p-10 sm:p-12">
+              <div>
+                <Badge tone="ice" className="mb-4">
+                  <FlaskConical className="h-3 w-3" />
+                  {r("calculator")}
+                </Badge>
+                <h2 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+                  {t("calcHeading")}
                 </h2>
-                <p className="mt-3 text-ink-muted">
-                  Threads, replies, batch updates, and shared research plans from the AverianLabs
-                  community.
-                </p>
-              </Reveal>
+                <p className="mt-3 text-sm text-ink-muted text-pretty">{t("calcSub")}</p>
+              </div>
+              <Button asChild size="md" className="self-start">
+                <Link href={`/${locale}/peptide-calculator`}>{t("calcCta")}</Link>
+              </Button>
             </div>
-            <ActivityFeed locale={locale} />
+
+            {/* Research community — surface card with ActivityFeed */}
+            <div className="grid gap-6 rounded-[var(--radius-2xl)] border border-line bg-surface p-10 sm:p-12 lg:grid-cols-[1fr_240px]">
+              <div className="max-w-md">
+                <h2 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+                  {r("communityTitle")}
+                </h2>
+                <p className="mt-3 text-sm text-ink-muted text-pretty">{r("communityIntro")}</p>
+              </div>
+              <ActivityFeed locale={locale} />
+            </div>
           </div>
         </Container>
       </section>
@@ -215,21 +202,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section className="py-24">
         <Container>
           <div className="rounded-[var(--radius-2xl)] bg-ink p-10 text-white sm:p-16">
-            <div className="grid items-center gap-10 lg:grid-cols-2">
+            <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto]">
               <div>
                 <Badge tone="ice" className="mb-4 border-white/20 bg-white/10 text-white">
-                  For institutions
+                  {r("institutions")}
                 </Badge>
                 <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
                   {t("partnerHeading")}
                 </h2>
                 <p className="mt-4 max-w-lg text-white/70 text-pretty">{t("partnerSub")}</p>
               </div>
-              <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
-                <Button asChild size="lg" className="bg-white text-ink hover:bg-white/90">
-                  <Link href={`/${locale}/partner`}>{t("partnerCta")}</Link>
-                </Button>
-              </div>
+              <Button asChild size="lg" className="bg-white text-ink hover:bg-white/90">
+                <Link href={`/${locale}/partner`}>{t("partnerCta")}</Link>
+              </Button>
             </div>
           </div>
         </Container>
@@ -253,7 +238,7 @@ async function LabBatchCard({
   featured,
   locale,
 }: {
-  featured: ReturnType<typeof getFeaturedProducts>
+  featured: Product[]
   locale: string
 }) {
   const t = await getTranslations({ locale, namespace: "home" })
@@ -273,80 +258,30 @@ async function LabBatchCard({
 
   const batch = withBatch.latestBatch
   const translation = withBatch.translations?.[locale as Locale] ?? withBatch.defaultTranslation
-  const purity = batch.hplcPurity
-
   return (
-    <div className="relative rounded-[var(--radius-xl)] border border-line bg-surface p-8 shadow-lg">
-      <div className="mb-6 flex items-center justify-between border-b border-line pb-4">
-        <div>
-          <div className="font-mono text-xs text-ink-subtle">
-            {t("labBatchCode")} · {batch.code}
-          </div>
-          <div className="font-display text-lg font-semibold">{translation.name}</div>
-        </div>
-        <Badge tone="success">{purity >= 98 ? t("labPass") : t("labReview")}</Badge>
-      </div>
-
-      <div className="mb-6 flex items-center gap-4 rounded-[var(--radius)] bg-surface-2/60 p-4">
-        <div className="relative h-16 w-16">
-          <svg
-            viewBox="0 0 36 36"
-            className="h-16 w-16 -rotate-90"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <circle
-              cx="18"
-              cy="18"
-              r="15"
-              fill="none"
-              stroke="var(--color-surface-3)"
-              strokeWidth="3"
-            />
-            <circle
-              cx="18"
-              cy="18"
-              r="15"
-              fill="none"
-              stroke="var(--color-accent)"
-              strokeWidth="3"
-              strokeDasharray={`${(purity / 100) * 94.2} 100`}
-              strokeLinecap="round"
-            />
-          </svg>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="font-display text-sm font-bold text-accent">{purity.toFixed(1)}</span>
-          </div>
-        </div>
-        <div>
-          <p className="font-display text-sm font-semibold">{t("labPurityLabel")}</p>
-          <p className="text-xs text-ink-muted">
-            {purity >= 98 ? t("labPurityMeta") : t("labPurityBelow")}
-          </p>
-        </div>
-      </div>
-
-      <dl className="space-y-3 text-sm">
-        <Row k={t("labRowHplc")} v={`${purity.toFixed(1)}%`} />
-        <Row k={t("labRowEndotoxin")} v={`${batch.endotoxinEUPerMg.toFixed(1)} EU/mg`} />
+    <div className="rounded-[var(--radius-xl)] border border-line bg-surface p-8 shadow-lg">
+      <p className="font-mono text-xs text-ink-muted">
+        {t("labBatchCode")} · {batch.code}
+      </p>
+      <h3 className="mt-2 font-display text-lg font-semibold">{translation.name}</h3>
+      <dl className="mt-4 space-y-3 text-sm">
         <Row
-          k={t("labRowMassSpec")}
-          v={batch.msConfirmed ? t("labMassSpecConfirmed") : t("labMassSpecPending")}
+          k={t("labRowHplc")}
+          v={new Intl.NumberFormat(locale, { style: "percent", maximumFractionDigits: 2 }).format(
+            batch.hplcPurity / 100,
+          )}
         />
-        <Row k={t("labRowTested")} v={batch.lab} />
-        <Row k={t("labRowManufactured")} v={batch.manufacturedAt} />
-        <Row k={t("labRowExpires")} v={batch.expiresAt} />
+        {batch.lab && <Row k={t("labRowTested")} v={batch.lab} />}
       </dl>
       <Button asChild variant="outline" fullWidth className="mt-6">
-        <Link href={`/${locale}/lab-tests`}>{t("labViewCta")}</Link>
+        <Link href={`/${locale}/coa?q=${encodeURIComponent(batch.code)}`}>{t("labViewCta")}</Link>
       </Button>
     </div>
   )
 }
-
 function Row({ k, v }: { k: string; v: string }) {
   return (
-    <div className="flex justify-between">
+    <div className="flex flex-wrap justify-between gap-3">
       <dt className="text-ink-muted">{k}</dt>
       <dd className="font-mono font-medium">{v}</dd>
     </div>

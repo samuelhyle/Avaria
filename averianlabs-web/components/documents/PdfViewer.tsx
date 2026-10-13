@@ -1,6 +1,7 @@
 "use client"
 
 import { FileWarning, Loader2 } from "lucide-react"
+import { useTranslations } from "next-intl"
 import dynamic from "next/dynamic"
 import { useEffect, useState } from "react"
 
@@ -17,22 +18,26 @@ interface PdfViewerProps {
 }
 
 export function PdfViewer({ url, title }: PdfViewerProps) {
+  const t = useTranslations("research")
+  const [preview, setPreview] = useState(false)
   const [numPages, setNumPages] = useState<number>(0)
   const [pageNumber, setPageNumber] = useState<number>(1)
   const [loadError, setLoadError] = useState<string | null>(null)
   const [width, setWidth] = useState<number>(800)
 
   useEffect(() => {
+    if (!preview) return
     const update = () => {
       const el = document.getElementById("pdf-viewport")
-      if (el) setWidth(Math.max(320, el.clientWidth - 32))
+      if (el) setWidth(Math.max(160, el.clientWidth - 32))
     }
     update()
     window.addEventListener("resize", update)
     return () => window.removeEventListener("resize", update)
-  }, [])
+  }, [preview])
 
   useEffect(() => {
+    if (!preview) return
     let cancelled = false
     void (async () => {
       try {
@@ -52,20 +57,30 @@ export function PdfViewer({ url, title }: PdfViewerProps) {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [preview])
 
+  if (!preview)
+    return (
+      <button
+        type="button"
+        className="rounded-[var(--radius)] border border-line px-4 py-2 text-sm"
+        onClick={() => setPreview(true)}
+      >
+        {t("previewDocument")}
+      </button>
+    )
   if (loadError) {
     return (
       <div className="rounded-[var(--radius-lg)] border border-dashed border-line bg-surface p-12 text-center">
         <FileWarning className="mx-auto mb-3 h-6 w-6 text-warn" />
-        <p className="text-sm text-ink-muted">Couldn't load PDF: {loadError}</p>
+        <p className="text-sm text-ink-muted">{t("pdfFailed")}</p>
         <a
           href={url}
           target="_blank"
           rel="noreferrer"
           className="mt-3 inline-block text-sm text-accent hover:underline"
         >
-          Open in new tab →
+          {t("download")} →
         </a>
       </div>
     )
@@ -86,7 +101,7 @@ export function PdfViewer({ url, title }: PdfViewerProps) {
               disabled={pageNumber === 1}
               className="rounded-[var(--radius)] border border-line bg-surface px-2.5 py-1.5 text-ink-muted disabled:opacity-50"
             >
-              ← Prev
+              ← {t("previous")}
             </button>
             <span className="font-mono text-ink-muted">
               {pageNumber} / {numPages}
@@ -97,7 +112,7 @@ export function PdfViewer({ url, title }: PdfViewerProps) {
               disabled={pageNumber === numPages}
               className="rounded-[var(--radius)] border border-line bg-surface px-2.5 py-1.5 text-ink-muted disabled:opacity-50"
             >
-              Next →
+              {t("next")} →
             </button>
           </div>
         ) : null}
@@ -124,10 +139,11 @@ export function PdfViewer({ url, title }: PdfViewerProps) {
 }
 
 function PdfSkeleton() {
+  const t = useTranslations("research")
   return (
     <div className="flex h-[400px] items-center justify-center rounded-[var(--radius)] border border-dashed border-line bg-surface-2 text-sm text-ink-muted">
       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-      Loading PDF…
+      {t("pdfLoading")}
     </div>
   )
 }

@@ -25,13 +25,15 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-accent text-on-accent hover:bg-accent-hover active:scale-[0.97] shadow-sm hover:shadow-md",
+    "bg-accent text-on-accent hover:bg-accent-hover hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:scale-[0.97] shadow-sm",
   secondary:
-    "bg-surface-2 text-ink hover:bg-surface-3 border border-line hover:border-ink-subtle/30",
-  ghost: "bg-transparent text-ink hover:bg-surface-2 hover:text-ink active:bg-surface-3",
+    "bg-surface-2 text-ink hover:bg-surface-3 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] border border-line hover:border-ink-subtle/30",
+  ghost:
+    "bg-transparent text-ink hover:bg-surface-2 hover:text-ink active:bg-surface-3 active:scale-[0.97]",
   outline:
-    "bg-transparent text-accent border border-accent/40 hover:bg-accent-soft hover:border-accent",
-  danger: "bg-danger text-on-accent hover:bg-danger/90 shadow-sm",
+    "bg-transparent text-accent border border-accent/40 hover:bg-accent-soft hover:border-accent hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97]",
+  danger:
+    "bg-danger text-on-accent hover:bg-danger/90 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] shadow-sm",
 }
 
 const sizeClasses: Record<Size, string> = {

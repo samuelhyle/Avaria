@@ -26,10 +26,13 @@ export async function TrustStrip() {
       {lines.map((line) => {
         const Icon = line.icon
         return (
-          <li key={line.label} className="flex items-center gap-2.5">
+          <li
+            key={line.label}
+            className="group flex items-center gap-2.5 transition-transform duration-300 ease-[var(--ease-crystal)] hover:-translate-y-0.5"
+          >
             <span
               aria-hidden="true"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft text-accent-ink"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft text-accent-ink transition-transform duration-300 ease-[var(--ease-crystal)] group-hover:scale-110"
             >
               <Icon className="h-4 w-4" />
             </span>
