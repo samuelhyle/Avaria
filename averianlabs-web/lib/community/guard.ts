@@ -56,9 +56,15 @@ export function checkText(text: string): GuardResult {
       "",
     )
     .replace(/\b10\.\d{4,9}\/[^\s<>"']+/g, "")
-    .replace(/\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b/gi, "")
   for (const { rx, code } of CONTACT_PATTERNS) {
-    if (rx.test(citationSafeText)) {
+    const contactText =
+      code === "phone"
+        ? citationSafeText.replace(
+            /\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b/gi,
+            "",
+          )
+        : citationSafeText
+    if (rx.test(contactText)) {
       ruleCodes.push(code)
       notes.push("Posting contact information is not allowed.")
     }

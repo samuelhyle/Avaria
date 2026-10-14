@@ -181,6 +181,9 @@ describe("scientific citations", () => {
       "Method run 3d2b2645-a728-4749-8e69-9d3568ed9fac records the analytical observations."
     expect(checkText(study).ruleCodes).not.toContain("phone")
     expect(checkText(`${study} Call +358 40 123 4567.`).ruleCodes).toContain("phone")
+    expect(
+      checkText("Contact 3d2b2645-a728-4749-8e69-9d3568ed9fac@example.org for details.").ruleCodes,
+    ).toContain("email")
   })
   it("does not classify DOI identifiers or a bibliography as contact information", () => {
     const result = checkText(
