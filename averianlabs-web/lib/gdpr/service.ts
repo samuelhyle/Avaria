@@ -2,6 +2,7 @@ import {
   accounts,
   activityEvents,
   addresses,
+  forumDrafts,
   forumPosts,
   forumReactions,
   forumThreads,
@@ -14,6 +15,7 @@ import {
   researchPlanItems,
   researchPlans,
   rewardsAccounts,
+  savedCalculations,
   sessions,
   users,
 } from "@/db/schema"
@@ -139,6 +141,11 @@ export async function exportUserData(userId: string): Promise<Record<string, unk
     aiMessages: messageRows,
     userMemories: userMemoryRows,
     supportTickets: userTickets,
+    savedCalculations: await db
+      .select()
+      .from(savedCalculations)
+      .where(eq(savedCalculations.ownerId, userId)),
+    forumDrafts: await db.select().from(forumDrafts).where(eq(forumDrafts.ownerId, userId)),
   }
 }
 
@@ -158,6 +165,14 @@ export async function softDeleteUser(userId: string): Promise<void> {
         passwordHash: null,
       })
       .where(eq(users.id, userId))
+    await tx.delete(savedCalculations).where(eq(savedCalculations.ownerId, userId))
+    await tx.delete(forumDrafts).where(eq(forumDrafts.ownerId, userId))
+    await tx
+      .delete(forumThreads)
+      .where(and(eq(forumThreads.authorId, userId), eq(forumThreads.status, "pending")))
+    await tx
+      .delete(forumPosts)
+      .where(and(eq(forumPosts.authorId, userId), eq(forumPosts.status, "pending")))
     await tx.update(forumThreads).set({ authorId: null }).where(eq(forumThreads.authorId, userId))
     await tx.update(forumPosts).set({ authorId: null }).where(eq(forumPosts.authorId, userId))
     await tx.delete(forumReactions).where(eq(forumReactions.userId, userId))

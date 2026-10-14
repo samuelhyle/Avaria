@@ -4,6 +4,27 @@ import { describe, expect, it } from "vitest"
 
 const verifyWithFixture = (text: string) => verifyResponse(text, products)
 
+it("does not borrow another variant's batch result for an undocumented exact SKU", () => {
+  const product = products.find((product) => product.vials.some((vial) => vial.sku === "BPC157-5"))
+  if (!product) throw new Error("Missing product fixture")
+  const differentBatch = {
+    id: "qa-other-batch",
+    code: "qa-other-batch",
+    hplcPurity: 99.9,
+  } as NonNullable<typeof product.latestBatch>
+  const catalogue = [
+    {
+      ...product,
+      latestBatch: differentBatch,
+      vials: product.vials.map((vial) => ({
+        ...vial,
+        batch: vial.sku === "BPC157-5" ? undefined : differentBatch,
+      })),
+    },
+  ]
+  expect(verifyResponse("BPC157-5 has 99.9% HPLC purity", catalogue).passed).toBe(false)
+})
+
 describe("guardrails/verify — extractSkus", () => {
   it("matches canonical peptide-name SKUs like BPC-157", () => {
     expect(extractSkus("BPC-157 is great")).toEqual(["BPC-157"])
@@ -78,7 +99,7 @@ describe("guardrails/verify — extractPrices", () => {
 
 describe("guardrails/verify — verifyResponse", () => {
   it("passes clean responses", () => {
-    const report = verifyWithFixture("BPC157-10 is $69.00 and 99.2% pure.")
+    const report = verifyWithFixture("BPC157-10 is $69.00.")
     expect(report.passed).toBe(true)
     expect(report.unknownSkus).toEqual([])
     expect(report.priceMismatches).toEqual([])
@@ -107,4 +128,22 @@ describe("guardrails/verify — verifyResponse", () => {
     const report = verifyWithFixture("Not approved by the FDA or EMA.")
     expect(report.unknownSkus).toEqual([])
   })
+})
+
+it("does not accept invented availability for an unavailable SKU", () => {
+  const p = products.find((p) => p.vials.some((v) => v.sku === "BPC157-5"))
+  if (!p) throw new Error()
+  const unavailable = {
+    ...p,
+    vials: p.vials.map((v) => ({
+      ...v,
+      stockQty: 0,
+      purchaseMode: "unavailable" as const,
+      priceCents: 0,
+    })),
+    latestBatch: undefined,
+  }
+  expect(verifyResponse("BPC157-5 is in stock.", [unavailable]).passed).toBe(false)
+  expect(verifyResponse("BPC157-5 is not in stock.", [unavailable]).passed).toBe(true)
+  expect(verifyResponse("BPC157-5 is 99.9% pure.", [unavailable]).passed).toBe(false)
 })

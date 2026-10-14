@@ -12,6 +12,7 @@ import { type CSSProperties, useCallback, useEffect, useState } from "react"
 interface ShopFilterSidebarProps {
   initial: ShopFilters
   counts: Record<string, number>
+  hasPurity?: boolean
 }
 
 const SORT_OPTIONS: SortOption[] = ["newest", "price-asc", "price-desc", "name", "purity-desc"]
@@ -20,9 +21,11 @@ function FilterContent({
   initial,
   counts,
   onClose,
+  hasPurity,
 }: {
   initial: ShopFilters
   counts: Record<string, number>
+  hasPurity?: boolean
   onClose?: () => void
 }) {
   const t = useTranslations("shop")
@@ -53,7 +56,6 @@ function FilterContent({
       else p.delete("purityMin")
       if (merged.sort !== "newest") p.set("sort", merged.sort)
       else p.delete("sort")
-      p.delete("view")
       router.push(`${pathname}?${p.toString()}`)
     },
     [initial, sp, pathname, router],
@@ -131,27 +133,31 @@ function FilterContent({
         </ul>
       </div>
 
-      <div className="border-t border-line pt-5">
-        <h4 className="text-3xs font-semibold uppercase tracking-wider text-ink-subtle">
-          {t("purity")}
-        </h4>
-        <div className="mt-3">
-          <div className="flex items-center justify-between text-xs">
-            <span className="font-mono">{initial.purityMin}%</span>
-            <span className="text-ink-subtle">{r("minPurity")}</span>
+      {hasPurity ? (
+        <div className="border-t border-line pt-5">
+          <h4 className="text-3xs font-semibold uppercase tracking-wider text-ink-subtle">
+            {t("purity")}
+          </h4>
+          <div className="mt-3">
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-mono">{initial.purityMin}%</span>
+              <span className="text-ink-subtle">{r("minPurity")}</span>
+            </div>
+            <input
+              type="range"
+              min={0}
+              max={100}
+              step={0.1}
+              value={initial.purityMin}
+              onChange={(e) => update({ purityMin: Number(e.target.value) })}
+              aria-label={t("purity")}
+              className="mt-2 w-full accent-accent"
+            />
           </div>
-          <input
-            type="range"
-            min={0}
-            max={100}
-            step={0.1}
-            value={initial.purityMin}
-            onChange={(e) => update({ purityMin: Number(e.target.value) })}
-            aria-label={t("purity")}
-            className="mt-2 w-full accent-accent"
-          />
         </div>
-      </div>
+      ) : (
+        <p className="border-t border-line pt-4 text-xs text-ink-muted">{r("noVerifiedPurity")}</p>
+      )}
 
       <div className="border-t border-line pt-5 space-y-2">
         <label className="flex cursor-pointer items-center gap-2 text-sm">
@@ -195,7 +201,7 @@ function FilterContent({
   )
 }
 
-export function ShopFilterSidebar({ initial, counts }: ShopFilterSidebarProps) {
+export function ShopFilterSidebar({ initial, counts, hasPurity }: ShopFilterSidebarProps) {
   const t = useTranslations("shop")
   const r = useTranslations("research")
   const tCommon = useTranslations("common")
@@ -213,7 +219,7 @@ export function ShopFilterSidebar({ initial, counts }: ShopFilterSidebarProps) {
       {/* Desktop sidebar */}
       <aside className="sticky top-24 hidden h-fit lg:block">
         <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-5 shadow-sm">
-          <FilterContent initial={initial} counts={counts} />
+          <FilterContent initial={initial} counts={counts} hasPurity={hasPurity} />
         </div>
       </aside>
 
@@ -248,6 +254,7 @@ export function ShopFilterSidebar({ initial, counts }: ShopFilterSidebarProps) {
               <FilterContent
                 initial={initial}
                 counts={counts}
+                hasPurity={hasPurity}
                 onClose={() => setMobileOpen(false)}
               />
             </div>

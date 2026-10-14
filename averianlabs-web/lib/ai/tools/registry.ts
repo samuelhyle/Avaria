@@ -27,6 +27,9 @@ import { trackShipmentTool } from "@/lib/ai/tools/track-shipment"
 import { viewCartTool } from "@/lib/ai/tools/view-cart"
 import type { ProposedAction } from "@/lib/ai/types/events"
 import type { Locale } from "@/lib/i18n/config"
+import { prepareCommunityDraftTool, readDiscussionTool } from "./community"
+import { getDocumentsTool } from "./get-documents"
+import { laboratoryCalculationTool } from "./laboratory-calculation"
 
 export type { ProposedAction }
 
@@ -42,6 +45,7 @@ export interface ToolDefinition {
 
 export interface ToolContext {
   locale: Locale
+  readOnly?: boolean
   /** Read-only snapshot of the cart as last seen by the client. May be empty
    *  on first turn — the agent calls viewCart() to populate it. */
   cart: Array<{
@@ -82,6 +86,10 @@ export interface Tool {
 }
 
 export const TOOL_REGISTRY: Record<string, Tool> = {
+  [laboratoryCalculationTool.definition.name]: laboratoryCalculationTool,
+  [getDocumentsTool.definition.name]: getDocumentsTool,
+  [readDiscussionTool.definition.name]: readDiscussionTool,
+  [prepareCommunityDraftTool.definition.name]: prepareCommunityDraftTool,
   [searchProductsTool.definition.name]: searchProductsTool,
   [getProductTool.definition.name]: getProductTool,
   [getBatchesTool.definition.name]: getBatchesTool,
@@ -108,6 +116,7 @@ export function listToolDefinitions(ctx?: ToolContext): Array<{
   return Object.values(TOOL_REGISTRY)
     .filter((t) => {
       if (t.requiresAdmin && !ctx?.isAdmin) return false
+      if (ctx?.readOnly && !READ_ONLY_TOOLS.has(t.definition.name)) return false
       return true
     })
     .map((t) => ({
@@ -123,5 +132,19 @@ export async function runTool(name: string, args: unknown, ctx: ToolContext): Pr
   if (tool.requiresAdmin && !ctx.isAdmin) {
     throw new Error(`Tool ${name} requires admin role`)
   }
+  if (ctx.readOnly && !READ_ONLY_TOOLS.has(name)) throw new Error("read_only_tool_required")
   return tool.execute(args, ctx)
 }
+
+const READ_ONLY_TOOLS = new Set([
+  "searchProducts",
+  "getProduct",
+  "getBatches",
+  "getDocuments",
+  "compareProducts",
+  "calculateLaboratory",
+  "getReconstitution",
+  "readDiscussion",
+  "prepareCommunityDraft",
+  "viewCart",
+])

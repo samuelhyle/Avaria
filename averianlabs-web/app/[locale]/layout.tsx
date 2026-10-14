@@ -29,6 +29,7 @@ const CLIENT_NAMESPACES = [
   "a11y",
   "notFound",
   "research",
+  "calculator",
   "account",
   "admin",
   "ageGate",
@@ -147,7 +148,10 @@ export default async function LocaleLayout({
       className={`${GeistSans.variable} ${GeistMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen bg-bg text-ink antialiased">
+      <body
+        data-review-site={process.env.NEXT_PUBLIC_REVIEW_SITE === "true" ? "true" : undefined}
+        className="min-h-screen bg-bg text-ink antialiased"
+      >
         <ThemeProvider>
           <MotionProvider>
             <OrganizationJsonLd />

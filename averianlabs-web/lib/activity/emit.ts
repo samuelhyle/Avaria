@@ -1,4 +1,4 @@
-import { activityEvents, researchPlans } from "@/db/schema"
+import { activityEvents, forumPosts, forumThreads, researchPlans } from "@/db/schema"
 /**
  * Activity event emitter — append-only public-safe log.
  *
@@ -62,7 +62,7 @@ export function emitActivity(input: EmitInput): void {
 }
 
 export async function recentActivity(limit = 12) {
-  const { and, desc, eq, getTableColumns, ne, or } = await import("drizzle-orm")
+  const { and, desc, eq, getTableColumns, ne, or, sql } = await import("drizzle-orm")
   return db
     .select(getTableColumns(activityEvents))
     .from(activityEvents)
@@ -70,12 +70,23 @@ export async function recentActivity(limit = 12) {
       researchPlans,
       and(eq(activityEvents.targetType, "plan"), eq(activityEvents.targetId, researchPlans.id)),
     )
+    .leftJoin(
+      forumThreads,
+      and(eq(activityEvents.targetType, "thread"), eq(activityEvents.targetId, forumThreads.id)),
+    )
+    .leftJoin(
+      forumPosts,
+      and(eq(activityEvents.targetType, "post"), eq(activityEvents.targetId, forumPosts.id)),
+    )
     .where(
-      or(
-        ne(activityEvents.kind, "plan_shared"),
-        and(
-          eq(researchPlans.isPublic, true),
-          eq(researchPlans.shareSlug, activityEvents.targetSlug),
+      and(
+        sql`(${activityEvents.kind} not in ('thread_created','post_created','reaction_added') or (${activityEvents.targetType}='thread' and ${forumThreads.status} in ('active','locked') and ${activityEvents.kind}<>'post_created') or (${activityEvents.targetType}='post' and ${forumPosts.status} in ('active','edited') and exists(select 1 from forum_threads ft where ft.id=${forumPosts.threadId} and ft.status in ('active','locked'))))`,
+        or(
+          ne(activityEvents.kind, "plan_shared"),
+          and(
+            eq(researchPlans.isPublic, true),
+            eq(researchPlans.shareSlug, activityEvents.targetSlug),
+          ),
         ),
       ),
     )

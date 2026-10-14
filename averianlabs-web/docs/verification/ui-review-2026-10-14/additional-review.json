@@ -1,0 +1,26 @@
+{
+  "reviewedAt": "2026-10-14T15:14:14.208Z",
+  "results": [
+    {
+      "name": "desktop",
+      "path": "/en/coa",
+      "status": 200,
+      "mainText": "Certificates of Analysis\n\nFind published documents for a product or batch. A document link is not a blanket PASS designation; assess the methods and results in the original report.\n\nBatch documents\n\nNo published documents are available yet.",
+      "overflow": false
+    },
+    {
+      "name": "mobile",
+      "path": "/fi/coa",
+      "status": 200,
+      "mainText": "Analyysitodistukset\n\nEtsi julkaistut asiakirjat tuotteen tai erätunnuksen perusteella. Asiakirjalinkki ei ole yleinen hyväksymismerkintä. Arvioi menetelmät ja tulokset alkuperäisestä raportista.\n\nEräasiakirjat\n\nJulkaistuja asiakirjoja ei ole vielä saatavilla.",
+      "overflow": false
+    },
+    {
+      "name": "tablet",
+      "path": "/en",
+      "status": 200,
+      "mainText": "AverianLabs\nEN · RESEARCH\n\nFOR LABORATORY RESEARCH\n\nResearch materials for laboratory work.\n\nExplore products, review batch documents and check availability before ordering.\n\nBrowse the catalogue\nVerify a batch\n\nFOR RESEARCH PURCHASING\n\nRESEARCH UNIVERSITIES\nBIOTECH STARTUPS\nHOSPITAL PHARMACIES\nINDEPENDENT LABS\nPUBLIC INSTITUTES\nProduct-specific information\nClear purchase information\nBatch documents\nExplore in 3D\nFROM 20 mg\nRetatrutide\n\nLaboratory research material. Review the product-specific documentation before use.\n\nSKU\nRETA-20\nHPLC\n—\nfrom\n20 mg\nFROM\nRequest a quote\nView →\nRetatrutide\n· 20 mg\nGHK-Cu\n· 50 mg\nMOTS-c\n· 10 mg\nMelanotan II\n· 10 mg\nNAD+\n· 1,000 mg\nBPC-157\n· 5 mg\n\nIllustrative product view\n\nExplore the catalogue\n\nBrowse product information and find materials relevant to your research.\n\nBrowse all products\nExplore the catalogue\nBAC water\nBACW-10\nCompare\nBAC water\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nRetatrutide\nRETA-20\nCompare\nRetatrutide\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nGHK-Cu\nGHKCU-50\nCompare\nGHK-Cu\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nMOTS-c\nMOTSC-10\nCompare\nMOTS-c\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nMelanotan II\nMT2-10\nCompare\nMelanotan II\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nNAD+\nNAD-1000\nCompare\nNAD+\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nBPC-157\nBPC157-5\nCompare\nBPC-157\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nMelanotan I\nMT1-10\nCompare\nMelanotan I\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nBrowse by research area\nMetabolic research\n\nMaterials grouped for metabolic laboratory research. Check the product-specific records and applicable methods.\n\n4 products\nTissue research\n\nMaterials grouped for tissue and cell research. Check product identity and batch evidence before selecting a material.\n\n1 product\nNeurobiology\n\nMaterials grouped for laboratory neurobiology research. Suitability depends on your experimental method.\n\n2 products\nCell ageing\n\nMaterials grouped for cellular ageing research. Category membership does not establish biological activity.\n\n2 products\nCosmetic research\n\nMaterials grouped for skin and cosmetic laboratory research. These products are for laboratory research only.\n\n3 products\nBlends\n\nPeptide mixtures. Confirm the stated components and proportions in approved product records.\n\n2 products\nSupplies\n\nLaboratory reagents and supplies. Check the size, unit and material-specific documentation.\n\n1 product\nBatch documents\nReview the batch documentation\n\nConsult original analytical reports. Report availability is stated explicitly.\n\nUnderstanding test results\nCOA\nNo released batch linked yet\n\nOnly published, reviewed documents appear here. A missing document is not a test result.\n\nView Lab Tests\nConcentration calculator\nConcentration and aliquot calculations\n\nCalculate laboratory solution concentration and aliquot volumes.\n\nOpen concentration calculator\nResearch community\n\nDiscuss documentation and share laboratory research questions.\n\nNo activity yet — the feed fills up as members post.\nFor research organisations\nFor institutions & resellers\n\nAsk about products, required documentation and purchasing quantities.\n\nApply for partner pricing",
+      "overflow": false
+    }
+  ]
+}

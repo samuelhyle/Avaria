@@ -18,9 +18,15 @@ export interface ConsentBannerProps {
   consent: "accepted" | "declined" | "unset"
   onAccept: () => void
   onDecline: () => void
+  inline?: boolean
 }
 
-export function ConsentBanner({ consent, onAccept, onDecline }: ConsentBannerProps) {
+export function ConsentBanner({
+  consent,
+  onAccept,
+  onDecline,
+  inline = false,
+}: ConsentBannerProps) {
   const t = useTranslations("averia.consent")
 
   const visible = consent === "unset"
@@ -40,9 +46,11 @@ export function ConsentBanner({ consent, onAccept, onDecline }: ConsentBannerPro
           className={cn(
             // Bottom-left so it never collides with the right-corner stack
             // (chat launcher, back-to-top, compare bar).
-            "fixed bottom-5 left-5 z-30 w-[min(360px,calc(100vw-2.5rem))]",
+            inline
+              ? "w-full"
+              : "fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom))] left-5 z-[60] w-[min(360px,calc(100vw-2.5rem))]",
             "rounded-[var(--radius-lg)] border border-line bg-surface p-4 shadow-xl",
-            "md:bottom-6 md:left-6",
+            !inline && "md:bottom-20 md:left-6",
           )}
         >
           <div className="flex items-start gap-3">

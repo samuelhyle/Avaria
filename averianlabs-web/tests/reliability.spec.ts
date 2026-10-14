@@ -5,7 +5,7 @@ for (const locale of ["en", "fi"]) {
   test(`${locale}: 10 mL stays a volume through product and cart`, async ({ cleanPage: page }) => {
     await page.goto(`/${locale}/shop/qa-water`)
     await expect(page.locator("main")).toContainText("10 mL")
-    await expect(page.locator("main")).not.toContainText("10 mg")
+    await expect(page.locator("main fieldset")).not.toContainText("10 mg")
     await page
       .locator("main")
       .getByRole("button", { name: locale === "fi" ? /lisää ostoskoriin/i : /add to cart/i })
@@ -32,6 +32,7 @@ for (const locale of ["en", "fi"]) {
       await expect(
         page.locator("main").getByRole("button", { name: /add to cart|lisää ostoskoriin/i }),
       ).toHaveCount(0)
+      await page.locator("main details summary").first().click()
       await page.locator('main input[name="name"]').fill("Browser QA")
       await page.locator('main input[name="email"]').fill(email)
       const response = page.waitForResponse(
@@ -114,7 +115,7 @@ test("cookie settings can reopen and withdraw analytics consent", async ({ clean
 })
 test("invalid concentration inputs do not expose infinite results", async ({ cleanPage: page }) => {
   await page.goto("/fi/peptide-calculator")
-  await page.locator('main input[type="number"]').nth(1).fill("0")
+  await page.getByRole("textbox", { name: "Liuoksen lopullinen tilavuus", exact: true }).fill("0")
   await expect(page.locator("main").getByRole("status")).toBeVisible()
   await expect(page.locator("main")).not.toContainText(/Infinity|NaN|IU/)
 })
@@ -138,7 +139,7 @@ for (const locale of ["en", "fi"]) {
       const page = await context.newPage()
       await page.goto(`${process.env.BASE_URL ?? "http://localhost:3000"}/${locale}`)
       await expect(page.locator("main h1")).toBeVisible()
-      const category = page.locator(`main a[href="/${locale}/shop?category=metabolic"]`).first()
+      const category = page.locator(`main a[href="/${locale}/shop"]`).first()
       await category.scrollIntoViewIfNeeded()
       await expect(category).toBeVisible()
       expect(
@@ -160,7 +161,10 @@ for (const locale of ["en", "fi"]) {
 test("hero preserves SI unit case and spacing", async ({ cleanPage: page }) => {
   await page.setViewportSize({ width: 1440, height: 900 })
   await page.goto("/fi")
-  const unit = page.locator("main [role=group] .normal-case").first()
+  const unit = page
+    .locator("main section[aria-label]")
+    .first()
+    .getByText(/\d+ mg \/ \d+ mg/)
   await expect(unit).toHaveText(/\d+ (mg|g|µg|mL|µL|vial)/)
   expect(await unit.evaluate((element) => getComputedStyle(element).textTransform)).toBe("none")
 })

@@ -7,6 +7,7 @@ const Body = z.object({
   categorySlug: z.string().min(1).max(64),
   title: z.string().min(6).max(140),
   body: z.string().min(1).max(8000),
+  locale: z.enum(["en", "fi"]).optional(),
 })
 
 function clampInt(value: string | null, fallback: number, min: number, max: number): number {

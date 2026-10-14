@@ -1,0 +1,177 @@
+{
+  "checkedAt": "2026-10-14T15:40:31.259Z",
+  "results": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "locale": "en",
+      "view": "home",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    },
+    {
+      "name": "desktop",
+      "width": 1440,
+      "locale": "en",
+      "view": "catalog",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    },
+    {
+      "name": "desktop",
+      "width": 1440,
+      "locale": "en",
+      "view": "product",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    },
+    {
+      "name": "desktop",
+      "width": 1440,
+      "locale": "fi",
+      "view": "home",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    },
+    {
+      "name": "desktop",
+      "width": 1440,
+      "locale": "fi",
+      "view": "catalog",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    },
+    {
+      "name": "desktop",
+      "width": 1440,
+      "locale": "fi",
+      "view": "product",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "locale": "en",
+      "view": "home",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "locale": "en",
+      "view": "catalog",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "locale": "en",
+      "view": "product",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "locale": "fi",
+      "view": "home",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "locale": "fi",
+      "view": "catalog",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "locale": "fi",
+      "view": "product",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    },
+    {
+      "name": "narrow",
+      "width": 320,
+      "locale": "en",
+      "view": "home",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    },
+    {
+      "name": "narrow",
+      "width": 320,
+      "locale": "en",
+      "view": "catalog",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    },
+    {
+      "name": "narrow",
+      "width": 320,
+      "locale": "en",
+      "view": "product",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    },
+    {
+      "name": "narrow",
+      "width": 320,
+      "locale": "fi",
+      "view": "home",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    },
+    {
+      "name": "narrow",
+      "width": 320,
+      "locale": "fi",
+      "view": "catalog",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    },
+    {
+      "name": "narrow",
+      "width": 320,
+      "locale": "fi",
+      "view": "product",
+      "overflow": false,
+      "blocking": [],
+      "minor": []
+    }
+  ],
+  "interactionChecks": [
+    "FI/EN switching with filters retained",
+    "material-type filtering",
+    "SKU filtering",
+    "product navigation",
+    "variant selection",
+    "preview dialog",
+    "Escape dismissal"
+  ],
+  "networkCallsFromConcept": false
+}

@@ -29,3 +29,5 @@ next-env.d.ts
 
 # Isolated local production verification output
 .next-implementation/
+
+.next-workspace/

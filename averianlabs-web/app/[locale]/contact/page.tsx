@@ -10,7 +10,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   const t = await getTranslations("research")
   const legal = getLegalIdentity()
   return (
-    <Container className="py-16">
+    <Container className="py-8 sm:py-12">
       <h1 className="font-display text-4xl font-semibold">{t("contactTitle")}</h1>
       <p className="mt-4 max-w-2xl text-ink-muted">{t("contactIntro")}</p>
       <div className="mt-10 grid gap-10 lg:grid-cols-2">

@@ -33,11 +33,11 @@ function uuid(): string {
 }
 
 const CONFIRMATIONS: Record<string, string> = {
-  en: "I've created a support ticket and attached our conversation. A specialist will follow up within 24 hours at the email you provided.",
-  fi: "Olen luonut tukipyynnön ja liittänyt keskustelumme siihen. Asiantuntija vastaa 24 tunnin sisällä antamaasi sähköpostiin.",
-  de: "Ich habe ein Support-Ticket erstellt und unser Gespräch angehängt. Ein Spezialist meldet sich innerhalb von 24 Stunden unter der angegebenen E-Mail.",
-  sv: "Jag har skapat ett supportärende och bifogat vår konversation. En specialist återkommer inom 24 timmar till den angivna e-posten.",
-  nl: "Ik heb een supportticket aangemaakt en ons gesprek bijgevoegd. Een specialist reageert binnen 24 uur op het opgegeven e-mailadres.",
+  en: "I've created a support ticket and attached our conversation. Our team can follow up using the email you provided.",
+  fi: "Olen luonut tukipyynnön ja liittänyt keskustelumme siihen. Tiimimme voi ottaa yhteyttä antamaasi sähköpostiin.",
+  de: "Ich habe ein Support-Ticket erstellt und unser Gespräch angehängt. Unser Team kann Sie unter der angegebenen E-Mail kontaktieren.",
+  sv: "Jag har skapat ett supportärende och bifogat vår konversation. Vårt team kan följa upp via den angivna e-postadressen.",
+  nl: "Ik heb een supportticket aangemaakt en ons gesprek bijgevoegd. Ons team kan contact opnemen via het opgegeven e-mailadres.",
 }
 
 export const createSupportTicketTool: Tool = {
@@ -84,7 +84,7 @@ export const createSupportTicketTool: Tool = {
       return { content: { error: "missing_inputs", required: ["email", "subject", "body"] } }
     }
 
-    const transcript = args.transcript?.length ? args.transcript : (ctx.transcript ?? [])
+    const transcript = ctx.transcript ?? []
     if (transcript.length === 0) {
       return { content: { error: "empty_transcript" } }
     }
@@ -96,7 +96,7 @@ export const createSupportTicketTool: Tool = {
       await db.insert(supportTickets).values({
         id,
         userId: ctx.auth?.userId ?? null,
-        conversationId: args.conversationId ?? ctx.conversationId ?? null,
+        conversationId: ctx.conversationId ?? null,
         email: args.email.toLowerCase(),
         subject: args.subject.slice(0, 200),
         body: args.body.slice(0, 4000),

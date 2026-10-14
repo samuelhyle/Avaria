@@ -1,6 +1,7 @@
 "use client"
 
 import { Badge } from "@/components/ui/Badge"
+import { discussionReferences } from "@/lib/community/references"
 import { tierFor } from "@/lib/community/reputation"
 import { cn } from "@/lib/utils/cn"
 import { useLocale, useTranslations } from "next-intl"
@@ -44,6 +45,7 @@ export function PostCard({ post, isOriginal, isAuthed, currentUserId, reactions 
 
   return (
     <article
+      id={`post-${post.id}`}
       className={cn(
         "rounded-[var(--radius-lg)] border bg-surface p-5",
         isOriginal ? "border-accent/30 ring-1 ring-accent/10" : "border-line",
@@ -85,14 +87,36 @@ export function PostCard({ post, isOriginal, isAuthed, currentUserId, reactions 
       {isRemoved ? (
         <p className="text-sm italic text-ink-muted">{t("removedNotice")}</p>
       ) : (
-        <PostMarkdown body={post.body} />
+        <>
+          <PostMarkdown body={post.body} />
+          {discussionReferences(post.body).length > 0 && (
+            <section className="mt-5 border-t border-line pt-4">
+              <h3 className="text-xs font-semibold">{t("sources")}</h3>
+              <p className="mt-2 text-xs text-ink-muted">{t("sourceNotice")}</p>
+              <ul className="mt-3 space-y-2">
+                {discussionReferences(post.body).map((url) => (
+                  <li key={url}>
+                    <a
+                      className="break-all text-xs text-accent underline"
+                      href={url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {url}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </>
       )}
 
       {!isRemoved ? (
         <footer className="mt-4 flex items-center justify-between border-t border-line pt-3">
           <ReactionBar
             postId={post.id}
-            isAuthed={isAuthed}
+            isAuthed={isAuthed && post.status !== "pending"}
             counts={reactions}
             mine={reactions.mine}
             isOwnPost={isOwnPost}

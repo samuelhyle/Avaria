@@ -1,0 +1,66 @@
+{
+  "checkedAt": "2026-10-14T18:34:53.508965+00:00",
+  "scope": "Final local production build; isolated PostgreSQL/pgvector. No live customer mutations, payments or emails.",
+  "build": "pass",
+  "typecheck": "pass",
+  "lint": {
+    "errors": 0,
+    "warnings": 52
+  },
+  "i18n": {
+    "locales": 5,
+    "leafKeys": 1215,
+    "missing": 0,
+    "literalCalls": "pass"
+  },
+  "unit": {
+    "passed": 213,
+    "skipped": 0,
+    "localEmbeddingModelExecuted": true
+  },
+  "integration": {
+    "passed": 26,
+    "skipped": 0
+  },
+  "deploymentGuards": {
+    "passed": 12,
+    "skipped": 0
+  },
+  "browser": {
+    "passed": 118,
+    "skipped": 2,
+    "skippedScope": "Two real-provider chat journeys; provider disabled in isolated environment. Explicit mocked provider failures and deterministic tools were tested."
+  },
+  "visual": {
+    "routeViewportStates": 42,
+    "httpFailures": 0,
+    "horizontalOverflow": 0,
+    "runtimeErrors": 0,
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "locales": [
+      "en",
+      "fi"
+    ],
+    "widths": [
+      320,
+      390,
+      1440
+    ]
+  },
+  "routeBudgetsKiBGzip": {
+    "home": 271.7,
+    "shop": 278.1,
+    "product": 290.5,
+    "cart": 269.8,
+    "payment": 274.1
+  },
+  "liveModelEvaluation": {
+    "implementedPairedScenarios": 60,
+    "fullExecution": "pending",
+    "reason": "Hosted secret is not readable for an isolated local provider run. Hosted functional smoke is recorded separately."
+  },
+  "reviewNote": "A transient hydration warning occurred while fixture mutation tests and screenshot capture ran concurrently. It did not recur in the final serial 42-state capture, three 6-route production loops, or the separate development rendering probe. Immutable hosted candidate checks are required before promotion."
+}

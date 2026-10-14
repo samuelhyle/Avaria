@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/Badge"
 import { Container } from "@/components/ui/Container"
 import { forumModerationEvents, forumPosts, forumThreads, users } from "@/db/schema"
 import { getAdminOrNull } from "@/lib/admin"
-import { listOpenReports } from "@/lib/community"
+import { listOpenReports, moderationQueue } from "@/lib/community"
 import { db } from "@/lib/db"
 import { and, desc as descFn, inArray, ne } from "drizzle-orm"
 import type { Metadata } from "next"
@@ -38,27 +38,14 @@ export default async function ModerationPage({
             href={`/${locale}/community`}
             className="mt-4 inline-block text-sm text-accent hover:underline"
           >
-            ← Back to community
+            ← {t("moderationUi.back")}
           </Link>
         </ForbiddenShell>
       </Container>
     )
   }
 
-  const events = await db
-    .select()
-    .from(forumModerationEvents)
-    .where(
-      and(
-        inArray(forumModerationEvents.verdict, ["warn", "remove"]),
-        // Human verdicts are terminal — reviewed content leaves the queue.
-        ne(forumModerationEvents.layer, "human"),
-        // Blocked-before-publish entries are audit records, not actionable.
-        ne(forumModerationEvents.targetId, "blocked"),
-      ),
-    )
-    .orderBy(descFn(forumModerationEvents.createdAt))
-    .limit(100)
+  const events = await moderationQueue(100)
 
   const reports = await listOpenReports(100)
 
@@ -162,15 +149,12 @@ export default async function ModerationPage({
       <AdminShell member={member}>
         <header className="mb-6">
           <Badge tone="warn" size="sm" className="mb-2">
-            Admin · Moderation
+            {t("moderation")}
           </Badge>
           <h1 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">
             {t("moderation")}
           </h1>
-          <p className="mt-1 text-sm text-ink-muted">
-            Member reports first, then posts flagged by the lexical guard or the LLM moderator.
-            Newest first. Click <em>View</em> to inspect the full post body.
-          </p>
+          <p className="mt-1 text-sm text-ink-muted">{t("moderationUi.intro")}</p>
         </header>
 
         <ModerationQueue items={items} />

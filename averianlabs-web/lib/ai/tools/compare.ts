@@ -1,79 +1,69 @@
-/**
- * compareProducts — side-by-side comparison of 2–4 products.
- *
- * Returns a compact table suitable for direct rendering or for the model to
- * paraphrase into a Markdown table.
- */
-
-import type { Tool, ToolContext, ToolResult } from "@/lib/ai/tools/registry"
 import { getStorefrontCatalogue } from "@/lib/products/catalogue"
+import { hasPublishedDocuments } from "@/lib/products/document-status"
 import { formatSize } from "@/lib/utils/format"
-
-interface Args {
-  slugs: string[]
-}
-
+import { z } from "zod"
+import type { Tool } from "./registry"
+const argsSchema = z
+  .object({
+    slugs: z.array(z.string().max(100)).min(2).max(4).optional(),
+    skus: z.array(z.string().max(80)).min(2).max(4).optional(),
+  })
+  .strict()
+  .refine((a) => !!a.slugs !== !!a.skus)
 export const compareProductsTool: Tool = {
   definition: {
     name: "compareProducts",
     description:
-      "Compare 2–4 products by slug and return a compact table of name, category, purity, vial sizes, starting price, and latest batch HPLC / endotoxin. Use this whenever the user asks 'compare X vs Y'.",
+      "Compare the customer's 2–4 exact selected SKUs or product slugs using current authoritative records. Ask for selections first. Preserve quantities/units and missing evidence; do not infer popularity or suitability.",
     parameters: {
       type: "object",
       properties: {
-        slugs: {
-          type: "array",
-          items: { type: "string" },
-          description: "Array of 2 to 4 product slugs to compare.",
-        },
+        slugs: { type: "array", items: { type: "string" } },
+        skus: { type: "array", items: { type: "string" } },
       },
-      required: ["slugs"],
+      required: [],
     },
   },
-  async execute(rawArgs, ctx): Promise<ToolResult> {
-    const args = (rawArgs ?? {}) as Args
-    const products = await getStorefrontCatalogue()
-    const found = args.slugs
-      .map((s) => products.find((p) => p.slug === s))
-      .filter((p): p is (typeof products)[number] => Boolean(p))
-
-    if (found.length === 0) {
-      return { content: { error: "none_found", requested: args.slugs, products: [] } }
+  async execute(raw, ctx) {
+    const parsed = argsSchema.safeParse(raw)
+    if (!parsed.success) return { content: { error: "invalid_selection", products: [] } }
+    const catalog = await getStorefrontCatalogue()
+    const requested = [...new Set(parsed.data.skus ?? parsed.data.slugs ?? [])]
+    if (requested.length < 2) return { content: { error: "select_two", products: [] } }
+    const rows = []
+    const missing = []
+    for (const selected of requested) {
+      const p = catalog.find((p) =>
+        parsed.data.skus ? p.vials.some((v) => v.sku === selected) : p.slug === selected,
+      )
+      if (!p) {
+        missing.push(selected)
+        continue
+      }
+      const variants = parsed.data.skus ? p.vials.filter((v) => v.sku === selected) : p.vials
+      const tr = p.translations?.[ctx.locale] ?? p.defaultTranslation
+      const direct = variants.filter(
+        (v) => v.purchaseMode === "direct" && v.stockQty > 0 && v.priceCents > 0,
+      )
+      rows.push({
+        slug: p.slug,
+        name: tr.name,
+        requestedSku: parsed.data.skus ? selected : null,
+        category: p.category,
+        purityPercent: variants[0]?.batch?.hplcPurity || null,
+        vialSizes: variants.map((v) => formatSize(v, ctx.locale)),
+        fromPriceCents: direct.length ? Math.min(...direct.map((v) => v.priceCents)) : null,
+        variants: variants.map((v) => ({
+          sku: v.sku,
+          size: formatSize(v, ctx.locale),
+          purchaseMode: v.purchaseMode,
+          stockQty: v.stockQty,
+          batchCode: v.batch?.code ?? null,
+          documentsAvailable: hasPublishedDocuments(p, ctx.locale, v.sku),
+        })),
+        url: `/${ctx.locale}/shop/${p.slug}`,
+      })
     }
-
-    return {
-      content: {
-        locale: ctx.locale,
-        products: found.map((p) => {
-          const tr =
-            ctx.locale === "en"
-              ? p.defaultTranslation
-              : ((
-                  p.translations as
-                    | Record<string, import("@/lib/products/types").ProductTranslation>
-                    | undefined
-                )?.[ctx.locale] ?? p.defaultTranslation)
-          const minPrice = Math.min(
-            ...p.vials.filter((v) => v.purchaseMode === "direct").map((v) => v.priceCents),
-          )
-          return {
-            slug: p.slug,
-            name: tr.name,
-            category: p.category,
-            purityPercent: p.purityPercent ?? null,
-            vialSizes: p.vials.map((v) => formatSize(v, ctx.locale)),
-            fromPriceCents: Number.isFinite(minPrice) ? minPrice : null,
-            url: `/${ctx.locale}/shop/${p.slug}`,
-            latestBatch: p.latestBatch
-              ? {
-                  code: p.latestBatch.code,
-                  hplcPurity: p.latestBatch.hplcPurity,
-                  endotoxinEUPerMg: p.latestBatch.endotoxinEUPerMg,
-                }
-              : null,
-          }
-        }),
-      },
-    }
+    return { content: { locale: ctx.locale, products: rows, missing } }
   },
 }

@@ -20,11 +20,11 @@ export function ProductGallery({ product }: { product: Product }) {
   const reducedMotion = useReducedMotion()
   return (
     <div>
-      <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-[var(--radius-xl)] border border-line bg-surface-2">
+      <div className="relative flex h-64 sm:h-80 items-center justify-center overflow-hidden rounded-[var(--radius-xl)] border border-line bg-surface-2">
         {threeD ? (
           <ProductVialScene product={product} reducedMotion={reducedMotion} />
         ) : (
-          <VialGraphic hue={product.hue} name={translation.name} className="h-3/4 w-3/4" />
+          <VialGraphic hue={product.hue} name={translation.name} className="h-48 w-28" />
         )}
         <span className="absolute bottom-4 rounded-full bg-surface px-3 py-1 text-xs text-ink-muted">
           {t("illustration")}

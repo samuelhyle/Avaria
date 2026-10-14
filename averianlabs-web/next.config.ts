@@ -102,6 +102,10 @@ const config: NextConfig = isDemoBuild
       typescript: { ignoreBuildErrors: false },
       serverExternalPackages: ["postgres", "argon2"],
       output: "standalone",
+      outputFileTracingIncludes: {
+        "/api/forum/*": ["./lib/ai/prompts/community-moderator.md"],
+        "/api/cron/*": ["./lib/ai/prompts/community-moderator.md"],
+      },
       // Allow verification builds to use a separate directory so they don't
       // clobber a running dev server's `.next` cache.
       distDir: process.env.NEXT_DIST_DIR ?? ".next",
@@ -120,6 +124,8 @@ const config: NextConfig = isDemoBuild
               ],
             },
             outputFileTracingIncludes: {
+              "/api/forum/*": ["./lib/ai/prompts/community-moderator.md"],
+              "/api/cron/*": ["./lib/ai/prompts/community-moderator.md"],
               "/api/ai/*": [
                 "./node_modules/.pnpm/onnxruntime-node@*/node_modules/onnxruntime-node/bin/napi-v*/linux/*/onnxruntime_binding.node",
                 "./node_modules/.pnpm/onnxruntime-node@*/node_modules/onnxruntime-node/bin/napi-v*/linux/*/libonnxruntime.so.1",

@@ -15,7 +15,9 @@
 import { EMBEDDING_DIM, aiDocumentChunks, aiDocuments } from "@/db/schema/ai"
 import { embedText } from "@/lib/ai/providers/minimax"
 import { db } from "@/lib/db"
+import { getStorefrontCatalogue } from "@/lib/products/catalogue"
 import { and, eq, inArray, sql } from "drizzle-orm"
+import { catalogueSourceVersion } from "./version"
 
 export interface RetrievedChunk {
   id: string
@@ -153,6 +155,7 @@ export async function retrieveContext(opts: RetrieveOptions): Promise<RetrievedC
     .innerJoin(aiDocuments, eq(aiDocuments.id, aiDocumentChunks.documentId))
     .where(inArray(aiDocumentChunks.id, ids))
 
+  const currentCatalogue = await getStorefrontCatalogue()
   for (const row of rows) {
     const existing = byId.get(row.id)
     if (!existing) continue
@@ -161,6 +164,17 @@ export async function retrieveContext(opts: RetrieveOptions): Promise<RetrievedC
     ) {
       byId.delete(row.id)
       continue
+    }
+    if (row.source === "product") {
+      const current = currentCatalogue.find((p) => p.slug === row.sourceId)
+      if (
+        !current ||
+        (row.metadata as { sourceVersion?: string } | null)?.sourceVersion !==
+          catalogueSourceVersion(current)
+      ) {
+        byId.delete(row.id)
+        continue
+      }
     }
     existing.documentId = row.documentId
     existing.position = row.position

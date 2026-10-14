@@ -23,6 +23,7 @@
 
 import { getAdminOrNull } from "@/lib/admin/guard"
 import { type AgentEvent, type PersistedMessage, runAgent } from "@/lib/ai/agent/loop"
+import { calculationProseWarnings } from "@/lib/ai/guardrails/calculation"
 import { preflightInput } from "@/lib/ai/guardrails/input"
 import { verifyResponse } from "@/lib/ai/guardrails/verify"
 import { getAnonFromRequest, getConsentFromRequest } from "@/lib/ai/memory/consent"
@@ -85,6 +86,7 @@ const bodySchema = z.object({
   // session is anonymous, has no consent, or the row was deleted.
   conversationId: z.string().min(1).max(128).optional(),
   noRetrieve: z.boolean().optional(),
+  readOnly: z.boolean().optional(),
   noPersist: z.boolean().optional(),
 })
 
@@ -274,6 +276,7 @@ export async function POST(request: Request): Promise<Response> {
   const actions: Array<unknown> = []
   let usage = { tokensIn: 0, tokensOut: 0, latencyMs: 0 }
   let accumulatedText = ""
+  let completion: AgentEvent | undefined
 
   const controllerRef = { current: null as ReadableStreamDefaultController<Uint8Array> | null }
 
@@ -282,7 +285,8 @@ export async function POST(request: Request): Promise<Response> {
       if (cancelled) return
       const wire: AgentEvent = event.type === "done" ? { ...event, messageId: assistantId } : event
       try {
-        controllerRef.current?.enqueue(encoder.encode(`data: ${JSON.stringify(wire)}\n\n`))
+        if (event.type !== "text" && event.type !== "done")
+          controllerRef.current?.enqueue(encoder.encode(`data: ${JSON.stringify(wire)}\n\n`))
       } catch {
         // Controller may have been closed if client disconnected.
       }
@@ -299,6 +303,7 @@ export async function POST(request: Request): Promise<Response> {
         actions.push(event.action)
       } else if (event.type === "done") {
         usage = event.usage
+        completion = wire
       }
     },
   }
@@ -335,6 +340,7 @@ export async function POST(request: Request): Promise<Response> {
           systemNote: softRefusal,
           signal: request.signal,
           noRetrieve: parsed.noRetrieve,
+          readOnly: parsed.readOnly,
         },
         sink,
       )
@@ -356,6 +362,16 @@ export async function POST(request: Request): Promise<Response> {
           // (the client also hides them at render time).
           accumulatedText = accumulatedText.replace(/<think>[\s\S]*?(<\/think>|$)/gi, "").trim()
           const report = verifyResponse(accumulatedText, await getStorefrontCatalogue())
+          const calculationInputs = toolTrace.flatMap((trace) => {
+            const result = trace.result as
+              | { calculation?: { inputs: import("@/lib/calculations").LaboratoryInputs } }
+              | undefined
+            return result?.calculation?.inputs ? [result.calculation.inputs] : []
+          })
+          report.warnings.push(
+            ...calculationProseWarnings(accumulatedText, calculationInputs, locale),
+          )
+          report.passed = report.warnings.length === 0
           if (
             report.unknownSkus.length > 0 ||
             report.priceMismatches.length > 0 ||
@@ -368,8 +384,21 @@ export async function POST(request: Request): Promise<Response> {
               warnings: report.warnings,
             })
           }
-          if (report.needsMedicalReminder && !accumulatedText.includes(RESEARCH_FOOTER)) {
-            sink.enqueue({ type: "text", delta: `\n\n${RESEARCH_FOOTER}` })
+          if (!report.passed)
+            accumulatedText =
+              locale === "fi"
+                ? "En pysty vahvistamaan vastausta nykyisistä tuotetiedoista. Tarkista linkitetyt tuotetiedot ja alkuperäiset asiakirjat tai ota yhteyttä tiimiimme."
+                : "I could not verify this answer against the current product records. Check the linked product information and original documents, or contact our team."
+          if (report.needsMedicalReminder && !accumulatedText.includes(RESEARCH_FOOTER))
+            accumulatedText += `\n\n${locale === "fi" ? "Vain laboratoriotutkimukseen. Tuotetiedot eivät ole annostelu- tai hoito-ohjeita." : RESEARCH_FOOTER}`
+          if (!cancelled) {
+            controller.enqueue(
+              encoder.encode(
+                `data: ${JSON.stringify({ type: "text", delta: accumulatedText })}\n\n`,
+              ),
+            )
+            if (completion)
+              controller.enqueue(encoder.encode(`data: ${JSON.stringify(completion)}\n\n`))
           }
 
           // Persist the turn (best-effort, never blocks the stream).

@@ -7,24 +7,26 @@ import { QuickActions } from "@/components/ai/QuickActions"
 import { HelixGlyph } from "@/components/ai/icons/HelixGlyph"
 import { useCatalogue } from "@/components/product/CatalogueProvider"
 import { Button } from "@/components/ui/Button"
+import { chatErrorBody, chatErrorTitle } from "@/lib/ai/errors"
 import { type ChatMessageWithExtras, useAveriaChat } from "@/lib/ai/hooks/use-averia-chat"
 import { usePageContext } from "@/lib/ai/hooks/use-page-context"
 import { useCart } from "@/lib/cart/store"
 import { AlertCircle, MessageSquare, RefreshCw, Trash2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
-import { useCallback } from "react"
+import { useCallback, useEffect } from "react"
 import { toast } from "sonner"
 
 interface AssistantCanvasProps {
   locale: string
+  initialPrompt?: string
 }
 
 /**
  * Full-page Averia canvas — the power-user view of the same chat the floating
  * widget uses. Shares the hook, message renderer and action/feedback plumbing.
  */
-export function AssistantCanvas({ locale }: AssistantCanvasProps) {
+export function AssistantCanvas({ locale, initialPrompt }: AssistantCanvasProps) {
   const t = useTranslations("averia")
   const products = useCatalogue()
   const tAssistant = useTranslations("averia.assistant")
@@ -50,8 +52,11 @@ export function AssistantCanvas({ locale }: AssistantCanvasProps) {
     })),
   })
 
+  useEffect(() => {
+    if (initialPrompt) chat.setInput(initialPrompt)
+  }, [initialPrompt, chat.setInput])
   const handleConfirmAction = useCallback(
-    (action: ProposedAction, messageId: string) => {
+    async (action: ProposedAction, messageId: string) => {
       if (action.kind === "add_to_cart") {
         const product = products.find((p) => p.slug === action.productSlug)
         const vial = product?.vials.find((v) => v.sku === action.sku)
@@ -77,13 +82,18 @@ export function AssistantCanvas({ locale }: AssistantCanvasProps) {
         chat.resolveAction(messageId, action, "added")
         toast.success(t("actions.removedToast"))
       } else if (action.kind === "remember") {
-        void fetch("/api/ai/memory", {
-          method: "PUT",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ key: action.key, value: action.value, source: "explicit" }),
-        }).catch(() => {})
-        chat.resolveAction(messageId, action, "added")
-        toast.success(t("actions.rememberedToast"))
+        try {
+          const response = await fetch("/api/ai/memory", {
+            method: "PUT",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ key: action.key, value: action.value, source: "explicit" }),
+          })
+          if (!response.ok) throw new Error("memory_not_saved")
+          chat.resolveAction(messageId, action, "added")
+          toast.success(t("actions.rememberedToast"))
+        } catch {
+          toast.error(t("errorBody"))
+        }
       }
     },
     [products, cartAdd, cartRemove, chat, t],
@@ -112,16 +122,16 @@ export function AssistantCanvas({ locale }: AssistantCanvasProps) {
 
   return (
     <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_300px]">
-      <div className="flex min-h-[70vh] flex-col overflow-hidden rounded-[var(--radius-xl)] border border-line bg-surface shadow-sm">
+      <div className="flex min-h-[540px] sm:min-h-[65vh] flex-col overflow-hidden rounded-xl border border-line bg-surface shadow-sm">
         <header className="flex items-center justify-between border-b border-line bg-surface-2/50 px-5 py-4">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent/10 text-accent">
               <HelixGlyph className="h-4 w-4" />
             </div>
             <div>
-              <h2 className="text-sm font-semibold leading-none">{t("title")}</h2>
+              <h1 className="text-sm font-semibold leading-none">{t("title")}</h1>
               <p className="mt-1 flex items-center gap-1 text-xs text-ink-muted">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-success" aria-hidden />
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-ink-subtle" aria-hidden />
                 {t("statusOnline")}
               </p>
             </div>
@@ -158,16 +168,22 @@ export function AssistantCanvas({ locale }: AssistantCanvasProps) {
           <div className="mx-5 mb-2 flex items-start gap-2 rounded-[var(--radius)] border border-danger/30 bg-danger/5 px-3 py-2 text-xs text-danger">
             <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />
             <div className="flex-1">
-              <p className="font-medium">{t("errorTitle")}</p>
-              <p className="opacity-80">{t("errorBody")}</p>
+              <p className="font-medium">{chatErrorTitle(t, chat.error)}</p>
+              <p className="opacity-80">{chatErrorBody(t, chat.error)}</p>
             </div>
-            <Button variant="ghost" size="sm" onClick={() => chat.reset()}>
+            <Button variant="ghost" size="sm" onClick={() => chat.retry()}>
               <RefreshCw className="h-3 w-3" aria-hidden />
               {t("retry")}
             </Button>
           </div>
         ) : null}
 
+        <ConsentBanner
+          inline
+          consent={chat.consent}
+          onAccept={() => chat.setConsent("accepted")}
+          onDecline={() => chat.setConsent("declined")}
+        />
         <ChatInput
           value={chat.input}
           onChange={chat.setInput}
@@ -193,17 +209,14 @@ export function AssistantCanvas({ locale }: AssistantCanvasProps) {
 
         <div className="rounded-[var(--radius-lg)] border border-line bg-surface-2/50 p-5 text-xs text-ink-muted">
           {tAssistant("privacyNote")}{" "}
-          <Link href={`/${locale}/legal/privacy`} className="text-accent hover:underline">
+          <Link
+            href={`/${locale}/legal/privacy`}
+            className="text-accent underline underline-offset-2"
+          >
             {tAssistant("privacyLink")}
           </Link>
         </div>
       </aside>
-
-      <ConsentBanner
-        consent={chat.consent}
-        onAccept={() => chat.setConsent("accepted")}
-        onDecline={() => chat.setConsent("declined")}
-      />
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { AssistantCanvas } from "@/components/ai/AssistantCanvas"
 import { Container } from "@/components/ui/Container"
+import { readCalculationHandoff } from "@/lib/calculator-handoff"
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 
@@ -12,19 +13,30 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "averia" })
   return {
     title: `${t("title")} — AverianLabs`,
-    description:
-      "Ask Averia, our AI research concierge, about catalog products, COAs, reconstitution, and orders.",
+    description: t("assistant.description"),
     alternates: { canonical: `/${locale}/assistant` },
   }
 }
 
-export default async function AssistantPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function AssistantPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}) {
   const { locale } = await params
   setRequestLocale(locale)
 
+  const query = await searchParams
+  const initial = readCalculationHandoff(query)
+  const t = await getTranslations({ locale, namespace: "averia.assistant" })
+  const initialPrompt = initial
+    ? `${t("explainCalculation")} ${JSON.stringify(initial)}`
+    : undefined
   return (
     <Container className="py-10">
-      <AssistantCanvas locale={locale} />
+      <AssistantCanvas locale={locale} initialPrompt={initialPrompt} />
     </Container>
   )
 }

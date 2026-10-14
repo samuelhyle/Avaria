@@ -95,7 +95,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             {loadingLabel ? <span className="sr-only">{loadingLabel}</span> : null}
           </>
         ) : null}
-        <span className={cn(loading && "opacity-70")}>{children}</span>
+        <span className={cn("inline-flex items-center gap-[inherit]", loading && "opacity-70")}>
+          {children}
+        </span>
       </button>
     )
   },

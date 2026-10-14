@@ -12,7 +12,7 @@ export default async function CartPage({
   const t = await getTranslations({ locale, namespace: "cart" })
 
   return (
-    <Container className="py-12">
+    <Container className="py-8 sm:py-12">
       <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
         {t("title")}
       </h1>

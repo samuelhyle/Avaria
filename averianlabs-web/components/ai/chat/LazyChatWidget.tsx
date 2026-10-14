@@ -1,6 +1,7 @@
 "use client"
 
 import dynamic from "next/dynamic"
+import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 
 const ChatWidget = dynamic(
@@ -26,6 +27,7 @@ export function LazyChatWidget({
   demoMode?: boolean
 }) {
   const [ready, setReady] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     // `requestIdleCallback`/`cancelIdleCallback` aren't in the default DOM
@@ -44,6 +46,6 @@ export function LazyChatWidget({
     return () => window.clearTimeout(timer)
   }, [])
 
-  if (!ready) return null
+  if (!ready || /\/(assistant|peptide-calculator)\/?$/.test(pathname)) return null
   return <ChatWidget locale={locale} demoMode={demoMode} />
 }

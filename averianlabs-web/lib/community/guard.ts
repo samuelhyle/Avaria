@@ -50,15 +50,28 @@ export function checkText(text: string): GuardResult {
     }
   }
 
+  const citationSafeText = text
+    .replace(
+      /https?:\/\/(?:doi\.org|pubmed\.ncbi\.nlm\.nih\.gov|pmc\.ncbi\.nlm\.nih\.gov)\/[^\s<>"']+/gi,
+      "",
+    )
+    .replace(/\b10\.\d{4,9}\/[^\s<>"']+/g, "")
   for (const { rx, code } of CONTACT_PATTERNS) {
-    if (rx.test(text)) {
+    if (rx.test(citationSafeText)) {
       ruleCodes.push(code)
       notes.push("Posting contact information is not allowed.")
     }
   }
 
   const urls = text.match(URL_PATTERN) ?? []
-  if (urls.length > 2) {
+  if (
+    urls.filter(
+      (url) =>
+        !/^https?:\/\/(?:doi\.org|pubmed\.ncbi\.nlm\.nih\.gov|pmc\.ncbi\.nlm\.nih\.gov)\//i.test(
+          url,
+        ),
+    ).length > 2
+  ) {
     ruleCodes.push("url_spam")
     notes.push("Too many links.")
   }

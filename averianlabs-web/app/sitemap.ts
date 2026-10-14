@@ -33,6 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/glossary", freq: "monthly" as const, pri: 0.6 },
     { path: "/community", freq: "hourly" as const, pri: 0.8 },
     { path: "/lab-tests", freq: "monthly" as const, pri: 0.6 },
+    { path: "/research-tools", freq: "monthly" as const, pri: 0.6 },
     { path: "/peptide-calculator", freq: "monthly" as const, pri: 0.6 },
     { path: "/partner", freq: "monthly" as const, pri: 0.5 },
     { path: "/rewards", freq: "monthly" as const, pri: 0.5 },

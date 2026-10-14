@@ -29,7 +29,7 @@ async function main() {
   // doesn't have them (e.g. a CI runner without secrets) instead of failing.
   if (!process.env.DATABASE_URL || !process.env.MINIMAX_API_KEY) {
     console.warn("[ai-eval] DATABASE_URL and/or MINIMAX_API_KEY not set — skipping eval (exit 0).")
-    process.exit(0)
+    process.exit(process.argv.includes("--required") ? 2 : 0)
   }
 
   // Optional cap for quick local smoke runs (e.g. AI_EVAL_LIMIT=8).

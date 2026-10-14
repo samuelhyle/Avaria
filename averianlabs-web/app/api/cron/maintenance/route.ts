@@ -1,3 +1,5 @@
+import { syncCatalogueIndex } from "@/lib/ai/rag/indexer"
+import { processModerationJobs } from "@/lib/community/moderation"
 import { deliverEmailOutbox } from "@/lib/email/outbox"
 import { purgeDeletedUsers } from "@/lib/gdpr/service"
 import { releaseExpiredReservations } from "@/lib/orders"
@@ -11,5 +13,7 @@ export async function GET(request: Request) {
   const released = await releaseExpiredReservations()
   const purged = await purgeDeletedUsers()
   const delivery = await deliverEmailOutbox()
-  return NextResponse.json({ released, purged, ...delivery })
+  const moderation = await processModerationJobs()
+  const index = await syncCatalogueIndex()
+  return NextResponse.json({ released, purged, ...delivery, moderation, index })
 }

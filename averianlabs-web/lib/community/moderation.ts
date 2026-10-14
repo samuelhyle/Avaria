@@ -1,69 +1,22 @@
-/**
- * Layer 2 of the moderation pipeline — LLM moderator.
- *
- * Uses the shared MiniMax provider wrapper (timeout + config in one place).
- * Fails to the human queue on any error — never silently allows.
- */
+/** Durable AI suggestions. A human publication decision is always required. */
+import { forumModerationEvents, forumModerationJobs, forumPosts } from "@/db/schema"
 import { completeMinimaxChat, isMinimaxConfigured } from "@/lib/ai/providers/minimax"
+import { db } from "@/lib/db"
+import { and, eq, lte, or, sql } from "drizzle-orm"
 import type { GuardResult } from "./guard"
-
-export type ModeratorVerdict = "allow" | "warn" | "remove"
-
 export interface ModeratorResult {
-  verdict: ModeratorVerdict
+  verdict: "allow" | "warn" | "remove"
   ruleCodes: string[]
   note: string
 }
-
-const PROMPT_CACHE = new Map<string, string>()
-
-async function loadPrompt(): Promise<string> {
-  const cached = PROMPT_CACHE.get("default")
-  if (cached !== undefined) return cached
+export function parseVerdict(raw: string): ModeratorResult | null {
   try {
-    const fs = await import("node:fs/promises")
-    const path = await import("node:path")
-    const file = path.join(process.cwd(), "lib/ai/prompts/community-moderator.md")
-    const content = await fs.readFile(file, "utf8")
-    PROMPT_CACHE.set("default", content)
-    return content
-  } catch {
-    PROMPT_CACHE.set("default", "")
-    return ""
-  }
-}
-
-async function callLLM(systemPrompt: string, postBody: string): Promise<ModeratorResult> {
-  const raw = await completeMinimaxChat({
-    messages: [
-      { role: "system", content: systemPrompt },
-      { role: "user", content: postBody },
-    ],
-    temperature: 0,
-    maxTokens: 200,
-  })
-  return parseVerdict(raw) ?? MODERATOR_UNAVAILABLE
-}
-
-/** Fail-open to the *human queue* (warn), never silently to allow. */
-const MODERATOR_UNAVAILABLE: ModeratorResult = {
-  verdict: "warn",
-  ruleCodes: ["moderator_unavailable"],
-  note: "Automatic moderation was unavailable — please review manually.",
-}
-
-function parseVerdict(raw: string): ModeratorResult | null {
-  const trimmed = raw.trim()
-  const match = trimmed.match(/\{[\s\S]*\}/)
-  if (!match) return null
-  try {
-    const obj = JSON.parse(match[0]) as Partial<ModeratorResult>
-    const verdict = obj.verdict
-    if (verdict !== "allow" && verdict !== "warn" && verdict !== "remove") return null
+    const obj = JSON.parse(raw.trim()) as Partial<ModeratorResult>
+    if (!["allow", "warn", "remove"].includes(obj.verdict ?? "")) return null
     return {
-      verdict,
+      verdict: obj.verdict as ModeratorResult["verdict"],
       ruleCodes: Array.isArray(obj.ruleCodes)
-        ? obj.ruleCodes.filter((c) => typeof c === "string")
+        ? obj.ruleCodes.filter((x): x is string => typeof x === "string").slice(0, 12)
         : [],
       note: typeof obj.note === "string" ? obj.note.slice(0, 240) : "",
     }
@@ -71,43 +24,123 @@ function parseVerdict(raw: string): ModeratorResult | null {
     return null
   }
 }
-
-export function moderateAsync(input: { postId: string; body: string; lexical: GuardResult }): void {
-  if (!isMinimaxConfigured()) return
-  if (input.lexical.verdict === "block") return
-
-  const work = async () => {
-    const prompt = await loadPrompt()
-    if (!prompt) return
-    let result: ModeratorResult
-    try {
-      result = await callLLM(prompt, input.body)
-    } catch (err) {
-      console.error("[community] moderation LLM failed:", err)
-      result = MODERATOR_UNAVAILABLE
-    }
-    await persistModerationEvent({
-      targetType: "post",
-      targetId: input.postId,
-      layer: "agent",
-      verdict: result.verdict,
-      ruleCodes: result.ruleCodes,
-      note: result.note,
+export async function processModerationJobs(limit = 1): Promise<{ processed: number }> {
+  let processed = 0
+  for (let i = 0; i < Math.min(limit, 3); i++) {
+    const now = new Date()
+    const claimed = await db.transaction(async (tx) => {
+      const [job] = await tx
+        .select()
+        .from(forumModerationJobs)
+        .where(
+          or(
+            and(
+              eq(forumModerationJobs.status, "pending"),
+              lte(forumModerationJobs.availableAt, now),
+            ),
+            and(
+              eq(forumModerationJobs.status, "running"),
+              lte(forumModerationJobs.lockedAt, new Date(Date.now() - 120000)),
+            ),
+          ),
+        )
+        .orderBy(forumModerationJobs.availableAt)
+        .limit(1)
+        .for("update", { skipLocked: true })
+      if (!job) return null
+      const [updated] = await tx
+        .update(forumModerationJobs)
+        .set({ status: "running", lockedAt: now, attempts: job.attempts + 1 })
+        .where(eq(forumModerationJobs.id, job.id))
+        .returning()
+      return updated
     })
+    if (!claimed) break
+    const [post] = await db
+      .select()
+      .from(forumPosts)
+      .where(eq(forumPosts.id, claimed.postId))
+      .limit(1)
+    let result: ModeratorResult = {
+      verdict: "warn",
+      ruleCodes: ["moderator_unavailable"],
+      note: "Awaiting human review; automatic checks were unavailable.",
+    }
+    let retry = false
+    if (post?.status === "pending" && isMinimaxConfigured()) {
+      try {
+        const { readFile } = await import("node:fs/promises")
+        const { join } = await import("node:path")
+        const prompt = await readFile(
+          join(process.cwd(), "lib/ai/prompts/community-moderator.md"),
+          "utf8",
+        )
+        if (!prompt.trim()) throw new Error("missing_prompt")
+        const raw = await completeMinimaxChat({
+          messages: [
+            { role: "system", content: prompt },
+            { role: "user", content: post.body },
+          ],
+          temperature: 0,
+          maxTokens: 300,
+        })
+        const parsed = parseVerdict(raw)
+        if (!parsed) throw new Error("invalid_verdict")
+        result = parsed
+      } catch {
+        retry = claimed.attempts < 3
+      }
+    }
+    await db.transaction(async (tx) => {
+      const [current] = await tx
+        .select()
+        .from(forumModerationJobs)
+        .where(eq(forumModerationJobs.id, claimed.id))
+        .for("update")
+      if (
+        !current ||
+        current.status !== "running" ||
+        current.lockedAt?.getTime() !== claimed.lockedAt?.getTime()
+      )
+        return
+      if (post?.status === "pending")
+        await tx.insert(forumModerationEvents).values({
+          targetType: "post",
+          targetId: post.id,
+          layer: "agent",
+          verdict: result.verdict,
+          ruleCodes: result.ruleCodes,
+          note: result.note,
+        })
+      await tx
+        .update(forumModerationJobs)
+        .set({
+          status: retry ? "pending" : "human",
+          lockedAt: null,
+          availableAt: new Date(Date.now() + 30000 * 2 ** claimed.attempts),
+        })
+        .where(eq(forumModerationJobs.id, claimed.id))
+    })
+    processed++
   }
-
-  // `after()` keeps the work alive after the response on serverless; fall back
-  // to fire-and-forget when called outside a request scope.
+  return { processed }
+}
+export function moderateAsync(_input: {
+  postId: string
+  body: string
+  lexical: GuardResult
+}): void {
+  // The job was inserted in the same transaction as the pending post. A stopped
+  // server or failed callback leaves it available to authenticated maintenance.
   void (async () => {
     try {
       const { after } = await import("next/server")
-      after(work)
+      after(() => processModerationJobs())
     } catch {
-      void work().catch(() => {})
+      /* maintenance will retry */
     }
   })()
 }
-
 export async function persistModerationEvent(input: {
   targetType: "post" | "thread"
   targetId: string
@@ -117,19 +150,5 @@ export async function persistModerationEvent(input: {
   note: string
   actorId?: string
 }): Promise<void> {
-  try {
-    const { db } = await import("@/lib/db")
-    const { forumModerationEvents } = await import("@/db/schema")
-    await db.insert(forumModerationEvents).values({
-      targetType: input.targetType,
-      targetId: input.targetId,
-      layer: input.layer,
-      verdict: input.verdict,
-      ruleCodes: input.ruleCodes,
-      note: input.note,
-      actorId: input.actorId ?? null,
-    })
-  } catch {
-    // best-effort; never crash the request path
-  }
+  await db.insert(forumModerationEvents).values({ ...input, actorId: input.actorId ?? null })
 }

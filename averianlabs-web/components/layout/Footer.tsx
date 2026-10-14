@@ -1,4 +1,3 @@
-import { NewsletterForm } from "@/components/home/NewsletterForm"
 import { Logo } from "@/components/layout/Logo"
 import { Container } from "@/components/ui/Container"
 import { getLegalIdentity } from "@/lib/legal"
@@ -23,11 +22,8 @@ export async function Footer({ locale }: FooterProps) {
         { href: `/${locale}/shop`, label: t("shop") },
         { href: `/${locale}/lab-tests`, label: t("labTests") },
         { href: `/${locale}/coa`, label: t("coa") },
-        { href: `/${locale}/documents`, label: t("documents") },
         { href: `/${locale}/peptide-calculator`, label: t("calculator") },
         { href: `/${locale}/community`, label: t("community") },
-        { href: `/${locale}/glossary`, label: t("glossary") },
-        { href: `/${locale}/blog`, label: t("blog") },
       ],
     },
     {
@@ -37,7 +33,6 @@ export async function Footer({ locale }: FooterProps) {
         { href: `/${locale}/quality`, label: t("quality") },
         { href: `/${locale}/partner`, label: t("partner") },
         { href: `/${locale}/contact`, label: t("contact") },
-        { href: `/${locale}/rewards`, label: t("rewards") ?? "Rewards" },
       ],
     },
     {
@@ -63,14 +58,12 @@ export async function Footer({ locale }: FooterProps) {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="mt-32 border-t border-line bg-surface-2">
+    <footer className="platform-bottom-safe mt-12 border-t border-line bg-surface-2">
       <Container>
-        <div className="grid gap-12 py-16 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
+        <div className="grid gap-8 py-8 lg:grid-cols-[280px_minmax(0,1fr)]">
           <div>
             <Logo href={`/${locale}`} size="md" />
             <p className="mt-3 max-w-md text-sm text-ink-muted text-pretty">{t("tagline")}</p>
-
-            <NewsletterForm className="mt-6 max-w-md" />
 
             <Link
               href={`/${locale}/lab-tests`}
@@ -118,9 +111,7 @@ export async function Footer({ locale }: FooterProps) {
             <span>{t("researchUse")}</span>
           </div>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-ink-muted">
-            <span>
-              © {year} {legal.companyName} · {t("rightsReserved", { year })}
-            </span>
+            <span>{t("rightsReserved", { year })}</span>
             {legal.businessId && legal.vatId ? (
               <span className="font-mono">
                 {r("businessId")} {legal.businessId} · VAT {legal.vatId}
@@ -132,7 +123,7 @@ export async function Footer({ locale }: FooterProps) {
               <a href={`mailto:${legal.contactEmail}`} className="hover:text-ink hover:underline">
                 {legal.contactEmail}
               </a>
-              {" · "}
+              {legal.addressLine1 || legal.addressLine2 ? " · " : ""}
               {[legal.addressLine1, legal.addressLine2].filter(Boolean).join(", ")}
             </address>
           </div>

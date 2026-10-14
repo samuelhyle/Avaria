@@ -54,7 +54,7 @@ export default async function ProductPage({
     .filter((p) => p.category === product.category && p.slug !== slug)
     .slice(0, 4)
   return (
-    <Container className="py-12">
+    <Container className="py-8 sm:py-12">
       <ProductJsonLd
         product={product}
         locale={locale}
@@ -78,10 +78,14 @@ export default async function ProductPage({
         <span>{translation.name}</span>
       </nav>
       <div className="grid gap-10 lg:grid-cols-2">
-        <ProductGallery product={product} />
-        <div>
+        <div className="order-2 lg:order-1">
+          <ProductGallery product={product} />
+        </div>
+        <div className="order-1 lg:order-2">
           <p className="text-sm text-ink-muted">{t(`categories.${product.category}`)}</p>
-          <h1 className="mt-2 font-display text-4xl font-semibold">{translation.name}</h1>
+          <h1 className="mt-2 font-display text-3xl font-semibold sm:text-4xl">
+            {translation.name}
+          </h1>
           <p className="mt-4 text-ink-muted">{translation.description}</p>
           {product.dataSource === "reference" ? (
             <p role="status" className="mt-4 rounded border border-line bg-surface-2 p-4 text-sm">

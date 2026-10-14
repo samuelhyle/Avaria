@@ -29,11 +29,25 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
     router.push(`${pathname}?${params.toString()}`)
   }
 
-  const openSearch = () => {
-    window.dispatchEvent(new CustomEvent("averianlabs:open-search"))
-  }
-
   const chips = [
+    ...(searchParams?.get("q")
+      ? [{ key: "q", label: searchParams.get("q")!, onRemove: () => update("q", null) }]
+      : []),
+    ...(filters.inStock
+      ? [{ key: "stock", label: t("inStock"), onRemove: () => update("inStock", null) }]
+      : []),
+    ...(filters.materialType !== "all"
+      ? [
+          {
+            key: "type",
+            label: r(`types.${filters.materialType}` as never),
+            onRemove: () => update("type", null),
+          },
+        ]
+      : []),
+    ...(filters.hasDocuments
+      ? [{ key: "documents", label: r("withDocuments"), onRemove: () => update("documents", null) }]
+      : []),
     ...filters.category.map((c) => ({
       key: `category.${c}`,
       label: r(`categories.${c}`),
@@ -55,16 +69,29 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
 
   return (
     <div className="space-y-3">
-      <div className="flex flex-col gap-4 rounded-[var(--radius-lg)] border border-line bg-surface p-4 shadow-sm sm:flex-row sm:items-center">
-        <button
-          type="button"
-          onClick={openSearch}
-          className="flex items-center gap-2 flex-1 rounded-[var(--radius)] border border-line bg-surface-2 px-3 text-left h-10"
+      <div className="flex flex-col gap-3 rounded-[var(--radius-lg)] border border-line bg-surface p-4 shadow-sm sm:flex-row sm:items-center">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            const value = new FormData(e.currentTarget).get("q")
+            update("q", typeof value === "string" ? value : null)
+          }}
+          className="flex min-w-0 flex-1 items-center gap-2 rounded-lg border border-line bg-surface px-3"
         >
-          <Search className="h-4 w-4 text-ink-subtle" />
-          <span className="text-sm text-ink-subtle">{t("search")}</span>
-          <span className="ml-auto hidden font-mono text-3xs text-ink-subtle sm:inline">⌘K</span>
-        </button>
+          <Search className="h-4 w-4 shrink-0 text-ink-muted" aria-hidden />
+          <input
+            key={searchParams?.get("q") ?? ""}
+            name="q"
+            type="search"
+            defaultValue={searchParams?.get("q") ?? ""}
+            aria-label={r("searchPlaceholder")}
+            placeholder={r("searchPlaceholder")}
+            className="h-11 min-w-0 flex-1 bg-transparent text-sm outline-none"
+          />
+          <button type="submit" className="min-h-9 shrink-0 text-xs font-medium text-accent">
+            {t("search")}
+          </button>
+        </form>
 
         <div className="flex flex-wrap items-center gap-2">
           <Link
@@ -100,6 +127,7 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
                 type="button"
                 onClick={() => update("view", v)}
                 aria-label={label}
+                aria-pressed={initialView === v}
                 className={cn(
                   "inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] transition-colors",
                   initialView === v
@@ -114,6 +142,29 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
         </div>
       </div>
 
+      <div className="flex flex-wrap items-center gap-3">
+        <select
+          aria-label={r("materialType")}
+          value={filters.materialType}
+          onChange={(e) => update("type", e.target.value === "all" ? null : e.target.value)}
+          className="h-10 max-w-full rounded-lg border border-line bg-surface px-3 text-sm"
+        >
+          <option value="all">{r("allTypes")}</option>
+          {["peptide", "cosmetic", "reagent", "supplies"].map((type) => (
+            <option key={type} value={type}>
+              {r(`types.${type}` as never)}
+            </option>
+          ))}
+        </select>
+        <label className="flex items-center gap-2 text-sm text-ink-muted">
+          <input
+            type="checkbox"
+            checked={filters.hasDocuments}
+            onChange={(e) => update("documents", e.target.checked ? "true" : null)}
+          />
+          {r("withDocuments")}
+        </label>
+      </div>
       {chips.length > 0 ? (
         <div className="flex flex-wrap items-center gap-2">
           {chips.map((chip) => (

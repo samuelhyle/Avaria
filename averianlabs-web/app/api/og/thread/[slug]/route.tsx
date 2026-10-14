@@ -7,7 +7,7 @@ export async function GET(req: Request, ctx: { params: Promise<{ slug: string }>
   const { slug } = await ctx.params
   const locale = ogLocale(req)
   const thread = await getThreadBySlug(slug).catch(() => null)
-  if (!thread) {
+  if (!thread || !["active", "locked"].includes(thread.status)) {
     return new Response("Not found", { status: 404 })
   }
   return renderOg({

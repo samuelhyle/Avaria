@@ -1,18 +1,16 @@
 import { expect, test } from "@/tests/fixtures"
 
 test.describe("homepage", () => {
-  test("renders the 3D product hero with focusable product chips", async ({ cleanPage }) => {
+  test("shows product records with an optional illustration and a catalogue path", async ({
+    cleanPage,
+  }) => {
     await cleanPage.goto("/en")
 
-    // The hero exposes a chip group with one chip per featured product.
-    // The group is rendered with role=group + an aria-label that we set
-    // in the i18n catalogue.
-    const chipGroup = cleanPage
-      .getByRole("group", { name: /featured products|valitut tuotteet/i })
-      .first()
-    await expect(chipGroup).toBeVisible()
-
-    // The hero card links to the focused product's detail page.
+    const hero = cleanPage.locator("main section[aria-label]").first()
+    await expect(hero.locator("dl")).toContainText("Availability")
+    await expect(hero).toContainText("Illustrative product view")
+    await expect(cleanPage.locator("main canvas")).toHaveCount(0)
+    await expect(cleanPage.getByRole("link", { name: /browse the catalogue/i })).toBeVisible()
     await expect(cleanPage.getByRole("link", { name: /view/i }).first()).toBeVisible()
   })
 

@@ -24,9 +24,9 @@ export function ChatBubble({ unread, onOpen, className }: ChatBubbleProps) {
       exit={{ opacity: 0, scale: 0.85, y: 12 }}
       transition={{ type: "spring", stiffness: 320, damping: 24 }}
       className={cn(
-        "fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-lg shadow-accent/30",
+        "fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom))] right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-lg shadow-accent/30",
         "transition-transform duration-150 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg",
-        "md:bottom-6 md:right-6",
+        "md:bottom-20 md:right-6",
         className,
       )}
     >

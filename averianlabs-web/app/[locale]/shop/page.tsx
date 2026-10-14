@@ -29,12 +29,12 @@ export default async function ShopPage({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale, namespace: "shop" })
 
   return (
-    <Container className="py-12">
-      <header className="mb-8 flex flex-col gap-3">
-        <h1 className="font-display break-words hyphens-auto [overflow-wrap:anywhere] text-3xl font-semibold tracking-tight sm:text-5xl">
+    <Container className="py-8 sm:py-12">
+      <header className="mb-5 flex flex-col gap-2">
+        <h1 className="font-display break-words hyphens-auto [overflow-wrap:anywhere] text-3xl font-semibold tracking-tight sm:text-4xl">
           {t("title")}
         </h1>
-        <p className="text-ink-muted">{t("subtitle")}</p>
+        <p className="text-sm text-ink-muted">{t("subtitle")}</p>
       </header>
 
       <Suspense fallback={<ShopCatalogSkeleton />}>

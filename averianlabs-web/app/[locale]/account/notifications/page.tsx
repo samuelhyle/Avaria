@@ -56,7 +56,7 @@ export default async function NotificationsPage({
         <section>
           {notifications.length === 0 ? (
             <div className="rounded-[var(--radius-lg)] border border-dashed border-line bg-surface p-10 text-center text-sm text-ink-muted">
-              You're all caught up.
+              {r("notificationsEmpty")}
             </div>
           ) : (
             <ul className="space-y-2">
@@ -75,7 +75,11 @@ export default async function NotificationsPage({
                             ? r("notificationReaction")
                             : n.kind === "plan_shared"
                               ? r("notificationPlan")
-                              : r("notificationOther")}
+                              : n.kind === "moderation_approved"
+                                ? r("notificationModerationApproved")
+                                : n.kind === "moderation_removed"
+                                  ? r("notificationModerationRemoved")
+                                  : r("notificationOther")}
                         {n.targetTitle ? (
                           <>
                             {" "}

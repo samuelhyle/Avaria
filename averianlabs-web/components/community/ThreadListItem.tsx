@@ -24,7 +24,7 @@ interface ThreadRowProps {
 
 export function ThreadListItem({ thread, locale, t }: ThreadRowProps) {
   const tier = tierFor(thread.authorReputation ?? 0)
-  const authorLabel = thread.authorName ?? "Anonymous"
+  const authorLabel = thread.authorName ?? t("anonymous")
   const last = new Date(thread.lastActivityAt)
   const ago = relativeTime(last, locale)
 
@@ -37,7 +37,7 @@ export function ThreadListItem({ thread, locale, t }: ThreadRowProps) {
       )}
     >
       <div className="min-w-0 flex-1">
-        <h3 className="truncate text-sm font-medium text-ink group-hover:text-accent">
+        <h3 className="break-words text-sm font-medium text-ink group-hover:text-accent">
           {thread.title}
         </h3>
         <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-ink-muted">
@@ -53,7 +53,7 @@ export function ThreadListItem({ thread, locale, t }: ThreadRowProps) {
           <span>
             {t("threadBy")} <span className="font-medium text-ink">{authorLabel}</span>
           </span>
-          {authorLabel !== "Anonymous" ? (
+          {authorLabel !== t("anonymous") ? (
             <Badge tone={tier.color} size="sm">
               {t(`reputation${capitalize(tier.id)}` as never)}
             </Badge>
@@ -75,12 +75,13 @@ function relativeTime(date: Date, locale: string): string {
   const now = Date.now()
   const diff = Math.max(0, now - date.getTime())
   const min = Math.round(diff / 60_000)
-  if (min < 1) return "now"
-  if (min < 60) return `${min}m`
+  const relative = new Intl.RelativeTimeFormat(locale, { numeric: "auto" })
+  if (min < 1) return relative.format(0, "minute")
+  if (min < 60) return relative.format(-min, "minute")
   const h = Math.round(min / 60)
-  if (h < 24) return `${h}h`
+  if (h < 24) return relative.format(-h, "hour")
   const d = Math.round(h / 24)
-  if (d < 7) return `${d}d`
+  if (d < 7) return relative.format(-d, "day")
   try {
     return new Intl.DateTimeFormat(locale, { month: "short", day: "numeric" }).format(date)
   } catch {

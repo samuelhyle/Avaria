@@ -1,4 +1,4 @@
-import { batches, documents, productTranslations, products } from "@/db/schema"
+import { batches, documents, productTranslations, products, vials } from "@/db/schema"
 import { db } from "@/lib/db"
 import { privateDocumentUrl } from "@/lib/storage/documents"
 import { type SQL, and, desc, eq, inArray, lte, sql } from "drizzle-orm"
@@ -14,6 +14,8 @@ export interface DocumentRecord {
   productName: string | null
   batchId: string | null
   batchCode: string | null
+  batchSku?: string | null
+  batchStatus?: string | null
   title: string
   version: string
   fileR2Key: string | null
@@ -33,11 +35,13 @@ async function queryDocuments(
     .select({
       id: documents.id,
       type: documents.type,
-      productId: documents.productId,
+      productId: products.id,
       productSlug: products.slug,
       productName: productTranslations.name,
       batchId: documents.batchId,
       batchCode: batches.code,
+      batchSku: vials.sku,
+      batchStatus: batches.verificationStatus,
       title: documents.title,
       version: documents.version,
       fileR2Key: documents.fileR2Key,
@@ -47,15 +51,17 @@ async function queryDocuments(
       requiresLogin: documents.requiresLogin,
     })
     .from(documents)
-    .leftJoin(products, eq(documents.productId, products.id))
+    .leftJoin(batches, eq(documents.batchId, batches.id))
+    .leftJoin(vials, eq(batches.vialId, vials.id))
+    .leftJoin(products, eq(products.id, sql`coalesce(${documents.productId},${vials.productId})`))
     .leftJoin(
       productTranslations,
       and(eq(productTranslations.productId, products.id), eq(productTranslations.locale, locale)),
     )
-    .leftJoin(batches, eq(documents.batchId, batches.id))
     .where(
       and(
         ...conditions,
+        sql`(${documents.batchId} is null or ${vials.productId}=${products.id})`,
         sql`${locale} = ANY(${documents.displayLocales})`,
         lte(documents.publishedAt, new Date()),
         ...(allowPrivate ? [] : [eq(documents.requiresLogin, false)]),
@@ -79,7 +85,7 @@ export async function listRecentDocuments(
   return queryDocuments(
     [
       ...(opts.type ? [eq(documents.type, opts.type)] : []),
-      ...(opts.productId ? [eq(documents.productId, opts.productId)] : []),
+      ...(opts.productId ? [eq(products.id, opts.productId)] : []),
     ],
     opts.locale ?? "en",
     false,
@@ -97,7 +103,7 @@ export function listDocumentsForProductSlug(slug: string, locale = "en") {
   return queryDocuments([eq(products.slug, slug)], locale)
 }
 export function listDocumentsForProduct(productId: string, locale = "en") {
-  return queryDocuments([eq(documents.productId, productId)], locale)
+  return queryDocuments([eq(products.id, productId)], locale)
 }
 export function listDocumentsByType(types: DocumentType[], locale = "en") {
   return types.length

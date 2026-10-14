@@ -161,6 +161,19 @@ Online mobile checks exposed a scrollable checkout progress list that could not 
 4. Profile Finnish catalogue hydration on actual target devices, then measure consent-respecting field LCP/INP/CLS. The lab report is a diagnostic; it cannot certify field responsiveness.
 5. Add validated additional-country tax/shipping support and purchasing features only after operations approve them. Before any marketing campaign, implement a signed unsubscribe route and its message link; subscriptions, loyalty discounts, cart marketing and public product reviews stay disabled until their actual workflows exist.
 
+## UI and research-tools extension — 14 October 2026
+
+The ordered scope and acceptance criteria are maintained in the [UI, calculator, community and Averia plan](UI_VISUAL_REVIEW_2026-10-14.md). The [first delivery record](RESEARCH_WORKSPACE_IMPLEMENTATION_2026-10-14.md) separates current implementation checks from the historical verification above.
+
+- [x] Apply the shared visual system to storefront, documentation, calculator, community, assistant and account/form pages, then inspect the running Finnish/English customer journeys.
+- [x] Deliver explicit units, concentration/required-volume/dilution/aliquot modes, numerical boundaries, formula/assumption displays, calculation exports and owner-only private history.
+- [x] Deliver inspectable original-document references, exact-SKU comparisons, deterministic calculation cards, truthful service/action status and catalogue source-version lifecycle checks.
+- [x] Deliver human-gated community publication, durable moderation retries, discovery/search/filtering/pagination, exact counts, Markdown/source links, private drafts and localized review notifications.
+- [ ] Execute the complete live-provider answer evaluation and obtain Finnish/English scientific editorial and laboratory-buyer review. The 60 paired scenarios and deterministic contracts are implemented; model-free tests are not a live-provider certification.
+- [ ] Add molar conversion after approved chemical-form/molar-mass data and numerical review. Add original-report summaries after approved report text, permissions, source/version checks and model evaluations exist.
+
+These changes preserve the outstanding scientific evidence, seller/provider setup and merchant release requirements. Real reviewed introductory community content and the authenticated maintenance scheduler remain operational setup tasks; empty states and durable human-review queues do not imply they have been supplied.
+
 ## References
 
 - [Stripe idempotent requests](https://docs.stripe.com/api/idempotent_requests)

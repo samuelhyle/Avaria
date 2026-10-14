@@ -31,7 +31,7 @@ const SIZE_MAP: Record<LogoSize, { chip: string; wordmark: string; link: string 
   },
   md: {
     chip: "h-8 w-8",
-    wordmark: "text-lg tracking-tight",
+    wordmark: "text-base sm:text-lg tracking-tight",
     link: "text-lg tracking-tight",
   },
 }
@@ -58,7 +58,7 @@ export function Logo({
       >
         Æ
       </span>
-      {wordmarkVisible ? <span className={wordmarkClass}>AVERIANLABS</span> : null}
+      {wordmarkVisible ? <span className={wordmarkClass}>AverianLabs</span> : null}
     </Link>
   )
 }

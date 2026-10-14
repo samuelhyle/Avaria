@@ -12,8 +12,12 @@ export function CookieBanner({ locale }: { locale: string }) {
 
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY)
-    if (!saved) setShow(true)
-    const reopen = () => setShow(true)
+    if (!saved || document.documentElement.dataset.cookieSettingsRequested) setShow(true)
+    delete document.documentElement.dataset.cookieSettingsRequested
+    const reopen = () => {
+      delete document.documentElement.dataset.cookieSettingsRequested
+      setShow(true)
+    }
     window.addEventListener("cookie-settings", reopen)
     return () => window.removeEventListener("cookie-settings", reopen)
   }, [])

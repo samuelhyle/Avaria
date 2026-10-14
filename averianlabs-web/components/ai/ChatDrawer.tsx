@@ -4,6 +4,7 @@ import { ChatInput } from "@/components/ai/ChatInput"
 import { type ChatMessage, MessageList, type ProposedAction } from "@/components/ai/MessageList"
 import { QuickActions } from "@/components/ai/QuickActions"
 import { HelixGlyph } from "@/components/ai/icons/HelixGlyph"
+import { chatErrorBody as errorBodyFor, chatErrorTitle as errorTitleFor } from "@/lib/ai/errors"
 import { useOverlay } from "@/lib/hooks/use-overlay"
 import { cn } from "@/lib/utils/cn"
 import { AlertCircle, RefreshCw, Trash2, X } from "lucide-react"
@@ -24,6 +25,7 @@ export interface ChatDrawerProps {
   onQuickPrompt?: (prompt: string) => void
   onConfirmAction?: (action: ProposedAction, messageId: string) => void
   onDismissAction?: (action: ProposedAction, messageId: string) => void
+  consentBanner?: React.ReactNode
   onClearConversation?: () => void
   onFeedback?: (messageId: string, feedback: "up" | "down") => void
 }
@@ -43,6 +45,7 @@ export function ChatDrawer({
   onConfirmAction,
   onDismissAction,
   onClearConversation,
+  consentBanner,
   onFeedback,
 }: ChatDrawerProps) {
   const t = useTranslations("averia")
@@ -89,7 +92,7 @@ export function ChatDrawer({
                   <span className="text-sm font-semibold leading-none">{t("title")}</span>
                   <span className="flex items-center gap-1 text-2xs text-ink-muted">
                     <span
-                      className="inline-block h-1.5 w-1.5 rounded-full bg-success"
+                      className="inline-block h-1.5 w-1.5 rounded-full bg-ink-subtle"
                       aria-hidden
                     />
                     {t("statusOnline")}
@@ -149,6 +152,7 @@ export function ChatDrawer({
               </div>
             ) : null}
 
+            {consentBanner}
             <ChatInput
               value={input}
               onChange={setInput}
@@ -178,32 +182,4 @@ function EmptyState({ onPrompt }: { onPrompt?: (prompt: string) => void }) {
       {onPrompt ? <QuickActions onSelect={onPrompt} /> : null}
     </div>
   )
-}
-
-function errorTitleFor(t: ReturnType<typeof useTranslations>, err: Error): string {
-  switch (err.name) {
-    case "rate_limited":
-      return t("errorRateLimitTitle")
-    case "provider_unavailable":
-      return t("errorOfflineTitle")
-    case "invalid_request":
-      return t("errorInvalidTitle")
-    default:
-      return t("errorTitle")
-  }
-}
-
-function errorBodyFor(t: ReturnType<typeof useTranslations>, err: Error): string {
-  switch (err.name) {
-    case "rate_limited":
-      return t("errorRateLimitBody")
-    case "provider_unavailable":
-      return t("errorOfflineBody")
-    case "invalid_request":
-      return t("errorInvalidBody")
-    case "server_error":
-      return t("errorServerBody")
-    default:
-      return t("errorBody")
-  }
 }

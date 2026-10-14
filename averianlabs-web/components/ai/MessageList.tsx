@@ -32,6 +32,7 @@ import Link from "next/link"
 import { useEffect, useRef } from "react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
+import { ResearchResultCards } from "./ResearchResultCards"
 
 export type { ProposedAction, ProposedActionAddToCart, ActionResolution }
 
@@ -130,7 +131,7 @@ function InlineProducts({ products }: { products: ProductCardData[] }) {
                 <span className="block truncate text-xs font-medium text-ink">{p.name}</span>
                 <span className="block text-3xs text-ink-muted">
                   {p.purityPercent !== null ? `${p.purityPercent.toFixed(1)}% HPLC · ` : ""}
-                  {p.fromPriceCents !== null ? `${(p.fromPriceCents / 100).toFixed(2)} €` : ""}
+                  {p.fromPriceCents !== null ? formatCurrency(p.fromPriceCents, "EUR", locale) : ""}
                 </span>
               </span>
               <span className="shrink-0 text-3xs font-medium text-accent">{t("viewProduct")}</span>
@@ -202,6 +203,7 @@ export function Message({
   onDismissAction,
   onFeedback,
 }: MessageProps) {
+  const t = useTranslations("averia")
   const isUser = message.role === "user"
   const products = isUser ? [] : extractProducts(message.toolTrace)
   const renderedContent = isUser
@@ -227,10 +229,15 @@ export function Message({
       <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
         <HelixGlyph className="h-4 w-4" />
       </div>
-      <div className="flex max-w-[85%] flex-col gap-2">
+      <div className="flex min-w-0 max-w-[85%] flex-col gap-2">
         {message.toolTrace && message.toolTrace.length > 0 ? (
           <ToolTraceList trace={message.toolTrace} />
         ) : null}
+        {!message.content && isStreaming && (
+          <p role="status" className="py-3 text-sm text-ink-muted">
+            {t("preparing")}
+          </p>
+        )}
         {message.content ? (
           <div
             className={cn(
@@ -261,6 +268,7 @@ export function Message({
             ))}
           </div>
         ) : null}
+        {!isStreaming && <ResearchResultCards trace={message.toolTrace} />}
         {!isStreaming && products.length > 0 ? <InlineProducts products={products} /> : null}
         {message.citations && message.citations.length > 0 && !isStreaming ? (
           <CitationChips citations={message.citations} />
@@ -320,6 +328,7 @@ function FeedbackBar({
 }
 
 function ToolTraceList({ trace }: { trace: ToolTrace[] }) {
+  const labels = useTranslations("averia.toolLabels")
   return (
     <ul className="flex flex-wrap gap-1.5 text-2xs">
       {trace.map((t) => {
@@ -335,7 +344,7 @@ function ToolTraceList({ trace }: { trace: ToolTrace[] }) {
             )}
           >
             <ToolIcon name={t.name} className="h-3 w-3" />
-            {t.name}
+            {labels.has(t.name) ? labels(t.name) : labels("lookup")}
             {hasResult ? (
               <span className="opacity-60">·</span>
             ) : (

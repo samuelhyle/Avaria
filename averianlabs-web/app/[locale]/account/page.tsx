@@ -7,6 +7,7 @@ import { SignOutButton } from "@/components/auth/SignOutButton"
 import { Badge } from "@/components/ui/Badge"
 import { Button } from "@/components/ui/Button"
 import { Container } from "@/components/ui/Container"
+import { safeReturnPath } from "@/lib/auth/return-path"
 import { getCurrentMember } from "@/lib/community"
 import { listOrdersForUser } from "@/lib/orders"
 import { listPlansForOwner } from "@/lib/research-plans"
@@ -15,20 +16,28 @@ import type { Route } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import Link from "next/link"
 
-export default async function AccountPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function AccountPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}) {
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations("account")
   const r = await getTranslations("research")
   const tAuth = await getTranslations("auth")
   const member = await getCurrentMember()
+  const query = await searchParams
+  const returnTo = safeReturnPath(query.returnTo, locale)
   const [plans, orders] = await Promise.all([
     member ? listPlansForOwner(member.id, locale).catch(() => []) : Promise.resolve([]),
     member ? listOrdersForUser(member.id).catch(() => []) : Promise.resolve([]),
   ])
 
   return (
-    <Container className="py-16">
+    <Container className="py-8 sm:py-12">
       <header className="mb-10 flex flex-wrap items-start justify-between gap-4">
         <div>
           <Badge tone="accent" className="mb-3">
@@ -46,7 +55,7 @@ export default async function AccountPage({ params }: { params: Promise<{ locale
 
       {!member ? (
         <div className="max-w-md rounded-[var(--radius-lg)] border border-line bg-surface p-6 sm:p-8">
-          <LoginForm locale={locale} />
+          <LoginForm locale={locale} returnTo={returnTo} />
         </div>
       ) : (
         <>

@@ -1,12 +1,12 @@
 /**
  * getReconstitution — math for reconstituting a research peptide vial.
  *
- * Same formula as the on-page calculator (mg / mL × dose mcg → volume).
+ * Uses the shared laboratory formula. Legacy solventMl means final solution volume.
  * Refuses inputs that suggest human-use framing.
  */
 
 import type { Tool, ToolContext, ToolResult } from "@/lib/ai/tools/registry"
-import { calculateAliquots } from "@/lib/calculations"
+import { calculateAliquots, calculateLaboratory } from "@/lib/calculations"
 interface Args {
   vialMg: number
   solventMl: number
@@ -21,7 +21,7 @@ export const reconstitutionTool: Tool = {
   definition: {
     name: "getReconstitution",
     description:
-      "Calculate laboratory solution concentration and aliquot volume from material mass (mg), solution volume (mL) and mass per aliquot (micrograms). Does not determine biological activity, syringe units or an administration dose.",
+      "Calculate laboratory solution concentration and aliquot volume from material mass (mg), final solution volume (mL; legacy parameter name solventMl) and mass per aliquot (micrograms). Does not determine biological activity, syringe units or an administration dose.",
     parameters: {
       type: "object",
       properties: {
@@ -39,6 +39,12 @@ export const reconstitutionTool: Tool = {
     return {
       content: {
         inputs: args,
+        calculation: calculateLaboratory({
+          mode: "aliquots",
+          massMg: args.vialMg,
+          finalVolumeMl: args.solventMl,
+          aliquotMcg: args.aliquotMcg,
+        }),
         ...result,
         reminder:
           _ctx.locale === "fi"

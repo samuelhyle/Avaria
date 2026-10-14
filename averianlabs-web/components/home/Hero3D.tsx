@@ -1,109 +1,76 @@
 "use client"
-
-import { Hero3DProductCard } from "@/components/home/Hero3DProductCard"
-import { Hero3DProductChips } from "@/components/home/Hero3DProductChips"
+import { ProductGallery } from "@/components/product/ProductGallery"
 import { VialGraphic } from "@/components/product/VialGraphic"
-import { ThreeDShell } from "@/components/three/ThreeDShell"
-import { useReducedMotion } from "@/lib/hooks/use-reduced-motion"
-import type { Product } from "@/lib/products/types"
+import { Badge } from "@/components/ui/Badge"
+import { hasPublishedDocuments } from "@/lib/products/document-status"
+import { defaultVial } from "@/lib/products/selection"
+import type { Locale, Product } from "@/lib/products/types"
+import { formatSize } from "@/lib/utils/format"
 import { useTranslations } from "next-intl"
-import dynamic from "next/dynamic"
+import Link from "next/link"
 import { useState } from "react"
-
-const PeptideTorusCanvas = dynamic(
-  () => import("@/components/three/PeptideTorusCanvas").then((module) => module.PeptideTorusCanvas),
-  { ssr: false },
-)
-
-/**
- * The hero 3-D scene. By default the canvas is *not* active — we render
- * a static `VialGraphic` of the focused product, and the user can opt in
- * to the interactive canvas with a button. This keeps the homepage
- * cheap on first paint (no three.js chunk downloaded for non-curious
- * users) and avoids an animation that some browsers can't keep up with.
- *
- * Layout on mobile (default < sm):
- *   - Static vial image fills the canvas area.
- *   - The "enable 3-D" button sits on top of it.
- *   - The Hero3DProductCard **stacks below** the canvas (not overlaid),
- *     so the chip row at the bottom of the canvas isn't covered.
- * Layout on sm+:
- *   - Same canvas area.
- *   - The Hero3DProductCard **overlays** the right edge, vertically centred,
- *     with a notch on the left that visually connects it to the vial.
- */
 export function Hero3D({ products, locale }: { products: Product[]; locale: string }) {
-  const t = useTranslations("research")
-  const [focusedSlug, setFocusedSlug] = useState(products[0]?.slug)
-  const [interactive, setInteractive] = useState(false)
-  const reducedMotion = useReducedMotion()
-  const focused = products.find((product) => product.slug === focusedSlug) ?? products[0]
-
+  const r = useTranslations("research")
+  const t = useTranslations("home")
+  const [expanded, setExpanded] = useState(false)
+  const product = products[0]
+  if (!product) return null
+  const tr = product.translations?.[locale as Locale] ?? product.defaultTranslation
+  const vial = defaultVial(product)
+  const available = vial.purchaseMode === "direct" && vial.stockQty > 0
   return (
-    <div className="relative w-full">
-      {/* Canvas area — wraps the 3-D shell + overlay card (sm+) + chip row. */}
-      <div className="relative h-[460px] w-full overflow-hidden rounded-[var(--radius-xl)] border border-line bg-surface sm:h-[520px] lg:h-[640px]">
-        {interactive ? (
-          <ThreeDShell className="h-full w-full">
-            <PeptideTorusCanvas
-              products={products}
-              reducedMotion={reducedMotion}
-              onSelect={(product) => setFocusedSlug(product.slug)}
-            />
-          </ThreeDShell>
-        ) : focused ? (
-          <div
-            className="hue-radial flex h-full items-center justify-start p-5 sm:p-8"
-            style={{
-              background: `radial-gradient(circle at 25% 45%, hsl(${focused.hue} 60% 88%), var(--color-surface))`,
-            }}
-          >
-            <VialGraphic
-              hue={focused.hue}
-              className="h-64 w-32 sm:h-80 sm:w-40"
-              showLabel={false}
-            />
-          </div>
-        ) : null}
-
-        <button
-          type="button"
-          aria-pressed={interactive}
-          onClick={() => setInteractive(!interactive)}
-          className="absolute left-4 top-4 z-20 rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium"
-        >
-          {interactive ? t("close3d") : t("optional3d")}
-        </button>
-
-        {/* Overlay card (sm+) — right edge, vertically centred, with the
-            notch on the left that visually anchors it to the vial. */}
-        {focused ? (
-          <div className="hidden sm:block">
-            <Hero3DProductCard key={focused.slug} product={focused} locale={locale} />
-          </div>
-        ) : null}
-
-        <div className="absolute inset-x-0 bottom-4 z-20 px-4">
-          <Hero3DProductChips
-            products={products}
-            focusedSlug={focusedSlug}
-            onFocus={setFocusedSlug}
-            locale={locale}
-          />
+    <section
+      className="overflow-hidden rounded-xl border border-line bg-surface shadow-sm"
+      aria-label={tr.name}
+    >
+      <div className="border-b border-line px-5 py-4 text-xs text-ink-muted">{r("product")}</div>
+      <div className="flex items-center gap-5 p-5 sm:p-6">
+        <VialGraphic hue={product.hue} showLabel={false} className="h-36 w-20 shrink-0" />
+        <div className="min-w-0">
+          <h2 className="text-2xl font-semibold tracking-tight">{tr.name}</h2>
+          <p className="mt-2 break-words font-mono text-xs text-ink-muted">{vial.sku}</p>
+          <p className="mt-3 text-sm text-ink-muted">
+            {product.vials.map((v) => formatSize(v, locale)).join(" / ")}
+          </p>
         </div>
-
-        {!interactive ? (
-          <p className="absolute bottom-16 left-4 text-xs text-ink-muted">{t("illustration")}</p>
-        ) : null}
       </div>
-
-      {/* Stacked card on mobile — sits below the canvas so it doesn't fight
-          the 3-D scene for the same pixels. */}
-      {focused ? (
-        <div className="mt-3 sm:hidden">
-          <Hero3DProductCard key={focused.slug} product={focused} locale={locale} />
+      <dl className="divide-y divide-line border-y border-line px-5 text-sm">
+        <div className="flex flex-wrap justify-between gap-3 py-3">
+          <dt className="text-ink-muted">{r("availability")}</dt>
+          <dd>
+            <Badge tone={available ? "success" : "muted"}>
+              {available
+                ? r("available")
+                : vial.purchaseMode === "quotation"
+                  ? r("quote")
+                  : r("unavailable")}
+            </Badge>
+          </dd>
         </div>
-      ) : null}
-    </div>
+        <div className="flex flex-wrap justify-between gap-3 py-3">
+          <dt className="text-ink-muted">{r("documents")}</dt>
+          <dd className="text-xs">
+            {hasPublishedDocuments(product, locale) ? r("documentAvailable") : r("noDocuments")}
+          </dd>
+        </div>
+      </dl>
+      <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-4">
+        <span className="text-xs text-ink-muted">{r("illustration")}</span>
+        <Link className="text-sm font-medium text-accent" href={`/${locale}/shop/${product.slug}`}>
+          {t("heroProductView")} →
+        </Link>
+      </div>
+      <details
+        className="border-t border-line px-5 py-3"
+        onToggle={(e) => setExpanded(e.currentTarget.open)}
+      >
+        <summary className="cursor-pointer text-xs text-ink-muted">{r("optional3d")}</summary>
+        {expanded && (
+          <div className="mt-4">
+            <ProductGallery product={product} />
+          </div>
+        )}
+      </details>
+    </section>
   )
 }

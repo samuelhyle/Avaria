@@ -26,10 +26,20 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params
   const thread = await getThreadBySlug(slug).catch(() => null)
-  if (!thread) return { title: "Thread not found" }
+  const t = await getTranslations({ locale, namespace: "community" })
+  const member = await getCurrentMember()
+  if (
+    !thread ||
+    (!["active", "locked"].includes(thread.status) &&
+      (!member || (member.id !== thread.authorId && !["admin", "moderator"].includes(member.role))))
+  )
+    return { title: t("notFound"), robots: { index: false, follow: false } }
+  if (thread.status === "pending")
+    return { title: t("pendingTitle"), robots: { index: false, follow: false } }
+
   return {
     title: thread.title,
-    description: `${thread.replyCount} replies · ${thread.viewCount} views`,
+    description: t("metadata", { replies: thread.replyCount, views: thread.viewCount }),
     alternates: { canonical: `/${locale}/community/thread/${slug}` },
     openGraph: {
       title: thread.title,
@@ -45,15 +55,22 @@ export default async function ThreadPage({ params }: Props) {
   const r = await getTranslations({ locale, namespace: "research" })
 
   const thread = await getThreadBySlug(slug).catch(() => null)
-  if (!thread || thread.status === "removed") notFound()
+  const viewer = await getCurrentMember()
+  if (
+    !thread ||
+    thread.status === "removed" ||
+    (thread.status === "pending" &&
+      (!viewer || (viewer.id !== thread.authorId && !["admin", "moderator"].includes(viewer.role))))
+  )
+    notFound()
 
   const [posts, member, cat] = await Promise.all([
-    listPostsForThread(slug, thread.id),
+    listPostsForThread(slug, thread.id, viewer?.id, viewer?.role),
     getCurrentMember(),
     thread.categorySlug ? getCategoryBySlug(thread.categorySlug) : Promise.resolve(null),
   ])
 
-  void incrementViewCount(thread.id).catch(() => {})
+  if (thread.status !== "pending") void incrementViewCount(thread.id).catch(() => {})
 
   const ids = posts.map((p) => p.id)
   const reactions = await getReactionsForPosts(ids, member)
@@ -62,14 +79,16 @@ export default async function ThreadPage({ params }: Props) {
 
   return (
     <Container size="wide" className="py-12">
-      <DiscussionForumPostingJsonLd
-        title={thread.title}
-        url={`https://averianlabs.eu/${locale}/community/thread/${slug}`}
-        datePublished={thread.lastActivityAt.toISOString()}
-        authorName={thread.authorName ?? r("anonymousMember")}
-        commentCount={Math.max(0, thread.replyCount - 1)}
-        locale={locale}
-      />
+      {thread.status !== "pending" && (
+        <DiscussionForumPostingJsonLd
+          title={thread.title}
+          url={`https://averianlabs.eu/${locale}/community/thread/${slug}`}
+          datePublished={thread.lastActivityAt.toISOString()}
+          authorName={thread.authorName ?? r("anonymousMember")}
+          commentCount={thread.replyCount}
+          locale={locale}
+        />
+      )}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <Link
           href={`/${locale}/community/${thread.categorySlug}`}
@@ -99,11 +118,23 @@ export default async function ThreadPage({ params }: Props) {
         </p>
         {thread.status === "locked" ? (
           <Badge tone="warn" size="sm" className="mt-2">
-            Locked
+            {t("locked")}
           </Badge>
         ) : null}
       </header>
 
+      {thread.status === "pending" && (
+        <div role="status" className="mb-5 rounded-xl border border-warn/30 bg-warn-soft p-5">
+          <h2 className="font-semibold">{t("pendingTitle")}</h2>
+          <p className="mt-2 text-sm">{t("pendingHelp")}</p>
+          <Link
+            className="mt-3 inline-block text-sm text-accent underline"
+            href={`/${locale}/contact`}
+          >
+            {r("contactTitle")}
+          </Link>
+        </div>
+      )}
       <div className="grid gap-6 lg:grid-cols-[1fr_280px]">
         <div className="space-y-4">
           {posts.length === 0 ? (
@@ -138,12 +169,14 @@ export default async function ThreadPage({ params }: Props) {
             ))
           )}
 
-          <ReplyBox
-            threadSlug={thread.slug}
-            isAuthed={!!member}
-            signInHref={`/${locale}/account`}
-            isLocked={thread.status === "locked"}
-          />
+          {thread.status !== "pending" && (
+            <ReplyBox
+              threadSlug={thread.slug}
+              isAuthed={!!member}
+              signInHref={`/${locale}/account`}
+              isLocked={thread.status === "locked"}
+            />
+          )}
         </div>
 
         <aside className="space-y-4">

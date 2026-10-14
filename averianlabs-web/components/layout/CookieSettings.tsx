@@ -5,7 +5,10 @@ export function CookieSettings() {
   return (
     <button
       type="button"
-      onClick={() => window.dispatchEvent(new Event("cookie-settings"))}
+      onClick={() => {
+        document.documentElement.dataset.cookieSettingsRequested = "true"
+        window.dispatchEvent(new Event("cookie-settings"))
+      }}
       className="text-sm text-ink-muted underline underline-offset-4 hover:text-ink"
     >
       {t("cookieSettings")}

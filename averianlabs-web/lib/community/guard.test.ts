@@ -174,3 +174,13 @@ describe("slugifyTitle", () => {
     expect(body.length).toBeLessThanOrEqual(80)
   })
 })
+
+describe("scientific citations", () => {
+  it("does not classify DOI identifiers or a bibliography as contact information", () => {
+    const result = checkText(
+      "References: https://doi.org/10.123456789/12345 https://doi.org/10.1000/123 https://doi.org/10.1234/456 DOI 10.123456789/12345",
+    )
+    expect(result.ruleCodes).not.toContain("phone")
+    expect(result.ruleCodes).not.toContain("url_spam")
+  })
+})

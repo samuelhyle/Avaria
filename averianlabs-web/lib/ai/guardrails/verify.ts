@@ -8,8 +8,8 @@
  *     research-use reminder if detected)
  *
  * Returns a structured `VerificationReport` so the route can append the
- * footer + log a warning event. We never block or re-generate; Phase A6 is
- * observability-first, Phase A7 may escalate to re-generation.
+ * footer + log a warning event. The chat route withholds generated prose until these checks run and replaces
+ * detected factual mismatches with a localized request to inspect the records.
  */
 
 import type { Product } from "@/lib/products/types"
@@ -135,6 +135,16 @@ function buildCatalogIndex(products: Product[]) {
       bySku.set(v.sku, { product: p, mg: v.mg, cents: v.priceCents })
     }
   }
+  for (const product of products) {
+    const vial = product.vials[0]
+    if (vial)
+      for (const alias of [
+        product.slug.toUpperCase(),
+        product.defaultTranslation.name.toUpperCase(),
+      ]) {
+        if (!bySku.has(alias)) bySku.set(alias, { product, mg: vial.mg, cents: vial.priceCents })
+      }
+  }
   return bySku
 }
 
@@ -167,6 +177,36 @@ export function verifyResponse(text: string, products: Product[] = []): Verifica
     }
   }
 
+  // Targeted check of numeric purity claims adjacent to a known product/SKU.
+  for (const paragraph of text.split(/\n/)) {
+    if (!/hplc|purity|pure|puhtau/i.test(paragraph)) continue
+    const value = paragraph.match(/(\d+(?:[.,]\d+)?)\s*%/)
+    const sku = extractSkus(paragraph).find((id) => catalog.has(id))
+    if (!value || !sku) continue
+    const entry = catalog.get(sku)
+    const selectedVariant = entry?.product.vials.find((v) => v.sku === sku)
+    const batch = selectedVariant ? selectedVariant.batch : entry?.product.latestBatch
+    const cited = Number(value[1]?.replace(",", "."))
+    if (!batch || !batch.hplcPurity || Math.abs(cited - batch.hplcPurity) > 0.05)
+      warnings.push(`unsupported_purity:${sku}`)
+  }
+  for (const paragraph of text.split(/\n/)) {
+    if (
+      !/in stock|available (?:to buy|for purchase)|on varastossa|saatavilla ostettavaksi/i.test(
+        paragraph,
+      )
+    )
+      continue
+    if (/\b(?:not|no|unavailable|ei|eivät)\b/i.test(paragraph)) continue
+    for (const sku of extractSkus(paragraph)) {
+      const entry = catalog.get(sku)
+      if (!entry) continue
+      const selected = entry.product.vials.filter((v) => v.sku === sku)
+      const variants = selected.length ? selected : entry.product.vials
+      if (!variants.some((v) => v.purchaseMode === "direct" && v.stockQty > 0 && v.priceCents > 0))
+        warnings.push(`unsupported_availability:${sku}`)
+    }
+  }
   const needsMedicalReminder = MEDICAL_PATTERNS.some((rx) => rx.test(text))
 
   return {

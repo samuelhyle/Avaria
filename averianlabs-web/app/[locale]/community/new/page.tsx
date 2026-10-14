@@ -22,21 +22,27 @@ export async function generateMetadata({
 
 export default async function NewThreadPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>
+  searchParams: Promise<Record<string, string | string[] | undefined>>
 }) {
   const { locale } = await params
   setRequestLocale(locale)
   await ensureCategories()
   const [categories, member] = await Promise.all([listCategories(), getCurrentMember()])
 
+  const query = await searchParams
+  const initialBody = typeof query.calculation === "string" ? query.calculation.slice(0, 6000) : ""
   return (
     <Container size="narrow" className="py-12">
       <ThreadComposer
+        initialBody={initialBody}
+        initialTitle={typeof query.title === "string" ? query.title.slice(0, 140) : ""}
         locale={locale}
         categories={categories.map((c) => ({ slug: c.slug, nameKey: c.nameKey }))}
         isAuthed={!!member}
-        signInHref={`/${locale}/account`}
+        signInHref={`/${locale}/account?returnTo=${encodeURIComponent(`/${locale}/community/new?${new URLSearchParams({ calculation: initialBody })}`)}`}
       />
     </Container>
   )

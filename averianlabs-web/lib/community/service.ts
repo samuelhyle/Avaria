@@ -1,10 +1,13 @@
 import {
   forumCategories,
   forumModerationEvents,
+  forumModerationJobs,
   forumPosts,
   forumReactions,
   forumReports,
   forumThreads,
+  notificationPreferences,
+  notifications,
   users,
 } from "@/db/schema"
 import { emitActivity } from "@/lib/activity/emit"
@@ -15,12 +18,14 @@ import { db } from "@/lib/db"
  * Ported from helix-labs-store v1's `lib/forum/service.ts` with v2
  * conventions (Auth.js session, Drizzle upserts, async LLM moderator).
  */
-import { and, desc, eq, inArray, ne, sql } from "drizzle-orm"
+import { and, desc, eq, ilike, inArray, ne, or, sql } from "drizzle-orm"
 import { cache } from "react"
 import { getCurrentMember, requireMember } from "./auth"
+import { requireRole } from "./auth"
 import { CATEGORY_SEEDS } from "./categories"
 import { type GuardResult, checkText, normalizeTitle, slugifyTitle } from "./guard"
 import { moderateAsync, persistModerationEvent } from "./moderation"
+import { setPostPublication } from "./publication"
 import { tierFor } from "./reputation"
 
 /* ─── categories ─── */
@@ -78,18 +83,22 @@ export interface CreateThreadInput {
   categorySlug: string
   title: string
   body: string
+  locale?: string
 }
 
 export async function createThread(
   input: CreateThreadInput,
 ): Promise<
-  { ok: true; threadId: string; slug: string } | { ok: false; reason: string; ruleCodes: string[] }
+  | { ok: true; threadId: string; slug: string; status: "pending" }
+  | { ok: false; reason: string; ruleCodes: string[] }
 > {
   const member = await requireMember()
   const category = await getCategoryBySlug(input.categorySlug)
   if (!category) return { ok: false, reason: "Category not found.", ruleCodes: [] }
   if (category.isLocked) return { ok: false, reason: "Category is locked.", ruleCodes: [] }
 
+  if (category.slug === "announcements" && member.role !== "admin" && member.role !== "moderator")
+    return { ok: false, reason: "Staff permission required.", ruleCodes: ["staff_only"] }
   const title = normalizeTitle(input.title)
   if (title.length < 6) {
     return {
@@ -124,52 +133,65 @@ export async function createThread(
       authorId: member.id,
       slug,
       title,
-      status: "active",
+      locale: input.locale === "fi" ? "fi" : "en",
+      originalPostId: postId,
+      status: "pending",
     })
     await tx.insert(forumPosts).values({
       id: postId,
       threadId,
       authorId: member.id,
       body: input.body.trim(),
-      status: "active",
+      status: "pending",
+    })
+    await tx.insert(forumModerationJobs).values({ postId })
+    await tx.insert(forumModerationEvents).values({
+      targetType: "post",
+      targetId: postId,
+      layer: "lexical",
+      verdict: "warn",
+      ruleCodes: guard.ruleCodes.length ? guard.ruleCodes : ["pending_review"],
+      note: guard.note || "Awaiting publication review.",
+      actorId: member.id,
     })
     await tx
       .update(forumThreads)
-      .set({ replyCount: 1, lastActivityAt: new Date() })
+      .set({ replyCount: 0, lastActivityAt: new Date() })
       .where(eq(forumThreads.id, threadId))
   })
 
-  await persistModerationEvent({
-    targetType: "thread",
-    targetId: threadId,
-    layer: "lexical",
-    verdict: guard.verdict === "warn" ? "warn" : "allow",
-    ruleCodes: guard.ruleCodes,
-    note: guard.note,
-    actorId: member.id,
-  })
-
   moderateAsync({ postId, body: input.body, lexical: guard })
-
-  emitActivity({
-    kind: "thread_created",
-    actorId: member.id,
-    actorName: member.name,
-    targetType: "thread",
-    targetId: threadId,
-    targetSlug: slug,
-    targetTitle: title,
-  })
-
-  return { ok: true, threadId, slug }
+  return { ok: true, threadId, slug, status: "pending" }
 }
 
 export async function listThreads(
-  opts: { categorySlug?: string; categoryId?: string; limit?: number; offset?: number } = {},
+  opts: {
+    categorySlug?: string
+    categoryId?: string
+    limit?: number
+    offset?: number
+    query?: string
+    locale?: string
+    unanswered?: boolean
+  } = {},
 ) {
   const limit = Math.min(opts.limit ?? 20, 50)
   const offset = opts.offset ?? 0
   const whereParts = [eq(forumThreads.status, "active")]
+  if (opts.locale) whereParts.push(eq(forumThreads.locale, opts.locale))
+  if (opts.unanswered) whereParts.push(eq(forumThreads.replyCount, 0))
+  if (opts.query?.trim()) {
+    const escaped = opts.query
+      .trim()
+      .slice(0, 200)
+      .replace(/[\\%_]/g, "\\$&")
+    whereParts.push(
+      or(
+        ilike(forumThreads.title, `%${escaped}%`),
+        sql`exists(select 1 from ${forumPosts} p where p.thread_id=${forumThreads.id} and p.status in ('active','edited') and p.body ilike ${`%${escaped}%`})`,
+      ) ?? sql`false`,
+    )
+  }
   if (opts.categoryId) {
     whereParts.push(eq(forumThreads.categoryId, opts.categoryId))
   } else if (opts.categorySlug) {
@@ -183,6 +205,8 @@ export async function listThreads(
       slug: forumThreads.slug,
       title: forumThreads.title,
       status: forumThreads.status,
+      locale: forumThreads.locale,
+      originalPostId: forumThreads.originalPostId,
       viewCount: forumThreads.viewCount,
       replyCount: forumThreads.replyCount,
       lastActivityAt: forumThreads.lastActivityAt,
@@ -209,6 +233,8 @@ export const getThreadBySlug = cache(async (slug: string) => {
       slug: forumThreads.slug,
       title: forumThreads.title,
       status: forumThreads.status,
+      locale: forumThreads.locale,
+      originalPostId: forumThreads.originalPostId,
       viewCount: forumThreads.viewCount,
       replyCount: forumThreads.replyCount,
       lastActivityAt: forumThreads.lastActivityAt,
@@ -245,7 +271,10 @@ export interface CreatePostInput {
 
 export async function createReply(
   input: CreatePostInput,
-): Promise<{ ok: true; postId: string } | { ok: false; reason: string; ruleCodes: string[] }> {
+): Promise<
+  | { ok: true; postId: string; status: "pending" }
+  | { ok: false; reason: string; ruleCodes: string[] }
+> {
   const member = await requireMember()
   const thread = await getThreadBySlug(input.threadSlug)
   if (!thread) return { ok: false, reason: "Thread not found.", ruleCodes: [] }
@@ -273,57 +302,35 @@ export async function createReply(
       threadId: thread.id,
       authorId: member.id,
       body: input.body.trim(),
-      status: "active",
+      status: "pending",
       parentPostId: input.parentPostId ?? null,
+    })
+    await tx.insert(forumModerationJobs).values({ postId })
+    await tx.insert(forumModerationEvents).values({
+      targetType: "post",
+      targetId: postId,
+      layer: "lexical",
+      verdict: "warn",
+      ruleCodes: guard.ruleCodes.length ? guard.ruleCodes : ["pending_review"],
+      note: guard.note || "Awaiting publication review.",
+      actorId: member.id,
     })
     await tx
       .update(forumThreads)
-      .set({ replyCount: sql`${forumThreads.replyCount} + 1`, lastActivityAt: new Date() })
+      .set({ lastActivityAt: new Date() })
       .where(eq(forumThreads.id, thread.id))
   })
 
-  await persistModerationEvent({
-    targetType: "post",
-    targetId: postId,
-    layer: "lexical",
-    verdict: guard.verdict === "warn" ? "warn" : "allow",
-    ruleCodes: guard.ruleCodes,
-    note: guard.note,
-    actorId: member.id,
-  })
-
   moderateAsync({ postId, body: input.body, lexical: guard })
-
-  emitActivity({
-    kind: "post_created",
-    actorId: member.id,
-    actorName: member.name,
-    targetType: "thread",
-    targetId: thread.id,
-    targetSlug: thread.slug,
-    targetTitle: thread.title,
-  })
-
-  // Notify the original poster (if it's a different person).
-  if (thread.authorId && thread.authorId !== member.id) {
-    const { emitNotification } = await import("@/lib/notifications")
-    emitNotification({
-      userId: thread.authorId,
-      kind: "reply",
-      actorId: member.id,
-      actorName: member.name,
-      targetType: "thread",
-      targetId: thread.id,
-      targetSlug: thread.slug,
-      targetTitle: thread.title,
-      preview: input.body.slice(0, 160),
-    })
-  }
-
-  return { ok: true, postId }
+  return { ok: true, postId, status: "pending" }
 }
 
-export async function listPostsForThread(threadSlug: string, knownThreadId?: string) {
+export async function listPostsForThread(
+  threadSlug: string,
+  knownThreadId?: string,
+  viewerId?: string,
+  role?: string,
+) {
   let threadId = knownThreadId
   if (!threadId) {
     const thread = await getThreadBySlug(threadSlug)
@@ -345,7 +352,22 @@ export async function listPostsForThread(threadSlug: string, knownThreadId?: str
     })
     .from(forumPosts)
     .leftJoin(users, eq(forumPosts.authorId, users.id))
-    .where(and(eq(forumPosts.threadId, threadId), inArray(forumPosts.status, ["active", "edited"])))
+    .where(
+      and(
+        eq(forumPosts.threadId, threadId),
+        or(
+          inArray(forumPosts.status, ["active", "edited"]),
+          viewerId
+            ? and(
+                eq(forumPosts.status, "pending"),
+                ["admin", "moderator"].includes(role ?? "")
+                  ? sql`true`
+                  : eq(forumPosts.authorId, viewerId),
+              )
+            : sql`false`,
+        ),
+      ),
+    )
     .orderBy(forumPosts.createdAt)
 }
 
@@ -382,7 +404,13 @@ export async function toggleReaction(
   const post = await db
     .select({ authorId: forumPosts.authorId })
     .from(forumPosts)
-    .where(eq(forumPosts.id, postId))
+    .where(
+      and(
+        eq(forumPosts.id, postId),
+        inArray(forumPosts.status, ["active", "edited"]),
+        sql`exists(select 1 from forum_threads t where t.id=${forumPosts.threadId} and t.status in ('active','locked'))`,
+      ),
+    )
     .limit(1)
   if (!post[0]) throw new Error("Post not found.")
   if (post[0].authorId === member.id) throw new Error("You cannot react to your own post.")
@@ -536,8 +564,8 @@ export async function topMembers(limit = 5) {
 /* ─── moderation queue (human layer) ─── */
 
 export async function moderationQueue(limit = 50) {
-  return db
-    .select({
+  const queue = db
+    .selectDistinctOn([forumModerationEvents.targetType, forumModerationEvents.targetId], {
       id: forumModerationEvents.id,
       targetType: forumModerationEvents.targetType,
       targetId: forumModerationEvents.targetId,
@@ -555,10 +583,16 @@ export async function moderationQueue(limit = 50) {
         ne(forumModerationEvents.layer, "human"),
         // Content blocked before publish is audit-only, not actionable.
         ne(forumModerationEvents.targetId, "blocked"),
+        sql`not exists (select 1 from forum_moderation_events h where h.target_type=${forumModerationEvents.targetType} and h.target_id=${forumModerationEvents.targetId} and h.layer='human' and h.created_at>=${forumModerationEvents.createdAt})`,
       ),
     )
-    .orderBy(desc(forumModerationEvents.createdAt))
-    .limit(limit)
+    .orderBy(
+      forumModerationEvents.targetType,
+      forumModerationEvents.targetId,
+      desc(forumModerationEvents.createdAt),
+    )
+    .as("pending_review_queue")
+  return db.select().from(queue).orderBy(desc(queue.createdAt)).limit(limit)
 }
 
 export async function moderatorVerdict(input: {
@@ -566,27 +600,66 @@ export async function moderatorVerdict(input: {
   action: "allow" | "keep" | "remove"
   actorId: string
 }) {
-  const targetVerdict =
-    input.action === "allow" ? "allow" : input.action === "remove" ? "remove" : "warn"
-  await db
-    .update(forumModerationEvents)
-    .set({ verdict: targetVerdict, actorId: input.actorId, layer: "human" })
-    .where(eq(forumModerationEvents.id, input.eventId))
-
-  if (input.action === "remove") {
-    // Best-effort: mark the post as removed. Look up the event's target_id first.
-    const [evt] = await db
-      .select({
-        targetType: forumModerationEvents.targetType,
-        targetId: forumModerationEvents.targetId,
-      })
+  await requireRole(["admin", "moderator"])
+  await db.transaction(async (tx) => {
+    const [evt] = await tx
+      .select()
       .from(forumModerationEvents)
       .where(eq(forumModerationEvents.id, input.eventId))
-      .limit(1)
-    if (evt?.targetType === "post") {
-      await db.update(forumPosts).set({ status: "removed" }).where(eq(forumPosts.id, evt.targetId))
+      .for("update")
+    if (!evt) throw new Error("event_not_found")
+    let postId = evt.targetId
+    if (evt.targetType === "thread") {
+      const [thread] = await tx.select().from(forumThreads).where(eq(forumThreads.id, evt.targetId))
+      postId = thread?.originalPostId ?? ""
     }
-  }
+    await tx
+      .update(forumModerationJobs)
+      .set({ status: "done", lockedAt: null })
+      .where(eq(forumModerationJobs.postId, postId))
+    const changed = await setPostPublication(tx, postId, input.action !== "remove")
+    await tx.insert(forumModerationEvents).values({
+      targetType: evt.targetType,
+      targetId: evt.targetId,
+      layer: "human",
+      verdict: input.action === "remove" ? "remove" : "allow",
+      ruleCodes: [],
+      note: "Publication decision recorded.",
+      actorId: input.actorId,
+    })
+    if (changed.changed) {
+      const notify = async (userId: string, kind: string) => {
+        if (userId === input.actorId) return
+        const [prefs] = await tx
+          .select()
+          .from(notificationPreferences)
+          .where(eq(notificationPreferences.userId, userId))
+        if (prefs?.replyEnabled === false) return
+        await tx.insert(notifications).values({
+          userId,
+          kind,
+          actorId: input.actorId,
+          targetType: "thread",
+          targetId: changed.thread.id,
+          targetSlug: changed.thread.slug,
+          targetTitle: changed.thread.title,
+        })
+      }
+      if (changed.post.authorId)
+        await notify(
+          changed.post.authorId,
+          input.action === "remove" ? "moderation_removed" : "moderation_approved",
+        )
+      if (
+        !changed.original &&
+        input.action !== "remove" &&
+        changed.thread.authorId &&
+        changed.thread.authorId !== changed.post.authorId
+      )
+        await notify(changed.thread.authorId, "reply")
+    }
+    return changed
+  })
 }
 
 /* ─── reports (human queue) ─── */
@@ -619,7 +692,13 @@ export async function resolveReport(input: {
   if (!report) return { ok: false, reason: "Report not found." }
 
   if (input.action === "remove") {
-    await db.update(forumPosts).set({ status: "removed" }).where(eq(forumPosts.id, report.postId))
+    await db.transaction(async (tx) => {
+      await tx
+        .update(forumModerationJobs)
+        .set({ status: "done", lockedAt: null })
+        .where(eq(forumModerationJobs.postId, report.postId))
+      await setPostPublication(tx, report.postId, false)
+    })
     await db
       .update(forumReports)
       .set({ status: "reviewed" })
@@ -631,4 +710,13 @@ export async function resolveReport(input: {
       .where(eq(forumReports.id, input.reportId))
   }
   return { ok: true }
+}
+
+export async function categoryThreadCounts() {
+  const rows = await db
+    .select({ categoryId: forumThreads.categoryId, count: sql<number>`count(*)::integer` })
+    .from(forumThreads)
+    .where(eq(forumThreads.status, "active"))
+    .groupBy(forumThreads.categoryId)
+  return new Map(rows.map((r) => [r.categoryId, r.count]))
 }

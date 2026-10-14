@@ -132,7 +132,9 @@ export function MobileMenu({ locale, productsCount }: MobileMenuProps) {
                   {[
                     { href: `/${locale}/lab-tests`, label: t("labTests") },
                     { href: `/${locale}/quality`, label: t("quality") },
+                    { href: `/${locale}/research-tools`, label: r("tools") },
                     { href: `/${locale}/peptide-calculator`, label: t("calculator") },
+                    { href: `/${locale}/assistant`, label: "Averia" },
                     { href: `/${locale}/blog`, label: t("blog") },
                     { href: `/${locale}/glossary`, label: t("glossary") },
                     { href: `/${locale}/documents`, label: t("documents") },
@@ -181,7 +183,7 @@ export function MobileMenu({ locale, productsCount }: MobileMenuProps) {
               </div>
             </div>
 
-            <footer className="space-y-3 border-t border-line p-5">
+            <footer className="platform-bottom-safe space-y-3 border-t border-line p-5">
               <div className="flex items-center justify-between gap-2">
                 <LocaleSwitcher currentLocale={locale} />
                 <ThemeToggle />

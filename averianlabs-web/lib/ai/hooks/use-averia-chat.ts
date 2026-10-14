@@ -10,8 +10,10 @@
  *   - All 7 SSE event types from the agent loop
  */
 
+import { chatErrorBody } from "@/lib/ai/errors"
 import { getConsentState, getOrCreateAnonId, setConsentState } from "@/lib/ai/memory/consent-client"
 import type { ChatContext, ChatMessage, CitationRef } from "@/lib/ai/types"
+import { useTranslations } from "next-intl"
 import { useCallback, useEffect, useRef, useState } from "react"
 
 import {
@@ -90,6 +92,7 @@ export function useAveriaChat({
   onError,
   onConversationStart,
 }: AveriaChatInput): AveriaChat {
+  const t = useTranslations("averia")
   const [messages, setMessages] = useState<ChatMessageWithExtras[]>(INITIAL)
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -123,7 +126,7 @@ export function useAveriaChat({
   }, [])
 
   const submit = useCallback(
-    (text: string) => {
+    (text: string, retryLastUser = false) => {
       const trimmed = text.trim()
       if (!trimmed) return
 
@@ -145,13 +148,19 @@ export function useAveriaChat({
         createdAt: new Date().toISOString(),
       }
 
-      setMessages((prev) => [...prev, userMsg, assistantMsg])
+      const previous = retryLastUser
+        ? messages.slice(
+            0,
+            messages.findLastIndex((message) => message.role === "user"),
+          )
+        : messages
+      setMessages((prev) => [...(retryLastUser ? previous : prev), userMsg, assistantMsg])
       setInput("")
       setIsLoading(true)
       setError(null)
       onSend?.(trimmed)
 
-      const history = [...messages, userMsg]
+      const history = [...previous, userMsg]
         .filter((m) => m.content.trim().length > 0)
         .slice(-40)
         .map((m) => ({ id: m.id, role: m.role, content: m.content }))
@@ -216,7 +225,7 @@ export function useAveriaChat({
           setMessages((prev) =>
             prev.map((m) =>
               m.id === assistantId && m.content === ""
-                ? { ...m, content: placeholderForError(e) }
+                ? { ...m, content: `_${chatErrorBody(t, e)}_` }
                 : m,
             ),
           )
@@ -278,7 +287,7 @@ export function useAveriaChat({
         }
       }
     },
-    [cart, context, conversationId, locale, messages, onConversationStart, onError, onSend],
+    [cart, context, conversationId, locale, messages, onConversationStart, onError, onSend, t],
   )
 
   const reset = useCallback(() => {
@@ -302,11 +311,8 @@ export function useAveriaChat({
       reset()
       return
     }
-    // Drop the empty assistant placeholder and any partial error state, then
-    // resubmit. The hook is idempotent on submit().
-    setMessages((prev) => prev.filter((m) => !(m.role === "assistant" && m.content === "")))
     setError(null)
-    submit(lastUser.content)
+    submit(lastUser.content, true)
   }, [isLoading, messages, reset, submit])
 
   const resolveAction = useCallback(
@@ -394,22 +400,6 @@ function classifyHttpError(status: number, body: string): Error {
   const e = new Error(`Chat failed (${status})`)
   e.name = code
   return e
-}
-
-/** Italic placeholder shown when the assistant bubble is empty after an error. */
-function placeholderForError(err: Error): string {
-  switch (err.name) {
-    case "rate_limited":
-      return "_Slow down a touch — Averia's rate limit kicked in. Try again in a minute._"
-    case "provider_unavailable":
-      return "_Averia is offline. Check that MINIMAX_API_KEY is configured._"
-    case "invalid_request":
-      return "_That message couldn't be sent. Clear the conversation and try again._"
-    case "server_error":
-      return "_Averia hit a problem on our side. Try again in a moment._"
-    default:
-      return "_Averia didn't respond just now. Try again in a moment._"
-  }
 }
 
 export type { CartItem }

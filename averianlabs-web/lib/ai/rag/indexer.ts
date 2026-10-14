@@ -17,6 +17,7 @@ import { getStorefrontCatalogue } from "@/lib/products/catalogue"
 import type { Product, Locale as ProductLocale } from "@/lib/products/types"
 import { formatSize } from "@/lib/utils/format"
 import { and, eq, inArray } from "drizzle-orm"
+import { catalogueSourceVersion } from "./version"
 
 const SUPPORTED_LOCALES: ProductLocale[] = ["en", "fi", "de", "sv", "nl"]
 const CATEGORY_LABELS: Record<Product["category"], string> = {
@@ -58,7 +59,6 @@ function renderProductDocument(
     specs.push(`Molecular weight: ${product.molecularWeight} g/mol`)
   if (product.sequence) specs.push(`Sequence: ${product.sequence}`)
   specs.push(`Storage: ${product.storageTemp}`)
-  if (product.purityPercent !== undefined) specs.push(`HPLC purity: ${product.purityPercent}%`)
 
   const vials = product.vials.map((v) => `- ${formatSize(v, locale)}; SKU ${v.sku}`).join("\n")
   const batch =
@@ -76,7 +76,7 @@ function renderProductDocument(
     "Specifications",
     ...specs,
     "",
-    "Available vials",
+    "Listed variants; consult live tools for availability",
     vials,
     "",
     "Latest batch",
@@ -100,13 +100,17 @@ async function indexOneDocument(
   title: string,
   content: string,
   url: string,
+  sourceVersion?: string,
+  keywordOnly = false,
 ): Promise<{ chunks: Chunk[]; embedded: number; skipped: number }> {
   const docId = `${source}:${sourceId}:${locale}`
   const chunks = chunkText(content, { maxTokens: 700, overlapTokens: 150 })
   if (chunks.length === 0) return { chunks: [], embedded: 0, skipped: 0 }
 
   // Embed in parallel before starting the DB transaction to minimize lock time.
-  const embeddings = await embedBatch(chunks.map((c) => c.content))
+  const embeddings = keywordOnly
+    ? chunks.map(() => null)
+    : await embedBatch(chunks.map((c) => c.content))
   const embedded = embeddings.filter((e): e is number[] => e !== null).length
   const skipped = embeddings.length - embedded
 
@@ -132,7 +136,7 @@ async function indexOneDocument(
         locale,
         title,
         url,
-        metadata: { category: source, reviewVersion: "research-reviewed-v1" },
+        metadata: { category: source, reviewVersion: "research-reviewed-v1", sourceVersion },
         updatedAt: new Date(),
       })
       .onConflictDoUpdate({
@@ -140,7 +144,7 @@ async function indexOneDocument(
         set: {
           title,
           url,
-          metadata: { category: source, reviewVersion: "research-reviewed-v1" },
+          metadata: { category: source, reviewVersion: "research-reviewed-v1", sourceVersion },
           updatedAt: new Date(),
         },
       })
@@ -256,6 +260,7 @@ export async function indexAll(): Promise<IndexerReport> {
         title,
         content,
         `/${locale}/shop/${product.slug}`,
+        catalogueSourceVersion(product),
       )
       addResult(result.chunks.length, result.embedded, result.skipped)
     }
@@ -392,4 +397,37 @@ export async function purgeSource(source: string, sourceIds?: string[]): Promise
         db.select({ id: aiDocuments.id }).from(aiDocuments).where(eq(aiDocuments.source, source)),
       ),
     )
+}
+
+/** Bounded keyword updates; explicit full indexing can also create embeddings. */
+export async function syncCatalogueIndex(limit = 2) {
+  const catalog = await getStorefrontCatalogue()
+  if (!catalog.length || catalog.some((p) => p.dataSource !== "database")) return { updated: 0 }
+  const stored = await db.select().from(aiDocuments).where(eq(aiDocuments.source, "product"))
+  const versions = new Map(
+    stored.map((d) => [d.id, (d.metadata as { sourceVersion?: string } | null)?.sourceVersion]),
+  )
+  let updated = 0
+  for (const product of catalog)
+    for (const locale of SUPPORTED_LOCALES) {
+      if (updated >= limit) return { updated }
+      const revision = catalogueSourceVersion(product)
+      if (versions.get(`product:${product.slug}:${locale}`) === revision) continue
+      const doc = renderProductDocument(product, locale)
+      await indexOneDocument(
+        "product",
+        product.slug,
+        locale,
+        doc.title,
+        doc.content,
+        `/${locale}/shop/${product.slug}`,
+        revision,
+        true,
+      )
+      updated++
+    }
+  const valid = new Set(catalog.map((p) => p.slug))
+  for (const doc of stored)
+    if (!valid.has(doc.sourceId)) await purgeSource("product", [doc.sourceId])
+  return { updated }
 }

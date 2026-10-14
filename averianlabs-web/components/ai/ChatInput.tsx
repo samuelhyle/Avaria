@@ -49,7 +49,7 @@ export function ChatInput({
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex items-end gap-2 border-t border-line bg-surface px-3 py-3"
+      className="flex items-end gap-2 border-t border-line bg-surface px-3 py-3 pb-[calc(0.75rem+var(--platform-bottom-inset,0px)+env(safe-area-inset-bottom))]"
     >
       <textarea
         ref={ref}

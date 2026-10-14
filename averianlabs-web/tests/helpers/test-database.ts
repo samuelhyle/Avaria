@@ -26,6 +26,8 @@ export async function cleanBrowserRecords(email: string) {
       await tx`delete from quote_requests where email = ${email}`
       await tx`delete from verification_tokens where identifier in (${`email-verify:${email}`}, ${`password-reset:${email}`}, ${`account-delete:${email}`})`
       await tx`delete from activity_events where actor_id in (select id from users where email = ${email})`
+      await tx`delete from forum_moderation_events where target_id in (select p.id from forum_posts p join forum_threads t on t.id=p.thread_id join users u on u.id=t.author_id where u.email=${email}) or target_id in (select t.id from forum_threads t join users u on u.id=t.author_id where u.email=${email})`
+      await tx`delete from forum_threads where author_id in (select id from users where email = ${email})`
       await tx`delete from users where email = ${email}`
     })
   } finally {

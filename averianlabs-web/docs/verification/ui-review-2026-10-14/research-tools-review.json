@@ -1,0 +1,315 @@
+{
+  "reviewedAt": "2026-10-14T15:56:24.457Z",
+  "baseUrl": "https://averianlabs-demo.netlify.app",
+  "scope": "Public rendering and calculator input changes only; no community content posted, no model queries or private account operations.",
+  "results": [
+    {
+      "path": "/en/peptide-calculator",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "status": 200,
+      "title": "Reconstitution calculator · AverianLabs",
+      "description": "Laboratory concentration calculation only. This tool does not determine a biological activity or an administration dose.",
+      "mainText": "Concentration calculator\n\nLaboratory concentration calculation only. This tool does not determine a biological activity or an administration dose.\n\nInputs\nMaterial mass (mg)\nSolution volume (mL)\nMaterial per aliquot (µg)\nCalculated results\nConcentration\n5 mg/mL\n5,000 µg/mL\nVolume per aliquot\n0.05 mL\n50 µL\nNumber of complete aliquots\n40\n\nLaboratory concentration calculation only. This tool does not determine a biological activity or an administration dose.",
+      "height": 1690,
+      "overflow": false,
+      "inputs": [
+        {
+          "type": "number",
+          "label": "Material mass (mg)",
+          "value": "10"
+        },
+        {
+          "type": "number",
+          "label": "Solution volume (mL)",
+          "value": "2"
+        },
+        {
+          "type": "number",
+          "label": "Material per aliquot (µg)",
+          "value": "250"
+        }
+      ],
+      "buttons": [],
+      "pageErrors": [],
+      "calculatorCheck": {
+        "inputs": [10, 2, 250],
+        "validResult": "Concentration\n5 mg/mL\n5,000 µg/mL\nVolume per aliquot\n0.05 mL\n50 µL\nNumber of complete aliquots\n40",
+        "zeroVolumeMessage": "Enter finite positive values. An aliquot cannot contain more material than the total mass."
+      }
+    },
+    {
+      "path": "/en/community",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "status": 200,
+      "title": "Community · AverianLabs",
+      "description": "A research-use-only space for qualified researchers, lab staff and institutional buyers.",
+      "mainText": "Research discussions · moderated\n\nCommunity\n\nA research-use-only space for qualified researchers, lab staff and institutional buyers.\n\nRead the community rules\nNew thread\nDiscussion categories\n\nPick a category and dive in.\n\n0\nAnnouncements\n\nOfficial posts from the AverianLabs team.\n\n0\nResearch discussion\n\nGeneral discussion of peptide science.\n\n0\nDocumentation & COAs\n\nQuestions about certificates of analysis.\n\n0\nMethods & analytics\n\nHPLC, mass spectrometry, NMR.\n\n0\nStorage & handling\n\nLyophilised storage, reconstitution.\n\n0\nMarket & regulation\n\nCountry-specific eligibility.\n\n0\nOff-topic lounge\n\nAnything else.\n\nRecent activity\nToday in peptide science →\n\nNo threads yet — be first.\n\nBe first.\nModeration\n\nPosts are checked against the community rules. Flagged content may be held for moderator review. Community posts do not replace original evidence or professional advice.",
+      "height": 1834,
+      "overflow": false,
+      "inputs": [],
+      "buttons": [],
+      "pageErrors": []
+    },
+    {
+      "path": "/en/assistant",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "status": 200,
+      "title": "Averia — AverianLabs · AverianLabs",
+      "description": "Ask Averia, our AI research concierge, about catalog products, COAs, reconstitution, and orders.",
+      "mainText": "Averia\n\nOnline · research concierge\n\nNew conversation\nHi — I'm Averia.\n\nI can help browse the catalog, check COA details, compare products, or assist with an order.\n\nRecommend for me\nCompare products\nTrack my order\nReconstitution walkthrough\nAsk about research purchasing\n· Find a product or SKU\n· Check available batch documents\n· Calculate a laboratory concentration\nSaved conversations require your consent. Privacy notice\nSave conversation memory?\n\nAllow saved conversations and preferences to personalise future answers. You can turn this off and delete saved data in your account.\n\n· Return to earlier conversations\n· Keep preferences you choose to save\nAllow saving\nContinue without saving",
+      "height": 1690,
+      "overflow": false,
+      "inputs": [],
+      "buttons": [
+        "New conversation",
+        "Recommend for me",
+        "Compare products",
+        "Track my order",
+        "Reconstitution walkthrough",
+        "Allow saving",
+        "Continue without saving"
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/fi/peptide-calculator",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "status": 200,
+      "title": "Liuotuslaskuri · AverianLabs",
+      "description": "Vain laboratoriopitoisuuden laskentaan. Laskuri ei määritä biologista aktiivisuutta tai annostusta.",
+      "mainText": "Pitoisuuslaskuri\n\nVain laboratoriopitoisuuden laskentaan. Laskuri ei määritä biologista aktiivisuutta tai annostusta.\n\nLähtötiedot\nMateriaalin massa (mg)\nLiuoksen tilavuus (mL)\nMateriaalin määrä osanäytteessä (µg)\nLaskennan tulokset\nPitoisuus\n5 mg/mL\n5 000 µg/mL\nOsanäytteen tilavuus\n0,05 mL\n50 µL\nKokonaisten osanäytteiden määrä\n40\n\nVain laboratoriopitoisuuden laskentaan. Laskuri ei määritä biologista aktiivisuutta tai annostusta.",
+      "height": 1708,
+      "overflow": false,
+      "inputs": [
+        {
+          "type": "number",
+          "label": "Materiaalin massa (mg)",
+          "value": "10"
+        },
+        {
+          "type": "number",
+          "label": "Liuoksen tilavuus (mL)",
+          "value": "2"
+        },
+        {
+          "type": "number",
+          "label": "Materiaalin määrä osanäytteessä (µg)",
+          "value": "250"
+        }
+      ],
+      "buttons": [],
+      "pageErrors": [],
+      "calculatorCheck": {
+        "inputs": [10, 2, 250],
+        "validResult": "Pitoisuus\n5 mg/mL\n5 000 µg/mL\nOsanäytteen tilavuus\n0,05 mL\n50 µL\nKokonaisten osanäytteiden määrä\n40",
+        "zeroVolumeMessage": "Anna äärelliset positiiviset arvot. Osanäytteen materiaalimäärä ei voi ylittää kokonaismassaa."
+      }
+    },
+    {
+      "path": "/fi/community",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "status": 200,
+      "title": "Yhteisö · AverianLabs",
+      "description": "Vain tutkimuskäyttöön tarkoitettu tila päteville tutkijoille, laboratorion henkilökunnalle ja institutionaalisille ostajille.",
+      "mainText": "Tutkimuskeskustelut · moderoitu\n\nYhteisö\n\nVain tutkimuskäyttöön tarkoitettu tila päteville tutkijoille, laboratorion henkilökunnalle ja institutionaalisille ostajille.\n\nLue yhteisön säännöt\nUusi ketju\nKeskustelukategoriat\n\nValitse kategoria ja sukella sisään.\n\n0\nTiedotteet\n\nAverianLabs-tiimin viralliset viestit.\n\n0\nTutkimuskeskustelu\n\nYleistä keskustelua peptiditieteestä.\n\n0\nDokumentaatio ja analyysitodistukset\n\nKysymyksiä analyysitodistuksista.\n\n0\nMenetelmät ja analytiikka\n\nHPLC, massaspektrometria, NMR.\n\n0\nSäilytys ja käsittely\n\nLyofiloitu säilytys ja liuotus.\n\n0\nMarkkinat ja sääntely\n\nMaakohtainen kelpoisuus.\n\n0\nOff-topic-lounge\n\nMikä tahansa muu.\n\nViimeisin toiminta\nTänään peptiditieteessä →\n\nEi vielä ketjuja — ole ensimmäinen.\n\nOle ensimmäinen.\nModerointi\n\nViestien sääntöjenmukaisuutta tarkistetaan. Sääntöjen vastaiseksi epäilty viesti voidaan siirtää moderaattorin tarkistettavaksi. Yhteisön viestit eivät korvaa alkuperäisiä lähteitä tai ammattilaisen neuvontaa.",
+      "height": 1876,
+      "overflow": false,
+      "inputs": [],
+      "buttons": [],
+      "pageErrors": []
+    },
+    {
+      "path": "/fi/assistant",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "status": 200,
+      "title": "Averia — AverianLabs · AverianLabs",
+      "description": "Ask Averia, our AI research concierge, about catalog products, COAs, reconstitution, and orders.",
+      "mainText": "Averia\n\nOnline · tutkimusneuvoja\n\nUusi keskustelu\nHei — olen Averia.\n\nVoin auttaa selaamaan valikoimaa, tarkistamaan analyysitodistuksen tietoja, vertailemaan tuotteita tai hoitamaan tilauksen.\n\nSuosittele minulle\nVertaile tuotteita\nSeuraa tilaustani\nLiuotusohje\nKysy tutkimushankinnoista\n· Hae tuote tai SKU-tunnus\n· Tarkista saatavilla olevat eräasiakirjat\n· Laske laboratorioliuoksen pitoisuus\nKeskustelujen tallentaminen edellyttää suostumustasi. Tietosuojaseloste\nTallennetaanko keskustelumuisti?\n\nSalli keskustelujen ja asetusten tallentaminen tulevien vastausten mukauttamiseen. Voit poistaa tallennuksen käytöstä ja poistaa tiedot asiakastililtäsi.\n\n· Palaa aiempiin keskusteluihin\n· Säilytä valitsemasi asetukset\nSalli tallennus\nJatka tallentamatta",
+      "height": 1708,
+      "overflow": false,
+      "inputs": [],
+      "buttons": [
+        "Uusi keskustelu",
+        "Suosittele minulle",
+        "Vertaile tuotteita",
+        "Seuraa tilaustani",
+        "Liuotusohje",
+        "Salli tallennus",
+        "Jatka tallentamatta"
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/en/peptide-calculator",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "title": "Reconstitution calculator · AverianLabs",
+      "description": "Laboratory concentration calculation only. This tool does not determine a biological activity or an administration dose.",
+      "mainText": "Concentration calculator\n\nLaboratory concentration calculation only. This tool does not determine a biological activity or an administration dose.\n\nInputs\nMaterial mass (mg)\nSolution volume (mL)\nMaterial per aliquot (µg)\nCalculated results\nConcentration\n5 mg/mL\n5,000 µg/mL\nVolume per aliquot\n0.05 mL\n50 µL\nNumber of complete aliquots\n40\n\nLaboratory concentration calculation only. This tool does not determine a biological activity or an administration dose.",
+      "height": 2296,
+      "overflow": false,
+      "inputs": [
+        {
+          "type": "number",
+          "label": "Material mass (mg)",
+          "value": "10"
+        },
+        {
+          "type": "number",
+          "label": "Solution volume (mL)",
+          "value": "2"
+        },
+        {
+          "type": "number",
+          "label": "Material per aliquot (µg)",
+          "value": "250"
+        }
+      ],
+      "buttons": [],
+      "pageErrors": [],
+      "calculatorCheck": {
+        "inputs": [10, 2, 250],
+        "validResult": "Concentration\n5 mg/mL\n5,000 µg/mL\nVolume per aliquot\n0.05 mL\n50 µL\nNumber of complete aliquots\n40",
+        "zeroVolumeMessage": "Enter finite positive values. An aliquot cannot contain more material than the total mass."
+      }
+    },
+    {
+      "path": "/en/community",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "title": "Community · AverianLabs",
+      "description": "A research-use-only space for qualified researchers, lab staff and institutional buyers.",
+      "mainText": "Research discussions · moderated\n\nCommunity\n\nA research-use-only space for qualified researchers, lab staff and institutional buyers.\n\nRead the community rules\nNew thread\nDiscussion categories\n\nPick a category and dive in.\n\n0\nAnnouncements\n\nOfficial posts from the AverianLabs team.\n\n0\nResearch discussion\n\nGeneral discussion of peptide science.\n\n0\nDocumentation & COAs\n\nQuestions about certificates of analysis.\n\n0\nMethods & analytics\n\nHPLC, mass spectrometry, NMR.\n\n0\nStorage & handling\n\nLyophilised storage, reconstitution.\n\n0\nMarket & regulation\n\nCountry-specific eligibility.\n\n0\nOff-topic lounge\n\nAnything else.\n\nRecent activity\nToday in peptide science →\n\nNo threads yet — be first.\n\nBe first.\nModeration\n\nPosts are checked against the community rules. Flagged content may be held for moderator review. Community posts do not replace original evidence or professional advice.",
+      "height": 3111,
+      "overflow": false,
+      "inputs": [],
+      "buttons": [],
+      "pageErrors": []
+    },
+    {
+      "path": "/en/assistant",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "title": "Averia — AverianLabs · AverianLabs",
+      "description": "Ask Averia, our AI research concierge, about catalog products, COAs, reconstitution, and orders.",
+      "mainText": "Averia\n\nOnline · research concierge\n\nNew conversation\nHi — I'm Averia.\n\nI can help browse the catalog, check COA details, compare products, or assist with an order.\n\nRecommend for me\nCompare products\nTrack my order\nReconstitution walkthrough\nAsk about research purchasing\n· Find a product or SKU\n· Check available batch documents\n· Calculate a laboratory concentration\nSaved conversations require your consent. Privacy notice\nSave conversation memory?\n\nAllow saved conversations and preferences to personalise future answers. You can turn this off and delete saved data in your account.\n\n· Return to earlier conversations\n· Keep preferences you choose to save\nAllow saving\nContinue without saving",
+      "height": 2194,
+      "overflow": false,
+      "inputs": [],
+      "buttons": [
+        "New conversation",
+        "Recommend for me",
+        "Compare products",
+        "Track my order",
+        "Reconstitution walkthrough",
+        "Allow saving",
+        "Continue without saving"
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/fi/peptide-calculator",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "title": "Liuotuslaskuri · AverianLabs",
+      "description": "Vain laboratoriopitoisuuden laskentaan. Laskuri ei määritä biologista aktiivisuutta tai annostusta.",
+      "mainText": "Pitoisuuslaskuri\n\nVain laboratoriopitoisuuden laskentaan. Laskuri ei määritä biologista aktiivisuutta tai annostusta.\n\nLähtötiedot\nMateriaalin massa (mg)\nLiuoksen tilavuus (mL)\nMateriaalin määrä osanäytteessä (µg)\nLaskennan tulokset\nPitoisuus\n5 mg/mL\n5 000 µg/mL\nOsanäytteen tilavuus\n0,05 mL\n50 µL\nKokonaisten osanäytteiden määrä\n40\n\nVain laboratoriopitoisuuden laskentaan. Laskuri ei määritä biologista aktiivisuutta tai annostusta.",
+      "height": 2272,
+      "overflow": false,
+      "inputs": [
+        {
+          "type": "number",
+          "label": "Materiaalin massa (mg)",
+          "value": "10"
+        },
+        {
+          "type": "number",
+          "label": "Liuoksen tilavuus (mL)",
+          "value": "2"
+        },
+        {
+          "type": "number",
+          "label": "Materiaalin määrä osanäytteessä (µg)",
+          "value": "250"
+        }
+      ],
+      "buttons": [],
+      "pageErrors": [],
+      "calculatorCheck": {
+        "inputs": [10, 2, 250],
+        "validResult": "Pitoisuus\n5 mg/mL\n5 000 µg/mL\nOsanäytteen tilavuus\n0,05 mL\n50 µL\nKokonaisten osanäytteiden määrä\n40",
+        "zeroVolumeMessage": "Anna äärelliset positiiviset arvot. Osanäytteen materiaalimäärä ei voi ylittää kokonaismassaa."
+      }
+    },
+    {
+      "path": "/fi/community",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "title": "Yhteisö · AverianLabs",
+      "description": "Vain tutkimuskäyttöön tarkoitettu tila päteville tutkijoille, laboratorion henkilökunnalle ja institutionaalisille ostajille.",
+      "mainText": "Tutkimuskeskustelut · moderoitu\n\nYhteisö\n\nVain tutkimuskäyttöön tarkoitettu tila päteville tutkijoille, laboratorion henkilökunnalle ja institutionaalisille ostajille.\n\nLue yhteisön säännöt\nUusi ketju\nKeskustelukategoriat\n\nValitse kategoria ja sukella sisään.\n\n0\nTiedotteet\n\nAverianLabs-tiimin viralliset viestit.\n\n0\nTutkimuskeskustelu\n\nYleistä keskustelua peptiditieteestä.\n\n0\nDokumentaatio ja analyysitodistukset\n\nKysymyksiä analyysitodistuksista.\n\n0\nMenetelmät ja analytiikka\n\nHPLC, massaspektrometria, NMR.\n\n0\nSäilytys ja käsittely\n\nLyofiloitu säilytys ja liuotus.\n\n0\nMarkkinat ja sääntely\n\nMaakohtainen kelpoisuus.\n\n0\nOff-topic-lounge\n\nMikä tahansa muu.\n\nViimeisin toiminta\nTänään peptiditieteessä →\n\nEi vielä ketjuja — ole ensimmäinen.\n\nOle ensimmäinen.\nModerointi\n\nViestien sääntöjenmukaisuutta tarkistetaan. Sääntöjen vastaiseksi epäilty viesti voidaan siirtää moderaattorin tarkistettavaksi. Yhteisön viestit eivät korvaa alkuperäisiä lähteitä tai ammattilaisen neuvontaa.",
+      "height": 3151,
+      "overflow": false,
+      "inputs": [],
+      "buttons": [],
+      "pageErrors": []
+    },
+    {
+      "path": "/fi/assistant",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "title": "Averia — AverianLabs · AverianLabs",
+      "description": "Ask Averia, our AI research concierge, about catalog products, COAs, reconstitution, and orders.",
+      "mainText": "Averia\n\nOnline · tutkimusneuvoja\n\nUusi keskustelu\nHei — olen Averia.\n\nVoin auttaa selaamaan valikoimaa, tarkistamaan analyysitodistuksen tietoja, vertailemaan tuotteita tai hoitamaan tilauksen.\n\nSuosittele minulle\nVertaile tuotteita\nSeuraa tilaustani\nLiuotusohje\nKysy tutkimushankinnoista\n· Hae tuote tai SKU-tunnus\n· Tarkista saatavilla olevat eräasiakirjat\n· Laske laboratorioliuoksen pitoisuus\nKeskustelujen tallentaminen edellyttää suostumustasi. Tietosuojaseloste\nTallennetaanko keskustelumuisti?\n\nSalli keskustelujen ja asetusten tallentaminen tulevien vastausten mukauttamiseen. Voit poistaa tallennuksen käytöstä ja poistaa tiedot asiakastililtäsi.\n\n· Palaa aiempiin keskusteluihin\n· Säilytä valitsemasi asetukset\nSalli tallennus\nJatka tallentamatta",
+      "height": 2210,
+      "overflow": false,
+      "inputs": [],
+      "buttons": [
+        "Uusi keskustelu",
+        "Suosittele minulle",
+        "Vertaile tuotteita",
+        "Seuraa tilaustani",
+        "Liuotusohje",
+        "Salli tallennus",
+        "Jatka tallentamatta"
+      ],
+      "pageErrors": []
+    }
+  ]
+}

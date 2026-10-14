@@ -27,6 +27,7 @@ export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
     } else {
       segments.unshift(target)
     }
+    window.dispatchEvent(new CustomEvent("averianlabs:before-locale-switch"))
     const newPath = `/${segments.join("/")}${window.location.search}${window.location.hash}`
     startTransition(() => router.push(newPath))
   }

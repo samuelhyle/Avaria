@@ -1,0 +1,1395 @@
+{
+  "reviewedAt": "2026-10-14T15:11:26.051Z",
+  "baseUrl": "https://averianlabs-demo.netlify.app",
+  "readOnly": true,
+  "results": [
+    {
+      "path": "/en",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "status": 200,
+      "title": "AverianLabs — Laboratory research materials",
+      "headings": [
+        {
+          "text": "Research materials for laboratory work.",
+          "top": 256
+        },
+        {
+          "text": "Retatrutide",
+          "top": 386
+        },
+        {
+          "text": "Retatrutide",
+          "top": 0
+        },
+        {
+          "text": "Explore the catalogue",
+          "top": 1041
+        },
+        {
+          "text": "Explore the catalogue",
+          "top": 1149
+        },
+        {
+          "text": "Browse by research area",
+          "top": 2020
+        },
+        {
+          "text": "Review the batch documentation",
+          "top": 2938
+        },
+        {
+          "text": "Concentration and aliquot calculations",
+          "top": 3362
+        },
+        {
+          "text": "Research community",
+          "top": 3326
+        },
+        {
+          "text": "For institutions & resellers",
+          "top": 3860
+        }
+      ],
+      "bodyHeight": 4813,
+      "overflow": false,
+      "mainText": "AverianLabs\nEN · RESEARCH\n\nFOR LABORATORY RESEARCH\n\nResearch materials for laboratory work.\n\nExplore products, review batch documents and check availability before ordering.\n\nBrowse the catalogue\nVerify a batch\n\nFOR RESEARCH PURCHASING\n\nRESEARCH UNIVERSITIES\nBIOTECH STARTUPS\nHOSPITAL PHARMACIES\nINDEPENDENT LABS\nPUBLIC INSTITUTES\nProduct-specific information\nClear purchase information\nBatch documents\nExplore in 3D\nFROM 20 mg\nRetatrutide\n\nLaboratory research material. Review the product-specific documentation before use.\n\nSKU\nRETA-20\nHPLC\n—\nfrom\n20 mg\nFROM\nRequest a quote\nView →\nRetatrutide\n· 20 mg\nGHK-Cu\n· 50 mg\nMOTS-c\n· 10 mg\nMelanotan II\n· 10 mg\nNAD+\n· 1,000 mg\nBPC-157\n· 5 mg\n\nIllustrative product view\n\nExplore the catalogue\n\nBrowse product information and find materials relevant to your research.\n\nBrowse all products\nExplore the catalogue\nBAC water\nBACW-10\nCompare\nBAC water\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nRetatrutide\nRETA-20\nCompare\nRetatrutide\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nGHK-Cu\nGHKCU-50\nCompare\nGHK-Cu\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nMOTS-c\nMOTSC-10\nCompare\nMOTS-c\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nMelanotan II\nMT2-10\nCompare\nMelanotan II\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nNAD+\nNAD-1000\nCompare\nNAD+\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nBPC-157\nBPC157-5\nCompare\nBPC-157\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nMelanotan I\nMT1-10\nCompare\nMelanotan I\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nBrowse by research area\nMetabolic research\n\nMaterials grouped for metabolic laboratory research. Check the product-specific records and applicable methods.\n\n4 products\nTissue research\n\nMaterials grouped for tissue and cell research. Check product identity and batch evidence before selecting a material.\n\n1 product\nNeurobiology\n\nMaterials grouped for laboratory neurobiology research. Suitability depends on your experimental method.\n\n2 products\nCell ageing\n\nMaterials grouped for cellular ageing research. Category membership does not establish biological activity.\n\n2 products\nCosmetic research\n\nMaterials grouped for skin and cosmetic laboratory research. These products are for laboratory research only.\n\n3 products\nBlends\n\nPeptide mixtures. Confirm the stated components and proportions in approved product records.\n\n2 products\nSupplies\n\nLaboratory reagents and supplies. Check the size, unit and material-specific documentation.\n\n1 product\nBatch documents\nReview the batch documentation\n\nConsult original analytical reports. Report availability is stated explicitly.\n\nUnderstanding test results\nCOA\nNo released batch linked yet\n\nOnly published, reviewed documents appear here. A missing document is not a test result.\n\nView Lab Tests\nConcentration calculator\nConcentration and aliquot calculations\n\nCalculate laboratory solution concentration and aliquot volumes.\n\nOpen concentration calculator\nResearch community\n\nDiscuss documentation and share laboratory research questions.\n\nNo activity yet — the feed fills up as members post.\nFor research organisations\nFor institutions & resellers\n\nAsk about products, required documentation and purchasing quantities.\n\nApply for partner pricing",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Back to top",
+          "text": "",
+          "rect": {
+            "x": 1372,
+            "y": 876,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 1238,
+            "y": 936,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Open Averia",
+          "text": "",
+          "rect": {
+            "x": 1360,
+            "y": 920,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/en/shop",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "status": 200,
+      "title": "Research catalog · AverianLabs",
+      "headings": [
+        {
+          "text": "Research catalog",
+          "top": 113
+        },
+        {
+          "text": "Filters",
+          "top": 402
+        }
+      ],
+      "bodyHeight": 4049,
+      "overflow": false,
+      "mainText": "Research catalog\n\nCheck SKU availability and original batch documents before ordering.\n\n15 products\nSearch products…\n⌘K\nCompare\nFilters\nClear all\nCATEGORY\nMetabolic Research\n4\nRepair And Recovery Research\n1\nCognitive Research\n2\nAgeing Research\n2\nCosmetic Research\n3\nBlends\n2\nLaboratory Supplies\n1\nPURITY\n0%\nMinimum HPLC purity\nIn stock\nQuote-only items\nSORT\nNewest\nPrice ↑\nPrice ↓\nName (A→Z)\nPurity (high→low)\nHGH Frag 176-191\nHGHFR-5\nCompare\nHGH Frag 176-191\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nAOD-9604\nAOD-5\nCompare\nAOD-9604\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nCJC-1295\nCJC-1\nCompare\nCJC-1295\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nSemax\nSEMX-5\nCompare\nSemax\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nSelank\nSELK-5\nCompare\nSelank\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nBPC-157 + TB-500 blend\nBPC-TB-10\nCompare\nBPC-157 + TB-500 blend\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nKLOW blend\nKLOW-80\nCompare\nKLOW blend\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nMelanotan I\nMT1-10\nCompare\nMelanotan I\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nBPC-157\nBPC157-5\nCompare\nBPC-157\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nNAD+\nNAD-1000\nCompare\nNAD+\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nMelanotan II\nMT2-10\nCompare\nMelanotan II\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nMOTS-c\nMOTSC-10\nCompare\nMOTS-c\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nGHK-Cu\nGHKCU-50\nCompare\nGHK-Cu\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nRetatrutide\nRETA-20\nCompare\nRetatrutide\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nBAC water\nBACW-10\nCompare\nBAC water\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Back to top",
+          "text": "",
+          "rect": {
+            "x": 1372,
+            "y": 876,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 1238,
+            "y": 936,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Open Averia",
+          "text": "",
+          "rect": {
+            "x": 1360,
+            "y": 920,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/en/shop/bpc-157",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "status": 200,
+      "title": "BPC-157 · AverianLabs",
+      "headings": [
+        {
+          "text": "BPC-157",
+          "top": 185
+        },
+        {
+          "text": "Specifications",
+          "top": 1114
+        },
+        {
+          "text": "Batch documents",
+          "top": 1259
+        },
+        {
+          "text": "Frequently asked questions",
+          "top": 1428
+        }
+      ],
+      "bodyHeight": 2535,
+      "overflow": false,
+      "mainText": "Browse products\n›\nRepair and recovery research\n›\nBPC-157\nBPC-157\nIllustrative product view\nExplore in 3D\n\nRepair and recovery research\n\nBPC-157\n\nLaboratory research material. Review the product-specific documentation before use.\n\nCompare\nSign in to save\nSelect vial size\n5 mg\nBPC157-5\nCurrently unavailable\n10 mg\nBPC157-10\nCurrently unavailable\nRequest a quote\n\nAsk about pricing, the required quantity and current batch availability.\n\nContact name\nEmail address\nOrganisation (optional)\nRequirements (optional)\nRequest a quote\n\nBatch documentation is not yet available.\n\nSpecifications\n\nSpecifications are awaiting review. Contact us for the current product documentation.\n\nBatch documents\n\nNo published documents are available yet.\n\nUnderstanding test results\nFrequently asked questions\nWhat are these materials intended for?\nThese materials are for laboratory research. Product-specific documentation describes identity, composition and handling; the catalogue does not provide instructions for human or veterinary administration.\nWhere can I find batch documents?\nWhere can I place a direct order?\nHow do I request a quote?",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Back to top",
+          "text": "",
+          "rect": {
+            "x": 1372,
+            "y": 876,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 1238,
+            "y": 936,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Open Averia",
+          "text": "",
+          "rect": {
+            "x": 1360,
+            "y": 920,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/en/lab-tests",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "status": 200,
+      "title": "Lab testing — HPLC, endotoxin, mass spec · AverianLabs",
+      "headings": [
+        {
+          "text": "Understanding laboratory reports",
+          "top": 129
+        },
+        {
+          "text": "Chromatographic purity",
+          "top": 281
+        },
+        {
+          "text": "Identity and composition",
+          "top": 417
+        },
+        {
+          "text": "Product-specific tests",
+          "top": 553
+        }
+      ],
+      "bodyHeight": 1690,
+      "overflow": false,
+      "mainText": "Understanding laboratory reports\n\nRead the original report for the selected batch. The methods below describe different analytical questions and do not imply that every product has undergone every test.\n\nChromatographic purity\n\nHPLC reports describe a result under a specified analytical method. Chromatographic purity should not be treated as a measurement of the total amount of material in a container.\n\nIdentity and composition\n\nMass spectrometry can provide molecular-mass evidence. A sequence or composition claim needs the appropriate supporting analysis and specification; mass alone is not a complete sequence determination.\n\nProduct-specific tests\n\nEndotoxin, sterility and other test results are shown only when applicable and supported by the report. Retain the units used in the original result, such as EU/mg.\n\nView batch documents\nRequest a quote",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Back to top",
+          "text": "",
+          "rect": {
+            "x": 1372,
+            "y": 876,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 1238,
+            "y": 936,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Open Averia",
+          "text": "",
+          "rect": {
+            "x": 1360,
+            "y": 920,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/en/quality",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "status": 200,
+      "title": "Quality assurance · AverianLabs",
+      "headings": [
+        {
+          "text": "Quality and product documentation",
+          "top": 129
+        },
+        {
+          "text": "Product identity",
+          "top": 281
+        },
+        {
+          "text": "Batch evidence",
+          "top": 417
+        },
+        {
+          "text": "Storage and handling",
+          "top": 553
+        }
+      ],
+      "bodyHeight": 1690,
+      "overflow": false,
+      "mainText": "Quality and product documentation\n\nEvaluate materials using the documents for the actual product and batch. Availability of a report is shown explicitly; missing reports are not presented as verified results.\n\nProduct identity\n\nCheck the chemical identity, composition, quantity and unit against the original specification. Analytical purity, material content and identity are different measurements.\n\nBatch evidence\n\nA report should identify the batch, laboratory, test method, result, unit and date. Accreditation or supplier quality claims are published only when their supporting evidence has been approved.\n\nStorage and handling\n\nUse the conditions in the product-specific documentation. Do not assume that the same storage or preparation conditions apply to every material.\n\nView batch documents\nRequest a quote",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Back to top",
+          "text": "",
+          "rect": {
+            "x": 1372,
+            "y": 876,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 1238,
+            "y": 936,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Open Averia",
+          "text": "",
+          "rect": {
+            "x": 1360,
+            "y": 920,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/en/checkout/cart",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "status": 200,
+      "title": "AverianLabs — Laboratory research materials",
+      "headings": [
+        {
+          "text": "Checkout",
+          "top": 112
+        },
+        {
+          "text": "Cart",
+          "top": 259
+        },
+        {
+          "text": "Your cart is empty.",
+          "top": 428
+        }
+      ],
+      "bodyHeight": 1690,
+      "overflow": false,
+      "mainText": "Checkout\n1\nEmail\n2\nAddress\n3\nShipping\n4\nPayment\nCart\n\nYour selected peptides and supplies — ready for review.\n\nYour cart is empty.\nBrowse products",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Back to top",
+          "text": "",
+          "rect": {
+            "x": 1372,
+            "y": 876,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 1238,
+            "y": 936,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Open Averia",
+          "text": "",
+          "rect": {
+            "x": 1360,
+            "y": 920,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/en/account",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "status": 200,
+      "title": "AverianLabs — Laboratory research materials",
+      "headings": [
+        {
+          "text": "Sign in",
+          "top": 163
+        }
+      ],
+      "bodyHeight": 1690,
+      "overflow": false,
+      "mainText": "Account\nSign in\n\nAccess your orders, research plans and community profile.\n\nEmail\nPassword\nSign in\nForgot password?\nCreate account",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Back to top",
+          "text": "",
+          "rect": {
+            "x": 1372,
+            "y": 876,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 1238,
+            "y": 936,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Open Averia",
+          "text": "",
+          "rect": {
+            "x": 1360,
+            "y": 920,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/en/contact",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "status": 200,
+      "title": "Contact · AverianLabs",
+      "headings": [
+        {
+          "text": "Contact us",
+          "top": 129
+        }
+      ],
+      "bodyHeight": 1690,
+      "overflow": false,
+      "mainText": "Contact us\n\nAsk about products, documentation, availability or an existing order. Include the SKU or order number when available.\n\nhello@averianlabs.eu\nName\nEmail\nSubject\nMessage\nSend message",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Back to top",
+          "text": "",
+          "rect": {
+            "x": 1372,
+            "y": 876,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 1238,
+            "y": 936,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Open Averia",
+          "text": "",
+          "rect": {
+            "x": 1360,
+            "y": 920,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/fi",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "status": 200,
+      "title": "AverianLabs — Materiaalit laboratoriotutkimukseen",
+      "headings": [
+        {
+          "text": "Tutkimusmateriaalit laboratoriotyöhön.",
+          "top": 223
+        },
+        {
+          "text": "Retatrutidi",
+          "top": 387
+        },
+        {
+          "text": "Retatrutidi",
+          "top": 0
+        },
+        {
+          "text": "Tutustu tuotevalikoimaan",
+          "top": 1042
+        },
+        {
+          "text": "Tutustu tuotevalikoimaan",
+          "top": 1150
+        },
+        {
+          "text": "Selaa tutkimusalueittain",
+          "top": 2021
+        },
+        {
+          "text": "Tarkista erän asiakirjat",
+          "top": 2927
+        },
+        {
+          "text": "Pitoisuuksien ja osanäytteiden laskenta",
+          "top": 3363
+        },
+        {
+          "text": "Tutkimusyhteisö",
+          "top": 3327
+        },
+        {
+          "text": "Tutkimuslaitoksille ja jälleenmyyjille",
+          "top": 3881
+        }
+      ],
+      "bodyHeight": 4828,
+      "overflow": false,
+      "mainText": "AverianLabs\nFI · TUTKIMUS\n\nLABORATORIOTUTKIMUKSEEN\n\nTutkimusmateriaalit laboratoriotyöhön.\n\nTutustu tuotteisiin, tarkista erän asiakirjat ja kysy saatavuudesta ennen tilaamista.\n\nSelaa valikoimaa\nVarmenna erä\n\nTUTKIMUSHANKINTOJEN TUEKSI\n\nTUTKIMUSYLIOPISTOT\nBIOTEKNIIKAN STARTUPIT\nSAIRAALA-APTEEKIT\nRIIPPUMATTOMAT LABORATORIOT\nJULKISET TUTKIMUSLAITOKSET\nTuotekohtaiset tiedot\nSelkeät ostotiedot\nEräasiakirjat\nTutustu 3D-näkymässä\nALKAEN 20 mg\nRetatrutidi\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nSKU\nRETA-20\nHPLC\n—\nalkaen\n20 mg\nALKAEN\nPyydä tarjous\nNäytä →\nRetatrutidi\n· 20 mg\nGHK-Cu\n· 50 mg\nMOTS-c\n· 10 mg\nMelanotan II\n· 10 mg\nNAD+\n· 1 000 mg\nBPC-157\n· 5 mg\n\nHavainnollistava tuotekuva\n\nTutustu tuotevalikoimaan\n\nSelaa tuotetietoja ja valitse tutkimustyösi kannalta olennaiset materiaalit.\n\nSelaa kaikkia tuotteita\nTutustu tuotevalikoimaan\nBAC-vesi\nBACW-10\nVertaile\nBAC-vesi\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nRetatrutidi\nRETA-20\nVertaile\nRetatrutidi\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nGHK-Cu\nGHKCU-50\nVertaile\nGHK-Cu\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nMOTS-c\nMOTSC-10\nVertaile\nMOTS-c\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nMelanotan II\nMT2-10\nVertaile\nMelanotan II\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nNAD+\nNAD-1000\nVertaile\nNAD+\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nBPC-157\nBPC157-5\nVertaile\nBPC-157\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nMelanotan I\nMT1-10\nVertaile\nMelanotan I\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nSelaa tutkimusalueittain\nMetabolinen tutkimus\n\nLaboratorion aineenvaihduntatutkimukseen ryhmitellyt materiaalit. Tarkista tuotekohtaiset asiakirjat ja soveltuvat menetelmät.\n\n4 tuotetta\nKudostutkimus\n\nKudos- ja solututkimukseen ryhmitellyt materiaalit. Tarkista tuotteen identiteetti ja erän asiakirjat ennen materiaalin valintaa.\n\n1 tuote\nNeurobiologia\n\nLaboratorion neurobiologiseen tutkimukseen ryhmitellyt materiaalit. Soveltuvuus riippuu tutkimusmenetelmästäsi.\n\n2 tuotetta\nSolujen vanheneminen\n\nSolujen vanhenemisen tutkimukseen ryhmitellyt materiaalit. Tuoteryhmä ei osoita biologista aktiivisuutta.\n\n2 tuotetta\nKosmeettinen tutkimus\n\nIhon ja kosmetiikan laboratoriotutkimukseen ryhmitellyt materiaalit. Tuotteet on tarkoitettu vain laboratoriotutkimukseen.\n\n3 tuotetta\nYhdistelmät\n\nPeptidiseokset. Tarkista ilmoitetut aineosat ja niiden osuudet hyväksytyistä tuotetiedoista.\n\n2 tuotetta\nTarvikkeet\n\nLaboratorioreagenssit ja tarvikkeet. Tarkista koko, yksikkö ja materiaalikohtaiset asiakirjat.\n\n1 tuote\nEräasiakirjat\nTarkista erän asiakirjat\n\nTutustu alkuperäisiin analyysiraportteihin. Raporttien saatavuus ilmoitetaan erikseen.\n\nAnalyysitulosten tulkinta\nCOA\nJulkaistua erää ei vielä linkitetty\n\nVain julkaistut ja tarkistetut asiakirjat näkyvät täällä. Asiakirjan puuttuminen ei ole testitulos.\n\nNäytä laboratoriotestit\nPitoisuuslaskuri\nPitoisuuksien ja osanäytteiden laskenta\n\nLaske laboratorioliuoksen pitoisuus ja osanäytteiden tilavuus.\n\nAvaa pitoisuuslaskuri\nTutkimusyhteisö\n\nKeskustele asiakirjoista ja jaa laboratoriotutkimukseen liittyviä kysymyksiä.\n\nEi vielä toimintaa — syöte täyttyy jäsenten postatessa.\nTutkimusorganisaatioille\nTutkimuslaitoksille ja jälleenmyyjille\n\nKysy tuotteista, tarvitsemistasi asiakirjoista ja hankintamääristä.\n\nHae kumppanihinnoittelua",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Takaisin ylös",
+          "text": "",
+          "rect": {
+            "x": 1372,
+            "y": 876,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 1238,
+            "y": 936,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Avaa Averia",
+          "text": "",
+          "rect": {
+            "x": 1360,
+            "y": 920,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/fi/shop",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "status": 200,
+      "title": "Tuotevalikoima · AverianLabs",
+      "headings": [
+        {
+          "text": "Tuotevalikoima",
+          "top": 113
+        },
+        {
+          "text": "Suodattimet",
+          "top": 402
+        }
+      ],
+      "bodyHeight": 4067,
+      "overflow": false,
+      "mainText": "Tuotevalikoima\n\nTarkista tuotetunnuksen saatavuus ja alkuperäiset eräasiakirjat ennen tilaamista.\n\n15 tuotetta\nHae tuotteita…\n⌘K\nVertaa\nSuodattimet\nTyhjennä\nKATEGORIA\nAineenvaihduntatutkimus\n4\nKorjaus- Ja Palautumistutkimus\n1\nKognitiotutkimus\n2\nIkääntymistutkimus\n2\nKosmeettinen Tutkimus\n3\nSeokset\n2\nLaboratoriotarvikkeet\n1\nPUHTAUS\n0%\nHPLC-puhtauden alaraja\nVarastossa\nVain tarjouspyynnöllä\nJÄRJESTÄ\nUusimmat\nHinta ↑\nHinta ↓\nNimi (A–Ö)\nPuhtaus (korkeasta matalaan)\nHGH Frag 176-191\nHGHFR-5\nVertaile\nHGH Frag 176-191\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nAOD-9604\nAOD-5\nVertaile\nAOD-9604\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nCJC-1295\nCJC-1\nVertaile\nCJC-1295\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nSemax\nSEMX-5\nVertaile\nSemax\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nSelank\nSELK-5\nVertaile\nSelank\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nBPC-157 + TB-500 -seos\nBPC-TB-10\nVertaile\nBPC-157 + TB-500 -seos\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nKLOW-seos\nKLOW-80\nVertaile\nKLOW-seos\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nMelanotan I\nMT1-10\nVertaile\nMelanotan I\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nBPC-157\nBPC157-5\nVertaile\nBPC-157\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nNAD+\nNAD-1000\nVertaile\nNAD+\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nMelanotan II\nMT2-10\nVertaile\nMelanotan II\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nMOTS-c\nMOTSC-10\nVertaile\nMOTS-c\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nGHK-Cu\nGHKCU-50\nVertaile\nGHK-Cu\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nRetatrutidi\nRETA-20\nVertaile\nRetatrutidi\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nBAC-vesi\nBACW-10\nVertaile\nBAC-vesi\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Takaisin ylös",
+          "text": "",
+          "rect": {
+            "x": 1372,
+            "y": 876,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 1238,
+            "y": 936,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Avaa Averia",
+          "text": "",
+          "rect": {
+            "x": 1360,
+            "y": 920,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "title": "AverianLabs — Laboratory research materials",
+      "headings": [
+        {
+          "text": "Research materials for laboratory work.",
+          "top": 223
+        },
+        {
+          "text": "Retatrutide",
+          "top": 0
+        },
+        {
+          "text": "Retatrutide",
+          "top": 1427
+        },
+        {
+          "text": "Explore the catalogue",
+          "top": 1846
+        },
+        {
+          "text": "Explore the catalogue",
+          "top": 2010
+        },
+        {
+          "text": "Browse by research area",
+          "top": 2952
+        },
+        {
+          "text": "Review the batch documentation",
+          "top": 4702
+        },
+        {
+          "text": "Concentration and aliquot calculations",
+          "top": 5432
+        },
+        {
+          "text": "Research community",
+          "top": 5718
+        },
+        {
+          "text": "For institutions & resellers",
+          "top": 6256
+        }
+      ],
+      "bodyHeight": 7834,
+      "overflow": false,
+      "mainText": "AverianLabs\nEN · RESEARCH\n\nFOR LABORATORY RESEARCH\n\nResearch materials for laboratory work.\n\nExplore products, review batch documents and check availability before ordering.\n\nBrowse the catalogue\nVerify a batch\n\nFOR RESEARCH PURCHASING\n\nRESEARCH UNIVERSITIES\nBIOTECH STARTUPS\nHOSPITAL PHARMACIES\nINDEPENDENT LABS\nPUBLIC INSTITUTES\nProduct-specific information\nClear purchase information\nBatch documents\nExplore in 3D\nRetatrutide\nGHK-Cu\nMOTS-c\nMelanotan II\nNAD+\nBPC-157\n\nIllustrative product view\n\nFROM 20 mg\nRetatrutide\n\nLaboratory research material. Review the product-specific documentation before use.\n\nSKU\nRETA-20\nHPLC\n—\nfrom\n20 mg\nFROM\nRequest a quote\nView →\nExplore the catalogue\n\nBrowse product information and find materials relevant to your research.\n\nBrowse all products\nExplore the catalogue\nBAC water\nBACW-10\nCompare\nBAC water\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nRetatrutide\nRETA-20\nCompare\nRetatrutide\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nGHK-Cu\nGHKCU-50\nCompare\nGHK-Cu\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nMOTS-c\nMOTSC-10\nCompare\nMOTS-c\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nMelanotan II\nMT2-10\nCompare\nMelanotan II\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nNAD+\nNAD-1000\nCompare\nNAD+\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nBPC-157\nBPC157-5\nCompare\nBPC-157\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nMelanotan I\nMT1-10\nCompare\nMelanotan I\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\n1 / 8\nBrowse by research area\nMetabolic research\n\nMaterials grouped for metabolic laboratory research. Check the product-specific records and applicable methods.\n\n4 products\nTissue research\n\nMaterials grouped for tissue and cell research. Check product identity and batch evidence before selecting a material.\n\n1 product\nNeurobiology\n\nMaterials grouped for laboratory neurobiology research. Suitability depends on your experimental method.\n\n2 products\nCell ageing\n\nMaterials grouped for cellular ageing research. Category membership does not establish biological activity.\n\n2 products\nCosmetic research\n\nMaterials grouped for skin and cosmetic laboratory research. These products are for laboratory research only.\n\n3 products\nBlends\n\nPeptide mixtures. Confirm the stated components and proportions in approved product records.\n\n2 products\nSupplies\n\nLaboratory reagents and supplies. Check the size, unit and material-specific documentation.\n\n1 product\nBatch documents\nReview the batch documentation\n\nConsult original analytical reports. Report availability is stated explicitly.\n\nUnderstanding test results\nCOA\nNo released batch linked yet\n\nOnly published, reviewed documents appear here. A missing document is not a test result.\n\nView Lab Tests\nConcentration calculator\nConcentration and aliquot calculations\n\nCalculate laboratory solution concentration and aliquot volumes.\n\nOpen concentration calculator\nResearch community\n\nDiscuss documentation and share laboratory research questions.\n\nNo activity yet — the feed fills up as members post.\nFor research organisations\nFor institutions & resellers\n\nAsk about products, required documentation and purchasing quantities.\n\nApply for partner pricing",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Back to top",
+          "text": "",
+          "rect": {
+            "x": 322,
+            "y": 720,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 188,
+            "y": 780,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Open Averia",
+          "text": "",
+          "rect": {
+            "x": 314,
+            "y": 768,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/en/shop",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "title": "Research catalog · AverianLabs",
+      "headings": [
+        {
+          "text": "Research catalog",
+          "top": 113
+        },
+        {
+          "text": "Filters",
+          "top": 0
+        }
+      ],
+      "bodyHeight": 11493,
+      "overflow": false,
+      "mainText": "Research catalog\n\nCheck SKU availability and original batch documents before ordering.\n\n15 products\nSearch products…\nFilters\n1\nHGH Frag 176-191\nHGHFR-5\nCompare\nHGH Frag 176-191\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nAOD-9604\nAOD-5\nCompare\nAOD-9604\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nCJC-1295\nCJC-1\nCompare\nCJC-1295\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nSemax\nSEMX-5\nCompare\nSemax\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nSelank\nSELK-5\nCompare\nSelank\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nBPC-157 + TB-500 blend\nBPC-TB-10\nCompare\nBPC-157 + TB-500 blend\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nKLOW blend\nKLOW-80\nCompare\nKLOW blend\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nMelanotan I\nMT1-10\nCompare\nMelanotan I\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nBPC-157\nBPC157-5\nCompare\nBPC-157\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nNAD+\nNAD-1000\nCompare\nNAD+\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nMelanotan II\nMT2-10\nCompare\nMelanotan II\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nMOTS-c\nMOTSC-10\nCompare\nMOTS-c\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nGHK-Cu\nGHKCU-50\nCompare\nGHK-Cu\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nRetatrutide\nRETA-20\nCompare\nRetatrutide\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY\nBAC water\nBACW-10\nCompare\nBAC water\n\nLaboratory research material. Review the product-specific documentation before use.\n\nPricing on request\nPRICING\nRequest quote\nRESEARCH USE ONLY",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Back to top",
+          "text": "",
+          "rect": {
+            "x": 322,
+            "y": 720,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 188,
+            "y": 780,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Open Averia",
+          "text": "",
+          "rect": {
+            "x": 314,
+            "y": 768,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/en/shop/bpc-157",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "title": "BPC-157 · AverianLabs",
+      "headings": [
+        {
+          "text": "BPC-157",
+          "top": 645
+        },
+        {
+          "text": "Specifications",
+          "top": 1594
+        },
+        {
+          "text": "Batch documents",
+          "top": 1787
+        },
+        {
+          "text": "Frequently asked questions",
+          "top": 1956
+        }
+      ],
+      "bodyHeight": 3684,
+      "overflow": false,
+      "mainText": "Browse products\n›\nRepair and recovery research\n›\nBPC-157\nBPC-157\nIllustrative product view\nExplore in 3D\n\nRepair and recovery research\n\nBPC-157\n\nLaboratory research material. Review the product-specific documentation before use.\n\nCompare\nSign in to save\nSelect vial size\n5 mg\nBPC157-5\nCurrently unavailable\n10 mg\nBPC157-10\nCurrently unavailable\nRequest a quote\n\nAsk about pricing, the required quantity and current batch availability.\n\nContact name\nEmail address\nOrganisation (optional)\nRequirements (optional)\nRequest a quote\n\nBatch documentation is not yet available.\n\nSpecifications\n\nSpecifications are awaiting review. Contact us for the current product documentation.\n\nBatch documents\n\nNo published documents are available yet.\n\nUnderstanding test results\nFrequently asked questions\nWhat are these materials intended for?\nThese materials are for laboratory research. Product-specific documentation describes identity, composition and handling; the catalogue does not provide instructions for human or veterinary administration.\nWhere can I find batch documents?\nWhere can I place a direct order?\nHow do I request a quote?",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Back to top",
+          "text": "",
+          "rect": {
+            "x": 322,
+            "y": 720,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 188,
+            "y": 780,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Open Averia",
+          "text": "",
+          "rect": {
+            "x": 314,
+            "y": 768,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/en/lab-tests",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "title": "Lab testing — HPLC, endotoxin, mass spec · AverianLabs",
+      "headings": [
+        {
+          "text": "Understanding laboratory reports",
+          "top": 129
+        },
+        {
+          "text": "Chromatographic purity",
+          "top": 373
+        },
+        {
+          "text": "Identity and composition",
+          "top": 561
+        },
+        {
+          "text": "Product-specific tests",
+          "top": 775
+        }
+      ],
+      "bodyHeight": 2245,
+      "overflow": false,
+      "mainText": "Understanding laboratory reports\n\nRead the original report for the selected batch. The methods below describe different analytical questions and do not imply that every product has undergone every test.\n\nChromatographic purity\n\nHPLC reports describe a result under a specified analytical method. Chromatographic purity should not be treated as a measurement of the total amount of material in a container.\n\nIdentity and composition\n\nMass spectrometry can provide molecular-mass evidence. A sequence or composition claim needs the appropriate supporting analysis and specification; mass alone is not a complete sequence determination.\n\nProduct-specific tests\n\nEndotoxin, sterility and other test results are shown only when applicable and supported by the report. Retain the units used in the original result, such as EU/mg.\n\nView batch documents\nRequest a quote",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Back to top",
+          "text": "",
+          "rect": {
+            "x": 322,
+            "y": 720,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 188,
+            "y": 780,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Open Averia",
+          "text": "",
+          "rect": {
+            "x": 314,
+            "y": 768,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/en/quality",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "title": "Quality assurance · AverianLabs",
+      "headings": [
+        {
+          "text": "Quality and product documentation",
+          "top": 129
+        },
+        {
+          "text": "Product identity",
+          "top": 373
+        },
+        {
+          "text": "Batch evidence",
+          "top": 587
+        },
+        {
+          "text": "Storage and handling",
+          "top": 801
+        }
+      ],
+      "bodyHeight": 2271,
+      "overflow": false,
+      "mainText": "Quality and product documentation\n\nEvaluate materials using the documents for the actual product and batch. Availability of a report is shown explicitly; missing reports are not presented as verified results.\n\nProduct identity\n\nCheck the chemical identity, composition, quantity and unit against the original specification. Analytical purity, material content and identity are different measurements.\n\nBatch evidence\n\nA report should identify the batch, laboratory, test method, result, unit and date. Accreditation or supplier quality claims are published only when their supporting evidence has been approved.\n\nStorage and handling\n\nUse the conditions in the product-specific documentation. Do not assume that the same storage or preparation conditions apply to every material.\n\nView batch documents\nRequest a quote",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Back to top",
+          "text": "",
+          "rect": {
+            "x": 322,
+            "y": 720,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 188,
+            "y": 780,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Open Averia",
+          "text": "",
+          "rect": {
+            "x": 314,
+            "y": 768,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/en/checkout/cart",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "title": "AverianLabs — Laboratory research materials",
+      "headings": [
+        {
+          "text": "Checkout",
+          "top": 112
+        },
+        {
+          "text": "Cart",
+          "top": 307
+        },
+        {
+          "text": "Your cart is empty.",
+          "top": 492
+        }
+      ],
+      "bodyHeight": 2039,
+      "overflow": false,
+      "mainText": "Checkout\n1\nEmail\n2\nAddress\n3\nShipping\n4\nPayment\nCart\n\nYour selected peptides and supplies — ready for review.\n\nYour cart is empty.\nBrowse products",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Back to top",
+          "text": "",
+          "rect": {
+            "x": 322,
+            "y": 720,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 188,
+            "y": 780,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Open Averia",
+          "text": "",
+          "rect": {
+            "x": 314,
+            "y": 768,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/en/account",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "title": "AverianLabs — Laboratory research materials",
+      "headings": [
+        {
+          "text": "Sign in",
+          "top": 163
+        }
+      ],
+      "bodyHeight": 2039,
+      "overflow": false,
+      "mainText": "Account\nSign in\n\nAccess your orders, research plans and community profile.\n\nEmail\nPassword\nSign in\nForgot password?\nCreate account",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Back to top",
+          "text": "",
+          "rect": {
+            "x": 322,
+            "y": 720,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 188,
+            "y": 780,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Open Averia",
+          "text": "",
+          "rect": {
+            "x": 314,
+            "y": 768,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/en/contact",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "title": "Contact · AverianLabs",
+      "headings": [
+        {
+          "text": "Contact us",
+          "top": 129
+        }
+      ],
+      "bodyHeight": 2060,
+      "overflow": false,
+      "mainText": "Contact us\n\nAsk about products, documentation, availability or an existing order. Include the SKU or order number when available.\n\nhello@averianlabs.eu\nName\nEmail\nSubject\nMessage\nSend message",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Back to top",
+          "text": "",
+          "rect": {
+            "x": 322,
+            "y": 720,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 188,
+            "y": 780,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Open Averia",
+          "text": "",
+          "rect": {
+            "x": 314,
+            "y": 768,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/fi",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "title": "AverianLabs — Materiaalit laboratoriotutkimukseen",
+      "headings": [
+        {
+          "text": "Tutkimusmateriaalit laboratoriotyöhön.",
+          "top": 223
+        },
+        {
+          "text": "Retatrutidi",
+          "top": 0
+        },
+        {
+          "text": "Retatrutidi",
+          "top": 1451
+        },
+        {
+          "text": "Tutustu tuotevalikoimaan",
+          "top": 1870
+        },
+        {
+          "text": "Tutustu tuotevalikoimaan",
+          "top": 2070
+        },
+        {
+          "text": "Selaa tutkimusalueittain",
+          "top": 3048
+        },
+        {
+          "text": "Tarkista erän asiakirjat",
+          "top": 4846
+        },
+        {
+          "text": "Pitoisuuksien ja osanäytteiden laskenta",
+          "top": 5568
+        },
+        {
+          "text": "Tutkimusyhteisö",
+          "top": 5854
+        },
+        {
+          "text": "Tutkimuslaitoksille ja jälleenmyyjille",
+          "top": 6412
+        }
+      ],
+      "bodyHeight": 7982,
+      "overflow": false,
+      "mainText": "AverianLabs\nFI · TUTKIMUS\n\nLABORATORIOTUTKIMUKSEEN\n\nTutkimusmateriaalit laboratoriotyöhön.\n\nTutustu tuotteisiin, tarkista erän asiakirjat ja kysy saatavuudesta ennen tilaamista.\n\nSelaa valikoimaa\nVarmenna erä\n\nTUTKIMUSHANKINTOJEN TUEKSI\n\nTUTKIMUSYLIOPISTOT\nBIOTEKNIIKAN STARTUPIT\nSAIRAALA-APTEEKIT\nRIIPPUMATTOMAT LABORATORIOT\nJULKISET TUTKIMUSLAITOKSET\nTuotekohtaiset tiedot\nSelkeät ostotiedot\nEräasiakirjat\nTutustu 3D-näkymässä\nRetatrutidi\nGHK-Cu\nMOTS-c\nMelanotan II\nNAD+\nBPC-157\n\nHavainnollistava tuotekuva\n\nALKAEN 20 mg\nRetatrutidi\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nSKU\nRETA-20\nHPLC\n—\nalkaen\n20 mg\nALKAEN\nPyydä tarjous\nNäytä →\nTutustu tuotevalikoimaan\n\nSelaa tuotetietoja ja valitse tutkimustyösi kannalta olennaiset materiaalit.\n\nSelaa kaikkia tuotteita\nTutustu tuotevalikoimaan\nBAC-vesi\nBACW-10\nVertaile\nBAC-vesi\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nRetatrutidi\nRETA-20\nVertaile\nRetatrutidi\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nGHK-Cu\nGHKCU-50\nVertaile\nGHK-Cu\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nMOTS-c\nMOTSC-10\nVertaile\nMOTS-c\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nMelanotan II\nMT2-10\nVertaile\nMelanotan II\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nNAD+\nNAD-1000\nVertaile\nNAD+\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nBPC-157\nBPC157-5\nVertaile\nBPC-157\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nMelanotan I\nMT1-10\nVertaile\nMelanotan I\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\n1 / 8\nSelaa tutkimusalueittain\nMetabolinen tutkimus\n\nLaboratorion aineenvaihduntatutkimukseen ryhmitellyt materiaalit. Tarkista tuotekohtaiset asiakirjat ja soveltuvat menetelmät.\n\n4 tuotetta\nKudostutkimus\n\nKudos- ja solututkimukseen ryhmitellyt materiaalit. Tarkista tuotteen identiteetti ja erän asiakirjat ennen materiaalin valintaa.\n\n1 tuote\nNeurobiologia\n\nLaboratorion neurobiologiseen tutkimukseen ryhmitellyt materiaalit. Soveltuvuus riippuu tutkimusmenetelmästäsi.\n\n2 tuotetta\nSolujen vanheneminen\n\nSolujen vanhenemisen tutkimukseen ryhmitellyt materiaalit. Tuoteryhmä ei osoita biologista aktiivisuutta.\n\n2 tuotetta\nKosmeettinen tutkimus\n\nIhon ja kosmetiikan laboratoriotutkimukseen ryhmitellyt materiaalit. Tuotteet on tarkoitettu vain laboratoriotutkimukseen.\n\n3 tuotetta\nYhdistelmät\n\nPeptidiseokset. Tarkista ilmoitetut aineosat ja niiden osuudet hyväksytyistä tuotetiedoista.\n\n2 tuotetta\nTarvikkeet\n\nLaboratorioreagenssit ja tarvikkeet. Tarkista koko, yksikkö ja materiaalikohtaiset asiakirjat.\n\n1 tuote\nEräasiakirjat\nTarkista erän asiakirjat\n\nTutustu alkuperäisiin analyysiraportteihin. Raporttien saatavuus ilmoitetaan erikseen.\n\nAnalyysitulosten tulkinta\nCOA\nJulkaistua erää ei vielä linkitetty\n\nVain julkaistut ja tarkistetut asiakirjat näkyvät täällä. Asiakirjan puuttuminen ei ole testitulos.\n\nNäytä laboratoriotestit\nPitoisuuslaskuri\nPitoisuuksien ja osanäytteiden laskenta\n\nLaske laboratorioliuoksen pitoisuus ja osanäytteiden tilavuus.\n\nAvaa pitoisuuslaskuri\nTutkimusyhteisö\n\nKeskustele asiakirjoista ja jaa laboratoriotutkimukseen liittyviä kysymyksiä.\n\nEi vielä toimintaa — syöte täyttyy jäsenten postatessa.\nTutkimusorganisaatioille\nTutkimuslaitoksille ja jälleenmyyjille\n\nKysy tuotteista, tarvitsemistasi asiakirjoista ja hankintamääristä.\n\nHae kumppanihinnoittelua",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Takaisin ylös",
+          "text": "",
+          "rect": {
+            "x": 322,
+            "y": 720,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 188,
+            "y": 780,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Avaa Averia",
+          "text": "",
+          "rect": {
+            "x": 314,
+            "y": 768,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/fi/shop",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "title": "Tuotevalikoima · AverianLabs",
+      "headings": [
+        {
+          "text": "Tuotevalikoima",
+          "top": 113
+        },
+        {
+          "text": "Suodattimet",
+          "top": 0
+        }
+      ],
+      "bodyHeight": 11509,
+      "overflow": false,
+      "mainText": "Tuotevalikoima\n\nTarkista tuotetunnuksen saatavuus ja alkuperäiset eräasiakirjat ennen tilaamista.\n\n15 tuotetta\nHae tuotteita…\nSuodattimet\n1\nHGH Frag 176-191\nHGHFR-5\nVertaile\nHGH Frag 176-191\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nAOD-9604\nAOD-5\nVertaile\nAOD-9604\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nCJC-1295\nCJC-1\nVertaile\nCJC-1295\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nSemax\nSEMX-5\nVertaile\nSemax\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nSelank\nSELK-5\nVertaile\nSelank\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nBPC-157 + TB-500 -seos\nBPC-TB-10\nVertaile\nBPC-157 + TB-500 -seos\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nKLOW-seos\nKLOW-80\nVertaile\nKLOW-seos\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nMelanotan I\nMT1-10\nVertaile\nMelanotan I\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nBPC-157\nBPC157-5\nVertaile\nBPC-157\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nNAD+\nNAD-1000\nVertaile\nNAD+\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nMelanotan II\nMT2-10\nVertaile\nMelanotan II\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nMOTS-c\nMOTSC-10\nVertaile\nMOTS-c\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nGHK-Cu\nGHKCU-50\nVertaile\nGHK-Cu\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nRetatrutidi\nRETA-20\nVertaile\nRetatrutidi\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN\nBAC-vesi\nBACW-10\nVertaile\nBAC-vesi\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nHinta pyynnöstä\nHINNOITTELU\nPyydä tarjous\nVAIN TUTKIMUSKÄYTTÖÖN",
+      "floating": [
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Takaisin ylös",
+          "text": "",
+          "rect": {
+            "x": 322,
+            "y": 720,
+            "w": 44,
+            "h": 44
+          }
+        },
+        {
+          "tag": "IFRAME",
+          "role": null,
+          "label": null,
+          "text": "",
+          "rect": {
+            "x": 188,
+            "y": 780,
+            "w": 202,
+            "h": 64
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "role": null,
+          "label": "Avaa Averia",
+          "text": "",
+          "rect": {
+            "x": 314,
+            "y": 768,
+            "w": 56,
+            "h": 56
+          }
+        }
+      ],
+      "pageErrors": []
+    }
+  ]
+}

@@ -500,7 +500,9 @@ export const forumThreads = pgTable(
     authorId: text("author_id").references(() => users.id, { onDelete: "set null" }),
     slug: text("slug").notNull().unique(),
     title: text("title").notNull(),
-    status: text("status").notNull().default("active"), // active | locked | removed
+    locale: text("locale").notNull().default("en"),
+    originalPostId: text("original_post_id"),
+    status: text("status").notNull().default("active"), // pending | active | locked | removed
     viewCount: integer("view_count").notNull().default(0),
     replyCount: integer("reply_count").notNull().default(0),
     lastActivityAt: timestamp("last_activity_at", { withTimezone: true }).notNull().defaultNow(),
@@ -850,6 +852,7 @@ export const newsletterSubscribers = pgTable(
     id: text("id").primaryKey().default(sql`gen_random_uuid()`),
     email: text("email").notNull().unique(),
     locale: text("locale").notNull().default("en"),
+    originalPostId: text("original_post_id"),
     status: text("status").notNull().default("pending"), // pending | confirmed | unsubscribed
     confirmToken: text("confirm_token"),
     confirmExpiresAt: timestamp("confirm_expires_at", { withTimezone: true }),
@@ -880,3 +883,48 @@ export {
  * references the relations symbols, so removing the re-export from
  * `@/db/schema` is safe.
  */
+
+/** Private calculation history. Inputs are recomputed, never trusted as supplied results. */
+export const savedCalculations = pgTable(
+  "saved_calculations",
+  {
+    id: text("id").primaryKey().default(sql`gen_random_uuid()`),
+    ownerId: text("owner_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    inputs: jsonb("inputs").$type<import("@/lib/calculations").LaboratoryInputs>().notNull(),
+    formulaVersion: text("formula_version").notNull(),
+    sourceSku: text("source_sku"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("saved_calculations_owner_idx").on(t.ownerId, t.createdAt)],
+)
+
+/** Durable automatic moderation attempts; publication waits for an actual verdict. */
+export const forumModerationJobs = pgTable(
+  "forum_moderation_jobs",
+  {
+    id: text("id").primaryKey().default(sql`gen_random_uuid()`),
+    postId: text("post_id")
+      .notNull()
+      .unique()
+      .references(() => forumPosts.id, { onDelete: "cascade" }),
+    status: text("status").notNull().default("pending"),
+    attempts: integer("attempts").notNull().default(0),
+    availableAt: timestamp("available_at", { withTimezone: true }).notNull().defaultNow(),
+    lockedAt: timestamp("locked_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("forum_moderation_jobs_due_idx").on(t.status, t.availableAt)],
+)
+
+export const forumDrafts = pgTable("forum_drafts", {
+  ownerId: text("owner_id")
+    .primaryKey()
+    .references(() => users.id, { onDelete: "cascade" }),
+  title: text("title").notNull().default(""),
+  body: text("body").notNull().default(""),
+  categorySlug: text("category_slug").notNull().default("research-discussion"),
+  locale: text("locale").notNull().default("en"),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+})

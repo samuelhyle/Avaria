@@ -5,15 +5,15 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-bg: hsl(210 30% 99%);
+  --color-bg: #f5f7fa;
   --color-surface: hsl(0 0% 100%);
   --color-surface-2: hsl(210 30% 96%);
   --color-surface-3: hsl(214 30% 93%);
-  --color-ink: hsl(220 30% 12%);
-  --color-ink-muted: hsl(220 12% 38%);
+  --color-ink: #17263d;
+  --color-ink-muted: #526077;
   --color-ink-subtle: hsl(220 10% 42%);
-  --color-line: hsl(220 15% 90%);
-  --color-accent: hsl(214 95% 45%);
+  --color-line: #dce3eb;
+  --color-accent: #105be1;
   --color-accent-hover: hsl(214 95% 39%);
   --color-accent-soft: hsl(214 95% 96%);
   --color-accent-ink: hsl(214 95% 22%);
@@ -33,9 +33,9 @@
 
   /* Type scale — two micro steps below `text-xs` (12px) so tiny UI text stops
      using one-off arbitrary values. Floor is 10px for legibility. */
-  --text-3xs: 0.625rem;
+  --text-3xs: 0.75rem;
   --text-3xs--line-height: 0.875rem;
-  --text-2xs: 0.6875rem;
+  --text-2xs: 0.75rem;
   --text-2xs--line-height: 1rem;
 
   /* Headline display scale — used for hero/large headings to control rhythm. */
@@ -55,10 +55,10 @@
 
   --radius-xs: 4px;
   --radius-sm: 6px;
-  --radius: 12px;
-  --radius-lg: 20px;
-  --radius-xl: 32px;
-  --radius-2xl: 48px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
   --radius-full: 999px;
 
   --shadow-xs: 0 1px 1px hsl(220 30% 12% / 0.04);
@@ -275,10 +275,10 @@
 
   /* Section rhythm — consistent vertical breathing room. */
   .section {
-    @apply py-16 sm:py-20 lg:py-24;
+    @apply py-8 sm:py-12 lg:py-16;
   }
   .section-tight {
-    @apply py-10 sm:py-12 lg:py-16;
+    @apply py-6 sm:py-8 lg:py-10;
   }
 
   /* Subtle hover lift for cards. */
@@ -393,4 +393,29 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+@media print {
+  header,
+  footer,
+  [data-chat-widget],
+  button,
+  input,
+  select {
+    display: none !important;
+  }
+  body {
+    background: white;
+    color: #17263d;
+  }
+  details {
+    display: block;
+  }
+}
+
+body[data-review-site="true"] {
+  --platform-bottom-inset: 48px;
+}
+.platform-bottom-safe {
+  padding-bottom: calc(1rem + var(--platform-bottom-inset, 0px) + env(safe-area-inset-bottom));
 }

@@ -19,6 +19,7 @@ export function ReplyBox({ threadSlug, isAuthed, signInHref, isLocked }: ReplyBo
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
   const [body, setBody] = useState("")
+  const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   if (isLocked) {
@@ -47,18 +48,23 @@ export function ReplyBox({ threadSlug, isAuthed, signInHref, isLocked }: ReplyBo
     if (!body.trim()) return
     setError(null)
     startTransition(async () => {
-      const res = await fetch("/api/forum/posts", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ threadSlug, body }),
-      })
-      const data = (await res.json()) as { ok: boolean; reason?: string }
-      if (!data.ok) {
-        setError(data.reason ?? "Failed")
-        return
+      try {
+        const res = await fetch("/api/forum/posts", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ threadSlug, body }),
+        })
+        const data = (await res.json()) as { ok: boolean; reason?: string }
+        if (!data.ok) {
+          setError(t("reviewBlocked"))
+          return
+        }
+        setBody("")
+        setSubmitted(true)
+        router.refresh()
+      } catch {
+        setError(t("requestFailed"))
       }
-      setBody("")
-      router.refresh()
     })
   }
 
@@ -79,6 +85,11 @@ export function ReplyBox({ threadSlug, isAuthed, signInHref, isLocked }: ReplyBo
           error && "border-danger focus:border-danger",
         )}
       />
+      {submitted && (
+        <p role="status" className="text-sm text-ink-muted">
+          {t("pendingReview")}
+        </p>
+      )}
       {error ? <p className="text-xs text-danger">{error}</p> : null}
       <div className="flex items-center justify-end">
         <Button size="sm" onClick={submit} disabled={isPending || !body.trim()}>

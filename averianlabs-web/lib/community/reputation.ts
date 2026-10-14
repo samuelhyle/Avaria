@@ -13,9 +13,9 @@ export interface Tier {
 export const TIERS: readonly Tier[] = [
   { id: "new", name: "New", min: 0, color: "muted" },
   { id: "contributor", name: "Contributor", min: 5, color: "accent" },
-  { id: "analyst", name: "Analyst", min: 25, color: "ice" },
-  { id: "senior", name: "Senior", min: 100, color: "success" },
-  { id: "fellow", name: "Fellow", min: 250, color: "warn" },
+  { id: "analyst", name: "Active contributor", min: 25, color: "ice" },
+  { id: "senior", name: "Regular contributor", min: 100, color: "muted" },
+  { id: "fellow", name: "Long-standing contributor", min: 250, color: "muted" },
 ] as const
 
 export function tierFor(reputation: number): Tier {

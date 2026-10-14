@@ -65,6 +65,7 @@ export interface PersistedMessage {
 
 export interface AgentInput {
   locale: Locale
+  readOnly?: boolean
   context?: ChatContext
   /** Full conversation including prior turns. We re-send only the last 6 turns
    *  to MiniMax; the rest lives in the DB for context. */
@@ -153,6 +154,7 @@ export async function runAgent(input: AgentInput, sink: AgentSink): Promise<void
     }))
   const toolContext: ToolContext = {
     locale: input.locale,
+    readOnly: input.readOnly,
     cart: input.cart,
     auth: input.auth,
     isAdmin: Boolean(input.isAdmin),
@@ -288,7 +290,10 @@ export async function runAgent(input: AgentInput, sink: AgentSink): Promise<void
   }
 
   if (needsFooter && !finalText.includes("Research use only")) {
-    sink.enqueue({ type: "text", delta: `\n\n${RESEARCH_FOOTER}` })
+    sink.enqueue({
+      type: "text",
+      delta: `\n\n${input.locale === "fi" ? "Vain laboratoriotutkimukseen. Tuotetiedot eivät ole annostelu- tai hoito-ohjeita." : RESEARCH_FOOTER}`,
+    })
   }
 
   totalTokensIn += estimateTokens(JSON.stringify(chatMessages))

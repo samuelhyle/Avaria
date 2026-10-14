@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { type FormEvent, useState } from "react"
 
-export function LoginForm({ locale }: { locale: string }) {
+export function LoginForm({ locale, returnTo }: { locale: string; returnTo?: string }) {
   const t = useTranslations("auth")
   const [pending, setPending] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -28,7 +28,7 @@ export function LoginForm({ locale }: { locale: string }) {
         setError(t("invalidCredentials"))
         return
       }
-      window.location.assign(`/${locale}/account`)
+      window.location.assign(returnTo ?? `/${locale}/account`)
     } catch {
       setError(t("genericError"))
     } finally {

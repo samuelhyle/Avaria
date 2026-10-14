@@ -16,8 +16,10 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, category } = await params
+  const cat = await getCategoryBySlug(category)
+  const t = await getTranslations({ locale, namespace: "community" })
   return {
-    title: `Category · ${category}`,
+    title: cat ? t(cat.nameKey.replace("community.", "") as never) : t("notFound"),
     alternates: { canonical: `/${locale}/community/${category}` },
   }
 }

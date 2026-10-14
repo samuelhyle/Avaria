@@ -1,6 +1,7 @@
 import { batches, categories, documents, productTranslations, products, vials } from "@/db/schema"
 import { db } from "@/lib/db"
 import { publicDocumentUrl } from "@/lib/documents/availability"
+import { DOCUMENT_TYPES } from "@/lib/documents/constants"
 import { logger } from "@/lib/logger"
 import { and, eq, gt, inArray, isNotNull, lte, sql } from "drizzle-orm"
 import { unstable_noStore as noStore } from "next/cache"
@@ -62,37 +63,43 @@ export const getStorefrontCatalogue = cache(async (): Promise<Product[]> => {
   if (process.env.BUILD_MODE === "demo" || !process.env.DATABASE_URL) return references
   noStore()
   try {
-    const [rows, vialRows, translations, batchRows, reportRows] = await Promise.all([
-      db
-        .select({ product: products, category: categories.slug })
-        .from(products)
-        .leftJoin(categories, eq(products.categoryId, categories.id))
-        .where(inArray(products.status, ["active", "draft"])),
-      db.select().from(vials),
-      db.select().from(productTranslations),
-      db
-        .select()
-        .from(batches)
-        .where(
-          and(
-            eq(batches.verificationStatus, "released"),
-            isNotNull(batches.reviewedBy),
-            isNotNull(batches.reviewedAt),
-            gt(batches.expiresAt, new Date()),
+    const [rows, vialRows, translations, batchRows, reportRows, publicDocs, batchLinks] =
+      await Promise.all([
+        db
+          .select({ product: products, category: categories.slug })
+          .from(products)
+          .leftJoin(categories, eq(products.categoryId, categories.id))
+          .where(inArray(products.status, ["active", "draft"])),
+        db.select().from(vials),
+        db.select().from(productTranslations),
+        db
+          .select()
+          .from(batches)
+          .where(
+            and(
+              eq(batches.verificationStatus, "released"),
+              isNotNull(batches.reviewedBy),
+              isNotNull(batches.reviewedAt),
+              gt(batches.expiresAt, new Date()),
+            ),
           ),
-        ),
-      db
-        .select()
-        .from(documents)
-        .where(
-          and(
-            eq(documents.type, "coa"),
-            eq(documents.requiresLogin, false),
-            lte(documents.publishedAt, new Date()),
-            sql`ARRAY['en','fi']::text[] <@ ${documents.displayLocales}`,
+        db
+          .select()
+          .from(documents)
+          .where(
+            and(
+              eq(documents.type, "coa"),
+              eq(documents.requiresLogin, false),
+              lte(documents.publishedAt, new Date()),
+              sql`ARRAY['en','fi']::text[] <@ ${documents.displayLocales}`,
+            ),
           ),
-        ),
-    ])
+        db
+          .select()
+          .from(documents)
+          .where(and(eq(documents.requiresLogin, false), lte(documents.publishedAt, new Date()))),
+        db.select({ id: batches.id, vialId: batches.vialId }).from(batches),
+      ])
     if (!rows.length) return references
     const result: Product[] = []
     for (const { product: row, category } of rows) {
@@ -151,6 +158,23 @@ export const getStorefrontCatalogue = cache(async (): Promise<Product[]> => {
             purchaseMode: mode,
             contactOnly: mode === "quotation",
             batch: batchRecord,
+            documentLocales: [
+              ...new Set(
+                publicDocs
+                  .filter(
+                    (doc) =>
+                      (DOCUMENT_TYPES as readonly string[]).includes(doc.type) &&
+                      publicDocumentUrl(doc) &&
+                      (doc.productId === row.id || doc.productId === null) &&
+                      (doc.batchId
+                        ? batchLinks.some(
+                            (link) => link.id === doc.batchId && link.vialId === vial.id,
+                          )
+                        : doc.productId === row.id),
+                  )
+                  .flatMap((doc) => doc.displayLocales),
+              ),
+            ],
           }
         })
       if (!vialsForProduct.length) continue

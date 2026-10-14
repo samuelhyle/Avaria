@@ -39,6 +39,7 @@ export interface VialSize {
   purchaseMode: PurchaseMode
   contactOnly?: boolean
   batch?: Batch
+  documentLocales?: string[]
 }
 
 export interface Batch {

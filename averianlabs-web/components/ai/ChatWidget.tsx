@@ -147,7 +147,7 @@ export function ChatWidget({ locale, demoMode = false }: ChatWidgetProps) {
   }
 
   const handleConfirmAction = useCallback(
-    (action: ProposedAction, messageId: string) => {
+    async (action: ProposedAction, messageId: string) => {
       if (action.kind === "add_to_cart") {
         const product = products.find((p) => p.slug === action.productSlug)
         const vial = product?.vials.find((v) => v.sku === action.sku)
@@ -173,13 +173,18 @@ export function ChatWidget({ locale, demoMode = false }: ChatWidgetProps) {
         chat.resolveAction(messageId, action, "added")
         toast.success(t("actions.removedToast"))
       } else if (action.kind === "remember") {
-        void fetch("/api/ai/memory", {
-          method: "PUT",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ key: action.key, value: action.value, source: "explicit" }),
-        }).catch(() => {})
-        chat.resolveAction(messageId, action, "added")
-        toast.success(t("actions.rememberedToast"))
+        try {
+          const response = await fetch("/api/ai/memory", {
+            method: "PUT",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ key: action.key, value: action.value, source: "explicit" }),
+          })
+          if (!response.ok) throw new Error("memory_not_saved")
+          chat.resolveAction(messageId, action, "added")
+          toast.success(t("actions.rememberedToast"))
+        } catch {
+          toast.error(t("errorBody"))
+        }
       }
     },
     [products, cartAdd, cartRemove, chat, t],
@@ -214,17 +219,17 @@ export function ChatWidget({ locale, demoMode = false }: ChatWidgetProps) {
         {!open && consent ? <ChatBubble unread={unread} onOpen={handleOpen} /> : null}
       </AnimatePresence>
 
-      {/* Only prompt for memory consent once the researcher actually opens
-          Averia — an auto-shown card on first visit covers storefront CTAs. */}
-      {open ? (
-        <ConsentBanner
-          consent={chat.consent}
-          onAccept={() => chat.setConsent("accepted")}
-          onDecline={() => chat.setConsent("declined")}
-        />
-      ) : null}
-
       <ChatDrawer
+        consentBanner={
+          open ? (
+            <ConsentBanner
+              inline
+              consent={chat.consent}
+              onAccept={() => chat.setConsent("accepted")}
+              onDecline={() => chat.setConsent("declined")}
+            />
+          ) : undefined
+        }
         open={open}
         onClose={handleClose}
         messages={messages}

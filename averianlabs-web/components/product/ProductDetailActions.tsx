@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils/cn"
 import { formatCurrency, formatPercent, formatSize } from "@/lib/utils/format"
 import { GitCompare } from "lucide-react"
 import { useTranslations } from "next-intl"
+import Link from "next/link"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -64,7 +65,7 @@ export function ProductDetailActions({
   }
   return (
     <>
-      <div className="mt-8 space-y-5">
+      <div className="mt-5 space-y-5">
         <div className="flex flex-wrap items-center gap-3">
           <WishlistButton slug={product.slug} />
           <Button
@@ -151,7 +152,22 @@ export function ProductDetailActions({
             </p>
           </>
         ) : (
-          <QuoteForm key={vial.sku} sku={vial.sku} locale={locale} />
+          <details key={vial.sku} className="rounded-lg border border-line">
+            <summary className="cursor-pointer rounded-lg bg-accent px-4 py-3 text-center text-sm font-semibold text-on-accent">
+              {r("quote")}
+            </summary>
+            <div className="p-4">
+              <QuoteForm sku={vial.sku} locale={locale} />
+            </div>
+          </details>
+        )}
+        {["mg", "mcg", "g"].includes(vial.sizeUnit) && (
+          <Link
+            href={`/${locale}/peptide-calculator?sku=${encodeURIComponent(vial.sku)}`}
+            className="inline-flex min-h-10 items-center text-sm text-accent underline"
+          >
+            {r("useCalculator")} · {vial.sku}
+          </Link>
         )}
         {vial.batch ? (
           <div className="rounded-[var(--radius)] border border-line p-4 text-sm">

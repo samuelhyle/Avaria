@@ -1,22 +1,11 @@
 export const dynamic = "force-dynamic"
-
-import { CategoryCard } from "@/components/community/CategoryCard"
-import { Leaderboard } from "@/components/community/Leaderboard"
 import { ThreadListItem } from "@/components/community/ThreadListItem"
-import { Badge } from "@/components/ui/Badge"
 import { Button } from "@/components/ui/Button"
 import { Container } from "@/components/ui/Container"
-import { listCategories, listThreads, topMembers } from "@/lib/community"
-import { Plus, ScrollText } from "lucide-react"
-import type { Metadata } from "next"
+import { categoryThreadCounts, listCategories, listThreads } from "@/lib/community/service"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import Link from "next/link"
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "community" })
   return {
@@ -25,165 +14,197 @@ export async function generateMetadata({
     alternates: { canonical: `/${locale}/community` },
   }
 }
-
 export default async function CommunityHubPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>
+  searchParams: Promise<Record<string, string | string[] | undefined>>
 }) {
   const { locale } = await params
   setRequestLocale(locale)
-  const r = await getTranslations({ locale, namespace: "research" })
-
-  const [categories, recent, leaders] = await Promise.all([
+  const [t, r, query, categories, counts] = await Promise.all([
+    getTranslations("community"),
+    getTranslations("research"),
+    searchParams,
     listCategories(),
-    listThreads({ limit: 6 }),
-    topMembers(5),
+    categoryThreadCounts(),
   ])
-
-  const t = await getTranslations("community")
-
-  const counts = new Map<string, number>()
-  for (const th of recent) {
-    const k = th.categorySlug ?? ""
-    counts.set(k, (counts.get(k) ?? 0) + 1)
+  const text = typeof query.q === "string" ? query.q.slice(0, 200) : ""
+  const category = typeof query.category === "string" ? query.category : ""
+  const language = query.language === "fi" || query.language === "en" ? query.language : undefined
+  const page = Math.min(500, Math.max(1, Number(query.page) || 1))
+  const offset = (Math.trunc(page) - 1) * 20
+  const threads = await listThreads({
+    query: text,
+    categorySlug: category || undefined,
+    locale: language,
+    unanswered: query.unanswered === "true",
+    limit: 21,
+    offset,
+  })
+  const pageLink = (next: number) => {
+    const p = new URLSearchParams()
+    if (text) p.set("q", text)
+    if (category) p.set("category", category)
+    if (language) p.set("language", language)
+    if (query.unanswered === "true") p.set("unanswered", "true")
+    p.set("page", String(next))
+    return `/${locale}/community?${p}`
   }
-
   return (
-    <Container className="py-12">
-      <header className="mb-10 flex flex-wrap items-end justify-between gap-4">
+    <Container className="py-8 sm:py-12">
+      <header className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-2xl">
-          <p className="mb-2 inline-flex items-center gap-2 rounded-full border border-line bg-accent-soft px-3 py-1 text-xs font-medium text-accent">
-            <ScrollText className="h-3 w-3" />
-            {r("moderated")}
+          <p className="mb-2 text-xs font-medium uppercase tracking-wider text-accent">
+            {t("evidenceHeading")}
           </p>
-          <h1 className="text-3xl font-semibold tracking-tight text-ink md:text-4xl">
-            {t("title")}
-          </h1>
-          <p className="mt-3 text-base text-ink-muted">{t("subtitle")}</p>
+          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{t("title")}</h1>
+          <p className="mt-3 text-sm text-ink-muted">{t("subtitle")}</p>
         </div>
-        <div className="flex items-center gap-2">
-          <Button asChild variant="ghost" size="sm">
-            <Link href={`/${locale}/community/rules`}>{t("rulesLink")}</Link>
-          </Button>
-          <Button asChild size="sm">
-            <Link href={`/${locale}/community/new`}>
-              <Plus className="h-4 w-4" />
-              {t("newThread")}
-            </Link>
-          </Button>
-        </div>
+        <Link
+          className="inline-flex min-h-10 items-center rounded-lg bg-accent px-4 text-sm font-medium text-on-accent hover:bg-accent-hover"
+          href={`/${locale}/community/new`}
+        >
+          {t("newThread")}
+        </Link>
       </header>
-
-      <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
-        <div className="space-y-10">
-          <section>
-            <h2 className="mb-2 text-lg font-semibold text-ink">{t("hubHeading")}</h2>
-            <p className="mb-5 text-sm text-ink-muted">{t("hubSub")}</p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {categories.map(
-                (c: { id: string; slug: string; nameKey: string; descriptionKey: string }) => (
-                  <CategoryCard
-                    key={c.id}
-                    slug={c.slug}
-                    nameKey={c.nameKey}
-                    descriptionKey={c.descriptionKey}
-                    threadCount={counts.get(c.slug) ?? 0}
-                    href={`/${locale}/community/${c.slug}`}
-                    t={(k) =>
-                      k === c.nameKey
-                        ? t(`categories.${resolveCategoryKey(c.nameKey)}.name` as never)
-                        : t(`categories.${resolveCategoryKey(c.nameKey)}.description` as never)
-                    }
-                  />
-                ),
-              )}
+      <form
+        className="mb-6 grid gap-3 rounded-xl border border-line bg-surface p-4 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_190px_160px_auto]"
+        action={`/${locale}/community`}
+      >
+        <label className="block text-xs font-medium text-ink-muted">
+          {t("search")}
+          <input
+            type="search"
+            name="q"
+            defaultValue={text}
+            placeholder={t("searchPlaceholder")}
+            className="mt-1.5 h-10 w-full rounded-lg border bg-surface px-3 text-sm text-ink"
+          />
+        </label>
+        <label className="block text-xs font-medium text-ink-muted">
+          {t("fieldCategory")}
+          <select
+            name="category"
+            defaultValue={category}
+            className="mt-1.5 h-10 w-full rounded-lg border bg-surface px-3 text-sm text-ink"
+          >
+            <option value="">{t("allCategories")}</option>
+            {categories.map((c) => (
+              <option value={c.slug} key={c.id}>
+                {t(`${c.nameKey.replace("community.", "")}` as never)}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="block text-xs font-medium text-ink-muted">
+          {t("language")}
+          <select
+            name="language"
+            defaultValue={language ?? ""}
+            className="mt-1.5 h-10 w-full rounded-lg border bg-surface px-3 text-sm text-ink"
+          >
+            <option value="">{t("allLanguages")}</option>
+            <option value="fi">Suomi</option>
+            <option value="en">English</option>
+          </select>
+        </label>
+        <div className="flex flex-wrap items-end gap-3">
+          <label className="flex h-10 items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              name="unanswered"
+              value="true"
+              defaultChecked={query.unanswered === "true"}
+            />
+            {t("unanswered")}
+          </label>
+          <Button type="submit" size="sm">
+            {t("search")}
+          </Button>
+        </div>
+      </form>
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_280px]">
+        <section>
+          <h2 className="mb-4 text-lg font-semibold">{t("recentHeading")}</h2>
+          {threads.length ? (
+            <div className="space-y-2">
+              {threads.slice(0, 20).map((th) => (
+                <ThreadListItem
+                  key={th.id}
+                  locale={locale}
+                  t={t as never}
+                  thread={{
+                    ...th,
+                    categorySlug: th.categorySlug ?? "",
+                    authorName: th.authorName ?? r("anonymousMember"),
+                    authorReputation: th.authorReputation ?? 0,
+                  }}
+                />
+              ))}
             </div>
-          </section>
-
-          <section>
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-ink">{t("recentHeading")}</h2>
+          ) : (
+            <div className="rounded-xl border border-dashed border-line bg-surface px-6 py-10">
+              <h3 className="text-lg font-semibold">
+                {t(text || category || language || query.unanswered ? "noResults" : "emptyHeading")}
+              </h3>
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-muted">
+                {t("emptyGuide")}
+              </p>
               <Link
-                href={`/${locale}/community/activity`}
-                className="text-sm text-accent hover:underline"
+                className="mt-4 inline-block text-sm text-accent underline"
+                href={`/${locale}/community/rules`}
               >
-                {t("activityHeading")} →
+                {t("rulesLink")}
               </Link>
             </div>
-            {recent.length === 0 ? (
-              <p className="rounded-[var(--radius)] border border-dashed border-line bg-surface p-6 text-center text-sm text-ink-muted">
-                {t("emptyThreads")}
-              </p>
+          )}
+          <nav className="mt-5 flex justify-between gap-3" aria-label={t("pagination")}>
+            {page > 1 ? (
+              <Link className="text-sm text-accent underline" href={pageLink(page - 1)}>
+                {t("previous")}
+              </Link>
             ) : (
-              <div className="space-y-2">
-                {recent.map(
-                  (th: {
-                    id: string
-                    slug: string
-                    title: string
-                    categorySlug: string | null
-                    replyCount: number
-                    viewCount: number
-                    lastActivityAt: Date
-                    authorName: string | null
-                    authorReputation: number | null
-                  }) => (
-                    <ThreadListItem
-                      key={th.id}
-                      locale={locale}
-                      t={t as never}
-                      thread={{
-                        id: th.id,
-                        slug: th.slug,
-                        title: th.title,
-                        categorySlug: th.categorySlug ?? "",
-                        replyCount: th.replyCount,
-                        viewCount: th.viewCount,
-                        lastActivityAt: th.lastActivityAt,
-                        authorName: th.authorName ?? r("anonymousMember"),
-                        authorReputation: th.authorReputation ?? 0,
-                      }}
-                    />
-                  ),
-                )}
-              </div>
+              <span />
             )}
-          </section>
-        </div>
-
+            {threads.length > 20 && (
+              <Link className="text-sm text-accent underline" href={pageLink(page + 1)}>
+                {t("next")}
+              </Link>
+            )}
+          </nav>
+        </section>
         <aside className="space-y-4">
-          <Leaderboard
-            members={leaders.map(
-              (m: {
-                id: string
-                name: string | null
-                image: string | null
-                reputation: number | null
-                reputationTier: string | null
-              }) => ({
-                id: m.id,
-                name: m.name,
-                image: m.image,
-                reputation: m.reputation ?? 0,
-                reputationTier: m.reputationTier ?? "new",
-              }),
-            )}
-            t={t as never}
-          />
-          <div className="rounded-[var(--radius-lg)] border border-line bg-surface-2 p-5 text-xs text-ink-muted">
-            <Badge tone="accent" size="sm" className="mb-2">
-              {r("moderation")}
-            </Badge>
-            <p>{r("moderationBody")}</p>
-          </div>
+          <section className="rounded-xl border border-line bg-surface p-5">
+            <h2 className="mb-3 text-base font-semibold">{t("hubHeading")}</h2>
+            <ul className="divide-y divide-line">
+              {categories.map((c) => (
+                <li key={c.id}>
+                  <Link
+                    href={`/${locale}/community?category=${c.slug}`}
+                    className="flex items-center justify-between gap-3 py-3 text-sm hover:text-accent"
+                  >
+                    <span>{t(c.nameKey.replace("community.", "") as never)}</span>
+                    <span className="font-mono text-xs text-ink-muted">
+                      {counts.get(c.id) ?? 0}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section className="rounded-xl border border-line bg-surface p-5">
+            <h2 className="text-base font-semibold">{t("evidenceHeading")}</h2>
+            <p className="mt-3 text-sm leading-relaxed text-ink-muted">{r("moderationBody")}</p>
+            <div className="mt-4 flex flex-col gap-3 text-sm text-accent">
+              <Link href={`/${locale}/community/rules`}>{t("rulesLink")} →</Link>
+              <Link href={`/${locale}/lab-tests`}>{r("methodology")} →</Link>
+              <Link href={`/${locale}/coa`}>{r("viewDocuments")} →</Link>
+            </div>
+          </section>
         </aside>
       </div>
     </Container>
   )
-}
-
-function resolveCategoryKey(nameKey: string): string {
-  const parts = nameKey.split(".")
-  return parts[parts.length - 2] ?? ""
 }
