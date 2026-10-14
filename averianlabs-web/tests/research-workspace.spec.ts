@@ -267,6 +267,42 @@ for (const locale of ["en", "fi"]) {
     await expect(page.locator("main").getByText(question, { exact: true })).toHaveCount(1)
   })
 
+  test(`${locale}: interrupted and error streams expose a working retry`, async ({
+    cleanPage: page,
+  }) => {
+    let calls = 0
+    await page.route("**/api/ai/chat", async (route) => {
+      calls++
+      const events =
+        calls === 1
+          ? [{ type: "thinking", step: 1 }]
+          : calls === 2
+            ? [{ type: "error", message: "temporary_provider_failure" }]
+            : [
+                {
+                  type: "text",
+                  delta: locale === "fi" ? "Yhteys palautui." : "Connection recovered.",
+                },
+                { type: "done", usage: { tokensIn: 1, tokensOut: 1, latencyMs: 1 } },
+              ]
+      await route.fulfill({
+        contentType: "text/event-stream",
+        body: events.map((event) => `data: ${JSON.stringify(event)}\n\n`).join(""),
+      })
+    })
+    await page.goto(`/${locale}/assistant`)
+    await page.locator("main textarea").fill("Check the available product records.")
+    await page.locator("main").getByRole("button", { name: m.averia.send, exact: true }).click()
+    for (let i = 0; i < 2; i++) {
+      await expect(page.locator("main")).toContainText(m.averia.errorServerBody)
+      await page.locator("main").getByRole("button", { name: m.averia.retry, exact: true }).click()
+    }
+    await expect(page.locator("main")).toContainText(
+      locale === "fi" ? "Yhteys palautui." : "Connection recovered.",
+    )
+    expect(calls).toBe(3)
+  })
+
   for (const width of [320, 390, 1440]) {
     test(`${locale}: research workspace fits ${width}px and has no blocking accessibility findings`, async ({
       cleanPage: page,

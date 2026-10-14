@@ -195,6 +195,7 @@ export function useAveriaChat({
 
           const decoder = new TextDecoder()
           let buffer = ""
+          let completed = false
 
           while (true) {
             const { done, value } = await reader.read()
@@ -207,15 +208,22 @@ export function useAveriaChat({
               if (!event.startsWith("data:")) continue
               const payload = event.slice(5).trim()
               if (!payload) continue
+              let msg: AgentEventWire
               try {
-                const msg = JSON.parse(payload) as AgentEventWire
-                handleWireEvent(msg, assistantId)
-              } catch (parseErr) {
-                if (parseErr instanceof Error && parseErr.message.startsWith("Chat failed"))
-                  throw parseErr
+                msg = JSON.parse(payload) as AgentEventWire
+              } catch {
+                nl = buffer.indexOf("\n\n")
+                continue
               }
+              if (msg.type === "done") completed = true
+              handleWireEvent(msg, assistantId)
               nl = buffer.indexOf("\n\n")
             }
+          }
+          if (!completed) {
+            const error = new Error("incomplete_stream")
+            error.name = "server_error"
+            throw error
           }
         } catch (err) {
           if (controller.signal.aborted) return
@@ -283,7 +291,9 @@ export function useAveriaChat({
             setMessages((prev) => prev.map((m) => (m.id === aid ? { ...m, id: serverId } : m)))
           }
         } else if (msg.type === "error") {
-          throw new Error(msg.message)
+          const error = new Error(msg.message)
+          error.name = "server_error"
+          throw error
         }
       }
     },
