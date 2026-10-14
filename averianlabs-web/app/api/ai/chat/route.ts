@@ -376,6 +376,14 @@ export async function POST(request: Request): Promise<Response> {
           report.warnings.push(
             ...calculationProseWarnings(accumulatedText, calculationInputs, locale),
           )
+          const calculationIncomplete =
+            calculationInputs.length === 0 &&
+            toolTrace.some(
+              (trace) =>
+                ["calculateLaboratory", "getReconstitution"].includes(trace.name) &&
+                (trace.result as { error?: unknown } | undefined)?.error,
+            )
+          if (calculationIncomplete) report.warnings.push("calculation_not_completed")
           report.passed = report.warnings.length === 0
           if (
             report.unknownSkus.length > 0 ||
@@ -390,8 +398,11 @@ export async function POST(request: Request): Promise<Response> {
             })
           }
           if (!report.passed)
-            accumulatedText =
-              locale === "fi"
+            accumulatedText = calculationIncomplete
+              ? locale === "fi"
+                ? "Laskelmaa ei voitu vahvistaa. Tarkista lähtötiedot ja yksiköt tai avaa [laboratoriolaskuri](/fi/peptide-calculator)."
+                : "The calculation could not be completed. Check the quantities and units, or open the [laboratory calculator](/en/peptide-calculator)."
+              : locale === "fi"
                 ? "En pysty vahvistamaan vastausta nykyisistä tuotetiedoista. Tarkista linkitetyt tuotetiedot ja alkuperäiset asiakirjat tai ota yhteyttä tiimiimme."
                 : "I could not verify this answer against the current product records. Check the linked product information and original documents, or contact our team."
           if (report.needsMedicalReminder && !accumulatedText.includes(RESEARCH_FOOTER))

@@ -41,6 +41,14 @@ import {
   parseLaboratoryNumber,
 } from "./calculations"
 describe("research calculator modes and language input", () => {
+  it("returns the missing dilution field instead of inventing a final volume", async () => {
+    const result = await laboratoryCalculationTool.execute(
+      { mode: "dilution", stockMgPerMl: 5, targetMgPerMl: 1 },
+      { locale: "en", cart: [] },
+    )
+    expect(result.content).toMatchObject({ error: "missing_inputs", missing: ["finalVolumeMl"] })
+    expect(result.content).not.toHaveProperty("calculation")
+  })
   it("accepts Finnish decimal commas and scientific notation without ambiguous separators", () => {
     expect(parseLaboratoryNumber("0,5", "fi")).toBe(0.5)
     expect(parseLaboratoryNumber("1e-3", "en")).toBe(0.001)
