@@ -98,6 +98,9 @@ const config: NextConfig = isDemoBuild
     }
   : {
       reactStrictMode: true,
+      // Keep localized metadata in the initial head. Streaming metadata produced
+      // intermittent hydration mismatches during full-page deployment checks.
+      htmlLimitedBots: /.*/,
       poweredByHeader: false,
       typescript: { ignoreBuildErrors: false },
       serverExternalPackages: ["postgres", "argon2"],

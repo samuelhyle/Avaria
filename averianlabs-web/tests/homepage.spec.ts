@@ -1,6 +1,21 @@
 import { expect, test } from "@/tests/fixtures"
 
 test.describe("homepage", () => {
+  test("metadata stays in the head through repeated full-page hydration", async ({
+    cleanPage: page,
+  }) => {
+    await page.setViewportSize({ width: 1440, height: 900 })
+    const errors: string[] = []
+    page.on("pageerror", (error) => errors.push(error.message))
+    for (let i = 0; i < 12; i++) {
+      await page.goto(i % 2 ? "/fi" : "/en")
+      await expect(page.locator("main h1")).toBeVisible()
+      await expect(page.locator("head title")).toHaveCount(1)
+      await expect(page.locator('body meta[name="description"]')).toHaveCount(0)
+      await page.waitForTimeout(150)
+      expect(errors).toEqual([])
+    }
+  })
   test("shows product records with an optional illustration and a catalogue path", async ({
     cleanPage,
   }) => {
