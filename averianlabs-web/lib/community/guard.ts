@@ -56,6 +56,7 @@ export function checkText(text: string): GuardResult {
       "",
     )
     .replace(/\b10\.\d{4,9}\/[^\s<>"']+/g, "")
+    .replace(/\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b/gi, "")
   for (const { rx, code } of CONTACT_PATTERNS) {
     if (rx.test(citationSafeText)) {
       ruleCodes.push(code)

@@ -176,6 +176,12 @@ describe("slugifyTitle", () => {
 })
 
 describe("scientific citations", () => {
+  it("accepts a UUID study identifier while still rejecting a separate phone contact", () => {
+    const study =
+      "Method run 3d2b2645-a728-4749-8e69-9d3568ed9fac records the analytical observations."
+    expect(checkText(study).ruleCodes).not.toContain("phone")
+    expect(checkText(`${study} Call +358 40 123 4567.`).ruleCodes).toContain("phone")
+  })
   it("does not classify DOI identifiers or a bibliography as contact information", () => {
     const result = checkText(
       "References: https://doi.org/10.123456789/12345 https://doi.org/10.1000/123 https://doi.org/10.1234/456 DOI 10.123456789/12345",
