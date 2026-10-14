@@ -141,7 +141,31 @@ for (const locale of ["en", "fi"]) {
       await page.goto(`/${locale}/peptide-calculator`)
       await page.getByRole("button", { name: t.save, exact: true }).click()
       await expect(page.locator("main").getByRole("heading", { name: t.history })).toBeVisible()
-      await page.getByRole("button", { name: t.delete, exact: true }).click()
+      const savedReference = await page.request.post("/api/calculations", {
+        data: {
+          inputs: { mode: "concentration", massMg: 5, finalVolumeMl: 2 },
+          sourceSku: "QA-PEPTIDE-5",
+        },
+      })
+      expect(savedReference.status()).toBe(201)
+      await page.getByRole("button", { name: t.history, exact: true }).click()
+      const savedRow = page.locator("main section > div").filter({ hasText: "QA-PEPTIDE-5" })
+      await savedRow.getByRole("button", { name: t.load, exact: true }).click()
+      await page.setViewportSize({ width: 1440, height: 900 })
+      const otherLocale = locale === "fi" ? "en" : "fi"
+      await page
+        .getByRole("combobox", { name: m.nav.language, exact: true })
+        .selectOption(otherLocale)
+      await page.waitForURL(`**/${otherLocale}/peptide-calculator`)
+      await expect(
+        page.locator("main p .font-mono").filter({ hasText: "QA-PEPTIDE-5" }),
+      ).toBeVisible()
+      await page.goto(`/${locale}/peptide-calculator`)
+      await page.getByRole("button", { name: t.history, exact: true }).click()
+      for (let i = 0; i < 2; i++) {
+        await page.getByRole("button", { name: t.delete, exact: true }).first().click()
+        await expect(page.getByRole("button", { name: t.load, exact: true })).toHaveCount(1 - i)
+      }
       await expect(
         page.locator("main").getByRole("button", { name: t.load, exact: true }),
       ).toHaveCount(0)
@@ -150,7 +174,12 @@ for (const locale of ["en", "fi"]) {
       const body = `## Method\n\n${title}\n\nHow should this analytical method be documented for research?\n\nhttps://doi.org/10.1038/s41586-020-2649-2`
       await page.getByRole("textbox", { name: m.community.fieldTitle, exact: true }).fill(title)
       await page.getByRole("textbox", { name: m.community.fieldBody, exact: true }).fill(body)
+      const draftSaved = page.waitForResponse(
+        (response) =>
+          response.url().endsWith("/api/forum/drafts") && response.request().method() === "PUT",
+      )
       await page.getByRole("button", { name: m.community.saveDraft, exact: true }).click()
+      expect((await draftSaved).status()).toBe(200)
       await page.reload()
       await page.getByRole("button", { name: m.community.loadDraft, exact: true }).click()
       await expect(

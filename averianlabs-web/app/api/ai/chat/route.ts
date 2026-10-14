@@ -361,6 +361,11 @@ export async function POST(request: Request): Promise<Response> {
           // Strip model reasoning blocks before verification + persistence
           // (the client also hides them at render time).
           accumulatedText = accumulatedText.replace(/<think>[\s\S]*?(<\/think>|$)/gi, "").trim()
+          if (locale === "fi")
+            accumulatedText = accumulatedText.replace(
+              /^\*{0,2}Research use only\.?\*{0,2}$/gim,
+              "Vain laboratoriotutkimukseen.",
+            )
           const report = verifyResponse(accumulatedText, await getStorefrontCatalogue())
           const calculationInputs = toolTrace.flatMap((trace) => {
             const result = trace.result as

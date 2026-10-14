@@ -34,7 +34,7 @@ export const getDocumentsTool: Tool = {
           publishedAt: doc.publishedAt.toISOString(),
           batchCode: doc.batchCode,
           batchStatus: doc.batchStatus ?? null,
-          sku: typeof args.sku === "string" ? args.sku : null,
+          sku: doc.batchSku ?? null,
           url,
         })
     }

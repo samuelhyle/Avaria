@@ -68,12 +68,23 @@ export function Calculator({
           setMode(saved.mode)
           setFields(saved.fields)
           setUnits(saved.units)
+          setCurrentSource(
+            saved.source &&
+              typeof saved.source.sku === "string" &&
+              saved.source.sku.length <= 80 &&
+              typeof saved.source.name === "string" &&
+              saved.source.name.length <= 300
+              ? saved.source.sku === source?.sku
+                ? source
+                : saved.source
+              : undefined,
+          )
         }
       }
     } catch {
       // A disabled browser store must not prevent a calculation.
     }
-  }, [])
+  }, [source])
   useEffect(() => {
     const transfer = () => {
       try {
@@ -83,6 +94,7 @@ export function Calculator({
             at: Date.now(),
             mode,
             units,
+            source: currentSource ?? null,
             fields: Object.fromEntries(
               Object.entries(fields).map(([key, value]) => {
                 const parsed = parseLaboratoryNumber(value, locale)
@@ -97,7 +109,7 @@ export function Calculator({
     }
     window.addEventListener("averianlabs:before-locale-switch", transfer)
     return () => window.removeEventListener("averianlabs:before-locale-switch", transfer)
-  }, [fields, units, mode, locale])
+  }, [fields, units, mode, locale, currentSource])
   useEffect(() => {
     let wasOpen = false
     const beforePrint = () => {
@@ -511,6 +523,7 @@ export function Calculator({
               <Button
                 size="sm"
                 variant="outline"
+                disabled={busy}
                 onClick={() =>
                   load(
                     item.inputs,
@@ -523,13 +536,17 @@ export function Calculator({
               <Button
                 size="sm"
                 variant="ghost"
+                disabled={busy}
                 onClick={async () => {
+                  setBusy(true)
                   try {
                     const res = await fetch(`/api/calculations/${item.id}`, { method: "DELETE" })
                     if (!res.ok) throw new Error()
-                    setHistory(history.filter((x) => x.id !== item.id))
+                    setHistory((previous) => previous.filter((x) => x.id !== item.id))
                   } catch {
                     toast.error(t("requestFailed"))
+                  } finally {
+                    setBusy(false)
                   }
                 }}
               >

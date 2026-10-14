@@ -2,6 +2,7 @@ import { safeReturnPath } from "@/lib/auth/return-path"
 import { referenceCatalogue } from "@/lib/products/catalogue"
 import { describe, expect, it, vi } from "vitest"
 import { verifyResponse } from "../guardrails/verify"
+import { buildSystemPrompt } from "../prompts/system"
 import { catalogueSourceVersion } from "../rag/version"
 import { laboratoryCalculationTool } from "../tools/laboratory-calculation"
 import { listToolDefinitions, runTool } from "../tools/registry"
@@ -9,6 +10,15 @@ import { RESEARCH_EVAL_CASES } from "./research-cases"
 vi.mock("@/lib/auth", () => ({ auth: vi.fn(async () => null) }))
 
 describe("research evaluation contracts", () => {
+  it("keeps source/consent rules and Finnish wording guidance when retrieval is disabled", () => {
+    const prompt = buildSystemPrompt("fi")
+    expect(prompt).toContain("not product evidence")
+    expect(prompt).toContain(
+      "Only summarize a discussion or prepare a draft when the customer explicitly requests it",
+    )
+    expect(prompt).toContain("Vain laboratoriotutkimukseen")
+    expect(prompt).toContain("a generic COA do not establish analyte mass")
+  })
   it("contains 30 paired scenarios per target language", () => {
     expect(RESEARCH_EVAL_CASES.filter((c) => c.locale === "fi")).toHaveLength(30)
     expect(RESEARCH_EVAL_CASES.filter((c) => c.locale === "en")).toHaveLength(30)

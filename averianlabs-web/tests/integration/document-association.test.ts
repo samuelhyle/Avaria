@@ -1,4 +1,5 @@
 import { batches, documents, productTranslations, products, vials } from "@/db/schema"
+import { getDocumentsTool } from "@/lib/ai/tools/get-documents"
 import { db } from "@/lib/db"
 import { listDocumentsForProduct, listDocumentsForProductSlug } from "@/lib/documents/service"
 import { getStorefrontCatalogue } from "@/lib/products/catalogue"
@@ -73,6 +74,10 @@ it("associates a batch-only public report without confusing its availability wit
     expect(hasPublishedDocuments(product, "fi", prefix)).toBe(false)
     expect(product.vials[0]?.batch).toBeUndefined()
     expect(product.vials[0]?.purchaseMode).toBe("unavailable")
+    const found = await getDocumentsTool.execute({ slug: firstId }, { locale: "en", cart: [] })
+    expect(
+      (found.content as { documents: Array<{ sku: string; batchStatus: string }> }).documents,
+    ).toMatchObject([{ sku: prefix, batchStatus: "pending" }])
   } finally {
     await db.delete(documents).where(inArray(documents.id, docIds))
     await db.delete(batches).where(eq(batches.id, prefix))

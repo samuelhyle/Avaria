@@ -24,7 +24,7 @@ for (const entry of RESEARCH_EVAL_CASES) {
       noPersist: true,
       readOnly: true,
       noRetrieve: true,
-      messages: [{ role: "user", content: entry.prompt }],
+      messages: [{ id: crypto.randomUUID(), role: "user", content: entry.prompt }],
     }),
   })
   if (response.status === 503) {
