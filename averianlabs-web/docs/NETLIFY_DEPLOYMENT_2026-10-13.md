@@ -1,5 +1,7 @@
 # Netlify deployment — 13 October 2026
 
+Historical release; superseded by [the 14 October research workspace delivery](NETLIFY_DEPLOYMENT_2026-10-14.md).
+
 The updated full application is published at [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app) and was opened in the local browser. [Finnish](https://averianlabs-demo.netlify.app/fi) and [English](https://averianlabs-demo.netlify.app/en) are available. This remains a review site; customer orders are not released for merchant operation.
 
 ## Exact release

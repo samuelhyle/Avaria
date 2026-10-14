@@ -1,0 +1,19 @@
+{
+  "siteId": "a10936e5-0fc8-4d2b-8ccd-58207323cd6f",
+  "siteUrl": "https://averianlabs-demo.netlify.app",
+  "deployId": "6acfdd709ba5414797142d54",
+  "buildId": "6acfdd709ba5414797142d52",
+  "sourceCommit": "f5140f6864ddc44814456c4b901e058bb91e177e",
+  "sourceSha256": "4f9260777cdfde9aef3eb688a080c9a247df83ce75439f54131220f2678f9bd9",
+  "publishedAt": "2026-10-14T20:05:28.948Z",
+  "publishedLocked": true,
+  "lockReason": "Current local source is deployed by ZIP; linked remote demo branch has not been synchronized",
+  "previousPublishedDeployment": "6acfd5a410f58f4a9708d83b",
+  "backup": {
+    "sha256": "8ccdd4f84bf7aa2ab8f79662023ee693b37af117b4b14acd717a8e33d7a4d5e0",
+    "publicTables": 47,
+    "migrationLedgerEntries": 6,
+    "private": true
+  },
+  "scope": "Full Next.js review deployment; merchant release and scientific/editorial gates remain in force."
+}

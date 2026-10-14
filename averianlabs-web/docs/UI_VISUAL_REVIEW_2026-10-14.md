@@ -173,3 +173,5 @@ The concept contains four examples while the current catalogue contains 15 entri
 ## First delivery status
 
 The practical implementation follows steps 1–7 above and adds optional private history and draft preparation from step 8. See [the implementation and verification record](RESEARCH_WORKSPACE_IMPLEMENTATION_2026-10-14.md) for the exact scope, results and remaining gates. Checkboxes indicate implemented behavior, not scientific/editorial approval. No original reports, chemical specifications, scientific credentials or community activity were fabricated.
+
+Published delivery: [14 October deployment record](NETLIFY_DEPLOYMENT_2026-10-14.md). Final checks passed: 216 unit, 26 integration, 121 browser (2 explicit provider skips), 42 local visual states, 29 main-domain HTTP checks, 28 online browser states and 4 live assistant/tool checks. Full paired-model scientific/editorial evaluation and approved original reports remain separate gates.

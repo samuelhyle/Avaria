@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-14T18:34:53.508965+00:00",
+  "checkedAt": "2026-10-14T20:08:40.922281+00:00",
   "scope": "Final local production build; isolated PostgreSQL/pgvector. No live customer mutations, payments or emails.",
   "build": "pass",
   "typecheck": "pass",
@@ -14,7 +14,7 @@
     "literalCalls": "pass"
   },
   "unit": {
-    "passed": 213,
+    "passed": 216,
     "skipped": 0,
     "localEmbeddingModelExecuted": true
   },
@@ -27,28 +27,21 @@
     "skipped": 0
   },
   "browser": {
-    "passed": 118,
+    "passed": 121,
     "skipped": 2,
-    "skippedScope": "Two real-provider chat journeys; provider disabled in isolated environment. Explicit mocked provider failures and deterministic tools were tested."
+    "skippedScope": "Two real-provider chat journeys; provider disabled in isolated environment. Explicit mocked provider failures and deterministic tools were tested.",
+    "repeatedHydrationLoads": 12,
+    "streamRecovery": "Interrupted EOF and explicit SSE error tested in EN/FI; retry preserves one user question.",
+    "transport": "Anonymous private-page GET retries one ECONNRESET; assertions and HTTP-status failures are not retried."
   },
   "visual": {
     "routeViewportStates": 42,
     "httpFailures": 0,
     "horizontalOverflow": 0,
     "runtimeErrors": 0,
-    "themes": [
-      "light",
-      "dark"
-    ],
-    "locales": [
-      "en",
-      "fi"
-    ],
-    "widths": [
-      320,
-      390,
-      1440
-    ]
+    "themes": ["light", "dark"],
+    "locales": ["en", "fi"],
+    "widths": [320, 390, 1440]
   },
   "routeBudgetsKiBGzip": {
     "home": 271.7,
@@ -62,5 +55,7 @@
     "fullExecution": "pending",
     "reason": "Hosted secret is not readable for an isolated local provider run. Hosted functional smoke is recorded separately."
   },
-  "reviewNote": "A transient hydration warning occurred while fixture mutation tests and screenshot capture ran concurrently. It did not recur in the final serial 42-state capture, three 6-route production loops, or the separate development rendering probe. Immutable hosted candidate checks are required before promotion."
+  "reviewNote": "The earlier hosted candidate reproduced an intermittent hydration mismatch. Final source blocks streamed metadata, adds repeated bilingual hydration coverage and is checked again on its immutable deployment URL and the published domain. Failed candidates remain separate evidence; their results are not counted as passes.",
+  "sourceCommit": "f5140f6864ddc44814456c4b901e058bb91e177e",
+  "metadata": "Blocking metadata in initial head; documented Next.js htmlLimitedBots option."
 }

@@ -197,7 +197,9 @@ for (const locale of ["en", "fi"]) {
       expect(response.status()).toBe(201)
       const record = await response.json()
       await expect(page.locator("main")).toContainText(m.community.pendingTitle)
-      const anonymousThread = await request.get(`/${locale}/community/thread/${record.slug}`)
+      const anonymousThread = await request.get(`/${locale}/community/thread/${record.slug}`, {
+        maxRetries: 1,
+      })
       const anonymousHtml = await anonymousThread.text()
       expect(anonymousHtml).not.toContain(title)
       expect(anonymousHtml).not.toContain("How should this analytical method be documented")

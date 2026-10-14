@@ -1,0 +1,158 @@
+{
+  "checkedAt": "2026-10-14T19:10:45.559Z",
+  "base": "https://6acfd1a3ea4a5efe64faad3c--averianlabs-demo.netlify.app",
+  "rows": [
+    {
+      "id": "fi-concentration",
+      "locale": "fi",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "requiredTool": true,
+      "latencyMs": 8281,
+      "answer": "## Pitoisuuslaskelma\n\n**Kaava:** `c = m / V`\n\n**Syötteet:**\n- Massa (m): 10 mg\n- Lopullinen liuostilavuus (V): 2 mL\n\n**Tulos:**\n- 5 mg/mL\n- 5 000 µg/mL\n\n**Oletukset:**\n- Laskennallinen massatase ilman hävikkiä.\n- Nimellismäärä ei osoita mitattua analyyttisisältöä; tämä perustuu ilmoitettuun massaan.\n- Annettu 2 mL on koko liuoksen lopullinen tilavuus, ei lisätyn liuottimen määrä.\n\nJos haluat, voin laskea tällä pitoisuudella myös aliquot-tilavuuden tietylle mikrogrammamäärälle.\n\nVain laboratoriotutkimukseen. Tuotetiedot eivät ole annostelu- tai hoito-ohjeita.",
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_2UBhC36hNlKnWtf6pP47aGEr",
+          "name": "calculateLaboratory",
+          "content": {
+            "calculation": {
+              "version": "laboratory-v2",
+              "inputs": {
+                "mode": "concentration",
+                "massMg": 10,
+                "finalVolumeMl": 2
+              },
+              "values": {
+                "concentrationMgPerMl": 5,
+                "concentrationMcgPerMl": 5000
+              },
+              "formula": "c = m / V"
+            },
+            "assumptions": "Laskennallinen massatase ilman hävikkiä. Nimellismäärä ei osoita mitattua sisältöä. Käytä lopullista liuostilavuutta."
+          }
+        }
+      ],
+      "citations": [],
+      "scope": "Live provider functional smoke, no persistence/retrieval/write tools. Not the complete 60-case editorial evaluation."
+    },
+    {
+      "id": "en-dilution",
+      "locale": "en",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": false,
+      "requiredTool": true,
+      "latencyMs": 8224,
+      "answer": "I'll run the dilution calculation through the lab math tool.\n\nThe dilution tool requires a volume input I didn't pass. Working it out directly with the standard dilution equation:\n\n**Formula:** C₁V₁ = C₂V₂ → V₁ = (C₂ × V₂) / C₁\n\n**Inputs**\n- C₁ (stock) = 5 mg/mL\n- C₂ (target) = 1 mg/mL\n- V₂ (final solution volume) = 2 mL\n\n**Result**\n- V₁ (stock to use) = (1 × 2) / 5 = **0.4 mL of stock**\n- Solvent to add = 2 − 0.4 = **1.6 mL**\n- Dilution factor = 5× (1 part stock + 4 parts solvent)\n\n**Assumptions**\n- Stock concentration is exactly 5 mg/mL (not nominal vial mass divided by added solvent — those are not equivalent).\n- Volumes are additive (small-volume approximation; at 2 mL total this is reasonable).\n- \"Final solution volume\" is the total volume after combining stock and solvent, not the volume of solvent alone.\n\nThis yields2 mL of solution at 1 mg/mL. For laboratory research only.",
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13bd2b468748680ed988e",
+          "name": "calculateLaboratory",
+          "content": {
+            "error": "invalid_calculation",
+            "inputs": {
+              "mode": "dilution",
+              "stockMgPerMl": 5,
+              "targetMgPerMl": 1
+            }
+          }
+        }
+      ],
+      "citations": [],
+      "scope": "Live provider functional smoke, no persistence/retrieval/write tools. Not the complete 60-case editorial evaluation."
+    },
+    {
+      "id": "fi-missing-documents",
+      "locale": "fi",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "requiredTool": true,
+      "latencyMs": 9029,
+      "answer": "Tuotekoodille `BPC157-5` ei löytynyt tällä hetkellä julkaistuja alkuperäisiä eräasiakirjoja.\n\n- **SKU**: `BPC157-5`\n- **Slug**: `bpc-157`\n- **Dokumentteja**: 0\n\nTyökalu palautti tyhjän tuloksen, joten en voi viitata mihinkään COA- tai eräkohtaiseen todisteeseen tämän tuotekoodin osalta. Tyhjä tulos ei tarkoita hyväksyntää tai hylkäystä — vain sitä, ettei julkaistuja asiakirjoja ole juuri nyt saatavilla.\n\nJos haluat, voin:\n- tarkistaa toisen erän tai tuotekoodin,\n- hakea tuotteen `bpc-157` yleistiedot ja tämänhetkiset erät, tai\n- ohjata pyynnön tiimillemme lisäselvitystä varten.",
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_oamVa52fmyH3wjzJlPNmqSvb",
+          "name": "getDocuments",
+          "content": {
+            "slug": "bpc-157",
+            "source": "published_document_registry",
+            "documents": [],
+            "notice": "Arvioi alkuperäiset menetelmät ja tulokset. Linkki ei ole yleinen hyväksyntä."
+          }
+        }
+      ],
+      "citations": [],
+      "scope": "Live provider functional smoke, no persistence/retrieval/write tools. Not the complete 60-case editorial evaluation."
+    },
+    {
+      "id": "en-exact-comparison",
+      "locale": "en",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "requiredTool": true,
+      "latencyMs": 5230,
+      "answer": "Comparison — [BPC-157](/en/shop/bpc-157) (selected SKUs only):\n\n| Field | `BPC157-5` | `BPC157-10` |\n|---|---|---|\n| Vial size | 5 mg | 10 mg |\n| Category | recovery | recovery |\n| Purchase mode | unavailable | unavailable |\n| Stock qty | 0 | 0 |\n| Batch code | not provided | not provided |\n| Documents available | false | false |\n| From price | not provided | not provided |\n\nMissing batch evidence (neither SKU): HPLC purity %, endotoxin, mass-spec confirmation, COA link, and pricing. The records also show both variants are currently unavailable with zero stock, so no batch can be attached.\n\nIf you'd like, I can pull `getBatches` and `getDocuments` for `bpc-157` to see whether any historical batch data has been published, or escalate availability to a human.",
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13bd2edbb74d5934aeb8d",
+          "name": "compareProducts",
+          "content": {
+            "locale": "en",
+            "products": [
+              {
+                "slug": "bpc-157",
+                "name": "BPC-157",
+                "requestedSku": "BPC157-5",
+                "category": "recovery",
+                "purityPercent": null,
+                "vialSizes": ["5 mg"],
+                "fromPriceCents": null,
+                "variants": [
+                  {
+                    "sku": "BPC157-5",
+                    "size": "5 mg",
+                    "purchaseMode": "unavailable",
+                    "stockQty": 0,
+                    "batchCode": null,
+                    "documentsAvailable": false
+                  }
+                ],
+                "url": "/en/shop/bpc-157"
+              },
+              {
+                "slug": "bpc-157",
+                "name": "BPC-157",
+                "requestedSku": "BPC157-10",
+                "category": "recovery",
+                "purityPercent": null,
+                "vialSizes": ["10 mg"],
+                "fromPriceCents": null,
+                "variants": [
+                  {
+                    "sku": "BPC157-10",
+                    "size": "10 mg",
+                    "purchaseMode": "unavailable",
+                    "stockQty": 0,
+                    "batchCode": null,
+                    "documentsAvailable": false
+                  }
+                ],
+                "url": "/en/shop/bpc-157"
+              }
+            ],
+            "missing": []
+          }
+        }
+      ],
+      "citations": [],
+      "scope": "Live provider functional smoke, no persistence/retrieval/write tools. Not the complete 60-case editorial evaluation."
+    }
+  ]
+}

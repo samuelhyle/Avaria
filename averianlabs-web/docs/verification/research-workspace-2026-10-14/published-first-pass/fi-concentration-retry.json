@@ -1,0 +1,58 @@
+{
+  "status": 200,
+  "latencyMs": 6555,
+  "events": [
+    {
+      "type": "thinking",
+      "step": 0
+    },
+    {
+      "type": "tool-call",
+      "id": "call_01a13be7d9427160aefdc8a8",
+      "name": "calculateLaboratory",
+      "args": {
+        "mode": "concentration",
+        "massMg": 10,
+        "finalVolumeMl": 2
+      }
+    },
+    {
+      "type": "tool-result",
+      "id": "call_01a13be7d9427160aefdc8a8",
+      "name": "calculateLaboratory",
+      "content": {
+        "calculation": {
+          "version": "laboratory-v2",
+          "inputs": {
+            "mode": "concentration",
+            "massMg": 10,
+            "finalVolumeMl": 2
+          },
+          "values": {
+            "concentrationMgPerMl": 5,
+            "concentrationMcgPerMl": 5000
+          },
+          "formula": "c = m / V"
+        },
+        "assumptions": "Laskennallinen massatase ilman h\u00e4vikki\u00e4. Nimellism\u00e4\u00e4r\u00e4 ei osoita mitattua sis\u00e4lt\u00f6\u00e4. K\u00e4yt\u00e4 lopullista liuostilavuutta."
+      }
+    },
+    {
+      "type": "thinking",
+      "step": 1
+    },
+    {
+      "type": "text",
+      "delta": "**Pitoisuuslaskelma**\n\n| Sy\u00f6te | Arvo |\n|---|---|\n| Materiaalin massa (m) | 10 mg |\n| Liuoksen lopullinen tilavuus (V) | 2 mL |\n\n**Kaava**\n\n$$c = \\frac{m}{V}$$\n\n**Tulos**\n\n- c = 10 mg / 2 mL = **5 mg/mL** (5 000 \u00b5g/mL)\n\n**Oletukset**\n\n- Laskennallinen massatase ilman h\u00e4vikki\u00e4; oletus on ihanteellinen ja additiivinen, ei vahvistus mittauksesta.\n- 10 mg on nimellism\u00e4\u00e4r\u00e4, ei analyyttisesti mitattu pitoisuus. COA:n HPLC-pinta-alapitoisuus ei korvaa t\u00e4t\u00e4 arvoa, ellei kyseinen er\u00e4kohtainen raportti mittaa nimenomaan analyyttimassaa.\n- Annettu 2 mL on lopullinen liuostilavuus, ei lis\u00e4tyn liuottimen tilavuus.\n\nVain laboratoriotutkimukseen."
+    },
+    {
+      "type": "done",
+      "usage": {
+        "tokensIn": 2423,
+        "tokensOut": 487,
+        "latencyMs": 4071
+      },
+      "messageId": "a-1792006411683-jb4z98"
+    }
+  ]
+}
