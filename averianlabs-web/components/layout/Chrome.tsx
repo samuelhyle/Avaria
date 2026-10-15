@@ -1,7 +1,9 @@
+import { LazyChatWidget } from "@/components/ai/chat/LazyChatWidget"
 import { ChromeIslands } from "@/components/layout/ChromeIslands"
 import { Footer } from "@/components/layout/Footer"
 import { Header } from "@/components/layout/Header"
 import { CatalogueProvider } from "@/components/product/CatalogueProvider"
+import { isDemoBuild } from "@/lib/demo"
 import { getFooterContent } from "@/lib/layout/footer-content"
 import { getStorefrontCatalogue } from "@/lib/products/catalogue"
 
@@ -32,6 +34,7 @@ export async function Chrome({
       </main>
       <Footer content={footerContent} />
       <ChromeIslands locale={locale} />
+      <LazyChatWidget locale={locale} demoMode={isDemoBuild()} />
     </CatalogueProvider>
   )
 }

@@ -1,6 +1,5 @@
 export const dynamic = "force-dynamic"
 
-import { LazyChatWidget } from "@/components/ai/chat/LazyChatWidget"
 import { Chrome } from "@/components/layout/Chrome"
 import { DocumentHydrationGate } from "@/components/layout/DocumentHydrationGate"
 import { MotionProvider } from "@/components/layout/MotionProvider"
@@ -173,7 +172,6 @@ export default async function LocaleLayout({
                   <PostHogProvider />
                 </Suspense>
                 <Toaster />
-                <LazyChatWidget locale={locale} demoMode={isDemoBuild()} />
                 <VercelInsights />
               </NextIntlClientProvider>
             </MotionProvider>
