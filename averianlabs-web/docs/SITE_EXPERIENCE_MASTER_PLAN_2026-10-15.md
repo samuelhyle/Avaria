@@ -1,6 +1,6 @@
 # AverianLabs — visual, content and customer-experience master plan
 
-Date: 15 October 2026 · Status: reviewed implementation plan; changes below are proposed.
+Date: 15 October 2026 · Status: implementation published to the online review site.
 
 ## Outcome
 
@@ -8,7 +8,7 @@ Make AverianLabs feel like a well-designed research workspace: clear, calm, appr
 
 Keep the established blue/ink/Æ identity and the working Next.js foundation. The next pass should improve the current product through small, reviewable changes. The [visual direction board](SITE_VISUAL_DIRECTION_2026-10-15.html) makes the proposed hierarchy, typography, states and mobile conversation layout concrete. It is a component study, not an implemented redesign or approved product evidence.
 
-This becomes the active next-pass plan. The [14 October plan](UI_VISUAL_REVIEW_2026-10-14.md), [implementation ledger](RESEARCH_WORKSPACE_IMPLEMENTATION_2026-10-14.md) and [15 October release](NETLIFY_DEPLOYMENT_2026-10-15.md) remain historical records of delivered work.
+Execution is tracked in the [implementation and validation ledger](SITE_EXPERIENCE_IMPLEMENTATION_2026-10-15.md), with the published identity and rollback in the [experience release record](NETLIFY_EXPERIENCE_DEPLOYMENT_2026-10-15.md). The original findings and acceptance criteria below remain the review baseline, rather than a description of every current issue. The ledger records completed A1–C3 work, recorded regressions, measured loading follow-ups and the remaining source/human dependencies. This is the active plan. The [14 October plan](UI_VISUAL_REVIEW_2026-10-14.md), [implementation ledger](RESEARCH_WORKSPACE_IMPLEMENTATION_2026-10-14.md) and [15 October release](NETLIFY_DEPLOYMENT_2026-10-15.md) remain historical records of delivered work.
 
 ## Review basis and present strengths
 

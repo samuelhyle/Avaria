@@ -1,0 +1,1004 @@
+
+Running 138 tests using 2 workers
+
+(node:42397) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:42398) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    1 [chromium] › tests/3d-render.spec.ts:28:1 › 3D shop carousel renders a non-empty canvas (5.7s)
+  ✓    3 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en has no serious/critical axe-core violations (1.4s)
+  ✓    4 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/shop has no serious/critical axe-core violations (1.9s)
+  ✓    5 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/shop/qa-water has no serious/critical axe-core violations (1.4s)
+  ✓    6 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/quality has no serious/critical axe-core violations (1.4s)
+saved vial-label-renders.png
+  ✓    2 [chromium] › tests/3d-render.spec.ts:9:1 › 3D hero on PDP renders the vial label after rotation (12.8s)
+  ✓    7 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/about has no serious/critical axe-core violations (1.4s)
+  ✓    8 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/checkout/cart has no serious/critical axe-core violations (1.7s)
+  ✓    9 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/peptide-calculator has no serious/critical axe-core violations (1.7s)
+  ✓   10 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/documents has no serious/critical axe-core violations (1.7s)
+  ✓   11 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/contact has no serious/critical axe-core violations (1.7s)
+  ✓   12 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi has no serious/critical axe-core violations (2.2s)
+  ✓   13 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/shop has no serious/critical axe-core violations (2.5s)
+  ✓   14 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/shop/qa-water has no serious/critical axe-core violations (1.6s)
+  ✓   15 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/quality has no serious/critical axe-core violations (1.6s)
+  ✓   16 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/about has no serious/critical axe-core violations (1.4s)
+  ✓   17 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/checkout/cart has no serious/critical axe-core violations (1.6s)
+  ✓   18 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/peptide-calculator has no serious/critical axe-core violations (1.9s)
+  ✓   19 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/documents has no serious/critical axe-core violations (1.5s)
+  ✓   20 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/contact has no serious/critical axe-core violations (1.4s)
+  ✓   21 [chromium] › tests/a11y.spec.ts:63:3 › a11y: en mobile empty-cart steps remain visible and accessible (3.0s)
+  ✓   23 [chromium] › tests/a11y.spec.ts:63:3 › a11y: fi mobile empty-cart steps remain visible and accessible (2.8s)
+  ✓   22 [chromium] › tests/a11y.spec.ts:86:3 › a11y: en populated checkout email/address/shipping/payment has no blocking violations (5.9s)
+  ✓   25 [chromium] › tests/account-reliability.spec.ts:5:3 › en: account creation and plan sharing remain truthful on failure and revoke access immediately (4.3s)
+  ✓   26 [chromium] › tests/account-reliability.spec.ts:92:3 › en: failed password-reset request stays retryable (619ms)
+  ✓   24 [chromium] › tests/a11y.spec.ts:86:3 › a11y: fi populated checkout email/address/shipping/payment has no blocking violations (6.9s)
+  ✓   28 [chromium] › tests/account-reliability.spec.ts:92:3 › fi: failed password-reset request stays retryable (709ms)
+  ✓   29 [chromium] › tests/api.spec.ts:5:3 › public APIs › GET /api/health responds with a status code (32ms)
+  ✓   30 [chromium] › tests/api.spec.ts:20:3 › public APIs › POST /api/newsletter rejects missing email (26ms)
+  ✓   31 [chromium] › tests/api.spec.ts:31:3 › public APIs › POST /api/contact is rate-limited or rejected (23ms)
+  ✓   32 [chromium] › tests/api.spec.ts:42:3 › public APIs › GET /en/shop returns 200 (62ms)
+  ✓   33 [chromium] › tests/api.spec.ts:47:3 › public APIs › GET /sitemap.xml returns a non-empty XML document (35ms)
+  ✓   34 [chromium] › tests/api.spec.ts:55:3 › public APIs › GET /robots.txt disallows AI bots and the admin (24ms)
+  ✓   35 [chromium] › tests/auth.spec.ts:4:3 › authentication pages › register page loads and shows the registration form (560ms)
+  ✓   36 [chromium] › tests/auth.spec.ts:13:3 › authentication pages › forgot password form is accessible (550ms)
+  ✓   37 [chromium] › tests/auth.spec.ts:19:3 › authentication pages › auth-required pages return a usable response (not 5xx) (545ms)
+  ✓   38 [chromium] › tests/auth.spec.ts:25:3 › authentication pages › auth API uses an anti-enumeration contract (200 with ok envelope) (18ms)
+  ✓   27 [chromium] › tests/account-reliability.spec.ts:5:3 › fi: account creation and plan sharing remain truthful on failure and revoke access immediately (4.1s)
+  ✓   40 [chromium] › tests/cart.spec.ts:46:3 › cart drawer + add-to-cart › add-to-cart opens the cart drawer and shows the subtotal (1.0s)
+  ✓   39 [chromium] › tests/cart.spec.ts:11:3 › cart drawer + add-to-cart › a product detail page renders the qty stepper with descriptive aria-labels (1.7s)
+  ✓   41 [chromium] › tests/cart.spec.ts:64:3 › cart drawer + add-to-cart › wishlist button announces its action in plain English (1.6s)
+  ✓   42 [chromium] › tests/chat.spec.ts:43:3 › Averia chat widget › the chat bubble is visible on every locale page (3.4s)
+  -   44 [chromium] › tests/chat.spec.ts:57:3 › Averia chat widget › sending a message produces a streamed assistant reply
+  -   45 [chromium] › tests/chat.spec.ts:80:3 › Averia chat widget › a quick-action chip pre-fills and submits a prompt
+  ✓   46 [chromium] › tests/chat.spec.ts:93:3 › Averia chat widget › prompt-injection is blocked at the route level (no provider call) (10ms)
+  ✓   47 [chromium] › tests/chat.spec.ts:116:3 › Averia chat widget › invalid payloads are rejected with 400 (8ms)
+  ✓   48 [chromium] › tests/chat.spec.ts:125:3 › Averia chat widget › rate-limited responses return 429 with a known code (93ms)
+  ✘   43 [chromium] › tests/chat.spec.ts:50:3 › Averia chat widget › opening the chat reveals the input + greeting (6.9s)
+(node:45029) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   50 [chromium] › tests/checkout.spec.ts:4:3 › checkout flow › empty cart shows the empty state with a CTA to shop (543ms)
+  ✓   51 [chromium] › tests/checkout.spec.ts:15:3 › checkout flow › checkout steps render with the right ordering (509ms)
+  ✘   49 [chromium] › tests/chat.spec.ts:153:3 › Averia chat widget › the chat widget does not break the rest of the page (7.2s)
+(node:45138) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   52 [chromium] › tests/checkout.spec.ts:21:3 › checkout flow › shipping step uses fieldset/legend for radio groups (2.2s)
+  ✓   54 [chromium] › tests/experience-documents.spec.ts:111:3 › en: changing SKU keeps product-wide documents and shows only the applicable batch (1.2s)
+  ✓   53 [chromium] › tests/experience-documents.spec.ts:62:3 › en: mobile document filters and legacy COA links preserve exact search context (1.7s)
+  ✓   55 [chromium] › tests/experience-documents.spec.ts:146:3 › en: a missing original file has retry and documentation help without hiding the record (1.1s)
+  ✓   57 [chromium] › tests/experience-documents.spec.ts:111:3 › fi: changing SKU keeps product-wide documents and shows only the applicable batch (1.2s)
+  ✓   58 [chromium] › tests/experience-documents.spec.ts:146:3 › fi: a missing original file has retry and documentation help without hiding the record (680ms)
+  ✓   59 [chromium] › tests/experience-documents.spec.ts:178:1 › an actually empty language collection differs from a failed search in the seeded library (520ms)
+  ✓   60 [chromium] › tests/experience-shell.spec.ts:10:3 › en: persisted cart snapshots hydrate consistently across full navigations (1.8s)
+  ✓   61 [chromium] › tests/experience-shell.spec.ts:55:3 › en: mobile menu fills the viewport and reaches the current document library (768ms)
+  ✘   62 [chromium] › tests/experience-shell.spec.ts:79:3 › en: immediate mobile filters expose checked state and retain view and hash (798ms)
+(node:46378) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   63 [chromium] › tests/experience-shell.spec.ts:10:3 › fi: persisted cart snapshots hydrate consistently across full navigations (2.0s)
+  ✓   64 [chromium] › tests/experience-shell.spec.ts:55:3 › fi: mobile menu fills the viewport and reaches the current document library (781ms)
+  ✘   65 [chromium] › tests/experience-shell.spec.ts:79:3 › fi: immediate mobile filters expose checked state and retain view and hash (770ms)
+(node:47065) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   56 [chromium] › tests/experience-documents.spec.ts:62:3 › fi: mobile document filters and legacy COA links preserve exact search context (12.1s)
+(node:47256) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   67 [chromium] › tests/experience-shell.spec.ts:122:1 › first visit completes eligibility before showing readable cookie choices (961ms)
+  ✓   68 [chromium] › tests/homepage.spec.ts:4:3 › homepage › metadata stays in the head through repeated full-page hydration (4.3s)
+  ✓   69 [chromium] › tests/homepage.spec.ts:19:3 › homepage › puts material search, records and research tasks before decorative media (789ms)
+  ✘   70 [chromium] › tests/homepage.spec.ts:35:3 › homepage › emits a translated title and full hreflang set (61ms)
+(node:47469) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   71 [chromium] › tests/homepage.spec.ts:55:3 › homepage › translates metadata per locale (244ms)
+  ✓   72 [chromium] › tests/i18n.spec.ts:4:3 › internationalization › each locale resolves with a translated title (180ms)
+  ✓   73 [chromium] › tests/i18n.spec.ts:18:3 › internationalization › alternate hreflang tags cover all locales (205ms)
+  ✓   74 [chromium] › tests/i18n.spec.ts:30:3 › internationalization › invalid locale triggers a 404 / notFound fallback (10ms)
+  ✓   75 [chromium] › tests/i18n.spec.ts:44:3 › internationalization › LocaleSwitcher changes the current locale (696ms)
+carousel captured
+  ✓   76 [chromium] › tests/instanced-vial.spec.ts:3:1 › InstancedVials: carousel renders all vials in fewer draw calls (8.6s)
+pdp captured
+  ✓   77 [chromium] › tests/instanced-vial.spec.ts:21:1 › InstancedVials: PDP renders vial label after rotation (12.3s)
+  ✓   78 [chromium] › tests/reliability.spec.ts:5:3 › en: 10 mL stays a volume through product and cart (1.8s)
+  ✓   79 [chromium] › tests/reliability.spec.ts:23:3 › en: quotation success follows the persisted server response (1.8s)
+  ✓   80 [chromium] › tests/reliability.spec.ts:54:5 › en: primary customer pages fit 320px (1.8s)
+  ✓   81 [chromium] › tests/reliability.spec.ts:54:5 › en: primary customer pages fit 390px (1.8s)
+  ✓   82 [chromium] › tests/reliability.spec.ts:54:5 › en: primary customer pages fit 414px (1.6s)
+  ✓   83 [chromium] › tests/reliability.spec.ts:54:5 › en: primary customer pages fit 1024px (1.6s)
+  ✓   84 [chromium] › tests/reliability.spec.ts:54:5 › en: primary customer pages fit 1280px (1.5s)
+  ✓   85 [chromium] › tests/reliability.spec.ts:5:3 › fi: 10 mL stays a volume through product and cart (1.6s)
+  ✓   86 [chromium] › tests/reliability.spec.ts:23:3 › fi: quotation success follows the persisted server response (1.6s)
+  ✓   87 [chromium] › tests/reliability.spec.ts:54:5 › fi: primary customer pages fit 320px (1.7s)
+  ✓   88 [chromium] › tests/reliability.spec.ts:54:5 › fi: primary customer pages fit 390px (1.5s)
+  ✓   89 [chromium] › tests/reliability.spec.ts:54:5 › fi: primary customer pages fit 414px (1.5s)
+  ✓   90 [chromium] › tests/reliability.spec.ts:54:5 › fi: primary customer pages fit 1024px (1.2s)
+  ✓   91 [chromium] › tests/reliability.spec.ts:54:5 › fi: primary customer pages fit 1280px (1.2s)
+  ✓   92 [chromium] › tests/reliability.spec.ts:81:1 › language switch keeps filters and hash (582ms)
+  ✓   93 [chromium] › tests/reliability.spec.ts:88:1 › homepage is useful without WebGL or requestIdleCallback (502ms)
+  ✓   94 [chromium] › tests/reliability.spec.ts:96:1 › cookie settings can reopen and withdraw analytics consent (1.0s)
+  ✘   95 [chromium] › tests/reliability.spec.ts:116:1 › invalid concentration inputs do not expose infinite results (613ms)
+(node:48898) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   96 [chromium] › tests/reliability.spec.ts:124:3 › en: server-rendered research content remains visible without JavaScript (557ms)
+  ✓   97 [chromium] › tests/reliability.spec.ts:124:3 › fi: server-rendered research content remains visible without JavaScript (444ms)
+  ✘   66 [chromium] › tests/experience-shell.spec.ts:101:1 › search remains usable when localStorage is unavailable (1.0m)
+(node:48969) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   99 [chromium] › tests/research-workspace.spec.ts:10:3 › en: calculation modes preserve units, show remainders and export the record (1.1s)
+  ✓  100 [chromium] › tests/research-workspace.spec.ts:57:3 › en: selected SKU carries its mass to the calculator and assistant only after Send (1.2s)
+  ✘   98 [chromium] › tests/reliability.spec.ts:161:1 › hero preserves SI unit case and spacing (11.0s)
+(node:49038) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  101 [chromium] › tests/research-workspace.spec.ts:123:3 › en: private saved work and pending submissions stay out of the public hub (5.6s)
+  ✓  102 [chromium] › tests/research-workspace.spec.ts:240:3 › en: unavailable assistant keeps the question and retries without duplicate messages (1.1s)
+  ✓  103 [chromium] › tests/research-workspace.spec.ts:279:3 › en: interrupted and error streams expose a working retry (1.0s)
+  ✓  105 [chromium] › tests/research-workspace.spec.ts:316:5 › en: research workspace fits 390px and has no blocking accessibility findings (5.5s)
+  ✘  104 [chromium] › tests/research-workspace.spec.ts:316:5 › en: research workspace fits 320px and has no blocking accessibility findings (6.5s)
+(node:49191) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  107 [chromium] › tests/research-workspace.spec.ts:10:3 › fi: calculation modes preserve units, show remainders and export the record (1.3s)
+  ✓  108 [chromium] › tests/research-workspace.spec.ts:57:3 › fi: selected SKU carries its mass to the calculator and assistant only after Send (1.4s)
+  ✘  106 [chromium] › tests/research-workspace.spec.ts:316:5 › en: research workspace fits 1440px and has no blocking accessibility findings (6.5s)
+(node:49252) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  110 [chromium] › tests/research-workspace.spec.ts:240:3 › fi: unavailable assistant keeps the question and retries without duplicate messages (1.1s)
+  ✓  111 [chromium] › tests/research-workspace.spec.ts:279:3 › fi: interrupted and error streams expose a working retry (1.5s)
+  ✓  109 [chromium] › tests/research-workspace.spec.ts:123:3 › fi: private saved work and pending submissions stay out of the public hub (6.6s)
+  ✘  112 [chromium] › tests/research-workspace.spec.ts:316:5 › fi: research workspace fits 320px and has no blocking accessibility findings (6.5s)
+  ✘  113 [chromium] › tests/research-workspace.spec.ts:316:5 › fi: research workspace fits 390px and has no blocking accessibility findings (6.4s)
+(node:49418) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:49426) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  115 [chromium] › tests/research-workspace.spec.ts:347:1 › switching Finnish calculator entries to English preserves quantities and selected units (1.3s)
+  ✘  114 [chromium] › tests/research-workspace.spec.ts:316:5 › fi: research workspace fits 1440px and has no blocking accessibility findings (6.3s)
+(node:49515) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  117 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en (70ms)
+  ✓  118 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/shop (45ms)
+  ✓  119 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/shop/bpc-157 (44ms)
+  ✓  120 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/about (32ms)
+  ✓  121 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/coa (59ms)
+  ✓  122 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/compare (32ms)
+  ✓  123 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/contact (32ms)
+  ✓  124 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/faq (38ms)
+  ✓  125 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/lab-tests (37ms)
+  ✓  126 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/legal/terms (33ms)
+  ✓  127 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/legal/privacy (32ms)
+  ✓  128 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/legal/cookies (32ms)
+  ✓  129 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/legal/research-disclaimer (35ms)
+  ✓  130 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/peptide-calculator (34ms)
+  ✓  131 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/quality (40ms)
+  ✓  132 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/partner (35ms)
+  ✓  133 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/rewards (63ms)
+  ✓  134 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/wishlist (33ms)
+  ✓  135 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/support/shipping-returns (45ms)
+  ✓  136 [chromium] › tests/shop.spec.ts:4:3 › shop catalog › renders the shop page with filter sidebar and toolbar (645ms)
+  ✓  137 [chromium] › tests/shop.spec.ts:14:3 › shop catalog › the 3D shop carousel is reachable via ?view=3d (1.4s)
+  ✓  138 [chromium] › tests/shop.spec.ts:20:3 › shop catalog › MegaMenu opens via ArrowDown from the trigger and roves links (1.5s)
+  ✘  116 [chromium] › tests/research-workspace.spec.ts:369:1 › a populated cart badge fits the narrow header (11.1s)
+
+
+  1) [chromium] › tests/chat.spec.ts:50:3 › Averia chat widget › opening the chat reveals the input + greeting 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('textarea[aria-label*="Ask" i], textarea[aria-label*="Tutkimus" i], textarea[aria-label*="Frag" i], textarea[aria-label*="Ställ" i], textarea[aria-label*="Vraag" i]').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('textarea[aria-label*="Ask" i], textarea[aria-label*="Tutkimus" i], textarea[aria-label*="Frag" i], textarea[aria-label*="Ställ" i], textarea[aria-label*="Vraag" i]').first() with timeout 5000ms
+      - waiting for locator('textarea[aria-label*="Ask" i], textarea[aria-label*="Tutkimus" i], textarea[aria-label*="Frag" i], textarea[aria-label*="Ställ" i], textarea[aria-label*="Vraag" i]').first()
+
+
+      28 |   await page.locator(CHAT_BUBBLE).first().waitFor({ state: "visible", timeout: 30_000 })
+      29 |   await page.locator(CHAT_BUBBLE).first().click()
+    > 30 |   await expect(page.locator(CHAT_INPUT).first()).toBeVisible({ timeout: 5_000 })
+         |                                                  ^
+      31 | }
+      32 |
+      33 | async function skipIfProviderDown(request: APIRequestContext): Promise<boolean> {
+        at openChat (/Users/purepanel/Avaria/averianlabs-web/tests/chat.spec.ts:30:50)
+        at /Users/purepanel/Avaria/averianlabs-web/tests/chat.spec.ts:52:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-Averia-chat-widget-op-b981d--reveals-the-input-greeting-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/chat-Averia-chat-widget-op-b981d--reveals-the-input-greeting-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/chat-Averia-chat-widget-op-b981d--reveals-the-input-greeting-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat-Averia-chat-widget-op-b981d--reveals-the-input-greeting-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/chat-Averia-chat-widget-op-b981d--reveals-the-input-greeting-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/chat.spec.ts:153:3 › Averia chat widget › the chat widget does not break the rest of the page 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('textarea[aria-label*="Ask" i], textarea[aria-label*="Tutkimus" i], textarea[aria-label*="Frag" i], textarea[aria-label*="Ställ" i], textarea[aria-label*="Vraag" i]').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('textarea[aria-label*="Ask" i], textarea[aria-label*="Tutkimus" i], textarea[aria-label*="Frag" i], textarea[aria-label*="Ställ" i], textarea[aria-label*="Vraag" i]').first() with timeout 5000ms
+      - waiting for locator('textarea[aria-label*="Ask" i], textarea[aria-label*="Tutkimus" i], textarea[aria-label*="Frag" i], textarea[aria-label*="Ställ" i], textarea[aria-label*="Vraag" i]').first()
+
+
+      28 |   await page.locator(CHAT_BUBBLE).first().waitFor({ state: "visible", timeout: 30_000 })
+      29 |   await page.locator(CHAT_BUBBLE).first().click()
+    > 30 |   await expect(page.locator(CHAT_INPUT).first()).toBeVisible({ timeout: 5_000 })
+         |                                                  ^
+      31 | }
+      32 |
+      33 | async function skipIfProviderDown(request: APIRequestContext): Promise<boolean> {
+        at openChat (/Users/purepanel/Avaria/averianlabs-web/tests/chat.spec.ts:30:50)
+        at /Users/purepanel/Avaria/averianlabs-web/tests/chat.spec.ts:156:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/chat-Averia-chat-widget-th-745f4--break-the-rest-of-the-page-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/chat-Averia-chat-widget-th-745f4--break-the-rest-of-the-page-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/chat-Averia-chat-widget-th-745f4--break-the-rest-of-the-page-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/chat-Averia-chat-widget-th-745f4--break-the-rest-of-the-page-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/chat-Averia-chat-widget-th-745f4--break-the-rest-of-the-page-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests/experience-documents.spec.ts:62:3 › fi: mobile document filters and legacy COA links preserve exact search context 
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected pattern: /\/fi\/documents$/
+    Received string:  "http://localhost:3217/fi/documents?q=no-such-qa-document-98464daf-6140-4649-a668-cd82572f371c&product=qa-peptide&sku=QA-PEPTIDE-5&batch=QA-PEPTIDE-5-BATCH&type=coa"
+    Timeout: 10000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 10000ms
+        24 × locator resolved to <html lang="fi" class="__variable_8adcd2 __variable_46451f light">…</html>
+           - unexpected value "http://localhost:3217/fi/documents?q=no-such-qa-document-98464daf-6140-4649-a668-cd82572f371c&product=qa-peptide&sku=QA-PEPTIDE-5&batch=QA-PEPTIDE-5-BATCH&type=coa"
+
+
+      105 |     await expect(main.getByRole("heading", { name: t.emptyTitle, exact: true })).toHaveCount(0)
+      106 |     await main.getByRole("link", { name: t.clear, exact: true }).first().click()
+    > 107 |     await expect(page).toHaveURL(new RegExp(`/${locale}/documents$`))
+          |                        ^
+      108 |     await expect(main.locator(`a[href="/${locale}/documents/${records.five}"]`)).toBeVisible()
+      109 |   })
+      110 |
+        at /Users/purepanel/Avaria/averianlabs-web/tests/experience-documents.spec.ts:107:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/experience-documents-fi-mo-ded6a-eserve-exact-search-context-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/experience-documents-fi-mo-ded6a-eserve-exact-search-context-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/experience-documents-fi-mo-ded6a-eserve-exact-search-context-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/experience-documents-fi-mo-ded6a-eserve-exact-search-context-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/experience-documents-fi-mo-ded6a-eserve-exact-search-context-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › tests/experience-shell.spec.ts:79:3 › en: immediate mobile filters expose checked state and retain view and hash 
+
+    Error: locator.check: Clicking the checkbox did not change its state
+    Call log:
+      - waiting for getByRole('dialog', { name: 'Filters', exact: true }).getByRole('checkbox', { name: /Tissue research/ })
+        - locator resolved to <button type="button" role="checkbox" aria-checked="false" class="flex w-full items-center gap-3 rounded-[var(--radius)] px-2 py-1.5 text-sm transition-colors text-ink-muted hover:bg-surface-2 hover:text-ink">…</button>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - performing click action
+        - click action done
+        - waiting for scheduled navigations to finish
+        - navigations have finished
+
+
+      87 |       name: new RegExp(messages[locale].research.categories.recovery),
+      88 |     })
+    > 89 |     await category.check()
+         |                    ^
+      90 |     await expect(category).toBeChecked()
+      91 |     await expect(page).toHaveURL(/view=list.*category=recovery#catalogue$/)
+      92 |     await dialog
+        at /Users/purepanel/Avaria/averianlabs-web/tests/experience-shell.spec.ts:89:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/experience-shell-en-immedi-d403f-te-and-retain-view-and-hash-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/experience-shell-en-immedi-d403f-te-and-retain-view-and-hash-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/experience-shell-en-immedi-d403f-te-and-retain-view-and-hash-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/experience-shell-en-immedi-d403f-te-and-retain-view-and-hash-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/experience-shell-en-immedi-d403f-te-and-retain-view-and-hash-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › tests/experience-shell.spec.ts:79:3 › fi: immediate mobile filters expose checked state and retain view and hash 
+
+    Error: locator.check: Clicking the checkbox did not change its state
+    Call log:
+      - waiting for getByRole('dialog', { name: 'Suodattimet', exact: true }).getByRole('checkbox', { name: /Kudostutkimus/ })
+        - locator resolved to <button type="button" role="checkbox" aria-checked="false" class="flex w-full items-center gap-3 rounded-[var(--radius)] px-2 py-1.5 text-sm transition-colors text-ink-muted hover:bg-surface-2 hover:text-ink">…</button>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - performing click action
+        - click action done
+        - waiting for scheduled navigations to finish
+        - navigations have finished
+
+
+      87 |       name: new RegExp(messages[locale].research.categories.recovery),
+      88 |     })
+    > 89 |     await category.check()
+         |                    ^
+      90 |     await expect(category).toBeChecked()
+      91 |     await expect(page).toHaveURL(/view=list.*category=recovery#catalogue$/)
+      92 |     await dialog
+        at /Users/purepanel/Avaria/averianlabs-web/tests/experience-shell.spec.ts:89:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/experience-shell-fi-immedi-f04e1-te-and-retain-view-and-hash-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/experience-shell-fi-immedi-f04e1-te-and-retain-view-and-hash-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/experience-shell-fi-immedi-f04e1-te-and-retain-view-and-hash-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/experience-shell-fi-immedi-f04e1-te-and-retain-view-and-hash-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/experience-shell-fi-immedi-f04e1-te-and-retain-view-and-hash-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [chromium] › tests/experience-shell.spec.ts:101:1 › search remains usable when localStorage is unavailable 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Call log:
+      - waiting for getByRole('option', { name: /QA peptide/i })
+        - locator resolved to <div cmdk-item="" role="option" id="radix-_r_9_" aria-selected="true" data-selected="true" aria-disabled="false" data-disabled="false" data-value="qa-peptide QA peptide — test fixture  QA-PEPTIDE-5 QA-PEPTIDE-5-BATCH QA-PEPTIDE-10 QA-PEPTIDE-10-BATCH" class="flex cursor-pointer items-center gap-3 rounded-[var(--radius)] px-3 py-2.5 text-sm text-ink aria-selected:bg-accent-soft aria-selected:text-accent-ink">…</div>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+        - element is not stable
+      - retrying click action
+        - waiting for element to be visible, enabled and stable
+      - element was detached from the DOM, retrying
+
+
+      116 |     .click()
+      117 |   await page.getByPlaceholder(messages.en.research.searchPlaceholder).fill("QA-PEPTIDE-5")
+    > 118 |   await page.getByRole("option", { name: /QA peptide/i }).click()
+          |                                                           ^
+      119 |   await expect(page).toHaveURL(/\/en\/shop\/qa-peptide/)
+      120 |   expect(errors).toEqual([])
+      121 | })
+        at /Users/purepanel/Avaria/averianlabs-web/tests/experience-shell.spec.ts:118:59
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/experience-shell-search-re-70c24-localStorage-is-unavailable-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/experience-shell-search-re-70c24-localStorage-is-unavailable-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/experience-shell-search-re-70c24-localStorage-is-unavailable-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/experience-shell-search-re-70c24-localStorage-is-unavailable-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/experience-shell-search-re-70c24-localStorage-is-unavailable-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [chromium] › tests/homepage.spec.ts:35:3 › homepage › emits a translated title and full hreflang set 
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "href=\"http://localhost:3217/en\""
+    Received string:    "<!DOCTYPE html><html lang=\"en\" class=\"__variable_8adcd2 __variable_46451f\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/37aa2fa7d3df6706.css\" data-precedence=\"next\"/><link rel=\"preload\" as=\"script\" fetchPriority=\"low\" href=\"/_next/static/chunks/webpack-b6ec6b16493f1fe1.js\"/><script src=\"/_next/static/chunks/121b6f03-037b23fc1c09df7d.js\" async=\"\"></script><script src=\"/_next/static/chunks/c1a87517-e73f533f96a6fa67.js\" async=\"\"></script><script src=\"/_next/static/chunks/9d81e687-8a1f3ef355ee4346.js\" async=\"\"></script><script src=\"/_next/static/chunks/277-14d524269b3aa4a6.js\" async=\"\"></script><script src=\"/_next/static/chunks/main-app-194a0aadee75dc8f.js\" async=\"\"></script><script src=\"/_next/static/chunks/6498-a2749136d2163117.js\" async=\"\"></script><script src=\"/_next/static/chunks/2679-0e5798c0da53978e.js\" async=\"\"></script><script src=\"/_next/static/chunks/8553-56dcebdc149058d0.js\" async=\"\"></script><script src=\"/_next/static/chunks/8390-7d564f52e24ebab5.js\" async=\"\"></script><script src=\"/_next/static/chunks/5326-e995e87b1ddf691d.js\" async=\"\"></script><script src=\"/_next/static/chunks/8286-4e03a2eb8c2c9317.js\" async=\"\"></script><script src=\"/_next/static/chunks/app/%5Blocale%5D/layout-03d60439bec4c69f.js\" async=\"\"></script><script src=\"/_next/static/chunks/app/global-error-dd98719b435f7f39.js\" async=\"\"></script><script src=\"/_next/static/chunks/283-469944e0cefa97bc.js\" async=\"\"></script><script src=\"/_next/static/chunks/app/%5Blocale%5D/page-19b08bb6fde02334.js\" async=\"\"></script><script src=\"/_next/static/chunks/app/%5Blocale%5D/error-a4d0fefc7573e7ca.js\" async=\"\"></script><meta name=\"next-size-adjust\" content=\"\"/><meta name=\"theme-color\" media=\"(prefers-color-scheme: light)\" content=\"#fbfcfe\"/><meta name=\"theme-color\" media=\"(prefers-color-scheme: dark)\" content=\"#0b0e14\"/><title>AverianLabs — Laboratory research materials</title><meta name=\"description\" content=\"Explore products, review batch documents and check availability before ordering.\"/><meta name=\"author\" content=\"AverianLabs\"/><link rel=\"manifest\" href=\"/manifest.webmanifest\"/><meta name=\"keywords\" content=\"research peptides, BPC-157, semaglutide, tirzepatide, TB-500, GHK-Cu, EU, Finland, COA, HPLC\"/><meta name=\"creator\" content=\"AverianLabs\"/><meta name=\"publisher\" content=\"AverianLabs\"/><meta name=\"robots\" content=\"noindex, nofollow\"/><meta name=\"googlebot\" content=\"noindex, nofollow\"/><link rel=\"canonical\" href=\"http://localhost:3217/en/\"/><link rel=\"alternate\" hrefLang=\"en\" href=\"http://localhost:3217/en/\"/><link rel=\"alternate\" hrefLang=\"fi\" href=\"http://localhost:3217/fi/\"/><link rel=\"alternate\" hrefLang=\"de\" href=\"http://localhost:3217/de/\"/><link rel=\"alternate\" hrefLang=\"sv\" href=\"http://localhost:3217/sv/\"/><link rel=\"alternate\" hrefLang=\"nl\" href=\"http://localhost:3217/nl/\"/><meta name=\"format-detection\" content=\"telephone=no, address=no, email=no\"/><meta property=\"og:title\" content=\"AverianLabs — Laboratory research materials\"/><meta property=\"og:description\" content=\"A catalogue of research materials and batch documents for laboratory research.\"/><meta property=\"og:url\" content=\"http://localhost:3217/en\"/><meta property=\"og:site_name\" content=\"AverianLabs\"/><meta property=\"og:locale\" content=\"en\"/><meta property=\"og:image\" content=\"http://localhost:3217/api/og/default/en\"/><meta property=\"og:image:width\" content=\"1200\"/><meta property=\"og:image:height\" content=\"630\"/><meta property=\"og:image:alt\" content=\"AverianLabs — Laboratory research materials\"/><meta property=\"og:type\" content=\"website\"/><meta name=\"twitter:card\" content=\"summary_large_image\"/><meta name=\"twitter:title\" content=\"AverianLabs — Laboratory research materials\"/><meta name=\"twitter:description\" content=\"A catalogue of research materials and batch documents for laboratory research.\"/><meta name=\"twitter:image\" content=\"http://localhost:3217/api/og/default/en\"/><link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\"/><script src=\"/_next/static/chunks/polyfills-42372ed130431b0a.js\" noModule=\"\"></script></head>"
+
+      49 |         process.env.NEXT_PUBLIC_SITE_URL ?? process.env.BASE_URL ?? "https://averianlabs.eu",
+      50 |       ).origin
+    > 51 |       expect(head).toContain(`href="${origin}/${lang}"`)
+         |                    ^
+      52 |     }
+      53 |   })
+      54 |
+        at /Users/purepanel/Avaria/averianlabs-web/tests/homepage.spec.ts:51:20
+
+    Error Context: test-results/homepage-homepage-emits-a--f1a20-title-and-full-hreflang-set-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/homepage-homepage-emits-a--f1a20-title-and-full-hreflang-set-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/homepage-homepage-emits-a--f1a20-title-and-full-hreflang-set-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [chromium] › tests/reliability.spec.ts:116:1 › invalid concentration inputs do not expose infinite results 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('main').getByRole('status')
+    Expected: visible
+    Error: strict mode violation: locator('main').getByRole('status') resolved to 2 elements:
+        1) <p role="status" aria-live="off" class="mt-5 text-sm text-danger">Anna positiivinen luku väliltä 10⁻¹²–10¹². Tarkis…</p> aka getByRole('status').filter({ hasText: 'Anna positiivinen luku välilt' })
+        2) <p role="status" class="sr-only" aria-live="polite" aria-atomic="true"></p> aka getByRole('status').filter({ hasText: /^$/ })
+
+    Call log:
+      - Expect "toBeVisible" locator('main').getByRole('status') with timeout 10000ms
+      - waiting for locator('main').getByRole('status')
+
+
+      117 |   await page.goto("/fi/peptide-calculator")
+      118 |   await page.getByRole("textbox", { name: "Liuoksen lopullinen tilavuus", exact: true }).fill("0")
+    > 119 |   await expect(page.locator("main").getByRole("status")).toBeVisible()
+          |                                                          ^
+      120 |   await expect(page.locator("main")).not.toContainText(/Infinity|NaN|IU/)
+      121 | })
+      122 |
+        at /Users/purepanel/Avaria/averianlabs-web/tests/reliability.spec.ts:119:58
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/reliability-invalid-concen-c05b1-not-expose-infinite-results-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/reliability-invalid-concen-c05b1-not-expose-infinite-results-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/reliability-invalid-concen-c05b1-not-expose-infinite-results-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/reliability-invalid-concen-c05b1-not-expose-infinite-results-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/reliability-invalid-concen-c05b1-not-expose-infinite-results-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) [chromium] › tests/reliability.spec.ts:161:1 › hero preserves SI unit case and spacing ────────
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('main section[aria-label]').first().getByText(/\d+ mg \/ \d+ mg/)
+    Expected pattern: /\d+ (mg|g|µg|mL|µL|vial)/
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" locator('main section[aria-label]').first().getByText(/\d+ mg \/ \d+ mg/) with timeout 10000ms
+      - waiting for locator('main section[aria-label]').first().getByText(/\d+ mg \/ \d+ mg/)
+
+
+      166 |     .first()
+      167 |     .getByText(/\d+ mg \/ \d+ mg/)
+    > 168 |   await expect(unit).toHaveText(/\d+ (mg|g|µg|mL|µL|vial)/)
+          |                      ^
+      169 |   expect(await unit.evaluate((element) => getComputedStyle(element).textTransform)).toBe("none")
+      170 | })
+      171 |
+        at /Users/purepanel/Avaria/averianlabs-web/tests/reliability.spec.ts:168:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/reliability-hero-preserves-SI-unit-case-and-spacing-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/reliability-hero-preserves-SI-unit-case-and-spacing-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/reliability-hero-preserves-SI-unit-case-and-spacing-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/reliability-hero-preserves-SI-unit-case-and-spacing-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/reliability-hero-preserves-SI-unit-case-and-spacing-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) [chromium] › tests/research-workspace.spec.ts:316:5 › en: research workspace fits 320px and has no blocking accessibility findings 
+
+    Error: /assistant
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 22
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "id": "color-contrast",
+    +     "nodes": Array [
+    +       Array [
+    +         ".flex-1 > .mt-2.leading-relaxed",
+    +       ],
+    +       Array [
+    +         ".mt-2:nth-child(3) > li:nth-child(1)",
+    +       ],
+    +       Array [
+    +         ".mt-2:nth-child(3) > li:nth-child(2)",
+    +       ],
+    +       Array [
+    +         ".mt-4 > .text-on-accent.hover\\:bg-accent-hover.bg-accent",
+    +       ],
+    +       Array [
+    +         ".flex-1.min-h-11.py-2:nth-child(2)",
+    +       ],
+    +     ],
+    +   },
+    + ]
+
+      339 |             .map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })),
+      340 |           path,
+    > 341 |         ).toEqual([])
+          |           ^
+      342 |       }
+      343 |     })
+      344 |   }
+        at /Users/purepanel/Avaria/averianlabs-web/tests/research-workspace.spec.ts:341:11
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/research-workspace-en-rese-e01b7-king-accessibility-findings-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-en-rese-e01b7-king-accessibility-findings-chromium/video-1.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-en-rese-e01b7-king-accessibility-findings-chromium/video-2.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-en-rese-e01b7-king-accessibility-findings-chromium/video-3.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #5: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-en-rese-e01b7-king-accessibility-findings-chromium/video-4.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #6: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-en-rese-e01b7-king-accessibility-findings-chromium/video-5.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #7: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-en-rese-e01b7-king-accessibility-findings-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/research-workspace-en-rese-e01b7-king-accessibility-findings-chromium/error-context.md
+
+    attachment #9: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/research-workspace-en-rese-e01b7-king-accessibility-findings-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/research-workspace-en-rese-e01b7-king-accessibility-findings-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  11) [chromium] › tests/research-workspace.spec.ts:316:5 › en: research workspace fits 1440px and has no blocking accessibility findings 
+
+    Error: /assistant
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 22
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "id": "color-contrast",
+    +     "nodes": Array [
+    +       Array [
+    +         ".flex-1 > .mt-2.leading-relaxed",
+    +       ],
+    +       Array [
+    +         ".mt-2:nth-child(3) > li:nth-child(1)",
+    +       ],
+    +       Array [
+    +         ".mt-2:nth-child(3) > li:nth-child(2)",
+    +       ],
+    +       Array [
+    +         ".mt-4 > .text-on-accent.hover\\:bg-accent-hover.bg-accent",
+    +       ],
+    +       Array [
+    +         ".flex-1.min-h-11.py-2:nth-child(2)",
+    +       ],
+    +     ],
+    +   },
+    + ]
+
+      339 |             .map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })),
+      340 |           path,
+    > 341 |         ).toEqual([])
+          |           ^
+      342 |       }
+      343 |     })
+      344 |   }
+        at /Users/purepanel/Avaria/averianlabs-web/tests/research-workspace.spec.ts:341:11
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/research-workspace-en-rese-3f405-king-accessibility-findings-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-en-rese-3f405-king-accessibility-findings-chromium/video-4.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-en-rese-3f405-king-accessibility-findings-chromium/video-2.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-en-rese-3f405-king-accessibility-findings-chromium/video-1.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #5: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-en-rese-3f405-king-accessibility-findings-chromium/video-3.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #6: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-en-rese-3f405-king-accessibility-findings-chromium/video-5.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #7: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-en-rese-3f405-king-accessibility-findings-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/research-workspace-en-rese-3f405-king-accessibility-findings-chromium/error-context.md
+
+    attachment #9: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/research-workspace-en-rese-3f405-king-accessibility-findings-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/research-workspace-en-rese-3f405-king-accessibility-findings-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12) [chromium] › tests/research-workspace.spec.ts:316:5 › fi: research workspace fits 320px and has no blocking accessibility findings 
+
+    Error: /assistant
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 22
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "id": "color-contrast",
+    +     "nodes": Array [
+    +       Array [
+    +         ".flex-1 > .mt-2.leading-relaxed",
+    +       ],
+    +       Array [
+    +         ".mt-2:nth-child(3) > li:nth-child(1)",
+    +       ],
+    +       Array [
+    +         ".mt-2:nth-child(3) > li:nth-child(2)",
+    +       ],
+    +       Array [
+    +         ".mt-4 > .text-on-accent.hover\\:bg-accent-hover.bg-accent",
+    +       ],
+    +       Array [
+    +         ".flex-1.min-h-11.py-2:nth-child(2)",
+    +       ],
+    +     ],
+    +   },
+    + ]
+
+      339 |             .map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })),
+      340 |           path,
+    > 341 |         ).toEqual([])
+          |           ^
+      342 |       }
+      343 |     })
+      344 |   }
+        at /Users/purepanel/Avaria/averianlabs-web/tests/research-workspace.spec.ts:341:11
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-f01e5-king-accessibility-findings-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-f01e5-king-accessibility-findings-chromium/video-1.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-f01e5-king-accessibility-findings-chromium/video-3.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-f01e5-king-accessibility-findings-chromium/video-2.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #5: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-f01e5-king-accessibility-findings-chromium/video-5.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #6: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-f01e5-king-accessibility-findings-chromium/video-4.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #7: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-f01e5-king-accessibility-findings-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/research-workspace-fi-rese-f01e5-king-accessibility-findings-chromium/error-context.md
+
+    attachment #9: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-f01e5-king-accessibility-findings-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/research-workspace-fi-rese-f01e5-king-accessibility-findings-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13) [chromium] › tests/research-workspace.spec.ts:316:5 › fi: research workspace fits 390px and has no blocking accessibility findings 
+
+    Error: /assistant
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 22
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "id": "color-contrast",
+    +     "nodes": Array [
+    +       Array [
+    +         ".flex-1 > .mt-2.leading-relaxed",
+    +       ],
+    +       Array [
+    +         ".mt-2:nth-child(3) > li:nth-child(1)",
+    +       ],
+    +       Array [
+    +         ".mt-2:nth-child(3) > li:nth-child(2)",
+    +       ],
+    +       Array [
+    +         ".mt-4 > .text-on-accent.hover\\:bg-accent-hover.bg-accent",
+    +       ],
+    +       Array [
+    +         ".flex-1.min-h-11.py-2:nth-child(2)",
+    +       ],
+    +     ],
+    +   },
+    + ]
+
+      339 |             .map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })),
+      340 |           path,
+    > 341 |         ).toEqual([])
+          |           ^
+      342 |       }
+      343 |     })
+      344 |   }
+        at /Users/purepanel/Avaria/averianlabs-web/tests/research-workspace.spec.ts:341:11
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-32dce-king-accessibility-findings-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-32dce-king-accessibility-findings-chromium/video-1.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-32dce-king-accessibility-findings-chromium/video-2.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-32dce-king-accessibility-findings-chromium/video-4.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #5: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-32dce-king-accessibility-findings-chromium/video-3.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #6: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-32dce-king-accessibility-findings-chromium/video-5.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #7: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-32dce-king-accessibility-findings-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/research-workspace-fi-rese-32dce-king-accessibility-findings-chromium/error-context.md
+
+    attachment #9: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-32dce-king-accessibility-findings-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/research-workspace-fi-rese-32dce-king-accessibility-findings-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14) [chromium] › tests/research-workspace.spec.ts:316:5 › fi: research workspace fits 1440px and has no blocking accessibility findings 
+
+    Error: /assistant
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 25
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "id": "color-contrast",
+    +     "nodes": Array [
+    +       Array [
+    +         ".flex-1 > h3",
+    +       ],
+    +       Array [
+    +         ".flex-1 > .mt-2.leading-relaxed",
+    +       ],
+    +       Array [
+    +         ".mt-2:nth-child(3) > li:nth-child(1)",
+    +       ],
+    +       Array [
+    +         ".mt-2:nth-child(3) > li:nth-child(2)",
+    +       ],
+    +       Array [
+    +         ".mt-4 > .text-on-accent.hover\\:bg-accent-hover.bg-accent",
+    +       ],
+    +       Array [
+    +         ".flex-1.min-h-11.py-2:nth-child(2)",
+    +       ],
+    +     ],
+    +   },
+    + ]
+
+      339 |             .map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })),
+      340 |           path,
+    > 341 |         ).toEqual([])
+          |           ^
+      342 |       }
+      343 |     })
+      344 |   }
+        at /Users/purepanel/Avaria/averianlabs-web/tests/research-workspace.spec.ts:341:11
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-e1948-king-accessibility-findings-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-e1948-king-accessibility-findings-chromium/video-3.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-e1948-king-accessibility-findings-chromium/video-2.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-e1948-king-accessibility-findings-chromium/video-4.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #5: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-e1948-king-accessibility-findings-chromium/video-1.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #6: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-e1948-king-accessibility-findings-chromium/video-5.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #7: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-e1948-king-accessibility-findings-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/research-workspace-fi-rese-e1948-king-accessibility-findings-chromium/error-context.md
+
+    attachment #9: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/research-workspace-fi-rese-e1948-king-accessibility-findings-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/research-workspace-fi-rese-e1948-king-accessibility-findings-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  15) [chromium] › tests/research-workspace.spec.ts:369:1 › a populated cart badge fits the narrow header 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('link', { name: 'Æ AverianLabs', exact: true }).first()
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('link', { name: 'Æ AverianLabs', exact: true }).first() with timeout 10000ms
+      - waiting for getByRole('link', { name: 'Æ AverianLabs', exact: true }).first()
+
+
+      380 |   )
+      381 |   await expect(page.getByRole("button", { name: "Cart", exact: true })).toBeVisible()
+    > 382 |   await expect(page.getByRole("link", { name: "Æ AverianLabs", exact: true }).first()).toBeVisible()
+          |                                                                                        ^
+      383 | })
+      384 |
+        at /Users/purepanel/Avaria/averianlabs-web/tests/research-workspace.spec.ts:382:88
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/research-workspace-a-popul-ddeff-adge-fits-the-narrow-header-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/research-workspace-a-popul-ddeff-adge-fits-the-narrow-header-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/research-workspace-a-popul-ddeff-adge-fits-the-narrow-header-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/research-workspace-a-popul-ddeff-adge-fits-the-narrow-header-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/research-workspace-a-popul-ddeff-adge-fits-the-narrow-header-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  15 failed
+    [chromium] › tests/chat.spec.ts:50:3 › Averia chat widget › opening the chat reveals the input + greeting 
+    [chromium] › tests/chat.spec.ts:153:3 › Averia chat widget › the chat widget does not break the rest of the page 
+    [chromium] › tests/experience-documents.spec.ts:62:3 › fi: mobile document filters and legacy COA links preserve exact search context 
+    [chromium] › tests/experience-shell.spec.ts:79:3 › en: immediate mobile filters expose checked state and retain view and hash 
+    [chromium] › tests/experience-shell.spec.ts:79:3 › fi: immediate mobile filters expose checked state and retain view and hash 
+    [chromium] › tests/experience-shell.spec.ts:101:1 › search remains usable when localStorage is unavailable 
+    [chromium] › tests/homepage.spec.ts:35:3 › homepage › emits a translated title and full hreflang set 
+    [chromium] › tests/reliability.spec.ts:116:1 › invalid concentration inputs do not expose infinite results 
+    [chromium] › tests/reliability.spec.ts:161:1 › hero preserves SI unit case and spacing ─────────
+    [chromium] › tests/research-workspace.spec.ts:316:5 › en: research workspace fits 320px and has no blocking accessibility findings 
+    [chromium] › tests/research-workspace.spec.ts:316:5 › en: research workspace fits 1440px and has no blocking accessibility findings 
+    [chromium] › tests/research-workspace.spec.ts:316:5 › fi: research workspace fits 320px and has no blocking accessibility findings 
+    [chromium] › tests/research-workspace.spec.ts:316:5 › fi: research workspace fits 390px and has no blocking accessibility findings 
+    [chromium] › tests/research-workspace.spec.ts:316:5 › fi: research workspace fits 1440px and has no blocking accessibility findings 
+    [chromium] › tests/research-workspace.spec.ts:369:1 › a populated cart badge fits the narrow header 
+  2 skipped
+  121 passed (3.0m)

@@ -1,0 +1,72 @@
+
+> averianlabs-web@0.1.0 test /Users/purepanel/Avaria/averianlabs-web
+> vitest run
+
+
+ RUN  v2.1.9 /Users/purepanel/Avaria/averianlabs-web
+
+ ✓ lib/theme/contrast.test.ts (17 tests) 9ms
+ ✓ lib/citations/index.test.ts (17 tests) 12ms
+ ✓ lib/community/guard.test.ts (36 tests) 28ms
+ ✓ lib/ai/guardrails/verify.test.ts (20 tests) 17ms
+ ✓ lib/ai/eval/runner.test.ts (5 tests) 9ms
+ ✓ lib/ai/guardrails/quantities.test.ts (6 tests) 21ms
+ ✓ lib/calculations.test.ts (15 tests) 16ms
+ ✓ lib/og/locale-routes.test.ts (7 tests) 20ms
+ ✓ lib/ai/answers/calculation.test.ts (20 tests) 48ms
+stderr | tests/unit/chat-route.test.ts > research chat final output > withholds a factual answer whose numbered citation has no returned source
+[averia] output verification {
+  conversationId: undefined,
+  unknownSkus: [],
+  priceMismatches: [],
+  warnings: [ 'unsupported_citation:1' ]
+}
+
+stderr | tests/unit/chat-route.test.ts > research chat final output > keeps a slow buffered answer alive without sending unverified content and clears the timer
+[averia] output verification {
+  conversationId: undefined,
+  unknownSkus: [],
+  priceMismatches: [],
+  warnings: [ 'unsupported_citation:1' ]
+}
+
+stderr | tests/unit/chat-route.test.ts > research chat final output > cannot fall back to a generated scientific explanation after a failed guidance lookup
+[averia] output verification {
+  conversationId: undefined,
+  unknownSkus: [],
+  priceMismatches: [],
+  warnings: [ 'guidance_not_completed' ]
+}
+
+ ✓ tests/unit/chat-route.test.ts (7 tests) 77ms
+ ✓ tests/unit/anonymous-storage.test.ts (2 tests) 28ms
+ ✓ lib/ai/answers/guidance.test.ts (6 tests) 9ms
+ ✓ lib/community/reputation.test.ts (27 tests) 24ms
+ ✓ lib/documents/library.test.ts (4 tests) 8ms
+ ✓ tests/unit/legal.test.ts (4 tests) 5ms
+ ✓ tests/unit/document-library-page.test.ts (3 tests) 32ms
+ ✓ lib/seo/site-origin.test.ts (3 tests) 5ms
+ ✓ lib/admin/types.test.ts (20 tests) 13ms
+ ✓ tests/unit/review-indexing.test.ts (4 tests) 7ms
+ ✓ lib/community/categories.test.ts (5 tests) 11ms
+ ✓ lib/research-plans/share-slug.test.ts (5 tests) 44ms
+ ✓ lib/documents/service.test.ts (3 tests) 9ms
+ ✓ lib/seo/scientific-figure.test.ts (2 tests) 4ms
+ ✓ lib/ai/guardrails/input.test.ts (6 tests) 52ms
+ ✓ tests/unit/research-markdown-scroll.test.ts (2 tests) 123ms
+ ✓ lib/ai/providers/local-embeddings.test.ts (4 tests) 1133ms
+   ✓ local-embeddings (Xenova/all-MiniLM-L6-v2) > returns a 384-dim vector for a single text 1098ms
+ ✓ lib/ai/answers/catalogue.test.ts (14 tests) 52ms
+ ✓ lib/blog/authors.test.ts (3 tests) 5ms
+ ✓ lib/og/render.test.ts (1 test) 755ms
+   ✓ rendered social images > renders different Finnish/English PNGs with truthful locale and revocation-safe caching 754ms
+ ✓ lib/ai/eval/research-cases.test.ts (22 tests) 28ms
+ ✓ lib/activity/emit.test.ts (3 tests) 4ms
+ ✓ lib/documents/index.test.ts (5 tests) 6ms
+ ✓ tests/unit/research-workspace-ui.test.ts (8 tests) 200ms
+
+ Test Files  33 passed (33)
+      Tests  306 passed (306)
+   Start at  18:19:03
+   Duration  3.98s (transform 2.77s, setup 0ms, collect 14.23s, tests 2.82s, environment 2.30s, prepare 8.25s)
+

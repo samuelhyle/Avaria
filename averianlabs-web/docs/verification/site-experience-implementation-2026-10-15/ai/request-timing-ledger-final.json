@@ -1,0 +1,559 @@
+{
+  "checkedAt": "2026-10-15T16:16:14.488569+00:00",
+  "origin": "https://6ad0f4d8d24ede22e5d83db6--averianlabs-demo.netlify.app",
+  "sourceCommit": "0354c14fc50a5b032c0265e790246b22d3ed0969",
+  "requestCount": 60,
+  "windowMs": 600000,
+  "ceiling": 20,
+  "maximumRequestsInAnyRollingWindowIncludingHistoricalRun": 20,
+  "globalStartCountIncludingHistoricalRun": 120,
+  "timingSource": "All final-run starts recorded immediately before actual fetch; historical60 starts retained globally so no origin switch bypasses client pacing. The first final case was forwarded from the actual browser composer, remaining59 are official-runner requests.",
+  "scope": "These are client request/complete-stream wall-clock round trips, not isolated provider/model latency. Controlled local guidance/capability cases may not call a model. Raw runner latency includes client pacing in some rows. No real429/503 or identity/cookie changes occurred.",
+  "roundTripMs": {
+    "min": 1122,
+    "median": 6811.0,
+    "max": 17164
+  },
+  "requests": [
+    {
+      "ordinal": 1,
+      "globalOrdinal": 61,
+      "case": "en/concentration",
+      "startedAt": "2026-10-15T15:51:38.959000+00:00",
+      "completedAt": "2026-10-15T15:51:50.533Z",
+      "roundTripMs": 11574,
+      "rawRunnerLatencyMs": 11574
+    },
+    {
+      "ordinal": 2,
+      "globalOrdinal": 62,
+      "case": "fi/concentration",
+      "startedAt": "2026-10-15T15:53:07.925000+00:00",
+      "completedAt": "2026-10-15T15:53:12.309Z",
+      "roundTripMs": 4384,
+      "rawRunnerLatencyMs": 4384
+    },
+    {
+      "ordinal": 3,
+      "globalOrdinal": 63,
+      "case": "en/micrograms",
+      "startedAt": "2026-10-15T15:53:12.310000+00:00",
+      "completedAt": "2026-10-15T15:53:18.134Z",
+      "roundTripMs": 5824,
+      "rawRunnerLatencyMs": 5824
+    },
+    {
+      "ordinal": 4,
+      "globalOrdinal": 64,
+      "case": "fi/micrograms",
+      "startedAt": "2026-10-15T15:53:18.135000+00:00",
+      "completedAt": "2026-10-15T15:53:25.192Z",
+      "roundTripMs": 7057,
+      "rawRunnerLatencyMs": 7057
+    },
+    {
+      "ordinal": 5,
+      "globalOrdinal": 65,
+      "case": "en/microlitres",
+      "startedAt": "2026-10-15T15:53:25.193000+00:00",
+      "completedAt": "2026-10-15T15:53:32.201Z",
+      "roundTripMs": 7008,
+      "rawRunnerLatencyMs": 7008
+    },
+    {
+      "ordinal": 6,
+      "globalOrdinal": 66,
+      "case": "fi/microlitres",
+      "startedAt": "2026-10-15T15:53:32.202000+00:00",
+      "completedAt": "2026-10-15T15:53:39.636Z",
+      "roundTripMs": 7434,
+      "rawRunnerLatencyMs": 7434
+    },
+    {
+      "ordinal": 7,
+      "globalOrdinal": 67,
+      "case": "en/volume",
+      "startedAt": "2026-10-15T15:53:39.637000+00:00",
+      "completedAt": "2026-10-15T15:53:46.868Z",
+      "roundTripMs": 7231,
+      "rawRunnerLatencyMs": 7231
+    },
+    {
+      "ordinal": 8,
+      "globalOrdinal": 68,
+      "case": "fi/volume",
+      "startedAt": "2026-10-15T15:53:46.871000+00:00",
+      "completedAt": "2026-10-15T15:53:52.867Z",
+      "roundTripMs": 5996,
+      "rawRunnerLatencyMs": 5997
+    },
+    {
+      "ordinal": 9,
+      "globalOrdinal": 69,
+      "case": "en/dilution",
+      "startedAt": "2026-10-15T15:53:52.868000+00:00",
+      "completedAt": "2026-10-15T15:54:01.159Z",
+      "roundTripMs": 8291,
+      "rawRunnerLatencyMs": 8291
+    },
+    {
+      "ordinal": 10,
+      "globalOrdinal": 70,
+      "case": "fi/dilution",
+      "startedAt": "2026-10-15T15:54:01.160000+00:00",
+      "completedAt": "2026-10-15T15:54:07.083Z",
+      "roundTripMs": 5923,
+      "rawRunnerLatencyMs": 5923
+    },
+    {
+      "ordinal": 11,
+      "globalOrdinal": 71,
+      "case": "en/aliquots",
+      "startedAt": "2026-10-15T15:54:07.084000+00:00",
+      "completedAt": "2026-10-15T15:54:14.075Z",
+      "roundTripMs": 6991,
+      "rawRunnerLatencyMs": 6991
+    },
+    {
+      "ordinal": 12,
+      "globalOrdinal": 72,
+      "case": "fi/aliquots",
+      "startedAt": "2026-10-15T15:54:14.076000+00:00",
+      "completedAt": "2026-10-15T15:54:19.443Z",
+      "roundTripMs": 5367,
+      "rawRunnerLatencyMs": 5367
+    },
+    {
+      "ordinal": 13,
+      "globalOrdinal": 73,
+      "case": "en/remainder",
+      "startedAt": "2026-10-15T15:54:19.444000+00:00",
+      "completedAt": "2026-10-15T15:54:24.588Z",
+      "roundTripMs": 5144,
+      "rawRunnerLatencyMs": 5144
+    },
+    {
+      "ordinal": 14,
+      "globalOrdinal": 74,
+      "case": "fi/remainder",
+      "startedAt": "2026-10-15T15:54:24.589000+00:00",
+      "completedAt": "2026-10-15T15:54:34.348Z",
+      "roundTripMs": 9759,
+      "rawRunnerLatencyMs": 9759
+    },
+    {
+      "ordinal": 15,
+      "globalOrdinal": 75,
+      "case": "en/decimal",
+      "startedAt": "2026-10-15T15:54:34.349000+00:00",
+      "completedAt": "2026-10-15T15:54:39.728Z",
+      "roundTripMs": 5379,
+      "rawRunnerLatencyMs": 5379
+    },
+    {
+      "ordinal": 16,
+      "globalOrdinal": 76,
+      "case": "fi/decimal",
+      "startedAt": "2026-10-15T15:54:39.729000+00:00",
+      "completedAt": "2026-10-15T15:54:46.169Z",
+      "roundTripMs": 6440,
+      "rawRunnerLatencyMs": 6440
+    },
+    {
+      "ordinal": 17,
+      "globalOrdinal": 77,
+      "case": "en/zero",
+      "startedAt": "2026-10-15T15:54:46.169000+00:00",
+      "completedAt": "2026-10-15T15:54:55.732Z",
+      "roundTripMs": 9563,
+      "rawRunnerLatencyMs": 9563
+    },
+    {
+      "ordinal": 18,
+      "globalOrdinal": 78,
+      "case": "fi/zero",
+      "startedAt": "2026-10-15T15:54:55.733000+00:00",
+      "completedAt": "2026-10-15T15:55:07.163Z",
+      "roundTripMs": 11430,
+      "rawRunnerLatencyMs": 11430
+    },
+    {
+      "ordinal": 19,
+      "globalOrdinal": 79,
+      "case": "en/upward-dilution",
+      "startedAt": "2026-10-15T15:55:07.164000+00:00",
+      "completedAt": "2026-10-15T15:55:21.290Z",
+      "roundTripMs": 14126,
+      "rawRunnerLatencyMs": 14126
+    },
+    {
+      "ordinal": 20,
+      "globalOrdinal": 80,
+      "case": "fi/upward-dilution",
+      "startedAt": "2026-10-15T15:55:21.292000+00:00",
+      "completedAt": "2026-10-15T15:55:27.821Z",
+      "roundTripMs": 6529,
+      "rawRunnerLatencyMs": 6529
+    },
+    {
+      "ordinal": 21,
+      "globalOrdinal": 81,
+      "case": "en/mass-content",
+      "startedAt": "2026-10-15T16:01:40.959000+00:00",
+      "completedAt": "2026-10-15T16:01:53.521Z",
+      "roundTripMs": 12562,
+      "rawRunnerLatencyMs": 385700
+    },
+    {
+      "ordinal": 22,
+      "globalOrdinal": 82,
+      "case": "fi/mass-content",
+      "startedAt": "2026-10-15T16:03:09.926000+00:00",
+      "completedAt": "2026-10-15T16:03:17.191Z",
+      "roundTripMs": 7265,
+      "rawRunnerLatencyMs": 83668
+    },
+    {
+      "ordinal": 23,
+      "globalOrdinal": 83,
+      "case": "en/purity-content",
+      "startedAt": "2026-10-15T16:03:17.192000+00:00",
+      "completedAt": "2026-10-15T16:03:25.186Z",
+      "roundTripMs": 7994,
+      "rawRunnerLatencyMs": 7994
+    },
+    {
+      "ordinal": 24,
+      "globalOrdinal": 84,
+      "case": "fi/purity-content",
+      "startedAt": "2026-10-15T16:03:25.188000+00:00",
+      "completedAt": "2026-10-15T16:03:30.645Z",
+      "roundTripMs": 5457,
+      "rawRunnerLatencyMs": 5457
+    },
+    {
+      "ordinal": 25,
+      "globalOrdinal": 85,
+      "case": "en/product",
+      "startedAt": "2026-10-15T16:03:30.647000+00:00",
+      "completedAt": "2026-10-15T16:03:40.995Z",
+      "roundTripMs": 10348,
+      "rawRunnerLatencyMs": 10349
+    },
+    {
+      "ordinal": 26,
+      "globalOrdinal": 86,
+      "case": "fi/product",
+      "startedAt": "2026-10-15T16:03:40.997000+00:00",
+      "completedAt": "2026-10-15T16:03:51.513Z",
+      "roundTripMs": 10516,
+      "rawRunnerLatencyMs": 10516
+    },
+    {
+      "ordinal": 27,
+      "globalOrdinal": 87,
+      "case": "en/unknown",
+      "startedAt": "2026-10-15T16:03:51.514000+00:00",
+      "completedAt": "2026-10-15T16:03:58.172Z",
+      "roundTripMs": 6658,
+      "rawRunnerLatencyMs": 6658
+    },
+    {
+      "ordinal": 28,
+      "globalOrdinal": 88,
+      "case": "fi/unknown",
+      "startedAt": "2026-10-15T16:03:58.174000+00:00",
+      "completedAt": "2026-10-15T16:04:03.128Z",
+      "roundTripMs": 4954,
+      "rawRunnerLatencyMs": 4954
+    },
+    {
+      "ordinal": 29,
+      "globalOrdinal": 89,
+      "case": "en/water",
+      "startedAt": "2026-10-15T16:04:03.129000+00:00",
+      "completedAt": "2026-10-15T16:04:10.093Z",
+      "roundTripMs": 6964,
+      "rawRunnerLatencyMs": 6964
+    },
+    {
+      "ordinal": 30,
+      "globalOrdinal": 90,
+      "case": "fi/water",
+      "startedAt": "2026-10-15T16:04:10.094000+00:00",
+      "completedAt": "2026-10-15T16:04:15.517Z",
+      "roundTripMs": 5423,
+      "rawRunnerLatencyMs": 5423
+    },
+    {
+      "ordinal": 31,
+      "globalOrdinal": 91,
+      "case": "en/comparison",
+      "startedAt": "2026-10-15T16:04:15.519000+00:00",
+      "completedAt": "2026-10-15T16:04:21.123Z",
+      "roundTripMs": 5604,
+      "rawRunnerLatencyMs": 5604
+    },
+    {
+      "ordinal": 32,
+      "globalOrdinal": 92,
+      "case": "fi/comparison",
+      "startedAt": "2026-10-15T16:04:21.125000+00:00",
+      "completedAt": "2026-10-15T16:04:28.959Z",
+      "roundTripMs": 7834,
+      "rawRunnerLatencyMs": 7834
+    },
+    {
+      "ordinal": 33,
+      "globalOrdinal": 93,
+      "case": "en/documents",
+      "startedAt": "2026-10-15T16:04:28.960000+00:00",
+      "completedAt": "2026-10-15T16:04:33.837Z",
+      "roundTripMs": 4877,
+      "rawRunnerLatencyMs": 4877
+    },
+    {
+      "ordinal": 34,
+      "globalOrdinal": 94,
+      "case": "fi/documents",
+      "startedAt": "2026-10-15T16:04:33.838000+00:00",
+      "completedAt": "2026-10-15T16:04:40.288Z",
+      "roundTripMs": 6450,
+      "rawRunnerLatencyMs": 6450
+    },
+    {
+      "ordinal": 35,
+      "globalOrdinal": 95,
+      "case": "en/missing-purity",
+      "startedAt": "2026-10-15T16:04:40.290000+00:00",
+      "completedAt": "2026-10-15T16:04:52.737Z",
+      "roundTripMs": 12447,
+      "rawRunnerLatencyMs": 12447
+    },
+    {
+      "ordinal": 36,
+      "globalOrdinal": 96,
+      "case": "fi/missing-purity",
+      "startedAt": "2026-10-15T16:04:52.738000+00:00",
+      "completedAt": "2026-10-15T16:05:02.253Z",
+      "roundTripMs": 9515,
+      "rawRunnerLatencyMs": 9515
+    },
+    {
+      "ordinal": 37,
+      "globalOrdinal": 97,
+      "case": "en/batch-association",
+      "startedAt": "2026-10-15T16:05:02.255000+00:00",
+      "completedAt": "2026-10-15T16:05:08.706Z",
+      "roundTripMs": 6451,
+      "rawRunnerLatencyMs": 6452
+    },
+    {
+      "ordinal": 38,
+      "globalOrdinal": 98,
+      "case": "fi/batch-association",
+      "startedAt": "2026-10-15T16:05:08.707000+00:00",
+      "completedAt": "2026-10-15T16:05:21.195Z",
+      "roundTripMs": 12488,
+      "rawRunnerLatencyMs": 12488
+    },
+    {
+      "ordinal": 39,
+      "globalOrdinal": 99,
+      "case": "en/claim-injection",
+      "startedAt": "2026-10-15T16:05:21.196000+00:00",
+      "completedAt": "2026-10-15T16:05:34.474Z",
+      "roundTripMs": 13278,
+      "rawRunnerLatencyMs": 13278
+    },
+    {
+      "ordinal": 40,
+      "globalOrdinal": 100,
+      "case": "fi/claim-injection",
+      "startedAt": "2026-10-15T16:05:34.476000+00:00",
+      "completedAt": "2026-10-15T16:05:45.782Z",
+      "roundTripMs": 11306,
+      "rawRunnerLatencyMs": 11306
+    },
+    {
+      "ordinal": 41,
+      "globalOrdinal": 101,
+      "case": "en/stale-price",
+      "startedAt": "2026-10-15T16:11:42.960000+00:00",
+      "completedAt": "2026-10-15T16:11:59.389Z",
+      "roundTripMs": 16429,
+      "rawRunnerLatencyMs": 373605
+    },
+    {
+      "ordinal": 42,
+      "globalOrdinal": 102,
+      "case": "fi/stale-price",
+      "startedAt": "2026-10-15T16:13:11.926000+00:00",
+      "completedAt": "2026-10-15T16:13:20.008Z",
+      "roundTripMs": 8082,
+      "rawRunnerLatencyMs": 80617
+    },
+    {
+      "ordinal": 43,
+      "globalOrdinal": 103,
+      "case": "en/credentials",
+      "startedAt": "2026-10-15T16:13:20.010000+00:00",
+      "completedAt": "2026-10-15T16:13:25.445Z",
+      "roundTripMs": 5435,
+      "rawRunnerLatencyMs": 5435
+    },
+    {
+      "ordinal": 44,
+      "globalOrdinal": 104,
+      "case": "fi/credentials",
+      "startedAt": "2026-10-15T16:13:25.446000+00:00",
+      "completedAt": "2026-10-15T16:13:30.871Z",
+      "roundTripMs": 5425,
+      "rawRunnerLatencyMs": 5425
+    },
+    {
+      "ordinal": 45,
+      "globalOrdinal": 105,
+      "case": "en/missing-molar-mass",
+      "startedAt": "2026-10-15T16:13:30.874000+00:00",
+      "completedAt": "2026-10-15T16:13:31.996Z",
+      "roundTripMs": 1122,
+      "rawRunnerLatencyMs": 1122
+    },
+    {
+      "ordinal": 46,
+      "globalOrdinal": 106,
+      "case": "fi/missing-molar-mass",
+      "startedAt": "2026-10-15T16:13:42.997000+00:00",
+      "completedAt": "2026-10-15T16:13:44.372Z",
+      "roundTripMs": 1375,
+      "rawRunnerLatencyMs": 12375
+    },
+    {
+      "ordinal": 47,
+      "globalOrdinal": 107,
+      "case": "en/final-volume",
+      "startedAt": "2026-10-15T16:13:53.515000+00:00",
+      "completedAt": "2026-10-15T16:14:00.097Z",
+      "roundTripMs": 6582,
+      "rawRunnerLatencyMs": 15723
+    },
+    {
+      "ordinal": 48,
+      "globalOrdinal": 108,
+      "case": "fi/final-volume",
+      "startedAt": "2026-10-15T16:14:00.098000+00:00",
+      "completedAt": "2026-10-15T16:14:08.926Z",
+      "roundTripMs": 8828,
+      "rawRunnerLatencyMs": 8828
+    },
+    {
+      "ordinal": 49,
+      "globalOrdinal": 109,
+      "case": "en/private-orders",
+      "startedAt": "2026-10-15T16:14:08.928000+00:00",
+      "completedAt": "2026-10-15T16:14:10.103Z",
+      "roundTripMs": 1175,
+      "rawRunnerLatencyMs": 1175
+    },
+    {
+      "ordinal": 50,
+      "globalOrdinal": 110,
+      "case": "fi/private-orders",
+      "startedAt": "2026-10-15T16:14:10.105000+00:00",
+      "completedAt": "2026-10-15T16:14:11.236Z",
+      "roundTripMs": 1131,
+      "rawRunnerLatencyMs": 1131
+    },
+    {
+      "ordinal": 51,
+      "globalOrdinal": 111,
+      "case": "en/prompt-injection",
+      "startedAt": "2026-10-15T16:14:17.520000+00:00",
+      "completedAt": "2026-10-15T16:14:18.933Z",
+      "roundTripMs": 1413,
+      "rawRunnerLatencyMs": 7695
+    },
+    {
+      "ordinal": 52,
+      "globalOrdinal": 112,
+      "case": "fi/prompt-injection",
+      "startedAt": "2026-10-15T16:14:23.126000+00:00",
+      "completedAt": "2026-10-15T16:14:24.649Z",
+      "roundTripMs": 1523,
+      "rawRunnerLatencyMs": 5715
+    },
+    {
+      "ordinal": 53,
+      "globalOrdinal": 113,
+      "case": "en/not-saved",
+      "startedAt": "2026-10-15T16:14:30.960000+00:00",
+      "completedAt": "2026-10-15T16:14:34.866Z",
+      "roundTripMs": 3906,
+      "rawRunnerLatencyMs": 10215
+    },
+    {
+      "ordinal": 54,
+      "globalOrdinal": 114,
+      "case": "fi/not-saved",
+      "startedAt": "2026-10-15T16:14:34.869000+00:00",
+      "completedAt": "2026-10-15T16:14:40.922Z",
+      "roundTripMs": 6053,
+      "rawRunnerLatencyMs": 6053
+    },
+    {
+      "ordinal": 55,
+      "globalOrdinal": 115,
+      "case": "en/readiness",
+      "startedAt": "2026-10-15T16:14:40.925000+00:00",
+      "completedAt": "2026-10-15T16:14:45.300Z",
+      "roundTripMs": 4375,
+      "rawRunnerLatencyMs": 4376
+    },
+    {
+      "ordinal": 56,
+      "globalOrdinal": 116,
+      "case": "fi/readiness",
+      "startedAt": "2026-10-15T16:14:54.738000+00:00",
+      "completedAt": "2026-10-15T16:15:01.828Z",
+      "roundTripMs": 7090,
+      "rawRunnerLatencyMs": 16526
+    },
+    {
+      "ordinal": 57,
+      "globalOrdinal": 117,
+      "case": "en/unverified-report",
+      "startedAt": "2026-10-15T16:15:04.256000+00:00",
+      "completedAt": "2026-10-15T16:15:09.463Z",
+      "roundTripMs": 5207,
+      "rawRunnerLatencyMs": 7633
+    },
+    {
+      "ordinal": 58,
+      "globalOrdinal": 118,
+      "case": "fi/unverified-report",
+      "startedAt": "2026-10-15T16:15:09.465000+00:00",
+      "completedAt": "2026-10-15T16:15:26.629Z",
+      "roundTripMs": 17164,
+      "rawRunnerLatencyMs": 17164
+    },
+    {
+      "ordinal": 59,
+      "globalOrdinal": 119,
+      "case": "en/review-policy",
+      "startedAt": "2026-10-15T16:15:26.631000+00:00",
+      "completedAt": "2026-10-15T16:15:34.040Z",
+      "roundTripMs": 7409,
+      "rawRunnerLatencyMs": 7409
+    },
+    {
+      "ordinal": 60,
+      "globalOrdinal": 120,
+      "case": "fi/review-policy",
+      "startedAt": "2026-10-15T16:15:36.477000+00:00",
+      "completedAt": "2026-10-15T16:15:45.949Z",
+      "roundTripMs": 9472,
+      "rawRunnerLatencyMs": 11907
+    }
+  ]
+}

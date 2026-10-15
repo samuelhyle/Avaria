@@ -1,0 +1,24 @@
+
+> averianlabs-web@0.1.0 test:deployment /Users/purepanel/Avaria/averianlabs-web
+> node --test scripts/legacy-baseline.test.mjs
+
+✔ matches the original schema despite PostgreSQL expression formatting (3.189755ms)
+✔ refuses a missing table (1.729978ms)
+✔ refuses unknown tables (0.434203ms)
+✔ refuses an unexpected column (0.469956ms)
+✔ refuses a changed type (0.348853ms)
+✔ refuses changed nullability (0.236472ms)
+✔ preserves string-literal case when comparing defaults (0.360535ms)
+✔ refuses a changed generated column (0.271813ms)
+✔ refuses missing primary keys (0.366023ms)
+✔ refuses missing indexes (0.328969ms)
+✔ accepts the known embedding variant without changing stored vectors (0.262734ms)
+✔ refuses other embedding dimensions (0.285228ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 170.486588

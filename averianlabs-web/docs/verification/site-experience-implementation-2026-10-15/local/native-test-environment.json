@@ -1,0 +1,186 @@
+{
+  "reviewedAt": "2026-10-15T15:21:42.074559+00:00",
+  "scope": "Fresh isolated local QA database for implementation verification. No customer snapshot and no deployed database were used.",
+  "sourceCommit": "7c61288f4625d96890e7fbbcf5a2230f6e55f302",
+  "binarySource": "https://github.com/PostgresApp/PostgresApp/releases/download/v2.9.6/Postgres-2.9.6-16.dmg",
+  "extensionDocumentation": "https://postgresapp.com/extensions/",
+  "downloadSha256": "2689dc64d6a02e0a66e4585616919060d8fbf5bb06886fccc05b7f87638bf081",
+  "dmgChecksumVerified": true,
+  "bundleSignatureVerified": true,
+  "postgresVersion": "16.15",
+  "pgvectorVersion": "0.8.6",
+  "listenAddress": "127.0.0.1",
+  "port": 5439,
+  "database": "averian_reliability",
+  "role": "averian_qa",
+  "publicTables": 47,
+  "migrations": 6,
+  "draftReferenceProductsSeeded": 15,
+  "isolatedCommerceFixturesSeeded": true,
+  "globalInstallation": false,
+  "otherDatabasesAltered": false,
+  "priorEnvironmentIssue": "The previous Docker daemon terminated repeatedly. Those interrupted browser attempts are not verification passes. The native cluster removes that local daemon dependency; its termination source was not established.",
+  "stability": {
+    "complete": true,
+    "healthyThroughout": true,
+    "authenticatedTcpSqlSamples": 31,
+    "secondsObserved": 300.8,
+    "samples": [
+      {
+        "at": "2026-10-15T15:16:03.761800+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:16:13.801335+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:16:23.826601+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:16:33.850485+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:16:43.871601+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:16:53.895063+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:17:03.918969+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:17:13.939587+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:17:23.963423+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:17:33.984258+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:17:44.008853+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:17:54.034622+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:18:04.062023+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:18:14.088389+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:18:24.111566+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:18:34.136379+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:18:44.158519+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:18:54.197497+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:19:04.222538+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:19:14.259759+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:19:24.288074+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:19:34.312418+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:19:44.343785+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:19:54.366751+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:20:04.403069+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:20:14.427926+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:20:24.450815+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:20:34.475038+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:20:44.499653+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:20:54.524273+00:00",
+        "authenticatedTcpSqlReady": true
+      },
+      {
+        "at": "2026-10-15T15:21:04.548795+00:00",
+        "authenticatedTcpSqlReady": true
+      }
+    ]
+  },
+  "shutdown": {
+    "at": "2026-10-15T16:38:07.016972+00:00",
+    "method": "pg_ctl smart shutdown of the owned scratch data directory only",
+    "stopped": true,
+    "endpoint": "127.0.0.1:5439",
+    "privateFilesRetainedForAuditAndReuse": true,
+    "otherDatabasesOrDockerTouched": false
+  },
+  "lifecycleEvents": [
+    {
+      "at": "2026-10-15T16:41:13.284484+00:00",
+      "event": "restarted_owned_cluster_for_floating_widget_regression",
+      "endpoint": "127.0.0.1:5439",
+      "authenticatedTcpQueryPassed": true,
+      "database": "averian_reliability",
+      "postgresqlVersion": "16.15",
+      "otherDatabasesOrDockerTouched": false
+    },
+    {
+      "at": "2026-10-15T17:35:30.977825+00:00",
+      "action": "smart shutdown of owned nativeQA5439 only",
+      "reason": "Release owner confirmed local Browser fixtures removed by cleanup command exit0; no further local test DB needed.",
+      "ownedDataDirectoryAndPortVerified": true,
+      "smartShutdownExitCode": 0,
+      "pgCtlStatusAfterExitCode": 3,
+      "tcp5439ListenerAbsent": true,
+      "privateFilesPreserved": true,
+      "otherServicesTouched": false
+    }
+  ],
+  "currentState": "stopped after final authorized QA verification; private files preserved"
+}

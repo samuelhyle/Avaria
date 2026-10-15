@@ -1,0 +1,594 @@
+{
+  "reviewedAt": "2026-10-15T17:27:07.257506+00:00",
+  "reviewer": "Codex frontend_system_review, separate technical/editorial peer",
+  "reviewMethod": "All 18 actual answers and complete tool records were manually read before this static report was written. Truncated initial output was followed by a separate full read of dilution/aliquot cases. No new requests, browser sessions, builds or validations were initiated.",
+  "conclusion": "no_material_issue_found_in_this18_case_set",
+  "reviewedCaseCount": 18,
+  "sourceCommit": "4e4a948fb1cf722d11bac09340d140f174b54024",
+  "origin": "https://6ad10a0d17b4322a59f0afd8--averianlabs-demo.netlify.app",
+  "servingNodeVersion": "v24.21.0",
+  "buildAndLocalValidationNodeVersion": "v24.22.0",
+  "rawResultEvidence": "api-cases.json",
+  "rawResultSha256": "0aa79b5b88c1a95e1dce69d8dde2e9f274c0d2a9e39f01607a56b399f7466667",
+  "suiteHash": "625487a7fc40847437fe5f342d2aac7571ad9a98cccb37877eb39c480b7266c3",
+  "runtimeEvidence": "../../local/final-serving-runtime.json",
+  "sourceComparisonEvidence": "../final-server-source-equivalence.json",
+  "reviewScope": {
+    "numericalCases": 16,
+    "missingMolarGuidanceCases": 2,
+    "languages": [
+      "en",
+      "fi"
+    ],
+    "arithmeticAndUnitExamples": "Eight paired scenarios: concentration, µg conversion, µL conversion, required final volume, dilution, aliquots, remainder, and decimal/comma handling.",
+    "sourceAuthority": "Calculations remain based on given inputs with ideal-mass/final-volume/nominal-versus-measured/precision limits. No product/batch evidence is claimed or invented. Molar replies use actual reviewed guidance explicitly scoped site_guidance_not_product_evidence.",
+    "language": "Technical EN/FI editorial sanity review; no independent native-speaker certification is claimed.",
+    "scopeFlagClarification": "readOnly/noPersist/noRetrieve are evaluation flags. noRetrieve disables private/memory/RAG retrieval, not all permitted public information tools; these 18 cases used only calculation or reviewed guidance tools."
+  },
+  "materialIssues": [],
+  "limits": [
+    "Runtime/numerical/guidance contract passes and this technical/editorial peer review are distinct from independent scientific or native-language approval.",
+    "No approved original batch-report corpus was supplied; original-report recall, laboratory result faithfulness and product-specific scientific validation were not assessed.",
+    "This 18-case review does not cover every customer intent, all 60 historical cases, the separate additional 2 UI requests or the separate 18 display-state/synthetic-fixture browser checks, which completed outside this review scope.",
+    "A controlled safe abstention is appropriate task handling for these under-specified molar prompts, not a completed numerical molarity calculation.",
+    "User-input arithmetic does not prove measured content, preparation safety, solubility, product suitability or independent experimental validation."
+  ],
+  "rows": [
+    {
+      "caseNumber": 1,
+      "id": "concentration",
+      "locale": "en",
+      "prompt": "Calculate the concentration of 10 mg in a final solution volume of 2 mL.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "calculateLaboratory",
+          "version": "laboratory-v2",
+          "actualInputs": {
+            "mode": "concentration",
+            "massMg": 10,
+            "finalVolumeMl": 2
+          },
+          "actualValues": {
+            "concentrationMgPerMl": 5,
+            "concentrationMcgPerMl": 5000
+          },
+          "formula": "c = m / V",
+          "assumptions": "Ideal mass balance without loss. Nominal quantity does not establish measured content. Use final solution volume."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "10 mg / 2 mL gives 5 mg/mL and 5000 µg/mL; final volume and nominal-content/precision limits are explicit.",
+      "sourceContract": "user_input_calculation_with_nominal_content_limits",
+      "languageReview": "Meaning preserved and readable; SI units and decimal notation consistent.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    },
+    {
+      "caseNumber": 2,
+      "id": "concentration",
+      "locale": "fi",
+      "prompt": "Laske pitoisuus: 10 mg ja liuoksen lopullinen tilavuus 2 mL.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "calculateLaboratory",
+          "version": "laboratory-v2",
+          "actualInputs": {
+            "mode": "concentration",
+            "massMg": 10,
+            "finalVolumeMl": 2
+          },
+          "actualValues": {
+            "concentrationMgPerMl": 5,
+            "concentrationMcgPerMl": 5000
+          },
+          "formula": "c = m / V",
+          "assumptions": "Laskennallinen massatase ilman hävikkiä. Nimellismäärä ei osoita mitattua sisältöä. Käytä lopullista liuostilavuutta."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "10 mg / 2 mL gives 5 mg/mL and 5000 µg/mL; final volume and nominal-content/precision limits are explicit.",
+      "sourceContract": "user_input_calculation_with_nominal_content_limits",
+      "languageReview": "Meaning preserved and readable; SI units consistent. Finnish decimal commas correctly used where applicable.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    },
+    {
+      "caseNumber": 3,
+      "id": "micrograms",
+      "locale": "en",
+      "prompt": "Calculate concentration for 500 micrograms in a final 1 mL solution.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "calculateLaboratory",
+          "version": "laboratory-v2",
+          "actualInputs": {
+            "mode": "concentration",
+            "massMg": 0.5,
+            "finalVolumeMl": 1
+          },
+          "actualValues": {
+            "concentrationMgPerMl": 0.5,
+            "concentrationMcgPerMl": 500
+          },
+          "formula": "c = m / V",
+          "assumptions": "Ideal mass balance without loss. Nominal quantity does not establish measured content. Use final solution volume."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "500 µg is correctly represented as 0.5 mg; final 1 mL gives 0.5 mg/mL and 500 µg/mL.",
+      "sourceContract": "user_input_calculation_with_nominal_content_limits",
+      "languageReview": "Meaning preserved and readable; SI units and decimal notation consistent.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    },
+    {
+      "caseNumber": 4,
+      "id": "micrograms",
+      "locale": "fi",
+      "prompt": "Laske pitoisuus: 500 mikrogrammaa ja lopullinen tilavuus 1 mL.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "calculateLaboratory",
+          "version": "laboratory-v2",
+          "actualInputs": {
+            "mode": "concentration",
+            "massMg": 0.5,
+            "finalVolumeMl": 1
+          },
+          "actualValues": {
+            "concentrationMgPerMl": 0.5,
+            "concentrationMcgPerMl": 500
+          },
+          "formula": "c = m / V",
+          "assumptions": "Laskennallinen massatase ilman hävikkiä. Nimellismäärä ei osoita mitattua sisältöä. Käytä lopullista liuostilavuutta."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "500 µg is correctly represented as 0.5 mg; final 1 mL gives 0.5 mg/mL and 500 µg/mL.",
+      "sourceContract": "user_input_calculation_with_nominal_content_limits",
+      "languageReview": "Meaning preserved and readable; SI units consistent. Finnish decimal commas correctly used where applicable.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    },
+    {
+      "caseNumber": 5,
+      "id": "microlitres",
+      "locale": "en",
+      "prompt": "Calculate concentration for 1 mg in a final 500 microlitres of solution.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "calculateLaboratory",
+          "version": "laboratory-v2",
+          "actualInputs": {
+            "mode": "concentration",
+            "massMg": 1,
+            "finalVolumeMl": 0.5
+          },
+          "actualValues": {
+            "concentrationMgPerMl": 2,
+            "concentrationMcgPerMl": 2000
+          },
+          "formula": "c = m / V",
+          "assumptions": "Ideal mass balance without loss. Nominal quantity does not establish measured content. Use final solution volume."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "500 µL is correctly represented as 0.5 mL; 1 mg gives 2 mg/mL and 2000 µg/mL.",
+      "sourceContract": "user_input_calculation_with_nominal_content_limits",
+      "languageReview": "Meaning preserved and readable; SI units and decimal notation consistent.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    },
+    {
+      "caseNumber": 6,
+      "id": "microlitres",
+      "locale": "fi",
+      "prompt": "Laske pitoisuus: 1 mg ja lopullinen tilavuus 500 mikrolitraa.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "calculateLaboratory",
+          "version": "laboratory-v2",
+          "actualInputs": {
+            "mode": "concentration",
+            "massMg": 1,
+            "finalVolumeMl": 0.5
+          },
+          "actualValues": {
+            "concentrationMgPerMl": 2,
+            "concentrationMcgPerMl": 2000
+          },
+          "formula": "c = m / V",
+          "assumptions": "Laskennallinen massatase ilman hävikkiä. Nimellismäärä ei osoita mitattua sisältöä. Käytä lopullista liuostilavuutta."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "500 µL is correctly represented as 0.5 mL; 1 mg gives 2 mg/mL and 2000 µg/mL.",
+      "sourceContract": "user_input_calculation_with_nominal_content_limits",
+      "languageReview": "Meaning preserved and readable; SI units consistent. Finnish decimal commas correctly used where applicable.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    },
+    {
+      "caseNumber": 7,
+      "id": "volume",
+      "locale": "en",
+      "prompt": "What final solution volume gives 5 mg/mL from 10 mg? Calculate it.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "calculateLaboratory",
+          "version": "laboratory-v2",
+          "actualInputs": {
+            "mode": "volume",
+            "massMg": 10,
+            "targetMgPerMl": 5
+          },
+          "actualValues": {
+            "finalVolumeMl": 2,
+            "finalVolumeUl": 2000
+          },
+          "formula": "V = m / c",
+          "assumptions": "Ideal mass balance without loss. Nominal quantity does not establish measured content. Use final solution volume."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "10 mg at 5 mg/mL requires final 2 mL (2000 µL); final solution volume is distinguished from unsupported handling claims.",
+      "sourceContract": "user_input_calculation_with_nominal_content_limits",
+      "languageReview": "Meaning preserved and readable; SI units and decimal notation consistent.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    },
+    {
+      "caseNumber": 8,
+      "id": "volume",
+      "locale": "fi",
+      "prompt": "Laske lopullinen liuostilavuus: massa 10 mg, tavoitepitoisuus 5 mg/mL.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "calculateLaboratory",
+          "version": "laboratory-v2",
+          "actualInputs": {
+            "mode": "volume",
+            "massMg": 10,
+            "targetMgPerMl": 5
+          },
+          "actualValues": {
+            "finalVolumeMl": 2,
+            "finalVolumeUl": 2000
+          },
+          "formula": "V = m / c",
+          "assumptions": "Laskennallinen massatase ilman hävikkiä. Nimellismäärä ei osoita mitattua sisältöä. Käytä lopullista liuostilavuutta."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "10 mg at 5 mg/mL requires final 2 mL (2000 µL); final solution volume is distinguished from unsupported handling claims.",
+      "sourceContract": "user_input_calculation_with_nominal_content_limits",
+      "languageReview": "Meaning preserved and readable; SI units consistent. Finnish decimal commas correctly used where applicable.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    },
+    {
+      "caseNumber": 9,
+      "id": "dilution",
+      "locale": "en",
+      "prompt": "Calculate a dilution from 5 mg/mL stock to 1 mg/mL, final volume 2 mL.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "calculateLaboratory",
+          "version": "laboratory-v2",
+          "actualInputs": {
+            "mode": "dilution",
+            "stockMgPerMl": 5,
+            "targetMgPerMl": 1,
+            "finalVolumeMl": 2
+          },
+          "actualValues": {
+            "stockVolumeMl": 0.4,
+            "stockVolumeUl": 400,
+            "finalVolumeMl": 2,
+            "makeUpVolumeMl": 1.6
+          },
+          "formula": "c₁ × V₁ = c₂ × V₂",
+          "assumptions": "Ideal mass balance without loss. Nominal quantity does not establish measured content. Use final solution volume."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "5 mg/mL stock to 1 mg/mL at final 2 mL requires 0.4 mL stock and ideal 1.6 mL make-up. The answer explicitly states additive-volume assumptions and approved-method scope.",
+      "sourceContract": "user_input_calculation_with_nominal_content_limits",
+      "languageReview": "Meaning preserved and readable; SI units and decimal notation consistent.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    },
+    {
+      "caseNumber": 10,
+      "id": "dilution",
+      "locale": "fi",
+      "prompt": "Laske laimennus: kantaliuos 5 mg/mL, tavoite 1 mg/mL, lopullinen tilavuus 2 mL.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "calculateLaboratory",
+          "version": "laboratory-v2",
+          "actualInputs": {
+            "mode": "dilution",
+            "stockMgPerMl": 5,
+            "targetMgPerMl": 1,
+            "finalVolumeMl": 2
+          },
+          "actualValues": {
+            "stockVolumeMl": 0.4,
+            "stockVolumeUl": 400,
+            "finalVolumeMl": 2,
+            "makeUpVolumeMl": 1.6
+          },
+          "formula": "c₁ × V₁ = c₂ × V₂",
+          "assumptions": "Laskennallinen massatase ilman hävikkiä. Nimellismäärä ei osoita mitattua sisältöä. Käytä lopullista liuostilavuutta."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "5 mg/mL stock to 1 mg/mL at final 2 mL requires 0.4 mL stock and ideal 1.6 mL make-up. The answer explicitly states additive-volume assumptions and approved-method scope.",
+      "sourceContract": "user_input_calculation_with_nominal_content_limits",
+      "languageReview": "Meaning preserved and readable; SI units consistent. Finnish decimal commas correctly used where applicable.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    },
+    {
+      "caseNumber": 11,
+      "id": "aliquots",
+      "locale": "en",
+      "prompt": "Calculate laboratory aliquots: total 10 mg, final solution 2 mL, 250 micrograms per aliquot.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "calculateLaboratory",
+          "version": "laboratory-v2",
+          "actualInputs": {
+            "mode": "aliquots",
+            "massMg": 10,
+            "finalVolumeMl": 2,
+            "aliquotMcg": 250
+          },
+          "actualValues": {
+            "concentrationMgPerMl": 5,
+            "concentrationMcgPerMl": 5000,
+            "aliquotVolumeMl": 0.05,
+            "aliquotVolumeUl": 50,
+            "aliquotCount": 40,
+            "remainingMassMcg": 0,
+            "remainingVolumeMl": 0
+          },
+          "formula": "c = m / V; Vₐ = mₐ / c; N = floor(m / mₐ)",
+          "assumptions": "Ideal mass balance without loss. Nominal quantity does not establish measured content. Use final solution volume."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "10 mg in final 2 mL gives 5 mg/mL; 250 µg corresponds to 50 µL, with 40 complete aliquots and zero remainder.",
+      "sourceContract": "user_input_calculation_with_nominal_content_limits",
+      "languageReview": "Meaning preserved and readable; SI units and decimal notation consistent.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    },
+    {
+      "caseNumber": 12,
+      "id": "aliquots",
+      "locale": "fi",
+      "prompt": "Laske osanäytteet: massa 10 mg, lopullinen liuostilavuus 2 mL ja 250 mikrogrammaa osanäytteessä.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "calculateLaboratory",
+          "version": "laboratory-v2",
+          "actualInputs": {
+            "mode": "aliquots",
+            "massMg": 10,
+            "finalVolumeMl": 2,
+            "aliquotMcg": 250
+          },
+          "actualValues": {
+            "concentrationMgPerMl": 5,
+            "concentrationMcgPerMl": 5000,
+            "aliquotVolumeMl": 0.05,
+            "aliquotVolumeUl": 50,
+            "aliquotCount": 40,
+            "remainingMassMcg": 0,
+            "remainingVolumeMl": 0
+          },
+          "formula": "c = m / V; Vₐ = mₐ / c; N = floor(m / mₐ)",
+          "assumptions": "Laskennallinen massatase ilman hävikkiä. Nimellismäärä ei osoita mitattua sisältöä. Käytä lopullista liuostilavuutta."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "10 mg in final 2 mL gives 5 mg/mL; 250 µg corresponds to 50 µL, with 40 complete aliquots and zero remainder.",
+      "sourceContract": "user_input_calculation_with_nominal_content_limits",
+      "languageReview": "Meaning preserved and readable; SI units consistent. Finnish decimal commas correctly used where applicable.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    },
+    {
+      "caseNumber": 13,
+      "id": "remainder",
+      "locale": "en",
+      "prompt": "Calculate aliquots and remaining material: total 1 mg, final 1 mL, 300 micrograms per aliquot.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "calculateLaboratory",
+          "version": "laboratory-v2",
+          "actualInputs": {
+            "mode": "aliquots",
+            "massMg": 1,
+            "finalVolumeMl": 1,
+            "aliquotMcg": 300
+          },
+          "actualValues": {
+            "concentrationMgPerMl": 1,
+            "concentrationMcgPerMl": 1000,
+            "aliquotVolumeMl": 0.3,
+            "aliquotVolumeUl": 300,
+            "aliquotCount": 3,
+            "remainingMassMcg": 100,
+            "remainingVolumeMl": 0.10000000000000009
+          },
+          "formula": "c = m / V; Vₐ = mₐ / c; N = floor(m / mₐ)",
+          "assumptions": "Ideal mass balance without loss. Nominal quantity does not establish measured content. Use final solution volume."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "1 mg / final 1 mL and 300 µg per aliquot gives 300 µL each, 3 complete aliquots and 100 µg / 0.1 mL remainder. Raw floating-point 0.10000000000000009 mL is appropriately displayed as 0.1 mL (FI: 0,1 mL).",
+      "sourceContract": "user_input_calculation_with_nominal_content_limits",
+      "languageReview": "Meaning preserved and readable; SI units and decimal notation consistent.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    },
+    {
+      "caseNumber": 14,
+      "id": "remainder",
+      "locale": "fi",
+      "prompt": "Laske osanäytteet ja jäännös: massa 1 mg, lopullinen tilavuus 1 mL, 300 mikrogrammaa osanäytteessä.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "calculateLaboratory",
+          "version": "laboratory-v2",
+          "actualInputs": {
+            "mode": "aliquots",
+            "massMg": 1,
+            "finalVolumeMl": 1,
+            "aliquotMcg": 300
+          },
+          "actualValues": {
+            "concentrationMgPerMl": 1,
+            "concentrationMcgPerMl": 1000,
+            "aliquotVolumeMl": 0.3,
+            "aliquotVolumeUl": 300,
+            "aliquotCount": 3,
+            "remainingMassMcg": 100,
+            "remainingVolumeMl": 0.10000000000000009
+          },
+          "formula": "c = m / V; Vₐ = mₐ / c; N = floor(m / mₐ)",
+          "assumptions": "Laskennallinen massatase ilman hävikkiä. Nimellismäärä ei osoita mitattua sisältöä. Käytä lopullista liuostilavuutta."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "1 mg / final 1 mL and 300 µg per aliquot gives 300 µL each, 3 complete aliquots and 100 µg / 0.1 mL remainder. Raw floating-point 0.10000000000000009 mL is appropriately displayed as 0.1 mL (FI: 0,1 mL).",
+      "sourceContract": "user_input_calculation_with_nominal_content_limits",
+      "languageReview": "Meaning preserved and readable; SI units consistent. Finnish decimal commas correctly used where applicable.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    },
+    {
+      "caseNumber": 15,
+      "id": "decimal",
+      "locale": "en",
+      "prompt": "Calculate 0.5 mg in a final 0.25 mL solution.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "calculateLaboratory",
+          "version": "laboratory-v2",
+          "actualInputs": {
+            "mode": "concentration",
+            "massMg": 0.5,
+            "finalVolumeMl": 0.25
+          },
+          "actualValues": {
+            "concentrationMgPerMl": 2,
+            "concentrationMcgPerMl": 2000
+          },
+          "formula": "c = m / V",
+          "assumptions": "Ideal mass balance without loss. Nominal quantity does not establish measured content. Use final solution volume."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "0.5 mg / final 0.25 mL gives 2 mg/mL; Finnish comma-decimal inputs and outputs are consistent.",
+      "sourceContract": "user_input_calculation_with_nominal_content_limits",
+      "languageReview": "Meaning preserved and readable; SI units and decimal notation consistent.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    },
+    {
+      "caseNumber": 16,
+      "id": "decimal",
+      "locale": "fi",
+      "prompt": "Laske pitoisuus: 0,5 mg lopullisessa 0,25 mL liuoksessa.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "calculateLaboratory",
+          "version": "laboratory-v2",
+          "actualInputs": {
+            "mode": "concentration",
+            "massMg": 0.5,
+            "finalVolumeMl": 0.25
+          },
+          "actualValues": {
+            "concentrationMgPerMl": 2,
+            "concentrationMcgPerMl": 2000
+          },
+          "formula": "c = m / V",
+          "assumptions": "Laskennallinen massatase ilman hävikkiä. Nimellismäärä ei osoita mitattua sisältöä. Käytä lopullista liuostilavuutta."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "0.5 mg / final 0.25 mL gives 2 mg/mL; Finnish comma-decimal inputs and outputs are consistent.",
+      "sourceContract": "user_input_calculation_with_nominal_content_limits",
+      "languageReview": "Meaning preserved and readable; SI units consistent. Finnish decimal commas correctly used where applicable.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    },
+    {
+      "caseNumber": 17,
+      "id": "missing-molar-mass",
+      "locale": "en",
+      "prompt": "Calculate molar concentration for an unspecified peptide blend with no molar mass or composition.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "getResearchGuidance",
+          "topic": "molar_conversion",
+          "url": "/en/research-tools",
+          "scope": "site_guidance_not_product_evidence",
+          "version": "site-guidance-2026-10-15",
+          "actualGuidanceText": "Molar conversion is not currently implemented in this calculator. An unspecified peptide blend cannot be assigned a molar concentration without the chemical forms, component composition, appropriate molar masses, quantities and final solution volume. A generic weighted average is insufficient. Use the existing mass-concentration tools only for quantities and units you can establish; original product records are required before adding product-based molar conversion."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "Both languages withhold numerical molarity and invented chemistry, identify missing forms, composition, molar masses, quantities and final volume, and return reviewed site guidance with the correct locale research-tools link.",
+      "sourceContract": "reviewed_site_guidance_not_product_evidence",
+      "languageReview": "Meaning preserved and readable; SI units and decimal notation consistent.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    },
+    {
+      "caseNumber": 18,
+      "id": "missing-molar-mass",
+      "locale": "fi",
+      "prompt": "Laske ainemääräpitoisuus määrittelemättömälle peptidiseokselle ilman moolimassaa tai koostumusta.",
+      "reviewedAnswerAndFullToolRecords": true,
+      "toolOutcomes": [
+        {
+          "name": "getResearchGuidance",
+          "topic": "molar_conversion",
+          "url": "/fi/research-tools",
+          "scope": "site_guidance_not_product_evidence",
+          "version": "site-guidance-2026-10-15",
+          "actualGuidanceText": "Ainemääräpitoisuuden laskenta ei ole tällä hetkellä käytössä tässä laskurissa. Määrittelemättömän peptidiseoksen ainemääräpitoisuutta ei voida määrittää ilman kemiallisia muotoja, aineosien koostumusta, asianmukaisia moolimassoja, määriä ja lopullista liuostilavuutta. Yleinen painotettu keskiarvo ei riitä. Käytä nykyisiä massapitoisuustyökaluja vain määrillä ja yksiköillä, jotka voit osoittaa. Tuotekohtaisen ainemääräpitoisuuden lisääminen edellyttää alkuperäisiä tuotetietoja."
+        }
+      ],
+      "technicalEditorialConclusion": "no_material_issue_found",
+      "reviewNote": "Both languages withhold numerical molarity and invented chemistry, identify missing forms, composition, molar masses, quantities and final volume, and return reviewed site guidance with the correct locale research-tools link.",
+      "sourceContract": "reviewed_site_guidance_not_product_evidence",
+      "languageReview": "Meaning preserved and readable; SI units consistent. Finnish decimal commas correctly used where applicable.",
+      "independentScientificApproval": "pending",
+      "independentNativeLanguageApproval": "pending"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"dictionaryRows":1320,"changedDictionaryRows":139,"transactionalEmailRows":25,"missingFinnishKeys":[],"observedLocales":["en","fi"],"additionalLocales":"DE/SV/NL key parity retained. Document-library additions are translated; neutral metadata and new shared workspace/brand/home additions currently use English fallback and require native review."}

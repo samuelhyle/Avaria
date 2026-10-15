@@ -1,0 +1,60 @@
+{
+  "checkedAt": "2026-10-15T15:52:20.551Z",
+  "origin": "https://6ad0f4d8d24ede22e5d83db6--averianlabs-demo.netlify.app",
+  "sourceCommit": "0354c14fc50a5b032c0265e790246b22d3ed0969",
+  "suiteHash": "7fb748835fd7893951095b5350af75eac25d1e7bb72ef29cbcd810b6c967b5da",
+  "note": "The EN first official suite prompt was typed and sent in the actual candidate4 browser composer. Its single same-origin real API request used the exact official anonymous no-cookie readOnly/noPersist/noRetrieve body. The actual complete SSE response was buffered and delivered unchanged to the browser parser. The API returned correct inputs/result/text/done, but the browser displayed a blank assistant without the calculation card. FI browser submission was not attempted after this failure; the unchanged official runner resumed all remaining59 API cases. This is failed client-rendering evidence, not two successful browser cases or proof of incremental network delivery. The exact captured SSE is a client regression fixture; no synthetic answer was used.",
+  "checks": [
+    {
+      "locale": "en",
+      "prompt": "Calculate the concentration of 10 mg in a final solution volume of 2 mL.",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageErrors": [],
+      "consoleErrors": [],
+      "requestCount": 1,
+      "requestFlags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false,
+      "anonymousNoAccount": true,
+      "rendering": null,
+      "overflow": null,
+      "axeViolations": [],
+      "screenshots": [],
+      "pageStatus": 200,
+      "requestStartedAt": "2026-10-15T15:51:38.959Z",
+      "responseStatus": 200,
+      "responseCompletedAt": "2026-10-15T15:51:50.532Z",
+      "runtime": {
+        "completed": true,
+        "numericalCorrectness": true,
+        "guidanceCorrectness": true,
+        "invalidSuccess": false,
+        "errors": [],
+        "toolNames": [
+          "calculateLaboratory"
+        ]
+      }
+    },
+    {
+      "failure": {
+        "name": "Error",
+        "message": "expect(locator).toBeVisible() failed\n\nLocator: locator('main').locator('section').filter({ has: getByRole('heading', { name: 'Laboratory calculation', exact: true }) })\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" locator('main').locator('section').filter({ has: getByRole('heading', { name: 'Laboratory calculation', exact: true }) }) with timeout 30000ms\n  - waiting for locator('main').locator('section').filter({ has: getByRole('heading', { name: 'Laboratory calculation', exact: true }) })\n",
+        "at": "2026-10-15T15:52:20.551Z"
+      }
+    }
+  ],
+  "state": "failed_client_render",
+  "plannedLocales": [
+    "en",
+    "fi"
+  ],
+  "executedLocales": [
+    "en"
+  ]
+}

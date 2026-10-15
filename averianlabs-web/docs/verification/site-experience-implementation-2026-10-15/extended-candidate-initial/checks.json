@@ -1,0 +1,597 @@
+{
+  "checkedAt": "2026-10-15T15:10:56.208Z",
+  "base": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app",
+  "sourceCommit": "f5e74576d400d51cf60ff32828a6ba7e3cd54d02",
+  "scope": "Anonymous read-only extended browser checks on the immutable review site. No accounts, orders, posts, payments, email or provider calls. Two assistant requests are fulfilled entirely by labelled synthetic browser display fixtures.",
+  "limits": [
+    "Reflow-equivalent 720 CSS px represents a 1440px desktop at 200% zoom; this is viewport emulation, not a claim of native OS/browser zoom testing.",
+    "No physical mobile keyboard, assistive-technology/screen-reader, native-language customer or independent scientific approval.",
+    "Browser response fixtures test presentation, not provider behavior, retrieval quality or scientific correctness."
+  ],
+  "states": [
+    {
+      "id": "documents-no-match",
+      "locale": "en",
+      "width": 320,
+      "kind": "actual application",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/en/documents?q=read-only-display-check-no-matching-record-20261015&type=coa",
+      "status": 200,
+      "noindex": "noindex, nofollow\nnoindex",
+      "viewport": 320,
+      "scrollWidth": 320,
+      "dark": false,
+      "reducedMotion": false,
+      "focusedTag": "INPUT",
+      "focusedText": "",
+      "checks": {
+        "noMatch": true,
+        "keyboardMovesToProduct": true
+      },
+      "notes": [],
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "en-320-documents-no-match.png"
+    },
+    {
+      "id": "documents-cleared",
+      "locale": "en",
+      "width": 320,
+      "kind": "actual application",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/en/documents",
+      "viewport": 320,
+      "scrollWidth": 320,
+      "dark": false,
+      "reducedMotion": false,
+      "focusedTag": "BODY",
+      "focusedText": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c;(Array.is",
+      "checks": {
+        "cleared": true,
+        "noStaleNoMatch": true
+      },
+      "notes": [],
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "en-320-documents-cleared.png"
+    },
+    {
+      "id": "community-dark-reduced-motion",
+      "locale": "en",
+      "width": 414,
+      "kind": "actual application",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/en/community",
+      "status": 200,
+      "noindex": "noindex, nofollow\nnoindex",
+      "viewport": 414,
+      "scrollWidth": 414,
+      "dark": true,
+      "reducedMotion": true,
+      "focusedTag": "BODY",
+      "focusedText": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c;(Array.is",
+      "checks": {
+        "dark": true,
+        "reducedMotion": true
+      },
+      "notes": [],
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "en-414-community-dark-reduced-motion.png"
+    },
+    {
+      "id": "product-text-spacing",
+      "locale": "en",
+      "width": 768,
+      "kind": "actual application with browser-only text-spacing override",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/en/shop/bpc-157?sku=BPC157-10",
+      "status": 200,
+      "noindex": "noindex, nofollow\nnoindex",
+      "viewport": 768,
+      "scrollWidth": 768,
+      "dark": false,
+      "reducedMotion": false,
+      "focusedTag": "BODY",
+      "focusedText": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c;(Array.is",
+      "checks": {
+        "selectedSku": true
+      },
+      "notes": [
+        "Line height1.5; paragraph spacing2em; letter spacing.12em; word spacing.16em. No measurement precision or specimen appearance inferred."
+      ],
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "en-768-product-text-spacing.png"
+    },
+    {
+      "id": "home-200-percent-reflow-equivalent",
+      "locale": "en",
+      "width": 720,
+      "kind": "actual application in viewport emulation",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/en",
+      "status": 200,
+      "noindex": "noindex, nofollow\nnoindex",
+      "viewport": 720,
+      "scrollWidth": 720,
+      "dark": false,
+      "reducedMotion": false,
+      "focusedTag": "BODY",
+      "focusedText": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c;(Array.is",
+      "checks": {},
+      "notes": [
+        "720 CSS px models the layout width available when a1440px desktop is zoomed to200%; no native OS/browser zoom test is claimed."
+      ],
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "en-720-home-200-percent-reflow-equivalent.png"
+    },
+    {
+      "id": "assistant-long-markdown-fixture",
+      "locale": "en",
+      "width": 1024,
+      "kind": "synthetic browser response fixture; not a provider result",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/en/assistant",
+      "status": 200,
+      "noindex": "noindex, nofollow\nnoindex",
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "dark": false,
+      "reducedMotion": false,
+      "focusedTag": "BODY",
+      "focusedText": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c;(Array.is",
+      "checks": {
+        "multilineComposer": true,
+        "headingRendered": true,
+        "orderedList": true,
+        "unorderedList": true,
+        "noRemoteImageLoad": true,
+        "noJavascriptHref": true
+      },
+      "notes": [
+        "DISPLAY-FIXTURE-EN-20261015",
+        "The fixture has no returned product/report/source records."
+      ],
+      "errors": [],
+      "blockingAxe": [
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "nodes": [
+            [
+              "pre"
+            ]
+          ]
+        }
+      ],
+      "filename": "en-1024-assistant-long-markdown-fixture.png"
+    },
+    {
+      "id": "assistant-table-fixture-keyboard",
+      "locale": "en",
+      "width": 320,
+      "kind": "synthetic browser response fixture; not a provider result",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/en/assistant",
+      "viewport": 320,
+      "scrollWidth": 320,
+      "dark": false,
+      "reducedMotion": false,
+      "focusedTag": "DIV",
+      "focusedText": "Scrollable research table",
+      "checks": {
+        "tableKeyboardFocusable": true,
+        "tablePresent": true
+      },
+      "notes": [
+        "DISPLAY-FIXTURE-EN-20261015"
+      ],
+      "errors": [],
+      "blockingAxe": [
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "nodes": [
+            [
+              "pre"
+            ]
+          ]
+        }
+      ],
+      "filename": "en-320-assistant-table-fixture-keyboard.png"
+    },
+    {
+      "id": "first-visit-age-keyboard",
+      "locale": "en",
+      "width": 320,
+      "kind": "actual first-visit application; no eligibility answer submitted",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/en",
+      "status": 200,
+      "noindex": "noindex, nofollow\nnoindex",
+      "viewport": 320,
+      "scrollWidth": 320,
+      "dark": false,
+      "reducedMotion": false,
+      "focusedTag": "BUTTON",
+      "focusedText": "No, leave",
+      "checks": {
+        "focusContained": true,
+        "escapeDoesNotConfirm": true,
+        "cookieNotCompeting": true
+      },
+      "notes": [
+        "Only Tab and Escape were pressed. No eligibility confirmation or refusal occurred."
+      ],
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "en-320-first-visit-age-keyboard.png"
+    },
+    {
+      "id": "cookie-choice-keyboard",
+      "locale": "en",
+      "width": 414,
+      "kind": "preconfirmed-age browser fixture; actual cookie UI, no consent choice submitted",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/en",
+      "status": 200,
+      "noindex": "noindex, nofollow\nnoindex",
+      "viewport": 414,
+      "scrollWidth": 414,
+      "dark": false,
+      "reducedMotion": false,
+      "focusedTag": "BUTTON",
+      "focusedText": "Accept all",
+      "checks": {
+        "bannerInsideViewport": true,
+        "keyboardReachesAccept": true
+      },
+      "notes": [
+        "Age cookie is a test fixture. Cookie accept/reject actions were not clicked."
+      ],
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "en-414-cookie-choice-keyboard.png"
+    },
+    {
+      "id": "documents-no-match",
+      "locale": "fi",
+      "width": 320,
+      "kind": "actual application",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/fi/documents?q=read-only-display-check-no-matching-record-20261015&type=coa",
+      "status": 200,
+      "noindex": "noindex, nofollow\nnoindex",
+      "viewport": 320,
+      "scrollWidth": 320,
+      "dark": false,
+      "reducedMotion": false,
+      "focusedTag": "INPUT",
+      "focusedText": "",
+      "checks": {
+        "noMatch": true,
+        "keyboardMovesToProduct": true
+      },
+      "notes": [],
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "fi-320-documents-no-match.png"
+    },
+    {
+      "id": "documents-cleared",
+      "locale": "fi",
+      "width": 320,
+      "kind": "actual application",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/fi/documents",
+      "viewport": 320,
+      "scrollWidth": 320,
+      "dark": false,
+      "reducedMotion": false,
+      "focusedTag": "BODY",
+      "focusedText": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c;(Array.is",
+      "checks": {
+        "cleared": true,
+        "noStaleNoMatch": true
+      },
+      "notes": [],
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "fi-320-documents-cleared.png"
+    },
+    {
+      "id": "community-dark-reduced-motion",
+      "locale": "fi",
+      "width": 414,
+      "kind": "actual application",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/fi/community",
+      "status": 200,
+      "noindex": "noindex, nofollow\nnoindex",
+      "viewport": 414,
+      "scrollWidth": 414,
+      "dark": true,
+      "reducedMotion": true,
+      "focusedTag": "BODY",
+      "focusedText": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c;(Array.is",
+      "checks": {
+        "dark": true,
+        "reducedMotion": true
+      },
+      "notes": [],
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "fi-414-community-dark-reduced-motion.png"
+    },
+    {
+      "id": "product-text-spacing",
+      "locale": "fi",
+      "width": 768,
+      "kind": "actual application with browser-only text-spacing override",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/fi/shop/bpc-157?sku=BPC157-10",
+      "status": 200,
+      "noindex": "noindex, nofollow\nnoindex",
+      "viewport": 768,
+      "scrollWidth": 768,
+      "dark": false,
+      "reducedMotion": false,
+      "focusedTag": "BODY",
+      "focusedText": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c;(Array.is",
+      "checks": {
+        "selectedSku": true
+      },
+      "notes": [
+        "Line height1.5; paragraph spacing2em; letter spacing.12em; word spacing.16em. No measurement precision or specimen appearance inferred."
+      ],
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "fi-768-product-text-spacing.png"
+    },
+    {
+      "id": "home-200-percent-reflow-equivalent",
+      "locale": "fi",
+      "width": 720,
+      "kind": "actual application in viewport emulation",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/fi",
+      "status": 200,
+      "noindex": "noindex, nofollow\nnoindex",
+      "viewport": 720,
+      "scrollWidth": 720,
+      "dark": false,
+      "reducedMotion": false,
+      "focusedTag": "BODY",
+      "focusedText": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c;(Array.is",
+      "checks": {},
+      "notes": [
+        "720 CSS px models the layout width available when a1440px desktop is zoomed to200%; no native OS/browser zoom test is claimed."
+      ],
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "fi-720-home-200-percent-reflow-equivalent.png"
+    },
+    {
+      "id": "assistant-long-markdown-fixture",
+      "locale": "fi",
+      "width": 1024,
+      "kind": "synthetic browser response fixture; not a provider result",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/fi/assistant",
+      "status": 200,
+      "noindex": "noindex, nofollow\nnoindex",
+      "viewport": 1024,
+      "scrollWidth": 1024,
+      "dark": false,
+      "reducedMotion": false,
+      "focusedTag": "BODY",
+      "focusedText": "((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=[\"light\",\"dark\"];function k(b){var c;(Array.is",
+      "checks": {
+        "multilineComposer": true,
+        "headingRendered": true,
+        "orderedList": true,
+        "unorderedList": true,
+        "noRemoteImageLoad": true,
+        "noJavascriptHref": true
+      },
+      "notes": [
+        "DISPLAY-FIXTURE-FI-20261015",
+        "The fixture has no returned product/report/source records."
+      ],
+      "errors": [],
+      "blockingAxe": [
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "nodes": [
+            [
+              "pre"
+            ]
+          ]
+        }
+      ],
+      "filename": "fi-1024-assistant-long-markdown-fixture.png"
+    },
+    {
+      "id": "assistant-table-fixture-keyboard",
+      "locale": "fi",
+      "width": 320,
+      "kind": "synthetic browser response fixture; not a provider result",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/fi/assistant",
+      "viewport": 320,
+      "scrollWidth": 320,
+      "dark": false,
+      "reducedMotion": false,
+      "focusedTag": "DIV",
+      "focusedText": "Vieritettävä tutkimustaulukko",
+      "checks": {
+        "tableKeyboardFocusable": true,
+        "tablePresent": true
+      },
+      "notes": [
+        "DISPLAY-FIXTURE-FI-20261015"
+      ],
+      "errors": [],
+      "blockingAxe": [
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "nodes": [
+            [
+              "pre"
+            ]
+          ]
+        }
+      ],
+      "filename": "fi-320-assistant-table-fixture-keyboard.png"
+    },
+    {
+      "id": "first-visit-age-keyboard",
+      "locale": "fi",
+      "width": 320,
+      "kind": "actual first-visit application; no eligibility answer submitted",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/fi",
+      "status": 200,
+      "noindex": "noindex, nofollow\nnoindex",
+      "viewport": 320,
+      "scrollWidth": 320,
+      "dark": false,
+      "reducedMotion": false,
+      "focusedTag": "BUTTON",
+      "focusedText": "En, poistu",
+      "checks": {
+        "focusContained": true,
+        "escapeDoesNotConfirm": true,
+        "cookieNotCompeting": true
+      },
+      "notes": [
+        "Only Tab and Escape were pressed. No eligibility confirmation or refusal occurred."
+      ],
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "fi-320-first-visit-age-keyboard.png"
+    },
+    {
+      "id": "cookie-choice-keyboard",
+      "locale": "fi",
+      "width": 414,
+      "kind": "preconfirmed-age browser fixture; actual cookie UI, no consent choice submitted",
+      "url": "https://6ad0ebc74e792e02466f2234--averianlabs-demo.netlify.app/fi",
+      "status": 200,
+      "noindex": "noindex, nofollow\nnoindex",
+      "viewport": 414,
+      "scrollWidth": 414,
+      "dark": false,
+      "reducedMotion": false,
+      "focusedTag": "BUTTON",
+      "focusedText": "Hyväksy kaikki",
+      "checks": {
+        "bannerInsideViewport": true,
+        "keyboardReachesAccept": true
+      },
+      "notes": [
+        "Age cookie is a test fixture. Cookie accept/reject actions were not clicked."
+      ],
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "fi-414-cookie-choice-keyboard.png"
+    }
+  ],
+  "blockedWrites": [],
+  "fixtureRequests": [
+    {
+      "locale": "en",
+      "path": "/api/ai/chat",
+      "scope": "Synthetic browser response fixture; request never reaches server or AI provider",
+      "prompt": "DISPLAY FIXTURE ONLY\nSecond line\nThird line\nFourth line"
+    },
+    {
+      "locale": "fi",
+      "path": "/api/ai/chat",
+      "scope": "Synthetic browser response fixture; request never reaches server or AI provider",
+      "prompt": "DISPLAY FIXTURE ONLY\nSecond line\nThird line\nFourth line"
+    }
+  ],
+  "failures": [
+    {
+      "id": "assistant-long-markdown-fixture",
+      "locale": "en",
+      "overflow": false,
+      "errors": [],
+      "blockingAxe": [
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "nodes": [
+            [
+              "pre"
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "multilineComposer": true,
+        "headingRendered": true,
+        "orderedList": true,
+        "unorderedList": true,
+        "noRemoteImageLoad": true,
+        "noJavascriptHref": true
+      }
+    },
+    {
+      "id": "assistant-table-fixture-keyboard",
+      "locale": "en",
+      "overflow": false,
+      "errors": [],
+      "blockingAxe": [
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "nodes": [
+            [
+              "pre"
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "tableKeyboardFocusable": true,
+        "tablePresent": true
+      }
+    },
+    {
+      "id": "assistant-long-markdown-fixture",
+      "locale": "fi",
+      "overflow": false,
+      "errors": [],
+      "blockingAxe": [
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "nodes": [
+            [
+              "pre"
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "multilineComposer": true,
+        "headingRendered": true,
+        "orderedList": true,
+        "unorderedList": true,
+        "noRemoteImageLoad": true,
+        "noJavascriptHref": true
+      }
+    },
+    {
+      "id": "assistant-table-fixture-keyboard",
+      "locale": "fi",
+      "overflow": false,
+      "errors": [],
+      "blockingAxe": [
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "nodes": [
+            [
+              "pre"
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "tableKeyboardFocusable": true,
+        "tablePresent": true
+      }
+    }
+  ],
+  "finishedAt": "2026-10-15T15:12:02.981Z"
+}

@@ -1,0 +1,21 @@
+{
+  "sourceCommit": "4e4a948fb1cf722d11bac09340d140f174b54024",
+  "deployId": "6ad10a0d17b4322a59f0afd8",
+  "buildId": "6ad10a0d17b4322a59f0afd6",
+  "sourceZipSha256": "29153bd109814f6e114cf6d3850024c23b60b196af2f6e6448101742923ee27d",
+  "published": true,
+  "publishedLocked": true,
+  "publishedAt": "2026-10-15T17:32:20.090Z",
+  "verifiedAt": "2026-10-15T17:37:21.835Z",
+  "origin": "https://averianlabs-demo.netlify.app",
+  "httpContracts": 29,
+  "browserStates": 36,
+  "allPublicBadgeScriptAndFrameCountsZero": true,
+  "actualSharingPngs": 2,
+  "localeMetadataChecks": 2,
+  "httpBrowserEvidenceSha256": "a62293d0372c6a60c2cc818387664af96011f604510016e763537af4d2cb693f",
+  "metadataEvidenceSha256": "12456fc748bf6b7682484ad24bc7a02e62f3fc8c57cd9fc002e2a113c58cbf32",
+  "actualServingProof": "../local/final-serving-runtime.json",
+  "rollbackDeployId": "6ad0fcb3e98014388e373970",
+  "publicationScope": "Full application online review deployment; no merchant release or independent scientific/native approval implied. Linked older remote branch remains unsynchronized; the verified ZIP artifact is locked."
+}

@@ -1,0 +1,357 @@
+
+> averianlabs-web@0.1.0 build /Users/purepanel/Avaria/averianlabs-web
+> pnpm env:check && next build
+
+
+> averianlabs-web@0.1.0 env:check /Users/purepanel/Avaria/averianlabs-web
+> tsx scripts/check-env.ts
+
+[env:check] required production vars present ✓
+   ▲ Next.js 15.5.27
+   - Environments: .env.local
+   - Experiments (use with caution):
+     · serverActions
+     · clientTraceMetadata
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 37.7s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/277) ...
+   Generating static pages (69/277) 
+   Generating static pages (138/277) 
+   Generating static pages (207/277) 
+ ✓ Generating static pages (277/277)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                      Size  First Load JS
+┌ ○ /                                           193 B         209 kB
+├ ○ /_not-found                               1.01 kB         206 kB
+├ ● /[locale]                                 1.27 kB         234 kB
+├   ├ /en
+├   ├ /fi
+├   ├ /de
+├   └ [+2 more paths]
+├ ● /[locale]/about                             604 B         221 kB
+├   ├ /en/about
+├   ├ /fi/about
+├   ├ /de/about
+├   └ [+2 more paths]
+├ ● /[locale]/account                         5.89 kB         259 kB
+├   ├ /en/account
+├   ├ /fi/account
+├   ├ /de/account
+├   └ [+2 more paths]
+├ ƒ /[locale]/account/delete/confirm/[token]   1.5 kB         229 kB
+├ ● /[locale]/account/notifications           2.31 kB         230 kB
+├   ├ /en/account/notifications
+├   ├ /fi/account/notifications
+├   ├ /de/account/notifications
+├   └ [+2 more paths]
+├ ● /[locale]/account/orders                  1.18 kB         216 kB
+├   ├ /en/account/orders
+├   ├ /fi/account/orders
+├   ├ /de/account/orders
+├   └ [+2 more paths]
+├ ● /[locale]/account/plans                   3.47 kB         245 kB
+├   ├ /en/account/plans
+├   ├ /fi/account/plans
+├   ├ /de/account/plans
+├   └ [+2 more paths]
+├ ƒ /[locale]/account/plans/[id]              3.95 kB         246 kB
+├ ● /[locale]/admin                           2.73 kB         230 kB
+├   ├ /en/admin
+├   ├ /fi/admin
+├   ├ /de/admin
+├   └ [+2 more paths]
+├ ● /[locale]/admin/audit                     2.73 kB         230 kB
+├   ├ /en/admin/audit
+├   ├ /fi/admin/audit
+├   ├ /de/admin/audit
+├   └ [+2 more paths]
+├ ● /[locale]/admin/averia                    3.36 kB         231 kB
+├   ├ /en/admin/averia
+├   ├ /fi/admin/averia
+├   ├ /de/admin/averia
+├   └ [+2 more paths]
+├ ƒ /[locale]/admin/averia/[id]               3.86 kB         231 kB
+├ ● /[locale]/admin/documents                 5.72 kB         248 kB
+├   ├ /en/admin/documents
+├   ├ /fi/admin/documents
+├   ├ /de/admin/documents
+├   └ [+2 more paths]
+├ ● /[locale]/admin/moderation                4.64 kB         241 kB
+├   ├ /en/admin/moderation
+├   ├ /fi/admin/moderation
+├   ├ /de/admin/moderation
+├   └ [+2 more paths]
+├ ● /[locale]/assistant                       18.9 kB         299 kB
+├   ├ /en/assistant
+├   ├ /fi/assistant
+├   ├ /de/assistant
+├   └ [+2 more paths]
+├ ● /[locale]/blog                              193 B         209 kB
+├   ├ /en/blog
+├   ├ /fi/blog
+├   ├ /de/blog
+├   └ [+2 more paths]
+├ ● /[locale]/blog/[slug]                       193 B         209 kB
+├ ● /[locale]/blog/author/[slug]                186 B         214 kB
+├ ● /[locale]/checkout/address                  147 B         245 kB
+├   ├ /en/checkout/address
+├   ├ /fi/checkout/address
+├   ├ /de/checkout/address
+├   └ [+2 more paths]
+├ ● /[locale]/checkout/cart                    3.9 kB         224 kB
+├   ├ /en/checkout/cart
+├   ├ /fi/checkout/cart
+├   ├ /de/checkout/cart
+├   └ [+2 more paths]
+├ ƒ /[locale]/checkout/confirm/[orderId]      2.61 kB         211 kB
+├ ● /[locale]/checkout/email                    147 B         245 kB
+├   ├ /en/checkout/email
+├   ├ /fi/checkout/email
+├   ├ /de/checkout/email
+├   └ [+2 more paths]
+├ ● /[locale]/checkout/payment                  147 B         245 kB
+├   ├ /en/checkout/payment
+├   ├ /fi/checkout/payment
+├   ├ /de/checkout/payment
+├   └ [+2 more paths]
+├ ● /[locale]/checkout/shipping                 148 B         245 kB
+├   ├ /en/checkout/shipping
+├   ├ /fi/checkout/shipping
+├   ├ /de/checkout/shipping
+├   └ [+2 more paths]
+├ ● /[locale]/coa                               347 B         205 kB
+├   ├ /en/coa
+├   ├ /fi/coa
+├   ├ /de/coa
+├   └ [+2 more paths]
+├ ● /[locale]/community                       1.17 kB         216 kB
+├   ├ /en/community
+├   ├ /fi/community
+├   ├ /de/community
+├   └ [+2 more paths]
+├ ƒ /[locale]/community/[category]            1.17 kB         216 kB
+├ ● /[locale]/community/activity                193 B         209 kB
+├   ├ /en/community/activity
+├   ├ /fi/community/activity
+├   ├ /de/community/activity
+├   └ [+2 more paths]
+├ ● /[locale]/community/new                   2.45 kB         297 kB
+├   ├ /en/community/new
+├   ├ /fi/community/new
+├   ├ /de/community/new
+├   └ [+2 more paths]
+├ ● /[locale]/community/rules                   347 B         205 kB
+├   ├ /en/community/rules
+├   ├ /fi/community/rules
+├   ├ /de/community/rules
+├   └ [+2 more paths]
+├ ƒ /[locale]/community/thread/[slug]         4.15 kB         302 kB
+├ ● /[locale]/compare                          2.9 kB         223 kB
+├   ├ /en/compare
+├   ├ /fi/compare
+├   ├ /de/compare
+├   └ [+2 more paths]
+├ ● /[locale]/contact                         2.83 kB         236 kB
+├   ├ /en/contact
+├   ├ /fi/contact
+├   ├ /de/contact
+├   └ [+2 more paths]
+├ ● /[locale]/documents                         604 B         221 kB
+├   ├ /en/documents
+├   ├ /fi/documents
+├   ├ /de/documents
+├   └ [+2 more paths]
+├ ƒ /[locale]/documents/[id]                  3.36 kB         224 kB
+├ ● /[locale]/faq                             1.42 kB         218 kB
+├   ├ /en/faq
+├   ├ /fi/faq
+├   ├ /de/faq
+├   └ [+2 more paths]
+├ ● /[locale]/forgot-password                 2.14 kB         229 kB
+├   ├ /en/forgot-password
+├   ├ /fi/forgot-password
+├   ├ /de/forgot-password
+├   └ [+2 more paths]
+├ ● /[locale]/glossary                          193 B         209 kB
+├   ├ /en/glossary
+├   ├ /fi/glossary
+├   ├ /de/glossary
+├   └ [+2 more paths]
+├ ● /[locale]/glossary/[term]                   186 B         214 kB
+├ ● /[locale]/lab-tests                         604 B         221 kB
+├   ├ /en/lab-tests
+├   ├ /fi/lab-tests
+├   ├ /de/lab-tests
+├   └ [+2 more paths]
+├ ● /[locale]/legal/cookies                     426 B         217 kB
+├   ├ /en/legal/cookies
+├   ├ /fi/legal/cookies
+├   ├ /de/legal/cookies
+├   └ [+2 more paths]
+├ ● /[locale]/legal/privacy                     426 B         217 kB
+├   ├ /en/legal/privacy
+├   ├ /fi/legal/privacy
+├   ├ /de/legal/privacy
+├   └ [+2 more paths]
+├ ● /[locale]/legal/research-disclaimer         426 B         217 kB
+├   ├ /en/legal/research-disclaimer
+├   ├ /fi/legal/research-disclaimer
+├   ├ /de/legal/research-disclaimer
+├   └ [+2 more paths]
+├ ● /[locale]/legal/terms                       426 B         217 kB
+├   ├ /en/legal/terms
+├   ├ /fi/legal/terms
+├   ├ /de/legal/terms
+├   └ [+2 more paths]
+├ ƒ /[locale]/manifest.webmanifest              347 B         205 kB
+├ ● /[locale]/newsletter/confirm              1.18 kB         216 kB
+├   ├ /en/newsletter/confirm
+├   ├ /fi/newsletter/confirm
+├   ├ /de/newsletter/confirm
+├   └ [+2 more paths]
+├ ● /[locale]/partner                         2.32 kB         226 kB
+├   ├ /en/partner
+├   ├ /fi/partner
+├   ├ /de/partner
+├   └ [+2 more paths]
+├ ● /[locale]/peptide-calculator              7.04 kB         244 kB
+├   ├ /en/peptide-calculator
+├   ├ /fi/peptide-calculator
+├   ├ /de/peptide-calculator
+├   └ [+2 more paths]
+├ ● /[locale]/plans/[slug]                      193 B         209 kB
+├ ● /[locale]/quality                           604 B         221 kB
+├   ├ /en/quality
+├   ├ /fi/quality
+├   ├ /de/quality
+├   └ [+2 more paths]
+├ ● /[locale]/register                        2.33 kB         232 kB
+├   ├ /en/register
+├   ├ /fi/register
+├   ├ /de/register
+├   └ [+2 more paths]
+├ ● /[locale]/research-tools                    193 B         209 kB
+├   ├ /en/research-tools
+├   ├ /fi/research-tools
+├   ├ /de/research-tools
+├   └ [+2 more paths]
+├ ● /[locale]/reset-password                  2.19 kB         229 kB
+├   ├ /en/reset-password
+├   ├ /fi/reset-password
+├   ├ /de/reset-password
+├   └ [+2 more paths]
+├ ● /[locale]/rewards                           604 B         221 kB
+├   ├ /en/rewards
+├   ├ /fi/rewards
+├   ├ /de/rewards
+├   └ [+2 more paths]
+├ ● /[locale]/shop                            10.2 kB         243 kB
+├   ├ /en/shop
+├   ├ /fi/shop
+├   ├ /de/shop
+├   └ [+2 more paths]
+├ ƒ /[locale]/shop/[slug]                     8.54 kB         265 kB
+├ ● /[locale]/support/shipping-returns          426 B         217 kB
+├   ├ /en/support/shipping-returns
+├   ├ /fi/support/shipping-returns
+├   ├ /de/support/shipping-returns
+├   └ [+2 more paths]
+├ ● /[locale]/verify-email                    1.18 kB         216 kB
+├   ├ /en/verify-email
+├   ├ /fi/verify-email
+├   ├ /de/verify-email
+├   └ [+2 more paths]
+├ ● /[locale]/wishlist                        1.32 kB         243 kB
+├   ├ /en/wishlist
+├   ├ /fi/wishlist
+├   ├ /de/wishlist
+├   └ [+2 more paths]
+├ ƒ /api/account/delete                         347 B         205 kB
+├ ƒ /api/account/delete/confirm                 347 B         205 kB
+├ ƒ /api/account/export                         347 B         205 kB
+├ ƒ /api/account/gdpr                           347 B         205 kB
+├ ƒ /api/account/preferences                    347 B         205 kB
+├ ƒ /api/admin/ai/conversations                 347 B         205 kB
+├ ƒ /api/admin/ai/conversations/[id]            347 B         205 kB
+├ ƒ /api/admin/ai/draft-reply                   347 B         205 kB
+├ ƒ /api/admin/ai/metrics                       347 B         205 kB
+├ ƒ /api/admin/audit                            347 B         205 kB
+├ ƒ /api/admin/moderation                       347 B         205 kB
+├ ƒ /api/ai/chat                                347 B         205 kB
+├ ƒ /api/ai/consent                             347 B         205 kB
+├ ƒ /api/ai/conversations                       347 B         205 kB
+├ ƒ /api/ai/feedback                            347 B         205 kB
+├ ƒ /api/ai/identity                            347 B         205 kB
+├ ƒ /api/ai/memory                              347 B         205 kB
+├ ƒ /api/auth/[...nextauth]                     347 B         205 kB
+├ ƒ /api/auth/forgot-password                   347 B         205 kB
+├ ƒ /api/auth/register                          347 B         205 kB
+├ ƒ /api/auth/reset-password                    347 B         205 kB
+├ ƒ /api/calculations                           347 B         205 kB
+├ ƒ /api/calculations/[id]                      347 B         205 kB
+├ ƒ /api/cart-recovery                          347 B         205 kB
+├ ƒ /api/checkout                               347 B         205 kB
+├ ƒ /api/checkout/quote                         347 B         205 kB
+├ ƒ /api/contact                                347 B         205 kB
+├ ƒ /api/cron/maintenance                       347 B         205 kB
+├ ƒ /api/documents                              347 B         205 kB
+├ ƒ /api/documents/[id]                         347 B         205 kB
+├ ƒ /api/forum/categories                       347 B         205 kB
+├ ƒ /api/forum/drafts                           347 B         205 kB
+├ ƒ /api/forum/posts                            347 B         205 kB
+├ ƒ /api/forum/reactions                        347 B         205 kB
+├ ƒ /api/forum/reports                          347 B         205 kB
+├ ƒ /api/forum/threads                          347 B         205 kB
+├ ƒ /api/health                                 347 B         205 kB
+├ ƒ /api/newsletter                             347 B         205 kB
+├ ƒ /api/notifications                          347 B         205 kB
+├ ƒ /api/og/default                             347 B         205 kB
+├ ƒ /api/og/default/[locale]                    347 B         205 kB
+├ ƒ /api/og/document/[id]                       347 B         205 kB
+├ ƒ /api/og/document/[id]/[locale]              347 B         205 kB
+├ ƒ /api/og/glossary/[slug]                     347 B         205 kB
+├ ƒ /api/og/glossary/[slug]/[locale]            347 B         205 kB
+├ ƒ /api/og/plan/[slug]                         347 B         205 kB
+├ ƒ /api/og/plan/[slug]/[locale]                347 B         205 kB
+├ ƒ /api/og/thread/[slug]                       347 B         205 kB
+├ ƒ /api/og/thread/[slug]/[locale]              347 B         205 kB
+├ ƒ /api/orders/[orderId]/status                347 B         205 kB
+├ ƒ /api/partner                                347 B         205 kB
+├ ƒ /api/plans                                  347 B         205 kB
+├ ƒ /api/plans/[id]                             347 B         205 kB
+├ ƒ /api/plans/[id]/items                       347 B         205 kB
+├ ƒ /api/plans/[id]/items/[itemId]              347 B         205 kB
+├ ƒ /api/plans/share/[slug]                     347 B         205 kB
+├ ƒ /api/quotes                                 347 B         205 kB
+├ ƒ /api/referral/generate                      347 B         205 kB
+├ ƒ /api/referral/redeem                        347 B         205 kB
+├ ƒ /api/review-request                         347 B         205 kB
+├ ƒ /api/search                                 347 B         205 kB
+├ ƒ /api/shipping                               347 B         205 kB
+├ ƒ /api/vat                                    347 B         205 kB
+├ ƒ /api/webhooks/coinbase                      347 B         205 kB
+├ ƒ /api/webhooks/sanity                        347 B         205 kB
+├ ƒ /api/webhooks/stripe                        347 B         205 kB
+├ ○ /apple-icon                                 347 B         205 kB
+├ ○ /manifest.webmanifest                       347 B         205 kB
+├ ○ /robots.txt                                 347 B         205 kB
+├ ƒ /sitemap.xml                                347 B         205 kB
+└ ƒ /studio/[[...index]]                      1.45 kB         206 kB
++ First Load JS shared by all                  205 kB
+  ├ chunks/121b6f03-037b23fc1c09df7d.js       39.1 kB
+  ├ chunks/277-8ce1369951db3d01.js             107 kB
+  ├ chunks/9d81e687-8a1f3ef355ee4346.js       54.2 kB
+  └ other shared chunks (total)               4.62 kB
+
+
+ƒ Middleware                                  97.5 kB
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

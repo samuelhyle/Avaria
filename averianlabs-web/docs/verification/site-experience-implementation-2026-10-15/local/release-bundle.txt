@@ -1,0 +1,10 @@
+PASS /[locale]/page: 270.1 KiB gzip / 300 KiB
+PASS /[locale]/shop/page: 278.9 KiB gzip / 350 KiB
+PASS /[locale]/peptide-calculator/page: 272.3 KiB gzip / 350 KiB
+PASS /[locale]/assistant/page: 326.7 KiB gzip / 400 KiB
+PASS /[locale]/community/page: 266.6 KiB gzip / 350 KiB
+PASS /[locale]/documents/page: 266.1 KiB gzip / 350 KiB
+PASS /[locale]/shop/[slug]/page: 291.6 KiB gzip / 350 KiB
+PASS /[locale]/checkout/cart/page: 270.6 KiB gzip / 350 KiB
+PASS /[locale]/checkout/payment/page: 275.0 KiB gzip / 400 KiB
+All chunks (including deferred features): 3171.3 KiB gzip

@@ -1,0 +1,42 @@
+{
+  "recordedAt": "2026-10-15T16:51:22.746746+00:00",
+  "sourceCommit": "96249d6fa35a67296fd116442f104c8b4fba6a82",
+  "buildId": "MS4nvF6BDePmDQ-d9xKFx",
+  "counts": {
+    "passed": 138,
+    "failed": 2,
+    "explicitProviderSkips": 2,
+    "total": 142
+  },
+  "scope": "Actual isolated local catalogue/cart and explicit confirmation; browser-only chat SSE fixture. No provider/order/payment/account writes.",
+  "rows": [
+    {
+      "locale": "en",
+      "traceSha256": "e90964707bb7da5be8653089657b91fd28d0903414468b88ea7fd3eca7f33c37",
+      "observed": "Strict exact-cart state and disabled Added button assertions passed; clicking chat Close timed out because the active auto-opened cart overlay intercepted it.",
+      "contextAssertion": "Not reached in this attempt; moved immediately after actual cart/action assertions for the rerun."
+    },
+    {
+      "locale": "fi",
+      "traceSha256": "6342dd77a62fd34f902543d89da1fff4fdd52168172048617e6d7709c61f13c7",
+      "observed": "Strict exact-cart state and disabled Added button assertions passed; clicking chat Close timed out because the active auto-opened cart overlay intercepted it.",
+      "contextAssertion": "Not reached in this attempt; moved immediately after actual cart/action assertions for the rerun."
+    }
+  ],
+  "correction": "Tests now inspect and close the active cart overlay first, then close chat if still open, preserving strict persisted-cart/reload checks and moving emitted-context assertion immediately after confirmed action. No runtime change or click-through override.",
+  "rawArtifacts": "Original failure traces/screenshots/videos retained privately under /tmp/averian-experience-widget-browser-initial-20261015; not committed.",
+  "sanitizedLog": "widget-initial-browser.txt",
+  "rerun": {
+    "sourceCommit": "96249d6fa35a67296fd116442f104c8b4fba6a82",
+    "buildId": "MS4nvF6BDePmDQ-d9xKFx",
+    "counts": {
+      "passed": 140,
+      "failed": 0,
+      "explicitProviderSkips": 2,
+      "total": 142
+    },
+    "result": "Root-coordinated full-suite rerun passed both language cases, including exact confirmed cart, outgoing catalogue product context, active drawer handling and reload persistence.",
+    "harnessProvenance": "Runtime remained the same source/build. The overlay test-order correction was verification-only working-tree source after the runtime commit.",
+    "log": "Root retained /tmp/averian-experience-widget-browser-final-20261015.log; final evidence index provides the sanitized release record."
+  }
+}

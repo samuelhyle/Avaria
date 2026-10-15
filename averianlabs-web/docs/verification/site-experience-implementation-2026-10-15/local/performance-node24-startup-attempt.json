@@ -1,0 +1,24 @@
+{
+  "runtimeSourceCommit": "4e4a948fb1cf722d11bac09340d140f174b54024",
+  "buildId": "gbVoYSCId_d8o20D5NFmL",
+  "nodeVersion": "v24.22.0",
+  "ownedServerPid": 20542,
+  "boundPort": 3217,
+  "serverLifecycle": "Server and audits share one foreground parent; EXIT trap stops only this owned server.",
+  "startedAt": "2026-10-15T17:26:22.717Z",
+  "healthBeforeAudits": {
+    "at": "2026-10-15T17:26:22.717Z",
+    "httpStatus": 200,
+    "status": "ok",
+    "database": true
+  },
+  "coordinatedIsolation": true,
+  "coordinatedIsolationScope": "No concurrent builds/tests/browsers from this collaborating team; unrelated host workloads may remain and are measured only in aggregate.",
+  "complete": false,
+  "attempt": "Startup attempt before any measurements",
+  "completedAudits": 0,
+  "failure": "Audit Chrome debugging endpoint refused IPv6/IPv4 connection after launcher startup; no Lighthouse reports were created.",
+  "serverStopped": true,
+  "serverStopProof": "No3217listener after owned EXITtrap; other processes untouched.",
+  "ownedBrowserDiagnostic": "Separate sameChrome148/Node24 launch took approximately20s to expose endpoint; three127.0.0.1/json/version probes returned200 and CDP connected, then owned cleanup closed it. Exact startup cause is unproven."
+}

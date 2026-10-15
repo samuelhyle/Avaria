@@ -1,0 +1,44 @@
+{
+  "sourceCommit": "1d4fe833e690d32b35ffe14d0c4b4a36def3f3cf",
+  "workers": 8,
+  "counts": {
+    "passed": 129,
+    "failed": 8,
+    "skipped": 2
+  },
+  "scope": "Rejected Footer Suspense experiment: hydration errors remain and both no-JavaScript footers are hidden. Real intact Home hero cursor mismatch captured at document.readyState=loading independently. Private traces retained outside repository.",
+  "traces": [
+    {
+      "test": "experience-shell-search-re-70c24-localStorage-is-unavailable-chromium",
+      "sha256": "ef24f25ad8e42c8eeaa778631ed2a19d94c5ad790991cce9238dfd9541439024"
+    },
+    {
+      "test": "instanced-vial-optional-ca-92fac-and-SKU-identity-consistent-chromium",
+      "sha256": "075c82625669b884c21cd05dd469fa3bdfb35ea34ee889c8106d8b4968885304"
+    },
+    {
+      "test": "3d-render-en-optional-neut-62aa9-d-SKU-and-localized-caption-chromium",
+      "sha256": "2ab32555fad33c802459ada668d155cf144ad8cc38e57486531991b7b188ab3d"
+    },
+    {
+      "test": "reliability-en-server-rend-70210--visible-without-JavaScript-chromium",
+      "sha256": "4d2c476b47a73a792d869adf88cca96f363fc13cb3ea961dd35959a40303d70b"
+    },
+    {
+      "test": "homepage-homepage-metadata-e63e0-epeated-full-page-hydration-chromium",
+      "sha256": "ea1453f1ded95b101c1f990d93578ed668b9b643924861343b67b8d736c00e49"
+    },
+    {
+      "test": "experience-shell-en-persis-817f4-tly-across-full-navigations-chromium",
+      "sha256": "f7522d057c12a4b13f79a6f4a46c753516c99cd01932e3a488ad1833ddc43461"
+    },
+    {
+      "test": "reliability-fi-server-rend-a0e34--visible-without-JavaScript-chromium",
+      "sha256": "0567ce346d220a86f2888bd7b22eabc38970e3fb58f92952307a8076de0e9314"
+    },
+    {
+      "test": "account-reliability-en-acc-6e8c6-d-revoke-access-immediately-chromium",
+      "sha256": "8afe09d401c968d02a96b045c9800543c5bd17a4483bceacd2bf8d96c9c45a57"
+    }
+  ]
+}

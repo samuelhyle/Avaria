@@ -1,0 +1,360 @@
+{
+  "runtimeSourceCommit": "4e4a948fb1cf722d11bac09340d140f174b54024",
+  "buildId": "gbVoYSCId_d8o20D5NFmL",
+  "serverNodeVersion": "v24.22.0",
+  "elementSource": "app/[locale]/shop/[slug]/page.tsx:101",
+  "lcpElement": "Ordinary laboratory-research product description paragraph, not gallery/3D/image.",
+  "gallerySource": "components/product/ProductGallery.tsx:25",
+  "galleryObservation": "Static illustration is initial content; source has no opacity/reveal animation delaying the paragraph.",
+  "samples": [
+    {
+      "run": 1,
+      "report": "essential-consent-content-en-shop-bpc-157-run-1.report.json",
+      "simulatedLcpMs": 4995.122,
+      "observedLocalLcpMs": 425,
+      "observedLocalDclMs": 71,
+      "element": {
+        "type": "node",
+        "lhId": "page-0-P",
+        "path": "1,HTML,1,BODY,4,MAIN,2,DIV,3,DIV,1,DIV,2,P",
+        "selector": "div.mx-auto > div.grid > div.order-1 > p.mt-4",
+        "boundingRect": {
+          "top": 221,
+          "bottom": 272,
+          "left": 16,
+          "right": 374,
+          "width": 358,
+          "height": 51
+        },
+        "snippet": "<p class=\"mt-4 text-ink-muted\">",
+        "nodeLabel": "Laboratory research material. Review the product-specific documentation before \u2026"
+      },
+      "phases": [
+        {
+          "phase": "TTFB",
+          "timing": 455.0305,
+          "percent": "9%"
+        },
+        {
+          "phase": "Load Delay",
+          "timing": 0,
+          "percent": "0%"
+        },
+        {
+          "phase": "Load Time",
+          "timing": 0,
+          "percent": "0%"
+        },
+        {
+          "phase": "Render Delay",
+          "timing": 4540.0915,
+          "percent": "91%"
+        }
+      ],
+      "reportedCriticalRequestChain": {
+        "type": "criticalrequestchain",
+        "chains": {
+          "2268E1FD3A610BE3E3A6647AA029F496": {
+            "request": {
+              "url": "http://localhost:3217/en/shop/bpc-157",
+              "startTime": 1141955.558826,
+              "endTime": 1141955.608977,
+              "responseReceivedTime": 1141955.58472,
+              "transferSize": 43848
+            },
+            "children": {
+              "20908.50": {
+                "request": {
+                  "url": "http://localhost:3217/manifest.webmanifest",
+                  "startTime": 1141955.666811,
+                  "endTime": 1141955.670274,
+                  "responseReceivedTime": 1141955.6698730001,
+                  "transferSize": 2000
+                }
+              }
+            }
+          }
+        },
+        "longestChain": {
+          "duration": 111.44799995422363,
+          "length": 2,
+          "transferSize": 2000
+        }
+      },
+      "renderBlockingOverallSavingsMs": 0,
+      "selectedRequests": [
+        {
+          "url": "http://localhost:3217/_next/static/media/0b78ff376f6b9734-s.p.woff2",
+          "rendererStartMs": 39.628000020980835,
+          "networkEndMs": 44.92999982833862,
+          "transferBytes": 71218,
+          "resourceBytes": 69652,
+          "finished": true
+        },
+        {
+          "url": "http://localhost:3217/_next/static/media/723e11e5093b8e80.p.woff2",
+          "rendererStartMs": 39.94099998474121,
+          "networkEndMs": 45.10799980163574,
+          "transferBytes": 72934,
+          "resourceBytes": 71368,
+          "finished": true
+        },
+        {
+          "url": "http://localhost:3217/_next/static/chunks/5910-eaaf5133b3aded95.js",
+          "rendererStartMs": 430.30800008773804,
+          "networkEndMs": 451.9279999732971,
+          "transferBytes": 45032,
+          "resourceBytes": 145023,
+          "finished": true
+        },
+        {
+          "url": "http://localhost:3217/_next/static/chunks/1620.e825c3beeddef35f.js",
+          "rendererStartMs": 430.82599997520447,
+          "networkEndMs": 451.09800004959106,
+          "transferBytes": 40325,
+          "resourceBytes": 116676,
+          "finished": true
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "report": "essential-consent-content-en-shop-bpc-157-run-2.report.json",
+      "simulatedLcpMs": 5112.994999999999,
+      "observedLocalLcpMs": 459,
+      "observedLocalDclMs": 82,
+      "element": {
+        "type": "node",
+        "lhId": "page-0-P",
+        "path": "1,HTML,1,BODY,4,MAIN,2,DIV,3,DIV,1,DIV,2,P",
+        "selector": "div.mx-auto > div.grid > div.order-1 > p.mt-4",
+        "boundingRect": {
+          "top": 221,
+          "bottom": 272,
+          "left": 16,
+          "right": 374,
+          "width": 358,
+          "height": 51
+        },
+        "snippet": "<p class=\"mt-4 text-ink-muted\">",
+        "nodeLabel": "Laboratory research material. Review the product-specific documentation before \u2026"
+      },
+      "phases": [
+        {
+          "phase": "TTFB",
+          "timing": 454.999,
+          "percent": "9%"
+        },
+        {
+          "phase": "Load Delay",
+          "timing": 0,
+          "percent": "0%"
+        },
+        {
+          "phase": "Load Time",
+          "timing": 0,
+          "percent": "0%"
+        },
+        {
+          "phase": "Render Delay",
+          "timing": 4657.995999999999,
+          "percent": "91%"
+        }
+      ],
+      "reportedCriticalRequestChain": {
+        "type": "criticalrequestchain",
+        "chains": {
+          "B56B0F47CD8D3248516F18459647B319": {
+            "request": {
+              "url": "http://localhost:3217/en/shop/bpc-157",
+              "startTime": 1142012.078906,
+              "endTime": 1142012.116553,
+              "responseReceivedTime": 1142012.099809,
+              "transferSize": 43848
+            },
+            "children": {
+              "21053.51": {
+                "request": {
+                  "url": "http://localhost:3217/manifest.webmanifest",
+                  "startTime": 1142012.171368,
+                  "endTime": 1142012.17518,
+                  "responseReceivedTime": 1142012.174779,
+                  "transferSize": 2000
+                }
+              }
+            }
+          }
+        },
+        "longestChain": {
+          "duration": 96.27400016784668,
+          "length": 2,
+          "transferSize": 2000
+        }
+      },
+      "renderBlockingOverallSavingsMs": 0,
+      "selectedRequests": [
+        {
+          "url": "http://localhost:3217/_next/static/media/0b78ff376f6b9734-s.p.woff2",
+          "rendererStartMs": 34.187999963760376,
+          "networkEndMs": 37.82200002670288,
+          "transferBytes": 71218,
+          "resourceBytes": 69652,
+          "finished": true
+        },
+        {
+          "url": "http://localhost:3217/_next/static/media/723e11e5093b8e80.p.woff2",
+          "rendererStartMs": 34.50200009346008,
+          "networkEndMs": 37.95300006866455,
+          "transferBytes": 72934,
+          "resourceBytes": 71368,
+          "finished": true
+        },
+        {
+          "url": "http://localhost:3217/_next/static/chunks/5910-eaaf5133b3aded95.js",
+          "rendererStartMs": 446.00600004196167,
+          "networkEndMs": 460.97199988365173,
+          "transferBytes": 45032,
+          "resourceBytes": 145023,
+          "finished": true
+        },
+        {
+          "url": "http://localhost:3217/_next/static/chunks/1620.e825c3beeddef35f.js",
+          "rendererStartMs": 446.51900005340576,
+          "networkEndMs": 460.481999874115,
+          "transferBytes": 40325,
+          "resourceBytes": 116676,
+          "finished": true
+        }
+      ]
+    },
+    {
+      "run": 3,
+      "report": "essential-consent-content-en-shop-bpc-157-run-3.report.json",
+      "simulatedLcpMs": 3474.2535999999996,
+      "observedLocalLcpMs": 100,
+      "observedLocalDclMs": 60,
+      "element": {
+        "type": "node",
+        "lhId": "page-0-P",
+        "path": "1,HTML,1,BODY,4,MAIN,2,DIV,3,DIV,1,DIV,2,P",
+        "selector": "div.mx-auto > div.grid > div.order-1 > p.mt-4",
+        "boundingRect": {
+          "top": 221,
+          "bottom": 272,
+          "left": 16,
+          "right": 374,
+          "width": 358,
+          "height": 51
+        },
+        "snippet": "<p class=\"mt-4 text-ink-muted\">",
+        "nodeLabel": "Laboratory research material. Review the product-specific documentation before \u2026"
+      },
+      "phases": [
+        {
+          "phase": "TTFB",
+          "timing": 453.4648,
+          "percent": "13%"
+        },
+        {
+          "phase": "Load Delay",
+          "timing": 0,
+          "percent": "0%"
+        },
+        {
+          "phase": "Load Time",
+          "timing": 0,
+          "percent": "0%"
+        },
+        {
+          "phase": "Render Delay",
+          "timing": 3020.7887999999994,
+          "percent": "87%"
+        }
+      ],
+      "reportedCriticalRequestChain": {
+        "type": "criticalrequestchain",
+        "chains": {
+          "588DEB871076315CD76B01FF14730CDB": {
+            "request": {
+              "url": "http://localhost:3217/en/shop/bpc-157",
+              "startTime": 1142068.336717,
+              "endTime": 1142068.369885,
+              "responseReceivedTime": 1142068.353685,
+              "transferSize": 43848
+            },
+            "children": {
+              "21233.51": {
+                "request": {
+                  "url": "http://localhost:3217/manifest.webmanifest",
+                  "startTime": 1142068.431192,
+                  "endTime": 1142068.434754,
+                  "responseReceivedTime": 1142068.4343809998,
+                  "transferSize": 2000
+                }
+              }
+            }
+          }
+        },
+        "longestChain": {
+          "duration": 98.03699994087219,
+          "length": 2,
+          "transferSize": 2000
+        }
+      },
+      "renderBlockingOverallSavingsMs": 0,
+      "selectedRequests": [
+        {
+          "url": "http://localhost:3217/_next/static/media/0b78ff376f6b9734-s.p.woff2",
+          "rendererStartMs": 29.682000160217285,
+          "networkEndMs": 33.503000259399414,
+          "transferBytes": 71218,
+          "resourceBytes": 69652,
+          "finished": true
+        },
+        {
+          "url": "http://localhost:3217/_next/static/media/723e11e5093b8e80.p.woff2",
+          "rendererStartMs": 29.98800015449524,
+          "networkEndMs": 33.64900016784668,
+          "transferBytes": 72934,
+          "resourceBytes": 71368,
+          "finished": true
+        },
+        {
+          "url": "http://localhost:3217/_next/static/chunks/5910-eaaf5133b3aded95.js",
+          "rendererStartMs": 238.20700001716614,
+          "networkEndMs": 245.25000023841858,
+          "transferBytes": 45032,
+          "resourceBytes": 145023,
+          "finished": true
+        },
+        {
+          "url": "http://localhost:3217/_next/static/chunks/1620.e825c3beeddef35f.js",
+          "rendererStartMs": 238.62400007247925,
+          "networkEndMs": 244.67300009727478,
+          "transferBytes": 40325,
+          "resourceBytes": 116676,
+          "finished": true
+        }
+      ]
+    }
+  ],
+  "conclusion": "Repeated LCP is a text paragraph; median simulated LCP4.995s includes4.540s render delay (91%). Reported request chain is document\u2192manifest and no render-blocking resource saving is identified. This does not support an image-preload or gallery-animation fix.",
+  "followUp": {
+    "source": "components/ai/chat/LazyChatWidget.tsx:40",
+    "finding": "Existing idle callback imports full closed floating widget including motion/markdown dependencies. Frozen loadable manifest maps its modules to5910/1620/8713/6930 chunks.",
+    "proposal": "Measure a separate on-demand-loader experiment that keeps an immediate lightweight launcher, retains early-click intent and imports the full widget on actual open, preserving current catalogue provider/locale/consent/action-confirmation safeguards.",
+    "causalityLimit": "Chunks are delivered near/after the observed paragraph LCP in these unthrottled traces. Their unused bytes and late work motivate an experiment but do not establish that they cause all simulated render delay. No such optimization was applied to this source."
+  },
+  "measurementLimits": "Observed local trace LCP and simulated mobile LCP are distinct. Team work was paused but unrelated host work continued; baseline Node22 ambient load was not recorded. No causal runtime/provider comparison or field metric claim is made.",
+  "loadableManifest": {
+    "components/ai/chat/LazyChatWidget.tsx -> @/components/ai/ChatWidget": {
+      "id": 46930,
+      "files": [
+        "static/chunks/5910-eaaf5133b3aded95.js",
+        "static/chunks/1620.e825c3beeddef35f.js",
+        "static/chunks/8713-73876df71454a515.js",
+        "static/chunks/6930.5600af2b5aa9cd80.js"
+      ]
+    }
+  }
+}

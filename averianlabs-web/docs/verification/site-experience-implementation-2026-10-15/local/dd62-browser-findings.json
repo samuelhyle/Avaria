@@ -1,0 +1,47 @@
+{
+  "sourceCommit": "dd62af2231e6a1a3974ea591a4d5e94c434c6293",
+  "counts": {
+    "passed": 128,
+    "failed": 9,
+    "skipped": 2
+  },
+  "scope": "Raw failure traces retained privately outside repository. Concurrent diagnostic browser began after first home418; CPU contention may affect later timings, so no performance claims. Both plan tests failed only on disposed PATCH response-body access; strict harness corrected to verify persisted state after GET. Several real hydration errors remain under active diagnosis; other timeout failures require rerun. One Node TransformStream controller error was also recorded; relationship unproven.",
+  "traces": [
+    {
+      "test": "experience-shell-search-re-70c24-localStorage-is-unavailable-chromium",
+      "sha256": "17a7d6056a62d6bc397ba9187f0d70d9907ad5bf0f4b5a1bd12185d8e9737d6f"
+    },
+    {
+      "test": "3d-render-en-optional-neut-62aa9-d-SKU-and-localized-caption-chromium",
+      "sha256": "755a3626c4b96092526726d084f27956de2b2e340ce76b9121fb1af300612c29"
+    },
+    {
+      "test": "reliability-en-primary-customer-pages-fit-1280px-chromium",
+      "sha256": "4494d2237a6abd710d17d824d5c105af54e010fe2135f2e568f84d4f4fc40b0f"
+    },
+    {
+      "test": "experience-shell-fi-persis-b39f4-tly-across-full-navigations-chromium",
+      "sha256": "4ae7ef313215ba3265dc0faf5dcb3365d5d293b1b175fa77a506d80d112dea23"
+    },
+    {
+      "test": "homepage-homepage-metadata-e63e0-epeated-full-page-hydration-chromium",
+      "sha256": "76b7007bef6afdd73aa666b2f9af9cbc33660a4be4f82dfb9282613afb9e5303"
+    },
+    {
+      "test": "account-reliability-fi-acc-c5f24-d-revoke-access-immediately-chromium",
+      "sha256": "26127b7f6367fdf5309c9554a9688a9d12120b0ff5d1820327b50c55df9a316e"
+    },
+    {
+      "test": "experience-shell-en-persis-817f4-tly-across-full-navigations-chromium",
+      "sha256": "2d0245f618eb7132eaf43cf664aade5760d11fd6e4b7a3f150d8f2c7664c0cdb"
+    },
+    {
+      "test": "account-reliability-en-acc-6e8c6-d-revoke-access-immediately-chromium",
+      "sha256": "0155076ffa6240e972a7764bffa0feda47b6fbeb3de9fdc94809ae5ceef407b9"
+    },
+    {
+      "test": "experience-shell-en-immedi-d403f-te-and-retain-view-and-hash-chromium",
+      "sha256": "b9a8d13dfc392c76af8cabcc15e0524fe12b6e24d1d5773647a3f4f4b9967403"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "siteId": "a10936e5-0fc8-4d2b-8ccd-58207323cd6f",
+  "siteUrl": "https://averianlabs-demo.netlify.app",
+  "previousDeployId": "6ad0b7d8e5ad99401ce901bc",
+  "previousDeployInitiallyLocked": true,
+  "buildId": "6ad0fcb3e98014388e37396e",
+  "deployId": "6ad0fcb3e98014388e373970",
+  "sourceCommit": "e8e511e3f323fa439070864ac5873e301fb0ca8f",
+  "sourceSha256": "1bbbb52c066e9fbc3411b62889a074ea456bcc4a27253bc475998df418f433e8",
+  "published": true,
+  "recordedAt": "2026-10-15T16:37:18.420166+00:00",
+  "promotionVerification": "Release helper asserted new published deployment identity and locked state after restore."
+}

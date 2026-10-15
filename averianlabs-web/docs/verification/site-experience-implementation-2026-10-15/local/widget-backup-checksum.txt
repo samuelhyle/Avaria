@@ -1,0 +1,1 @@
+{"file":"/Users/purepanel/Library/Application Support/AverianLabs/deployment-backups/6ad10346ad1394b20bf0afd6-pre-migration.json","sha256":"a6f7434f2215b9efd17823f7c8e3576ec2b99dc17a884492bd44fc94bdfd2833","publicTables":47,"migrationLedgerEntries":6,"private":true}

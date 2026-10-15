@@ -1,4 +1,4 @@
-# AverianLabs — Premium Research Peptide Webstore
+# AverianLabs — Research materials and tools
 
 Next.js 15 (App Router) + React 19 + TypeScript + Tailwind v4 + React Three Fiber.
 
@@ -15,7 +15,11 @@ The repository-root `netlify.toml` sets the monorepo base directory. Hosted buil
 
 See [the release runbook](docs/RESEARCH_CUSTOMER_RELEASE_RUNBOOK.md) before enabling real orders. The existing Netlify Git connection tracks `demo`; a hosted source archive can deploy the current local snapshot when GitHub write access is unavailable.
 
-The 13 October 2026 update is online. See [the deployment record](docs/NETLIFY_DEPLOYMENT_2026-10-13.md) for its source, checks, database backups and publication lock while remote Git source remains unsynchronized.
+See the current [site experience plan](docs/SITE_EXPERIENCE_MASTER_PLAN_2026-10-15.md), [implementation ledger](docs/SITE_EXPERIENCE_IMPLEMENTATION_2026-10-15.md) and [15 October release record](docs/NETLIFY_EXPERIENCE_DEPLOYMENT_2026-10-15.md) for the exact published source, verification, private backup checksums, publication lock and remaining approvals.
+
+## Toolchain
+
+Use Node **24.22.0** and pnpm **10.0.0** for local development and builds. Root/app `.node-version`, CI and build configuration pin that toolchain. Managed hosting selects Node 24 for Functions; the release record verifies its actual serving patch separately rather than inferring it from the build version.
 
 ## Quick start (one command)
 
@@ -130,19 +134,20 @@ Embedding requests are batched (16 texts/request) and spaced for MiniMax's 1 RPM
 
 The Netlify deploy runs the full Next.js app via `@netlify/plugin-nextjs`,
 so `app/api/ai/chat` executes as a Node Function. Set the key under
-**Site settings → Environment variables** in three scopes (Production /
-Preview / Branch deploys) — the value is read at function invocation, never
+**Site settings → Environment variables**, with the **Functions** scope and the
+intended deploy contexts below. The value is read at function invocation, never
 written to the bundle, and never visible to the browser:
 
-| Scope | When it applies |
+| Deploy context | When it applies |
 |---|---|
-| Production | The live Netlify URL (main branch). |
+| Production | Production-context deployments, including the current review site and source-archive releases. |
 | Preview | Every pull-request deploy. Use a separate, rate-limited key so PR forks can't burn your credits. |
 | Branch | Any non-main branch with `Branch deploys` enabled (e.g. `feature/*`). |
 
-After saving, redeploy. Verify with `curl -fs https://<netlify-url>/api/health`
-` — a successful response with `checks.env: true` confirms the function
-runtime can read it. The chat widget's `/api/ai/chat` will return 503
+After saving, redeploy. `curl -fs https://<netlify-url>/api/health` verifies
+general environment/database readiness; it does not prove that the optional AI
+provider key is configured or that the provider responds. Verify an actual
+assistant reply separately. The chat widget's `/api/ai/chat` returns 503
 `provider_unavailable` until the key is set.
 
 **Never** commit `MINIMAX_API_KEY=…` with a non-empty value; the lefthook

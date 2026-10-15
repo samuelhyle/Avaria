@@ -1,0 +1,10 @@
+
+> averianlabs-web@0.1.0 check:i18n /Users/purepanel/Avaria/averianlabs-web
+> node scripts/check-i18n-keys.mjs
+
+[i18n:check] 5 locales · 1319 leaf keys · 0 missing
+
+> averianlabs-web@0.1.0 check:i18n:usage /Users/purepanel/Avaria/averianlabs-web
+> node scripts/check-i18n-usage.mjs
+
+All literal translation calls resolve.

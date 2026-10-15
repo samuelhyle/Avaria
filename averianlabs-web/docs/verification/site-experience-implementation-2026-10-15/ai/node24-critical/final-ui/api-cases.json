@@ -1,0 +1,114 @@
+{
+  "checkedAt": "2026-10-15T17:23:32.403Z",
+  "origin": "https://6ad10a0d17b4322a59f0afd8--averianlabs-demo.netlify.app",
+  "sourceCommit": "4e4a948fb1cf722d11bac09340d140f174b54024",
+  "target": "hosted_review",
+  "suiteHash": "bcde8fa9ae4a6ca44b53b6e0ef9ce87c563f44c417d119a65d6df212d4786ee5",
+  "state": "executed",
+  "selection": "paired_subset",
+  "expectedCases": 2,
+  "executedCases": 2,
+  "scope": "Live API, no persistence, no retrieval, read-only tools. Hosted review runs are anonymous with no cookies. Source, language and scientific assessment are separate from runtime/numerical checks.",
+  "rows": [
+    {
+      "id": "concentration",
+      "locale": "en",
+      "prompt": "Calculate the concentration of 10 mg in a final solution volume of 2 mL.",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "pass",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable",
+        "guidanceContract": "not_applicable"
+      },
+      "answer": "**Concentration**\n\nInputs: Material mass (mg): 10 mg; Final solution volume (mL): 2 mL.\n\n- Concentration: **5 mg/mL**\n\nFormula and assumptions: c = m / V.\nIdeal mass balance, no material loss. Use final solution volume. Values based on nominal mass do not establish measured content, purity, solubility or handling conditions.\n\nDisplayed values are rounded to at most eight significant digits. They do not establish measurement precision.\n\nFor laboratory research only.",
+      "toolNames": [
+        "calculateLaboratory"
+      ],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_zC4zV0zKta1AhGvG5J20r5YJ",
+          "name": "calculateLaboratory",
+          "content": {
+            "calculation": {
+              "version": "laboratory-v2",
+              "inputs": {
+                "mode": "concentration",
+                "massMg": 10,
+                "finalVolumeMl": 2
+              },
+              "values": {
+                "concentrationMgPerMl": 5,
+                "concentrationMcgPerMl": 5000
+              },
+              "formula": "c = m / V"
+            },
+            "assumptions": "Ideal mass balance without loss. Nominal quantity does not establish measured content. Use final solution volume."
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 7669,
+      "checkedAt": "2026-10-15T17:23:19.136Z"
+    },
+    {
+      "id": "concentration",
+      "locale": "fi",
+      "prompt": "Laske pitoisuus: 10 mg ja liuoksen lopullinen tilavuus 2 mL.",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "pass",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable",
+        "guidanceContract": "not_applicable"
+      },
+      "answer": "**Pitoisuus**\n\nLähtötiedot: Materiaalin massa (mg): 10 mg; Liuoksen lopullinen tilavuus (mL): 2 mL.\n\n- Pitoisuus: **5 mg/mL**\n\nKaava ja oletukset: c = m / V.\nLaskennallinen massatase ilman materiaalihävikkiä. Käytä liuoksen lopullista tilavuutta. Nimellismassa ei osoita mitattua sisältöä, puhtautta, liukoisuutta tai käsittelyolosuhteita.\n\nNäytetyt luvut pyöristetään enintään kahdeksaan merkitsevään numeroon. Ne eivät osoita mittauksen tarkkuutta.\n\nVain laboratoriotutkimukseen.",
+      "toolNames": [
+        "calculateLaboratory"
+      ],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a1409719a7758ab0ba120a",
+          "name": "calculateLaboratory",
+          "content": {
+            "calculation": {
+              "version": "laboratory-v2",
+              "inputs": {
+                "mode": "concentration",
+                "massMg": 10,
+                "finalVolumeMl": 2
+              },
+              "values": {
+                "concentrationMgPerMl": 5,
+                "concentrationMcgPerMl": 5000
+              },
+              "formula": "c = m / V"
+            },
+            "assumptions": "Laskennallinen massatase ilman hävikkiä. Nimellismäärä ei osoita mitattua sisältöä. Käytä lopullista liuostilavuutta."
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 6131,
+      "checkedAt": "2026-10-15T17:23:30.812Z"
+    }
+  ]
+}

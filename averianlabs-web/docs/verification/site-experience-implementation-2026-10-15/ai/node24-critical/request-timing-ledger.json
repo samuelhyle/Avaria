@@ -1,0 +1,422 @@
+{
+  "runId": "node24-critical-20261015",
+  "origin": "https://6ad10a0d17b4322a59f0afd8--averianlabs-demo.netlify.app",
+  "sourceCommit": "4e4a948fb1cf722d11bac09340d140f174b54024",
+  "seededFrom": {
+    "path": "/tmp/averian-final-eval-pacing-state-20261015.json",
+    "sha256": "a4bd4c48d166d1b85c0abc29abbf1e40ecfa454dcc1b7b6d2209ffe029348e7f",
+    "origin": "https://6ad0fcb3e98014388e373970--averianlabs-demo.netlify.app",
+    "requestCount": 122
+  },
+  "requestTimes": [
+    1792077054624,
+    1792077061623,
+    1792077068088,
+    1792077074013,
+    1792077081185,
+    1792077089565,
+    1792077097889,
+    1792077104729,
+    1792077111102,
+    1792077118922,
+    1792077128148,
+    1792077137732,
+    1792077146121,
+    1792077153490,
+    1792077164271,
+    1792077169189,
+    1792077173667,
+    1792077181168,
+    1792077188060,
+    1792077196850,
+    1792077670117,
+    1792077676038,
+    1792077690997,
+    1792077697688,
+    1792077705010,
+    1792077713795,
+    1792077726769,
+    1792077730166,
+    1792077735442,
+    1792077742001,
+    1792077750712,
+    1792077758164,
+    1792077765635,
+    1792077774500,
+    1792077781015,
+    1792077791781,
+    1792077799799,
+    1792077804166,
+    1792077816599,
+    1792077826769,
+    1792078272117,
+    1792078281255,
+    1792078292997,
+    1792078298815,
+    1792078306167,
+    1792078315621,
+    1792078328769,
+    1792078336761,
+    1792078347871,
+    1792078351031,
+    1792078356126,
+    1792078359464,
+    1792078367636,
+    1792078376501,
+    1792078385694,
+    1792078393781,
+    1792078401800,
+    1792078409501,
+    1792078418923,
+    1792078428770,
+    1792079498959,
+    1792079587925,
+    1792079592310,
+    1792079598135,
+    1792079605193,
+    1792079612202,
+    1792079619637,
+    1792079626871,
+    1792079632868,
+    1792079641160,
+    1792079647084,
+    1792079654076,
+    1792079659444,
+    1792079664589,
+    1792079674349,
+    1792079679729,
+    1792079686169,
+    1792079695733,
+    1792079707164,
+    1792079721292,
+    1792080100959,
+    1792080189926,
+    1792080197192,
+    1792080205188,
+    1792080210647,
+    1792080220997,
+    1792080231514,
+    1792080238174,
+    1792080243129,
+    1792080250094,
+    1792080255519,
+    1792080261125,
+    1792080268960,
+    1792080273838,
+    1792080280290,
+    1792080292738,
+    1792080302255,
+    1792080308707,
+    1792080321196,
+    1792080334476,
+    1792080702960,
+    1792080791926,
+    1792080800010,
+    1792080805446,
+    1792080810874,
+    1792080822997,
+    1792080833515,
+    1792080840098,
+    1792080848928,
+    1792080850105,
+    1792080857520,
+    1792080863126,
+    1792080870960,
+    1792080874869,
+    1792080880925,
+    1792080894738,
+    1792080904256,
+    1792080909465,
+    1792080926631,
+    1792080936477,
+    1792081436594,
+    1792081448539,
+    1792084870473,
+    1792084878647,
+    1792084884207,
+    1792084888339,
+    1792084895105,
+    1792084899965,
+    1792084907451,
+    1792084914883,
+    1792084920910,
+    1792084930469,
+    1792084935714,
+    1792084950626,
+    1792084957634,
+    1792084963296,
+    1792084971305,
+    1792084977379,
+    1792084982342,
+    1792084983520,
+    1792084991467,
+    1792085004681
+  ],
+  "requests": [
+    {
+      "phase": "api",
+      "locale": "en",
+      "startedAt": "2026-10-15T17:21:10.473Z",
+      "prompt": "Calculate the concentration of 10 mg in a final solution volume of 2 mL.",
+      "bodySha256": "8dee90864972e59c0732d4e5be6c5a79e93b4817c3faf1535bb9163f6780bc06",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "api",
+      "locale": "fi",
+      "startedAt": "2026-10-15T17:21:18.647Z",
+      "prompt": "Laske pitoisuus: 10 mg ja liuoksen lopullinen tilavuus 2 mL.",
+      "bodySha256": "ff2a3a5fda761c645bb1d08b09e53b33fef8a1905d6f0c8828c3651b91f15e69",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "api",
+      "locale": "en",
+      "startedAt": "2026-10-15T17:21:24.207Z",
+      "prompt": "Calculate concentration for 500 micrograms in a final 1 mL solution.",
+      "bodySha256": "3bbcd79a3d069a43a5efab640ebacbd570daa6999ea60770f66cbda29b7bff0e",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "api",
+      "locale": "fi",
+      "startedAt": "2026-10-15T17:21:28.339Z",
+      "prompt": "Laske pitoisuus: 500 mikrogrammaa ja lopullinen tilavuus 1 mL.",
+      "bodySha256": "7de9d0d67ac928d8c4a878dd9de3ded502fe590dc5b318d3269d6f9aca5935d7",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "api",
+      "locale": "en",
+      "startedAt": "2026-10-15T17:21:35.105Z",
+      "prompt": "Calculate concentration for 1 mg in a final 500 microlitres of solution.",
+      "bodySha256": "208fe0127ed8b5b386b1c747e2a52be7a3599ad1a7339d81499a55286a30ace8",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "api",
+      "locale": "fi",
+      "startedAt": "2026-10-15T17:21:39.965Z",
+      "prompt": "Laske pitoisuus: 1 mg ja lopullinen tilavuus 500 mikrolitraa.",
+      "bodySha256": "bb31ac9fac57419aead25b9c1928aa6a02d115db122927c8147f6324735ecb5c",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "api",
+      "locale": "en",
+      "startedAt": "2026-10-15T17:21:47.451Z",
+      "prompt": "What final solution volume gives 5 mg/mL from 10 mg? Calculate it.",
+      "bodySha256": "535f1b5bbd6bff884ead8248c6e8b5d02e96b4cd0422945668980dd0256661c0",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "api",
+      "locale": "fi",
+      "startedAt": "2026-10-15T17:21:54.883Z",
+      "prompt": "Laske lopullinen liuostilavuus: massa 10 mg, tavoitepitoisuus 5 mg/mL.",
+      "bodySha256": "903477fa3fd651a56eb754b172f7bb38242c1543c633682c021c96d923a076f8",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "api",
+      "locale": "en",
+      "startedAt": "2026-10-15T17:22:00.910Z",
+      "prompt": "Calculate a dilution from 5 mg/mL stock to 1 mg/mL, final volume 2 mL.",
+      "bodySha256": "5b2a3a43b79d37040c816dbeca4acd783395fc8a0a0efc851da89d0a0e662429",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "api",
+      "locale": "fi",
+      "startedAt": "2026-10-15T17:22:10.469Z",
+      "prompt": "Laske laimennus: kantaliuos 5 mg/mL, tavoite 1 mg/mL, lopullinen tilavuus 2 mL.",
+      "bodySha256": "fe34fa8e763332f6375ccccee0f7ee93ff4428c4a74e6f5ec3811395fc848375",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "api",
+      "locale": "en",
+      "startedAt": "2026-10-15T17:22:15.714Z",
+      "prompt": "Calculate laboratory aliquots: total 10 mg, final solution 2 mL, 250 micrograms per aliquot.",
+      "bodySha256": "d554dce6cef3458815ceb613158b4d4beabcc7e55fb15be4061ee6c12976f401",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "api",
+      "locale": "fi",
+      "startedAt": "2026-10-15T17:22:30.626Z",
+      "prompt": "Laske osanäytteet: massa 10 mg, lopullinen liuostilavuus 2 mL ja 250 mikrogrammaa osanäytteessä.",
+      "bodySha256": "67249ebeac95dfeca1cf41da1fa95fab4efcfd9ba0b1e9f2a55d3fccf94cd829",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "api",
+      "locale": "en",
+      "startedAt": "2026-10-15T17:22:37.634Z",
+      "prompt": "Calculate aliquots and remaining material: total 1 mg, final 1 mL, 300 micrograms per aliquot.",
+      "bodySha256": "52aa5009ba820d29b24658ad2e7b442b01c1fe38381f63ac86dc277ea4a52002",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "api",
+      "locale": "fi",
+      "startedAt": "2026-10-15T17:22:43.296Z",
+      "prompt": "Laske osanäytteet ja jäännös: massa 1 mg, lopullinen tilavuus 1 mL, 300 mikrogrammaa osanäytteessä.",
+      "bodySha256": "895adb09a75e8b3a1d0cafe91d9e49215d0138626a684c9f85fe43fa56ae57bc",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "api",
+      "locale": "en",
+      "startedAt": "2026-10-15T17:22:51.305Z",
+      "prompt": "Calculate 0.5 mg in a final 0.25 mL solution.",
+      "bodySha256": "8ff8c6642d426ddbb835b3bd05cb91f2d64f8f3d792c176233dae81f1df21603",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "api",
+      "locale": "fi",
+      "startedAt": "2026-10-15T17:22:57.379Z",
+      "prompt": "Laske pitoisuus: 0,5 mg lopullisessa 0,25 mL liuoksessa.",
+      "bodySha256": "469f7caaa3ab00bcfaa5655264ab7b8b04cb9cec2315b6240f62d73200dce32b",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "api",
+      "locale": "en",
+      "startedAt": "2026-10-15T17:23:02.342Z",
+      "prompt": "Calculate molar concentration for an unspecified peptide blend with no molar mass or composition.",
+      "bodySha256": "843a6302492fe99d99eeea12268dbf710cbb4d6985e03673413c14b621f827d5",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "api",
+      "locale": "fi",
+      "startedAt": "2026-10-15T17:23:03.520Z",
+      "prompt": "Laske ainemääräpitoisuus määrittelemättömälle peptidiseokselle ilman moolimassaa tai koostumusta.",
+      "bodySha256": "faf6888ac5ed6c5eaa2b4e040ff8652885698b36322723564ffa5e1623a666ad",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "ui",
+      "locale": "en",
+      "startedAt": "2026-10-15T17:23:11.467Z",
+      "prompt": "Calculate the concentration of 10 mg in a final solution volume of 2 mL.",
+      "bodySha256": "12267f9a3f024a298f383a525aedfdd2419281218b042e3baf666019edda4626",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    },
+    {
+      "phase": "ui",
+      "locale": "fi",
+      "startedAt": "2026-10-15T17:23:24.681Z",
+      "prompt": "Laske pitoisuus: 10 mg ja liuoksen lopullinen tilavuus 2 mL.",
+      "bodySha256": "05319d226fd016067ca4f21357b07938e7e1bad11aad634abf8663f954dc1a3f",
+      "flags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false
+    }
+  ],
+  "cooldownUntil": "2026-10-15T17:33:34.437Z",
+  "confirmedBackendRuntime": "Node24; root supplies the exact private startup/build proof separately",
+  "runnerNodeVersion": "v24.22.0",
+  "runtimeProofPath": "/Users/purepanel/Avaria/averianlabs-web/docs/verification/site-experience-implementation-2026-10-15/local/final-serving-runtime.json",
+  "finishedAt": "2026-10-15T17:23:32.437Z"
+}

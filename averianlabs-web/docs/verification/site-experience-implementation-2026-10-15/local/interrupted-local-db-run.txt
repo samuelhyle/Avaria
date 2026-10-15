@@ -1,0 +1,220 @@
+
+Running 139 tests using 2 workers
+
+(node:53997) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:53996) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘    2 [chromium] › tests/3d-render.spec.ts:11:3 › en: optional neutral 3D preserves the selected SKU and localized caption (27.1s)
+(node:54122) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘    1 [chromium] › tests/3d-render.spec.ts:11:3 › fi: optional neutral 3D preserves the selected SKU and localized caption (29.1s)
+(node:54148) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘    3 [chromium] › tests/3d-render.spec.ts:54:1 › neutral 3D responds to reduced-motion changes and retains manual controls (10.8s)
+(node:54266) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    4 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en has no serious/critical axe-core violations (12.6s)
+  ✘    6 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/shop/qa-water has no serious/critical axe-core violations (7.2s)
+  ✘    5 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/shop has no serious/critical axe-core violations (10.5s)
+
+
+  1) [chromium] › tests/3d-render.spec.ts:11:3 › en: optional neutral 3D preserves the selected SKU and localized caption 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('main figure').first().locator('canvas').or(locator('main figure').first().getByText('3D is unavailable on this device. Product details remain available below.', { exact: true }))
+    Expected: visible
+    Error: strict mode violation: locator('main figure').first().locator('canvas').or(locator('main figure').first().getByText('3D is unavailable on this device. Product details remain available below.', { exact: true })) resolved to 2 elements:
+        1) <canvas>…</canvas> aka locator('canvas')
+        2) <p class="max-w-xs text-center text-xs text-ink-muted">3D is unavailable on this device. Product details…</p> aka getByText('3D is unavailable on this')
+
+    Call log:
+      - Expect "toBeVisible" locator('main figure').first().locator('canvas').or(locator('main figure').first().getByText('3D is unavailable on this device. Product details remain available below.', { exact: true })) with timeout 20000ms
+      - waiting for locator('main figure').first().locator('canvas').or(locator('main figure').first().getByText('3D is unavailable on this device. Product details remain available below.', { exact: true }))
+
+
+      23 |     await expect(
+      24 |       gallery.locator("canvas").or(gallery.getByText(t.threeDUnavailable, { exact: true })),
+    > 25 |     ).toBeVisible({ timeout: 20_000 })
+         |       ^
+      26 |     test.skip(
+      27 |       await gallery.getByText(t.threeDUnavailable, { exact: true }).isVisible(),
+      28 |       "This browser has no WebGL; deterministic no-WebGL fallback is covered separately",
+        at /Users/purepanel/Avaria/averianlabs-web/tests/3d-render.spec.ts:25:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/3d-render-en-optional-neut-62aa9-d-SKU-and-localized-caption-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/3d-render-en-optional-neut-62aa9-d-SKU-and-localized-caption-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/3d-render-en-optional-neut-62aa9-d-SKU-and-localized-caption-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/3d-render-en-optional-neut-62aa9-d-SKU-and-localized-caption-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/3d-render-en-optional-neut-62aa9-d-SKU-and-localized-caption-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/3d-render.spec.ts:11:3 › fi: optional neutral 3D preserves the selected SKU and localized caption 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('main figure').first().locator('canvas').or(locator('main figure').first().getByText('3D-näkymä ei ole käytettävissä tällä laitteella. Tuotetiedot ovat edelleen luettavissa alla.', { exact: true }))
+    Expected: visible
+    Error: strict mode violation: locator('main figure').first().locator('canvas').or(locator('main figure').first().getByText('3D-näkymä ei ole käytettävissä tällä laitteella. Tuotetiedot ovat edelleen luettavissa alla.', { exact: true })) resolved to 2 elements:
+        1) <canvas width="578" height="264" data-engine="three.js r176">…</canvas> aka locator('canvas')
+        2) <p class="max-w-xs text-center text-xs text-ink-muted">3D-näkymä ei ole käytettävissä tällä laitteella. …</p> aka getByText('3D-näkymä ei ole käytettäviss')
+
+    Call log:
+      - Expect "toBeVisible" locator('main figure').first().locator('canvas').or(locator('main figure').first().getByText('3D-näkymä ei ole käytettävissä tällä laitteella. Tuotetiedot ovat edelleen luettavissa alla.', { exact: true })) with timeout 20000ms
+      - waiting for locator('main figure').first().locator('canvas').or(locator('main figure').first().getByText('3D-näkymä ei ole käytettävissä tällä laitteella. Tuotetiedot ovat edelleen luettavissa alla.', { exact: true }))
+
+
+      23 |     await expect(
+      24 |       gallery.locator("canvas").or(gallery.getByText(t.threeDUnavailable, { exact: true })),
+    > 25 |     ).toBeVisible({ timeout: 20_000 })
+         |       ^
+      26 |     test.skip(
+      27 |       await gallery.getByText(t.threeDUnavailable, { exact: true }).isVisible(),
+      28 |       "This browser has no WebGL; deterministic no-WebGL fallback is covered separately",
+        at /Users/purepanel/Avaria/averianlabs-web/tests/3d-render.spec.ts:25:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/3d-render-fi-optional-neut-933a3-d-SKU-and-localized-caption-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/3d-render-fi-optional-neut-933a3-d-SKU-and-localized-caption-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/3d-render-fi-optional-neut-933a3-d-SKU-and-localized-caption-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/3d-render-fi-optional-neut-933a3-d-SKU-and-localized-caption-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/3d-render-fi-optional-neut-933a3-d-SKU-and-localized-caption-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests/3d-render.spec.ts:54:1 › neutral 3D responds to reduced-motion changes and retains manual controls 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('main figure').first().locator('canvas').or(locator('main figure').first().getByText('3D is unavailable on this device. Product details remain available below.', { exact: true }))
+    Expected: visible
+    Error: strict mode violation: locator('main figure').first().locator('canvas').or(locator('main figure').first().getByText('3D is unavailable on this device. Product details remain available below.', { exact: true })) resolved to 2 elements:
+        1) <canvas width="578" height="264" data-engine="three.js r176">…</canvas> aka locator('canvas')
+        2) <p class="max-w-xs text-center text-xs text-ink-muted">3D is unavailable on this device. Product details…</p> aka getByText('3D is unavailable on this')
+
+    Call log:
+      - Expect "toBeVisible" locator('main figure').first().locator('canvas').or(locator('main figure').first().getByText('3D is unavailable on this device. Product details remain available below.', { exact: true })) with timeout 20000ms
+      - waiting for locator('main figure').first().locator('canvas').or(locator('main figure').first().getByText('3D is unavailable on this device. Product details remain available below.', { exact: true }))
+
+
+      64 |   await expect(
+      65 |     gallery.locator("canvas").or(gallery.getByText(t.threeDUnavailable, { exact: true })),
+    > 66 |   ).toBeVisible({ timeout: 20_000 })
+         |     ^
+      67 |   test.skip(
+      68 |     await gallery.getByText(t.threeDUnavailable, { exact: true }).isVisible(),
+      69 |     "This browser has no WebGL; deterministic no-WebGL fallback is covered separately",
+        at /Users/purepanel/Avaria/averianlabs-web/tests/3d-render.spec.ts:66:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/3d-render-neutral-3D-respo-1fe94-and-retains-manual-controls-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/3d-render-neutral-3D-respo-1fe94-and-retains-manual-controls-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/3d-render-neutral-3D-respo-1fe94-and-retains-manual-controls-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/3d-render-neutral-3D-respo-1fe94-and-retains-manual-controls-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/3d-render-neutral-3D-respo-1fe94-and-retains-manual-controls-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/shop has no serious/critical axe-core violations 
+
+    Test was interrupted.
+
+    Error: page.goto: net::ERR_ABORTED; maybe frame was detached?
+    Call log:
+      - navigating to "http://localhost:3217/en/shop", waiting until "domcontentloaded"
+
+
+      33 | for (const path of ROUTES) {
+      34 |   test(`a11y: ${path} has no serious/critical axe-core violations`, async ({ cleanPage: page }) => {
+    > 35 |     await page.goto(path, { waitUntil: "domcontentloaded" })
+         |                ^
+      36 |     const results = await new AxeBuilder({ page })
+      37 |       .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+      38 |       .analyze()
+        at /Users/purepanel/Avaria/averianlabs-web/tests/a11y.spec.ts:35:16
+
+    attachment #1: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/a11y-a11y-en-shop-has-no-s-4ffb8-ritical-axe-core-violations-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/a11y-a11y-en-shop-has-no-s-4ffb8-ritical-axe-core-violations-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/a11y-a11y-en-shop-has-no-s-4ffb8-ritical-axe-core-violations-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/a11y-a11y-en-shop-has-no-s-4ffb8-ritical-axe-core-violations-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/shop/qa-water has no serious/critical axe-core violations 
+
+    Test was interrupted.
+
+    Error: page.goto: net::ERR_ABORTED; maybe frame was detached?
+    Call log:
+      - navigating to "http://localhost:3217/en/shop/qa-water", waiting until "domcontentloaded"
+
+
+      33 | for (const path of ROUTES) {
+      34 |   test(`a11y: ${path} has no serious/critical axe-core violations`, async ({ cleanPage: page }) => {
+    > 35 |     await page.goto(path, { waitUntil: "domcontentloaded" })
+         |                ^
+      36 |     const results = await new AxeBuilder({ page })
+      37 |       .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+      38 |       .analyze()
+        at /Users/purepanel/Avaria/averianlabs-web/tests/a11y.spec.ts:35:16
+
+    attachment #1: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/a11y-a11y-en-shop-qa-water-edddc-ritical-axe-core-violations-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/a11y-a11y-en-shop-qa-water-edddc-ritical-axe-core-violations-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/a11y-a11y-en-shop-qa-water-edddc-ritical-axe-core-violations-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/a11y-a11y-en-shop-qa-water-edddc-ritical-axe-core-violations-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [chromium] › tests/3d-render.spec.ts:11:3 › en: optional neutral 3D preserves the selected SKU and localized caption 
+    [chromium] › tests/3d-render.spec.ts:11:3 › fi: optional neutral 3D preserves the selected SKU and localized caption 
+    [chromium] › tests/3d-render.spec.ts:54:1 › neutral 3D responds to reduced-motion changes and retains manual controls 
+  2 interrupted
+    [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/shop has no serious/critical axe-core violations 
+    [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/shop/qa-water has no serious/critical axe-core violations 
+  133 did not run
+  1 passed (52.3s)

@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-10-15T17:10:01.467Z",
+  "sourceTag": "v24.21.0",
+  "url": "https://raw.githubusercontent.com/nodejs/node/v24.21.0/lib/internal/webstreams/transformstream.js",
+  "sourceSha256": "9c25182543068e6fef4fbf998adf5bc1891c8d5daa8bafdff8f7c96fce05d585",
+  "relevantFunction": "function transformStreamDefaultControllerPerformTransform(controller, chunk) {\n  const controllerState = controller[kState];\n  const transformAlgorithm = controllerState.transformAlgorithm;\n  if (transformAlgorithm === undefined) {\n    // Algorithms were cleared by a concurrent cancel/abort/close.\n    return kResolvedPromise;\n  }\n  let result;\n  try {\n    result = transformAlgorithm(chunk, controller);\n  } catch (error) {\n    result = PromiseReject(error);\n  }\n  if (result === null ||\n      (typeof result !== 'object' && typeof result !== 'function')) {\n    result = kResolvedPromise;\n  } else {\n    result = PromiseResolve(result);\n  }\n  controllerState.performTransformRejected ??= (error) => {\n    transformStreamError(controller[kState].stream, error);\n    throw error;\n  };\n  return PromisePrototypeThen(\n    result,\n    undefined,\n    controllerState.performTransformRejected);\n}",
+  "clearedAlgorithmGuardPresent": true,
+  "transformSourceIdenticalToVerifiedBuildTag24_22": false,
+  "actualServingPatchEvidence": "Root confirmed private function startup metadata v24.21.0; this report verifies that exact official source tag, not a new serving invocation.",
+  "buildAndLocalValidationVersion": "v24.22.0",
+  "proposedPackageEngineRange": ">=24.15.0 <25",
+  "proposalScope": "Allows the observed managed24.21.0 serving patch and conservatively requires a verified release containing the upstream fix. Keep exact local/build/CI24.22.0 pins. No source or config edit in this verification.",
+  "runtimeEqualityLimit": "Shared TransformStream source and a present guard do not establish all runtime, deployed artifact or application behavior equality.",
+  "relevantFunctionSha256": "0f8762050cbef7d22c9264fc594276d26ef0de78c7b051d5a7504582f0162411",
+  "transformFunctionIdenticalToVerifiedBuildTag24_22": true
+}

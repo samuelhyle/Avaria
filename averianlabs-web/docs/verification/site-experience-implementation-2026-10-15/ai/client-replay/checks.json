@@ -1,0 +1,36 @@
+{
+  "checkedAt": "2026-10-15T16:02:48.335Z",
+  "renderedOrigin": "https://6ad0f7d0af165bf3294b9cea--averianlabs-demo.netlify.app",
+  "renderedSourceCommit": "dd62af2231e6a1a3974ea591a4d5e94c434c6293",
+  "capturedResponseOrigin": "https://6ad0f4d8d24ede22e5d83db6--averianlabs-demo.netlify.app",
+  "capturedResponseSourceCommit": "0354c14fc50a5b032c0265e790246b22d3ed0969",
+  "capturedResponsePath": "../final-live-ui-en.sse.txt",
+  "capturedResponseSha256": "01996654f46ce83ab5d456eb8bf40f6412cf276306d02d657c3bfc52151c3781",
+  "scope": "EN client rendering regression only. The exact previously captured actual API SSE is replayed unchanged through the new browser parser. No new model/API request, no incremental-network or FI-language claim.",
+  "newModelRequests": 0,
+  "uiRequestsIntercepted": 1,
+  "pageErrors": [],
+  "violations": [
+    {
+      "id": "heading-order",
+      "impact": "moderate",
+      "nodes": [
+        {
+          "target": [
+            ".mb-3"
+          ],
+          "failureSummary": "Fix any of the following:\n  Heading order invalid"
+        }
+      ]
+    }
+  ],
+  "overflow": {
+    "viewport": 1440,
+    "document": 1440,
+    "body": 1440,
+    "hasHorizontalOverflow": false
+  },
+  "cardText": "Laboratory calculation\n\nc = m / V\n\nMaterial mass (mg)\n10\nFinal solution volume (mL)\n2\nConcentration\n5 mg/mL\n\nIdeal mass balance, no material loss. Use final solution volume. Values based on nominal mass do not establish measured content, purity, solubility or handling conditions.\n\nDisplayed values are rounded to at most eight significant digits. They do not establish measurement precision.\n\nUse in calculator →",
+  "logText": "Calculate the concentration of 10 mg in a final solution volume of 2 mL.\n\nLaboratory calculation\n·\n\nConcentration\n\nInputs: Material mass (mg): 10 mg; Final solution volume (mL): 2 mL.\n\nConcentration: 5 mg/mL\n\nFormula and assumptions: c = m / V.\nIdeal mass balance, no material loss. Use final solution volume. Values based on nominal mass do not establish measured content, purity, solubility or handling conditions.\n\nDisplayed values are rounded to at most eight significant digits. They do not establish measurement precision.\n\nFor laboratory research only.\n\nLaboratory calculation\n\nc = m / V\n\nMaterial mass (mg)\n10\nFinal solution volume (mL)\n2\nConcentration\n5 mg/mL\n\nIdeal mass balance, no material loss. Use final solution volume. Values based on nominal mass do not establish measured content, purity, solubility or handling conditions.\n\nDisplayed values are rounded to at most eight significant digits. They do not establish measurement precision.\n\nUse in calculator →",
+  "state": "passed"
+}

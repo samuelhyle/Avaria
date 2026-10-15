@@ -1,0 +1,15 @@
+{
+  "recordedAt": "2026-10-15T17:02:11.676199+00:00",
+  "key": "AWS_LAMBDA_JS_RUNTIME",
+  "context": "production",
+  "scopes": [
+    "builds"
+  ],
+  "previousValue": null,
+  "value": "nodejs24.x",
+  "setVia": "Netlify CLI env:set --scope builds --context production",
+  "verifiedVia": "Netlify CLI env:get --scope builds --context production",
+  "effect": "Selects runtime major for subsequent deployments; current pinned artifact remains unchanged. Serving patch is verified separately through private startup logs.",
+  "rollback": "Restore the prior immutable deployment. Remove this production/build selector to restore its prior unset configuration before any subsequent rollback rebuild.",
+  "planOrBillingChanged": false
+}

@@ -1,0 +1,14 @@
+data: {"type":"thinking","step":0}
+
+data: {"type":"tool-call","id":"call_01a14060d52c71a8ae6834fd","name":"calculateLaboratory","args":{"mode":"concentration","massMg":10,"finalVolumeMl":2}}
+
+data: {"type":"tool-result","id":"call_01a14060d52c71a8ae6834fd","name":"calculateLaboratory","content":{"calculation":{"version":"laboratory-v2","inputs":{"mode":"concentration","massMg":10,"finalVolumeMl":2},"values":{"concentrationMgPerMl":5,"concentrationMcgPerMl":5000},"formula":"c = m / V"},"assumptions":"Laskennallinen massatase ilman hävikkiä. Nimellismäärä ei osoita mitattua sisältöä. Käytä lopullista liuostilavuutta."}}
+
+data: {"type":"thinking","step":1}
+
+: keep-alive
+
+data: {"type":"text","delta":"**Pitoisuus**\n\nLähtötiedot: Materiaalin massa (mg): 10 mg; Liuoksen lopullinen tilavuus (mL): 2 mL.\n\n- Pitoisuus: **5 mg/mL**\n\nKaava ja oletukset: c = m / V.\nLaskennallinen massatase ilman materiaalihävikkiä. Käytä liuoksen lopullista tilavuutta. Nimellismassa ei osoita mitattua sisältöä, puhtautta, liukoisuutta tai käsittelyolosuhteita.\n\nNäytetyt luvut pyöristetään enintään kahdeksaan merkitsevään numeroon. Ne eivät osoita mittauksen tarkkuutta.\n\nVain laboratoriotutkimukseen."}
+
+data: {"type":"done","usage":{"tokensIn":3192,"tokensOut":257,"latencyMs":3052},"messageId":"a-1792081449197-h6j7ch"}
+

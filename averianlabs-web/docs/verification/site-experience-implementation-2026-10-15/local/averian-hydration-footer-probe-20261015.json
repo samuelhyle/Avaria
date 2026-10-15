@@ -1,0 +1,1168 @@
+{
+  "scope": "Read-only local GETs, native served JavaScript, CDP breakpoint at React throwOnHydrationMismatch. Browser-only observer/DOM-call instrumentation for diagnostics; no application source patch.",
+  "base": "http://localhost:3217",
+  "reactScript": "/_next/static/chunks/9d81e687-8a1f3ef355ee4346.js",
+  "started": "2026-10-15T16:03:53.544Z",
+  "cursorBindings": {
+    "parent": "rP",
+    "next": "rN",
+    "active": "rL",
+    "rootOrSingleton": "r_"
+  },
+  "rows": [
+    {
+      "observed": true,
+      "round": 0,
+      "index": 0,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 1,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 2,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 3,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 4,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 5,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 6,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 7,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 8,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 9,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 10,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 11,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 12,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 13,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 14,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 15,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 16,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 17,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 18,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 19,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 20,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 21,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 22,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 23,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 0,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 1,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 2,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 3,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 4,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 5,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 6,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 7,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 8,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 9,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 10,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 11,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 12,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 13,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 14,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 15,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 16,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 17,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 18,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 19,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 20,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 21,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 22,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 1,
+      "index": 23,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 0,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 1,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 2,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 3,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 4,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 5,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 6,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 7,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 8,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 9,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 10,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 11,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 12,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 13,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 14,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 15,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 16,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 17,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 18,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 19,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 20,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 21,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 22,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 2,
+      "index": 23,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 0,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 1,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 2,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 3,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 4,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 5,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 6,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 7,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 8,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 9,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 10,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 11,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 12,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 13,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 14,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 15,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 16,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 17,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 18,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 19,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 20,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 21,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 22,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 0,
+      "index": 23,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 0,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 1,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 2,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 3,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 4,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 5,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 6,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 7,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 8,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 9,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 10,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 11,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 12,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 13,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 14,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 15,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 16,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 17,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 18,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 19,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 20,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 21,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 22,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 1,
+      "index": 23,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 0,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 1,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 2,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 3,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 4,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 5,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 6,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 7,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 8,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 9,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 10,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 11,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 12,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 13,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 14,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 15,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 16,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 17,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 18,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 19,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 20,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 21,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 22,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": false,
+      "round": 2,
+      "index": 23,
+      "locale": "en",
+      "errors": [],
+      "mismatchCount": 0
+    }
+  ],
+  "mismatches": [],
+  "completed": "2026-10-15T16:04:44.221Z"
+}

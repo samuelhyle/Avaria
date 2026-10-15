@@ -1,0 +1,847 @@
+{
+  "scope": "CDP breakpoint at React throwOnHydrationMismatch; unchanged served JavaScript and native loading.",
+  "base": "http://localhost:3217",
+  "patches": 0,
+  "rows": [
+    {
+      "i": 0,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 0,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 0,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 0,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 0,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 0,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 0,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 0,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 0,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 0,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 0,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 0,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 1,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 1,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 1,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 1,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 1,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 1,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 1,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 1,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 1,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 1,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 1,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 1,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 2,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 2,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 2,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 2,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 2,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 2,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 2,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 2,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 2,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 2,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 2,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 2,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 3,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 3,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 3,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 3,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 3,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 3,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 3,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 3,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 3,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 3,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 3,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 3,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 4,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 4,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 4,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 4,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 4,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 4,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 4,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 4,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 4,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 4,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 4,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 4,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 5,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 5,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 5,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 5,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 5,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 5,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 5,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 5,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 5,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 5,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 5,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 5,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 6,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 6,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 6,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 6,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 6,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 6,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 6,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 6,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 6,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 6,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 6,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 6,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 7,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 7,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 7,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 7,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 7,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 7,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 7,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 7,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 7,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 7,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 7,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 7,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 8,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 8,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 8,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 8,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 8,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 8,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 8,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 8,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 8,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 8,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 8,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 8,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 9,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 9,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 9,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 9,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 9,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 9,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 9,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 9,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 9,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 9,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 9,
+      "locale": "fi",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    },
+    {
+      "i": 9,
+      "locale": "en",
+      "path": "",
+      "errors": [],
+      "diagnostics": []
+    }
+  ]
+}

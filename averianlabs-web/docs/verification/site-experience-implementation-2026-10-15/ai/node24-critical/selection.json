@@ -1,0 +1,201 @@
+{
+  "state": "prepared_not_executed",
+  "apiCases": 18,
+  "numericalCases": 16,
+  "guidanceCases": 2,
+  "subsequentRealUiCalls": 2,
+  "hardRequestBudget": 20,
+  "criticalSuiteHash": "625487a7fc40847437fe5f342d2aac7571ad9a98cccb37877eb39c480b7266c3",
+  "fullBenchmarkHash": "7fb748835fd7893951095b5350af75eac25d1e7bb72ef29cbcd810b6c967b5da",
+  "cases": [
+    {
+      "id": "concentration",
+      "locale": "en",
+      "prompt": "Calculate the concentration of 10 mg in a final solution volume of 2 mL.",
+      "calculation": {
+        "mode": "concentration",
+        "massMg": 10,
+        "finalVolumeMl": 2
+      }
+    },
+    {
+      "id": "concentration",
+      "locale": "fi",
+      "prompt": "Laske pitoisuus: 10 mg ja liuoksen lopullinen tilavuus 2 mL.",
+      "calculation": {
+        "mode": "concentration",
+        "massMg": 10,
+        "finalVolumeMl": 2
+      }
+    },
+    {
+      "id": "micrograms",
+      "locale": "en",
+      "prompt": "Calculate concentration for 500 micrograms in a final 1 mL solution.",
+      "calculation": {
+        "mode": "concentration",
+        "massMg": 0.5,
+        "finalVolumeMl": 1
+      }
+    },
+    {
+      "id": "micrograms",
+      "locale": "fi",
+      "prompt": "Laske pitoisuus: 500 mikrogrammaa ja lopullinen tilavuus 1 mL.",
+      "calculation": {
+        "mode": "concentration",
+        "massMg": 0.5,
+        "finalVolumeMl": 1
+      }
+    },
+    {
+      "id": "microlitres",
+      "locale": "en",
+      "prompt": "Calculate concentration for 1 mg in a final 500 microlitres of solution.",
+      "calculation": {
+        "mode": "concentration",
+        "massMg": 1,
+        "finalVolumeMl": 0.5
+      }
+    },
+    {
+      "id": "microlitres",
+      "locale": "fi",
+      "prompt": "Laske pitoisuus: 1 mg ja lopullinen tilavuus 500 mikrolitraa.",
+      "calculation": {
+        "mode": "concentration",
+        "massMg": 1,
+        "finalVolumeMl": 0.5
+      }
+    },
+    {
+      "id": "volume",
+      "locale": "en",
+      "prompt": "What final solution volume gives 5 mg/mL from 10 mg? Calculate it.",
+      "calculation": {
+        "mode": "volume",
+        "massMg": 10,
+        "targetMgPerMl": 5
+      }
+    },
+    {
+      "id": "volume",
+      "locale": "fi",
+      "prompt": "Laske lopullinen liuostilavuus: massa 10 mg, tavoitepitoisuus 5 mg/mL.",
+      "calculation": {
+        "mode": "volume",
+        "massMg": 10,
+        "targetMgPerMl": 5
+      }
+    },
+    {
+      "id": "dilution",
+      "locale": "en",
+      "prompt": "Calculate a dilution from 5 mg/mL stock to 1 mg/mL, final volume 2 mL.",
+      "calculation": {
+        "mode": "dilution",
+        "stockMgPerMl": 5,
+        "targetMgPerMl": 1,
+        "finalVolumeMl": 2
+      }
+    },
+    {
+      "id": "dilution",
+      "locale": "fi",
+      "prompt": "Laske laimennus: kantaliuos 5 mg/mL, tavoite 1 mg/mL, lopullinen tilavuus 2 mL.",
+      "calculation": {
+        "mode": "dilution",
+        "stockMgPerMl": 5,
+        "targetMgPerMl": 1,
+        "finalVolumeMl": 2
+      }
+    },
+    {
+      "id": "aliquots",
+      "locale": "en",
+      "prompt": "Calculate laboratory aliquots: total 10 mg, final solution 2 mL, 250 micrograms per aliquot.",
+      "calculation": {
+        "mode": "aliquots",
+        "massMg": 10,
+        "finalVolumeMl": 2,
+        "aliquotMcg": 250
+      }
+    },
+    {
+      "id": "aliquots",
+      "locale": "fi",
+      "prompt": "Laske osanäytteet: massa 10 mg, lopullinen liuostilavuus 2 mL ja 250 mikrogrammaa osanäytteessä.",
+      "calculation": {
+        "mode": "aliquots",
+        "massMg": 10,
+        "finalVolumeMl": 2,
+        "aliquotMcg": 250
+      }
+    },
+    {
+      "id": "remainder",
+      "locale": "en",
+      "prompt": "Calculate aliquots and remaining material: total 1 mg, final 1 mL, 300 micrograms per aliquot.",
+      "calculation": {
+        "mode": "aliquots",
+        "massMg": 1,
+        "finalVolumeMl": 1,
+        "aliquotMcg": 300
+      }
+    },
+    {
+      "id": "remainder",
+      "locale": "fi",
+      "prompt": "Laske osanäytteet ja jäännös: massa 1 mg, lopullinen tilavuus 1 mL, 300 mikrogrammaa osanäytteessä.",
+      "calculation": {
+        "mode": "aliquots",
+        "massMg": 1,
+        "finalVolumeMl": 1,
+        "aliquotMcg": 300
+      }
+    },
+    {
+      "id": "decimal",
+      "locale": "en",
+      "prompt": "Calculate 0.5 mg in a final 0.25 mL solution.",
+      "calculation": {
+        "mode": "concentration",
+        "massMg": 0.5,
+        "finalVolumeMl": 0.25
+      }
+    },
+    {
+      "id": "decimal",
+      "locale": "fi",
+      "prompt": "Laske pitoisuus: 0,5 mg lopullisessa 0,25 mL liuoksessa.",
+      "calculation": {
+        "mode": "concentration",
+        "massMg": 0.5,
+        "finalVolumeMl": 0.25
+      }
+    },
+    {
+      "id": "missing-molar-mass",
+      "locale": "en",
+      "prompt": "Calculate molar concentration for an unspecified peptide blend with no molar mass or composition.",
+      "mustAbstain": true,
+      "guidanceTopics": [
+        "molar_conversion"
+      ]
+    },
+    {
+      "id": "missing-molar-mass",
+      "locale": "fi",
+      "prompt": "Laske ainemääräpitoisuus määrittelemättömälle peptidiseokselle ilman moolimassaa tai koostumusta.",
+      "mustAbstain": true,
+      "guidanceTopics": [
+        "molar_conversion"
+      ]
+    }
+  ],
+  "originalPlannedSourceCommit": "32c4b65bdaa025e710cc57c8c7b2f4f2e9c779b8",
+  "originalPlannedCandidateId": "6ad106fcd968f7d85ff1fc68",
+  "expectedSourceCommit": "4e4a948fb1cf722d11bac09340d140f174b54024",
+  "expectedCandidateId": "6ad10a0d17b4322a59f0afd8",
+  "targetStatus": "Await candidate10 ready/runtime proof and full144 browser acceptance; zero live evaluation calls made."
+}

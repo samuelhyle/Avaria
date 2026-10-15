@@ -1,0 +1,53 @@
+{
+  "reviewedAt": "2026-10-15T16:52:46.523526+00:00",
+  "scope": "Read-only investigation of host-owned badge; no host setting mutation performed by this investigation. Owner action and fresh-page validation recorded separately by release owner.",
+  "primarySources": {
+    "documentation": "https://docs.netlify.com/manage/projects/powered-by-netlify-badge/",
+    "openApi": "https://open-api.netlify.com/swagger.json",
+    "dashboardAndScript": [
+      {
+        "url": "https://app.netlify.com/assets/js/app.3ef0d695000c2b835d8a.js",
+        "bytes": 2949186,
+        "sha256": "b64b15ca967a1c927f70d0ef7cd1c0410cd84795eb473a9b5d0339df6a51d2e4"
+      },
+      {
+        "url": "https://app.netlify.com/assets/js/lib.f99efe1571030a8031e3.js",
+        "bytes": 227362,
+        "sha256": "3d7c1d86a3ae653b2c86a7963916edb72724febcce3e4b010a29f6a062f081c6"
+      },
+      {
+        "url": "https://averianlabs-demo.netlify.app/.netlify/scripts/hud?variant=public",
+        "bytes": 34481,
+        "sha256": "6fc3bfa655a80a5c979906f2ce708147e6b063703617fe0b7ef3706b813fea00"
+      }
+    ]
+  },
+  "sanitizedCapabilityResult": {
+    "authenticatedRole": "Owner",
+    "existingPlan": "Pro",
+    "can_remove_netlify_badge": true,
+    "built_with_badge_enabled_beforeOwnerAction": true
+  },
+  "supportedDashboardAction": {
+    "method": "PUT",
+    "path": "/api/v1/sites/{current_site_id}",
+    "payload": {
+      "built_with_badge_enabled": false
+    },
+    "changesPlanOrBilling": false,
+    "requiresRedeploy": false,
+    "status": "Validated payload/method from shipped official dashboard implementation; not executed by this investigation."
+  },
+  "documentationDifference": "General public badge documentation describes the project on/off control. The current official dashboard additionally gates removal on can_remove_netlify_badge and displays an upgrade prompt when explicitly false. Existing authenticated team capability was true; no upgrade is required. The public OpenAPI updateSite schema exposes PATCH but omits this newer field; current official dashboard API client uses PUT and serializes only the supplied changed fields.",
+  "observedInjectionBeforeOwnerAction": {
+    "route": "/fi/peptide-calculator",
+    "scriptSelector": "script[src^=\"/.netlify/scripts/hud\"][data-nf-variant=\"public\"]",
+    "sanitizedScriptTag": "<script async src=\"/.netlify/scripts/hud?variant=public\" data-nf-variant=\"public\" data-netlify-site-id=\"[public site ID omitted]\" data-app-host=\"app.netlify.com\">",
+    "publicFrameSelector": "iframe#nl-badge-frame[title=\"Powered by Netlify\"]",
+    "ownerFrameSelector": "iframe#nl-hud-frame[title=\"Netlify\"]",
+    "publicFrameInitialStyle": "position:fixed;bottom:0;right:0;z-index:2147483645;width:216px;height:92px",
+    "sourceChangeRequired": false
+  },
+  "verificationRecommendation": "Use four fresh browser contexts for EN/FI calculators at mobile and desktop widths. Confirm public injection script and #nl-badge-frame are absent, result headings are unobscured, page has no errors, and merchant/noindex gates remain unchanged. Avoid visitor dismissal state or CSS hiding as proof.",
+  "privacy": "No token, account ID, account slug, personal name/email, or credential values retained."
+}

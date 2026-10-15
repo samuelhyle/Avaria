@@ -1,0 +1,14 @@
+data: {"type":"thinking","step":0}
+
+data: {"type":"tool-call","id":"call_function_fy3jb9sabcyu_1","name":"calculateLaboratory","args":{"mode":"concentration","massMg":10,"finalVolumeMl":2}}
+
+data: {"type":"tool-result","id":"call_function_fy3jb9sabcyu_1","name":"calculateLaboratory","content":{"calculation":{"version":"laboratory-v2","inputs":{"mode":"concentration","massMg":10,"finalVolumeMl":2},"values":{"concentrationMgPerMl":5,"concentrationMcgPerMl":5000},"formula":"c = m / V"},"assumptions":"Ideal mass balance without loss. Nominal quantity does not establish measured content. Use final solution volume."}}
+
+data: {"type":"thinking","step":1}
+
+: keep-alive
+
+data: {"type":"text","delta":"**Concentration**\n\nInputs: Material mass (mg): 10 mg; Final solution volume (mL): 2 mL.\n\n- Concentration: **5 mg/mL**\n\nFormula and assumptions: c = m / V.\nIdeal mass balance, no material loss. Use final solution volume. Values based on nominal mass do not establish measured content, purity, solubility or handling conditions.\n\nDisplayed values are rounded to at most eight significant digits. They do not establish measurement precision.\n\nFor laboratory research only."}
+
+data: {"type":"done","usage":{"tokensIn":3164,"tokensOut":232,"latencyMs":4781},"messageId":"a-1792081437034-krm68f"}
+

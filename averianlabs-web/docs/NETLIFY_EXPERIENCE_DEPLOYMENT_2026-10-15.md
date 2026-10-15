@@ -1,0 +1,41 @@
+# Site experience review deployment — 15 October 2026
+
+Status: published and locked at 17:32:20.090 UTC on 15 October 2026.
+
+This release implements the [site experience master plan](SITE_EXPERIENCE_MASTER_PLAN_2026-10-15.md). The [implementation ledger](SITE_EXPERIENCE_IMPLEMENTATION_2026-10-15.md) records delivered behavior, initial failures, corrections and remaining dependencies. It is a review deployment; merchant activation and publication of source-dependent scientific material remain gated.
+
+## Artifact and rollback
+
+- Stable review site: <https://averianlabs-demo.netlify.app/fi> and <https://averianlabs-demo.netlify.app/en>.
+- Published deployment: `6ad10a0d17b4322a59f0afd8`.
+- Runtime source: `4e4a948fb1cf722d11bac09340d140f174b54024`.
+- Rollback deployment: `6ad0fcb3e98014388e373970`, source `e8e511e3f323fa439070864ac5873e301fb0ca8f`, published at 16:36:18.425 UTC. Its separate candidate/published/extended evidence remains under the `*-release7` folders.
+- Source ZIP SHA-256: `29153bd109814f6e114cf6d3850024c23b60b196af2f6e6448101742923ee27d`.
+- The workspace ZIP contains committed source and excludes every `.env*` file. Hosting settings supply secrets; no secret values are included in the evidence.
+- Promotion restored the validated immutable artifact, confirmed its published identity, and locked it against replacement by the older linked remote branch. No remote push was forced. Documentation/evidence commits after the runtime source do not change the deployed source attribution.
+
+The previous immutable artifact remains available for rollback. This change adds no database migration or schema change. A fresh provider-side logical pre-migration snapshot is exported privately and checksum-verified before promotion. The new private snapshot contains 47 public tables and six migration-ledger entries, SHA-256 `4b53366ed094604693ddcad9f9531f3dcedb77f3ff7aaa289ef0000d68253bec`. Its raw data stays outside the repository. Earlier logical restore rehearsal verified 47 tables, 125 rows, six migration hashes and 48 foreign keys; this is separate from a provider point-in-time recovery exercise.
+
+## Verification
+
+Current source passes 383 unit tests across 44 files, including all four native embedding checks; the rebuilt 144-case browser suite passes 142 with two explicit real-provider skips, two workers and zero retries. Both new cached-script/slow-HTML product regressions and strict no-JavaScript paths pass. The 26 integration tests pass under Node 24 with isolated native PostgreSQL; no SQL/API source changed in the final layout refinement. All nine local gzip budgets, twelve deployment guards and translation key/call checks pass. The complete lint check has zero errors and 39 retained warnings.
+
+The immutable candidate passes 29 HTTP contracts and 36 browser states with no recorded page errors, horizontal overflow or serious/critical axe findings. Actual FI/EN sharing PNGs and metadata pass. Fresh hosted evaluation passes all 18 critical API cases (16 numerical and two prerequisite-guidance cases) plus two actual English/Finnish composer calculations, with zero recorded UI errors, overflow or axe findings. All 18 supplementary responsive/keyboard/theme/presentation states pass; their two long-answer replies are explicitly intercepted display fixtures. Evidence is retained in [the implementation verification directory](verification/site-experience-implementation-2026-10-15/README.md); failed and intermediate candidates are identified separately.
+
+Independent post-publication verification of the stable public origin passes all 29 HTTP checks and 36 desktop/mobile browser states, with no recorded page errors, overflow or serious/critical axe findings. All 36 states have zero public badge scripts/frames. Both actual FI/EN sharing PNGs and both metadata checks pass again. The [published artifact record](verification/site-experience-implementation-2026-10-15/published/artifact.json) includes the publication/verification timestamps, source/archive identity and evidence hashes. Final lint checks 644 files with zero errors and 39 retained warnings. After verification, owned local commerce fixtures were removed and the temporary QA server/database stopped gracefully; private database files were preserved and other services were left running.
+
+Final-source repeated mobile Lighthouse verification completes all 23 audits and 46 API/database health checks. All 23 have accessibility 100, best practices 100 and CLS 0. Content-route performance medians are 91 home, 88 catalogue, 79 product, 85 calculator, 91 assistant, 86 community and 93 documents; LCP medians 3.04–5.00 seconds do not meet the 2.5-second target. All observations, including the initial slower home audit, remain in the [performance record](verification/site-experience-implementation-2026-10-15/performance/README.md). Local simulated measurements, ambient workloads and different source/runtime baselines prevent field-performance or causal speedup claims.
+
+The full hosted bilingual API evaluation targets immutable candidate `6ad0f4d8d24ede22e5d83db6`, source `0354c14fc50a5b032c0265e790246b22d3ed0969`. Subsequent fixes affect client parsing, plan-page navigation, accessibility, the floating widget’s catalogue-provider placement, whole-document hydration gating and the Node runtime. The API import graph records source identity; it does not claim runtime equivalence. The older full60 remains attributed to its previous runtime configuration, and the fresh 18-case critical API subset plus two actual composer calculations pass on the patched deployment with their own exact source/origin/runtime attribution. The server-source comparison lists187 unchanged API-reachable files,313 unchanged broad-selection files,2 intentional configuration changes and a supplemental runtime-control manifest. API evidence retains its actual origin; final client, routing and online checks run against the release artifact. Source identity does not by itself establish identical environment, database or provider behavior.
+
+## Runtime and hosting controls
+
+Local development, both CI configurations and both build configurations pin Node 24.22.0; the package admits supported Node 24 versions from 24.15.0. Netlify's production/build-scoped `AWS_LAMBDA_JS_RUNTIME=nodejs24.x` selector is configured through its supported CLI. [Actual serving startup metadata](verification/site-experience-implementation-2026-10-15/local/final-serving-runtime.json) confirms managed Node 24.21.0, distinct from the build patch. The relevant upstream cancellation guard is verified in that exact managed source; Node 22 reproduces the internal race three times, while local Node 24 completes 100 iterations without it. No framework/library patch, error suppression or public runtime-version endpoint is added.
+
+The existing owner entitlement permitted disabling the host badge through the supported project toggle without a plan or billing change. Fresh hosted states confirm no public injection script or frame. Rollback of application code restores the previous immutable artifact; its baked serving runtime remains separate from the selector used by future builds. Remove the new build-scoped selector to restore its previous unset configuration before rebuilding the old source. The intentional badge setting is project-level and independent of artifact rollback.
+
+## Release boundaries
+
+The catalogue retains 15 draft references without saleable stock or invented released batch reports. The review site remains `noindex, nofollow`. No real customer orders, accounts, emails or community posts are created by these checks. Persistence and commerce flows use isolated local fixtures. Hosted model evaluations are anonymous and read-only, with persistence and private/memory/RAG retrieval disabled; permitted public catalogue/document lookups remain available.
+
+Seller details, approved specifications and original batch files will be supplied later. Independent native Finnish/English and scientific approval, real researcher sessions, physical-device/screen-reader testing and consent-respecting field performance remain separate acceptance work. The [researcher task protocol](RESEARCHER_TASK_REVIEW_PROTOCOL_2026-10-15.md) makes that work ready to conduct; no participant results or approvals are fabricated.

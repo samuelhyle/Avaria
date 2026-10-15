@@ -1,0 +1,292 @@
+
+> averianlabs-web@0.1.0 lint /Users/purepanel/Avaria/averianlabs-web
+> biome check .
+
+./components/home/Hero3DProductCard.tsx:28:83 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    26 │   const translation = product.translations?.[locale as Locale] ?? product.defaultTranslation
+    27 │   const minVial = product.vials.length
+  > 28 │     ? product.vials.reduce((min, v) => (v.priceCents < min.priceCents ? v : min), product.vials[0]!)
+       │                                                                                   ^^^^^^^^^^^^^^^^^
+    29 │     : undefined
+    30 │ 
+  
+
+./components/home/Hero3DProductChips.tsx:63:83 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    61 │         const translation = p.translations?.[locale as Locale] ?? p.defaultTranslation
+    62 │         const minVial = p.vials.length
+  > 63 │           ? p.vials.reduce((min, v) => (v.priceCents < min.priceCents ? v : min), p.vials[0]!)
+       │                                                                                   ^^^^^^^^^^^
+    64 │           : undefined
+    65 │         return (
+  
+
+./components/product/ProductFAQ.tsx:29:9 lint/security/noDangerouslySetInnerHtml ━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid passing content using the dangerouslySetInnerHTML prop.
+  
+    27 │       <script
+    28 │         type="application/ld+json"
+  > 29 │         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\u003c") }}
+       │         ^^^^^^^^^^^^^^^^^^^^^^^
+    30 │       />
+    31 │       <h2 className="p-6 font-display text-xl font-semibold">{t("faqTitle")}</h2>
+  
+  ! Setting content using code can expose users to cross-site scripting (XSS) attacks
+  
+
+./components/product/ShopToolbar.tsx:36:29 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    34 │   const chips = [
+    35 │     ...(searchParams?.get("q")
+  > 36 │       ? [{ key: "q", label: searchParams.get("q")!, onRemove: () => update("q", null) }]
+       │                             ^^^^^^^^^^^^^^^^^^^^^^
+    37 │       : []),
+    38 │     ...(filters.inStock
+  
+
+./components/seo/JsonLd.tsx:20:7 lint/security/noDangerouslySetInnerHtml ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Avoid passing content using the dangerouslySetInnerHTML prop.
+  
+    18 │       type="application/ld+json"
+    19 │       id={id}
+  > 20 │       dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
+       │       ^^^^^^^^^^^^^^^^^^^^^^^
+    21 │     />
+    22 │   )
+  
+  ! Setting content using code can expose users to cross-site scripting (XSS) attacks
+  
+
+./components/three/PeptideTorusScene.tsx:24:43 lint/correctness/noUnusedVariables ━━━━━━━━━━━━━━━━━━
+
+  ! This variable is unused.
+  
+    22 │ }
+    23 │ 
+  > 24 │ function Scene({ products, reducedMotion, onSelect }: PeptideTorusProps) {
+       │                                           ^^^^^^^^
+    25 │   const groupRef = useRef<THREE.Group>(null)
+    26 │   const { gl, camera } = useThree()
+  
+  i Unused variables usually are result of incomplete refactoring, typos and other source of bugs.
+  
+
+./components/three/PeptideTorusScene.tsx:29:22 lint/correctness/noUnusedVariables  FIXABLE  ━━━━━━━━━━
+
+  ! This variable is unused.
+  
+    27 │   const angleRef = useRef(0)
+    28 │   const velocityRef = useRef(0.001)
+  > 29 │   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null)
+       │                      ^^^^^^^^^^^^^
+    30 │   const draggingRef = useRef(false)
+    31 │   const lastX = useRef(0)
+  
+  i Unused variables usually are result of incomplete refactoring, typos and other source of bugs.
+  
+  i Unsafe fix: If this is intentional, prepend setHoveredIdx with an underscore.
+  
+     27  27 │     const angleRef = useRef(0)
+     28  28 │     const velocityRef = useRef(0.001)
+     29     │ - ··const·[hoveredIdx,·setHoveredIdx]·=·useState<number·|·null>(null)
+         29 │ + ··const·[hoveredIdx,·_setHoveredIdx]·=·useState<number·|·null>(null)
+     30  30 │     const draggingRef = useRef(false)
+     31  31 │     const lastX = useRef(0)
+  
+
+./lib/ai/providers/local-embeddings.test.ts:57:49 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    55 │     const cos = (x: number[], y: number[]) => {
+    56 │       let dot = 0
+  > 57 │       for (let i = 0; i < x.length; i++) dot += x[i]! * y[i]!
+       │                                                 ^^^^^
+    58 │       return dot
+    59 │     }
+  
+
+./lib/ai/providers/local-embeddings.test.ts:57:57 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    55 │     const cos = (x: number[], y: number[]) => {
+    56 │       let dot = 0
+  > 57 │       for (let i = 0; i < x.length; i++) dot += x[i]! * y[i]!
+       │                                                         ^^^^^
+    58 │       return dot
+    59 │     }
+  
+
+./lib/community/reputation.test.ts:70:20 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    68 │   it("every tier has a numeric min that's strictly increasing", () => {
+    69 │     for (let i = 1; i < TIERS.length; i++) {
+  > 70 │       const prev = TIERS[i - 1]!
+       │                    ^^^^^^^^^^^^^
+    71 │       const curr = TIERS[i]!
+    72 │       expect(curr.min).toBeGreaterThan(prev.min)
+  
+
+./lib/community/reputation.test.ts:71:20 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    69 │     for (let i = 1; i < TIERS.length; i++) {
+    70 │       const prev = TIERS[i - 1]!
+  > 71 │       const curr = TIERS[i]!
+       │                    ^^^^^^^^^
+    72 │       expect(curr.min).toBeGreaterThan(prev.min)
+    73 │     }
+  
+
+./lib/notifications/service.ts:111:10 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    109 │   if (existing[0]) return existing[0]
+    110 │   const inserted = await db.insert(notificationPreferences).values({ userId }).returning()
+  > 111 │   return inserted[0]!
+        │          ^^^^^^^^^^^^
+    112 │ }
+    113 │ 
+  
+
+./lib/orders/quote.ts:113:17 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    111 │   ])
+    112 │   const lines: QuoteLine[] = normalized.map((item) => {
+  > 113 │     const row = rows.find((row) => row.vial.sku === item.sku)!
+        │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    114 │     const vial = row.vial
+    115 │     const spec = row.product.specJson as Record<string, unknown>
+  
+
+./lib/products/selection.ts:9:14 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+     7 │       if (available(a) !== available(b)) return available(a) ? -1 : 1
+     8 │       return a.priceCents - b.priceCents
+   > 9 │     })[0] ?? product.vials[0]!
+       │              ^^^^^^^^^^^^^^^^^
+    10 │   )
+    11 │ }
+  
+
+./lib/search/meilisearch.ts:75:7 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    73 │   // The small catalogue is hydrated on every request so a stale external index cannot advertise stock or batch evidence.
+    74 │   const locale = ["en", "fi", "de", "sv", "nl"].includes(options.locale ?? "")
+  > 75 │     ? options.locale!
+       │       ^^^^^^^^^^^^^^^
+    76 │     : "en"
+    77 │   const q = query.trim().toLocaleLowerCase(locale)
+  
+
+./lib/search/meilisearch.ts:86:54 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    84 │   if (options.inStock !== undefined) rows = rows.filter((row) => row.inStock === options.inStock)
+    85 │   if (options.minPrice !== undefined)
+  > 86 │     rows = rows.filter((row) => row.minPriceCents >= options.minPrice! * 100)
+       │                                                      ^^^^^^^^^^^^^^^^^
+    87 │   if (options.maxPrice !== undefined)
+    88 │     rows = rows.filter((row) => row.minPriceCents <= options.maxPrice! * 100)
+  
+
+./lib/search/meilisearch.ts:88:54 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    86 │     rows = rows.filter((row) => row.minPriceCents >= options.minPrice! * 100)
+    87 │   if (options.maxPrice !== undefined)
+  > 88 │     rows = rows.filter((row) => row.minPriceCents <= options.maxPrice! * 100)
+       │                                                      ^^^^^^^^^^^^^^^^^
+    89 │   if (options.sort === "minPriceCents:asc") rows.sort((a, b) => a.minPriceCents - b.minPriceCents)
+    90 │   if (options.sort === "minPriceCents:desc") rows.sort((a, b) => b.minPriceCents - a.minPriceCents)
+  
+
+./tests/integration/reliability.test.ts:137:15 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    135 │     .insert(batches)
+    136 │     .values({
+  > 137 │       vialId: vial!.id,
+        │               ^^^^^
+    138 │       code: `BATCH-${id}`,
+    139 │       manufacturedAt: new Date("2026-01-01"),
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+    135 135 │       .insert(batches)
+    136 136 │       .values({
+    137     │ - ······vialId:·vial!.id,
+        137 │ + ······vialId:·vial?.id,
+    138 138 │         code: `BATCH-${id}`,
+    139 139 │         manufacturedAt: new Date("2026-01-01"),
+  
+
+./tests/integration/reliability.test.ts:149:47 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    147 │     })
+    148 │     .returning()
+  > 149 │   await db.update(vials).set({ activeBatchId: batch!.id }).where(eq(vials.id, vial!.id))
+        │                                               ^^^^^^
+    150 │   await db.insert(productTranslations).values([
+    151 │     { productId: id, locale: "en", name: "Test water" },
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+    147 147 │       })
+    148 148 │       .returning()
+    149     │ - ··await·db.update(vials).set({·activeBatchId:·batch!.id·}).where(eq(vials.id,·vial!.id))
+        149 │ + ··await·db.update(vials).set({·activeBatchId:·batch?.id·}).where(eq(vials.id,·vial!.id))
+    150 150 │     await db.insert(productTranslations).values([
+    151 151 │       { productId: id, locale: "en", name: "Test water" },
+  
+
+./tests/integration/reliability.test.ts:149:79 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    147 │     })
+    148 │     .returning()
+  > 149 │   await db.update(vials).set({ activeBatchId: batch!.id }).where(eq(vials.id, vial!.id))
+        │                                                                               ^^^^^
+    150 │   await db.insert(productTranslations).values([
+    151 │     { productId: id, locale: "en", name: "Test water" },
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+    147 147 │       })
+    148 148 │       .returning()
+    149     │ - ··await·db.update(vials).set({·activeBatchId:·batch!.id·}).where(eq(vials.id,·vial!.id))
+        149 │ + ··await·db.update(vials).set({·activeBatchId:·batch!.id·}).where(eq(vials.id,·vial?.id))
+    150 150 │     await db.insert(productTranslations).values([
+    151 151 │       { productId: id, locale: "en", name: "Test water" },
+  
+
+The number of diagnostics exceeds the number allowed by Biome.
+Diagnostics not shown: 19.
+Checked 641 files in 330ms. No fixes applied.
+Found 39 warnings.

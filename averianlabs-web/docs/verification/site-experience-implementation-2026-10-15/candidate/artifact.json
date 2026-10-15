@@ -1,0 +1,13 @@
+{
+  "sourceCommit": "4e4a948fb1cf722d11bac09340d140f174b54024",
+  "deployId": "6ad10a0d17b4322a59f0afd8",
+  "buildId": "6ad10a0d17b4322a59f0afd6",
+  "sourceZipSha256": "29153bd109814f6e114cf6d3850024c23b60b196af2f6e6448101742923ee27d",
+  "published": false,
+  "ready": true,
+  "checkedAt": "2026-10-15T17:22:44.618Z",
+  "httpContracts": 29,
+  "browserStates": 36,
+  "allPublicBadgeScriptAndFrameCountsZero": true,
+  "actualServingProof": "../local/final-serving-runtime.json"
+}

@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-10-15T17:20:21.022146+00:00",
+  "deployId": "6ad10a0d17b4322a59f0afd8",
+  "sourceCommit": "4e4a948fb1cf722d11bac09340d140f174b54024",
+  "origin": "https://6ad10a0d17b4322a59f0afd8--averianlabs-demo.netlify.app",
+  "logSource": "functions",
+  "logFilteredByDeployId": true,
+  "observedNodeVersions": [
+    "v24.21.0"
+  ],
+  "runtimeLogEntries": 2,
+  "pinnedBuildVersion": "24.22.0",
+  "health": {
+    "status": 200,
+    "checks": {
+      "env": true,
+      "db": true
+    }
+  },
+  "runtimeSelector": "nodejs24.x",
+  "minimumWithUpstreamFix": "24.15.0",
+  "upstreamGuardEvidence": "node24-managed-serving-guard-20261015.json",
+  "privateRawLogSha256": "07952359dda1eaecb8a26e5798769c11c9cb4f3a4a809f70605baa0a74bedec4",
+  "rawLogPublished": false,
+  "scope": "Actual private serving-function startup metadata, not an inference from build logs. Managed serving patch differs from the pinned build. No secret values, request headers, cookies or customer logs are published."
+}

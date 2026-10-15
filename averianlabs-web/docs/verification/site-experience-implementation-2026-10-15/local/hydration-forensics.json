@@ -1,0 +1,3174 @@
+{
+  "scope": "Local native production build, read-only EN/FI homepage GETs. No application JavaScript patched. Browser-only CDP breakpoint and optional observer/DOM-call instrumentation.",
+  "baselineSourceCommit": "dd62af2231e6a1a3974ea591a4d5e94c434c6293",
+  "environment": {
+    "origin": "http://localhost:3217",
+    "database": "isolated native QA on 127.0.0.1:5439",
+    "fixture": "Desktop Chrome, 1440x900, accept-language en, age-confirmed cookie, first-context storage clear, essential consent, default system theme"
+  },
+  "originalNativeProbe": {
+    "states": 69,
+    "actualPageerrorRows": 2,
+    "events": [
+      {
+        "row": 4,
+        "contextRound": 0,
+        "locale": "fi",
+        "errors": [
+          "Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        ],
+        "capturedExpectedPath": [
+          {
+            "type": "div",
+            "props": {}
+          },
+          {
+            "type": "div",
+            "props": {
+              "className": "grid gap-7 py-8 lg:grid-cols-[260px_minmax(0,1fr)]"
+            }
+          },
+          {
+            "type": "div",
+            "props": {
+              "className": "mx-auto w-full px-4 sm:px-6 lg:px-10 max-w-[var(--container-page)]"
+            }
+          },
+          {
+            "type": "footer",
+            "props": {
+              "className": "platform-bottom-safe mt-12 border-t border-line bg-surface-2"
+            }
+          }
+        ]
+      },
+      {
+        "row": 45,
+        "contextRound": 3,
+        "locale": "en",
+        "errors": [
+          "Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        ],
+        "capturedExpectedPath": [
+          {
+            "type": "div",
+            "props": {}
+          },
+          {
+            "type": "div",
+            "props": {
+              "className": "grid gap-7 py-8 lg:grid-cols-[260px_minmax(0,1fr)]"
+            }
+          },
+          {
+            "type": "div",
+            "props": {
+              "className": "mx-auto w-full px-4 sm:px-6 lg:px-10 max-w-[var(--container-page)]"
+            }
+          },
+          {
+            "type": "footer",
+            "props": {
+              "className": "platform-bottom-safe mt-12 border-t border-line bg-surface-2"
+            }
+          }
+        ]
+      }
+    ],
+    "countingCaution": "The original helper reused a diagnostics array across navigations. Repeated references are not additional failures; only the two actual pageerror rows above count."
+  },
+  "enhancedNativeProbe": {
+    "states": 144,
+    "withObserver": 72,
+    "withoutObserver": 72,
+    "actualPageerrorRows": 0,
+    "capturedMismatches": 0
+  },
+  "cachedScriptTimingExperiment": {
+    "diagnosticOnly": true,
+    "networkAfterWarmup": {
+      "downloadBytesPerSecond": 32768,
+      "uploadBytesPerSecond": 262144,
+      "latencyMs": 30
+    },
+    "states": 3,
+    "actualPageerrorRows": 1,
+    "capturedMismatches": 1,
+    "event": {
+      "navigationIndex": 2,
+      "locale": "fi",
+      "readyStateAtThrow": "complete",
+      "atMs": 2028.4000000953674,
+      "navigation": [
+        {
+          "domInteractive": 2005.2999999523163,
+          "domContentLoadedEventEnd": 2005.4000000953674,
+          "loadEventEnd": 2005.5999999046326,
+          "responseEnd": 2000.2999999523163
+        }
+      ],
+      "nextUnclaimedNode": {
+        "id": 6,
+        "name": "A",
+        "className": "inline-flex items-center gap-2 font-display font-semibold text-lg tracking-tight",
+        "connected": true,
+        "parent": "DIV"
+      },
+      "hydrating": true,
+      "rootOrSingleton": false,
+      "expectedVsClaimed": [
+        {
+          "expectedType": "div",
+          "expectedProps": {},
+          "claimedNode": null
+        },
+        {
+          "expectedType": "div",
+          "expectedProps": {
+            "className": "grid gap-7 py-8 lg:grid-cols-[260px_minmax(0,1fr)]"
+          },
+          "claimedNode": {
+            "id": 5,
+            "name": "DIV",
+            "className": "",
+            "connected": true,
+            "parent": "DIV"
+          }
+        },
+        {
+          "expectedType": "div",
+          "expectedProps": {
+            "className": "mx-auto w-full px-4 sm:px-6 lg:px-10 max-w-[var(--container-page)]"
+          },
+          "claimedNode": {
+            "id": 4,
+            "name": "DIV",
+            "className": "grid gap-7 py-8 lg:grid-cols-[260px_minmax(0,1fr)]",
+            "connected": true,
+            "parent": "DIV"
+          }
+        },
+        {
+          "expectedType": "footer",
+          "expectedProps": {
+            "className": "platform-bottom-safe mt-12 border-t border-line bg-surface-2"
+          },
+          "claimedNode": {
+            "id": 2,
+            "name": "FOOTER",
+            "className": "platform-bottom-safe mt-12 border-t border-line bg-surface-2",
+            "connected": true,
+            "parent": "BODY"
+          }
+        }
+      ],
+      "footer": {
+        "id": 2,
+        "name": "FOOTER",
+        "className": "platform-bottom-safe mt-12 border-t border-line bg-surface-2",
+        "connected": true,
+        "parent": "BODY"
+      },
+      "footerChildren": [
+        {
+          "id": 3,
+          "name": "DIV",
+          "className": "mx-auto w-full px-4 sm:px-6 lg:px-10 max-w-[var(--container-page)]",
+          "connected": true,
+          "parent": "FOOTER"
+        }
+      ],
+      "interceptedFooterDomCalls": [],
+      "retainedMutationRecords": 180,
+      "retainedRemovedNodes": 0,
+      "footerMutationTimeline": [
+        {
+          "atMs": 814.4000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 36,
+            "name": "DETAILS",
+            "className": "group border-b border-line sm:hidden",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 41,
+              "name": "DIV",
+              "className": "pb-3",
+              "connected": true,
+              "parent": "DETAILS"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5,
+          "readyState": "loading",
+          "target": {
+            "id": 41,
+            "name": "DIV",
+            "className": "pb-3",
+            "connected": true,
+            "parent": "DETAILS"
+          },
+          "added": [
+            {
+              "id": 42,
+              "name": "UL",
+              "className": "mt-3 space-y-1",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5,
+          "readyState": "loading",
+          "target": {
+            "id": 42,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 43,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5,
+          "readyState": "loading",
+          "target": {
+            "id": 43,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 44,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5,
+          "readyState": "loading",
+          "target": {
+            "id": 44,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 45,
+              "name": "#text",
+              "connected": true,
+              "value": "Kauppa",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5,
+          "readyState": "loading",
+          "target": {
+            "id": 42,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 46,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5,
+          "readyState": "loading",
+          "target": {
+            "id": 46,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 47,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5,
+          "readyState": "loading",
+          "target": {
+            "id": 47,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 48,
+              "name": "#text",
+              "connected": true,
+              "value": "Asiakirjat",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5,
+          "readyState": "loading",
+          "target": {
+            "id": 42,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 49,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5,
+          "readyState": "loading",
+          "target": {
+            "id": 49,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 50,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5,
+          "readyState": "loading",
+          "target": {
+            "id": 50,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 51,
+              "name": "#text",
+              "connected": true,
+              "value": "Tutkimusty\u00f6kalut",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5,
+          "readyState": "loading",
+          "target": {
+            "id": 42,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 52,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5,
+          "readyState": "loading",
+          "target": {
+            "id": 52,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 53,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5,
+          "readyState": "loading",
+          "target": {
+            "id": 53,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 54,
+              "name": "#text",
+              "connected": true,
+              "value": "Yhteis\u00f6",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5,
+          "readyState": "loading",
+          "target": {
+            "id": 18,
+            "name": "DIV",
+            "className": "grid gap-x-6 sm:grid-cols-4",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 55,
+              "name": "DIV",
+              "className": "min-w-0",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5999999046326,
+          "readyState": "loading",
+          "target": {
+            "id": 55,
+            "name": "DIV",
+            "className": "min-w-0",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 56,
+              "name": "DIV",
+              "className": "hidden sm:block",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5999999046326,
+          "readyState": "loading",
+          "target": {
+            "id": 56,
+            "name": "DIV",
+            "className": "hidden sm:block",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 57,
+              "name": "H3",
+              "className": "text-xs font-semibold uppercase tracking-wider text-ink-muted",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5999999046326,
+          "readyState": "loading",
+          "target": {
+            "id": 57,
+            "name": "H3",
+            "className": "text-xs font-semibold uppercase tracking-wider text-ink-muted",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 58,
+              "name": "#text",
+              "connected": true,
+              "value": "Yritys",
+              "parent": "H3"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5999999046326,
+          "readyState": "loading",
+          "target": {
+            "id": 56,
+            "name": "DIV",
+            "className": "hidden sm:block",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 59,
+              "name": "UL",
+              "className": "mt-3 space-y-1",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5999999046326,
+          "readyState": "loading",
+          "target": {
+            "id": 59,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 60,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5999999046326,
+          "readyState": "loading",
+          "target": {
+            "id": 60,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 61,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5999999046326,
+          "readyState": "loading",
+          "target": {
+            "id": 61,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 62,
+              "name": "#text",
+              "connected": true,
+              "value": "Tietoa meist\u00e4",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.5999999046326,
+          "readyState": "loading",
+          "target": {
+            "id": 59,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 63,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 63,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 64,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 64,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 65,
+              "name": "#text",
+              "connected": true,
+              "value": "Laatu",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 59,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 66,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 66,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 67,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 67,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 68,
+              "name": "#text",
+              "connected": true,
+              "value": "Kumppanuusohjelma",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 55,
+            "name": "DIV",
+            "className": "min-w-0",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 69,
+              "name": "DETAILS",
+              "className": "group border-b border-line sm:hidden",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 69,
+            "name": "DETAILS",
+            "className": "group border-b border-line sm:hidden",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 70,
+              "name": "SUMMARY",
+              "className": "flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold [&::-webkit-details-marker]:hidden",
+              "connected": true,
+              "parent": "DETAILS"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 70,
+            "name": "SUMMARY",
+            "className": "flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold [&::-webkit-details-marker]:hidden",
+            "connected": true,
+            "parent": "DETAILS"
+          },
+          "added": [
+            {
+              "id": 71,
+              "name": "#text",
+              "connected": true,
+              "value": "Yritys",
+              "parent": "SUMMARY"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 70,
+            "name": "SUMMARY",
+            "className": "flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold [&::-webkit-details-marker]:hidden",
+            "connected": true,
+            "parent": "DETAILS"
+          },
+          "added": [
+            {
+              "id": 72,
+              "name": "svg",
+              "connected": true,
+              "parent": "SUMMARY"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 72,
+            "name": "svg",
+            "connected": true,
+            "parent": "SUMMARY"
+          },
+          "added": [
+            {
+              "id": 73,
+              "name": "path",
+              "connected": true,
+              "parent": "svg"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 69,
+            "name": "DETAILS",
+            "className": "group border-b border-line sm:hidden",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 74,
+              "name": "DIV",
+              "className": "pb-3",
+              "connected": true,
+              "parent": "DETAILS"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 74,
+            "name": "DIV",
+            "className": "pb-3",
+            "connected": true,
+            "parent": "DETAILS"
+          },
+          "added": [
+            {
+              "id": 75,
+              "name": "UL",
+              "className": "mt-3 space-y-1",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 75,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 76,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 76,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 77,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 77,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 78,
+              "name": "#text",
+              "connected": true,
+              "value": "Tietoa meist\u00e4",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 75,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 79,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 79,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 80,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 80,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 81,
+              "name": "#text",
+              "connected": true,
+              "value": "Laatu",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 75,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 82,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 82,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 83,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 83,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 84,
+              "name": "#text",
+              "connected": true,
+              "value": "Kumppanuusohjelma",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 18,
+            "name": "DIV",
+            "className": "grid gap-x-6 sm:grid-cols-4",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 85,
+              "name": "DIV",
+              "className": "min-w-0",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 85,
+            "name": "DIV",
+            "className": "min-w-0",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 86,
+              "name": "DIV",
+              "className": "hidden sm:block",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.7999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 86,
+            "name": "DIV",
+            "className": "hidden sm:block",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 87,
+              "name": "H3",
+              "className": "text-xs font-semibold uppercase tracking-wider text-ink-muted",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 87,
+            "name": "H3",
+            "className": "text-xs font-semibold uppercase tracking-wider text-ink-muted",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 88,
+              "name": "#text",
+              "connected": true,
+              "value": "Tuki",
+              "parent": "H3"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 86,
+            "name": "DIV",
+            "className": "hidden sm:block",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 89,
+              "name": "UL",
+              "className": "mt-3 space-y-1",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 89,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 90,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 90,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 91,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 91,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 92,
+              "name": "#text",
+              "connected": true,
+              "value": "UKK",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 89,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 93,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 93,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 94,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 94,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 95,
+              "name": "#text",
+              "connected": true,
+              "value": "Toimitus ja palautukset",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 89,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 96,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 96,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 97,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 97,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 98,
+              "name": "#text",
+              "connected": true,
+              "value": "Yhteystiedot",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 89,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 99,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 99,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 100,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 100,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 101,
+              "name": "#text",
+              "connected": true,
+              "value": "Asiakastili",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 85,
+            "name": "DIV",
+            "className": "min-w-0",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 102,
+              "name": "DETAILS",
+              "className": "group border-b border-line sm:hidden",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 102,
+            "name": "DETAILS",
+            "className": "group border-b border-line sm:hidden",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 103,
+              "name": "SUMMARY",
+              "className": "flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold [&::-webkit-details-marker]:hidden",
+              "connected": true,
+              "parent": "DETAILS"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 103,
+            "name": "SUMMARY",
+            "className": "flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold [&::-webkit-details-marker]:hidden",
+            "connected": true,
+            "parent": "DETAILS"
+          },
+          "added": [
+            {
+              "id": 104,
+              "name": "#text",
+              "connected": true,
+              "value": "Tuki",
+              "parent": "SUMMARY"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 103,
+            "name": "SUMMARY",
+            "className": "flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold [&::-webkit-details-marker]:hidden",
+            "connected": true,
+            "parent": "DETAILS"
+          },
+          "added": [
+            {
+              "id": 105,
+              "name": "svg",
+              "connected": true,
+              "parent": "SUMMARY"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 105,
+            "name": "svg",
+            "connected": true,
+            "parent": "SUMMARY"
+          },
+          "added": [
+            {
+              "id": 106,
+              "name": "path",
+              "connected": true,
+              "parent": "svg"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 814.9000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 102,
+            "name": "DETAILS",
+            "className": "group border-b border-line sm:hidden",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 107,
+              "name": "DIV",
+              "className": "pb-3",
+              "connected": true,
+              "parent": "DETAILS"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815,
+          "readyState": "loading",
+          "target": {
+            "id": 107,
+            "name": "DIV",
+            "className": "pb-3",
+            "connected": true,
+            "parent": "DETAILS"
+          },
+          "added": [
+            {
+              "id": 108,
+              "name": "UL",
+              "className": "mt-3 space-y-1",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815,
+          "readyState": "loading",
+          "target": {
+            "id": 108,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 109,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815,
+          "readyState": "loading",
+          "target": {
+            "id": 109,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 110,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815,
+          "readyState": "loading",
+          "target": {
+            "id": 110,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 111,
+              "name": "#text",
+              "connected": true,
+              "value": "UKK",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815,
+          "readyState": "loading",
+          "target": {
+            "id": 108,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 112,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815,
+          "readyState": "loading",
+          "target": {
+            "id": 112,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 113,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815,
+          "readyState": "loading",
+          "target": {
+            "id": 113,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 114,
+              "name": "#text",
+              "connected": true,
+              "value": "Toimitus ja palautukset",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815,
+          "readyState": "loading",
+          "target": {
+            "id": 108,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 115,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.0999999046326,
+          "readyState": "loading",
+          "target": {
+            "id": 115,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 116,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.0999999046326,
+          "readyState": "loading",
+          "target": {
+            "id": 116,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 117,
+              "name": "#text",
+              "connected": true,
+              "value": "Yhteystiedot",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.0999999046326,
+          "readyState": "loading",
+          "target": {
+            "id": 108,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 118,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.0999999046326,
+          "readyState": "loading",
+          "target": {
+            "id": 118,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 119,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.0999999046326,
+          "readyState": "loading",
+          "target": {
+            "id": 119,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 120,
+              "name": "#text",
+              "connected": true,
+              "value": "Asiakastili",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.0999999046326,
+          "readyState": "loading",
+          "target": {
+            "id": 18,
+            "name": "DIV",
+            "className": "grid gap-x-6 sm:grid-cols-4",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 121,
+              "name": "DIV",
+              "className": "min-w-0",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.0999999046326,
+          "readyState": "loading",
+          "target": {
+            "id": 121,
+            "name": "DIV",
+            "className": "min-w-0",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 122,
+              "name": "DIV",
+              "className": "hidden sm:block",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.0999999046326,
+          "readyState": "loading",
+          "target": {
+            "id": 122,
+            "name": "DIV",
+            "className": "hidden sm:block",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 123,
+              "name": "H3",
+              "className": "text-xs font-semibold uppercase tracking-wider text-ink-muted",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 123,
+            "name": "H3",
+            "className": "text-xs font-semibold uppercase tracking-wider text-ink-muted",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 124,
+              "name": "#text",
+              "connected": true,
+              "value": "Ehdot ja tietosuoja",
+              "parent": "H3"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 122,
+            "name": "DIV",
+            "className": "hidden sm:block",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 125,
+              "name": "UL",
+              "className": "mt-3 space-y-1",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 125,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 126,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 126,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 127,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 127,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 128,
+              "name": "#text",
+              "connected": true,
+              "value": "Ehdot",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 125,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 129,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 129,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 130,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 130,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 131,
+              "name": "#text",
+              "connected": true,
+              "value": "Tietosuoja",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 125,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 132,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 132,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 133,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 133,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 134,
+              "name": "#text",
+              "connected": true,
+              "value": "Ev\u00e4steet",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 125,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 135,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 135,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 136,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 136,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 137,
+              "name": "#text",
+              "connected": true,
+              "value": "Tutkimusk\u00e4yt\u00f6n ehdot",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 121,
+            "name": "DIV",
+            "className": "min-w-0",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 138,
+              "name": "DETAILS",
+              "className": "group border-b border-line sm:hidden",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 138,
+            "name": "DETAILS",
+            "className": "group border-b border-line sm:hidden",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 139,
+              "name": "SUMMARY",
+              "className": "flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold [&::-webkit-details-marker]:hidden",
+              "connected": true,
+              "parent": "DETAILS"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 139,
+            "name": "SUMMARY",
+            "className": "flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold [&::-webkit-details-marker]:hidden",
+            "connected": true,
+            "parent": "DETAILS"
+          },
+          "added": [
+            {
+              "id": 140,
+              "name": "#text",
+              "connected": true,
+              "value": "Ehdot ja tietosuoja",
+              "parent": "SUMMARY"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 139,
+            "name": "SUMMARY",
+            "className": "flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold [&::-webkit-details-marker]:hidden",
+            "connected": true,
+            "parent": "DETAILS"
+          },
+          "added": [
+            {
+              "id": 141,
+              "name": "svg",
+              "connected": true,
+              "parent": "SUMMARY"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 141,
+            "name": "svg",
+            "connected": true,
+            "parent": "SUMMARY"
+          },
+          "added": [
+            {
+              "id": 142,
+              "name": "path",
+              "connected": true,
+              "parent": "svg"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 138,
+            "name": "DETAILS",
+            "className": "group border-b border-line sm:hidden",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 143,
+              "name": "DIV",
+              "className": "pb-3",
+              "connected": true,
+              "parent": "DETAILS"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 143,
+            "name": "DIV",
+            "className": "pb-3",
+            "connected": true,
+            "parent": "DETAILS"
+          },
+          "added": [
+            {
+              "id": 144,
+              "name": "UL",
+              "className": "mt-3 space-y-1",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 144,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 145,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 145,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 146,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 146,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 147,
+              "name": "#text",
+              "connected": true,
+              "value": "Ehdot",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.2999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 144,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 148,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.4000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 148,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 149,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.4000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 149,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 150,
+              "name": "#text",
+              "connected": true,
+              "value": "Tietosuoja",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.4000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 144,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 151,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.4000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 151,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 152,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.4000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 152,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 153,
+              "name": "#text",
+              "connected": true,
+              "value": "Ev\u00e4steet",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.4000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 144,
+            "name": "UL",
+            "className": "mt-3 space-y-1",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 154,
+              "name": "LI",
+              "className": "",
+              "connected": true,
+              "parent": "UL"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.4000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 154,
+            "name": "LI",
+            "className": "",
+            "connected": true,
+            "parent": "UL"
+          },
+          "added": [
+            {
+              "id": 155,
+              "name": "A",
+              "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+              "connected": true,
+              "parent": "LI"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.4000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 155,
+            "name": "A",
+            "className": "inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4",
+            "connected": true,
+            "parent": "LI"
+          },
+          "added": [
+            {
+              "id": 156,
+              "name": "#text",
+              "connected": true,
+              "value": "Tutkimusk\u00e4yt\u00f6n ehdot",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.4000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 3,
+            "name": "DIV",
+            "className": "mx-auto w-full px-4 sm:px-6 lg:px-10 max-w-[var(--container-page)]",
+            "connected": true,
+            "parent": "FOOTER"
+          },
+          "added": [
+            {
+              "id": 157,
+              "name": "DIV",
+              "className": "flex flex-wrap items-center justify-between gap-4 border-t border-line py-4 text-sm text-ink-muted",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.4000000953674,
+          "readyState": "loading",
+          "target": {
+            "id": 157,
+            "name": "DIV",
+            "className": "flex flex-wrap items-center justify-between gap-4 border-t border-line py-4 text-sm text-ink-muted",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 158,
+              "name": "BUTTON",
+              "className": "text-sm text-ink-muted underline underline-offset-4 hover:text-ink",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.5,
+          "readyState": "loading",
+          "target": {
+            "id": 158,
+            "name": "BUTTON",
+            "className": "text-sm text-ink-muted underline underline-offset-4 hover:text-ink",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 159,
+              "name": "#text",
+              "connected": true,
+              "value": "Ev\u00e4steasetukset",
+              "parent": "BUTTON"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.5,
+          "readyState": "loading",
+          "target": {
+            "id": 3,
+            "name": "DIV",
+            "className": "mx-auto w-full px-4 sm:px-6 lg:px-10 max-w-[var(--container-page)]",
+            "connected": true,
+            "parent": "FOOTER"
+          },
+          "added": [
+            {
+              "id": 160,
+              "name": "DIV",
+              "className": "grid gap-4 border-t border-line py-6 text-sm text-ink-muted sm:grid-cols-[1fr_2fr]",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.5,
+          "readyState": "loading",
+          "target": {
+            "id": 160,
+            "name": "DIV",
+            "className": "grid gap-4 border-t border-line py-6 text-sm text-ink-muted sm:grid-cols-[1fr_2fr]",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 161,
+              "name": "P",
+              "className": "flex items-start gap-2",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 815.5,
+          "readyState": "loading",
+          "target": {
+            "id": 161,
+            "name": "P",
+            "className": "flex items-start gap-2",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 162,
+              "name": "svg",
+              "connected": true,
+              "parent": "P"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 856.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 162,
+            "name": "svg",
+            "connected": true,
+            "parent": "P"
+          },
+          "added": [
+            {
+              "id": 163,
+              "name": "path",
+              "connected": true,
+              "parent": "svg"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 856.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 162,
+            "name": "svg",
+            "connected": true,
+            "parent": "P"
+          },
+          "added": [
+            {
+              "id": 164,
+              "name": "path",
+              "connected": true,
+              "parent": "svg"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 856.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 162,
+            "name": "svg",
+            "connected": true,
+            "parent": "P"
+          },
+          "added": [
+            {
+              "id": 165,
+              "name": "path",
+              "connected": true,
+              "parent": "svg"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 856.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 161,
+            "name": "P",
+            "className": "flex items-start gap-2",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 166,
+              "name": "SPAN",
+              "className": "",
+              "connected": true,
+              "parent": "P"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 856.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 166,
+            "name": "SPAN",
+            "className": "",
+            "connected": true,
+            "parent": "P"
+          },
+          "added": [
+            {
+              "id": 167,
+              "name": "#text",
+              "connected": true,
+              "value": "Vain laboratoriotutkimukseen. Ei ihmis- tai el\u00e4ink\u00e4ytt\u00f6\u00f6n.",
+              "parent": "SPAN"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 856.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 160,
+            "name": "DIV",
+            "className": "grid gap-4 border-t border-line py-6 text-sm text-ink-muted sm:grid-cols-[1fr_2fr]",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 168,
+              "name": "DIV",
+              "className": "space-y-2",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 856.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 168,
+            "name": "DIV",
+            "className": "space-y-2",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 169,
+              "name": "P",
+              "className": "",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 856.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 169,
+            "name": "P",
+            "className": "",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 170,
+              "name": "#text",
+              "connected": true,
+              "value": "\u00a9 2026 AverianLabs. Kaikki oikeudet pid\u00e4tet\u00e4\u00e4n.",
+              "parent": "P"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 856.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 168,
+            "name": "DIV",
+            "className": "space-y-2",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 171,
+              "name": "P",
+              "className": "",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 856.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 171,
+            "name": "P",
+            "className": "",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 172,
+              "name": "#text",
+              "connected": true,
+              "value": "Myyj\u00e4n rekisteritiedot odottavat vahvistusta. Ota meihin yhteytt\u00e4 ennen tilaamista.",
+              "parent": "P"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 856.7000000476837,
+          "readyState": "loading",
+          "target": {
+            "id": 168,
+            "name": "DIV",
+            "className": "space-y-2",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 173,
+              "name": "ADDRESS",
+              "className": "not-italic",
+              "connected": true,
+              "parent": "DIV"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 856.7999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 173,
+            "name": "ADDRESS",
+            "className": "not-italic",
+            "connected": true,
+            "parent": "DIV"
+          },
+          "added": [
+            {
+              "id": 174,
+              "name": "A",
+              "className": "text-accent underline underline-offset-4",
+              "connected": true,
+              "parent": "ADDRESS"
+            }
+          ],
+          "removed": []
+        },
+        {
+          "atMs": 856.7999999523163,
+          "readyState": "loading",
+          "target": {
+            "id": 174,
+            "name": "A",
+            "className": "text-accent underline underline-offset-4",
+            "connected": true,
+            "parent": "ADDRESS"
+          },
+          "added": [
+            {
+              "id": 175,
+              "name": "#text",
+              "connected": true,
+              "value": "hello@averianlabs.eu",
+              "parent": "A"
+            }
+          ],
+          "removed": []
+        }
+      ]
+    }
+  },
+  "findings": [
+    "The same HTML host-element mismatch was captured with the Footer fiber attached to the correct footer, but its Container fiber claimed the nested grid and the grid fiber claimed the logo wrapper. The next expected div then encountered the logo anchor.",
+    "The actual Footer still contained its original Container, grid and logo wrappers in normal nesting; captured nodes were connected. No intercepted JavaScript append/remove/replace call touched the Footer, and the retained mutation records contained additions with no removals.",
+    "The timing experiment increased reproducibility. At the actual throw, document.readyState was already complete, so these captures do not establish that the parser was active at that exact moment.",
+    "React issue 37321 describes a plausible upstream hydration/parser interleaving failure, but an upstream cause is not proven by these captures. System theme was the fixture; correlation does not prove a theme defect."
+  ],
+  "nextExperiment": {
+    "change": "One explicit React Suspense fallback=null boundary around the existing async Footer in Chrome; preserve all provider placement and Footer markup.",
+    "validationRequired": "Unchanged native loading under the full browser suite, followed by the same cached-script timing probe and no-JavaScript Footer visibility.",
+    "status": "The Footer-only boundary was rejected. The broader document-readiness gate plus synchronous Footer presentation passed final source e8e511e validation recorded below."
+  },
+  "reference": "https://github.com/react/react/issues/37321",
+  "footerBoundaryExperiment": {
+    "sourceCommit": "1d4fe833e690d32b35ffe14d0c4b4a36def3f3cf",
+    "buildId": "CQQhXvTf56y8h9qFbt8Sv",
+    "change": "Explicit Suspense fallback=null around the existing async Footer, retaining its provider placement.",
+    "fullBrowserRun": {
+      "passed": 129,
+      "failed": 8,
+      "skipped": 2,
+      "workers": 8,
+      "note": "Both no-JavaScript research-content cases failed; the experiment was rejected as a release fix."
+    },
+    "timingProbe": {
+      "condition": "Same 32KiB/s delivery after native cached-script warm-up,30ms latency. Browser-only diagnostic instrumentation.",
+      "states": 2,
+      "actualPageerrorRows": 1,
+      "capturedMismatches": 1,
+      "navigationIndex": 1,
+      "locale": "en",
+      "readyStateAtThrow": "loading",
+      "atMs": 1379.3999998569489,
+      "navigation": [
+        {
+          "domInteractive": 0,
+          "domContentLoadedEventEnd": 0,
+          "loadEventEnd": 0,
+          "responseEnd": 0
+        }
+      ],
+      "nextUnclaimedNode": {
+        "id": 5,
+        "name": "DIV",
+        "className": "min-w-0 max-w-xl",
+        "connected": true,
+        "parent": "SECTION"
+      },
+      "hydrating": true,
+      "rootOrSingleton": false,
+      "expectedVsClaimed": [
+        {
+          "expectedType": "section",
+          "expectedProps": {
+            "className": "grid items-center gap-8 py-10 sm:py-16 lg:grid-cols-[1.15fr_1fr] lg:gap-14"
+          },
+          "claimedNode": null
+        },
+        {
+          "expectedType": "div",
+          "expectedProps": {
+            "className": "mx-auto w-full px-4 sm:px-6 lg:px-10 max-w-[var(--container-page)]"
+          },
+          "claimedNode": {
+            "id": 1,
+            "name": "DIV",
+            "className": "mx-auto w-full px-4 sm:px-6 lg:px-10 max-w-[var(--container-page)]",
+            "connected": true,
+            "parent": "MAIN"
+          }
+        },
+        {
+          "expectedType": "7",
+          "expectedProps": {},
+          "claimedNode": null
+        },
+        {
+          "expectedType": "10",
+          "expectedProps": {},
+          "claimedNode": null
+        }
+      ],
+      "footerMutationRecords": 0,
+      "interceptedFooterDomCalls": []
+    },
+    "conclusion": "The mismatch moved to the home hero section while document parsing was incomplete. A Footer-only Suspense boundary did not fix the broader timing-sensitive hydration failure, and its pending fallback also broke no-JavaScript visibility."
+  },
+  "validatedMitigation": {
+    "runtimeSourceCommit": "e8e511e3f323fa439070864ac5873e301fb0ca8f",
+    "buildId": "IEATsP20c06gq_xW_bo4C",
+    "changes": [
+      "DocumentHydrationGate around the existing body provider tree uses public React.use with one cached DOMContentLoaded Promise before any child host claims while the document is loading. SSR and already-parsed navigation return the same children with no new Suspense wrapper.",
+      "Footer content is loaded before presentation; the synchronous client Footer receives plain serialized labels/legal/year/payment-presence values and retains its existing DOM. The rejected Footer Suspense fallback was removed."
+    ],
+    "unitValidation": {
+      "totalPassed": 374,
+      "gateChecks": [
+        "SSR emits identical content without a wrapper or hidden fallback.",
+        "The original server button survives suspended initial hydration and its actual handler attaches after DOMContentLoaded, with no recoverable hydration error.",
+        "Already-parsed documents attach client interaction immediately."
+      ]
+    },
+    "browserValidation": {
+      "cases": 140,
+      "passed": 138,
+      "failed": 0,
+      "explicitProviderSkips": 2,
+      "workers": 8,
+      "included": [
+        "Original12 alternating EN/FI full-page hydration checks.",
+        "Permanent6 alternating EN/FI cached-script32KiB/s/30ms regression, including visible Footer and actual Header cart dialog open/Escape on every visit.",
+        "Both EN/FI no-JavaScript server-rendered research/Footer visibility journeys.",
+        "Persisted cart, blocked-storage first-click exact-SKU search and real/fallback3D journeys."
+      ]
+    },
+    "interpretation": "These checks validate the mitigation for the reproduced local timing condition and tested user journeys. They do not prove that an upstream React issue is the sole cause, nor guarantee every future browser/network condition. No React/Next scheduler or package source was patched.",
+    "historicalStatus": "Historical source-e8 result only. A later source32c4b65 Node24 eight-worker run captured one further actual React418 on initial Finnish PDP; the body-only gate was subsequently refined. Earlier passing observations remain valid for that original environment but do not establish final-source reliability."
+  },
+  "node24Recurrence": {
+    "runtimeSourceCommit": "32c4b65bdaa025e710cc57c8c7b2f4f2e9c779b8",
+    "buildId": "LV7ohMvEO_dv_F_vRGLBU",
+    "nodeVersion": "24.22.0",
+    "browserRun": {
+      "cases": 142,
+      "passed": 137,
+      "failed": 3,
+      "explicitProviderSkips": 2,
+      "workers": 8
+    },
+    "actualReact418Captured": 1,
+    "evidence": "node24-failed-3d-trace.json",
+    "interpretation": "One initial PDP418 was masked in the test summary by a later unfinished-stream caption timeout. Other trace steps also show large browser-library/test-runner completion gaps; that separate transport/worker stall does not dismiss the captured418. Cause of those delays was not established."
+  },
+  "finalWholeDocumentGate": {
+    "runtimeSourceCommit": "4e4a948fb1cf722d11bac09340d140f174b54024",
+    "buildId": "gbVoYSCId_d8o20D5NFmL",
+    "nodeVersion": "24.22.0",
+    "change": "The same transparent public React.use document-readiness gate now wraps the entire html element, so html/body host claims also wait until parsing completes. No additional Suspense wrapper, timer, hydration-warning suppression, scheduler patch or SSR markup was introduced. The synchronous Footer remains.",
+    "wholeDocumentUnit": "tests/unit/document-hydration-root.test.ts hydrates the actual document container, retaining original html/body/button identities, observing no handler while loading and a real handler after DOMContentLoaded, with no recoverable errors.",
+    "unitValidation": {
+      "passed": 383,
+      "files": 44
+    },
+    "browserValidation": {
+      "cases": 144,
+      "passed": 142,
+      "failed": 0,
+      "explicitProviderSkips": 2,
+      "workers": 2,
+      "retries": 0,
+      "workerPolicy": "Explicit two-worker setting matches repository CI and bounds owned resource use; previous eight-worker failures remain recorded.",
+      "included": [
+        "Original repeated EN/FI full-GET hydration journeys and six alternating cached-script slow-HTML homepage states with actual cart handler interaction.",
+        "New separate EN and FI PDP cached-script30ms/32KiB/s regressions, exactSKU10\u21925 full document navigation, caption/selected-button consistency, Footer visibility and real cart dialog interactions.",
+        "Both EN/FI no-JavaScript SSR Footer/research journeys; real and forced-fallback3D journeys; persisted cart and exact first-click blocked-storage search."
+      ]
+    },
+    "ambientConditions": {
+      "availableParallelism": 16,
+      "observedLoadAverageRangeFromRootMonitor": [
+        14.6,
+        39.94
+      ],
+      "maximumIndependentMonitorEventLoopDelayMs": 54.9,
+      "scope": "Team build/test/browser work was coordinated. Unrelated host workloads were not stopped, and full-host CPU isolation is not claimed."
+    },
+    "interpretation": "The complete final local CI-equivalent browser suite and targeted slow-PDP regressions pass for this source/runtime. They validate tested behavior, without proving the exact upstream React cursor mechanism or guaranteeing every concurrency/network condition. The earlier eight-worker failure and failed Footer-only Suspense experiment are preserved."
+  }
+}

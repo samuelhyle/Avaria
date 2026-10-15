@@ -1,0 +1,32 @@
+{
+  "archive": "lighthouse-raw-reports.zip",
+  "archiveBytes": 520678,
+  "archiveSha256": "f1c5418467e14e201fad77b075f4de79f995089a58437ed63d3f6c784c58a4e0",
+  "originalBytes": 2031870,
+  "reportFiles": 4,
+  "buildId": "IEATsP20c06gq_xW_bo4C",
+  "verifiedAt": "2026-10-15T16:37:00.218662+00:00",
+  "verification": "ZIP CRC and uncompressed per-entry byte length/SHA-256 verified before removing loose report files. JSON and HTML entry names match each result json/html field in the adjacent summary.",
+  "files": [
+    {
+      "file": "essential-consent-content-en-run-1.report.html",
+      "bytes": 560402,
+      "sha256": "3b87bed2648443f9f2f03548ac769d5505fb5fa688f01252f40e95b194333ae3"
+    },
+    {
+      "file": "essential-consent-content-en-run-1.report.json",
+      "bytes": 478503,
+      "sha256": "b6aacbc5e674140242c90395e7ddb1ba2efef802a529b0b0e69aaf0aef5f53fd"
+    },
+    {
+      "file": "essential-consent-content-fi-shop-run-1.report.html",
+      "bytes": 537128,
+      "sha256": "fb70b25dd116dc3d3a9c760d6dd6c236ec6a22aef30c4a5b7074895e62188383"
+    },
+    {
+      "file": "essential-consent-content-fi-shop-run-1.report.json",
+      "bytes": 455837,
+      "sha256": "3df53df744322d8e9154451b9bf51d0f91fba97daf1303d3f54bc427ace56d17"
+    }
+  ]
+}

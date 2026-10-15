@@ -1,0 +1,90 @@
+{
+  "recordedAt": "2026-10-15T17:39:00.243799+00:00",
+  "runtimeSourceCommit": "4e4a948fb1cf722d11bac09340d140f174b54024",
+  "publishedDeploymentId": "6ad10a0d17b4322a59f0afd8",
+  "publishedAt": "2026-10-15T17:32:20.090Z",
+  "stableOriginVerifiedAt": "2026-10-15T17:37:21.835Z",
+  "unit": {
+    "passed": 383,
+    "files": 44,
+    "nativeEmbeddingPassed": 4
+  },
+  "browser": {
+    "cases": 144,
+    "passed": 142,
+    "explicitRealProviderSkips": 2,
+    "workers": 2,
+    "retries": 0
+  },
+  "integration": {
+    "passed": 26,
+    "node": "24.22.0",
+    "scope": "Isolated local native PostgreSQL; before final layout-only refinement, unchanged API/SQL source."
+  },
+  "lint": {
+    "errors": 0,
+    "retainedWarnings": 39,
+    "files": 644
+  },
+  "deploymentGuardsPassed": 12,
+  "routeGzipBudgetsPassed": 9,
+  "i18n": {
+    "locales": 5,
+    "leafKeys": 1320,
+    "missing": 0,
+    "literalCallsUnresolved": 0,
+    "independentNativeApproval": "pending"
+  },
+  "immutableHosted": {
+    "httpContracts": 29,
+    "browserStates": 36,
+    "supplementaryStates": 18
+  },
+  "publishedStableHosted": {
+    "httpContracts": 29,
+    "browserStates": 36,
+    "sharingPngs": 2,
+    "localeMetadataChecks": 2,
+    "failures": 0
+  },
+  "freshHostedAi": {
+    "criticalApiPassed": 18,
+    "actualComposerCalculationsPassed": 2,
+    "validRequestStarts": 20,
+    "retries": 0,
+    "actualManagedServingNode": "24.21.0",
+    "scope": "Anonymous readOnly/noPersist/noRetrieve; private/memory/RAG retrieval disabled, allowed public lookups available. Actual composer SSE forwarded unchanged but buffered; no incremental transport-speed claim."
+  },
+  "mobileLaboratory": {
+    "audits": 23,
+    "healthChecksPassed": 46,
+    "allAccessibility": 100,
+    "allBestPractices": 100,
+    "allCls": 0,
+    "contentMedianLcpSecondsRange": [
+      3.04,
+      5.0
+    ],
+    "lcpTargetSeconds": 2.5,
+    "lcpTargetMet": false,
+    "fieldCoreWebVitals": "not_measured"
+  },
+  "cleanup": {
+    "ownedLocalCommerceFixtures": "removed",
+    "ownedQaServer": "stopped",
+    "ownedNativeQaDatabase": "gracefully_stopped",
+    "privateFiles": "preserved",
+    "otherServices": "untouched"
+  },
+  "pending": [
+    "Approved seller details, exact specifications and original released batch reports as previously agreed",
+    "Independent native Finnish/English and scientific approval",
+    "Researcher sessions, physical devices, assistive technologies and field performance",
+    "Measured loading and narrower AI task-quality follow-ups in implementation ledger"
+  ],
+  "boundary": "Online review application, noindex and merchant-gated. This record does not certify every generated answer, field performance or independent human approval.",
+  "whitespaceVerification": {
+    "sourceAndHandwrittenPlanDocs": "pass",
+    "generatedEvidence": "Excluded from whitespace rewriting to preserve captured CLI/SSE bytes and checksum chains; some raw logs contain original trailing spaces and blank final frames."
+  }
+}

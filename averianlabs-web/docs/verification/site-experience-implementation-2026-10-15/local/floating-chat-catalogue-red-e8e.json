@@ -1,0 +1,45 @@
+{
+  "recordedAt": "2026-10-15T16:45:47.906130+00:00",
+  "sourceCommit": "e8e511e3f323fa439070864ac5873e301fb0ca8f",
+  "buildId": "IEATsP20c06gq_xW_bo4C",
+  "target": "http://localhost:3217",
+  "scope": "Isolated matching local/CI database and owner-marked QA products. Only chat SSE is replayed in the browser. The actual lazy floating widget, catalogue, explicit confirmation and cart store are used. No direct client-state injection; no provider, account, order, payment or email writes. Existing anonymous identity issuance allowed.",
+  "counts": {
+    "tests": 2,
+    "expectedFailures": 2
+  },
+  "rows": [
+    {
+      "locale": "en",
+      "outcome": "Expected regression failure after explicit Add to cart confirmation: persisted cart remained empty for strict10second assertion.",
+      "shownProposal": {
+        "sku": "QA-PEPTIDE-10",
+        "sizeValue": 10,
+        "sizeUnit": "mg",
+        "qty": 3,
+        "unitPriceCents": 6500
+      },
+      "selectedPdpSku": "QA-PEPTIDE-5",
+      "observedOutgoingContext": null,
+      "traceSha256": "da737bcb544b51b0a831e7d73cbaa3dcce5eda1ac83bb4d7a301c0b165e38070",
+      "traceLocation": "Private /tmp regression artifacts only; not committed."
+    },
+    {
+      "locale": "fi",
+      "outcome": "Expected regression failure after explicit Add to cart confirmation: persisted cart remained empty for strict10second assertion.",
+      "shownProposal": {
+        "sku": "QA-PEPTIDE-10",
+        "sizeValue": 10,
+        "sizeUnit": "mg",
+        "qty": 3,
+        "unitPriceCents": 6500
+      },
+      "selectedPdpSku": "QA-PEPTIDE-5",
+      "observedOutgoingContext": null,
+      "traceSha256": "395eaac4971d831d2adce3d7999a3098954420d778a9cab6614e0f13cd46aed0",
+      "traceLocation": "Private /tmp regression artifacts only; not committed."
+    }
+  ],
+  "identifiedSourceIssue": "The old locale-layout floating widget is outside CatalogueProvider, so useCatalogue supplies an empty list to its exact-SKU guard. The full-page assistant is within Chrome and does not establish floating-widget correctness. Runtime placement fix and rebuilt browser green confirmation remain separate evidence.",
+  "server": "Playwright-owned3217 exited with runner; lsof confirmed no listener before root build resumed."
+}

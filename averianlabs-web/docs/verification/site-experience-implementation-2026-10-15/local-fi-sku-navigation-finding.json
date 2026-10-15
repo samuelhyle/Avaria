@@ -1,0 +1,24 @@
+{
+  "observedAt": "2026-10-15T15:22:17.559Z",
+  "scope": "Isolated local QA product and browser fixtures only; not merchant/customer data.",
+  "traceRetainedAt": "/tmp/averian-fi-sku-failure-20261015.zip",
+  "traceSha256": "8cafb6acf09897515c19c23415383646f68843300ae490f7bbd3c300ecceb037",
+  "rscBuildId": "-HkJMwttOP2O_0_Ao2mVr",
+  "request": "/fi/shop/qa-peptide?sku=QA-PEPTIDE-10&review=documents&_rsc=\u2026",
+  "responseStatus": 200,
+  "responseBytes": 20405,
+  "responseWaitMs": 16.873,
+  "responseReceiveMs": 27.315,
+  "responseComplete": true,
+  "serverSelectedSku": "QA-PEPTIDE-10",
+  "serverDocumentScope": "QA-PEPTIDE-10 batch plus product-wide specification",
+  "observedClientAfterTenSeconds": {
+    "urlSku": "QA-PEPTIDE-5",
+    "gallerySku": "QA-PEPTIDE-5",
+    "batchDocumentSku": "QA-PEPTIDE-5",
+    "actionSku": "QA-PEPTIDE-10"
+  },
+  "diagnosis": "The click handler ran and its optimistic action state changed. A complete correct RSC response arrived, but navigation did not commit during the strict ten-second assertion. No effect reset, early unhandled click, database failure or incomplete RSC body is established by this trace. The underlying client-router cause remains undiagnosed.",
+  "change": "Variant selection now uses one full GET, preserving query/hash and keeping the old complete selection until the new server-rendered page commits. No optimistic SKU or quantity switch; selected actions, imagery and exact batch evidence render together. Optional 3D returns to its initial static state after navigation.",
+  "verification": "Strict browser URL/document assertions retained and augmented to require an actual document navigation request; final rebuilt runtime verification pending."
+}

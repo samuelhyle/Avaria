@@ -1,0 +1,97 @@
+{
+  "scope": "Descriptive comparison of actual source/runtime laboratory environments, not attribution to one change. Full three-observation ranges in both original summaries remain authoritative. Baseline does not include equivalent ambient telemetry.",
+  "baselineFolder": "../performance-release7/",
+  "measurements": [
+    {
+      "route": "/en",
+      "baselineSource": "e8e511e3f323fa439070864ac5873e301fb0ca8f",
+      "baselineNodeVersion": "v22.20.0",
+      "currentSource": "4e4a948fb1cf722d11bac09340d140f174b54024",
+      "currentNodeVersion": "v24.22.0",
+      "baselinePerformanceMedian": 0.91,
+      "currentPerformanceMedian": 0.91,
+      "baselineLcpMedianMs": 3160.1730000000002,
+      "currentLcpMedianMs": 3163.6858,
+      "baselineTbtMedianMs": 187,
+      "currentTbtMedianMs": 177.49999999999955
+    },
+    {
+      "route": "/fi/shop",
+      "baselineSource": "e8e511e3f323fa439070864ac5873e301fb0ca8f",
+      "baselineNodeVersion": "v22.20.0",
+      "currentSource": "4e4a948fb1cf722d11bac09340d140f174b54024",
+      "currentNodeVersion": "v24.22.0",
+      "baselinePerformanceMedian": 0.86,
+      "currentPerformanceMedian": 0.88,
+      "baselineLcpMedianMs": 3310.3455999999996,
+      "currentLcpMedianMs": 3312.7299,
+      "baselineTbtMedianMs": 292.49999999999955,
+      "currentTbtMedianMs": 219.49999999999955
+    },
+    {
+      "route": "/en/shop/bpc-157",
+      "baselineSource": "e8e511e3f323fa439070864ac5873e301fb0ca8f",
+      "baselineNodeVersion": "v22.20.0",
+      "currentSource": "4e4a948fb1cf722d11bac09340d140f174b54024",
+      "currentNodeVersion": "v24.22.0",
+      "baselinePerformanceMedian": 0.77,
+      "currentPerformanceMedian": 0.79,
+      "baselineLcpMedianMs": 5588.093500000001,
+      "currentLcpMedianMs": 4995.122,
+      "baselineTbtMedianMs": 182,
+      "currentTbtMedianMs": 179
+    },
+    {
+      "route": "/fi/peptide-calculator",
+      "baselineSource": "e8e511e3f323fa439070864ac5873e301fb0ca8f",
+      "baselineNodeVersion": "v22.20.0",
+      "currentSource": "4e4a948fb1cf722d11bac09340d140f174b54024",
+      "currentNodeVersion": "v24.22.0",
+      "baselinePerformanceMedian": 0.87,
+      "currentPerformanceMedian": 0.85,
+      "baselineLcpMedianMs": 3164.5024,
+      "currentLcpMedianMs": 4022.5659999999993,
+      "baselineTbtMedianMs": 292.99999999999955,
+      "currentTbtMedianMs": 187.00000000000045
+    },
+    {
+      "route": "/en/assistant",
+      "baselineSource": "e8e511e3f323fa439070864ac5873e301fb0ca8f",
+      "baselineNodeVersion": "v22.20.0",
+      "currentSource": "4e4a948fb1cf722d11bac09340d140f174b54024",
+      "currentNodeVersion": "v24.22.0",
+      "baselinePerformanceMedian": 0.85,
+      "currentPerformanceMedian": 0.91,
+      "baselineLcpMedianMs": 4159.607349999998,
+      "currentLcpMedianMs": 3162.7488999999987,
+      "baselineTbtMedianMs": 195.5,
+      "currentTbtMedianMs": 169.99999999999955
+    },
+    {
+      "route": "/fi/community",
+      "baselineSource": "e8e511e3f323fa439070864ac5873e301fb0ca8f",
+      "baselineNodeVersion": "v22.20.0",
+      "currentSource": "4e4a948fb1cf722d11bac09340d140f174b54024",
+      "currentNodeVersion": "v24.22.0",
+      "baselinePerformanceMedian": 0.84,
+      "currentPerformanceMedian": 0.86,
+      "baselineLcpMedianMs": 4156.444,
+      "currentLcpMedianMs": 4141.842999999999,
+      "baselineTbtMedianMs": 175.5,
+      "currentTbtMedianMs": 120.00000000000045
+    },
+    {
+      "route": "/en/documents",
+      "baselineSource": "e8e511e3f323fa439070864ac5873e301fb0ca8f",
+      "baselineNodeVersion": "v22.20.0",
+      "currentSource": "4e4a948fb1cf722d11bac09340d140f174b54024",
+      "currentNodeVersion": "v24.22.0",
+      "baselinePerformanceMedian": 0.78,
+      "currentPerformanceMedian": 0.93,
+      "baselineLcpMedianMs": 3044.0314999999996,
+      "currentLcpMedianMs": 3041.46255,
+      "baselineTbtMedianMs": 178.5,
+      "currentTbtMedianMs": 134.5
+    }
+  ]
+}

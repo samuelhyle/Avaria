@@ -1,0 +1,556 @@
+
+> averianlabs-web@0.1.0 test:e2e /Users/purepanel/Avaria/averianlabs-web
+> playwright test
+
+[WebServer] (node:78116) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:78129) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]  ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+Running 139 tests using 8 workers
+
+(node:78167) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:78173) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:78169) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:78170) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:78168) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:78172) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:78166) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:78171) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    5 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/about has no serious/critical axe-core violations (6.6s)
+  ✓    7 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/quality has no serious/critical axe-core violations (8.1s)
+  ✓    6 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en has no serious/critical axe-core violations (8.2s)
+  ✓    4 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/shop/qa-water has no serious/critical axe-core violations (9.9s)
+  ✓    9 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/checkout/cart has no serious/critical axe-core violations (3.2s)
+  ✓    8 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/shop has no serious/critical axe-core violations (10.1s)
+  ✓   11 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/documents has no serious/critical axe-core violations (3.7s)
+  ✓   10 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/peptide-calculator has no serious/critical axe-core violations (4.3s)
+  ✓   12 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/contact has no serious/critical axe-core violations (2.7s)
+  ✓    1 [chromium] › tests/3d-render.spec.ts:58:1 › neutral 3D responds to reduced-motion changes and retains manual controls (13.4s)
+  ✓   13 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi has no serious/critical axe-core violations (3.8s)
+  ✓   15 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/shop/qa-water has no serious/critical axe-core violations (4.0s)
+  ✓   14 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/shop has no serious/critical axe-core violations (6.2s)
+  ✓   17 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/about has no serious/critical axe-core violations (5.2s)
+  ✓   16 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/quality has no serious/critical axe-core violations (5.7s)
+  ✓    2 [chromium] › tests/3d-render.spec.ts:11:3 › fi: optional neutral 3D preserves the selected SKU and localized caption (18.5s)
+  ✘    3 [chromium] › tests/3d-render.spec.ts:11:3 › en: optional neutral 3D preserves the selected SKU and localized caption (18.3s)
+  ✓   18 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/checkout/cart has no serious/critical axe-core violations (5.1s)
+  ✓   19 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/peptide-calculator has no serious/critical axe-core violations (6.1s)
+  ✓   21 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/contact has no serious/critical axe-core violations (3.8s)
+  ✓   20 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/documents has no serious/critical axe-core violations (4.5s)
+(node:78347) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]  ⨯ [TypeError: controller[kState].transformAlgorithm is not a function] {
+[WebServer]   digest: '320898842'
+[WebServer] }
+  ✓   26 [chromium] › tests/account-reliability.spec.ts:160:3 › en: failed password-reset request stays retryable (3.4s)
+  ✓   30 [chromium] › tests/api.spec.ts:5:3 › public APIs › GET /api/health responds with a status code (267ms)
+  ✓   31 [chromium] › tests/api.spec.ts:20:3 › public APIs › POST /api/newsletter rejects missing email (401ms)
+  ✓   32 [chromium] › tests/api.spec.ts:31:3 › public APIs › POST /api/contact is rate-limited or rejected (193ms)
+  ✓   28 [chromium] › tests/account-reliability.spec.ts:160:3 › fi: failed password-reset request stays retryable (3.8s)
+  ✓   34 [chromium] › tests/api.spec.ts:47:3 › public APIs › GET /sitemap.xml returns a non-empty XML document (1.1s)
+[WebServer]  ⨯ [TypeError: controller[kState].transformAlgorithm is not a function] {
+[WebServer]   digest: '320898842'
+[WebServer] }
+  ✓   33 [chromium] › tests/api.spec.ts:42:3 › public APIs › GET /en/shop returns 200 (1.8s)
+  ✓   35 [chromium] › tests/api.spec.ts:55:3 › public APIs › GET /robots.txt disallows AI bots and the admin (450ms)
+  ✓   22 [chromium] › tests/a11y.spec.ts:63:3 › a11y: en mobile empty-cart steps remain visible and accessible (10.3s)
+  ✓   36 [chromium] › tests/auth.spec.ts:4:3 › authentication pages › register page loads and shows the registration form (2.1s)
+  ✓   39 [chromium] › tests/auth.spec.ts:25:3 › authentication pages › auth API uses an anti-enumeration contract (200 with ok envelope) (65ms)
+  ✓   37 [chromium] › tests/auth.spec.ts:13:3 › authentication pages › forgot password form is accessible (2.5s)
+  ✓   24 [chromium] › tests/a11y.spec.ts:63:3 › a11y: fi mobile empty-cart steps remain visible and accessible (10.0s)
+  ✓   38 [chromium] › tests/auth.spec.ts:19:3 › authentication pages › auth-required pages return a usable response (not 5xx) (2.2s)
+  ✓   41 [chromium] › tests/cart.spec.ts:46:3 › cart drawer + add-to-cart › add-to-cart opens the cart drawer and shows the subtotal (3.1s)
+  ✓   40 [chromium] › tests/cart.spec.ts:11:3 › cart drawer + add-to-cart › a product detail page renders the qty stepper with descriptive aria-labels (3.7s)
+  ✓   42 [chromium] › tests/cart.spec.ts:64:3 › cart drawer + add-to-cart › wishlist button announces its action in plain English (3.6s)
+  -   45 [chromium] › tests/chat.spec.ts:72:3 › Averia chat widget › sending a message produces a streamed assistant reply
+  ✓   47 [chromium] › tests/chat.spec.ts:108:3 › Averia chat widget › prompt-injection is blocked at the route level (no provider call) (142ms)
+  ✓   48 [chromium] › tests/chat.spec.ts:131:3 › Averia chat widget › invalid payloads are rejected with 400 (62ms)
+  -   46 [chromium] › tests/chat.spec.ts:95:3 › Averia chat widget › a quick-action chip pre-fills and submits a prompt
+  ✓   23 [chromium] › tests/a11y.spec.ts:86:3 › a11y: en populated checkout email/address/shipping/payment has no blocking violations (15.1s)
+  ✓   49 [chromium] › tests/chat.spec.ts:140:3 › Averia chat widget › rate-limited responses return 429 with a known code (1.0s)
+  ✓   44 [chromium] › tests/chat.spec.ts:65:3 › Averia chat widget › opening the chat reveals the input + greeting (3.5s)
+  ✓   51 [chromium] › tests/checkout.spec.ts:4:3 › checkout flow › empty cart shows the empty state with a CTA to shop (2.6s)
+  ✓   52 [chromium] › tests/checkout.spec.ts:15:3 › checkout flow › checkout steps render with the right ordering (3.3s)
+  ✓   50 [chromium] › tests/chat.spec.ts:168:3 › Averia chat widget › the chat widget does not break the rest of the page (4.9s)
+  ✓   29 [chromium] › tests/a11y.spec.ts:86:3 › a11y: fi populated checkout email/address/shipping/payment has no blocking violations (16.6s)
+  ✓   43 [chromium] › tests/chat.spec.ts:58:3 › Averia chat widget › the chat bubble is visible on every locale page (8.1s)
+  ✓   56 [chromium] › tests/experience-documents.spec.ts:158:3 › en: a missing original file has retry and documentation help without hiding the record (3.7s)
+  ✘   25 [chromium] › tests/account-reliability.spec.ts:9:3 › en: account creation and plan sharing remain truthful on failure and revoke access immediately (22.7s)
+(node:78550) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   53 [chromium] › tests/checkout.spec.ts:21:3 › checkout flow › shipping step uses fieldset/legend for radio groups (10.1s)
+  ✓   54 [chromium] › tests/experience-documents.spec.ts:62:3 › en: mobile document filters and legacy COA links preserve exact search context (9.3s)
+  ✓   55 [chromium] › tests/experience-documents.spec.ts:114:3 › en: changing SKU keeps product-wide documents and shows only the applicable batch (8.5s)
+  ✓   59 [chromium] › tests/experience-documents.spec.ts:158:3 › fi: a missing original file has retry and documentation help without hiding the record (4.2s)
+  ✓   27 [chromium] › tests/account-reliability.spec.ts:9:3 › fi: account creation and plan sharing remain truthful on failure and revoke access immediately (27.3s)
+  ✓   57 [chromium] › tests/experience-documents.spec.ts:62:3 › fi: mobile document filters and legacy COA links preserve exact search context (9.4s)
+  ✓   58 [chromium] › tests/experience-documents.spec.ts:114:3 › fi: changing SKU keeps product-wide documents and shows only the applicable batch (9.4s)
+  ✓   61 [chromium] › tests/experience-shell.spec.ts:55:3 › en: mobile menu fills the viewport and reaches the current document library (2.9s)
+  ✓   62 [chromium] › tests/experience-documents.spec.ts:190:1 › an actually empty language collection differs from a failed search in the seeded library (3.1s)
+  ✓   63 [chromium] › tests/experience-shell.spec.ts:79:3 › en: immediate mobile filters expose checked state and retain view and hash (3.9s)
+  ✓   65 [chromium] › tests/experience-shell.spec.ts:55:3 › fi: mobile menu fills the viewport and reaches the current document library (3.1s)
+  ✓   68 [chromium] › tests/experience-shell.spec.ts:130:1 › first visit completes eligibility before showing readable cookie choices (3.0s)
+  ✓   66 [chromium] › tests/experience-shell.spec.ts:79:3 › fi: immediate mobile filters expose checked state and retain view and hash (3.5s)
+  ✓   71 [chromium] › tests/homepage.spec.ts:49:3 › homepage › emits a translated title and full hreflang set (1.5s)
+  ✓   70 [chromium] › tests/homepage.spec.ts:33:3 › homepage › puts material search, records and research tasks before decorative media (3.4s)
+  ✓   75 [chromium] › tests/i18n.spec.ts:30:3 › internationalization › invalid locale triggers a 404 / notFound fallback (87ms)
+  ✘   67 [chromium] › tests/experience-shell.spec.ts:101:1 › search remains usable when localStorage is unavailable (6.5s)
+  ✓   76 [chromium] › tests/i18n.spec.ts:44:3 › internationalization › LocaleSwitcher changes the current locale (2.3s)
+(node:78648) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   64 [chromium] › tests/experience-shell.spec.ts:10:3 › fi: persisted cart snapshots hydrate consistently across full navigations (10.4s)
+  ✘   60 [chromium] › tests/experience-shell.spec.ts:10:3 › en: persisted cart snapshots hydrate consistently across full navigations (11.2s)
+  ✓   73 [chromium] › tests/i18n.spec.ts:4:3 › internationalization › each locale resolves with a translated title (5.9s)
+  ✓   72 [chromium] › tests/homepage.spec.ts:76:3 › homepage › translates metadata per locale (5.9s)
+  ✓   74 [chromium] › tests/i18n.spec.ts:18:3 › internationalization › alternate hreflang tags cover all locales (5.1s)
+(node:78669) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   77 [chromium] › tests/instanced-vial.spec.ts:52:1 › without WebGL the Finnish selected SKU and static illustration remain usable (5.4s)
+  ✓   78 [chromium] › tests/reliability.spec.ts:5:3 › en: 10 mL stays a volume through product and cart (5.6s)
+  ✘   79 [chromium] › tests/instanced-vial.spec.ts:5:1 › optional catalogue 3D keeps product navigation and SKU identity consistent (6.0s)
+  ✓   83 [chromium] › tests/reliability.spec.ts:23:3 › en: quotation success follows the persisted server response (5.9s)
+(node:78712) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   81 [chromium] › tests/reliability.spec.ts:54:5 › en: primary customer pages fit 390px (12.2s)
+  ✓   82 [chromium] › tests/reliability.spec.ts:54:5 › en: primary customer pages fit 414px (12.3s)
+  ✓   80 [chromium] › tests/reliability.spec.ts:54:5 › en: primary customer pages fit 320px (12.3s)
+  ✓   86 [chromium] › tests/reliability.spec.ts:23:3 › fi: quotation success follows the persisted server response (6.9s)
+  ✘   69 [chromium] › tests/homepage.spec.ts:18:3 › homepage › metadata stays in the head through repeated full-page hydration (22.1s)
+  ✓   85 [chromium] › tests/reliability.spec.ts:54:5 › en: primary customer pages fit 1280px (10.9s)
+  ✓   84 [chromium] › tests/reliability.spec.ts:54:5 › en: primary customer pages fit 1024px (12.1s)
+(node:78773) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   87 [chromium] › tests/reliability.spec.ts:5:3 › fi: 10 mL stays a volume through product and cart (6.3s)
+  ✓   93 [chromium] › tests/reliability.spec.ts:88:1 › homepage is useful without WebGL or requestIdleCallback (2.3s)
+  ✓   94 [chromium] › tests/reliability.spec.ts:96:1 › cookie settings can reopen and withdraw analytics consent (2.7s)
+  ✓   92 [chromium] › tests/reliability.spec.ts:81:1 › language switch keeps filters and hash (3.8s)
+  ✓   96 [chromium] › tests/reliability.spec.ts:116:1 › invalid concentration inputs do not expose infinite results (2.3s)
+  ✓   89 [chromium] › tests/reliability.spec.ts:54:5 › fi: primary customer pages fit 390px (9.1s)
+  ✓   88 [chromium] › tests/reliability.spec.ts:54:5 › fi: primary customer pages fit 320px (9.1s)
+  ✓   90 [chromium] › tests/reliability.spec.ts:54:5 › fi: primary customer pages fit 414px (9.1s)
+  ✓   91 [chromium] › tests/reliability.spec.ts:54:5 › fi: primary customer pages fit 1024px (8.4s)
+  ✓   99 [chromium] › tests/reliability.spec.ts:193:1 › catalogue quantities preserve SI unit case and spacing (3.1s)
+  ✓  100 [chromium] › tests/research-workspace.spec.ts:10:3 › en: calculation modes preserve units, show remainders and export the record (2.5s)
+  ✓  103 [chromium] › tests/research-workspace.spec.ts:240:3 › en: unavailable assistant keeps the question and retries without duplicate messages (1.9s)
+  ✓  104 [chromium] › tests/research-workspace.spec.ts:279:3 › en: interrupted and error streams expose a working retry (2.0s)
+  ✓  101 [chromium] › tests/research-workspace.spec.ts:57:3 › en: selected SKU carries its mass to the calculator and assistant only after Send (5.1s)
+  ✓  108 [chromium] › tests/research-workspace.spec.ts:10:3 › fi: calculation modes preserve units, show remainders and export the record (2.1s)
+  ✓  109 [chromium] › tests/research-workspace.spec.ts:57:3 › fi: selected SKU carries its mass to the calculator and assistant only after Send (4.1s)
+  ✓   95 [chromium] › tests/reliability.spec.ts:54:5 › fi: primary customer pages fit 1280px (17.8s)
+  ✓  105 [chromium] › tests/research-workspace.spec.ts:316:5 › en: research workspace fits 320px and has no blocking accessibility findings (11.5s)
+  ✓  102 [chromium] › tests/research-workspace.spec.ts:123:3 › en: private saved work and pending submissions stay out of the public hub (14.5s)
+  ✓  106 [chromium] › tests/research-workspace.spec.ts:316:5 › en: research workspace fits 390px and has no blocking accessibility findings (11.2s)
+  ✓  111 [chromium] › tests/research-workspace.spec.ts:279:3 › fi: interrupted and error streams expose a working retry (1.7s)
+  ✓  112 [chromium] › tests/research-workspace.spec.ts:240:3 › fi: unavailable assistant keeps the question and retries without duplicate messages (2.0s)
+  ✓  107 [chromium] › tests/research-workspace.spec.ts:316:5 › en: research workspace fits 1440px and has no blocking accessibility findings (12.5s)
+  ✓  116 [chromium] › tests/research-workspace.spec.ts:347:1 › switching Finnish calculator entries to English preserves quantities and selected units (2.7s)
+  ✓  118 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en (635ms)
+  ✓  117 [chromium] › tests/research-workspace.spec.ts:369:1 › a populated cart badge fits the narrow header (3.0s)
+  ✓  119 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/shop (390ms)
+  ✓  120 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/shop/bpc-157 (346ms)
+  ✓  121 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/about (843ms)
+  ✓  122 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/coa (1.0s)
+  ✓  124 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/contact (222ms)
+  ✓  123 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/compare (397ms)
+  ✓  125 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/faq (637ms)
+  ✓  126 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/lab-tests (639ms)
+  ✓  127 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/legal/terms (478ms)
+  ✓  128 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/legal/privacy (477ms)
+  ✓  129 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/legal/cookies (554ms)
+  ✓  130 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/legal/research-disclaimer (554ms)
+  ✓  131 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/peptide-calculator (618ms)
+  ✓  132 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/quality (619ms)
+  ✓  133 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/partner (416ms)
+  ✓  134 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/rewards (417ms)
+  ✓  135 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/wishlist (246ms)
+  ✓  136 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/support/shipping-returns (244ms)
+  ✓  138 [chromium] › tests/shop.spec.ts:14:3 › shop catalog › the 3D shop carousel is reachable via ?view=3d (2.4s)
+  ✓  137 [chromium] › tests/shop.spec.ts:4:3 › shop catalog › renders the shop page with filter sidebar and toolbar (2.4s)
+  ✓  113 [chromium] › tests/research-workspace.spec.ts:316:5 › fi: research workspace fits 320px and has no blocking accessibility findings (12.7s)
+  ✓  114 [chromium] › tests/research-workspace.spec.ts:316:5 › fi: research workspace fits 390px and has no blocking accessibility findings (13.0s)
+  ✓  139 [chromium] › tests/shop.spec.ts:20:3 › shop catalog › MegaMenu opens via ArrowDown from the trigger and roves links (2.2s)
+  ✓  110 [chromium] › tests/research-workspace.spec.ts:123:3 › fi: private saved work and pending submissions stay out of the public hub (17.7s)
+  ✓  115 [chromium] › tests/research-workspace.spec.ts:316:5 › fi: research workspace fits 1440px and has no blocking accessibility findings (13.8s)
+  ✘   97 [chromium] › tests/reliability.spec.ts:127:3 › en: server-rendered research content remains visible without JavaScript (1.0m)
+  ✘   98 [chromium] › tests/reliability.spec.ts:127:3 › fi: server-rendered research content remains visible without JavaScript (1.0m)
+
+
+  1) [chromium] › tests/3d-render.spec.ts:11:3 › en: optional neutral 3D preserves the selected SKU and localized caption 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.",
+    + ]
+
+      52 |     await expect(gallery.locator("canvas")).toHaveCount(0)
+      53 |     await expect(caption).toContainText("BPC157-5")
+    > 54 |     expect(errors).toEqual([])
+         |                    ^
+      55 |   })
+      56 | }
+      57 |
+        at /Users/purepanel/Avaria/averianlabs-web/tests/3d-render.spec.ts:54:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/3d-render-en-optional-neut-62aa9-d-SKU-and-localized-caption-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/3d-render-en-optional-neut-62aa9-d-SKU-and-localized-caption-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/3d-render-en-optional-neut-62aa9-d-SKU-and-localized-caption-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/3d-render-en-optional-neut-62aa9-d-SKU-and-localized-caption-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/3d-render-en-optional-neut-62aa9-d-SKU-and-localized-caption-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/account-reliability.spec.ts:9:3 › en: account creation and plan sharing remain truthful on failure and revoke access immediately 
+
+    Error: apiRequestContext.get: read ECONNRESET
+    Call log:
+      - → GET http://localhost:3217/en/plans/dIzjr_Eunm9d
+        - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36
+        - accept: */*
+        - accept-encoding: gzip,deflate,br
+        - accept-language: en
+
+
+      126 |         plan: { isPublic: false, shareSlug: null },
+      127 |       })
+    > 128 |       const revoked = await request.get(shareUrl)
+          |                                     ^
+      129 |       expect([200, 404]).toContain(revoked.status())
+      130 |       const revokedHtml = await revoked.text()
+      131 |       expect(revokedHtml).not.toContain("Browser QA laboratory plan")
+        at /Users/purepanel/Avaria/averianlabs-web/tests/account-reliability.spec.ts:128:37
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/account-reliability-en-acc-6e8c6-d-revoke-access-immediately-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/account-reliability-en-acc-6e8c6-d-revoke-access-immediately-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/account-reliability-en-acc-6e8c6-d-revoke-access-immediately-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/account-reliability-en-acc-6e8c6-d-revoke-access-immediately-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/account-reliability-en-acc-6e8c6-d-revoke-access-immediately-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests/experience-shell.spec.ts:10:3 › en: persisted cart snapshots hydrate consistently across full navigations 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.",
+    + ]
+
+      46 |       await page.waitForTimeout(150)
+      47 |     }
+    > 48 |     expect(errors).toEqual([])
+         |                    ^
+      49 |     expect(
+      50 |       await page.evaluate(
+      51 |         () => JSON.parse(localStorage.getItem("averianlabs-cart") ?? "{}").state.items[0].qty,
+        at /Users/purepanel/Avaria/averianlabs-web/tests/experience-shell.spec.ts:48:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/experience-shell-en-persis-817f4-tly-across-full-navigations-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/experience-shell-en-persis-817f4-tly-across-full-navigations-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/experience-shell-en-persis-817f4-tly-across-full-navigations-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/experience-shell-en-persis-817f4-tly-across-full-navigations-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/experience-shell-en-persis-817f4-tly-across-full-navigations-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › tests/experience-shell.spec.ts:101:1 › search remains usable when localStorage is unavailable 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.",
+    + ]
+
+      126 |     "QA-PEPTIDE-10",
+      127 |   )
+    > 128 |   expect(errors).toEqual([])
+          |                  ^
+      129 | })
+      130 | test("first visit completes eligibility before showing readable cookie choices", async ({
+      131 |   browser,
+        at /Users/purepanel/Avaria/averianlabs-web/tests/experience-shell.spec.ts:128:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/experience-shell-search-re-70c24-localStorage-is-unavailable-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/experience-shell-search-re-70c24-localStorage-is-unavailable-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/experience-shell-search-re-70c24-localStorage-is-unavailable-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/experience-shell-search-re-70c24-localStorage-is-unavailable-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/experience-shell-search-re-70c24-localStorage-is-unavailable-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › tests/homepage.spec.ts:18:3 › homepage › metadata stays in the head through repeated full-page hydration 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.",
+    + ]
+
+      28 |       await expect(page.locator('body meta[name="description"]')).toHaveCount(0)
+      29 |       await page.waitForTimeout(150)
+    > 30 |       expect(errors).toEqual([])
+         |                      ^
+      31 |     }
+      32 |   })
+      33 |   test("puts material search, records and research tasks before decorative media", async ({
+        at /Users/purepanel/Avaria/averianlabs-web/tests/homepage.spec.ts:30:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/homepage-homepage-metadata-e63e0-epeated-full-page-hydration-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/homepage-homepage-metadata-e63e0-epeated-full-page-hydration-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/homepage-homepage-metadata-e63e0-epeated-full-page-hydration-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/homepage-homepage-metadata-e63e0-epeated-full-page-hydration-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/homepage-homepage-metadata-e63e0-epeated-full-page-hydration-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [chromium] › tests/instanced-vial.spec.ts:5:1 › optional catalogue 3D keeps product navigation and SKU identity consistent 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.",
+    + ]
+
+      47 |   await expect(page.locator("main h1")).toHaveText(name ?? "")
+      48 |   await expect(page.locator("main figure figcaption").first()).toContainText(sku ?? "")
+    > 49 |   expect(errors).toEqual([])
+         |                  ^
+      50 | })
+      51 |
+      52 | test("without WebGL the Finnish selected SKU and static illustration remain usable", async ({
+        at /Users/purepanel/Avaria/averianlabs-web/tests/instanced-vial.spec.ts:49:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/instanced-vial-optional-ca-92fac-and-SKU-identity-consistent-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/instanced-vial-optional-ca-92fac-and-SKU-identity-consistent-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/instanced-vial-optional-ca-92fac-and-SKU-identity-consistent-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/instanced-vial-optional-ca-92fac-and-SKU-identity-consistent-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/instanced-vial-optional-ca-92fac-and-SKU-identity-consistent-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [chromium] › tests/reliability.spec.ts:127:3 › en: server-rendered research content remains visible without JavaScript 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: browserContext.close: Test ended.
+    Browser logs:
+
+    <launching> /Users/purepanel/Library/Caches/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-mac-x64/chrome-headless-shell --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/var/folders/0n/xnxpsy8s49s360tyf3n83zhw0000gn/T/playwright_chromiumdev_profile-NEe5HE --remote-debugging-pipe --no-startup-window
+    <launched> pid=78737
+    [pid=78737][err] [1015/191109.393528:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78737][err] [1015/191110.225280:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78737][err] [1015/191113.493488:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78737][err] [1015/191115.675889:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78737][err] [1015/191116.258397:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78737][err] [1015/191118.364101:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78737][err] [1015/191118.945786:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78737] <gracefully close start>
+
+      186 |       }
+      187 |     } finally {
+    > 188 |       await context.close()
+          |       ^
+      189 |     }
+      190 |   })
+      191 | }
+        at /Users/purepanel/Avaria/averianlabs-web/tests/reliability.spec.ts:188:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/reliability-en-server-rend-70210--visible-without-JavaScript-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/reliability-en-server-rend-70210--visible-without-JavaScript-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/reliability-en-server-rend-70210--visible-without-JavaScript-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/reliability-en-server-rend-70210--visible-without-JavaScript-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [chromium] › tests/reliability.spec.ts:127:3 › fi: server-rendered research content remains visible without JavaScript 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: browserContext.close: Test ended.
+    Browser logs:
+
+    <launching> /Users/purepanel/Library/Caches/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-mac-x64/chrome-headless-shell --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/var/folders/0n/xnxpsy8s49s360tyf3n83zhw0000gn/T/playwright_chromiumdev_profile-XjZms3 --remote-debugging-pipe --no-startup-window
+    <launched> pid=78175
+    [pid=78175][err] [1015/191002.138095:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191002.727389:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191008.677225:ERROR:gpu/command_buffer/service/gl_utils.cc:427] [.WebGL-0x10c0016ee00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=78175][err] [1015/191008.753146:INFO:CONSOLE:0] "[.WebGL-0x10c0016ee00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:3217/fi/shop/bpc-157?sku=BPC157-10 (0)
+    [pid=78175][err] [1015/191008.812845:ERROR:gpu/command_buffer/service/gl_utils.cc:427] [.WebGL-0x10c0016ee00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=78175][err] [1015/191009.784137:INFO:CONSOLE:0] "[.WebGL-0x10c0016ee00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:3217/fi/shop/bpc-157?sku=BPC157-10 (0)
+    [pid=78175][err] [1015/191010.129912:ERROR:gpu/command_buffer/service/gl_utils.cc:427] [.WebGL-0x10c0016ee00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=78175][err] [1015/191010.509740:INFO:CONSOLE:0] "[.WebGL-0x10c0016ee00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:3217/fi/shop/bpc-157?sku=BPC157-10 (0)
+    [pid=78175][err] [1015/191010.512301:ERROR:gpu/command_buffer/service/gl_utils.cc:427] [.WebGL-0x10c0016ee00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+    [pid=78175][err] [1015/191010.894121:INFO:CONSOLE:0] "[.WebGL-0x10c0016ee00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", source: http://localhost:3217/fi/shop/bpc-157?sku=BPC157-10 (0)
+    [pid=78175][err] [1015/191016.062617:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191020.648895:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191020.944945:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191022.730867:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191022.820967:INFO:CONSOLE:8] "Uncaught SecurityError: Failed to read the 'sessionStorage' property from 'Window': Access is denied for this document.", source:  (8)
+    [pid=78175][err] [1015/191023.513641:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191026.489435:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191026.564175:INFO:CONSOLE:8] "Uncaught SecurityError: Failed to read the 'sessionStorage' property from 'Window': Access is denied for this document.", source:  (8)
+    [pid=78175][err] [1015/191027.515622:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191029.339561:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191029.412665:INFO:CONSOLE:8] "Uncaught SecurityError: Failed to read the 'sessionStorage' property from 'Window': Access is denied for this document.", source:  (8)
+    [pid=78175][err] [1015/191030.690462:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191031.088354:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191034.366112:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191035.013253:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191035.359433:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191040.032754:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191040.589962:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191043.691720:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191044.703692:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191047.841374:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191048.408425:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191051.212196:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191053.500037:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191055.250148:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191056.648822:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191058.285476:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191058.542781:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191100.971411:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191103.869425:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191104.241954:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191107.337625:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191109.931593:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191112.943222:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191114.355532:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191114.822172:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191115.461948:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191118.597506:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175][err] [1015/191119.127683:ERROR:ui/display/mac/cv_display_link_mac.mm:195] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=78175] <gracefully close start>
+
+      186 |       }
+      187 |     } finally {
+    > 188 |       await context.close()
+          |       ^
+      189 |     }
+      190 |   })
+      191 | }
+        at /Users/purepanel/Avaria/averianlabs-web/tests/reliability.spec.ts:188:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/reliability-fi-server-rend-a0e34--visible-without-JavaScript-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/reliability-fi-server-rend-a0e34--visible-without-JavaScript-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/reliability-fi-server-rend-a0e34--visible-without-JavaScript-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/reliability-fi-server-rend-a0e34--visible-without-JavaScript-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8 failed
+    [chromium] › tests/3d-render.spec.ts:11:3 › en: optional neutral 3D preserves the selected SKU and localized caption 
+    [chromium] › tests/account-reliability.spec.ts:9:3 › en: account creation and plan sharing remain truthful on failure and revoke access immediately 
+    [chromium] › tests/experience-shell.spec.ts:10:3 › en: persisted cart snapshots hydrate consistently across full navigations 
+    [chromium] › tests/experience-shell.spec.ts:101:1 › search remains usable when localStorage is unavailable 
+    [chromium] › tests/homepage.spec.ts:18:3 › homepage › metadata stays in the head through repeated full-page hydration 
+    [chromium] › tests/instanced-vial.spec.ts:5:1 › optional catalogue 3D keeps product navigation and SKU identity consistent 
+    [chromium] › tests/reliability.spec.ts:127:3 › en: server-rendered research content remains visible without JavaScript 
+    [chromium] › tests/reliability.spec.ts:127:3 › fi: server-rendered research content remains visible without JavaScript 
+  2 skipped
+  129 passed (2.4m)
+ ELIFECYCLE  Command failed with exit code 1.

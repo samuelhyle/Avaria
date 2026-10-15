@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-15T17:35:30.977825+00:00",
+  "scope": "Only the explicitly owned private native QA PostgreSQL cluster",
+  "listenAddress": "127.0.0.1",
+  "port": 5439,
+  "database": "averian_reliability",
+  "shutdownMode": "smart",
+  "ownedDataDirectoryAndPortVerified": true,
+  "shutdownExitCode": 0,
+  "pgCtlStatusAfterExitCode": 3,
+  "tcpListenerAbsent": true,
+  "qaBrowserFixtureCleanup": "Confirmed complete by release owner before shutdown; cleanup command exited0 with Browser fixtures removed.",
+  "privateFilesPreserved": true,
+  "otherDatabasesOrServicesTouched": false,
+  "runtimeSourceCommit": "4e4a948fb1cf722d11bac09340d140f174b54024",
+  "privacy": "No credential values, account identity or private filesystem paths recorded."
+}

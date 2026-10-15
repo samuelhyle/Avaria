@@ -1,0 +1,6 @@
+{
+  "base": "https://averianlabs-demo.netlify.app",
+  "httpChecks": 29,
+  "browserStates": 36,
+  "failures": []
+}

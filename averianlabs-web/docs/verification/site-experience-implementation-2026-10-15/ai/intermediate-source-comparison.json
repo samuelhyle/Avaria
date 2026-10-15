@@ -1,0 +1,70 @@
+{
+  "scope": "Historical comparison of initial candidate f5e7457 and intermediate UI-only candidate ec4da37. Superseded: final source0354c14 changes API intent routing, so this is NOT final-release API equivalence or a transfer of the old evaluation.",
+  "evaluatedSource": "f5e74576d400d51cf60ff32828a6ba7e3cd54d02",
+  "evaluatedDeployId": "6ad0ebc74e792e02466f2234",
+  "groups": [
+    {
+      "path": "app/api/ai",
+      "evaluatedGitObject": "ddb3e5acb5ab0290cf475838358f292864f8d586",
+      "releaseGitObject": "ddb3e5acb5ab0290cf475838358f292864f8d586",
+      "identical": true
+    },
+    {
+      "path": "lib/ai",
+      "evaluatedGitObject": "ee0029b0fb7b7034b438d73e540b2bffc96345c6",
+      "releaseGitObject": "ee0029b0fb7b7034b438d73e540b2bffc96345c6",
+      "identical": true
+    },
+    {
+      "path": "lib/calculations.ts",
+      "evaluatedGitObject": "368fb4aaae0df4d6c68208c569eeca0a07154d05",
+      "releaseGitObject": "368fb4aaae0df4d6c68208c569eeca0a07154d05",
+      "identical": true
+    },
+    {
+      "path": "lib/documents",
+      "evaluatedGitObject": "378e30d242e74d4daff1495093114a533cd753cd",
+      "releaseGitObject": "378e30d242e74d4daff1495093114a533cd753cd",
+      "identical": true
+    },
+    {
+      "path": "lib/products",
+      "evaluatedGitObject": "e9427ec43a51880fb49fe01eb3b0ff998cbf6375",
+      "releaseGitObject": "e9427ec43a51880fb49fe01eb3b0ff998cbf6375",
+      "identical": true
+    },
+    {
+      "path": "lib/env.ts",
+      "evaluatedGitObject": "066593d03eb8407d2c9188b1162aa81ec3794a50",
+      "releaseGitObject": "066593d03eb8407d2c9188b1162aa81ec3794a50",
+      "identical": true
+    },
+    {
+      "path": "db",
+      "evaluatedGitObject": "5e61f9488629b1add3b3e84a6dd692be8f26d584",
+      "releaseGitObject": "5e61f9488629b1add3b3e84a6dd692be8f26d584",
+      "identical": true
+    },
+    {
+      "path": "package.json",
+      "evaluatedGitObject": "459170f48358052b8c02a59adb5bd9f16bca66ea",
+      "releaseGitObject": "459170f48358052b8c02a59adb5bd9f16bca66ea",
+      "identical": true
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "evaluatedGitObject": "620cadd595addc863f91c22153f83973d8c7777f",
+      "releaseGitObject": "620cadd595addc863f91c22153f83973d8c7777f",
+      "identical": true
+    },
+    {
+      "path": "netlify.toml",
+      "evaluatedGitObject": "c3299869b77835baa12423468d42a4be59ca5624",
+      "releaseGitObject": "c3299869b77835baa12423468d42a4be59ca5624",
+      "identical": true
+    }
+  ],
+  "status": "superseded-before-api-fix",
+  "intermediateSource": "ec4da37ab4ebdead2fe093d9603778b3cafacf8a",
+  "intermediateDeployId": "6ad0f28b0364c381d4a53116"
+}

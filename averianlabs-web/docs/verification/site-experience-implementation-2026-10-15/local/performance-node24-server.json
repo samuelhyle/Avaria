@@ -1,0 +1,24 @@
+{
+  "runtimeSourceCommit": "4e4a948fb1cf722d11bac09340d140f174b54024",
+  "buildId": "gbVoYSCId_d8o20D5NFmL",
+  "nodeVersion": "v24.22.0",
+  "ownedServerPid": 20816,
+  "boundPort": 3217,
+  "serverLifecycle": "Server and audits share one foreground parent; EXIT trap stops only this owned server.",
+  "startedAt": "2026-10-15T17:28:19.083Z",
+  "healthBeforeAudits": {
+    "at": "2026-10-15T17:28:19.083Z",
+    "httpStatus": 200,
+    "status": "ok",
+    "database": true
+  },
+  "coordinatedIsolation": true,
+  "coordinatedIsolationScope": "No concurrent builds/tests/browsers from this collaborating team; unrelated host workloads may remain and are measured only in aggregate.",
+  "complete": true,
+  "completedAudits": 23,
+  "healthyBeforeAndAfterChecks": 46,
+  "measurementsCompletedAt": "2026-10-15T17:31:54.087Z",
+  "serverStop": "Owned EXIT trap requested after this completed measurement proof. Listener absence is verified separately.",
+  "serverStopped": true,
+  "serverStopProof": "After owned EXIT trap completed, lsof3217 returned no listener; no other server was stopped."
+}

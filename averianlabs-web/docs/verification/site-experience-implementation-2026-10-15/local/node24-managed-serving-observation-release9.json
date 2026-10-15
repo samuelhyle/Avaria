@@ -1,0 +1,25 @@
+{
+  "observedAt": "2026-10-15T17:12:27.275888+00:00",
+  "sourceCommit": "32c4b65bdaa025e710cc57c8c7b2f4f2e9c779b8",
+  "deployId": "6ad106fcd968f7d85ff1fc68",
+  "logSource": "functions",
+  "logFilteredByDeployId": true,
+  "observedVersions": [
+    "v24.21.0"
+  ],
+  "runtimeLogEntries": 2,
+  "buildVersion": "24.22.0",
+  "actualServingPatchDiffersFromBuild": true,
+  "healthRequest": {
+    "at": "2026-10-15T17:07:30.849854Z",
+    "status": 200,
+    "checks": {
+      "env": true,
+      "db": true
+    }
+  },
+  "privateRawLogSha256": "3bfda35e8e1f248d720c1111cbc5fd91ccaa9864044b98236fb8d9f7b805e63d",
+  "rawLogPublished": false,
+  "guardEvidence": "node24-managed-serving-guard-20261015.json",
+  "note": "Private serving-function startup output, not a build-log inference. Intermediate candidate9 remains unpromoted after browser failures."
+}

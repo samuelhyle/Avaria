@@ -1,0 +1,279 @@
+
+> averianlabs-web@0.1.0 test:e2e /Users/purepanel/Avaria/averianlabs-web
+> playwright test
+
+[WebServer] (node:13671) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:13683) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer]  ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+Running 142 tests using 8 workers
+
+(node:13777) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13776) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13775) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13779) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13774) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13773) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13778) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    8 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/about has no serious/critical axe-core violations (5.2s)
+  ✓    5 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/quality has no serious/critical axe-core violations (5.5s)
+  ✓    6 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en has no serious/critical axe-core violations (6.5s)
+  ✓    7 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/shop/qa-water has no serious/critical axe-core violations (7.2s)
+  ✓    9 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/checkout/cart has no serious/critical axe-core violations (3.5s)
+  ✓    4 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/shop has no serious/critical axe-core violations (9.4s)
+  ✓   11 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/documents has no serious/critical axe-core violations (3.2s)
+  ✓   10 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/peptide-calculator has no serious/critical axe-core violations (4.6s)
+  ✓   12 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en/contact has no serious/critical axe-core violations (3.3s)
+  ✓    2 [chromium] › tests/3d-render.spec.ts:58:1 › neutral 3D responds to reduced-motion changes and retains manual controls (10.9s)
+  ✓   13 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi has no serious/critical axe-core violations (3.6s)
+  ✓   16 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/quality has no serious/critical axe-core violations (3.4s)
+  ✓   17 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/about has no serious/critical axe-core violations (3.2s)
+  ✓   15 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/shop/qa-water has no serious/critical axe-core violations (4.2s)
+  ✓   18 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/checkout/cart has no serious/critical axe-core violations (3.6s)
+  ✓    3 [chromium] › tests/3d-render.spec.ts:11:3 › en: optional neutral 3D preserves the selected SKU and localized caption (15.1s)
+  ✓   14 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/shop has no serious/critical axe-core violations (6.2s)
+  ✓    1 [chromium] › tests/3d-render.spec.ts:11:3 › fi: optional neutral 3D preserves the selected SKU and localized caption (16.7s)
+  ✓   19 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/peptide-calculator has no serious/critical axe-core violations (5.0s)
+  ✓   21 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/contact has no serious/critical axe-core violations (3.9s)
+  ✓   20 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /fi/documents has no serious/critical axe-core violations (4.6s)
+  ✓   27 [chromium] › tests/account-reliability.spec.ts:160:3 › en: failed password-reset request stays retryable (2.7s)
+  ✓   30 [chromium] › tests/api.spec.ts:5:3 › public APIs › GET /api/health responds with a status code (278ms)
+  ✓   29 [chromium] › tests/account-reliability.spec.ts:160:3 › fi: failed password-reset request stays retryable (2.5s)
+  ✓   31 [chromium] › tests/api.spec.ts:20:3 › public APIs › POST /api/newsletter rejects missing email (366ms)
+  ✓   32 [chromium] › tests/api.spec.ts:31:3 › public APIs › POST /api/contact is rate-limited or rejected (292ms)
+  ✓   34 [chromium] › tests/api.spec.ts:47:3 › public APIs › GET /sitemap.xml returns a non-empty XML document (1.1s)
+  ✓   33 [chromium] › tests/api.spec.ts:42:3 › public APIs › GET /en/shop returns 200 (1.3s)
+  ✓   35 [chromium] › tests/api.spec.ts:55:3 › public APIs › GET /robots.txt disallows AI bots and the admin (43ms)
+  ✓   22 [chromium] › tests/a11y.spec.ts:63:3 › a11y: en mobile empty-cart steps remain visible and accessible (10.2s)
+  ✓   37 [chromium] › tests/auth.spec.ts:13:3 › authentication pages › forgot password form is accessible (2.1s)
+  ✓   36 [chromium] › tests/auth.spec.ts:4:3 › authentication pages › register page loads and shows the registration form (2.2s)
+  ✓   39 [chromium] › tests/auth.spec.ts:25:3 › authentication pages › auth API uses an anti-enumeration contract (200 with ok envelope) (141ms)
+  ✓   24 [chromium] › tests/a11y.spec.ts:63:3 › a11y: fi mobile empty-cart steps remain visible and accessible (9.9s)
+  ✓   38 [chromium] › tests/auth.spec.ts:19:3 › authentication pages › auth-required pages return a usable response (not 5xx) (2.0s)
+  ✓   41 [chromium] › tests/cart.spec.ts:46:3 › cart drawer + add-to-cart › add-to-cart opens the cart drawer and shows the subtotal (3.7s)
+  ✓   40 [chromium] › tests/cart.spec.ts:11:3 › cart drawer + add-to-cart › a product detail page renders the qty stepper with descriptive aria-labels (4.1s)
+  -   45 [chromium] › tests/chat.spec.ts:72:3 › Averia chat widget › sending a message produces a streamed assistant reply
+  ✓   42 [chromium] › tests/cart.spec.ts:64:3 › cart drawer + add-to-cart › wishlist button announces its action in plain English (4.1s)
+  ✓   47 [chromium] › tests/chat.spec.ts:108:3 › Averia chat widget › prompt-injection is blocked at the route level (no provider call) (69ms)
+  -   46 [chromium] › tests/chat.spec.ts:95:3 › Averia chat widget › a quick-action chip pre-fills and submits a prompt
+  ✓   48 [chromium] › tests/chat.spec.ts:131:3 › Averia chat widget › invalid payloads are rejected with 400 (115ms)
+  ✓   49 [chromium] › tests/chat.spec.ts:140:3 › Averia chat widget › rate-limited responses return 429 with a known code (1.5s)
+  ✓   25 [chromium] › tests/a11y.spec.ts:86:3 › a11y: fi populated checkout email/address/shipping/payment has no blocking violations (15.8s)
+  ✓   23 [chromium] › tests/a11y.spec.ts:86:3 › a11y: en populated checkout email/address/shipping/payment has no blocking violations (16.7s)
+  ✓   44 [chromium] › tests/chat.spec.ts:65:3 › Averia chat widget › opening the chat reveals the input + greeting (3.7s)
+  ✓   51 [chromium] › tests/checkout.spec.ts:4:3 › checkout flow › empty cart shows the empty state with a CTA to shop (1.9s)
+  ✓   52 [chromium] › tests/checkout.spec.ts:15:3 › checkout flow › checkout steps render with the right ordering (2.7s)
+  ✓   50 [chromium] › tests/chat.spec.ts:168:3 › Averia chat widget › the chat widget does not break the rest of the page (4.8s)
+  ✓   43 [chromium] › tests/chat.spec.ts:58:3 › Averia chat widget › the chat bubble is visible on every locale page (8.8s)
+  ✓   56 [chromium] › tests/experience-documents.spec.ts:158:3 › en: a missing original file has retry and documentation help without hiding the record (4.3s)
+  ✓   54 [chromium] › tests/experience-documents.spec.ts:62:3 › en: mobile document filters and legacy COA links preserve exact search context (7.8s)
+  ✓   26 [chromium] › tests/account-reliability.spec.ts:9:3 › en: account creation and plan sharing remain truthful on failure and revoke access immediately (23.3s)
+  ✓   59 [chromium] › tests/experience-documents.spec.ts:158:3 › fi: a missing original file has retry and documentation help without hiding the record (2.4s)
+  ✓   53 [chromium] › tests/checkout.spec.ts:21:3 › checkout flow › shipping step uses fieldset/legend for radio groups (9.8s)
+  ✓   57 [chromium] › tests/experience-documents.spec.ts:62:3 › fi: mobile document filters and legacy COA links preserve exact search context (7.0s)
+  ✓   58 [chromium] › tests/experience-documents.spec.ts:114:3 › fi: changing SKU keeps product-wide documents and shows only the applicable batch (7.2s)
+  ✓   28 [chromium] › tests/account-reliability.spec.ts:9:3 › fi: account creation and plan sharing remain truthful on failure and revoke access immediately (24.6s)
+  ✓   55 [chromium] › tests/experience-documents.spec.ts:114:3 › en: changing SKU keeps product-wide documents and shows only the applicable batch (9.3s)
+  ✓   60 [chromium] › tests/experience-documents.spec.ts:190:1 › an actually empty language collection differs from a failed search in the seeded library (3.4s)
+  ✓   62 [chromium] › tests/experience-shell.spec.ts:55:3 › en: mobile menu fills the viewport and reaches the current document library (3.2s)
+  ✓   63 [chromium] › tests/experience-shell.spec.ts:79:3 › en: immediate mobile filters expose checked state and retain view and hash (3.6s)
+  ✓   65 [chromium] › tests/experience-shell.spec.ts:55:3 › fi: mobile menu fills the viewport and reaches the current document library (3.2s)
+  ✓   68 [chromium] › tests/experience-shell.spec.ts:130:1 › first visit completes eligibility before showing readable cookie choices (2.4s)
+  ✓   66 [chromium] › tests/experience-shell.spec.ts:79:3 › fi: immediate mobile filters expose checked state and retain view and hash (3.5s)
+  ✓   67 [chromium] › tests/experience-shell.spec.ts:101:1 › search remains usable when localStorage is unavailable (5.1s)
+  ✓   74 [chromium] › tests/homepage.spec.ts:100:3 › homepage › emits a translated title and full hreflang set (1.3s)
+  ✓   73 [chromium] › tests/homepage.spec.ts:84:3 › homepage › puts material search, records and research tasks before decorative media (3.1s)
+  ✓   64 [chromium] › tests/experience-shell.spec.ts:10:3 › fi: persisted cart snapshots hydrate consistently across full navigations (9.2s)
+  ✓   69 [chromium] › tests/floating-chat-catalogue.spec.ts:22:3 › en: floating Averia confirms the exact catalogue SKU before adding its quantity and units (7.6s)
+  ✓   78 [chromium] › tests/i18n.spec.ts:30:3 › internationalization › invalid locale triggers a 404 / notFound fallback (143ms)
+  ✓   76 [chromium] › tests/i18n.spec.ts:4:3 › internationalization › each locale resolves with a translated title (4.7s)
+  ✓   70 [chromium] › tests/floating-chat-catalogue.spec.ts:22:3 › fi: floating Averia confirms the exact catalogue SKU before adding its quantity and units (8.8s)
+  ✓   75 [chromium] › tests/homepage.spec.ts:127:3 › homepage › translates metadata per locale (4.9s)
+  ✓   79 [chromium] › tests/i18n.spec.ts:44:3 › internationalization › LocaleSwitcher changes the current locale (2.4s)
+  ✓   77 [chromium] › tests/i18n.spec.ts:18:3 › internationalization › alternate hreflang tags cover all locales (3.6s)
+  ✓   83 [chromium] › tests/reliability.spec.ts:23:3 › en: quotation success follows the persisted server response (3.6s)
+  ✓   82 [chromium] › tests/reliability.spec.ts:5:3 › en: 10 mL stays a volume through product and cart (5.2s)
+  ✓   80 [chromium] › tests/instanced-vial.spec.ts:5:1 › optional catalogue 3D keeps product navigation and SKU identity consistent (5.7s)
+  ✓   84 [chromium] › tests/reliability.spec.ts:54:5 › en: primary customer pages fit 320px (7.5s)
+  ✓   71 [chromium] › tests/homepage.spec.ts:18:3 › homepage › metadata stays in the head through repeated full-page hydration (17.5s)
+  ✓   85 [chromium] › tests/reliability.spec.ts:54:5 › en: primary customer pages fit 390px (8.2s)
+  ✓   86 [chromium] › tests/reliability.spec.ts:54:5 › en: primary customer pages fit 414px (8.4s)
+  ✓   87 [chromium] › tests/reliability.spec.ts:54:5 › en: primary customer pages fit 1024px (7.9s)
+  ✓   90 [chromium] › tests/reliability.spec.ts:23:3 › fi: quotation success follows the persisted server response (3.8s)
+  ✓   91 [chromium] › tests/reliability.spec.ts:54:5 › fi: primary customer pages fit 320px (3.6s)
+  ✓   92 [chromium] › tests/reliability.spec.ts:54:5 › fi: primary customer pages fit 390px (3.6s)
+  ✓   93 [chromium] › tests/reliability.spec.ts:54:5 › fi: primary customer pages fit 414px (5.0s)
+  ✓   95 [chromium] › tests/reliability.spec.ts:54:5 › fi: primary customer pages fit 1280px (4.6s)
+  ✓   94 [chromium] › tests/reliability.spec.ts:54:5 › fi: primary customer pages fit 1024px (5.2s)
+  ✓   96 [chromium] › tests/reliability.spec.ts:81:1 › language switch keeps filters and hash (2.0s)
+  ✓   97 [chromium] › tests/reliability.spec.ts:88:1 › homepage is useful without WebGL or requestIdleCallback (1.5s)
+  ✓   98 [chromium] › tests/reliability.spec.ts:96:1 › cookie settings can reopen and withdraw analytics consent (2.0s)
+  ✓   99 [chromium] › tests/reliability.spec.ts:116:1 › invalid concentration inputs do not expose infinite results (1.5s)
+  ✓  102 [chromium] › tests/reliability.spec.ts:193:1 › catalogue quantities preserve SI unit case and spacing (2.0s)
+  ✓  100 [chromium] › tests/reliability.spec.ts:127:3 › en: server-rendered research content remains visible without JavaScript (3.5s)
+  ✓  101 [chromium] › tests/reliability.spec.ts:127:3 › fi: server-rendered research content remains visible without JavaScript (3.4s)
+  ✓  103 [chromium] › tests/research-workspace.spec.ts:10:3 › en: calculation modes preserve units, show remainders and export the record (2.1s)
+  ✓  106 [chromium] › tests/research-workspace.spec.ts:240:3 › en: unavailable assistant keeps the question and retries without duplicate messages (1.8s)
+  ✓  104 [chromium] › tests/research-workspace.spec.ts:57:3 › en: selected SKU carries its mass to the calculator and assistant only after Send (4.4s)
+  ✓  107 [chromium] › tests/research-workspace.spec.ts:279:3 › en: interrupted and error streams expose a working retry (1.9s)
+  ✓  105 [chromium] › tests/research-workspace.spec.ts:123:3 › en: private saved work and pending submissions stay out of the public hub (10.7s)
+  ✓  108 [chromium] › tests/research-workspace.spec.ts:316:5 › en: research workspace fits 320px and has no blocking accessibility findings (9.8s)
+  ✓  109 [chromium] › tests/research-workspace.spec.ts:316:5 › en: research workspace fits 390px and has no blocking accessibility findings (9.6s)
+  ✓  111 [chromium] › tests/research-workspace.spec.ts:10:3 › fi: calculation modes preserve units, show remainders and export the record (2.0s)
+  ✓  112 [chromium] › tests/research-workspace.spec.ts:57:3 › fi: selected SKU carries its mass to the calculator and assistant only after Send (3.9s)
+  ✓  114 [chromium] › tests/research-workspace.spec.ts:240:3 › fi: unavailable assistant keeps the question and retries without duplicate messages (2.0s)
+  ✓  115 [chromium] › tests/research-workspace.spec.ts:279:3 › fi: interrupted and error streams expose a working retry (2.0s)
+  ✓  110 [chromium] › tests/research-workspace.spec.ts:316:5 › en: research workspace fits 1440px and has no blocking accessibility findings (12.7s)
+  ✓  113 [chromium] › tests/research-workspace.spec.ts:123:3 › fi: private saved work and pending submissions stay out of the public hub (11.2s)
+  ✓  116 [chromium] › tests/research-workspace.spec.ts:316:5 › fi: research workspace fits 320px and has no blocking accessibility findings (10.1s)
+  ✓  119 [chromium] › tests/research-workspace.spec.ts:347:1 › switching Finnish calculator entries to English preserves quantities and selected units (1.6s)
+  ✓  117 [chromium] › tests/research-workspace.spec.ts:316:5 › fi: research workspace fits 390px and has no blocking accessibility findings (11.0s)
+  ✓  121 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en (193ms)
+  ✓  122 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/shop (89ms)
+  ✓  123 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/shop/bpc-157 (226ms)
+  ✓  124 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/about (44ms)
+  ✓  125 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/coa (230ms)
+  ✓  126 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/compare (61ms)
+  ✓  127 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/contact (49ms)
+  ✓  120 [chromium] › tests/research-workspace.spec.ts:369:1 › a populated cart badge fits the narrow header (1.5s)
+  ✓  128 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/faq (116ms)
+  ✓  130 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/legal/terms (88ms)
+  ✓  129 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/lab-tests (109ms)
+  ✓  132 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/legal/cookies (185ms)
+  ✓  131 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/legal/privacy (189ms)
+  ✓  134 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/legal/research-disclaimer (174ms)
+  ✓  133 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/peptide-calculator (174ms)
+  ✓  136 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/partner (248ms)
+  ✓  135 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/quality (272ms)
+  ✓  137 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/rewards (145ms)
+  ✓  138 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/wishlist (124ms)
+  ✓  139 [chromium] › tests/route-smoke.spec.ts:27:5 › public routes return 200 › /en/support/shipping-returns (64ms)
+  ✓  140 [chromium] › tests/shop.spec.ts:4:3 › shop catalog › renders the shop page with filter sidebar and toolbar (956ms)
+  ✓  118 [chromium] › tests/research-workspace.spec.ts:316:5 › fi: research workspace fits 1440px and has no blocking accessibility findings (10.7s)
+  ✓  141 [chromium] › tests/shop.spec.ts:14:3 › shop catalog › the 3D shop carousel is reachable via ?view=3d (2.8s)
+  ✓  142 [chromium] › tests/shop.spec.ts:20:3 › shop catalog › MegaMenu opens via ArrowDown from the trigger and roves links (1.9s)
+  ✘   61 [chromium] › tests/experience-shell.spec.ts:10:3 › en: persisted cart snapshots hydrate consistently across full navigations (1.4m)
+  ✘   89 [chromium] › tests/reliability.spec.ts:5:3 › fi: 10 mL stays a volume through product and cart (1.0m)
+  ✓   88 [chromium] › tests/reliability.spec.ts:54:5 › en: primary customer pages fit 1280px (1.1m)
+  ✘   81 [chromium] › tests/instanced-vial.spec.ts:52:1 › without WebGL the Finnish selected SKU and static illustration remain usable (1.2m)
+  ✓   72 [chromium] › tests/homepage.spec.ts:33:3 › homepage › cached scripts hydrate complete EN/FI content during slow HTML delivery (1.3m)
+
+
+  1) [chromium] › tests/experience-shell.spec.ts:10:3 › en: persisted cart snapshots hydrate consistently across full navigations 
+
+    Test timeout of 60000ms exceeded.
+
+    attachment #1: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/experience-shell-en-persis-817f4-tly-across-full-navigations-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/experience-shell-en-persis-817f4-tly-across-full-navigations-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/experience-shell-en-persis-817f4-tly-across-full-navigations-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/experience-shell-en-persis-817f4-tly-across-full-navigations-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/instanced-vial.spec.ts:52:1 › without WebGL the Finnish selected SKU and static illustration remain usable 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('main figure').first().locator('figcaption')
+    Expected substring: "BPC157-5"
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" locator('main figure').first().locator('figcaption') with timeout 10000ms
+      - waiting for locator('main figure').first().locator('figcaption')
+
+
+      86 |   await page.locator("main fieldset").getByRole("button").filter({ hasText: "BPC157-5" }).click()
+      87 |   await expect(page).toHaveURL(/sku=BPC157-5/)
+    > 88 |   await expect(gallery.locator("figcaption")).toContainText("BPC157-5")
+         |                                               ^
+      89 |   await expect(gallery.locator("canvas")).toHaveCount(0)
+      90 |   await expect(gallery.getByRole("status")).toHaveCount(0)
+      91 |   await gallery.getByRole("button", { name: t.optional3d, exact: true }).click()
+        at /Users/purepanel/Avaria/averianlabs-web/tests/instanced-vial.spec.ts:88:47
+
+    attachment #1: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/instanced-vial-without-Web-4556d--illustration-remain-usable-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/instanced-vial-without-Web-4556d--illustration-remain-usable-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/instanced-vial-without-Web-4556d--illustration-remain-usable-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/instanced-vial-without-Web-4556d--illustration-remain-usable-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests/reliability.spec.ts:5:3 › fi: 10 mL stays a volume through product and cart 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('main')
+    Expected substring: "25,5 %"
+    Received string:    "Kassa1Sähköposti2Osoite3Toimitus4MaksuOstoskoriValitsemasi peptidit ja tarvikkeet — valmiina tarkistettavaksi.Tilauksen yhteenvetoQA-vesi — testitietoQA-WATER-10 · 10 mL × 165 €Ladataan toimitustapoja…MaksutapaKorttitiedot syötetään maksupalvelun lomakkeelle. Tilauksen tila päivittyy, kun maksupalvelu vahvistaa maksun.Selaa tuotteita"
+    Timeout: 10000ms
+
+    Call log:
+      - Expect "toContainText" locator('main') with timeout 10000ms
+      - waiting for locator('main')
+        5 × locator resolved to <main id="main" class="min-h-[calc(100vh-64px)]">…</main>
+          - unexpected value "Kassa1Sähköposti2Osoite3Toimitus4MaksuOstoskoriValitsemasi peptidit ja tarvikkeet — valmiina tarkistettavaksi.Tilauksen yhteenvetoQA-vesi — testitietoQA-WATER-10 · 10 mL × 165 €Ladataan toimitustapoja…MaksutapaKorttitiedot syötetään maksupalvelun lomakkeelle. Tilauksen tila päivittyy, kun maksupalvelu vahvistaa maksun.Selaa tuotteita"
+
+
+      19 |     await page.goto(`/${locale}/checkout/cart`)
+      20 |     await expect(page.locator("main")).toContainText("10 mL")
+    > 21 |     await expect(page.locator("main")).toContainText(locale === "fi" ? "25,5 %" : "25.5%")
+         |                                        ^
+      22 |   })
+      23 |   test(`${locale}: quotation success follows the persisted server response`, async ({
+      24 |     cleanPage: page,
+        at /Users/purepanel/Avaria/averianlabs-web/tests/reliability.spec.ts:21:40
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/reliability-fi-10-mL-stays-a-volume-through-product-and-cart-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/reliability-fi-10-mL-stays-a-volume-through-product-and-cart-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/reliability-fi-10-mL-stays-a-volume-through-product-and-cart-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/reliability-fi-10-mL-stays-a-volume-through-product-and-cart-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/reliability-fi-10-mL-stays-a-volume-through-product-and-cart-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [chromium] › tests/experience-shell.spec.ts:10:3 › en: persisted cart snapshots hydrate consistently across full navigations 
+    [chromium] › tests/instanced-vial.spec.ts:52:1 › without WebGL the Finnish selected SKU and static illustration remain usable 
+    [chromium] › tests/reliability.spec.ts:5:3 › fi: 10 mL stays a volume through product and cart ─
+  2 skipped
+  137 passed (2.3m)
+ ELIFECYCLE  Command failed with exit code 1.

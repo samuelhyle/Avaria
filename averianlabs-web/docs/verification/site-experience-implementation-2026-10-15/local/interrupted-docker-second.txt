@@ -1,0 +1,142 @@
+
+Running 139 tests using 2 workers
+
+(node:55349) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:55350) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘    2 [chromium] › tests/3d-render.spec.ts:11:3 › fi: optional neutral 3D preserves the selected SKU and localized caption (46.5s)
+(node:55663) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘    1 [chromium] › tests/3d-render.spec.ts:11:3 › en: optional neutral 3D preserves the selected SKU and localized caption (48.2s)
+(node:55677) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘    4 [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en has no serious/critical axe-core violations (28.8s)
+  ✘    3 [chromium] › tests/3d-render.spec.ts:55:1 › neutral 3D responds to reduced-motion changes and retains manual controls (31.6s)
+
+
+  1) [chromium] › tests/3d-render.spec.ts:11:3 › en: optional neutral 3D preserves the selected SKU and localized caption 
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected pattern: /sku=BPC157-5/
+    Received string:  "http://localhost:3217/en/shop/bpc-157?sku=BPC157-10"
+    Timeout: 10000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 10000ms
+        24 × locator resolved to <html lang="en" class="__variable_8adcd2 __variable_46451f light">…</html>
+           - unexpected value "http://localhost:3217/en/shop/bpc-157?sku=BPC157-10"
+
+
+      42 |     ).toHaveAttribute("aria-pressed", "false")
+      43 |     await page.locator("main fieldset").getByRole("button").filter({ hasText: "BPC157-5" }).click()
+    > 44 |     await expect(page).toHaveURL(/sku=BPC157-5/)
+         |                        ^
+      45 |     await expect(caption).toContainText("BPC157-5")
+      46 |     await expect(caption).not.toContainText("BPC157-10")
+      47 |     await expect(caption).toContainText(t.threeDNotice)
+        at /Users/purepanel/Avaria/averianlabs-web/tests/3d-render.spec.ts:44:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/3d-render-en-optional-neut-62aa9-d-SKU-and-localized-caption-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/3d-render-en-optional-neut-62aa9-d-SKU-and-localized-caption-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/3d-render-en-optional-neut-62aa9-d-SKU-and-localized-caption-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/3d-render-en-optional-neut-62aa9-d-SKU-and-localized-caption-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/3d-render-en-optional-neut-62aa9-d-SKU-and-localized-caption-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/3d-render.spec.ts:11:3 › fi: optional neutral 3D preserves the selected SKU and localized caption 
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected pattern: /sku=BPC157-5/
+    Received string:  "http://localhost:3217/fi/shop/bpc-157?sku=BPC157-10"
+    Timeout: 10000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 10000ms
+        24 × locator resolved to <html lang="fi" class="__variable_8adcd2 __variable_46451f light">…</html>
+           - unexpected value "http://localhost:3217/fi/shop/bpc-157?sku=BPC157-10"
+
+
+      42 |     ).toHaveAttribute("aria-pressed", "false")
+      43 |     await page.locator("main fieldset").getByRole("button").filter({ hasText: "BPC157-5" }).click()
+    > 44 |     await expect(page).toHaveURL(/sku=BPC157-5/)
+         |                        ^
+      45 |     await expect(caption).toContainText("BPC157-5")
+      46 |     await expect(caption).not.toContainText("BPC157-10")
+      47 |     await expect(caption).toContainText(t.threeDNotice)
+        at /Users/purepanel/Avaria/averianlabs-web/tests/3d-render.spec.ts:44:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/3d-render-fi-optional-neut-933a3-d-SKU-and-localized-caption-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/3d-render-fi-optional-neut-933a3-d-SKU-and-localized-caption-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/3d-render-fi-optional-neut-933a3-d-SKU-and-localized-caption-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/3d-render-fi-optional-neut-933a3-d-SKU-and-localized-caption-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/3d-render-fi-optional-neut-933a3-d-SKU-and-localized-caption-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests/3d-render.spec.ts:55:1 › neutral 3D responds to reduced-motion changes and retains manual controls 
+
+    Test was interrupted.
+
+    Error: page.goto: Test ended.
+    Call log:
+      - navigating to "http://localhost:3217/en/shop/bpc-157?sku=BPC157-10", waiting until "load"
+
+
+      60 |   ).research
+      61 |   await page.emulateMedia({ reducedMotion: "reduce" })
+    > 62 |   await page.goto("/en/shop/bpc-157?sku=BPC157-10")
+         |              ^
+      63 |   const gallery = page.locator("main figure").first()
+      64 |   await gallery.getByRole("button", { name: t.optional3d, exact: true }).click()
+      65 |   const fallback = gallery
+        at /Users/purepanel/Avaria/averianlabs-web/tests/3d-render.spec.ts:62:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/3d-render-neutral-3D-respo-1fe94-and-retains-manual-controls-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/3d-render-neutral-3D-respo-1fe94-and-retains-manual-controls-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/3d-render-neutral-3D-respo-1fe94-and-retains-manual-controls-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/3d-render-neutral-3D-respo-1fe94-and-retains-manual-controls-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/3d-render-neutral-3D-respo-1fe94-and-retains-manual-controls-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › tests/3d-render.spec.ts:11:3 › en: optional neutral 3D preserves the selected SKU and localized caption 
+    [chromium] › tests/3d-render.spec.ts:11:3 › fi: optional neutral 3D preserves the selected SKU and localized caption 
+  2 interrupted
+    [chromium] › tests/3d-render.spec.ts:55:1 › neutral 3D responds to reduced-motion changes and retains manual controls 
+    [chromium] › tests/a11y.spec.ts:34:3 › a11y: /en has no serious/critical axe-core violations ───
+  135 did not run

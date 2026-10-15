@@ -1,0 +1,86 @@
+{
+  "reviewedAt": "2026-10-15T17:09:35.590955+00:00",
+  "runtimeSourceCommit": "32c4b65bdaa025e710cc57c8c7b2f4f2e9c779b8",
+  "buildId": "LV7ohMvEO_dv_F_vRGLBU",
+  "nodeVersion": "24.22.0",
+  "test": "without WebGL the Finnish selected SKU and static illustration remain usable",
+  "traceSha256": "fbba96e65e86ca0b606304f1c188c964d67aa647df727070496a484bc7bbe220",
+  "traceLocation": "test-results/instanced-vial-without-Web-4556d--illustration-remain-usable-chromium/trace.zip",
+  "actualPageErrorCount": 1,
+  "pageErrors": [
+    {
+      "monotonicMs": 64438.06,
+      "message": "Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.",
+      "stack": "Error: Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.\n    at rD (http://localhost:3217/_next/static/chunks/9d81e687-8a1f3ef355ee4346.js:1:35061)\n    at oq (http://localhost:3217/_next/static/chunks/9d81e687-8a1f3ef355ee4346.js:1:84565)\n    at iw (http://localhost:3217/_next/static/chunks/9d81e687-8a1f3ef355ee4346.js:1:114960)\n    at http://localhost:3217/_next/static/chunks/9d81e687-8a1f3ef355ee4346.js:1:110321\n    at iu (http://localhost:3217/_next/static/chunks/9d81e687-8a1f3ef355ee4346.js:1:110830)\n    at iX (http://localhost:3217/_next/static/chunks/9d81e687-8a1f3ef355ee4346.js:1:132933)\n    at MessagePort.x (http://localhost:3217/_next/static/chunks/277-96df059df146029a.js:4:4578)"
+    }
+  ],
+  "documentRequests": [
+    {
+      "url": "http://localhost:3217/fi/shop/bpc-157?sku=BPC157-10",
+      "startedAt": "2026-10-15T17:06:27.896Z",
+      "monotonicStartMs": 62851.582,
+      "status": 200,
+      "reportedTimeMs": 907.654,
+      "timings": {
+        "dns": 0.31,
+        "connect": 0.188,
+        "ssl": 1.655,
+        "send": 0,
+        "wait": 195.858,
+        "receive": 709.643
+      },
+      "decodedContentBytes": 185333,
+      "bodyBytes": 44493,
+      "transferBytes": 46432,
+      "capturedBodyResource": true
+    },
+    {
+      "url": "http://localhost:3217/fi/shop/bpc-157?sku=BPC157-5",
+      "startedAt": "2026-10-15T17:06:31.237Z",
+      "monotonicStartMs": 66193.41,
+      "status": 200,
+      "reportedTimeMs": 626.62,
+      "timings": {
+        "dns": -1,
+        "connect": -1,
+        "ssl": -1,
+        "send": 0,
+        "wait": 626.62,
+        "receive": -1
+      },
+      "decodedContentBytes": -1,
+      "bodyBytes": -1,
+      "transferBytes": -1,
+      "capturedBodyResource": false
+    }
+  ],
+  "sequence": [
+    {
+      "monotonicMs": 64438.06,
+      "event": "React418 on first SKU10 page before goto resolved."
+    },
+    {
+      "monotonicMs": 64577.719,
+      "event": "Initial goto load resolved; SKU10 gallery and forced no-WebGL fallback assertions subsequently passed."
+    },
+    {
+      "monotonicMs": 66166.541,
+      "event": "Click selects exact SKU5 by full document navigation."
+    },
+    {
+      "monotonicMs": 67039.265,
+      "event": "URL SKU5 assertion resolves."
+    },
+    {
+      "monotonicMs": 67043.996,
+      "event": "DOM snapshot shows localized shell/footer and empty main; figure not present."
+    },
+    {
+      "monotonicMs": 77053.232,
+      "event": "Browser-side figcaption expectation times out after10s; controller cleanup later delayed beyond test60s."
+    }
+  ],
+  "conclusion": "The second document received HTTP200 headers but had no completed response body in the trace, while cached scripts/styles/fonts loaded around1ms. This establishes an unfinished streamed navigation, without attributing cause to CPU, database or Node. An independent first-navigation React418 also occurred and was masked in main test output by the later timeout.",
+  "limitations": "Trace does not record DOMContentLoaded/readyState/performance navigation entries. No claim about exact parser completion or failing React fiber is possible from this trace alone. No browser retest, source mutation or timeout relaxation was performed.",
+  "privacy": "Request headers, cookies, account identifiers and provider credentials were excluded."
+}

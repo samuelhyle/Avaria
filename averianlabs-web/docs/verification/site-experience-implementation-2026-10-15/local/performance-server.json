@@ -1,0 +1,23 @@
+{
+  "runtimeSourceCommit": "e8e511e3f323fa439070864ac5873e301fb0ca8f",
+  "buildId": "IEATsP20c06gq_xW_bo4C",
+  "pid": 90768,
+  "origin": "http://localhost:3217",
+  "database": "isolated native QA on127.0.0.1:5439",
+  "startedAt": "2026-10-15T16:30:06.549Z",
+  "health": {
+    "http": 200,
+    "status": "ok",
+    "checks": {
+      "env": true,
+      "db": true
+    },
+    "latencyMs": 15,
+    "version": "unknown"
+  },
+  "lifecycle": "Production server and Lighthouse harness are children of one owned shell; EXIT trap stops only its recorded server PID.",
+  "completedAt": "2026-10-15T16:36:37.640Z",
+  "allAuditsCompleted": 23,
+  "allBeforeAfterHealthChecksPassed": 46,
+  "ownedServerStoppedByExitTrap": true
+}

@@ -1,0 +1,60 @@
+{
+  "checkedAt": "2026-10-15T17:34:50.809Z",
+  "base": "https://averianlabs-demo.netlify.app",
+  "scope": "Actual immutable/live review HTTP responses and rendered PNG bytes. Social/canonical URLs intentionally use the stable review origin.",
+  "images": [
+    {
+      "locale": "en",
+      "status": 200,
+      "contentType": "image/png",
+      "contentLanguage": "en",
+      "cacheControl": "private,no-store",
+      "dimensions": [
+        1200,
+        630
+      ],
+      "sha256": "991cee8b20f6180d3d463b2e24b49ad35e4bf52f682548d1fc8d8a73174c8d95"
+    },
+    {
+      "locale": "fi",
+      "status": 200,
+      "contentType": "image/png",
+      "contentLanguage": "fi",
+      "cacheControl": "private,no-store",
+      "dimensions": [
+        1200,
+        630
+      ],
+      "sha256": "8b6009bf688a97379e2740738ba1d159c715e1cbaf4570e87c9ba77bd450cb05"
+    }
+  ],
+  "metadata": [
+    {
+      "locale": "en",
+      "status": 200,
+      "canonical": "https://averianlabs-demo.netlify.app/en/",
+      "ogImage": "https://averianlabs-demo.netlify.app/api/og/default/en",
+      "organizationUrl": "https://averianlabs-demo.netlify.app",
+      "websiteUrl": "https://averianlabs-demo.netlify.app",
+      "searchTarget": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://averianlabs-demo.netlify.app/en/shop?q={search_term_string}"
+      },
+      "noindex": true
+    },
+    {
+      "locale": "fi",
+      "status": 200,
+      "canonical": "https://averianlabs-demo.netlify.app/fi/",
+      "ogImage": "https://averianlabs-demo.netlify.app/api/og/default/fi",
+      "organizationUrl": "https://averianlabs-demo.netlify.app",
+      "websiteUrl": "https://averianlabs-demo.netlify.app",
+      "searchTarget": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://averianlabs-demo.netlify.app/fi/shop?q={search_term_string}"
+      },
+      "noindex": true
+    }
+  ],
+  "failures": []
+}

@@ -1,0 +1,55 @@
+
+> averianlabs-web@0.1.0 test:integration /Users/purepanel/Avaria/averianlabs-web
+> vitest run --config vitest.integration.config.ts
+
+
+ RUN  v2.1.9 /Users/purepanel/Avaria/averianlabs-web
+
+ ❯ tests/integration/reliability.test.ts (18 tests | 2 failed) 600ms
+   × provider replay and durable notifications > does not consume a webhook on mismatch and safely replays a corrected signed event 31ms
+     → expected 503 to be 500 // Object.is equality
+   × account and provider recovery > retries an ambiguous Stripe creation with the same order and provider key 18ms
+     → STRIPE_SECRET_KEY is not configured
+ ✓ tests/integration/research-workspace.test.ts (7 tests) 358ms
+ ✓ tests/integration/document-association.test.ts (1 test) 103ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/reliability.test.ts > provider replay and durable notifications > does not consume a webhook on mismatch and safely replays a corrected signed event
+AssertionError: expected 503 to be 500 // Object.is equality
+
+- Expected
++ Received
+
+- 500
++ 503
+
+ ❯ tests/integration/reliability.test.ts:362:54
+    360|       )
+    361|     }
+    362|     expect((await deliver(a.totalCents + 1)).status).toBe(500)
+       |                                                      ^
+    363|     expect(
+    364|       await db
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/integration/reliability.test.ts > account and provider recovery > retries an ambiguous Stripe creation with the same order and provider key
+Error: STRIPE_SECRET_KEY is not configured
+ ❯ Module.stripe lib/payments/stripe.ts:10:11
+      8|   const key = getServerEnv().STRIPE_SECRET_KEY
+      9|   if (!key) {
+     10|     throw new Error("STRIPE_SECRET_KEY is not configured")
+       |           ^
+     11|   }
+     12|   _stripe = new Stripe(key, {
+ ❯ tests/integration/reliability.test.ts:539:14
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  2 failed | 24 passed (26)
+   Start at  18:16:43
+   Duration  4.22s (transform 369ms, setup 0ms, collect 2.37s, tests 1.06s, environment 1ms, prepare 201ms)
+
+ ELIFECYCLE  Command failed with exit code 1.

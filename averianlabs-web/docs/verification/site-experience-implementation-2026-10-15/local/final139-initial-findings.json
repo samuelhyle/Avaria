@@ -1,0 +1,19 @@
+{
+  "scope": "Honest record of original final-source135pass2fail2skip run; corrected-client rerun follows separately.",
+  "findings": [
+    {
+      "finding": "plan-revoke",
+      "traceSha256": "343d95aa31762b6e8947c614ef5977cc40e7526b845187fa5ca011a443c8f981",
+      "traceScope": "private local QA fixtures; raw trace retained outside repository",
+      "sourceCommit": "0354c14fc50a5b032c0265e790246b22d3ed0969",
+      "observation": "Revocation PATCH returned 200, ok:true, isPublic:false, shareSlug:null in 33.543 ms. Soft refresh did not commit; public badge/button remained visible at the 10-second assertion. Persistence succeeded. Atomic GET correction follows."
+    },
+    {
+      "finding": "home-hydration",
+      "traceSha256": "e160fc356082ae1224e1cc6da7fa52b6ba848e1c069bf54cfe35aadd855b55a3",
+      "traceScope": "private local QA fixtures; raw trace retained outside repository",
+      "sourceCommit": "0354c14fc50a5b032c0265e790246b22d3ed0969",
+      "observation": "Repeated alternating full EN/FI home navigations passed seven times then emitted React #418 on the eighth FI visit; head metadata assertions still passed. Host-element hydration claim failed; exact cause remains unproven."
+    }
+  ]
+}

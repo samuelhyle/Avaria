@@ -1,0 +1,545 @@
+{
+  "complete": false,
+  "coordinatedIsolation": true,
+  "tool": "Lighthouse",
+  "lighthouseVersion": "12.6.1",
+  "baseUrl": "http://localhost:3217",
+  "buildId": "IEATsP20c06gq_xW_bo4C",
+  "browserBinary": "Google Chrome for Testing",
+  "chromeVersion": "Google Chrome for Testing 148.0.7778.96",
+  "localLab": true,
+  "limitations": "Three sequential simulated-mobile runs per content route against a warm local production server. HTTP cache cleared before each run while age/essential consent state is retained. Not field Core Web Vitals or production-network evidence; TBT is not field INP. First-visit overlay runs are reported separately. No forms, customer actions or model prompts submitted. Noindex is deliberate for this review site.",
+  "settings": {
+    "formFactor": "mobile",
+    "throttlingMethod": "simulate",
+    "screenEmulation": {
+      "mobile": true,
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 1
+    },
+    "categories": [
+      "performance",
+      "accessibility",
+      "best-practices",
+      "seo"
+    ],
+    "disabledLocalOnlyAudits": [
+      "uses-http2",
+      "is-on-https"
+    ]
+  },
+  "summaries": [
+    {
+      "route": "/en",
+      "runs": 1,
+      "medianScores": {
+        "performance": 0.57,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.66
+      },
+      "medianLcpMs": 4623.83315,
+      "medianTbtMs": 1679.6944750000007,
+      "medianCls": 0,
+      "rangeLcpMs": [
+        4623.83315,
+        4623.83315
+      ]
+    },
+    {
+      "route": "/fi/shop",
+      "runs": 1,
+      "medianScores": {
+        "performance": 0.89,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.66
+      },
+      "medianLcpMs": 3315.6980000000003,
+      "medianTbtMs": 197.5,
+      "medianCls": 0,
+      "rangeLcpMs": [
+        3315.6980000000003,
+        3315.6980000000003
+      ]
+    },
+    {
+      "route": "/en/shop/bpc-157",
+      "runs": 0,
+      "medianScores": {
+        "performance": null,
+        "accessibility": null,
+        "best-practices": null,
+        "seo": null
+      },
+      "medianLcpMs": null,
+      "medianTbtMs": null,
+      "medianCls": null,
+      "rangeLcpMs": []
+    },
+    {
+      "route": "/fi/peptide-calculator",
+      "runs": 0,
+      "medianScores": {
+        "performance": null,
+        "accessibility": null,
+        "best-practices": null,
+        "seo": null
+      },
+      "medianLcpMs": null,
+      "medianTbtMs": null,
+      "medianCls": null,
+      "rangeLcpMs": []
+    },
+    {
+      "route": "/en/assistant",
+      "runs": 0,
+      "medianScores": {
+        "performance": null,
+        "accessibility": null,
+        "best-practices": null,
+        "seo": null
+      },
+      "medianLcpMs": null,
+      "medianTbtMs": null,
+      "medianCls": null,
+      "rangeLcpMs": []
+    },
+    {
+      "route": "/fi/community",
+      "runs": 0,
+      "medianScores": {
+        "performance": null,
+        "accessibility": null,
+        "best-practices": null,
+        "seo": null
+      },
+      "medianLcpMs": null,
+      "medianTbtMs": null,
+      "medianCls": null,
+      "rangeLcpMs": []
+    },
+    {
+      "route": "/en/documents",
+      "runs": 0,
+      "medianScores": {
+        "performance": null,
+        "accessibility": null,
+        "best-practices": null,
+        "seo": null
+      },
+      "medianLcpMs": null,
+      "medianTbtMs": null,
+      "medianCls": null,
+      "rangeLcpMs": []
+    }
+  ],
+  "results": [
+    {
+      "route": "/en",
+      "run": 1,
+      "scenario": "essential-consent-content",
+      "healthBefore": {
+        "at": "2026-10-15T16:28:12.007Z",
+        "status": "ok",
+        "checks": {
+          "env": true,
+          "db": true
+        }
+      },
+      "healthAfter": {
+        "at": "2026-10-15T16:28:31.582Z",
+        "status": "ok",
+        "checks": {
+          "env": true,
+          "db": true
+        }
+      },
+      "fetchedAt": "2026-10-15T16:28:18.091Z",
+      "finalUrl": "http://localhost:3217/en",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+      "environment": {
+        "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "benchmarkIndex": 980,
+        "credits": {
+          "axe-core": "4.10.3"
+        }
+      },
+      "configSettings": {
+        "output": [
+          "json",
+          "html"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": true,
+        "debugNavigation": false,
+        "channel": "node",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "skipAudits": [
+          "uses-http2",
+          "is-on-https"
+        ]
+      },
+      "scores": {
+        "performance": 0.57,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.66
+      },
+      "lcpMs": 4623.83315,
+      "fcpMs": 956.2221,
+      "tbtMs": 1679.6944750000007,
+      "cls": 0,
+      "transferredBytes": 662930,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "key": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "score": 0.34,
+          "displayValue": "4.6\u00a0s",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)"
+        },
+        {
+          "key": "total-blocking-time",
+          "title": "Total Blocking Time",
+          "score": 0.11,
+          "displayValue": "1,680\u00a0ms",
+          "description": "Sum of all time periods between FCP and Time to Interactive, when task length exceeded 50ms, expressed in milliseconds. [Learn more about the Total Blocking Time metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/)."
+        },
+        {
+          "key": "max-potential-fid",
+          "title": "Max Potential First Input Delay",
+          "score": 0.02,
+          "displayValue": "670\u00a0ms",
+          "description": "The maximum potential First Input Delay that your users could experience is the duration of the longest task. [Learn more about the Maximum Potential First Input Delay metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/)."
+        },
+        {
+          "key": "interactive",
+          "title": "Time to Interactive",
+          "score": 0.53,
+          "displayValue": "7.0\u00a0s",
+          "description": "Time to Interactive is the amount of time it takes for the page to become fully interactive. [Learn more about the Time to Interactive metric](https://developer.chrome.com/docs/lighthouse/performance/interactive/)."
+        },
+        {
+          "key": "mainthread-work-breakdown",
+          "title": "Minimize main-thread work",
+          "score": 0,
+          "displayValue": "3.3\u00a0s",
+          "description": "Consider reducing the time spent parsing, compiling and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to minimize main-thread work](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)"
+        },
+        {
+          "key": "bootup-time",
+          "title": "Reduce JavaScript execution time",
+          "score": 0,
+          "displayValue": "2.4\u00a0s",
+          "description": "Consider reducing the time spent parsing, compiling, and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to reduce Javascript execution time](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/)."
+        },
+        {
+          "key": "largest-contentful-paint-element",
+          "title": "Largest Contentful Paint element",
+          "score": 0,
+          "displayValue": "4,620\u00a0ms",
+          "description": "This is the largest contentful element painted within the viewport. [Learn more about the Largest Contentful Paint element](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)"
+        },
+        {
+          "key": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 159\u00a0KiB",
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/)."
+        },
+        {
+          "key": "legacy-javascript",
+          "title": "Avoid serving legacy JavaScript to modern browsers",
+          "score": 0,
+          "displayValue": "Est savings of 24\u00a0KiB",
+          "description": "Polyfills and transforms enable legacy browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/baseline) features, unless you know you must support legacy browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://philipwalton.com/articles/the-state-of-es5-on-the-web/)"
+        },
+        {
+          "key": "is-crawlable",
+          "title": "Page is blocked from indexing",
+          "score": 0,
+          "description": "Search engines are unable to include your pages in search results if they don't have permission to crawl them. [Learn more about crawler directives](https://developer.chrome.com/docs/lighthouse/seo/is-crawlable/)."
+        },
+        {
+          "key": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "3 failure reasons",
+          "description": "Many navigations are performed by going back to a previous page, or forwards again. The back/forward cache (bfcache) can speed up these return navigations. [Learn more about the bfcache](https://developer.chrome.com/docs/lighthouse/performance/bf-cache/)"
+        },
+        {
+          "key": "legacy-javascript-insight",
+          "title": "Legacy JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 25\u00a0KiB",
+          "description": "Polyfills and transforms enable older browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/articles/baseline-and-polyfills) features, unless you know you must support older browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://philipwalton.com/articles/the-state-of-es5-on-the-web/)"
+        },
+        {
+          "key": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0,
+          "description": "[Avoid chaining critical requests](https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains) by reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load."
+        }
+      ],
+      "json": "essential-consent-content-en-run-1.report.json",
+      "html": "essential-consent-content-en-run-1.report.html"
+    },
+    {
+      "route": "/fi/shop",
+      "run": 1,
+      "scenario": "essential-consent-content",
+      "healthBefore": {
+        "at": "2026-10-15T16:28:31.596Z",
+        "status": "ok",
+        "checks": {
+          "env": true,
+          "db": true
+        }
+      },
+      "healthAfter": {
+        "at": "2026-10-15T16:28:41.821Z",
+        "status": "ok",
+        "checks": {
+          "env": true,
+          "db": true
+        }
+      },
+      "fetchedAt": "2026-10-15T16:28:34.104Z",
+      "finalUrl": "http://localhost:3217/fi/shop",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+      "environment": {
+        "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "benchmarkIndex": 1600,
+        "credits": {
+          "axe-core": "4.10.3"
+        }
+      },
+      "configSettings": {
+        "output": [
+          "json",
+          "html"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": true,
+        "debugNavigation": false,
+        "channel": "node",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "skipAudits": [
+          "uses-http2",
+          "is-on-https"
+        ]
+      },
+      "scores": {
+        "performance": 0.89,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.66
+      },
+      "lcpMs": 3315.6980000000003,
+      "fcpMs": 1106.698,
+      "tbtMs": 197.5,
+      "cls": 0,
+      "transferredBytes": 686637,
+      "warnings": [],
+      "failedAudits": [
+        {
+          "key": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.99,
+          "displayValue": "1.1\u00a0s",
+          "description": "First Contentful Paint marks the time at which the first text or image is painted. [Learn more about the First Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/first-contentful-paint/)."
+        },
+        {
+          "key": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "score": 0.69,
+          "displayValue": "3.3\u00a0s",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)"
+        },
+        {
+          "key": "total-blocking-time",
+          "title": "Total Blocking Time",
+          "score": 0.9,
+          "displayValue": "200\u00a0ms",
+          "description": "Sum of all time periods between FCP and Time to Interactive, when task length exceeded 50ms, expressed in milliseconds. [Learn more about the Total Blocking Time metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/)."
+        },
+        {
+          "key": "max-potential-fid",
+          "title": "Max Potential First Input Delay",
+          "score": 0.56,
+          "displayValue": "230\u00a0ms",
+          "description": "The maximum potential First Input Delay that your users could experience is the duration of the longest task. [Learn more about the Maximum Potential First Input Delay metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/)."
+        },
+        {
+          "key": "interactive",
+          "title": "Time to Interactive",
+          "score": 0.72,
+          "displayValue": "5.3\u00a0s",
+          "description": "Time to Interactive is the amount of time it takes for the page to become fully interactive. [Learn more about the Time to Interactive metric](https://developer.chrome.com/docs/lighthouse/performance/interactive/)."
+        },
+        {
+          "key": "largest-contentful-paint-element",
+          "title": "Largest Contentful Paint element",
+          "score": 0,
+          "displayValue": "3,320\u00a0ms",
+          "description": "This is the largest contentful element painted within the viewport. [Learn more about the Largest Contentful Paint element](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)"
+        },
+        {
+          "key": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 159\u00a0KiB",
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/)."
+        },
+        {
+          "key": "legacy-javascript",
+          "title": "Avoid serving legacy JavaScript to modern browsers",
+          "score": 0.5,
+          "displayValue": "Est savings of 24\u00a0KiB",
+          "description": "Polyfills and transforms enable legacy browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/baseline) features, unless you know you must support legacy browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://philipwalton.com/articles/the-state-of-es5-on-the-web/)"
+        },
+        {
+          "key": "dom-size",
+          "title": "Avoid an excessive DOM size",
+          "score": 0.5,
+          "displayValue": "886 elements",
+          "description": "A large DOM will increase memory usage, cause longer [style calculations](https://developers.google.com/web/fundamentals/performance/rendering/reduce-the-scope-and-complexity-of-style-calculations), and produce costly [layout reflows](https://developers.google.com/speed/articles/reflow). [Learn how to avoid an excessive DOM size](https://developer.chrome.com/docs/lighthouse/performance/dom-size/)."
+        },
+        {
+          "key": "is-crawlable",
+          "title": "Page is blocked from indexing",
+          "score": 0,
+          "description": "Search engines are unable to include your pages in search results if they don't have permission to crawl them. [Learn more about crawler directives](https://developer.chrome.com/docs/lighthouse/seo/is-crawlable/)."
+        },
+        {
+          "key": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons",
+          "description": "Many navigations are performed by going back to a previous page, or forwards again. The back/forward cache (bfcache) can speed up these return navigations. [Learn more about the bfcache](https://developer.chrome.com/docs/lighthouse/performance/bf-cache/)"
+        },
+        {
+          "key": "legacy-javascript-insight",
+          "title": "Legacy JavaScript",
+          "score": 0.5,
+          "displayValue": "Est savings of 25\u00a0KiB",
+          "description": "Polyfills and transforms enable older browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/articles/baseline-and-polyfills) features, unless you know you must support older browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://philipwalton.com/articles/the-state-of-es5-on-the-web/)"
+        },
+        {
+          "key": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0,
+          "description": "[Avoid chaining critical requests](https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains) by reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load."
+        }
+      ],
+      "json": "essential-consent-content-fi-shop-run-1.report.json",
+      "html": "essential-consent-content-fi-shop-run-1.report.html"
+    }
+  ],
+  "classification": "isolated-but-incomplete-lifecycle-restart",
+  "stoppedReason": "Stopped after two completed reports to move server and harness under one explicitly owned parent lifecycle after an earlier prepared-server exit. Not used as final23 evidence.",
+  "reportArchive": {
+    "file": "lighthouse-raw-reports.zip",
+    "manifest": "archive-manifest.json",
+    "entriesReferencedBy": "Each result json/html filename names a ZIP entry."
+  }
+}

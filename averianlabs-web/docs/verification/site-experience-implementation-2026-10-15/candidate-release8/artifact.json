@@ -1,0 +1,15 @@
+{
+  "sourceCommit": "96249d6fa35a67296fd116442f104c8b4fba6a82",
+  "deployId": "6ad10346ad1394b20bf0afd6",
+  "sourceZipSha256": "be4cd09f4bc784f098fcc4ca29c1ca5a7a4221aade75aadffa8d7ef432a160b9",
+  "published": false,
+  "status": "Verified intermediate candidate; superseded before promotion by patched Node24 runtime follow-up.",
+  "verification": {
+    "httpContracts": 29,
+    "browserStates": 36,
+    "extendedStates": 18,
+    "socialImages": 2,
+    "metadataLocales": 2
+  },
+  "hostingBadgeRemovedBeforeTheseChecks": true
+}

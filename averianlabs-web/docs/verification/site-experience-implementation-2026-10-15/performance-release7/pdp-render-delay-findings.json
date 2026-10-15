@@ -1,0 +1,131 @@
+{
+  "runtimeSourceCommit": "e8e511e3f323fa439070864ac5873e301fb0ca8f",
+  "buildId": "IEATsP20c06gq_xW_bo4C",
+  "route": "/en/shop/bpc-157",
+  "lcpElement": {
+    "selector": "div.mx-auto > div.grid > div.order-1 > p.mt-4",
+    "text": "Laboratory research material. Review the product-specific documentation before use.",
+    "source": "app/[locale]/shop/[slug]/page.tsx:101"
+  },
+  "measurements": [
+    {
+      "run": 1,
+      "simulatedLcpMs": 5465.1425,
+      "observedUnthrottledLcpMs": 416,
+      "phases": [
+        {
+          "phase": "TTFB",
+          "timing": 455.6285,
+          "percent": "8%"
+        },
+        {
+          "phase": "Load Delay",
+          "timing": 0,
+          "percent": "0%"
+        },
+        {
+          "phase": "Load Time",
+          "timing": 0,
+          "percent": "0%"
+        },
+        {
+          "phase": "Render Delay",
+          "timing": 5009.514,
+          "percent": "92%"
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "simulatedLcpMs": 5588.093500000001,
+      "observedUnthrottledLcpMs": 429,
+      "phases": [
+        {
+          "phase": "TTFB",
+          "timing": 455.4187,
+          "percent": "8%"
+        },
+        {
+          "phase": "Load Delay",
+          "timing": 0,
+          "percent": "0%"
+        },
+        {
+          "phase": "Load Time",
+          "timing": 0,
+          "percent": "0%"
+        },
+        {
+          "phase": "Render Delay",
+          "timing": 5132.674800000001,
+          "percent": "92%"
+        }
+      ]
+    },
+    {
+      "run": 3,
+      "simulatedLcpMs": 5604.468249999999,
+      "observedUnthrottledLcpMs": 393,
+      "phases": [
+        {
+          "phase": "TTFB",
+          "timing": 455.29365,
+          "percent": "8%"
+        },
+        {
+          "phase": "Load Delay",
+          "timing": 0,
+          "percent": "0%"
+        },
+        {
+          "phase": "Load Time",
+          "timing": 0,
+          "percent": "0%"
+        },
+        {
+          "phase": "Render Delay",
+          "timing": 5149.174599999999,
+          "percent": "92%"
+        }
+      ]
+    }
+  ],
+  "criticalChain": {
+    "nativeLongestMs": 125.78099989891052,
+    "identified": "Main document→manifest.webmanifest only; no LCP image discovery/resource-load phase",
+    "renderBlockingSavingsMs": 0
+  },
+  "gallery": {
+    "source": "components/product/ProductGallery.tsx:25",
+    "finding": "Starts in static illustration mode with no opacity/reveal animation. The optional3D module is conditional on user activation."
+  },
+  "lateOptionalChat": {
+    "source": "components/ai/chat/LazyChatWidget.tsx:40",
+    "mappedBy": "The frozen build react-loadable-manifest maps chunks5910,1620,8713,6930 to LazyChatWidget→ChatWidget.",
+    "twoLargestChunkTransferBytes": 85357,
+    "twoLargestChunkUnusedBytes": 57477,
+    "observedRequestStartMs": [
+      365.599,
+      366.794
+    ],
+    "finding": "The entire motion/markdown widget loads at the first idle callback even while closed. These late requests overlap the final observed LCP repaint; this is evidence for an on-demand import experiment, not proof of sole causality."
+  },
+  "otherObservedWeight": {
+    "fontRequests": [
+      {
+        "path": "/_next/static/media/0b78ff376f6b9734-s.p.woff2",
+        "transferBytes": 71218,
+        "resourceBytes": 69652
+      },
+      {
+        "path": "/_next/static/media/723e11e5093b8e80.p.woff2",
+        "transferBytes": 72934,
+        "resourceBytes": 71368
+      }
+    ],
+    "scriptRequests": 31,
+    "totalTransferredBytes": 672748
+  },
+  "nextExperiment": "Compare a small on-demand chat launcher/full-widget import triggered by actual open, preserving early requests and consent/age behavior; inspect an actual performance trace and repeat identical mobile audits. Separately test font-subset/preload options without losing Finnish/English glyphs. Preserve hydration readiness mitigation and all current functional/no-JS tests.",
+  "releaseInterpretation": "No speed target pass is claimed. This artifact records an outstanding simulated-mobile render-delay gap; no application source changed during or after these measurements."
+}

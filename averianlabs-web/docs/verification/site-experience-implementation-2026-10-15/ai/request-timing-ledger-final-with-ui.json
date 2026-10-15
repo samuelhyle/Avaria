@@ -1,0 +1,547 @@
+{
+  "checkedAt": "2026-10-15T16:25:35.293727+00:00",
+  "scope": "Combined client pacing across both complete60-case API runs and exactly2 fresh final-artifact browser/API confirmations; no identity/cookie changes to create additional quota. The initial EN final-run case was the genuine browser-seeded API response and is counted once.",
+  "requestCount": 122,
+  "historicalFirstRunRequests": 60,
+  "finalApiSuiteRequests": 60,
+  "additionalFinalUiRequests": 2,
+  "windowMs": 600000,
+  "ceiling": 20,
+  "maximumRequestsInAnyRollingWindow": 20,
+  "finalApiSuiteTimingEvidence": "request-timing-ledger-final.json",
+  "additionalUiEvidence": "final-ui/final-live-ui.json",
+  "additionalUiRequests": [
+    {
+      "globalOrdinal": 121,
+      "locale": "en",
+      "origin": "https://6ad0fcb3e98014388e373970--averianlabs-demo.netlify.app",
+      "sourceCommit": "e8e511e3f323fa439070864ac5873e301fb0ca8f",
+      "startedAt": "2026-10-15T16:23:56.594Z",
+      "completedAt": "2026-10-15T16:24:02.668Z",
+      "requestCount": 1,
+      "requestFlags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false,
+      "status": 200,
+      "actualConcentrationMgPerMl": 5,
+      "pageErrorCount": 0,
+      "consoleErrorCount": 0,
+      "axeViolationCount": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "globalOrdinal": 122,
+      "locale": "fi",
+      "origin": "https://6ad0fcb3e98014388e373970--averianlabs-demo.netlify.app",
+      "sourceCommit": "e8e511e3f323fa439070864ac5873e301fb0ca8f",
+      "startedAt": "2026-10-15T16:24:08.539Z",
+      "completedAt": "2026-10-15T16:24:13.089Z",
+      "requestCount": 1,
+      "requestFlags": {
+        "readOnly": true,
+        "noPersist": true,
+        "noRetrieve": true
+      },
+      "cookieHeaderSent": false,
+      "status": 200,
+      "actualConcentrationMgPerMl": 5,
+      "pageErrorCount": 0,
+      "consoleErrorCount": 0,
+      "axeViolationCount": 0,
+      "horizontalOverflow": false
+    }
+  ],
+  "allRequestStarts": [
+    {
+      "globalOrdinal": 1,
+      "startedAt": "2026-10-15T15:10:54.624000+00:00"
+    },
+    {
+      "globalOrdinal": 2,
+      "startedAt": "2026-10-15T15:11:01.623000+00:00"
+    },
+    {
+      "globalOrdinal": 3,
+      "startedAt": "2026-10-15T15:11:08.088000+00:00"
+    },
+    {
+      "globalOrdinal": 4,
+      "startedAt": "2026-10-15T15:11:14.013000+00:00"
+    },
+    {
+      "globalOrdinal": 5,
+      "startedAt": "2026-10-15T15:11:21.185000+00:00"
+    },
+    {
+      "globalOrdinal": 6,
+      "startedAt": "2026-10-15T15:11:29.565000+00:00"
+    },
+    {
+      "globalOrdinal": 7,
+      "startedAt": "2026-10-15T15:11:37.889000+00:00"
+    },
+    {
+      "globalOrdinal": 8,
+      "startedAt": "2026-10-15T15:11:44.729000+00:00"
+    },
+    {
+      "globalOrdinal": 9,
+      "startedAt": "2026-10-15T15:11:51.102000+00:00"
+    },
+    {
+      "globalOrdinal": 10,
+      "startedAt": "2026-10-15T15:11:58.922000+00:00"
+    },
+    {
+      "globalOrdinal": 11,
+      "startedAt": "2026-10-15T15:12:08.148000+00:00"
+    },
+    {
+      "globalOrdinal": 12,
+      "startedAt": "2026-10-15T15:12:17.732000+00:00"
+    },
+    {
+      "globalOrdinal": 13,
+      "startedAt": "2026-10-15T15:12:26.121000+00:00"
+    },
+    {
+      "globalOrdinal": 14,
+      "startedAt": "2026-10-15T15:12:33.490000+00:00"
+    },
+    {
+      "globalOrdinal": 15,
+      "startedAt": "2026-10-15T15:12:44.271000+00:00"
+    },
+    {
+      "globalOrdinal": 16,
+      "startedAt": "2026-10-15T15:12:49.189000+00:00"
+    },
+    {
+      "globalOrdinal": 17,
+      "startedAt": "2026-10-15T15:12:53.667000+00:00"
+    },
+    {
+      "globalOrdinal": 18,
+      "startedAt": "2026-10-15T15:13:01.168000+00:00"
+    },
+    {
+      "globalOrdinal": 19,
+      "startedAt": "2026-10-15T15:13:08.060000+00:00"
+    },
+    {
+      "globalOrdinal": 20,
+      "startedAt": "2026-10-15T15:13:16.850000+00:00"
+    },
+    {
+      "globalOrdinal": 21,
+      "startedAt": "2026-10-15T15:21:10.117000+00:00"
+    },
+    {
+      "globalOrdinal": 22,
+      "startedAt": "2026-10-15T15:21:16.038000+00:00"
+    },
+    {
+      "globalOrdinal": 23,
+      "startedAt": "2026-10-15T15:21:30.997000+00:00"
+    },
+    {
+      "globalOrdinal": 24,
+      "startedAt": "2026-10-15T15:21:37.688000+00:00"
+    },
+    {
+      "globalOrdinal": 25,
+      "startedAt": "2026-10-15T15:21:45.010000+00:00"
+    },
+    {
+      "globalOrdinal": 26,
+      "startedAt": "2026-10-15T15:21:53.795000+00:00"
+    },
+    {
+      "globalOrdinal": 27,
+      "startedAt": "2026-10-15T15:22:06.769000+00:00"
+    },
+    {
+      "globalOrdinal": 28,
+      "startedAt": "2026-10-15T15:22:10.166000+00:00"
+    },
+    {
+      "globalOrdinal": 29,
+      "startedAt": "2026-10-15T15:22:15.442000+00:00"
+    },
+    {
+      "globalOrdinal": 30,
+      "startedAt": "2026-10-15T15:22:22.001000+00:00"
+    },
+    {
+      "globalOrdinal": 31,
+      "startedAt": "2026-10-15T15:22:30.712000+00:00"
+    },
+    {
+      "globalOrdinal": 32,
+      "startedAt": "2026-10-15T15:22:38.164000+00:00"
+    },
+    {
+      "globalOrdinal": 33,
+      "startedAt": "2026-10-15T15:22:45.635000+00:00"
+    },
+    {
+      "globalOrdinal": 34,
+      "startedAt": "2026-10-15T15:22:54.500000+00:00"
+    },
+    {
+      "globalOrdinal": 35,
+      "startedAt": "2026-10-15T15:23:01.015000+00:00"
+    },
+    {
+      "globalOrdinal": 36,
+      "startedAt": "2026-10-15T15:23:11.781000+00:00"
+    },
+    {
+      "globalOrdinal": 37,
+      "startedAt": "2026-10-15T15:23:19.799000+00:00"
+    },
+    {
+      "globalOrdinal": 38,
+      "startedAt": "2026-10-15T15:23:24.166000+00:00"
+    },
+    {
+      "globalOrdinal": 39,
+      "startedAt": "2026-10-15T15:23:36.599000+00:00"
+    },
+    {
+      "globalOrdinal": 40,
+      "startedAt": "2026-10-15T15:23:46.769000+00:00"
+    },
+    {
+      "globalOrdinal": 41,
+      "startedAt": "2026-10-15T15:31:12.117000+00:00"
+    },
+    {
+      "globalOrdinal": 42,
+      "startedAt": "2026-10-15T15:31:21.255000+00:00"
+    },
+    {
+      "globalOrdinal": 43,
+      "startedAt": "2026-10-15T15:31:32.997000+00:00"
+    },
+    {
+      "globalOrdinal": 44,
+      "startedAt": "2026-10-15T15:31:38.815000+00:00"
+    },
+    {
+      "globalOrdinal": 45,
+      "startedAt": "2026-10-15T15:31:46.167000+00:00"
+    },
+    {
+      "globalOrdinal": 46,
+      "startedAt": "2026-10-15T15:31:55.621000+00:00"
+    },
+    {
+      "globalOrdinal": 47,
+      "startedAt": "2026-10-15T15:32:08.769000+00:00"
+    },
+    {
+      "globalOrdinal": 48,
+      "startedAt": "2026-10-15T15:32:16.761000+00:00"
+    },
+    {
+      "globalOrdinal": 49,
+      "startedAt": "2026-10-15T15:32:27.871000+00:00"
+    },
+    {
+      "globalOrdinal": 50,
+      "startedAt": "2026-10-15T15:32:31.031000+00:00"
+    },
+    {
+      "globalOrdinal": 51,
+      "startedAt": "2026-10-15T15:32:36.126000+00:00"
+    },
+    {
+      "globalOrdinal": 52,
+      "startedAt": "2026-10-15T15:32:39.464000+00:00"
+    },
+    {
+      "globalOrdinal": 53,
+      "startedAt": "2026-10-15T15:32:47.636000+00:00"
+    },
+    {
+      "globalOrdinal": 54,
+      "startedAt": "2026-10-15T15:32:56.501000+00:00"
+    },
+    {
+      "globalOrdinal": 55,
+      "startedAt": "2026-10-15T15:33:05.694000+00:00"
+    },
+    {
+      "globalOrdinal": 56,
+      "startedAt": "2026-10-15T15:33:13.781000+00:00"
+    },
+    {
+      "globalOrdinal": 57,
+      "startedAt": "2026-10-15T15:33:21.800000+00:00"
+    },
+    {
+      "globalOrdinal": 58,
+      "startedAt": "2026-10-15T15:33:29.501000+00:00"
+    },
+    {
+      "globalOrdinal": 59,
+      "startedAt": "2026-10-15T15:33:38.923000+00:00"
+    },
+    {
+      "globalOrdinal": 60,
+      "startedAt": "2026-10-15T15:33:48.770000+00:00"
+    },
+    {
+      "globalOrdinal": 61,
+      "startedAt": "2026-10-15T15:51:38.959000+00:00"
+    },
+    {
+      "globalOrdinal": 62,
+      "startedAt": "2026-10-15T15:53:07.925000+00:00"
+    },
+    {
+      "globalOrdinal": 63,
+      "startedAt": "2026-10-15T15:53:12.310000+00:00"
+    },
+    {
+      "globalOrdinal": 64,
+      "startedAt": "2026-10-15T15:53:18.135000+00:00"
+    },
+    {
+      "globalOrdinal": 65,
+      "startedAt": "2026-10-15T15:53:25.193000+00:00"
+    },
+    {
+      "globalOrdinal": 66,
+      "startedAt": "2026-10-15T15:53:32.202000+00:00"
+    },
+    {
+      "globalOrdinal": 67,
+      "startedAt": "2026-10-15T15:53:39.637000+00:00"
+    },
+    {
+      "globalOrdinal": 68,
+      "startedAt": "2026-10-15T15:53:46.871000+00:00"
+    },
+    {
+      "globalOrdinal": 69,
+      "startedAt": "2026-10-15T15:53:52.868000+00:00"
+    },
+    {
+      "globalOrdinal": 70,
+      "startedAt": "2026-10-15T15:54:01.160000+00:00"
+    },
+    {
+      "globalOrdinal": 71,
+      "startedAt": "2026-10-15T15:54:07.084000+00:00"
+    },
+    {
+      "globalOrdinal": 72,
+      "startedAt": "2026-10-15T15:54:14.076000+00:00"
+    },
+    {
+      "globalOrdinal": 73,
+      "startedAt": "2026-10-15T15:54:19.444000+00:00"
+    },
+    {
+      "globalOrdinal": 74,
+      "startedAt": "2026-10-15T15:54:24.589000+00:00"
+    },
+    {
+      "globalOrdinal": 75,
+      "startedAt": "2026-10-15T15:54:34.349000+00:00"
+    },
+    {
+      "globalOrdinal": 76,
+      "startedAt": "2026-10-15T15:54:39.729000+00:00"
+    },
+    {
+      "globalOrdinal": 77,
+      "startedAt": "2026-10-15T15:54:46.169000+00:00"
+    },
+    {
+      "globalOrdinal": 78,
+      "startedAt": "2026-10-15T15:54:55.733000+00:00"
+    },
+    {
+      "globalOrdinal": 79,
+      "startedAt": "2026-10-15T15:55:07.164000+00:00"
+    },
+    {
+      "globalOrdinal": 80,
+      "startedAt": "2026-10-15T15:55:21.292000+00:00"
+    },
+    {
+      "globalOrdinal": 81,
+      "startedAt": "2026-10-15T16:01:40.959000+00:00"
+    },
+    {
+      "globalOrdinal": 82,
+      "startedAt": "2026-10-15T16:03:09.926000+00:00"
+    },
+    {
+      "globalOrdinal": 83,
+      "startedAt": "2026-10-15T16:03:17.192000+00:00"
+    },
+    {
+      "globalOrdinal": 84,
+      "startedAt": "2026-10-15T16:03:25.188000+00:00"
+    },
+    {
+      "globalOrdinal": 85,
+      "startedAt": "2026-10-15T16:03:30.647000+00:00"
+    },
+    {
+      "globalOrdinal": 86,
+      "startedAt": "2026-10-15T16:03:40.997000+00:00"
+    },
+    {
+      "globalOrdinal": 87,
+      "startedAt": "2026-10-15T16:03:51.514000+00:00"
+    },
+    {
+      "globalOrdinal": 88,
+      "startedAt": "2026-10-15T16:03:58.174000+00:00"
+    },
+    {
+      "globalOrdinal": 89,
+      "startedAt": "2026-10-15T16:04:03.129000+00:00"
+    },
+    {
+      "globalOrdinal": 90,
+      "startedAt": "2026-10-15T16:04:10.094000+00:00"
+    },
+    {
+      "globalOrdinal": 91,
+      "startedAt": "2026-10-15T16:04:15.519000+00:00"
+    },
+    {
+      "globalOrdinal": 92,
+      "startedAt": "2026-10-15T16:04:21.125000+00:00"
+    },
+    {
+      "globalOrdinal": 93,
+      "startedAt": "2026-10-15T16:04:28.960000+00:00"
+    },
+    {
+      "globalOrdinal": 94,
+      "startedAt": "2026-10-15T16:04:33.838000+00:00"
+    },
+    {
+      "globalOrdinal": 95,
+      "startedAt": "2026-10-15T16:04:40.290000+00:00"
+    },
+    {
+      "globalOrdinal": 96,
+      "startedAt": "2026-10-15T16:04:52.738000+00:00"
+    },
+    {
+      "globalOrdinal": 97,
+      "startedAt": "2026-10-15T16:05:02.255000+00:00"
+    },
+    {
+      "globalOrdinal": 98,
+      "startedAt": "2026-10-15T16:05:08.707000+00:00"
+    },
+    {
+      "globalOrdinal": 99,
+      "startedAt": "2026-10-15T16:05:21.196000+00:00"
+    },
+    {
+      "globalOrdinal": 100,
+      "startedAt": "2026-10-15T16:05:34.476000+00:00"
+    },
+    {
+      "globalOrdinal": 101,
+      "startedAt": "2026-10-15T16:11:42.960000+00:00"
+    },
+    {
+      "globalOrdinal": 102,
+      "startedAt": "2026-10-15T16:13:11.926000+00:00"
+    },
+    {
+      "globalOrdinal": 103,
+      "startedAt": "2026-10-15T16:13:20.010000+00:00"
+    },
+    {
+      "globalOrdinal": 104,
+      "startedAt": "2026-10-15T16:13:25.446000+00:00"
+    },
+    {
+      "globalOrdinal": 105,
+      "startedAt": "2026-10-15T16:13:30.874000+00:00"
+    },
+    {
+      "globalOrdinal": 106,
+      "startedAt": "2026-10-15T16:13:42.997000+00:00"
+    },
+    {
+      "globalOrdinal": 107,
+      "startedAt": "2026-10-15T16:13:53.515000+00:00"
+    },
+    {
+      "globalOrdinal": 108,
+      "startedAt": "2026-10-15T16:14:00.098000+00:00"
+    },
+    {
+      "globalOrdinal": 109,
+      "startedAt": "2026-10-15T16:14:08.928000+00:00"
+    },
+    {
+      "globalOrdinal": 110,
+      "startedAt": "2026-10-15T16:14:10.105000+00:00"
+    },
+    {
+      "globalOrdinal": 111,
+      "startedAt": "2026-10-15T16:14:17.520000+00:00"
+    },
+    {
+      "globalOrdinal": 112,
+      "startedAt": "2026-10-15T16:14:23.126000+00:00"
+    },
+    {
+      "globalOrdinal": 113,
+      "startedAt": "2026-10-15T16:14:30.960000+00:00"
+    },
+    {
+      "globalOrdinal": 114,
+      "startedAt": "2026-10-15T16:14:34.869000+00:00"
+    },
+    {
+      "globalOrdinal": 115,
+      "startedAt": "2026-10-15T16:14:40.925000+00:00"
+    },
+    {
+      "globalOrdinal": 116,
+      "startedAt": "2026-10-15T16:14:54.738000+00:00"
+    },
+    {
+      "globalOrdinal": 117,
+      "startedAt": "2026-10-15T16:15:04.256000+00:00"
+    },
+    {
+      "globalOrdinal": 118,
+      "startedAt": "2026-10-15T16:15:09.465000+00:00"
+    },
+    {
+      "globalOrdinal": 119,
+      "startedAt": "2026-10-15T16:15:26.631000+00:00"
+    },
+    {
+      "globalOrdinal": 120,
+      "startedAt": "2026-10-15T16:15:36.477000+00:00"
+    },
+    {
+      "globalOrdinal": 121,
+      "startedAt": "2026-10-15T16:23:56.594000+00:00"
+    },
+    {
+      "globalOrdinal": 122,
+      "startedAt": "2026-10-15T16:24:08.539000+00:00"
+    }
+  ]
+}

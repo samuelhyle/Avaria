@@ -1,0 +1,21 @@
+{
+  "sourceCommit": "4e4a948fb1cf722d11bac09340d140f174b54024",
+  "node": "24.22.0",
+  "pnpm": "10.0.0",
+  "buildId": "gbVoYSCId_d8o20D5NFmL",
+  "browserCases": 144,
+  "passed": 142,
+  "explicitProviderSkips": 2,
+  "workers": 2,
+  "retries": 0,
+  "hostTelemetry": {
+    "samples": 72,
+    "load1Range": [
+      14.595703125,
+      39.9423828125
+    ],
+    "maxMonitorEventLoopDelayMs": 54.919167,
+    "maxMonitorSampleIntervalMs": 2006.954636999988
+  },
+  "limits": "Own workflow uses repository CI worker count; unrelated host workloads were not stopped. Monitor is a separate owned Node process, not instrumentation inside Playwright workers. Earlier worker-delay cause and upstream hydration mechanism remain unproven; recorded regressions pass in this run."
+}

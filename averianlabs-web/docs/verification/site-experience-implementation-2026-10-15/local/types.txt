@@ -1,0 +1,4 @@
+
+> averianlabs-web@0.1.0 typecheck /Users/purepanel/Avaria/averianlabs-web
+> tsc --noEmit
+

@@ -1,0 +1,122 @@
+{
+  "archive": "lighthouse-raw-reports.zip",
+  "archiveBytes": 2525156,
+  "archiveSha256": "b6197802c417b57c2f4ff2f027a79e8c7c478d615da0313150f2b8f6802874c6",
+  "originalBytes": 10578469,
+  "reportFiles": 22,
+  "buildId": "jMdq9-2GdSmMnICm6JRDy",
+  "verifiedAt": "2026-10-15T16:37:00.683389+00:00",
+  "verification": "ZIP CRC and uncompressed per-entry byte length/SHA-256 verified before removing loose report files. JSON and HTML entry names match each result json/html field in the adjacent summary.",
+  "files": [
+    {
+      "file": "essential-consent-content-en-assistant-run-1.report.html",
+      "bytes": 473637,
+      "sha256": "1189206b173ab5544baafb6c435fe47c757c5b22dd04eef3ced03d6af6ec2984"
+    },
+    {
+      "file": "essential-consent-content-en-assistant-run-1.report.json",
+      "bytes": 389375,
+      "sha256": "57632b529cef53b8ff863c8dcfa056079b1191a3fd6c9da0a0ba5abe47442a0f"
+    },
+    {
+      "file": "essential-consent-content-en-documents-run-1.report.html",
+      "bytes": 515985,
+      "sha256": "d60b4c59ae88f9cfb6d2dd8a5ac9c270266e5c48762877372e3a3efe53c6fe2c"
+    },
+    {
+      "file": "essential-consent-content-en-documents-run-1.report.json",
+      "bytes": 432847,
+      "sha256": "9401d772ee9ce175ff4066736fd801bda372df76d6ead25ccc094c9f27708ee1"
+    },
+    {
+      "file": "essential-consent-content-en-run-1.report.html",
+      "bytes": 520978,
+      "sha256": "c00791c07e71003c5364b84025778722b5de0ae304b1108422156155546411cf"
+    },
+    {
+      "file": "essential-consent-content-en-run-1.report.json",
+      "bytes": 439278,
+      "sha256": "8890e7bad4ea4852ab6e2ba4c9d151c4ee6388dfad28c8236f269fee209f378d"
+    },
+    {
+      "file": "essential-consent-content-en-run-2.report.html",
+      "bytes": 557277,
+      "sha256": "02cf355b4bef11e2c49c6b2aa86a3836117f5c672982165bad70a3fd2d843ce0"
+    },
+    {
+      "file": "essential-consent-content-en-run-2.report.json",
+      "bytes": 473794,
+      "sha256": "336e932379671ab82ff5dba1862c167348e6da9c2eeae7a4291ea0f56f71eef4"
+    },
+    {
+      "file": "essential-consent-content-en-shop-bpc-157-run-1.report.html",
+      "bytes": 515111,
+      "sha256": "a6f2202d9cc55dffc1c4ab55a60a3fff3b46bf711f9b6f9295e105ccbace756c"
+    },
+    {
+      "file": "essential-consent-content-en-shop-bpc-157-run-1.report.json",
+      "bytes": 433326,
+      "sha256": "51ed64b1d36707c6b3a4c3ec6c6d64e9f5ceb988354e8783a8ad23ef2cb7bec1"
+    },
+    {
+      "file": "essential-consent-content-en-shop-bpc-157-run-2.report.html",
+      "bytes": 518517,
+      "sha256": "1f4edab4ac6207c507c52c13f12b337ec23ae66c0df5f238454808802b88de89"
+    },
+    {
+      "file": "essential-consent-content-en-shop-bpc-157-run-2.report.json",
+      "bytes": 436128,
+      "sha256": "5f74a09d62df6ec7b8e099d1e03779756c41ed912225b160328e3d0470a04d19"
+    },
+    {
+      "file": "essential-consent-content-fi-community-run-1.report.html",
+      "bytes": 506504,
+      "sha256": "577ae76ff0c101f566466a93aa8312382cdab1b83f2560369baaa208bc802c84"
+    },
+    {
+      "file": "essential-consent-content-fi-community-run-1.report.json",
+      "bytes": 422744,
+      "sha256": "232818c253e446e62e0a6488e39244683b060db2a93728a135360c5295350fde"
+    },
+    {
+      "file": "essential-consent-content-fi-peptide-calculator-run-1.report.html",
+      "bytes": 510081,
+      "sha256": "65a89e41bcd7e78583306750afa4cf5705ce19286fa10cb113656c6ec4cf675f"
+    },
+    {
+      "file": "essential-consent-content-fi-peptide-calculator-run-1.report.json",
+      "bytes": 423730,
+      "sha256": "6ecd784b1574722b39236f7ed89c7824c327d3a11483d4c8fe42924df9cbc3d5"
+    },
+    {
+      "file": "essential-consent-content-fi-peptide-calculator-run-2.report.html",
+      "bytes": 510964,
+      "sha256": "539d7510c5030d27e23e9da06cf41416b6fed6a91fca1c0d94708f9f96370cc1"
+    },
+    {
+      "file": "essential-consent-content-fi-peptide-calculator-run-2.report.json",
+      "bytes": 425171,
+      "sha256": "25dfb9865a936c422363bc4b851844da7b218117575bd987ea7582f2ea6fa26b"
+    },
+    {
+      "file": "essential-consent-content-fi-shop-run-1.report.html",
+      "bytes": 553296,
+      "sha256": "5213c9cd4427a2a97afa03c62fc89779ee2cad41a47e8f1c628ae4f83423acfa"
+    },
+    {
+      "file": "essential-consent-content-fi-shop-run-1.report.json",
+      "bytes": 480947,
+      "sha256": "7feccc7efdfe28647372a475ccc3b6eca8d818046602d526b00de921454bec01"
+    },
+    {
+      "file": "essential-consent-content-fi-shop-run-2.report.html",
+      "bytes": 554901,
+      "sha256": "9a2e6a774607ea3e99bf9d3776b16bcbfa5f55670b13fcac78fdf35ba1dd3614"
+    },
+    {
+      "file": "essential-consent-content-fi-shop-run-2.report.json",
+      "bytes": 483878,
+      "sha256": "dfc70f509ac74015fc4502524d067d94b05c84ed774e02d45a3009a284793830"
+    }
+  ]
+}

@@ -168,10 +168,12 @@ const surfaces = [
       "Declared association and original source; publication is not suitability approval.",
   },
   {
-    source: "lib/ai/answers/{calculation,catalogue,guidance}.ts",
-    states: "Controlled result/source narratives; missing-input and no-evidence answers",
+    source:
+      "lib/ai/answers/{calculation,catalogue,guidance,request-intent}.ts; app/api/ai/chat/route.ts",
+    states:
+      "Controlled result/source narratives; missing-input/no-evidence answers; current/prior hard guardrails; read-only capability and privacy wording",
     factualBasis:
-      "Deterministic calculator, returned records, versioned guidance; independent scientific approval pending.",
+      "Deterministic calculator, returned records, existing versioned guidance and actual mode/tool availability; no inferred molar values or unsupported support actions. Independent scientific approval pending.",
   },
   {
     source: "components/calculator/Calculator.tsx; lib/calculations.ts",

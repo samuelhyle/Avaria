@@ -1,0 +1,3456 @@
+{
+  "checkedAt": "2026-10-15T16:19:43.306Z",
+  "evaluatedSourceCommit": "0354c14fc50a5b032c0265e790246b22d3ed0969",
+  "finalSourceCommit": "e8e511e3f323fa439070864ac5873e301fb0ca8f",
+  "method": "TypeScript AST walk of literal import/export/require/dynamic-import and import-type nodes, starting at every app/api module. Internal aliases and relative modules resolved against tracked source. Type imports are deliberately retained as a conservative superset. External package source is covered by unchanged package/lock files, not traversed here. Computed imports/filesystem runtime reads are outside this static graph; the separate broad library/prompts/database/config manifest covers the stated tracked source bytes.",
+  "rootCount": 66,
+  "evaluatedReachableSourceCount": 187,
+  "finalReachableSourceCount": 187,
+  "reachableSourceIdentical": true,
+  "changedReachableFiles": [],
+  "unresolvedLiteralInternalImports": [],
+  "excludedNodes": [
+    {
+      "path": "lib/ai/hooks/use-averia-chat.ts",
+      "reachableFromAnyApiModule": false
+    },
+    {
+      "path": "lib/ai/stream.ts",
+      "reachableFromAnyApiModule": false
+    },
+    {
+      "path": "lib/ai/stream.test.ts",
+      "reachableFromAnyApiModule": false
+    },
+    {
+      "path": "lib/layout/footer-content.ts",
+      "reachableFromAnyApiModule": false
+    },
+    {
+      "path": "components/layout/DocumentHydrationGate.tsx",
+      "reachableFromAnyApiModule": false
+    }
+  ],
+  "footerAndGateLiteralImportReferences": [
+    {
+      "from": "app/[locale]/layout.tsx",
+      "specifier": "@/components/layout/DocumentHydrationGate",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "components/layout/Chrome.tsx",
+      "specifier": "@/lib/layout/footer-content",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "components/layout/Footer.tsx",
+      "specifier": "@/lib/layout/footer-content",
+      "kind": "type_import"
+    },
+    {
+      "from": "tests/unit/document-hydration-gate.test.ts",
+      "specifier": "@/components/layout/DocumentHydrationGate",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "tests/unit/footer-content.test.ts",
+      "specifier": "@/lib/layout/footer-content",
+      "kind": "import_or_export"
+    }
+  ],
+  "roots": [
+    "app/api/account/delete/confirm/route.ts",
+    "app/api/account/delete/route.ts",
+    "app/api/account/export/route.ts",
+    "app/api/account/gdpr/route.ts",
+    "app/api/account/preferences/route.ts",
+    "app/api/admin/ai/conversations/[id]/route.ts",
+    "app/api/admin/ai/conversations/route.ts",
+    "app/api/admin/ai/draft-reply/route.ts",
+    "app/api/admin/ai/metrics/route.ts",
+    "app/api/admin/audit/route.ts",
+    "app/api/admin/moderation/route.ts",
+    "app/api/ai/chat/route.ts",
+    "app/api/ai/consent/route.ts",
+    "app/api/ai/conversations/route.ts",
+    "app/api/ai/feedback/route.ts",
+    "app/api/ai/identity/route.ts",
+    "app/api/ai/memory/route.ts",
+    "app/api/auth/[...nextauth]/route.ts",
+    "app/api/auth/forgot-password/route.ts",
+    "app/api/auth/register/route.ts",
+    "app/api/auth/reset-password/route.ts",
+    "app/api/calculations/[id]/route.ts",
+    "app/api/calculations/route.ts",
+    "app/api/cart-recovery/route.ts",
+    "app/api/checkout/quote/route.ts",
+    "app/api/checkout/route.ts",
+    "app/api/contact/route.ts",
+    "app/api/cron/maintenance/route.ts",
+    "app/api/documents/[id]/route.ts",
+    "app/api/documents/route.ts",
+    "app/api/forum/categories/route.ts",
+    "app/api/forum/drafts/route.ts",
+    "app/api/forum/posts/route.ts",
+    "app/api/forum/reactions/route.ts",
+    "app/api/forum/reports/route.ts",
+    "app/api/forum/threads/route.ts",
+    "app/api/health/route.ts",
+    "app/api/newsletter/route.ts",
+    "app/api/notifications/route.ts",
+    "app/api/og/default/[locale]/route.tsx",
+    "app/api/og/default/route.tsx",
+    "app/api/og/document/[id]/[locale]/route.tsx",
+    "app/api/og/document/[id]/route.tsx",
+    "app/api/og/glossary/[slug]/[locale]/route.tsx",
+    "app/api/og/glossary/[slug]/route.tsx",
+    "app/api/og/plan/[slug]/[locale]/route.tsx",
+    "app/api/og/plan/[slug]/route.tsx",
+    "app/api/og/thread/[slug]/[locale]/route.tsx",
+    "app/api/og/thread/[slug]/route.tsx",
+    "app/api/orders/[orderId]/status/route.ts",
+    "app/api/partner/route.ts",
+    "app/api/plans/[id]/items/[itemId]/route.ts",
+    "app/api/plans/[id]/items/route.ts",
+    "app/api/plans/[id]/route.ts",
+    "app/api/plans/route.ts",
+    "app/api/plans/share/[slug]/route.ts",
+    "app/api/quotes/route.ts",
+    "app/api/referral/generate/route.ts",
+    "app/api/referral/redeem/route.ts",
+    "app/api/review-request/route.ts",
+    "app/api/search/route.ts",
+    "app/api/shipping/route.ts",
+    "app/api/vat/route.ts",
+    "app/api/webhooks/coinbase/route.ts",
+    "app/api/webhooks/sanity/route.ts",
+    "app/api/webhooks/stripe/route.ts"
+  ],
+  "manifest": [
+    {
+      "path": "app/api/account/delete/confirm/route.ts",
+      "sha256": "b835c8170fc9f7d5d61b2866760bdf7b2848be280ef6d785bd42bae107fcb712"
+    },
+    {
+      "path": "app/api/account/delete/route.ts",
+      "sha256": "00fd836d428452be6c819700d6dd44f05df6e22499353fa2254783f24f266914"
+    },
+    {
+      "path": "app/api/account/export/route.ts",
+      "sha256": "e10e897564745ff74151d1a65a121654e4e95c5fd782d338120672d4c6eda809"
+    },
+    {
+      "path": "app/api/account/gdpr/route.ts",
+      "sha256": "38124d7eb427233be2454d74c0c2ad6fadfeb5fbf5a7bbfdca66052b1a2d942c"
+    },
+    {
+      "path": "app/api/account/preferences/route.ts",
+      "sha256": "7dd7f0407d6c7c9f20fe7655abb2073495ce5e46f07c5a62594bba9b5fafcc8a"
+    },
+    {
+      "path": "app/api/admin/ai/conversations/[id]/route.ts",
+      "sha256": "047db597927f5a3145f883d58c689bd3ddeac09ad497f94a92c974a39545e861"
+    },
+    {
+      "path": "app/api/admin/ai/conversations/route.ts",
+      "sha256": "3ff3145f67b3c2335359b214beebae304031f3a46ef7bc74c39c72c35ce3d7c4"
+    },
+    {
+      "path": "app/api/admin/ai/draft-reply/route.ts",
+      "sha256": "3a6acb2976f4a0d7bd3979356ccf9e45e1da4082057a6b74762098048e7b6bc0"
+    },
+    {
+      "path": "app/api/admin/ai/metrics/route.ts",
+      "sha256": "174fc6010410ffd321a1951c73a00681180e14ed40670f574aebcafa0cda4a77"
+    },
+    {
+      "path": "app/api/admin/audit/route.ts",
+      "sha256": "59754c00301d6b9cac01b22a1451fce531be8b5b384af0bdb20c434db92e468f"
+    },
+    {
+      "path": "app/api/admin/moderation/route.ts",
+      "sha256": "072866996f08bbb2af1f6c82473126c5cf5d3b45c1aa634b840671051c3d77dd"
+    },
+    {
+      "path": "app/api/ai/chat/route.ts",
+      "sha256": "85e3c2a46eaa2cfe537d709b39821da08e85996ddb02ef5706e656558b1d21e9"
+    },
+    {
+      "path": "app/api/ai/consent/route.ts",
+      "sha256": "4f73de9a8e7a6ffdba830d6dcd46551bd3b959fd99b513d39b1bfafb3971a12f"
+    },
+    {
+      "path": "app/api/ai/conversations/route.ts",
+      "sha256": "d5c590ad47ca414a96be62aa1bf2a5208258d13c17848600d5744b52e5371c34"
+    },
+    {
+      "path": "app/api/ai/feedback/route.ts",
+      "sha256": "747482d00b4816c05d4e387d0ecaa1650aa62d407c0e26db84b868be02d5349e"
+    },
+    {
+      "path": "app/api/ai/identity/route.ts",
+      "sha256": "c9bbc221f6b052fe0ac558c921edba64542b8630dcb88951c4d8501636c75d0b"
+    },
+    {
+      "path": "app/api/ai/memory/route.ts",
+      "sha256": "b33cfed2c67576d46431f62bc854f3f2346f10f420f9f538569f39289c3bc6fe"
+    },
+    {
+      "path": "app/api/auth/[...nextauth]/route.ts",
+      "sha256": "fd556f36e0c194b65109b462721fb854e27816946251ce98ce7c85a32c1844ee"
+    },
+    {
+      "path": "app/api/auth/forgot-password/route.ts",
+      "sha256": "0953a4cc7202e2255ff8af2806dc8d518f9c53c2de9f82d353488fa7b5c565ea"
+    },
+    {
+      "path": "app/api/auth/register/route.ts",
+      "sha256": "507cbaf9509c51e6244aafd467b5eb476c8e88e1536a810e6673d556a4d98377"
+    },
+    {
+      "path": "app/api/auth/reset-password/route.ts",
+      "sha256": "36c2183a1532cf7e3bfb2468793efc96f84ec78b358b04dbfad295da514031dd"
+    },
+    {
+      "path": "app/api/calculations/[id]/route.ts",
+      "sha256": "b0c63812c3255a4bfe54af41a9efd521f8b1e384953c3465f3abc582de164348"
+    },
+    {
+      "path": "app/api/calculations/route.ts",
+      "sha256": "bd02bd66e74afcf6ee76d3288bb20e28bd30762a843c40114382aead668aadf4"
+    },
+    {
+      "path": "app/api/cart-recovery/route.ts",
+      "sha256": "9091b0f1e228dd57dcdaf7472f0496eabdfbdb4a4903d8a6256bbfa0870ff4cb"
+    },
+    {
+      "path": "app/api/checkout/quote/route.ts",
+      "sha256": "79dee8c080ead266d3957ad006512da144f309cc4b7e38692b1f4d9be2e6e97b"
+    },
+    {
+      "path": "app/api/checkout/route.ts",
+      "sha256": "e108a690dbfa634530558d974f66c57bcc80822c8b7211cd2ee626dc8c72e128"
+    },
+    {
+      "path": "app/api/contact/route.ts",
+      "sha256": "d9d18cd0549f7cbc7e8c3bf2daeba8152f67ff990a8434372db3f345b7c82521"
+    },
+    {
+      "path": "app/api/cron/maintenance/route.ts",
+      "sha256": "e54916b4a03433a529871175506608d8bf26d11fa0048ddefc215b3f17d5f4a2"
+    },
+    {
+      "path": "app/api/documents/[id]/route.ts",
+      "sha256": "d2b187ea51c6ae13c02ac2b68d3ef8494ad2ed2986960ac3ea01bddd3d5e618c"
+    },
+    {
+      "path": "app/api/documents/route.ts",
+      "sha256": "660fc99b50db1171894fe4544a5afc3b30f88f02a73e02e3251b55e85532fba3"
+    },
+    {
+      "path": "app/api/forum/categories/route.ts",
+      "sha256": "5fd3b53a657a47cd84601004d21758786af14277c8b067c36b6d36d966a34339"
+    },
+    {
+      "path": "app/api/forum/drafts/route.ts",
+      "sha256": "6ff7b01ca41bb21ccd351049bed5c88c828fae8d9f5dc41da6b5ac61039728c4"
+    },
+    {
+      "path": "app/api/forum/posts/route.ts",
+      "sha256": "acb058f1b8e2acf4fdc8095f6d8e11b16b0f8d565af15a00a90f7643ef40b3b3"
+    },
+    {
+      "path": "app/api/forum/reactions/route.ts",
+      "sha256": "3a219cea85591723cad9a6d049ff170cdc126c1e7a7a7a9b5fac90a19ad42f22"
+    },
+    {
+      "path": "app/api/forum/reports/route.ts",
+      "sha256": "01da0b7bd78b3a4e5d0fc60289f7e75597a7c013ee0ef658555a43d2c7e92ad7"
+    },
+    {
+      "path": "app/api/forum/threads/route.ts",
+      "sha256": "d146932630adccc554815e277793baccde1c34542c4fae68f08535daed40cf99"
+    },
+    {
+      "path": "app/api/health/route.ts",
+      "sha256": "a425b88e407d2833fa92b5db8141dd1c6b63eb41afa01f0f6b9e3722e01f53c7"
+    },
+    {
+      "path": "app/api/newsletter/route.ts",
+      "sha256": "88f085622e27711ffe8f80351342d17561956919dbf4a77f56f629ff7a7908a4"
+    },
+    {
+      "path": "app/api/notifications/route.ts",
+      "sha256": "5315a277ba51ffd596261a8142ff3a63bce29b0f969ad726a470906d1b0ffab4"
+    },
+    {
+      "path": "app/api/og/default/[locale]/route.tsx",
+      "sha256": "d48467717e05964b0ed96fc6b7a89ef85d8143563a87e022f0681fdcf86f6c52"
+    },
+    {
+      "path": "app/api/og/default/route.tsx",
+      "sha256": "238cbe83201cf82c014cb5497a593a8f7fc3955e776df5c02c5b905b7f4e1c04"
+    },
+    {
+      "path": "app/api/og/document/[id]/[locale]/route.tsx",
+      "sha256": "457e24f8fea53c54e54bfdf6764ba0c44ddef164041920457a3db944575c115e"
+    },
+    {
+      "path": "app/api/og/document/[id]/route.tsx",
+      "sha256": "ba86504a5772ee9f10d18d52cbf0c3463bf6381e1d095f30b1afb88887ed67be"
+    },
+    {
+      "path": "app/api/og/glossary/[slug]/[locale]/route.tsx",
+      "sha256": "544111291794c0244f3cebb570cbf20493167da508a36de47e39a283e73c577c"
+    },
+    {
+      "path": "app/api/og/glossary/[slug]/route.tsx",
+      "sha256": "f81918ecd9c339b061278a70ecc894f38a23cf36e3b3f0061c7da90747b84e65"
+    },
+    {
+      "path": "app/api/og/plan/[slug]/[locale]/route.tsx",
+      "sha256": "544111291794c0244f3cebb570cbf20493167da508a36de47e39a283e73c577c"
+    },
+    {
+      "path": "app/api/og/plan/[slug]/route.tsx",
+      "sha256": "50df8f34857a891a7234750536adb3756973a44901978328e0fa19ab9638a267"
+    },
+    {
+      "path": "app/api/og/thread/[slug]/[locale]/route.tsx",
+      "sha256": "544111291794c0244f3cebb570cbf20493167da508a36de47e39a283e73c577c"
+    },
+    {
+      "path": "app/api/og/thread/[slug]/route.tsx",
+      "sha256": "533d21a57d47d487275f552cdfbf573ef649754e05f24669dcf4050adac54a1b"
+    },
+    {
+      "path": "app/api/orders/[orderId]/status/route.ts",
+      "sha256": "cde40131574599e598d33b05a139991b64a8e09e343a212d893bdc6d936aa5b1"
+    },
+    {
+      "path": "app/api/partner/route.ts",
+      "sha256": "2a4b14efa7fb5c6f07fc086af324bb0dd854203b02599482c2e12365faa333dc"
+    },
+    {
+      "path": "app/api/plans/[id]/items/[itemId]/route.ts",
+      "sha256": "685ab4f57c342a6f967582c0fab546fcdc3c2b9f4ce48a2698e2e414f5516304"
+    },
+    {
+      "path": "app/api/plans/[id]/items/route.ts",
+      "sha256": "1419962af264c351f9e420e1090079afed544719ad430983a389e383da959863"
+    },
+    {
+      "path": "app/api/plans/[id]/route.ts",
+      "sha256": "6fa0a7dc778eeb918aec1a1adb34fbe9dc5e3b3058e099bee85d716409ce89cf"
+    },
+    {
+      "path": "app/api/plans/route.ts",
+      "sha256": "f395a80732830082e1d9e517dc180a48e44aa602125d6e818471c68678bd2221"
+    },
+    {
+      "path": "app/api/plans/share/[slug]/route.ts",
+      "sha256": "0ed4e87d7045428fd88e318ec8a9b2668e27b4313852d6e6a817bbcd6fc14cdd"
+    },
+    {
+      "path": "app/api/quotes/route.ts",
+      "sha256": "4ee814caa875481aca2fbfe34d248a4609062c7cfc0d5995ec915643e6f7a9e9"
+    },
+    {
+      "path": "app/api/referral/generate/route.ts",
+      "sha256": "9f327ec5249e0669ea3ef4a9e7882663686485aeb3c0d57dbdd660a7ce03fc8d"
+    },
+    {
+      "path": "app/api/referral/redeem/route.ts",
+      "sha256": "a5cb6d59726c1e7415c422328e934244df7205b4f48686f0f2d3730152fe4c13"
+    },
+    {
+      "path": "app/api/review-request/route.ts",
+      "sha256": "4fe83bcfab75859deb12753721afd00c17bb51db911c6887e381298fb255f7e0"
+    },
+    {
+      "path": "app/api/search/route.ts",
+      "sha256": "cdab9463f3e8880117d23bf64e8f4403e135e03a74535151a2c1e69e798e2bbf"
+    },
+    {
+      "path": "app/api/shipping/route.ts",
+      "sha256": "90feb3b9b1582f6579a9563248b454ad56d385288538a77206bf2dc922991485"
+    },
+    {
+      "path": "app/api/vat/route.ts",
+      "sha256": "62ff40d0268116bb399cd2729c17a3f75f743d8466d74d861aab893652d6ed17"
+    },
+    {
+      "path": "app/api/webhooks/coinbase/route.ts",
+      "sha256": "24f16da1acc7792612f801403650af8e7e8bd25c665d06e0fbb3c3b3971519d3"
+    },
+    {
+      "path": "app/api/webhooks/sanity/route.ts",
+      "sha256": "c0277a091f0bcce5b4fabc222b630d6a861aa2dfdb4689f129a4f5c1dc7714e9"
+    },
+    {
+      "path": "app/api/webhooks/stripe/route.ts",
+      "sha256": "fe37220c7ccbc47ba64b1161c90c8e1300a31ea70375f78e99dd34082ca2577e"
+    },
+    {
+      "path": "components/media/BrandSymbol.tsx",
+      "sha256": "5cf891ef219e0f74b795c85b09754256400591db903216b431f0d2ae16fcd350"
+    },
+    {
+      "path": "db/schema/ai.ts",
+      "sha256": "a7e40bf742dd91c5a9fbb97d681d9ec7ee1e9249a505dccf290f65b5b05b34ef"
+    },
+    {
+      "path": "db/schema/index.ts",
+      "sha256": "c879571e92bee3c4e81408fb6f9c68d72cc2da75190cc209610dd0517a4ef9f2"
+    },
+    {
+      "path": "lib/activity/emit.ts",
+      "sha256": "fd8268c010b7ae11ae936ea35f491c86f38cf0b48e55aee26ebe4e356e650c06"
+    },
+    {
+      "path": "lib/admin/guard.ts",
+      "sha256": "8b565cab9066d2233e801be75980b249f0d9feea0160d9523a109e45296d141c"
+    },
+    {
+      "path": "lib/admin/index.ts",
+      "sha256": "8c25351cc58139490f262afcc16a52c054643e41242d97fdeb492b34173cd0a9"
+    },
+    {
+      "path": "lib/admin/runtime.ts",
+      "sha256": "e1cf44dffc51cfebe94b3ebc0d7d2aea8e2f5d5a4271263fa9c022a8aaf9a482"
+    },
+    {
+      "path": "lib/admin/types.ts",
+      "sha256": "9079f317fc3a004a4a2ec272fa814896a723e6177d8fa8f8b4039896175d5431"
+    },
+    {
+      "path": "lib/ai/agent/loop.ts",
+      "sha256": "047041f1ac7bc1d30c3b11024472ea0942cae48802ba7e3aea7f3ef9ab6b3435"
+    },
+    {
+      "path": "lib/ai/answers/calculation.ts",
+      "sha256": "d93ddf44e5827eb95e93d68ce9a75356dd013fc5a15bf0cafefe40ebf320eb08"
+    },
+    {
+      "path": "lib/ai/answers/catalogue.ts",
+      "sha256": "dfc88d3787ee96ab5af0dca945cec48442ae8403b0c64307894eadc8476fc8e6"
+    },
+    {
+      "path": "lib/ai/answers/guidance.ts",
+      "sha256": "ab760e9ec3fc18719ae30c19ab10aa36b861031d4d102174a911de47c569791e"
+    },
+    {
+      "path": "lib/ai/answers/request-intent.ts",
+      "sha256": "e75547366912118b8fc1d2336b59071fa4950fb85b8871ee40ac2aa4bbe13904"
+    },
+    {
+      "path": "lib/ai/chunker.ts",
+      "sha256": "80bfdd07081d6513a381c0bb9edbf73318006438f2da2b70603a08a19a170dc3"
+    },
+    {
+      "path": "lib/ai/guardrails/calculation.ts",
+      "sha256": "dc36d1d4b2ad5a40fe68376540e84b66ea509cd98a7c90e41598e643c90fc3ee"
+    },
+    {
+      "path": "lib/ai/guardrails/citations.ts",
+      "sha256": "2f354a7c0e76a4b70333975eed7b581f0a1d6a54d3c094a22bfd35edf3ddc14e"
+    },
+    {
+      "path": "lib/ai/guardrails/input.ts",
+      "sha256": "8d6888cf372a58211de27a80fee3301276a3a2a8acad87831155c1fb5ac9de24"
+    },
+    {
+      "path": "lib/ai/guardrails/quantities.ts",
+      "sha256": "266ca0c824015703f48491755329ed2abb4f598676c95832b6d4fcbc73dbdc4c"
+    },
+    {
+      "path": "lib/ai/guardrails/verify.ts",
+      "sha256": "753d1f3d219ad7bdc03f60ce036bc3fc2307be6882cdfdb126f3a8127b31a62f"
+    },
+    {
+      "path": "lib/ai/memory/anon.ts",
+      "sha256": "0292aa27bedcc9f07dc07aa97eb5368d6ebb1b1b34b68e630df9ce7f80bfcbab"
+    },
+    {
+      "path": "lib/ai/memory/consent.ts",
+      "sha256": "3de65ed82d1984999de070a5705d3c2e17c4faee5f534983880e9f40accdfb70"
+    },
+    {
+      "path": "lib/ai/memory/cookies.ts",
+      "sha256": "f026d29caf2ac4ed7e67dcffba44e10c8558d910ad9adbbb9f2017f59ad9b425"
+    },
+    {
+      "path": "lib/ai/memory/store.ts",
+      "sha256": "fc49a512344958fc728cfdbf14ce5e18f6fddbd29b224114ad61f42d6702883a"
+    },
+    {
+      "path": "lib/ai/prompts/system.ts",
+      "sha256": "8b617ac3c090a27a44dc253140c081096743701daadeb27d2edd4518487b05ff"
+    },
+    {
+      "path": "lib/ai/providers/local-embeddings.ts",
+      "sha256": "e773f2ef4e46544653edbb7f504e4caefe3bea4a1b9341c6c371a0b853b15f47"
+    },
+    {
+      "path": "lib/ai/providers/minimax.ts",
+      "sha256": "feafd5311e73af8d88349f5e150c31e2c24f666a2987670e3e7363ab0ad27d2f"
+    },
+    {
+      "path": "lib/ai/rag/embeddings.ts",
+      "sha256": "f7cff18d6e674b3a9001197fa10c32c56d6ffa245dcd626ecb5943a5deb69815"
+    },
+    {
+      "path": "lib/ai/rag/indexer.ts",
+      "sha256": "fa321f32605c95713ca8d78dff278d42a3e0246e433e9e53df92f5fc59ab71eb"
+    },
+    {
+      "path": "lib/ai/rag/retrieval.ts",
+      "sha256": "e464c42ab342bef7ba3d1181bf7a99f7f7a918c3729e7b5358cbc6790142cec1"
+    },
+    {
+      "path": "lib/ai/rag/version.ts",
+      "sha256": "20a22ea3885479261b1ea273ee66333ec5b990dad8def51b12f89c74c55f35a3"
+    },
+    {
+      "path": "lib/ai/rate-limit.ts",
+      "sha256": "c5de25a4b980f94eaf01650fd865a7c81a01687ebcf74c7199cd9f8a60d6cb51"
+    },
+    {
+      "path": "lib/ai/tools/admin/draft-reply.ts",
+      "sha256": "931c21f085213581d102adb5a440706f4ac9b97dac97183b86b759abb1b7a64c"
+    },
+    {
+      "path": "lib/ai/tools/admin/list-low-stock.ts",
+      "sha256": "8ca88ec3caae2145183b3571ac8665f0d60fa42a0eb20ad0eae0430358ed3a9a"
+    },
+    {
+      "path": "lib/ai/tools/admin/lookup-order.ts",
+      "sha256": "c0b25a6a922d0a7d290d01dc8e6e953dfae299316cb95c9e19855812a9d4f024"
+    },
+    {
+      "path": "lib/ai/tools/cart.ts",
+      "sha256": "21620a3dd8e999e4898a8d02831d4a6d7b6fdb5ad35d8df320a3bd96479977fd"
+    },
+    {
+      "path": "lib/ai/tools/community.ts",
+      "sha256": "5fd7c771ab75e3cf675e4efe32196e6b5015636a918607ddb98552fb0f521076"
+    },
+    {
+      "path": "lib/ai/tools/compare.ts",
+      "sha256": "2814711558bd61b315a4d7e8a906bf1cd97c12508ead15a5af8c960427021d16"
+    },
+    {
+      "path": "lib/ai/tools/create-support-ticket.ts",
+      "sha256": "a91a4e047a74425dfe8f072d3dd19dbe612bffa16a48bd51f7fb419a9efac2cd"
+    },
+    {
+      "path": "lib/ai/tools/escalate.ts",
+      "sha256": "2a1b3c3beb08ad85ce07cffd6c055249aec3eede86c5f82fae4bda4cfdc7cac6"
+    },
+    {
+      "path": "lib/ai/tools/get-batches.ts",
+      "sha256": "ebfb407237bb12a9ed25bb1e3b7f07b5297e6e5ccfbcaf9e204cfbe67076227c"
+    },
+    {
+      "path": "lib/ai/tools/get-documents.ts",
+      "sha256": "c38cb34ecf7423e6987fd705a1a9a9b46482a2af9244eee98e3fc73c3d25dc56"
+    },
+    {
+      "path": "lib/ai/tools/get-product.ts",
+      "sha256": "20e125fd8b8ffc1ea49b3022b91c1647f0a1766d0a15468d323609bdbb43b5bf"
+    },
+    {
+      "path": "lib/ai/tools/laboratory-calculation.ts",
+      "sha256": "15041c9b1eea99b1a46f515432ce4a448f6477ecbd14b30ab7cb9cd77162feac"
+    },
+    {
+      "path": "lib/ai/tools/order-status.ts",
+      "sha256": "0b86fbf1597d9d97569de333932bbe6a60a806d850d658d6d43c98a05c09fcab"
+    },
+    {
+      "path": "lib/ai/tools/reconstitution.ts",
+      "sha256": "6dadb6a2eabd8f326ff193605942a5212c5ce4ad30c81d68cd805d1378e1b60a"
+    },
+    {
+      "path": "lib/ai/tools/registry.ts",
+      "sha256": "056d67516b6dcd90e4e90997542c23e81444981910c85758eac4d7e0615f366d"
+    },
+    {
+      "path": "lib/ai/tools/remember.ts",
+      "sha256": "c188cd5b1ca01f355802109025fc7c4beb14d580acc86bab3fff77c0e7905714"
+    },
+    {
+      "path": "lib/ai/tools/research-guidance.ts",
+      "sha256": "4453c8bbe9418c9ef99ff8ecf0718bd5fdea4e9a7b838e5b29cc8a159fa5d420"
+    },
+    {
+      "path": "lib/ai/tools/search-products.ts",
+      "sha256": "f618fb1cb95b0c778ab3ff0eda9bdaf32d214c0842906e7a816b9b54b2d4096a"
+    },
+    {
+      "path": "lib/ai/tools/track-shipment.ts",
+      "sha256": "39ba61234480126acc5d295dec1e127f16fbddb7da8b0c3e44b96fa827aeeccd"
+    },
+    {
+      "path": "lib/ai/tools/view-cart.ts",
+      "sha256": "12b6780b363fd5e1285ba05d76b9cebdbf3b4f387b56de8a0741c983c0db3a8e"
+    },
+    {
+      "path": "lib/ai/types.ts",
+      "sha256": "c6b7091f066882031a4988337cf6ac20452315ba4da6290258f72e473cb26c26"
+    },
+    {
+      "path": "lib/ai/types/events.ts",
+      "sha256": "2c87d448b7311a4baf3e037fdd214e3e623a16f1440c0eedd2390813047e2a2c"
+    },
+    {
+      "path": "lib/audit/log.ts",
+      "sha256": "790a1dd6e561f0ca35e4e465ac1ac03c7f1d51e0a0c75dbea6706d4506d7b696"
+    },
+    {
+      "path": "lib/auth/db-schema.ts",
+      "sha256": "7f4cebbe30317af7cfa26875c59d64ac2a3b4d0348f8f3ef39b3f1e67558330e"
+    },
+    {
+      "path": "lib/auth/index.ts",
+      "sha256": "aaa93320c37bf3cf89fb3255fd3ce20a9f6f23119cee5727b5bce36f1be672b1"
+    },
+    {
+      "path": "lib/auth/tokens.ts",
+      "sha256": "12171be8a629a2ef97656db1fe94e62c7c7c77eeafa27ce7fc0df6aa48b67d7a"
+    },
+    {
+      "path": "lib/blog/authors.ts",
+      "sha256": "c982d2c3d28d44ec420b64ca4f5a385b029be3dc98e9239381cf3f466b4c00f8"
+    },
+    {
+      "path": "lib/blog/posts.ts",
+      "sha256": "f77f65066a23f946cae51f3f451fb22907f05e8a11b3b8bc0fa342194ef41710"
+    },
+    {
+      "path": "lib/brand/mark.ts",
+      "sha256": "a767dd602bb11427d84896473a0af0b031931af45d3d26ea525d2c2240a70d48"
+    },
+    {
+      "path": "lib/calculations.ts",
+      "sha256": "d7630f09d97a0221f0cced2224f750476c1d00d5a5e14323ea56c41b4e6c255d"
+    },
+    {
+      "path": "lib/checkout/schema.ts",
+      "sha256": "bcdcd2a4e57de4576cb44334fe967a7feff17a3e6604f631989be151bff5689e"
+    },
+    {
+      "path": "lib/community/auth.ts",
+      "sha256": "943910f7e1be9170c935dd6cafa6c0236370556f3427239ede1b90418a7b186a"
+    },
+    {
+      "path": "lib/community/categories.ts",
+      "sha256": "985e04ecbe05a7eec6d203f03b6cd6430a4e4e636c2d879f62d13d3595ca2a8a"
+    },
+    {
+      "path": "lib/community/guard.ts",
+      "sha256": "775d35e22aa9ba247990ca4673655912b53b791ea58f571e07c15bae0aa1c589"
+    },
+    {
+      "path": "lib/community/index.ts",
+      "sha256": "62c17b309e0e9afde409eff55cba505b7258405a02ff97473276bbf7e29dd844"
+    },
+    {
+      "path": "lib/community/moderation.ts",
+      "sha256": "3d0ebe6d5a49c58c214869c543601fb5d886e9249950702ad9d792af9d84b01d"
+    },
+    {
+      "path": "lib/community/publication.ts",
+      "sha256": "fd106093d6dbef02e5f603546a4be89af772aaa77a2fd8c9cae499c5f8bf117c"
+    },
+    {
+      "path": "lib/community/reputation.ts",
+      "sha256": "3a999356bc5b55c98f5d359d18df06d2e11fe551e4e8e7ff50778008fc32075a"
+    },
+    {
+      "path": "lib/community/service.ts",
+      "sha256": "8646f079c64f655f50dcf1ed95f8334eb21759a932cdfcdc199f7af2fe6012c8"
+    },
+    {
+      "path": "lib/db.ts",
+      "sha256": "17a8bce0a01083552566b573a814cea661ff7d882e1ac57d6cd0434ecbad2974"
+    },
+    {
+      "path": "lib/demo/cache.ts",
+      "sha256": "7bb5f179f199ce5aa80ea4ca701c8bbeff780ce479bb92d6eeab4efe5aa86c95"
+    },
+    {
+      "path": "lib/demo/fixtures.ts",
+      "sha256": "e3a1b393cadac7a59e3f100fce92119186d4e3dc5834ffa8dcd513208feb1abd"
+    },
+    {
+      "path": "lib/demo/index.ts",
+      "sha256": "f08913ff74321c02b7645d725ae2dbae904ebf77f0f516ae63ef08f55b5432d5"
+    },
+    {
+      "path": "lib/documents/availability.ts",
+      "sha256": "9109f5d5d3686dbcc89b8d5d23b9c035e39b2257dd5f15d0bbf377349be67795"
+    },
+    {
+      "path": "lib/documents/constants.ts",
+      "sha256": "ee9a861fbee52dd88c79f0303f81d691afcffa95879e6503b7bc8da7fe2ec1c0"
+    },
+    {
+      "path": "lib/documents/index.ts",
+      "sha256": "586534cc5c2a7d64cf55936848010868ce42ff14d202217313e0ed24ba0469ab"
+    },
+    {
+      "path": "lib/documents/library.ts",
+      "sha256": "b6637d0a2d36d68390473f83d5ee179cc080a7cd60b55ea7aa14a0cb8ba09e54"
+    },
+    {
+      "path": "lib/documents/service.ts",
+      "sha256": "ad8c4bb1345200d84d67a4c9c10b9160d28a2d26aa9eb39131a616546456ab0f"
+    },
+    {
+      "path": "lib/email/html.ts",
+      "sha256": "fc2440e42d441d517c812d7765677a20a145731fca825891ead4db40d159a388"
+    },
+    {
+      "path": "lib/email/index.ts",
+      "sha256": "a07f8b386d64166a0f0282fa0dd0ac471a7e2d73b101f59796277a4cc4820ede"
+    },
+    {
+      "path": "lib/email/outbox.ts",
+      "sha256": "1ecf1c049a4dc6924b62a1da88aee6908c7c74cf10f830f60a556d9eca21c561"
+    },
+    {
+      "path": "lib/email/receipt.ts",
+      "sha256": "a37cd909f542de3fae567f220f60fb903e49db36a0f8b601ac7f46f9bc344c82"
+    },
+    {
+      "path": "lib/env.ts",
+      "sha256": "1e931f05b7e97dce319b5ac71b1a8a7b0c258fb59639917c3267f95b7248a0fe"
+    },
+    {
+      "path": "lib/gdpr/index.ts",
+      "sha256": "bd3d8fa840f63217e1ecc882bc6d6ecf78737324c6b510b4faf3d938eeac255b"
+    },
+    {
+      "path": "lib/gdpr/service.ts",
+      "sha256": "c2550900bd9dfff7226cf14c6476077128ff285642ef41502bb564da250d573a"
+    },
+    {
+      "path": "lib/glossary/index.ts",
+      "sha256": "87176acd0cee2b21471a913e38c18b57706e5e0db2dfcc23724982ea923dde35"
+    },
+    {
+      "path": "lib/glossary/sanity.ts",
+      "sha256": "631c265d1624fdaa71e0b74a7dcbe9d87bbb2642980093b0fbcc5a0ddbd1ca5d"
+    },
+    {
+      "path": "lib/i18n/config.ts",
+      "sha256": "e4b1dccc9921bd7de2c9e7a42d86eca625d9567a365473713284e7b0d3501c0b"
+    },
+    {
+      "path": "lib/legal.ts",
+      "sha256": "57045ef920eb7a9ee13d1a40992828b0c5784a5f28494a38d221787c7e6d8a58"
+    },
+    {
+      "path": "lib/logger.ts",
+      "sha256": "e0a1a643e63c60c9270977fbca8dee4a677a62e2e5007d0ca8407fd90a8b7957"
+    },
+    {
+      "path": "lib/notifications/index.ts",
+      "sha256": "05a0919570aa8dfc6d5b9176dce53575483ee82ec8a1d48bae5f816cb18957e4"
+    },
+    {
+      "path": "lib/notifications/service.ts",
+      "sha256": "32b7f717b728ddeafebc050a620325b22fb77c9a42185937d31f250fc6fd8dae"
+    },
+    {
+      "path": "lib/og/render.tsx",
+      "sha256": "e47d13679f967721e09bbe28ddcb8b037e269580acf5a507e9a354f90600dd8c"
+    },
+    {
+      "path": "lib/orders/access.ts",
+      "sha256": "57d93061117061b85d75c7919a1f75b697feb35bdaa9156d58080fbb494756cb"
+    },
+    {
+      "path": "lib/orders/index.ts",
+      "sha256": "1ca2f8fe2f020016520ee96799afba01ea0ff42141ac76404a3e12591ceb7286"
+    },
+    {
+      "path": "lib/orders/quote.ts",
+      "sha256": "8be92517d63be8f49d64b894ea4cbce8ade78f2d0ac58ab2ef81262b256f8ffb"
+    },
+    {
+      "path": "lib/orders/service.ts",
+      "sha256": "7990520dec7c6ab23f45d613d67030d680730b291b645e6209e5ba813a9abdfe"
+    },
+    {
+      "path": "lib/payments/stripe.ts",
+      "sha256": "9c7b5b4504f1f182882d4559635188fb9509cdbe7e608f3ed94b183940d5ac3c"
+    },
+    {
+      "path": "lib/pricing.ts",
+      "sha256": "62893d637438a2bbd31a91121d06e269ac91d3281e86708a1e98cc8a0d1e52e7"
+    },
+    {
+      "path": "lib/products/catalogue.ts",
+      "sha256": "b6071d6277dad413ce1f4c9b9087640e33f00ec0e1a136094598caf51ffc87a1"
+    },
+    {
+      "path": "lib/products/data.ts",
+      "sha256": "9f136ccd7266dc29d0e5cfa70e9ec1f3516db9cb2751fc31a6141555e36ac902"
+    },
+    {
+      "path": "lib/products/document-status.ts",
+      "sha256": "0773b73df648e157ada7a9d7226cf8036fb929947839de0bdf446b27aaeddd60"
+    },
+    {
+      "path": "lib/products/selection.ts",
+      "sha256": "aa1050b25afe6ae0267fde1f9987831e686063b1f38d78746c976ef4d9bd61c4"
+    },
+    {
+      "path": "lib/products/types.ts",
+      "sha256": "b6ff11a60411fb84cf95ff2c000d0f3c9754e353f0af1ed789bef7c1fa0a6b12"
+    },
+    {
+      "path": "lib/research-plans/index.ts",
+      "sha256": "4161d2569e3c2ec3c7dac9097ca70ae41f41f56aeaff0854164f119087aad802"
+    },
+    {
+      "path": "lib/research-plans/service.ts",
+      "sha256": "ede55d45ace591a8992fdeb351d170053fbc2abacd8f29921c7984894f92cf55"
+    },
+    {
+      "path": "lib/research-plans/share-slug.ts",
+      "sha256": "d0e425a101f6e441b90d7d87a59ac32daf8f914600e5b6c8a49b93e2ab1925a8"
+    },
+    {
+      "path": "lib/search/meilisearch.ts",
+      "sha256": "eec990de443b723b3754d3db9f5f29783ccd14e1029f507d59775a1f2ff02149"
+    },
+    {
+      "path": "lib/security/cron.ts",
+      "sha256": "fdfa51d3ef9e0507a3c453e762a06767716389ebb83defa8579c728a2c2c9afa"
+    },
+    {
+      "path": "lib/security/ip.ts",
+      "sha256": "81257cc661d55045616c0b07f0092f4408b1b3a90e55c363df5cd4835ab8c39c"
+    },
+    {
+      "path": "lib/security/rate-limit.ts",
+      "sha256": "580deefe51253b5c918c4e1e40317bc1b609d16a60e9d6164a6ce7fb2ba84e70"
+    },
+    {
+      "path": "lib/seo/site-origin.ts",
+      "sha256": "83220188d1e94da7485cb8eab9a034361bb345be6cc3957944fb2f03ccee23f8"
+    },
+    {
+      "path": "lib/shipping/cached.ts",
+      "sha256": "56c5ec445f040170c114c9667094fde2d8a2c52f498744bdf6eb7aed9401a793"
+    },
+    {
+      "path": "lib/shipping/index.ts",
+      "sha256": "ec9fc4a0eb511fdbf0d97ba5f06353b08c7130e71eda63d1915af8faa1aeb4c5"
+    },
+    {
+      "path": "lib/storage/documents.ts",
+      "sha256": "bb4d65e9c0befd66443b627fcf698a35b0b0949ddd5bfead5d9b51ed07f61ebd"
+    },
+    {
+      "path": "lib/utils/format.ts",
+      "sha256": "4095be2ffff7a897e9525eae5c2d871cfec35ff57e73dae306e7be33ea2b0229"
+    },
+    {
+      "path": "lib/vat/index.ts",
+      "sha256": "cf7a40b4091e7d81c78588f9ddc2a8474c43f8b1168bba3b6326d8880653e7d7"
+    },
+    {
+      "path": "messages/en.json",
+      "sha256": "4f5cc786e31131199f930cc301feb0327ee889adba6d35dbca5968aa1cf48a06"
+    },
+    {
+      "path": "messages/fi.json",
+      "sha256": "f7f7f607a48413c110659c4891cbdc714c1151178bb4af15abf6ff3801b0ef83"
+    },
+    {
+      "path": "sanity/client.ts",
+      "sha256": "d73b891c34240e2b9032250f273757025bd21be60bd0897ef7c35bd13f5f3c6d"
+    }
+  ],
+  "edges": [
+    {
+      "from": "app/api/account/delete/confirm/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/delete/confirm/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/delete/confirm/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/delete/confirm/route.ts",
+      "to": "lib/gdpr/service.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/delete/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/delete/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/delete/route.ts",
+      "to": "lib/gdpr/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/delete/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/export/route.ts",
+      "to": "lib/gdpr/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/export/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/gdpr/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/gdpr/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/gdpr/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/gdpr/route.ts",
+      "to": "lib/email/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/gdpr/route.ts",
+      "to": "lib/email/outbox.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/gdpr/route.ts",
+      "to": "lib/env.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/gdpr/route.ts",
+      "to": "lib/gdpr/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/gdpr/route.ts",
+      "to": "lib/i18n/config.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/preferences/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/account/preferences/route.ts",
+      "to": "lib/notifications/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/admin/ai/conversations/[id]/route.ts",
+      "to": "db/schema/ai.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/admin/ai/conversations/[id]/route.ts",
+      "to": "lib/admin/guard.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/admin/ai/conversations/[id]/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/admin/ai/conversations/route.ts",
+      "to": "db/schema/ai.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/admin/ai/conversations/route.ts",
+      "to": "lib/admin/guard.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/admin/ai/conversations/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/admin/ai/draft-reply/route.ts",
+      "to": "lib/admin/guard.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/admin/ai/draft-reply/route.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/admin/ai/draft-reply/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/admin/ai/metrics/route.ts",
+      "to": "db/schema/ai.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/admin/ai/metrics/route.ts",
+      "to": "lib/admin/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/admin/ai/metrics/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/admin/audit/route.ts",
+      "to": "lib/admin/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/admin/audit/route.ts",
+      "to": "lib/audit/log.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/admin/moderation/route.ts",
+      "to": "lib/audit/log.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/admin/moderation/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/admin/guard.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/ai/agent/loop.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/ai/answers/calculation.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/ai/answers/catalogue.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/ai/answers/guidance.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/ai/answers/request-intent.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/ai/guardrails/calculation.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/ai/guardrails/citations.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/ai/guardrails/input.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/ai/guardrails/verify.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/ai/memory/consent.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/ai/memory/store.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/ai/prompts/system.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/ai/providers/minimax.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/ai/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/ai/tools/research-guidance.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/ai/types.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/auth/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/i18n/config.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/products/catalogue.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/security/ip.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/ai/types.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "app/api/ai/chat/route.ts",
+      "to": "lib/calculations.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "app/api/ai/consent/route.ts",
+      "to": "lib/ai/memory/cookies.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/consent/route.ts",
+      "to": "lib/security/ip.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/consent/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/conversations/route.ts",
+      "to": "lib/ai/memory/consent.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/conversations/route.ts",
+      "to": "lib/ai/memory/store.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/conversations/route.ts",
+      "to": "lib/auth/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/conversations/route.ts",
+      "to": "lib/i18n/config.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/conversations/route.ts",
+      "to": "lib/security/ip.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/conversations/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/feedback/route.ts",
+      "to": "db/schema/ai.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/feedback/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/feedback/route.ts",
+      "to": "lib/security/ip.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/feedback/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/identity/route.ts",
+      "to": "lib/ai/memory/anon.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/identity/route.ts",
+      "to": "lib/ai/memory/cookies.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/memory/route.ts",
+      "to": "lib/ai/memory/consent.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/memory/route.ts",
+      "to": "lib/ai/memory/store.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/memory/route.ts",
+      "to": "lib/auth/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/ai/memory/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/[...nextauth]/route.ts",
+      "to": "lib/auth/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/forgot-password/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/forgot-password/route.ts",
+      "to": "lib/auth/tokens.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/forgot-password/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/forgot-password/route.ts",
+      "to": "lib/email/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/forgot-password/route.ts",
+      "to": "lib/email/outbox.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/forgot-password/route.ts",
+      "to": "lib/env.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/forgot-password/route.ts",
+      "to": "lib/i18n/config.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/forgot-password/route.ts",
+      "to": "lib/security/ip.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/forgot-password/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/register/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/register/route.ts",
+      "to": "lib/auth/tokens.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/register/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/register/route.ts",
+      "to": "lib/email/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/register/route.ts",
+      "to": "lib/email/outbox.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/register/route.ts",
+      "to": "lib/env.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/register/route.ts",
+      "to": "lib/i18n/config.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/register/route.ts",
+      "to": "lib/security/ip.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/register/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/reset-password/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/reset-password/route.ts",
+      "to": "lib/auth/tokens.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/reset-password/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/reset-password/route.ts",
+      "to": "lib/security/ip.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/auth/reset-password/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/calculations/[id]/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/calculations/[id]/route.ts",
+      "to": "lib/community/auth.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/calculations/[id]/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/calculations/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/calculations/route.ts",
+      "to": "lib/calculations.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/calculations/route.ts",
+      "to": "lib/community/auth.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/calculations/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/calculations/route.ts",
+      "to": "lib/products/catalogue.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/cart-recovery/route.ts",
+      "to": "lib/security/cron.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/quote/route.ts",
+      "to": "lib/checkout/schema.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/quote/route.ts",
+      "to": "lib/orders/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/quote/route.ts",
+      "to": "lib/orders/quote.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/quote/route.ts",
+      "to": "lib/pricing.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/quote/route.ts",
+      "to": "lib/security/ip.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/quote/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/quote/route.ts",
+      "to": "lib/shipping/cached.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/route.ts",
+      "to": "lib/checkout/schema.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/route.ts",
+      "to": "lib/env.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/route.ts",
+      "to": "lib/logger.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/route.ts",
+      "to": "lib/orders/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/route.ts",
+      "to": "lib/orders/access.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/route.ts",
+      "to": "lib/payments/stripe.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/route.ts",
+      "to": "lib/security/ip.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/checkout/route.ts",
+      "to": "lib/shipping/cached.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/contact/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/contact/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/contact/route.ts",
+      "to": "lib/email/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/contact/route.ts",
+      "to": "lib/email/outbox.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/contact/route.ts",
+      "to": "lib/i18n/config.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/contact/route.ts",
+      "to": "lib/legal.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/contact/route.ts",
+      "to": "lib/security/ip.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/contact/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/cron/maintenance/route.ts",
+      "to": "lib/ai/rag/indexer.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/cron/maintenance/route.ts",
+      "to": "lib/community/moderation.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/cron/maintenance/route.ts",
+      "to": "lib/email/outbox.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/cron/maintenance/route.ts",
+      "to": "lib/gdpr/service.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/cron/maintenance/route.ts",
+      "to": "lib/orders/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/cron/maintenance/route.ts",
+      "to": "lib/security/cron.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/documents/[id]/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/documents/[id]/route.ts",
+      "to": "lib/audit/log.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/documents/[id]/route.ts",
+      "to": "lib/community/auth.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/documents/[id]/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/documents/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/documents/route.ts",
+      "to": "lib/audit/log.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/documents/route.ts",
+      "to": "lib/community/auth.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/documents/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/documents/route.ts",
+      "to": "lib/documents/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/forum/categories/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/forum/drafts/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/forum/drafts/route.ts",
+      "to": "lib/community/auth.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/forum/drafts/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/forum/posts/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/forum/posts/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/forum/reactions/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/forum/reactions/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/forum/reports/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/forum/reports/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/forum/threads/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/forum/threads/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/health/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/health/route.ts",
+      "to": "lib/env.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/health/route.ts",
+      "to": "lib/logger.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/newsletter/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/newsletter/route.ts",
+      "to": "lib/auth/tokens.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/newsletter/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/newsletter/route.ts",
+      "to": "lib/email/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/newsletter/route.ts",
+      "to": "lib/email/outbox.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/newsletter/route.ts",
+      "to": "lib/env.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/newsletter/route.ts",
+      "to": "lib/i18n/config.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/newsletter/route.ts",
+      "to": "lib/security/ip.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/newsletter/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/notifications/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/notifications/route.ts",
+      "to": "lib/notifications/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/og/default/[locale]/route.tsx",
+      "to": "app/api/og/default/route.tsx",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/og/default/route.tsx",
+      "to": "lib/og/render.tsx",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/og/document/[id]/[locale]/route.tsx",
+      "to": "app/api/og/document/[id]/route.tsx",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/og/document/[id]/route.tsx",
+      "to": "lib/documents/service.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/og/document/[id]/route.tsx",
+      "to": "lib/og/render.tsx",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/og/glossary/[slug]/[locale]/route.tsx",
+      "to": "app/api/og/glossary/[slug]/route.tsx",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/og/glossary/[slug]/route.tsx",
+      "to": "lib/glossary/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/og/glossary/[slug]/route.tsx",
+      "to": "lib/og/render.tsx",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/og/plan/[slug]/[locale]/route.tsx",
+      "to": "app/api/og/plan/[slug]/route.tsx",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/og/plan/[slug]/route.tsx",
+      "to": "lib/og/render.tsx",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/og/plan/[slug]/route.tsx",
+      "to": "lib/research-plans/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/og/thread/[slug]/[locale]/route.tsx",
+      "to": "app/api/og/thread/[slug]/route.tsx",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/og/thread/[slug]/route.tsx",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/og/thread/[slug]/route.tsx",
+      "to": "lib/og/render.tsx",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/orders/[orderId]/status/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/orders/[orderId]/status/route.ts",
+      "to": "lib/orders/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/orders/[orderId]/status/route.ts",
+      "to": "lib/orders/access.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/orders/[orderId]/status/route.ts",
+      "to": "lib/payments/stripe.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/partner/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/partner/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/partner/route.ts",
+      "to": "lib/email/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/partner/route.ts",
+      "to": "lib/email/outbox.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/partner/route.ts",
+      "to": "lib/i18n/config.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/partner/route.ts",
+      "to": "lib/legal.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/partner/route.ts",
+      "to": "lib/security/ip.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/partner/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/plans/[id]/items/[itemId]/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/plans/[id]/items/[itemId]/route.ts",
+      "to": "lib/research-plans/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/plans/[id]/items/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/plans/[id]/items/route.ts",
+      "to": "lib/research-plans/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/plans/[id]/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/plans/[id]/route.ts",
+      "to": "lib/research-plans/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/plans/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/plans/route.ts",
+      "to": "lib/research-plans/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/plans/share/[slug]/route.ts",
+      "to": "lib/research-plans/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/quotes/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/quotes/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/quotes/route.ts",
+      "to": "lib/email/html.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/quotes/route.ts",
+      "to": "lib/email/outbox.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/quotes/route.ts",
+      "to": "lib/i18n/config.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/quotes/route.ts",
+      "to": "lib/products/data.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/quotes/route.ts",
+      "to": "lib/security/ip.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/quotes/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/referral/generate/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/referral/generate/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/referral/generate/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/referral/generate/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/referral/redeem/route.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/referral/redeem/route.ts",
+      "to": "lib/community/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/referral/redeem/route.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/referral/redeem/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/review-request/route.ts",
+      "to": "lib/security/cron.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/search/route.ts",
+      "to": "lib/search/meilisearch.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/search/route.ts",
+      "to": "lib/security/ip.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/search/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/shipping/route.ts",
+      "to": "lib/shipping/cached.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/vat/route.ts",
+      "to": "lib/security/ip.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/vat/route.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/vat/route.ts",
+      "to": "lib/vat/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/webhooks/coinbase/route.ts",
+      "to": "lib/env.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/webhooks/coinbase/route.ts",
+      "to": "lib/logger.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/webhooks/coinbase/route.ts",
+      "to": "lib/orders/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/webhooks/sanity/route.ts",
+      "to": "lib/ai/rag/indexer.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/webhooks/stripe/route.ts",
+      "to": "lib/env.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/webhooks/stripe/route.ts",
+      "to": "lib/logger.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/webhooks/stripe/route.ts",
+      "to": "lib/orders/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "app/api/webhooks/stripe/route.ts",
+      "to": "lib/payments/stripe.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "db/schema/index.ts",
+      "to": "db/schema/ai.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "db/schema/index.ts",
+      "to": "lib/calculations.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/community/index.ts",
+      "to": "lib/community/categories.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/index.ts",
+      "to": "lib/community/guard.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/index.ts",
+      "to": "lib/community/reputation.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/index.ts",
+      "to": "lib/community/service.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/index.ts",
+      "to": "lib/community/auth.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/db.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/db.ts",
+      "to": "lib/env.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/gdpr/service.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/gdpr/service.ts",
+      "to": "db/schema/ai.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/gdpr/service.ts",
+      "to": "lib/community/auth.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/gdpr/service.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/gdpr/index.ts",
+      "to": "lib/gdpr/service.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/security/rate-limit.ts",
+      "to": "lib/env.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/email/index.ts",
+      "to": "lib/logger.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/email/index.ts",
+      "to": "lib/email/html.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/email/index.ts",
+      "to": "lib/email/receipt.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/email/index.ts",
+      "to": "lib/email/html.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/email/outbox.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/email/outbox.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/email/outbox.ts",
+      "to": "lib/email/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/notifications/index.ts",
+      "to": "lib/notifications/service.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/admin/guard.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/admin/guard.ts",
+      "to": "lib/auth/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/admin/guard.ts",
+      "to": "lib/community/reputation.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/admin/guard.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/admin/draft-reply.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/admin/list-low-stock.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/admin/lookup-order.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/cart.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/compare.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/create-support-ticket.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/escalate.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/get-batches.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/get-product.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/order-status.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/reconstitution.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/remember.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/search-products.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/track-shipment.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/view-cart.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/types/events.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/i18n/config.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/community.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/get-documents.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/laboratory-calculation.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/registry.ts",
+      "to": "lib/ai/tools/research-guidance.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/admin/index.ts",
+      "to": "lib/admin/runtime.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/admin/index.ts",
+      "to": "lib/admin/types.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/audit/log.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/audit/log.ts",
+      "to": "lib/community/index.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/audit/log.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/agent/loop.ts",
+      "to": "lib/ai/memory/store.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/agent/loop.ts",
+      "to": "lib/ai/prompts/system.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/agent/loop.ts",
+      "to": "lib/ai/providers/minimax.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/agent/loop.ts",
+      "to": "lib/ai/rag/retrieval.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/agent/loop.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/agent/loop.ts",
+      "to": "lib/ai/types.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/agent/loop.ts",
+      "to": "lib/ai/types/events.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/agent/loop.ts",
+      "to": "lib/i18n/config.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/answers/calculation.ts",
+      "to": "lib/calculations.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/answers/calculation.ts",
+      "to": "lib/utils/format.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/answers/calculation.ts",
+      "to": "messages/en.json",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/answers/calculation.ts",
+      "to": "messages/fi.json",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/answers/catalogue.ts",
+      "to": "lib/utils/format.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/answers/catalogue.ts",
+      "to": "messages/en.json",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/answers/catalogue.ts",
+      "to": "messages/fi.json",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/answers/request-intent.ts",
+      "to": "lib/ai/answers/guidance.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/guardrails/calculation.ts",
+      "to": "lib/calculations.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/guardrails/verify.ts",
+      "to": "lib/products/types.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/memory/consent.ts",
+      "to": "lib/ai/memory/anon.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/memory/consent.ts",
+      "to": "lib/ai/memory/cookies.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/memory/store.ts",
+      "to": "db/schema/ai.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/memory/store.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/prompts/system.ts",
+      "to": "lib/ai/memory/store.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/prompts/system.ts",
+      "to": "lib/ai/types.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/providers/minimax.ts",
+      "to": "lib/ai/providers/local-embeddings.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/research-guidance.ts",
+      "to": "lib/ai/answers/guidance.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/research-guidance.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/types.ts",
+      "to": "lib/ai/types/events.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/auth/index.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/auth/index.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/auth/index.ts",
+      "to": "lib/env.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/auth/index.ts",
+      "to": "lib/security/ip.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/auth/index.ts",
+      "to": "lib/security/rate-limit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/auth/index.ts",
+      "to": "lib/auth/db-schema.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/products/catalogue.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/products/catalogue.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/products/catalogue.ts",
+      "to": "lib/documents/availability.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/products/catalogue.ts",
+      "to": "lib/documents/constants.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/products/catalogue.ts",
+      "to": "lib/logger.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/products/catalogue.ts",
+      "to": "lib/products/data.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/products/catalogue.ts",
+      "to": "lib/products/selection.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/products/catalogue.ts",
+      "to": "lib/products/types.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/memory/anon.ts",
+      "to": "lib/env.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/auth/tokens.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/auth/tokens.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/auth/tokens.ts",
+      "to": "lib/email/outbox.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/community/auth.ts",
+      "to": "lib/auth/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/auth.ts",
+      "to": "lib/community/reputation.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/community/auth.ts",
+      "to": "lib/community/reputation.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/auth.ts",
+      "to": "lib/db.ts",
+      "kind": "literal_dynamic_import_or_require"
+    },
+    {
+      "from": "lib/community/auth.ts",
+      "to": "db/schema/index.ts",
+      "kind": "literal_dynamic_import_or_require"
+    },
+    {
+      "from": "lib/security/cron.ts",
+      "to": "lib/env.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/checkout/schema.ts",
+      "to": "lib/i18n/config.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/orders/index.ts",
+      "to": "lib/orders/service.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/orders/quote.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/orders/quote.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/orders/quote.ts",
+      "to": "lib/documents/availability.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/orders/quote.ts",
+      "to": "lib/email/outbox.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/orders/quote.ts",
+      "to": "lib/pricing.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/shipping/cached.ts",
+      "to": "lib/shipping/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/payments/stripe.ts",
+      "to": "lib/env.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/rag/indexer.ts",
+      "to": "db/schema/ai.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/rag/indexer.ts",
+      "to": "lib/ai/chunker.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/rag/indexer.ts",
+      "to": "lib/ai/rag/embeddings.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/rag/indexer.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/rag/indexer.ts",
+      "to": "lib/products/catalogue.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/rag/indexer.ts",
+      "to": "lib/products/types.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/rag/indexer.ts",
+      "to": "lib/utils/format.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/rag/indexer.ts",
+      "to": "lib/ai/rag/version.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/rag/indexer.ts",
+      "to": "lib/glossary/sanity.ts",
+      "kind": "literal_dynamic_import_or_require"
+    },
+    {
+      "from": "lib/ai/rag/indexer.ts",
+      "to": "lib/blog/posts.ts",
+      "kind": "literal_dynamic_import_or_require"
+    },
+    {
+      "from": "lib/ai/rag/indexer.ts",
+      "to": "lib/glossary/sanity.ts",
+      "kind": "literal_dynamic_import_or_require"
+    },
+    {
+      "from": "lib/ai/rag/indexer.ts",
+      "to": "lib/blog/posts.ts",
+      "kind": "literal_dynamic_import_or_require"
+    },
+    {
+      "from": "lib/community/moderation.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/moderation.ts",
+      "to": "lib/ai/providers/minimax.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/moderation.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/moderation.ts",
+      "to": "lib/community/guard.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/documents/index.ts",
+      "to": "lib/documents/constants.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/og/render.tsx",
+      "to": "components/media/BrandSymbol.tsx",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/og/render.tsx",
+      "to": "lib/brand/mark.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/og/render.tsx",
+      "to": "lib/seo/site-origin.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/documents/service.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/documents/service.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/documents/service.ts",
+      "to": "lib/storage/documents.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/documents/service.ts",
+      "to": "lib/documents/availability.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/documents/service.ts",
+      "to": "lib/documents/constants.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/documents/service.ts",
+      "to": "lib/documents/library.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/glossary/index.ts",
+      "to": "lib/glossary/sanity.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/research-plans/index.ts",
+      "to": "lib/research-plans/service.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/research-plans/index.ts",
+      "to": "lib/research-plans/share-slug.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/products/data.ts",
+      "to": "lib/products/types.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/products/data.ts",
+      "to": "lib/products/types.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/search/meilisearch.ts",
+      "to": "lib/products/catalogue.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/search/meilisearch.ts",
+      "to": "lib/products/selection.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/search/meilisearch.ts",
+      "to": "lib/products/types.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/community/service.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/service.ts",
+      "to": "lib/activity/emit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/service.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/service.ts",
+      "to": "lib/community/auth.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/service.ts",
+      "to": "lib/community/auth.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/service.ts",
+      "to": "lib/community/categories.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/service.ts",
+      "to": "lib/community/guard.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/service.ts",
+      "to": "lib/community/moderation.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/service.ts",
+      "to": "lib/community/publication.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/service.ts",
+      "to": "lib/community/reputation.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/service.ts",
+      "to": "lib/notifications/index.ts",
+      "kind": "literal_dynamic_import_or_require"
+    },
+    {
+      "from": "lib/email/receipt.ts",
+      "to": "lib/utils/format.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/email/receipt.ts",
+      "to": "messages/en.json",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/email/receipt.ts",
+      "to": "messages/fi.json",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/email/receipt.ts",
+      "to": "lib/email/html.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/notifications/service.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/notifications/service.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/admin/draft-reply.ts",
+      "to": "lib/ai/providers/minimax.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/admin/draft-reply.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/admin/list-low-stock.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/admin/list-low-stock.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/admin/list-low-stock.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/admin/lookup-order.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/admin/lookup-order.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/admin/lookup-order.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/cart.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/cart.ts",
+      "to": "lib/products/catalogue.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/cart.ts",
+      "to": "lib/utils/format.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/cart.ts",
+      "to": "lib/products/types.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/compare.ts",
+      "to": "lib/products/catalogue.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/compare.ts",
+      "to": "lib/products/document-status.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/compare.ts",
+      "to": "lib/utils/format.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/compare.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/create-support-ticket.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/create-support-ticket.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/create-support-ticket.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/escalate.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/get-batches.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/get-batches.ts",
+      "to": "lib/products/catalogue.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/get-product.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/get-product.ts",
+      "to": "lib/products/catalogue.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/get-product.ts",
+      "to": "lib/products/types.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/order-status.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/order-status.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/order-status.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/reconstitution.ts",
+      "to": "lib/ai/guardrails/quantities.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/reconstitution.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/reconstitution.ts",
+      "to": "lib/calculations.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/remember.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/search-products.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/search-products.ts",
+      "to": "lib/products/catalogue.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/search-products.ts",
+      "to": "lib/products/types.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/track-shipment.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/track-shipment.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/track-shipment.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/view-cart.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/types/events.ts",
+      "to": "lib/ai/types.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/types/events.ts",
+      "to": "lib/products/types.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/community.ts",
+      "to": "lib/community/service.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/community.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/get-documents.ts",
+      "to": "lib/documents/service.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/get-documents.ts",
+      "to": "lib/products/catalogue.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/get-documents.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/tools/laboratory-calculation.ts",
+      "to": "lib/ai/guardrails/quantities.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/laboratory-calculation.ts",
+      "to": "lib/calculations.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/tools/laboratory-calculation.ts",
+      "to": "lib/ai/tools/registry.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/admin/runtime.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/admin/runtime.ts",
+      "to": "lib/auth/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/admin/runtime.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/admin/runtime.ts",
+      "to": "lib/admin/types.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/admin/runtime.ts",
+      "to": "lib/admin/types.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/rag/retrieval.ts",
+      "to": "db/schema/ai.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/rag/retrieval.ts",
+      "to": "lib/ai/providers/minimax.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/rag/retrieval.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/rag/retrieval.ts",
+      "to": "lib/products/catalogue.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/rag/retrieval.ts",
+      "to": "lib/ai/rag/version.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/auth/db-schema.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/products/selection.ts",
+      "to": "lib/products/types.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/orders/service.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/orders/service.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/orders/service.ts",
+      "to": "lib/documents/availability.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/orders/service.ts",
+      "to": "lib/email/outbox.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/orders/service.ts",
+      "to": "lib/email/receipt.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/orders/service.ts",
+      "to": "lib/orders/access.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/orders/service.ts",
+      "to": "lib/orders/quote.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/orders/service.ts",
+      "to": "lib/orders/quote.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/rag/embeddings.ts",
+      "to": "lib/ai/providers/minimax.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/rag/embeddings.ts",
+      "to": "lib/ai/providers/minimax.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/ai/rag/version.ts",
+      "to": "lib/products/types.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/glossary/sanity.ts",
+      "to": "lib/demo/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/glossary/sanity.ts",
+      "to": "lib/demo/cache.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/glossary/sanity.ts",
+      "to": "lib/demo/fixtures.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/glossary/sanity.ts",
+      "to": "sanity/client.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/blog/posts.ts",
+      "to": "lib/demo/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/blog/posts.ts",
+      "to": "lib/demo/cache.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/blog/posts.ts",
+      "to": "lib/demo/fixtures.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/blog/posts.ts",
+      "to": "sanity/client.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "components/media/BrandSymbol.tsx",
+      "to": "lib/brand/mark.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/documents/library.ts",
+      "to": "lib/documents/constants.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/research-plans/service.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/research-plans/service.ts",
+      "to": "lib/activity/emit.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/research-plans/service.ts",
+      "to": "lib/community/auth.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/research-plans/service.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/research-plans/service.ts",
+      "to": "lib/research-plans/share-slug.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/activity/emit.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/activity/emit.ts",
+      "to": "lib/db.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/publication.ts",
+      "to": "db/schema/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/community/publication.ts",
+      "to": "lib/db.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/products/document-status.ts",
+      "to": "lib/products/types.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/ai/guardrails/quantities.ts",
+      "to": "lib/calculations.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/demo/cache.ts",
+      "to": "lib/demo/index.ts",
+      "kind": "import_or_export"
+    },
+    {
+      "from": "lib/demo/fixtures.ts",
+      "to": "lib/blog/authors.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/demo/fixtures.ts",
+      "to": "lib/blog/posts.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/demo/fixtures.ts",
+      "to": "lib/glossary/sanity.ts",
+      "kind": "type_import"
+    },
+    {
+      "from": "lib/blog/authors.ts",
+      "to": "sanity/client.ts",
+      "kind": "import_or_export"
+    }
+  ],
+  "externalPackageSpecifiers": [
+    "@auth/drizzle-adapter",
+    "@aws-sdk/client-s3",
+    "@aws-sdk/s3-request-presigner",
+    "@huggingface/transformers",
+    "@sanity/client",
+    "@upstash/ratelimit",
+    "@upstash/redis",
+    "argon2",
+    "drizzle-orm",
+    "drizzle-orm/pg-core",
+    "drizzle-orm/postgres-js",
+    "meilisearch",
+    "next-auth",
+    "next-auth/providers/credentials",
+    "next-auth/providers/google",
+    "next-intl/server",
+    "next/cache",
+    "next/headers",
+    "next/og",
+    "next/server",
+    "node:crypto",
+    "node:fs/promises",
+    "node:path",
+    "postgres",
+    "react",
+    "resend",
+    "stripe",
+    "zod"
+  ]
+}

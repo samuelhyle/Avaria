@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-10-15T16:52:20.012773+00:00",
+  "setting": "built_with_badge_enabled",
+  "before": true,
+  "after": false,
+  "method": "PUT",
+  "body": {
+    "built_with_badge_enabled": false
+  },
+  "publishedDeployUnchanged": "6ad0fcb3e98014388e373970",
+  "publishedLocked": true,
+  "accountUnchanged": true,
+  "planOrBillingMutation": false,
+  "note": "Supported official dashboard site-save payload; existing owner account capability verified separately. Browser verification follows."
+}

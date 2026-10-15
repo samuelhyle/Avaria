@@ -1,0 +1,39 @@
+208:    - [36m./netlify/plugins/database-release[39m@1.0.0 from netlify.toml
+209: [deploy] Existing embedding column type: vector(384)
+210: [deploy] Private pre-migration backup verified: database-release-backups/pre-migration.json; SHA-256 4b53366ed094604693ddcad9f9531f3dcedb77f3ff7aaa289ef0000d68253bec
+211: Next.js cache restored
+212: [96m[1m​[22m[39m
+213: [96m[1mbuild.command from netlify.toml                               [22m[39m
+218: Done in 267ms
+219: > averianlabs-web@0.1.0 env:check /opt/build/repo/averianlabs-web
+220: > tsx scripts/check-env.ts
+221: [env:check] required **** vars present ✓
+222: [deploy] Database preflight: 47 public tables; migration ledger present
+223: [deploy] Applied migration timestamps: 1789406101358, 1791735000000, 1791907200000, 1791907201000, 1791907202000, 1791993600000
+224: [deploy] users: 0 existing records
+225: [deploy] orders: 0 existing records
+226: [deploy] products: 15 existing records
+227: > averianlabs-web@0.1.0 db:migrate /opt/build/repo/averianlabs-web
+228: > drizzle-kit migrate
+229: [90mNo config path provided, using default 'drizzle.config.ts'[39m
+243: > averianlabs-web@0.1.0 build /opt/build/repo/averianlabs-web
+244: > pnpm env:check && next build
+245: > averianlabs-web@0.1.0 env:check /opt/build/repo/averianlabs-web
+246: > tsx scripts/check-env.ts
+247: [env:check] required **** vars present ✓
+248:    [1m[38;2;173;127;168m▲ Next.js 15.5.27[39m[22m
+249:    - Experiments (use with caution):
+250:      · serverActions
+608: All chunks (including deferred features): 3236.3 KiB gzip
+609: [deploy] Server trace union: 3705 files, 235.6 MiB; Linux CPU binding verified
+610: [deploy] Largest traced asset: 37.8 MiB node_modules/.pnpm/@swc+core-linux-x64-musl@1.16.2/node_modules/@swc/core-linux-x64-musl/swc.linux-x64-musl.node
+611: [deploy] Largest traced asset: 31.2 MiB node_modules/.pnpm/@swc+core-linux-x64-gnu@1.16.2/node_modules/@swc/core-linux-x64-gnu/swc.linux-x64-gnu.node
+612: [deploy] Largest traced asset: 31.2 MiB node_modules/.pnpm/onnxruntime-node@1.23.2/node_modules/onnxruntime-node/bin/napi-v6/linux/x64/libonnxruntime.so.1
+613: [deploy] Largest traced asset: 18.0 MiB node_modules/.pnpm/@img+sharp-libvips-linuxmusl-x64@1.3.4/node_modules/@img/sharp-libvips-linuxmusl-x64/lib/libvips-cpp.so.8.18.7
+614: [deploy] Largest traced asset: 17.8 MiB node_modules/.pnpm/@img+sharp-libvips-linux-x64@1.3.4/node_modules/@img/sharp-libvips-linux-x64/lib/libvips-cpp.so.8.18.7
+615: [deploy] Largest traced asset: 17.8 MiB node_modules/.pnpm/onnxruntime-node@1.23.2/node_modules/onnxruntime-node/bin/napi-v6/linux/arm64/libonnxruntime.so.1
+616: [deploy] Largest traced asset: 9.8 MiB node_modules/.pnpm/@esbuild+linux-x64@0.25.6/node_modules/@esbuild/linux-x64/bin/esbuild
+617: [deploy] Largest traced asset: 8.7 MiB node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/typescript.js
+618: ​
+619: [90m(build.command completed in 2m 39.5s)[39m
+620: Next.js cache saved

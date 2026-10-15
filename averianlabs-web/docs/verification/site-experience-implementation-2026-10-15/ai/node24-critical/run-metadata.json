@@ -1,0 +1,85 @@
+{
+  "recordedAt": "2026-10-15T17:24:58.912483+00:00",
+  "state": "executed",
+  "origin": "https://6ad10a0d17b4322a59f0afd8--averianlabs-demo.netlify.app",
+  "sourceCommit": "4e4a948fb1cf722d11bac09340d140f174b54024",
+  "deployId": "6ad10a0d17b4322a59f0afd8",
+  "actualServingNodeVersions": [
+    "v24.21.0"
+  ],
+  "pinnedBuildNodeVersion": "24.22.0",
+  "runnerNodeVersion": "v24.22.0",
+  "runtimeProof": {
+    "path": "../../local/final-serving-runtime.json",
+    "sha256": "255cb2a7c555866b97ac564db132a5efaf4c3bf775828235680b3e55feda6f67"
+  },
+  "apiSubset": {
+    "cases": 18,
+    "numericalCases": 16,
+    "molarPrerequisiteGuidanceCases": 2,
+    "passedRuntimeNumericalGuidanceContracts": 18,
+    "suiteHash": "625487a7fc40847437fe5f342d2aac7571ad9a98cccb37877eb39c480b7266c3"
+  },
+  "realUiPair": {
+    "cases": 2,
+    "passed": 2,
+    "locales": [
+      "en",
+      "fi"
+    ],
+    "presentationFixture": false,
+    "sseDelivery": "Actual complete response buffered unchanged by anonymous Node forwarding; not incremental transport timing."
+  },
+  "requestBudget": {
+    "newChatApiStarts": 20,
+    "apiEvaluationStarts": 18,
+    "realUiStarts": 2,
+    "priorStartsSeeded": 122,
+    "firstNewStartAt": "2026-10-15T17:21:10.473Z",
+    "lastNewStartAt": "2026-10-15T17:23:24.681Z",
+    "uiBrowserClosedAt": "2026-10-15T17:23:32.437Z",
+    "noFurtherModelCallsBefore": "2026-10-15T17:33:34.437Z"
+  },
+  "requestScope": {
+    "readOnly": true,
+    "noPersist": true,
+    "noRetrieve": true,
+    "cookieHeaderSent": false,
+    "authorizationHeaderSent": false,
+    "retries": 0
+  },
+  "limits": [
+    "The16 numerical and2 guidance cases are a subset, not a new60-case evaluation.",
+    "The older60-case source0354/Node22 results and older real2UI e8 results remain separately attributed.",
+    "Native/editorial and scientific approval remain independent; source-assisted answer review is not such approval.",
+    "This does not establish original-report fidelity, retrieval quality, universal model quality or all future stream behavior."
+  ],
+  "artifactSha256": {
+    "api-cases.json": "0aa79b5b88c1a95e1dce69d8dde2e9f274c0d2a9e39f01607a56b399f7466667",
+    "final-ui/api-cases.json": "e7e46023c474eff2154fff64967cd5441fddcc1a826f295b83b597145342ca92",
+    "final-ui/final-live-ui-en-answer-start.png": "947ca43292ab2828f1277be8bf78f1d6d71c64c92139ddf7f8cd2a87f8db6cd8",
+    "final-ui/final-live-ui-en-calculation-card.png": "c249ef7477790c167cf0b56658d13944feab63af25332e7b54da7d35ab9f1d85",
+    "final-ui/final-live-ui-en.sse.txt": "43ffe9b42e978ede8c695413eb4832687871e66e5dee620f6cd9322be77cc20c",
+    "final-ui/final-live-ui-fi-answer-start.png": "3524765e74b71ef81c7a2dd67c0c61197e18fbe488e63f4a83210882ad16dbe1",
+    "final-ui/final-live-ui-fi-calculation-card.png": "9f2a22eb409c9b40ff1816991fd51a151be8fb914260241daa73ff0ec88193bd",
+    "final-ui/final-live-ui-fi.sse.txt": "3dd88a7397edd1f437b3534d42d7affd1a2ed3fc20470908e6e16caaef5f2302",
+    "final-ui/final-live-ui.json": "831e2fc43589a2c74bc0532242ebc1982f32c39aaa61d9c500305e36901b5e4f",
+    "harness/averian-node24-critical-run-20261015.sh": "a4ff241522d0eeba596e4482a5c2f10a0f49aca1fd002ab7b3d59e48509e9656",
+    "harness/averian-node24-eval-api-guard-20261015.mjs": "8c3bf6c9ecb1b1852ea59b3a82375da6cc415677bc59ce6da362f07b5c9a25a3",
+    "harness/averian-node24-eval-budget-20261015.mjs": "ed4dd08e89af2da59ca04b6c86304405cb8b9c93fbc10d5b9093d2273afc9458",
+    "harness/averian-node24-ui-confirmation-20261015.mts": "25b81f8513aaf7cadb9a6761304e6795761327c8bd6fbe26a2ec478d465fce75",
+    "request-timing-ledger.json": "eaee42d455595c66d0fb44fefa7f69414bef3c014c4f895c61871794e8f3d29d",
+    "selection.json": "6779987c60baccaa8ea7bd4f6387c440f9b2fcff0741ee635caa2b674085bb2f",
+    "technical-editorial-peer-review.json": "334a999aa3cfac3eb2b032e7f36aad059b6de12670127fc5c9d4619d3343ee39",
+    "technical-editorial-peer-review.md": "576bb5d83a9078bcb11e829cca536ac902b66edd4d4488d9a12b59ec0afc885c"
+  },
+  "technicalEditorialPeerReview": {
+    "report": "technical-editorial-peer-review.json",
+    "summary": "technical-editorial-peer-review.md",
+    "reviewedCases": 18,
+    "conclusion": "no_material_issue_found_in_this18_case_set",
+    "independentNativeAndScientificApproval": "pending"
+  },
+  "artifactManifestRefreshedAt": "2026-10-15T17:37:30.331916+00:00",
+  "artifactManifestRefreshReason": "Final technical/editorial peer-review wording was completed after initial metadata capture; refresh only its two documentary hashes. Raw responses and other captured artifacts are unchanged."
+}

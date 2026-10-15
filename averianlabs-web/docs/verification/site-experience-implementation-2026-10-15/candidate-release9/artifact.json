@@ -1,0 +1,19 @@
+{
+  "sourceCommit": "32c4b65bdaa025e710cc57c8c7b2f4f2e9c779b8",
+  "deployId": "6ad106fcd968f7d85ff1fc68",
+  "sourceZipSha256": "2da61ade74abe74c089d42ead338ff188aff5d0ef4590533cf3c3088229ffc42",
+  "published": false,
+  "status": "Unpromoted Node24 candidate; initial142browser run had137passes,3failures,2provider skips. The real418 and separate worker completion delays are preserved; root gate refinement follows.",
+  "actualServingVersion": "v24.21.0",
+  "buildVersion": "24.22.0",
+  "completedHostedChecks": [
+    "publichealth200",
+    "private serving-runtime log"
+  ],
+  "notCompleted": [
+    "full29HTTP/36browser",
+    "extended18",
+    "freshAI18+2",
+    "performance23"
+  ]
+}

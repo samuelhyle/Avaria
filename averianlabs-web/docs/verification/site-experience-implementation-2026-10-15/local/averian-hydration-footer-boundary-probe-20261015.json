@@ -1,0 +1,224 @@
+{
+  "diagnosticTiming": "After native warm-up GET: 32KiB/s network delivery, 30ms added latency; native unchanged JS is cached. Timing experiment only.",
+  "scope": "Read-only local GETs, native served JavaScript, CDP breakpoint at React throwOnHydrationMismatch. Browser-only observer/DOM-call instrumentation for diagnostics; no application source patch.",
+  "boundarySourceCommit": "1d4fe833e690d32b35ffe14d0c4b4a36def3f3cf",
+  "buildId": "CQQhXvTf56y8h9qFbt8Sv",
+  "base": "http://localhost:3217",
+  "reactScript": "/_next/static/chunks/9d81e687-8a1f3ef355ee4346.js",
+  "started": "2026-10-15T16:12:57.735Z",
+  "cursorBindings": {
+    "parent": "rP",
+    "next": "rN",
+    "active": "rL",
+    "rootOrSingleton": "r_"
+  },
+  "rows": [
+    {
+      "observed": true,
+      "round": 0,
+      "index": 0,
+      "locale": "fi",
+      "errors": [],
+      "mismatchCount": 0
+    },
+    {
+      "observed": true,
+      "round": 0,
+      "index": 1,
+      "locale": "en",
+      "errors": [
+        "Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      ],
+      "mismatchCount": 1
+    }
+  ],
+  "mismatches": [
+    {
+      "observed": true,
+      "round": 0,
+      "current": {
+        "index": 1,
+        "locale": "en"
+      },
+      "reason": "other",
+      "frames": [
+        {
+          "function": "rD",
+          "url": "",
+          "line": 0,
+          "column": 35060
+        },
+        {
+          "function": "oq",
+          "url": "",
+          "line": 0,
+          "column": 84564
+        },
+        {
+          "function": "iw",
+          "url": "",
+          "line": 0,
+          "column": 114959
+        },
+        {
+          "function": "",
+          "url": "",
+          "line": 0,
+          "column": 110320
+        },
+        {
+          "function": "iu",
+          "url": "",
+          "line": 0,
+          "column": 110829
+        },
+        {
+          "function": "iX",
+          "url": "",
+          "line": 0,
+          "column": 132932
+        },
+        {
+          "function": "x",
+          "url": "",
+          "line": 3,
+          "column": 4577
+        }
+      ],
+      "capture": {
+        "readyState": "loading",
+        "at": 1379.3999998569489,
+        "url": "http://localhost:3217/en",
+        "boot": {
+          "at": 190.39999985694885,
+          "readyState": "loading",
+          "theme": null,
+          "darkSystem": false
+        },
+        "next": {
+          "id": 5,
+          "name": "DIV",
+          "className": "min-w-0 max-w-xl",
+          "connected": true,
+          "html": "<div class=\"min-w-0 max-w-xl\"><p class=\"mb-4 text-xs font-semibold uppercase tracking-[.14em] text-accent\">For laboratory research</p><h1 class=\"break-words hyphens-auto font-display text-[2.25rem] font-semibold leading-[1.1] tracking-[-.04em] sm:text-5xl lg:text-[3.25rem]\">Materials and tools for laboratory research.</h1><p class=\"mt-5 max-w-lg text-base leading-relaxed text-ink-muted\">Find a material, inspect its available records and work through your laboratory calculations.</p><form class=\"",
+          "parent": "SECTION"
+        },
+        "parentFiber": {
+          "type": "section",
+          "node": null
+        },
+        "hydrating": true,
+        "rootOrSingleton": false,
+        "path": [
+          {
+            "type": "section",
+            "tag": 5,
+            "props": {
+              "className": "grid items-center gap-8 py-10 sm:py-16 lg:grid-cols-[1.15fr_1fr] lg:gap-14"
+            },
+            "node": null
+          },
+          {
+            "type": "div",
+            "tag": 5,
+            "props": {
+              "className": "mx-auto w-full px-4 sm:px-6 lg:px-10 max-w-[var(--container-page)]"
+            },
+            "node": {
+              "id": 1,
+              "name": "DIV",
+              "className": "mx-auto w-full px-4 sm:px-6 lg:px-10 max-w-[var(--container-page)]",
+              "connected": true,
+              "html": "<div class=\"mx-auto w-full px-4 sm:px-6 lg:px-10 max-w-[var(--container-page)]\"><section class=\"grid items-center gap-8 py-10 sm:py-16 lg:grid-cols-[1.15fr_1fr] lg:gap-14\"><div class=\"min-w-0 max-w-xl\"><p class=\"mb-4 text-xs font-semibold uppercase tracking-[.14em] text-accent\">For laboratory research</p><h1 class=\"break-words hyphens-auto font-display text-[2.25rem] font-semibold leading-[1.1] tracking-[-.04em] sm:text-5xl lg:text-[3.25rem]\">Materials and tools for laboratory research.</h1><p c",
+              "parent": "MAIN"
+            }
+          },
+          {
+            "type": "7",
+            "tag": 7,
+            "props": {},
+            "node": null
+          },
+          {
+            "type": "10",
+            "tag": 10,
+            "props": {},
+            "node": null
+          },
+          {
+            "type": "P",
+            "tag": 0,
+            "props": {},
+            "node": null
+          },
+          {
+            "type": "c",
+            "tag": 1,
+            "props": {},
+            "node": {
+              "id": 2
+            }
+          },
+          {
+            "type": "f",
+            "tag": 0,
+            "props": {},
+            "node": null
+          },
+          {
+            "type": "l",
+            "tag": 1,
+            "props": {},
+            "node": {
+              "id": 3
+            }
+          },
+          {
+            "type": "c",
+            "tag": 0,
+            "props": {},
+            "node": null
+          },
+          {
+            "type": "j",
+            "tag": 0,
+            "props": {},
+            "node": null
+          },
+          {
+            "type": "c",
+            "tag": 1,
+            "props": {},
+            "node": {
+              "id": 4
+            }
+          },
+          {
+            "type": "f",
+            "tag": 0,
+            "props": {},
+            "node": null
+          }
+        ],
+        "footer": null,
+        "footerChildren": [],
+        "mutations": [],
+        "calls": [],
+        "headStyles": [
+          {
+            "text": ":where(html[dir=\"ltr\"]),:where([data-sonner-toaster][dir=\"ltr\"]){--toast-icon-margin-start: -3px;--toast-icon-margin-end: 4px;--toast-svg-margin-start: -1px;--toast-svg-margin-end: 0px;--toast-button-margin-start: auto;--toast-button-margin-end: 0;--"
+          }
+        ],
+        "navigation": [
+          {
+            "domInteractive": 0,
+            "domContentLoadedEventEnd": 0,
+            "loadEventEnd": 0,
+            "responseEnd": 0
+          }
+        ]
+      }
+    }
+  ],
+  "completed": "2026-10-15T16:13:01.247Z"
+}
