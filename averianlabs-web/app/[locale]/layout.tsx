@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic"
 
 import { LazyChatWidget } from "@/components/ai/chat/LazyChatWidget"
 import { Chrome } from "@/components/layout/Chrome"
+import { DocumentHydrationGate } from "@/components/layout/DocumentHydrationGate"
 import { MotionProvider } from "@/components/layout/MotionProvider"
 import { PostHogProvider } from "@/components/layout/PostHogProvider"
 import { ThemeProvider } from "@/components/layout/ThemeProvider"
@@ -161,21 +162,23 @@ export default async function LocaleLayout({
         data-review-site={process.env.NEXT_PUBLIC_REVIEW_SITE === "true" ? "true" : undefined}
         className="min-h-screen bg-bg text-ink antialiased"
       >
-        <ThemeProvider>
-          <MotionProvider>
-            <OrganizationJsonLd />
-            <WebsiteJsonLd locale={locale} />
-            <NextIntlClientProvider locale={locale} messages={clientMessages}>
-              <Chrome locale={locale}>{children}</Chrome>
-              <Suspense fallback={null}>
-                <PostHogProvider />
-              </Suspense>
-              <Toaster />
-              <LazyChatWidget locale={locale} demoMode={isDemoBuild()} />
-              <VercelInsights />
-            </NextIntlClientProvider>
-          </MotionProvider>
-        </ThemeProvider>
+        <DocumentHydrationGate>
+          <ThemeProvider>
+            <MotionProvider>
+              <OrganizationJsonLd />
+              <WebsiteJsonLd locale={locale} />
+              <NextIntlClientProvider locale={locale} messages={clientMessages}>
+                <Chrome locale={locale}>{children}</Chrome>
+                <Suspense fallback={null}>
+                  <PostHogProvider />
+                </Suspense>
+                <Toaster />
+                <LazyChatWidget locale={locale} demoMode={isDemoBuild()} />
+                <VercelInsights />
+              </NextIntlClientProvider>
+            </MotionProvider>
+          </ThemeProvider>
+        </DocumentHydrationGate>
       </body>
     </html>
   )

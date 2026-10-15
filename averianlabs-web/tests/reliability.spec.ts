@@ -155,6 +155,35 @@ for (const locale of ["en", "fi"]) {
           return true
         }),
       ).toBe(true)
+      for (const path of ["/legal/terms", "/legal/privacy", "/contact"]) {
+        if (path !== "/legal/terms")
+          await page.goto(`${process.env.BASE_URL ?? "http://localhost:3000"}/${locale}`)
+        const footer = page.getByRole("contentinfo")
+        await footer.scrollIntoViewIfNeeded()
+        await expect(footer).toBeVisible()
+        // Native details must expose these links even with no client runtime.
+        for (const disclosure of await footer.locator("details").all())
+          await disclosure.locator("summary").click()
+        const link = footer.locator(`a[href="/${locale}${path}"]:visible`)
+        await expect(link).toHaveCount(1)
+        await link.scrollIntoViewIfNeeded()
+        await expect(link).toBeVisible()
+        expect(
+          await link.evaluate((node) => {
+            let element: Element | null = node
+            while (element) {
+              if (getComputedStyle(element).opacity === "0") return false
+              element = element.parentElement
+            }
+            return true
+          }),
+        ).toBe(true)
+        await link.click()
+        await expect(page).toHaveURL(
+          `${process.env.BASE_URL ?? "http://localhost:3000"}/${locale}${path}`,
+        )
+        await expect(page.locator("main h1").first()).toBeVisible()
+      }
     } finally {
       await context.close()
     }

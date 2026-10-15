@@ -2,12 +2,12 @@ import { ChromeIslands } from "@/components/layout/ChromeIslands"
 import { Footer } from "@/components/layout/Footer"
 import { Header } from "@/components/layout/Header"
 import { CatalogueProvider } from "@/components/product/CatalogueProvider"
+import { getFooterContent } from "@/lib/layout/footer-content"
 import { getStorefrontCatalogue } from "@/lib/products/catalogue"
-import { Suspense } from "react"
 
 /**
  * Composition shell. Header is interactive (cart/wishlist/compare stores),
- * Footer is async (server component for SSR'd i18n strings), ChromeIslands
+ * Footer receives resolved server copy for synchronous SSR, ChromeIslands
  * holds the lazily-loaded modals / banners.
  *
  * The request-scoped database catalogue feeds client search, compare and cart
@@ -20,16 +20,17 @@ export async function Chrome({
   locale: string
   children: React.ReactNode
 }) {
-  const products = await getStorefrontCatalogue()
+  const [products, footerContent] = await Promise.all([
+    getStorefrontCatalogue(),
+    getFooterContent(locale),
+  ])
   return (
     <CatalogueProvider products={products}>
       <Header locale={locale} />
       <main id="main" className="min-h-[calc(100vh-64px)]">
         {children}
       </main>
-      <Suspense fallback={null}>
-        <Footer locale={locale} />
-      </Suspense>
+      <Footer content={footerContent} />
       <ChromeIslands locale={locale} />
     </CatalogueProvider>
   )
