@@ -104,7 +104,7 @@ for (const entry of cases) {
     rows.push(row)
     await checkpoint("running")
     console.log(
-      `${rows.length}/${cases.length} ${entry.locale}/${entry.id}: ${row.completed && row.numericalCorrectness && !row.invalidSuccess ? "checked" : "needs review"}`,
+      `${rows.length}/${cases.length} ${entry.locale}/${entry.id}: ${row.completed && row.numericalCorrectness && row.guidanceCorrectness && !row.invalidSuccess ? "checked" : "needs review"}`,
     )
   } catch (error) {
     await checkpoint("incomplete", (error as Error).name)
@@ -112,6 +112,11 @@ for (const entry of cases) {
   }
 }
 await checkpoint("executed")
-if (rows.some((row) => !row.completed || !row.numericalCorrectness || row.invalidSuccess))
+if (
+  rows.some(
+    (row) =>
+      !row.completed || !row.numericalCorrectness || !row.guidanceCorrectness || row.invalidSuccess,
+  )
+)
   process.exit(1)
 console.log("Runtime/numerical checks completed. Saved answers still require editorial assessment.")

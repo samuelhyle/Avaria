@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest"
+import { researchGuidance } from "../answers/guidance"
 import { RESEARCH_EVAL_CASES } from "./research-cases"
 import { assessResearchResponse, validateEvaluationTarget } from "./runner"
 
@@ -34,6 +35,25 @@ describe("live evaluation evidence", () => {
     )
     expect(result.completed).toBe(false)
     expect(result.numericalCorrectness).toBe(false)
+  })
+  it("requires the relevant reviewed topic for scientific guidance rather than a plausible model-only answer", () => {
+    const entry = RESEARCH_EVAL_CASES.find((item) => item.id === "upward-dilution")
+    if (!entry) throw new Error()
+    const done = event({ type: "done" })
+    expect(assessResearchResponse(entry, 200, text + done).guidanceCorrectness).toBe(false)
+    const tool = event({
+      type: "tool-result",
+      name: "getResearchGuidance",
+      content: { topic: "dilution_limit" },
+    })
+    expect(assessResearchResponse(entry, 200, tool + text + done).guidanceCorrectness).toBe(false)
+    const reviewed = event({
+      type: "text",
+      delta: researchGuidance("dilution_limit", entry.locale).text,
+    })
+    expect(assessResearchResponse(entry, 200, tool + reviewed + done).guidanceCorrectness).toBe(
+      true,
+    )
   })
   it("keeps hosted evaluation anonymous and restricted to the review origin", () => {
     const env = { AI_EVAL_TARGET: "review", BASE_URL: "https://averianlabs-demo.netlify.app" }

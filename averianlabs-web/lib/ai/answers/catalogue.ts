@@ -12,6 +12,23 @@ const safe = (value: unknown) =>
     .replace(/[\n\r|<>`\[\]]/g, " ")
     .slice(0, 160)
 
+/** Known record titles are labels, not additional SKU claims. Keep SKU/price rows intact. */
+export function catalogueVerificationText(text: string, trace: Trace[]) {
+  let result = text
+  for (const item of trace) {
+    const content = record(item.result)
+    if (item.name === "getProduct" && typeof content.name === "string")
+      result = result.split(`**${safe(content.name)}**`).join("**Catalogue item**")
+    if (item.name === "searchProducts")
+      for (const product of rows(content.results))
+        result = result.split(`**${safe(product.name)}**`).join("**Catalogue item**")
+    if (item.name === "compareProducts")
+      for (const product of rows(content.products))
+        result = result.split(`\n| ${safe(product.name)} |`).join("\n| Catalogue item |")
+  }
+  return result
+}
+
 /** Commercial and document prose comes from tool records, with no model-added promises. */
 export function renderCatalogueAnswer(trace: Trace[], locale: string): string | null {
   const catalogueTools = new Set([

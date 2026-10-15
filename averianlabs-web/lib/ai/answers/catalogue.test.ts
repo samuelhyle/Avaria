@@ -1,5 +1,7 @@
+import { referenceCatalogue } from "@/lib/products/catalogue"
 import { describe, expect, it } from "vitest"
-import { renderCatalogueAnswer } from "./catalogue"
+import { verifyResponse } from "../guardrails/verify"
+import { catalogueVerificationText, renderCatalogueAnswer } from "./catalogue"
 const vial = {
   sku: "BACW-10",
   sizeValue: 10,
@@ -9,6 +11,40 @@ const vial = {
   priceCents: 0,
 }
 const product = { slug: "bac-water", name: "BAC water", vials: [vial] }
+describe("catalogue name verification", () => {
+  const catalogue = referenceCatalogue()
+  const blend = catalogue.find((product) => product.slug === "bpc-tb-blend")
+  if (!blend) throw new Error("Blend reference missing")
+  const trace = [
+    {
+      name: "searchProducts",
+      result: {
+        results: [
+          {
+            name: blend.translations?.fi?.name ?? blend.defaultTranslation.name,
+            slug: blend.slug,
+            vials: blend.vials,
+          },
+        ],
+      },
+    },
+  ]
+  it("recognises a listed blend title while continuing to validate its actual SKU", () => {
+    const answer = renderCatalogueAnswer(trace, "fi")
+    if (!answer) throw new Error()
+    const text = catalogueVerificationText(answer, trace)
+    expect(text).toContain("BPC-TB-10")
+    expect(verifyResponse(text, catalogue).passed).toBe(true)
+  })
+  it("still rejects an invented SKU row even when its product title is legitimate", () => {
+    const answer = renderCatalogueAnswer(trace, "fi")
+    if (!answer) throw new Error()
+    const changed = answer.replace("| BPC-TB-10 |", "| FAKE-999 |")
+    expect(
+      verifyResponse(catalogueVerificationText(changed, trace), catalogue).unknownSkus,
+    ).toContain("FAKE-999")
+  })
+})
 for (const locale of ["en", "fi"])
   describe(`controlled catalogue answers: ${locale}`, () => {
     it("preserves physical units and unavailable status without claiming zero-price sales or purity", () => {

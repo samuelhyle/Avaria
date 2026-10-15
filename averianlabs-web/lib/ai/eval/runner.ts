@@ -1,3 +1,4 @@
+import { researchGuidance } from "@/lib/ai/answers/guidance"
 import { calculateLaboratory } from "@/lib/calculations"
 import type { ResearchEvalCase } from "./research-cases"
 
@@ -58,6 +59,14 @@ export function assessResearchResponse(entry: ResearchEvalCase, status: number, 
       ),
     )
   const invalidSuccess = Boolean(entry.mustAbstain && calculations.length > 0)
+  const guidanceCorrectness =
+    !entry.guidanceTopics ||
+    toolResults.some(
+      (event) =>
+        event.name === "getResearchGuidance" &&
+        entry.guidanceTopics?.includes(event.content?.topic) &&
+        answer.includes(researchGuidance(event.content.topic, entry.locale).text),
+    )
   const completed =
     status >= 200 &&
     status < 300 &&
@@ -72,6 +81,7 @@ export function assessResearchResponse(entry: ResearchEvalCase, status: number, 
     completed,
     numericalCorrectness,
     invalidSuccess,
+    guidanceCorrectness,
     assessment: {
       taskCompletion: completed ? "runtime_completed" : "incomplete",
       numericalCorrectness: expected ? (numericalCorrectness ? "pass" : "fail") : "not_applicable",
@@ -79,6 +89,11 @@ export function assessResearchResponse(entry: ResearchEvalCase, status: number, 
       citationValidity: "pending_source_review",
       languageQuality: "pending_finnish_english_editorial_review",
       abstention: entry.mustAbstain ? "pending_answer_review" : "not_applicable",
+      guidanceContract: entry.guidanceTopics
+        ? guidanceCorrectness
+          ? "pass"
+          : "fail"
+        : "not_applicable",
     },
     answer,
     toolNames: toolResults.map((event) => event.name),

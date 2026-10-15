@@ -138,7 +138,8 @@ export const AVERIA_PLATFORM_FACTS = `Documented platform facts; do not invent a
 - No automatic stock monitoring, future callback, stock alert or scheduled follow-up is established by the chat. Offer a support request now or ask the customer to check again. Stock arrival does not automatically establish report publication or approval.
 - Molar conversion is not implemented. Do not promise to run it or infer blend molar mass from a generic weighted average. It needs the approved chemical forms, component composition, appropriate molar masses and quantities.
 - Batch evidence describes the tested samples and scope stated in the original report. Never say every individual vial was tested. Do not invent FDA/EMA requirements or institutional quality policies. A document may cover multiple variants only when its actual scope and exact associations establish that.
-- In Finnish use näytepullo, tuotekoodi, osanäyte, nimellismassa and eräasiakirjat. Avoid injektiopullo, eskaloida and untranslated field/category names.`
+- In Finnish use näytepullo, tuotekoodi, osanäyte, nimellismassa and eräasiakirjat. Avoid injektiopullo, eskaloida and untranslated field/category names.
+- Questions about these platform facts, including short preference/consent questions, MUST first call getResearchGuidance with the matching topic (memory for consent/preferences). Do not answer them directly from these bullets. Do not invoke a save action when the customer is asking how saving works.`
 
 const LOCALE_NAMES: Record<string, string> = {
   en: "English",

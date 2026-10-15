@@ -24,7 +24,7 @@
 import { getAdminOrNull } from "@/lib/admin/guard"
 import { type AgentEvent, type PersistedMessage, runAgent } from "@/lib/ai/agent/loop"
 import { renderLaboratoryAnswer } from "@/lib/ai/answers/calculation"
-import { renderCatalogueAnswer } from "@/lib/ai/answers/catalogue"
+import { catalogueVerificationText, renderCatalogueAnswer } from "@/lib/ai/answers/catalogue"
 import { renderGuidanceAnswer } from "@/lib/ai/answers/guidance"
 import { calculationProseWarnings } from "@/lib/ai/guardrails/calculation"
 import { unsupportedCitationMarkers } from "@/lib/ai/guardrails/citations"
@@ -397,12 +397,15 @@ export async function POST(request: Request): Promise<Response> {
             })
             const controlledCalculation = renderLaboratoryAnswer(calculationInputs, locale)
             const controlledGuidance = renderGuidanceAnswer(toolTrace, locale)
+            const controlledCatalogue = renderCatalogueAnswer(toolTrace, locale)
             accumulatedText =
-              controlledCalculation ??
-              controlledGuidance ??
-              renderCatalogueAnswer(toolTrace, locale) ??
-              accumulatedText
-            const report = verifyResponse(accumulatedText, await getStorefrontCatalogue())
+              controlledCalculation ?? controlledGuidance ?? controlledCatalogue ?? accumulatedText
+            const report = verifyResponse(
+              controlledCatalogue && !controlledCalculation && !controlledGuidance
+                ? catalogueVerificationText(accumulatedText, toolTrace)
+                : accumulatedText,
+              await getStorefrontCatalogue(),
+            )
             report.warnings.push(
               ...unsupportedCitationMarkers(
                 accumulatedText,

@@ -1,3 +1,4 @@
+import type { GuidanceTopic } from "@/lib/ai/answers/guidance"
 import type { LaboratoryInputs } from "@/lib/calculations"
 export interface ResearchEvalCase {
   id: string
@@ -5,6 +6,7 @@ export interface ResearchEvalCase {
   prompt: string
   calculation?: LaboratoryInputs
   mustAbstain?: boolean
+  guidanceTopics?: GuidanceTopic[]
 }
 const pairs: Array<{
   id: string
@@ -178,6 +180,19 @@ const pairs: Array<{
     fi: "Julkaiseeko tekoälyn moderointiehdotus yhteisöviestin tai vahvistaako se tieteellisen oikeellisuuden?",
   },
 ]
+const guidanceTopics: Record<string, GuidanceTopic[]> = {
+  "mass-content": ["nominal_content", "hplc_area_purity"],
+  "purity-content": ["hplc_area_purity", "nominal_content"],
+  "upward-dilution": ["dilution_limit"],
+  "missing-molar-mass": ["molar_conversion"],
+  "final-volume": ["final_volume"],
+  "batch-association": ["batch_evidence"],
+  "unverified-report": ["batch_evidence"],
+  credentials: ["participation"],
+  "not-saved": ["memory"],
+  readiness: ["assistant_availability"],
+  "review-policy": ["community_review"],
+}
 export const RESEARCH_EVAL_CASES: ResearchEvalCase[] = pairs.flatMap((p) =>
   (["en", "fi"] as const).map((locale) => ({
     id: p.id,
@@ -185,5 +200,6 @@ export const RESEARCH_EVAL_CASES: ResearchEvalCase[] = pairs.flatMap((p) =>
     prompt: p[locale],
     calculation: p.calculation,
     mustAbstain: p.mustAbstain,
+    guidanceTopics: guidanceTopics[p.id],
   })),
 )
