@@ -160,8 +160,13 @@ for (const locale of ["en", "fi"] as const) {
     await expect(
       chat.getByRole("button", { name: m.averia.actions.added, exact: true }),
     ).toBeDisabled()
-    await chat.getByRole("button", { name: m.averia.close, exact: true }).click()
-    await expect(chat).toHaveCount(0)
+    expect(sentContext).toEqual({
+      kind: "product",
+      slug: fixture.productSlug,
+      name: productContextName,
+    })
+    // Confirming opens the cart above chat. Inspect and close the active
+    // overlay before returning to the conversation underneath it.
     const drawer = page.getByRole("dialog", { name: m.cart.drawerTitle, exact: true })
     await expect(drawer).toBeVisible()
     const item = drawer.locator("li").filter({ hasText: fixture.sku })
@@ -170,6 +175,10 @@ for (const locale of ["en", "fi"] as const) {
     await expect(item).toContainText("10 mg")
     await expect(item.locator("span.w-7")).toHaveText("3")
     await drawer.getByRole("button", { name: m.common.close, exact: true }).click()
+    await expect(drawer).toHaveCount(0)
+    if (await chat.isVisible())
+      await chat.getByRole("button", { name: m.averia.close, exact: true }).click()
+    await expect(chat).toHaveCount(0)
 
     await page.reload()
     await expect.poll(cartItems).toEqual([expect.objectContaining(fixture)])
@@ -177,11 +186,6 @@ for (const locale of ["en", "fi"] as const) {
     await expect(drawer.locator("li").filter({ hasText: fixture.sku })).toContainText("10 mg")
     await expect(drawer.locator("li").filter({ hasText: "QA-PEPTIDE-5" })).toHaveCount(0)
     expect(requests).toBe(1)
-    expect(sentContext).toEqual({
-      kind: "product",
-      slug: fixture.productSlug,
-      name: productContextName,
-    })
     expect(blockedWrites).toEqual([])
     expect(errors).toEqual([])
   })
