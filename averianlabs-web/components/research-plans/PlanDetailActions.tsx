@@ -11,16 +11,16 @@ interface PlanDetailActionsProps {
   planId: string
   shareSlug: string | null
   isPublic: boolean
-  title: string
   locale: string
+  initialShareOpen?: boolean
 }
 
 export function PlanDetailActions({
   planId,
   shareSlug,
   isPublic,
-  title,
   locale,
+  initialShareOpen = false,
 }: PlanDetailActionsProps) {
   const r = useTranslations("research")
   const t = useTranslations("plans")
@@ -28,7 +28,7 @@ export function PlanDetailActions({
   const [busy, setBusy] = useState<string | null>(null)
   const [error, setError] = useState("")
   const [, startTransition] = useTransition()
-  const [shareOpen, setShareOpen] = useState(false)
+  const [shareOpen, setShareOpen] = useState(initialShareOpen && isPublic && Boolean(shareSlug))
   const [deleteOpen, setDeleteOpen] = useState(false)
   const [confirmPhrase, setConfirmPhrase] = useState("")
 
@@ -36,26 +36,36 @@ export function PlanDetailActions({
     ? `${typeof window !== "undefined" ? window.location.origin : ""}/${locale}/plans/${shareSlug}`
     : ""
 
-  const togglePublic = () => {
+  const togglePublic = async () => {
     setBusy("share")
     setError("")
-    startTransition(async () => {
-      try {
-        const res = await fetch(`/api/plans/${planId}`, {
-          method: "PATCH",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ isPublic: !isPublic }),
-        })
-        const data = (await res.json()) as { ok: boolean }
-        if (!res.ok || !data.ok) throw new Error("save failed")
-        setShareOpen(!isPublic)
-        router.refresh()
-      } catch {
-        setError(t("saveFailed"))
-      } finally {
-        setBusy(null)
+    try {
+      const res = await fetch(`/api/plans/${planId}`, {
+        method: "PATCH",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ isPublic: !isPublic }),
+      })
+      const data = (await res.json()) as {
+        ok: boolean
+        plan?: { isPublic: boolean; shareSlug: string | null }
       }
-    })
+      if (
+        !res.ok ||
+        !data.ok ||
+        data.plan?.isPublic !== !isPublic ||
+        (data.plan.isPublic ? !data.plan.shareSlug : data.plan.shareSlug !== null)
+      )
+        throw new Error("save failed")
+
+      // Commit the badge, actions and share URL together from the confirmed server state.
+      const destination = new URL(window.location.href)
+      if (data.plan.isPublic) destination.searchParams.set("share", "1")
+      else destination.searchParams.delete("share")
+      window.location.assign(`${destination.pathname}${destination.search}${destination.hash}`)
+    } catch {
+      setError(t("saveFailed"))
+      setBusy(null)
+    }
   }
 
   const copy = async () => {

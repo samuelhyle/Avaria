@@ -12,6 +12,7 @@
 
 import { chatErrorBody } from "@/lib/ai/errors"
 import { getConsentState, getOrCreateAnonId, setConsentState } from "@/lib/ai/memory/consent-client"
+import { createAgentEventParser } from "@/lib/ai/stream"
 import type { ChatContext, ChatMessage, CitationRef } from "@/lib/ai/types"
 import { useTranslations } from "next-intl"
 import { useCallback, useEffect, useRef, useState } from "react"
@@ -194,31 +195,17 @@ export function useAveriaChat({
           if (!reader) throw new Error("No stream")
 
           const decoder = new TextDecoder()
-          let buffer = ""
+          const parser = createAgentEventParser()
           let completed = false
 
           while (true) {
             const { done, value } = await reader.read()
-            if (done) break
-            buffer += decoder.decode(value, { stream: true })
-            let nl = buffer.indexOf("\n\n")
-            while (nl !== -1) {
-              const event = buffer.slice(0, nl).trim()
-              buffer = buffer.slice(nl + 2)
-              if (!event.startsWith("data:")) continue
-              const payload = event.slice(5).trim()
-              if (!payload) continue
-              let msg: AgentEventWire
-              try {
-                msg = JSON.parse(payload) as AgentEventWire
-              } catch {
-                nl = buffer.indexOf("\n\n")
-                continue
-              }
+            const decoded = done ? decoder.decode() : decoder.decode(value, { stream: true })
+            for (const msg of parser.push(decoded)) {
               if (msg.type === "done") completed = true
               handleWireEvent(msg, assistantId)
-              nl = buffer.indexOf("\n\n")
             }
+            if (done) break
           }
           if (!completed) {
             const error = new Error("incomplete_stream")

@@ -13,6 +13,7 @@ import { notFound } from "next/navigation"
 
 interface Props {
   params: Promise<{ locale: string; id: string }>
+  searchParams: Promise<{ share?: string | string[] }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function PlanDetailPage({ params }: Props) {
+export default async function PlanDetailPage({ params, searchParams }: Props) {
   const { locale, id } = await params
   setRequestLocale(locale)
   const r = await getTranslations({ locale, namespace: "research" })
@@ -55,6 +56,7 @@ export default async function PlanDetailPage({ params }: Props) {
   const plan = await getPlanForOwner(id, member.id, locale)
   if (!plan) notFound()
   const t = await getTranslations("plans")
+  const initialShareOpen = (await searchParams).share === "1"
 
   return (
     <Container size="wide" className="py-10">
@@ -94,8 +96,8 @@ export default async function PlanDetailPage({ params }: Props) {
           planId={plan.id}
           shareSlug={plan.shareSlug}
           isPublic={plan.isPublic}
-          title={plan.title}
           locale={locale}
+          initialShareOpen={initialShareOpen}
         />
       </header>
 

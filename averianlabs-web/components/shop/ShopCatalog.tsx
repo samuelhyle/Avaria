@@ -131,13 +131,19 @@ export function ShopCatalog({ locale }: { locale: string }) {
           ) : view === "list" ? (
             <div className="grid gap-3">
               {filtered.map((p) => (
-                <ProductCard key={p.slug} product={p} locale={locale as Locale} variant="list" />
+                <ProductCard
+                  key={p.slug}
+                  product={p}
+                  locale={locale as Locale}
+                  variant="list"
+                  headingLevel={2}
+                />
               ))}
             </div>
           ) : (
             <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
               {filtered.map((p) => (
-                <ProductCard key={p.slug} product={p} locale={locale as Locale} />
+                <ProductCard key={p.slug} product={p} locale={locale as Locale} headingLevel={2} />
               ))}
             </div>
           )}

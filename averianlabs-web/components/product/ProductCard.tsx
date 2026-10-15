@@ -17,7 +17,15 @@ export function ProductCard({
   locale,
   className,
   variant = "grid",
-}: { product: Product; locale: Locale; className?: string; variant?: "grid" | "list" }) {
+  headingLevel = 3,
+}: {
+  product: Product
+  locale: Locale
+  className?: string
+  variant?: "grid" | "list"
+  headingLevel?: 2 | 3
+}) {
+  const Heading = headingLevel === 2 ? "h2" : "h3"
   const t = useTranslations("shop")
   const r = useTranslations("research")
   const translation = product.translations?.[locale] ?? product.defaultTranslation
@@ -44,14 +52,14 @@ export function ProductCard({
           <VialGraphic hue={product.hue} showLabel={false} className="h-14 w-8" />
         </div>
         <div className="min-w-0 flex-1">
-          <h3 className="text-base font-semibold tracking-tight">
+          <Heading className="text-base font-semibold tracking-tight">
             <Link
               href={`/${locale}/shop/${product.slug}`}
               className="after:absolute after:inset-0 after:rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               {translation.name}
             </Link>
-          </h3>
+          </Heading>
           <p className="mt-1 break-words font-mono text-xs text-ink-muted">{vial.sku}</p>
           <p className="mt-1 text-sm text-ink-muted">
             {product.vials.map((v) => formatSize(v, locale)).join(" / ")}
@@ -77,9 +85,7 @@ export function ProductCard({
         <button
           type="button"
           onClick={() => compare.toggle(product.slug)}
-          aria-label={
-            compare.items.includes(product.slug) ? t("removeFromCompare") : t("addToCompare")
-          }
+          aria-label={`${t("compareLabel")}: ${compare.items.includes(product.slug) ? t("removeFromCompare") : t("addToCompare")}`}
           aria-pressed={compare.items.includes(product.slug)}
           disabled={!compare.items.includes(product.slug) && compare.items.length >= compare.max}
           className="inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-line px-2.5 text-xs text-ink-muted hover:text-ink disabled:opacity-50"
