@@ -185,3 +185,7 @@ The [editorial, assistant-evaluation and recovery review](RESEARCH_EDITORIAL_REV
 The verified follow-up is published: see the [15 October deployment record](NETLIFY_DEPLOYMENT_2026-10-15.md) for exact source, final targeted assistant checks, independent public-domain verification and remaining release requirements. The full baseline and intermediate failed attempts remain separate evidence.
 
 In the laboratory-buyer usability pass, prioritize the assistant at 320 px: assess conversation width, avatar/tool spacing and the multi-line composer placeholder. Automated overflow checks passed, but the narrow layout remains compact and needs customer/keyboard review.
+
+## Next visual and content iteration — 15 October 2026
+
+The active next-pass brief is the [site experience master plan](SITE_EXPERIENCE_MASTER_PLAN_2026-10-15.md), with fresh live-review evidence, proposed bilingual edits, imagery direction, ordered work packages and acceptance criteria. Its [visual reference board](SITE_VISUAL_DIRECTION_2026-10-15.html) is a proposed component study. Existing implementation checkboxes retain their historical meaning.

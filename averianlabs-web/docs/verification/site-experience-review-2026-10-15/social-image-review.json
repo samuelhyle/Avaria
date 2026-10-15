@@ -1,0 +1,17 @@
+{
+  "scope": "Read-only direct downloads of current hosted social images; image equality observed, root cause unconfirmed.",
+  "rows": [
+    {
+      "locale": "en",
+      "url": "https://averianlabs-demo.netlify.app/api/og/default?locale=en",
+      "file": "og-current-en.png",
+      "sha256": "75e93e99fa4e3fcfa99905166192b62b4d4b0e4553c91f3084bdd3e15954ec00"
+    },
+    {
+      "locale": "fi",
+      "url": "https://averianlabs-demo.netlify.app/api/og/default?locale=fi",
+      "file": "og-current-fi.png",
+      "sha256": "75e93e99fa4e3fcfa99905166192b62b4d4b0e4553c91f3084bdd3e15954ec00"
+    }
+  ]
+}

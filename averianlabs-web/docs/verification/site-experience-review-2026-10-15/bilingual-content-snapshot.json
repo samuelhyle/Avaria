@@ -1,0 +1,938 @@
+[
+  {
+    "locale": "en",
+    "path": "",
+    "status": 200,
+    "title": "AverianLabs — Laboratory research materials",
+    "headings": [
+      "Research materials for laboratory work.",
+      "Retatrutide",
+      "Find a material",
+      "Inspect the records",
+      "Confirm availability",
+      "Explore the catalogue",
+      "Quality and product documentation",
+      "Research tools"
+    ],
+    "main": "FOR LABORATORY RESEARCH\n\nResearch materials for laboratory work.\n\nExplore products, review batch documents and check availability before ordering.\n\nBrowse the catalogue →\nReview batch documents\n\nFor laboratory research only.\n\nProduct\nRetatrutide\n\nRETA-20\n\n20 mg / 30 mg\n\nAvailability\nCurrently unavailable\nBatch documents\nNo publicly available documents.\nIllustrative product view\nView → →\nExplore in 3D\n1\nFind a material\n\nSearch by name or SKU.\n\n2\nInspect the records\n\nCheck the original sources for the exact product and batch.\n\n3\nConfirm availability\n\nReview purchasing information before ordering.\n\nExplore the catalogue\n\nBrowse product information and find materials relevant to your research.\n\nBrowse products →\nBAC water\n\nBACW-10\n\n10 mL\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nRetatrutide\n\nRETA-20\n\n20 mg / 30 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nGHK-Cu\n\nGHKCU-50\n\n50 mg / 100 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nMOTS-c\n\nMOTSC-10\n\n10 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nQuality and product documentation\n\nEvaluate materials using the documents for the actual product and batch. Availability of a report is shown explicitly; missing reports are not presented as verified results.\n\nView batch documents →\nUnderstanding test results →\nResearch tools\n\nCalculate laboratory quantities, inspect sources and ask research questions.\n\nLaboratory calculator\nResearch community",
+    "links": [
+      {
+        "text": "Browse the catalogue →",
+        "href": "/en/shop"
+      },
+      {
+        "text": "Review batch documents",
+        "href": "/en/coa"
+      },
+      {
+        "text": "View → →",
+        "href": "/en/shop/retatrutide"
+      },
+      {
+        "text": "Browse products →",
+        "href": "/en/shop"
+      },
+      {
+        "text": "BAC water",
+        "href": "/en/shop/bac-water"
+      },
+      {
+        "text": "Retatrutide",
+        "href": "/en/shop/retatrutide"
+      },
+      {
+        "text": "GHK-Cu",
+        "href": "/en/shop/ghk-cu"
+      },
+      {
+        "text": "MOTS-c",
+        "href": "/en/shop/mots-c"
+      },
+      {
+        "text": "View batch documents →",
+        "href": "/en/coa"
+      },
+      {
+        "text": "Understanding test results →",
+        "href": "/en/lab-tests"
+      },
+      {
+        "text": "Laboratory calculator",
+        "href": "/en/peptide-calculator"
+      },
+      {
+        "text": "Research community",
+        "href": "/en/community"
+      }
+    ],
+    "buttons": ["", "Compare", "", "Compare", "", "Compare", "", "Compare"]
+  },
+  {
+    "locale": "en",
+    "path": "/shop",
+    "status": 200,
+    "title": "Research catalog · AverianLabs",
+    "headings": ["Research catalog", "Filters"],
+    "main": "Research catalog\n\nCheck SKU availability and original batch documents before ordering.\n\n15 products\nSearch products…\nCompare\nAll material types\nPeptides\nCosmetic raw materials\nReagents\nLaboratory supplies\nPublished documents\nFilters\nClear all\nCATEGORY\nMetabolic Research\n4\nTissue Research\n1\nNeurobiology\n2\nCell Ageing\n2\nCosmetic Research\n3\nBlends\n2\nLaboratory Supplies\n1\n\nPurity filtering becomes available when published batch results exist.\n\nIn stock\nQuote-only items\nSORT\nNewest\nPrice ↑\nPrice ↓\nName (A→Z)\nPurity (high→low)\nHGH Frag 176-191\n\nHGHFR-5\n\n5 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nAOD-9604\n\nAOD-5\n\n5 mg\n\nRequest a quote\nNo publicly available documents.\nCompare\nCJC-1295\n\nCJC-1\n\n1 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nSemax\n\nSEMX-5\n\n5 mg / 10 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nSelank\n\nSELK-5\n\n5 mg / 10 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nBPC-157 + TB-500 blend\n\nBPC-TB-10\n\n10 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nKLOW blend\n\nKLOW-80\n\n80 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nMelanotan I\n\nMT1-10\n\n10 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nBPC-157\n\nBPC157-5\n\n5 mg / 10 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nNAD+\n\nNAD-1000\n\n1,000 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nMelanotan II\n\nMT2-10\n\n10 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nMOTS-c\n\nMOTSC-10\n\n10 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nGHK-Cu\n\nGHKCU-50\n\n50 mg / 100 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nRetatrutide\n\nRETA-20\n\n20 mg / 30 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nBAC water\n\nBACW-10\n\n10 mL\n\nCurrently unavailable\nNo publicly available documents.\nCompare",
+    "links": [
+      {
+        "text": "Compare",
+        "href": "/en/compare"
+      },
+      {
+        "text": "HGH Frag 176-191",
+        "href": "/en/shop/hgh-frag-176-191"
+      },
+      {
+        "text": "AOD-9604",
+        "href": "/en/shop/aod-9604"
+      },
+      {
+        "text": "CJC-1295",
+        "href": "/en/shop/cjc-1295"
+      },
+      {
+        "text": "Semax",
+        "href": "/en/shop/semax"
+      },
+      {
+        "text": "Selank",
+        "href": "/en/shop/selank"
+      },
+      {
+        "text": "BPC-157 + TB-500 blend",
+        "href": "/en/shop/bpc-tb-blend"
+      },
+      {
+        "text": "KLOW blend",
+        "href": "/en/shop/klow"
+      },
+      {
+        "text": "Melanotan I",
+        "href": "/en/shop/melanotan-i"
+      },
+      {
+        "text": "BPC-157",
+        "href": "/en/shop/bpc-157"
+      },
+      {
+        "text": "NAD+",
+        "href": "/en/shop/nad-plus"
+      },
+      {
+        "text": "Melanotan II",
+        "href": "/en/shop/melanotan-ii"
+      },
+      {
+        "text": "MOTS-c",
+        "href": "/en/shop/mots-c"
+      },
+      {
+        "text": "GHK-Cu",
+        "href": "/en/shop/ghk-cu"
+      },
+      {
+        "text": "Retatrutide",
+        "href": "/en/shop/retatrutide"
+      },
+      {
+        "text": "BAC water",
+        "href": "/en/shop/bac-water"
+      }
+    ],
+    "buttons": [
+      "Search products…",
+      "Filters",
+      "",
+      "",
+      "",
+      "Clear all",
+      "Metabolic Research\n4",
+      "Tissue Research\n1",
+      "Neurobiology\n2",
+      "Cell Ageing\n2",
+      "Cosmetic Research\n3",
+      "Blends\n2",
+      "Laboratory Supplies\n1",
+      "",
+      "Compare",
+      "",
+      "Compare",
+      "",
+      "Compare",
+      "",
+      "Compare",
+      "",
+      "Compare",
+      "",
+      "Compare",
+      "",
+      "Compare",
+      "",
+      "Compare",
+      "",
+      "Compare",
+      "",
+      "Compare",
+      "",
+      "Compare",
+      "",
+      "Compare",
+      "",
+      "Compare",
+      "",
+      "Compare",
+      "",
+      "Compare"
+    ]
+  },
+  {
+    "locale": "en",
+    "path": "/shop/bpc-157",
+    "status": 200,
+    "title": "BPC-157 · AverianLabs",
+    "headings": ["BPC-157", "Specifications", "Batch documents", "Frequently asked questions"],
+    "main": "Browse products\n›\nTissue research\n›\nBPC-157\nBPC-157\nIllustrative product view\nExplore in 3D\n\nTissue research\n\nBPC-157\n\nLaboratory research material. Review the product-specific documentation before use.\n\nCompare\nSign in to save\nSelect vial size\n5 mg\nBPC157-5\nCurrently unavailable\n10 mg\nBPC157-10\nCurrently unavailable\nRequest a quote\nUse in calculator · BPC157-5\n\nReleased batch data is not confirmed for this variant.\n\nSpecifications\n\nSpecifications are awaiting review. Contact us for the current product documentation.\n\nBatch documents\n\nNo publicly available documents.\n\nUnderstanding test results\nFrequently asked questions\nWhat are these materials intended for?\nThese materials are for laboratory research. Product-specific documentation describes identity, composition and handling; the catalogue does not provide instructions for human or veterinary administration.\nWhere can I find batch documents?\nWhere can I place a direct order?\nHow do I request a quote?",
+    "links": [
+      {
+        "text": "Browse products",
+        "href": "/en/shop"
+      },
+      {
+        "text": "Tissue research",
+        "href": "/en/shop?category=recovery"
+      },
+      {
+        "text": "Sign in to save",
+        "href": "/en/account"
+      },
+      {
+        "text": "Use in calculator · BPC157-5",
+        "href": "/en/peptide-calculator?sku=BPC157-5"
+      },
+      {
+        "text": "Understanding test results",
+        "href": "/en/lab-tests"
+      }
+    ],
+    "buttons": [
+      "Explore in 3D",
+      "",
+      "Compare",
+      "5 mg\nBPC157-5\nCurrently unavailable",
+      "10 mg\nBPC157-10\nCurrently unavailable",
+      "",
+      "What are these materials intended for?",
+      "Where can I find batch documents?",
+      "Where can I place a direct order?",
+      "How do I request a quote?"
+    ]
+  },
+  {
+    "locale": "en",
+    "path": "/quality",
+    "status": 200,
+    "title": "Quality assurance · AverianLabs",
+    "headings": [
+      "Quality and product documentation",
+      "Product identity",
+      "Batch evidence",
+      "Storage and handling",
+      "Batch documents"
+    ],
+    "main": "Quality and product documentation\n\nEvaluate materials using the documents for the actual product and batch. Availability of a report is shown explicitly; missing reports are not presented as verified results.\n\nProduct identity\n\nCheck the chemical identity, composition, quantity and unit against the original specification. Analytical purity, material content and identity are different measurements.\n\nBatch evidence\n\nA report should identify the batch, laboratory, test method, result, unit and date. Accreditation or supplier quality claims are published only when their supporting evidence has been approved.\n\nStorage and handling\n\nUse the conditions in the product-specific documentation. Do not assume that the same storage or preparation conditions apply to every material.\n\nBatch documents\n\nNo publicly available documents.\n\nView batch documents\nContact us\nView batch documents\nRequest a quote",
+    "links": [
+      {
+        "text": "View batch documents",
+        "href": "/en/coa"
+      },
+      {
+        "text": "Contact us",
+        "href": "/en/contact"
+      },
+      {
+        "text": "View batch documents",
+        "href": "/en/coa"
+      },
+      {
+        "text": "Request a quote",
+        "href": "/en/contact"
+      }
+    ],
+    "buttons": []
+  },
+  {
+    "locale": "en",
+    "path": "/documents",
+    "status": 200,
+    "title": "Published documents · AverianLabs",
+    "headings": ["Published documents"],
+    "main": "PUBLISHED DOCUMENTS\n\nPublished documents\n\nFind available certificates of analysis, safety data sheets, analytical reports and product specifications.\n\nNo publicly available documents.",
+    "links": [],
+    "buttons": []
+  },
+  {
+    "locale": "en",
+    "path": "/about",
+    "status": 200,
+    "title": "About AverianLabs · AverianLabs",
+    "headings": ["About AverianLabs", "Evidence before promises", "Research purchasing support"],
+    "main": "About AverianLabs\n\nAverianLabs provides a catalogue and ordering tools for laboratory research materials. Product documentation and clear purchasing information help customers evaluate materials for their work.\n\nEvidence before promises\n\nWe distinguish published documentation from information awaiting review. Contact support if a specification or report you need is unavailable.\n\nResearch purchasing support\n\nAsk about product identity, batch documentation, quantities and purchase availability. Quotes are handled separately from direct orders.\n\nView batch documents\nRequest a quote",
+    "links": [
+      {
+        "text": "View batch documents",
+        "href": "/en/coa"
+      },
+      {
+        "text": "Request a quote",
+        "href": "/en/contact"
+      }
+    ],
+    "buttons": []
+  },
+  {
+    "locale": "en",
+    "path": "/contact",
+    "status": 200,
+    "title": "Contact · AverianLabs",
+    "headings": ["Contact us"],
+    "main": "Contact us\n\nAsk about products, documentation, availability or an existing order. Include the SKU or order number when available.\n\nhello@averianlabs.eu\nName\nEmail\nSubject\nMessage\nSend message",
+    "links": [
+      {
+        "text": "hello@averianlabs.eu",
+        "href": "mailto:hello@averianlabs.eu"
+      }
+    ],
+    "buttons": ["Send message"]
+  },
+  {
+    "locale": "en",
+    "path": "/faq",
+    "status": 200,
+    "title": "Frequently asked questions · AverianLabs",
+    "headings": ["Frequently asked questions"],
+    "main": "Frequently asked questions\nWhat are these materials intended for?\nThese materials are for laboratory research. Product-specific documentation describes identity, composition and handling; the catalogue does not provide instructions for human or veterinary administration.\nWhere can I find batch documents?\nWhere can I place a direct order?\nHow do I request a quote?",
+    "links": [],
+    "buttons": [
+      "What are these materials intended for?",
+      "Where can I find batch documents?",
+      "Where can I place a direct order?",
+      "How do I request a quote?"
+    ]
+  },
+  {
+    "locale": "en",
+    "path": "/community",
+    "status": 200,
+    "title": "Community · AverianLabs",
+    "headings": ["Community", "Recent activity", "Topics", "Research discussions"],
+    "main": "RESEARCH DISCUSSIONS\n\nCommunity\n\nDiscuss laboratory methods, documentation and research questions with cited sources.\n\nNew thread\nSearch\nCategory\nAll topics\nAnnouncements\nResearch discussion\nDocumentation & COAs\nMethods & analytics\nStorage & handling\nMarket & regulation\nOff-topic lounge\nDiscussion language\nAll languages\nSuomi\nEnglish\nUnanswered\nSearch\nRecent activity\nStart a useful research discussion\n\nAsk a specific question, describe the method or document, and link your sources. New submissions are reviewed before publication.\n\nRead the community rules\nTopics\nAnnouncements\n0\nResearch discussion\n0\nDocumentation & COAs\n0\nMethods & analytics\n0\nStorage & handling\n0\nMarket & regulation\n0\nOff-topic lounge\n0\nResearch discussions\n\nNew submissions await a moderator’s publication decision. AI assists the review. Community posts and reactions do not establish scientific qualifications or replace original sources.\n\nRead the community rules →\nUnderstanding test results →\nView batch documents →",
+    "links": [
+      {
+        "text": "New thread",
+        "href": "/en/community/new"
+      },
+      {
+        "text": "Read the community rules",
+        "href": "/en/community/rules"
+      },
+      {
+        "text": "Announcements\n0",
+        "href": "/en/community?category=announcements"
+      },
+      {
+        "text": "Research discussion\n0",
+        "href": "/en/community?category=research-discussion"
+      },
+      {
+        "text": "Documentation & COAs\n0",
+        "href": "/en/community?category=documentation-coa"
+      },
+      {
+        "text": "Methods & analytics\n0",
+        "href": "/en/community?category=methods-analysis"
+      },
+      {
+        "text": "Storage & handling\n0",
+        "href": "/en/community?category=storage-handling"
+      },
+      {
+        "text": "Market & regulation\n0",
+        "href": "/en/community?category=market-compliance"
+      },
+      {
+        "text": "Off-topic lounge\n0",
+        "href": "/en/community?category=off-topic-lounge"
+      },
+      {
+        "text": "Read the community rules →",
+        "href": "/en/community/rules"
+      },
+      {
+        "text": "Understanding test results →",
+        "href": "/en/lab-tests"
+      },
+      {
+        "text": "View batch documents →",
+        "href": "/en/coa"
+      }
+    ],
+    "buttons": ["Search"]
+  },
+  {
+    "locale": "en",
+    "path": "/assistant",
+    "status": 200,
+    "title": "Averia — AverianLabs · AverianLabs",
+    "headings": ["Averia"],
+    "main": "Averia\n\nAI research assistant\n\nNew conversation\nHi — I'm Averia.\n\nI can help find products, check published batch documents, compare selected SKUs and explain laboratory calculations.\n\nFind a product\nCompare products\nCheck batch documents\nCalculate concentration\nAsk about research purchasing\n· Find a product or SKU\n· Check available batch documents\n· Calculate a laboratory concentration\nSaved conversations require your consent. Privacy notice",
+    "links": [
+      {
+        "text": "Privacy notice",
+        "href": "/en/legal/privacy"
+      }
+    ],
+    "buttons": [
+      "New conversation",
+      "Find a product",
+      "Compare products",
+      "Check batch documents",
+      "Calculate concentration",
+      ""
+    ]
+  },
+  {
+    "locale": "en",
+    "path": "/research-tools",
+    "status": 200,
+    "title": "Research tools · AverianLabs",
+    "headings": [
+      "Research tools",
+      "Laboratory calculator →",
+      "Averia →",
+      "Research community →",
+      "Understanding test results →"
+    ],
+    "main": "Research tools\n\nCalculate laboratory quantities, inspect sources and ask research questions.\n\nLaboratory calculator →\n\nCalculate mass concentration, dilution and aliquots. Results describe ideal mass balance, not measured material content.\n\nAveria →\n\nFind product information and batch documents, or ask about a laboratory calculation.\n\nResearch community →\n\nDiscuss documentation and share laboratory research questions.\n\nUnderstanding test results →\n\nRead the original report for the selected batch. The methods below describe different analytical questions and do not imply that every product has undergone every test.",
+    "links": [
+      {
+        "text": "Laboratory calculator →\n\nCalculate mass concentration, dilution and aliquots. Results describe ideal mass balance, not measured material content.",
+        "href": "/en/peptide-calculator"
+      },
+      {
+        "text": "Averia →\n\nFind product information and batch documents, or ask about a laboratory calculation.",
+        "href": "/en/assistant"
+      },
+      {
+        "text": "Research community →\n\nDiscuss documentation and share laboratory research questions.",
+        "href": "/en/community"
+      },
+      {
+        "text": "Understanding test results →\n\nRead the original report for the selected batch. The methods below describe different analytical questions and do not imply that every product has undergone every test.",
+        "href": "/en/lab-tests"
+      }
+    ],
+    "buttons": []
+  },
+  {
+    "locale": "en",
+    "path": "/peptide-calculator",
+    "status": 200,
+    "title": "Laboratory calculator · AverianLabs",
+    "headings": ["Laboratory calculator", "Inputs", "Calculated results"],
+    "main": "RESEARCH TOOLS\n\nLaboratory calculator\n\nCalculate mass concentration, dilution and aliquots. Results describe ideal mass balance, not measured material content.\n\nConcentration\nDilution\nAliquots\nInputs\nCalculate the required final volume\nMaterial mass\nUnit\nmg\nµg\nFinal solution volume\nUnit\nmL\nµL\n\nUse a decimal point in English. Scientific notation, such as 1e-3, is supported.\n\nExample inputs. Replace these values with your own laboratory quantities.\n\nCalculated results\nConcentration\n5 mg/mL\n\nIdeal mass balance, no material loss. Use final solution volume. Values based on nominal mass do not establish measured content, purity, solubility or handling conditions.\n\nDisplayed values are rounded to at most eight significant digits. They do not establish measurement precision.\n\nReset\nCopy result\nExport CSV\nPrint\nSign in to save calculations\nAsk Averia about this calculation\nPrepare a community question\nFormula and assumptions",
+    "links": [
+      {
+        "text": "Sign in to save calculations",
+        "href": "/en/account?returnTo=%2Fen%2Fpeptide-calculator%3Fmode%3Dconcentration%26massMg%3D10%26finalVolumeMl%3D2"
+      },
+      {
+        "text": "Ask Averia about this calculation",
+        "href": "/en/assistant?mode=concentration&massMg=10&finalVolumeMl=2"
+      },
+      {
+        "text": "Prepare a community question",
+        "href": "/en/community/new?calculation=Laboratory%20calculation%0ACalculation%20mode%3A%20Concentration%0AFormula%20and%20assumptions%3A%20c%20%3D%20m%20%2F%20V%0AMaterial%20mass%3A%2010%20mg%0AFinal%20solution%20volume%3A%202%20mL%0AConcentration%3A%205%20mg%2FmL%0AConcentration%3A%205%2C000%20%C2%B5g%2FmL%0AUser-supplied%20quantities%0AIdeal%20mass%20balance%2C%20no%20material%20loss.%20Use%20final%20solution%20volume.%20Values%20based%20on%20nominal%20mass%20do%20not%20establish%20measured%20content%2C%20purity%2C%20solubility%20or%20handling%20conditions.%0ADisplayed%20values%20are%20rounded%20to%20at%20most%20eight%20significant%20digits.%20They%20do%20not%20establish%20measurement%20precision.%0AFormula%20version%3A%20laboratory-v2"
+      }
+    ],
+    "buttons": [
+      "Concentration",
+      "Dilution",
+      "Aliquots",
+      "Reset",
+      "Copy result",
+      "Export CSV",
+      "Print"
+    ]
+  },
+  {
+    "locale": "fi",
+    "path": "",
+    "status": 200,
+    "title": "AverianLabs — Materiaalit laboratoriotutkimukseen",
+    "headings": [
+      "Tutkimusmateriaalit laboratoriotyöhön.",
+      "Retatrutidi",
+      "Löydä materiaali",
+      "Tarkista asiakirjat",
+      "Varmista saatavuus",
+      "Tutustu tuotevalikoimaan",
+      "Laatu ja tuoteasiakirjat",
+      "Tutkimustyökalut"
+    ],
+    "main": "LABORATORIOTUTKIMUKSEEN\n\nTutkimusmateriaalit laboratoriotyöhön.\n\nTutustu tuotteisiin, tarkista erän asiakirjat ja kysy saatavuudesta ennen tilaamista.\n\nSelaa valikoimaa →\nTarkista eräasiakirjat\n\nVain laboratoriotutkimukseen.\n\nTuote\nRetatrutidi\n\nRETA-20\n\n20 mg / 30 mg\n\nSaatavuus\nEi saatavilla tällä hetkellä\nEräasiakirjat\nEi julkisesti saatavilla olevia asiakirjoja.\nHavainnollistava tuotekuva\nNäytä → →\nTutustu 3D-näkymässä\n1\nLöydä materiaali\n\nHae nimellä tai tuotekoodilla.\n\n2\nTarkista asiakirjat\n\nTarkista juuri tuotteen ja erän alkuperäiset lähteet.\n\n3\nVarmista saatavuus\n\nTarkista hankintatiedot ennen tilaamista.\n\nTutustu tuotevalikoimaan\n\nSelaa tuotetietoja ja valitse tutkimustyösi kannalta olennaiset materiaalit.\n\nSelaa tuotteita →\nBAC-vesi\n\nBACW-10\n\n10 mL\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nRetatrutidi\n\nRETA-20\n\n20 mg / 30 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nGHK-Cu\n\nGHKCU-50\n\n50 mg / 100 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nMOTS-c\n\nMOTSC-10\n\n10 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nLaatu ja tuoteasiakirjat\n\nArvioi materiaalit kyseisen tuotteen ja erän asiakirjojen perusteella. Kerromme selkeästi, onko raportti saatavilla. Puuttuvia raportteja ei esitetä varmennettuina tuloksina.\n\nTarkastele erän asiakirjoja →\nAnalyysitulosten tulkinta →\nTutkimustyökalut\n\nLaske laboratoriomääriä, tarkista lähteet ja esitä tutkimuskysymyksiä.\n\nLaboratoriolaskuri\nTutkimusyhteisö",
+    "links": [
+      {
+        "text": "Selaa valikoimaa →",
+        "href": "/fi/shop"
+      },
+      {
+        "text": "Tarkista eräasiakirjat",
+        "href": "/fi/coa"
+      },
+      {
+        "text": "Näytä → →",
+        "href": "/fi/shop/retatrutide"
+      },
+      {
+        "text": "Selaa tuotteita →",
+        "href": "/fi/shop"
+      },
+      {
+        "text": "BAC-vesi",
+        "href": "/fi/shop/bac-water"
+      },
+      {
+        "text": "Retatrutidi",
+        "href": "/fi/shop/retatrutide"
+      },
+      {
+        "text": "GHK-Cu",
+        "href": "/fi/shop/ghk-cu"
+      },
+      {
+        "text": "MOTS-c",
+        "href": "/fi/shop/mots-c"
+      },
+      {
+        "text": "Tarkastele erän asiakirjoja →",
+        "href": "/fi/coa"
+      },
+      {
+        "text": "Analyysitulosten tulkinta →",
+        "href": "/fi/lab-tests"
+      },
+      {
+        "text": "Laboratoriolaskuri",
+        "href": "/fi/peptide-calculator"
+      },
+      {
+        "text": "Tutkimusyhteisö",
+        "href": "/fi/community"
+      }
+    ],
+    "buttons": ["", "Vertaile", "", "Vertaile", "", "Vertaile", "", "Vertaile"]
+  },
+  {
+    "locale": "fi",
+    "path": "/shop",
+    "status": 200,
+    "title": "Tuotevalikoima · AverianLabs",
+    "headings": ["Tuotevalikoima", "Suodattimet"],
+    "main": "Tuotevalikoima\n\nTarkista tuotetunnuksen saatavuus ja alkuperäiset eräasiakirjat ennen tilaamista.\n\n15 tuotetta\nHae tuotteita…\nVertaa\nKaikki materiaalityypit\nPeptidit\nKosmetiikan raaka-aineet\nReagenssit\nLaboratoriotarvikkeet\nJulkaistut asiakirjat\nSuodattimet\nTyhjennä\nKATEGORIA\nAineenvaihduntatutkimus\n4\nKudostutkimus\n1\nNeurobiologia\n2\nSolujen Vanheneminen\n2\nKosmeettinen Tutkimus\n3\nSeokset\n2\nLaboratoriotarvikkeet\n1\n\nPuhtaussuodatin tulee käyttöön, kun julkaistuja erätuloksia on saatavilla.\n\nVarastossa\nVain tarjouspyynnöllä\nJÄRJESTÄ\nUusimmat\nHinta ↑\nHinta ↓\nNimi (A–Ö)\nPuhtaus (korkeasta matalaan)\nHGH Frag 176-191\n\nHGHFR-5\n\n5 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nAOD-9604\n\nAOD-5\n\n5 mg\n\nPyydä tarjous\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nCJC-1295\n\nCJC-1\n\n1 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nSemax\n\nSEMX-5\n\n5 mg / 10 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nSelank\n\nSELK-5\n\n5 mg / 10 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nBPC-157 + TB-500 -seos\n\nBPC-TB-10\n\n10 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nKLOW-seos\n\nKLOW-80\n\n80 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nMelanotan I\n\nMT1-10\n\n10 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nBPC-157\n\nBPC157-5\n\n5 mg / 10 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nNAD+\n\nNAD-1000\n\n1 000 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nMelanotan II\n\nMT2-10\n\n10 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nMOTS-c\n\nMOTSC-10\n\n10 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nGHK-Cu\n\nGHKCU-50\n\n50 mg / 100 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nRetatrutidi\n\nRETA-20\n\n20 mg / 30 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile\nBAC-vesi\n\nBACW-10\n\n10 mL\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nVertaile",
+    "links": [
+      {
+        "text": "Vertaa",
+        "href": "/fi/compare"
+      },
+      {
+        "text": "HGH Frag 176-191",
+        "href": "/fi/shop/hgh-frag-176-191"
+      },
+      {
+        "text": "AOD-9604",
+        "href": "/fi/shop/aod-9604"
+      },
+      {
+        "text": "CJC-1295",
+        "href": "/fi/shop/cjc-1295"
+      },
+      {
+        "text": "Semax",
+        "href": "/fi/shop/semax"
+      },
+      {
+        "text": "Selank",
+        "href": "/fi/shop/selank"
+      },
+      {
+        "text": "BPC-157 + TB-500 -seos",
+        "href": "/fi/shop/bpc-tb-blend"
+      },
+      {
+        "text": "KLOW-seos",
+        "href": "/fi/shop/klow"
+      },
+      {
+        "text": "Melanotan I",
+        "href": "/fi/shop/melanotan-i"
+      },
+      {
+        "text": "BPC-157",
+        "href": "/fi/shop/bpc-157"
+      },
+      {
+        "text": "NAD+",
+        "href": "/fi/shop/nad-plus"
+      },
+      {
+        "text": "Melanotan II",
+        "href": "/fi/shop/melanotan-ii"
+      },
+      {
+        "text": "MOTS-c",
+        "href": "/fi/shop/mots-c"
+      },
+      {
+        "text": "GHK-Cu",
+        "href": "/fi/shop/ghk-cu"
+      },
+      {
+        "text": "Retatrutidi",
+        "href": "/fi/shop/retatrutide"
+      },
+      {
+        "text": "BAC-vesi",
+        "href": "/fi/shop/bac-water"
+      }
+    ],
+    "buttons": [
+      "Hae tuotteita…",
+      "Suodattimet",
+      "",
+      "",
+      "",
+      "Tyhjennä",
+      "Aineenvaihduntatutkimus\n4",
+      "Kudostutkimus\n1",
+      "Neurobiologia\n2",
+      "Solujen Vanheneminen\n2",
+      "Kosmeettinen Tutkimus\n3",
+      "Seokset\n2",
+      "Laboratoriotarvikkeet\n1",
+      "",
+      "Vertaile",
+      "",
+      "Vertaile",
+      "",
+      "Vertaile",
+      "",
+      "Vertaile",
+      "",
+      "Vertaile",
+      "",
+      "Vertaile",
+      "",
+      "Vertaile",
+      "",
+      "Vertaile",
+      "",
+      "Vertaile",
+      "",
+      "Vertaile",
+      "",
+      "Vertaile",
+      "",
+      "Vertaile",
+      "",
+      "Vertaile",
+      "",
+      "Vertaile",
+      "",
+      "Vertaile"
+    ]
+  },
+  {
+    "locale": "fi",
+    "path": "/shop/bpc-157",
+    "status": 200,
+    "title": "BPC-157 · AverianLabs",
+    "headings": ["BPC-157", "Tuotetiedot", "Eräasiakirjat", "Usein kysytyt kysymykset"],
+    "main": "Selaa tuotteita\n›\nKudostutkimus\n›\nBPC-157\nBPC-157\nHavainnollistava tuotekuva\nTutustu 3D-näkymässä\n\nKudostutkimus\n\nBPC-157\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nVertaa\nKirjaudu sisään tallentaaksesi\nValitse pullokoko\n5 mg\nBPC157-5\nEi saatavilla tällä hetkellä\n10 mg\nBPC157-10\nEi saatavilla tällä hetkellä\nPyydä tarjous\nKäytä laskurissa · BPC157-5\n\nTämän tuoteversion vapautetun erän tietoja ei ole vahvistettu.\n\nTuotetiedot\n\nTuotetietoja tarkistetaan. Ota meihin yhteyttä saadaksesi ajantasaiset asiakirjat.\n\nEräasiakirjat\n\nEi julkisesti saatavilla olevia asiakirjoja.\n\nAnalyysitulosten tulkinta\nUsein kysytyt kysymykset\nMihin materiaalit on tarkoitettu?\nMateriaalit on tarkoitettu laboratoriotutkimukseen. Tuotekohtaiset asiakirjat kuvaavat tunnistetiedot, koostumuksen ja käsittelyn. Tuotevalikoima ei sisällä ohjeita materiaalien antamiseen ihmisille tai eläimille.\nMistä löydän erän asiakirjat?\nMinne voin tehdä suoran tilauksen?\nMiten pyydän tarjouksen?",
+    "links": [
+      {
+        "text": "Selaa tuotteita",
+        "href": "/fi/shop"
+      },
+      {
+        "text": "Kudostutkimus",
+        "href": "/fi/shop?category=recovery"
+      },
+      {
+        "text": "Kirjaudu sisään tallentaaksesi",
+        "href": "/fi/account"
+      },
+      {
+        "text": "Käytä laskurissa · BPC157-5",
+        "href": "/fi/peptide-calculator?sku=BPC157-5"
+      },
+      {
+        "text": "Analyysitulosten tulkinta",
+        "href": "/fi/lab-tests"
+      }
+    ],
+    "buttons": [
+      "Tutustu 3D-näkymässä",
+      "",
+      "Vertaa",
+      "5 mg\nBPC157-5\nEi saatavilla tällä hetkellä",
+      "10 mg\nBPC157-10\nEi saatavilla tällä hetkellä",
+      "",
+      "Mihin materiaalit on tarkoitettu?",
+      "Mistä löydän erän asiakirjat?",
+      "Minne voin tehdä suoran tilauksen?",
+      "Miten pyydän tarjouksen?"
+    ]
+  },
+  {
+    "locale": "fi",
+    "path": "/quality",
+    "status": 200,
+    "title": "Laadunvarmistus · AverianLabs",
+    "headings": [
+      "Laatu ja tuoteasiakirjat",
+      "Tuotteen tunnistetiedot",
+      "Eräkohtainen näyttö",
+      "Säilytys ja käsittely",
+      "Eräasiakirjat"
+    ],
+    "main": "Laatu ja tuoteasiakirjat\n\nArvioi materiaalit kyseisen tuotteen ja erän asiakirjojen perusteella. Kerromme selkeästi, onko raportti saatavilla. Puuttuvia raportteja ei esitetä varmennettuina tuloksina.\n\nTuotteen tunnistetiedot\n\nTarkista kemiallinen identiteetti, koostumus, määrä ja yksikkö alkuperäisestä tuoteselosteesta. Analyyttinen puhtaus, materiaalin sisältö ja identiteetti ovat eri asioita.\n\nEräkohtainen näyttö\n\nRaportista tulee käydä ilmi erä, laboratorio, analyysimenetelmä, tulos, yksikkö ja päivämäärä. Akkreditointia tai toimittajan laatua koskevat väitteet julkaistaan vasta, kun niitä tukeva näyttö on hyväksytty.\n\nSäilytys ja käsittely\n\nNoudata tuotekohtaisissa asiakirjoissa annettuja olosuhteita. Eri materiaalien säilytys- ja valmisteluohjeet voivat poiketa toisistaan.\n\nEräasiakirjat\n\nEi julkisesti saatavilla olevia asiakirjoja.\n\nTarkastele erän asiakirjoja\nOta yhteyttä\nTarkastele erän asiakirjoja\nPyydä tarjous",
+    "links": [
+      {
+        "text": "Tarkastele erän asiakirjoja",
+        "href": "/fi/coa"
+      },
+      {
+        "text": "Ota yhteyttä",
+        "href": "/fi/contact"
+      },
+      {
+        "text": "Tarkastele erän asiakirjoja",
+        "href": "/fi/coa"
+      },
+      {
+        "text": "Pyydä tarjous",
+        "href": "/fi/contact"
+      }
+    ],
+    "buttons": []
+  },
+  {
+    "locale": "fi",
+    "path": "/documents",
+    "status": 200,
+    "title": "Julkaistut asiakirjat · AverianLabs",
+    "headings": ["Julkaistut asiakirjat"],
+    "main": "JULKAISTUT ASIAKIRJAT\n\nJulkaistut asiakirjat\n\nHae saatavilla olevia analyysitodistuksia, käyttöturvallisuustiedotteita, analyysiraportteja ja tuotemäärittelyjä.\n\nEi julkisesti saatavilla olevia asiakirjoja.",
+    "links": [],
+    "buttons": []
+  },
+  {
+    "locale": "fi",
+    "path": "/about",
+    "status": 200,
+    "title": "Tietoa AverianLabsista · AverianLabs",
+    "headings": [
+      "Tietoa AverianLabsista",
+      "Näyttö lupausten perustana",
+      "Tuki tutkimushankintoihin"
+    ],
+    "main": "Tietoa AverianLabsista\n\nAverianLabs tarjoaa tuotevalikoiman ja tilaustyökalut laboratoriotutkimuksen materiaaleille. Tuoteasiakirjat ja selkeät ostotiedot auttavat asiakkaita arvioimaan materiaalien soveltuvuutta työhönsä.\n\nNäyttö lupausten perustana\n\nErotamme julkaistut asiakirjat tiedoista, joita vielä tarkistetaan. Ota yhteyttä asiakastukeen, jos tarvitsemasi tuotetieto tai raportti ei ole saatavilla.\n\nTuki tutkimushankintoihin\n\nKysy tuotteen tunnistetiedoista, eräasiakirjoista, määristä ja saatavuudesta. Tarjouspyynnöt käsitellään erillään suorista tilauksista.\n\nTarkastele erän asiakirjoja\nPyydä tarjous",
+    "links": [
+      {
+        "text": "Tarkastele erän asiakirjoja",
+        "href": "/fi/coa"
+      },
+      {
+        "text": "Pyydä tarjous",
+        "href": "/fi/contact"
+      }
+    ],
+    "buttons": []
+  },
+  {
+    "locale": "fi",
+    "path": "/contact",
+    "status": 200,
+    "title": "Yhteystiedot · AverianLabs",
+    "headings": ["Ota yhteyttä"],
+    "main": "Ota yhteyttä\n\nKysy tuotteista, asiakirjoista, saatavuudesta tai tilauksesta. Ilmoita SKU-tunnus tai tilausnumero, jos se on saatavilla.\n\nhello@averianlabs.eu\nNimi\nSähköposti\nAihe\nViesti\nLähetä viesti",
+    "links": [
+      {
+        "text": "hello@averianlabs.eu",
+        "href": "mailto:hello@averianlabs.eu"
+      }
+    ],
+    "buttons": ["Lähetä viesti"]
+  },
+  {
+    "locale": "fi",
+    "path": "/faq",
+    "status": 200,
+    "title": "Usein kysytyt kysymykset · AverianLabs",
+    "headings": ["Usein kysytyt kysymykset"],
+    "main": "Usein kysytyt kysymykset\nMihin materiaalit on tarkoitettu?\nMateriaalit on tarkoitettu laboratoriotutkimukseen. Tuotekohtaiset asiakirjat kuvaavat tunnistetiedot, koostumuksen ja käsittelyn. Tuotevalikoima ei sisällä ohjeita materiaalien antamiseen ihmisille tai eläimille.\nMistä löydän erän asiakirjat?\nMinne voin tehdä suoran tilauksen?\nMiten pyydän tarjouksen?",
+    "links": [],
+    "buttons": [
+      "Mihin materiaalit on tarkoitettu?",
+      "Mistä löydän erän asiakirjat?",
+      "Minne voin tehdä suoran tilauksen?",
+      "Miten pyydän tarjouksen?"
+    ]
+  },
+  {
+    "locale": "fi",
+    "path": "/community",
+    "status": 200,
+    "title": "Yhteisö · AverianLabs",
+    "headings": ["Yhteisö", "Viimeisin toiminta", "Aiheet", "Tutkimuskeskustelut"],
+    "main": "TUTKIMUSKESKUSTELUT\n\nYhteisö\n\nKeskustele laboratoriomenetelmistä, asiakirjoista ja tutkimuskysymyksistä alkuperäisiin lähteisiin viitaten.\n\nUusi ketju\nHae\nKategoria\nKaikki aiheet\nTiedotteet\nTutkimuskeskustelu\nDokumentaatio ja analyysitodistukset\nMenetelmät ja analytiikka\nSäilytys ja käsittely\nMarkkinat ja sääntely\nVapaa keskustelu\nKeskustelun kieli\nKaikki kielet\nSuomi\nEnglish\nVastaamattomat\nHae\nViimeisin toiminta\nAloita hyödyllinen tutkimuskeskustelu\n\nEsitä tarkka kysymys, kuvaa menetelmä tai asiakirja ja linkitä lähteet. Uudet viestit tarkistetaan ennen julkaisua.\n\nLue yhteisön säännöt\nAiheet\nTiedotteet\n0\nTutkimuskeskustelu\n0\nDokumentaatio ja analyysitodistukset\n0\nMenetelmät ja analytiikka\n0\nSäilytys ja käsittely\n0\nMarkkinat ja sääntely\n0\nVapaa keskustelu\n0\nTutkimuskeskustelut\n\nUudet viestit odottavat moderaattorin julkaisupäätöstä. Tekoäly tukee tarkistusta. Yhteisön viestit ja reaktiot eivät vahvista tieteellistä pätevyyttä tai korvaa alkuperäisiä lähteitä.\n\nLue yhteisön säännöt →\nAnalyysitulosten tulkinta →\nTarkastele erän asiakirjoja →",
+    "links": [
+      {
+        "text": "Uusi ketju",
+        "href": "/fi/community/new"
+      },
+      {
+        "text": "Lue yhteisön säännöt",
+        "href": "/fi/community/rules"
+      },
+      {
+        "text": "Tiedotteet\n0",
+        "href": "/fi/community?category=announcements"
+      },
+      {
+        "text": "Tutkimuskeskustelu\n0",
+        "href": "/fi/community?category=research-discussion"
+      },
+      {
+        "text": "Dokumentaatio ja analyysitodistukset\n0",
+        "href": "/fi/community?category=documentation-coa"
+      },
+      {
+        "text": "Menetelmät ja analytiikka\n0",
+        "href": "/fi/community?category=methods-analysis"
+      },
+      {
+        "text": "Säilytys ja käsittely\n0",
+        "href": "/fi/community?category=storage-handling"
+      },
+      {
+        "text": "Markkinat ja sääntely\n0",
+        "href": "/fi/community?category=market-compliance"
+      },
+      {
+        "text": "Vapaa keskustelu\n0",
+        "href": "/fi/community?category=off-topic-lounge"
+      },
+      {
+        "text": "Lue yhteisön säännöt →",
+        "href": "/fi/community/rules"
+      },
+      {
+        "text": "Analyysitulosten tulkinta →",
+        "href": "/fi/lab-tests"
+      },
+      {
+        "text": "Tarkastele erän asiakirjoja →",
+        "href": "/fi/coa"
+      }
+    ],
+    "buttons": ["Hae"]
+  },
+  {
+    "locale": "fi",
+    "path": "/assistant",
+    "status": 200,
+    "title": "Averia — AverianLabs · AverianLabs",
+    "headings": ["Averia"],
+    "main": "Averia\n\nTekoälyavustaja\n\nUusi keskustelu\nHei — olen Averia.\n\nVoin auttaa hakemaan tuotteita, tarkistamaan julkaistuja eräasiakirjoja, vertailemaan tuotekoodeja ja tulkitsemaan laboratoriolaskelmia.\n\nHae tuote\nVertaile tuotteita\nTarkista eräasiakirjat\nLaske pitoisuus\nKysy tutkimushankinnoista\n· Hae tuote tai SKU-tunnus\n· Tarkista saatavilla olevat eräasiakirjat\n· Laske laboratorioliuoksen pitoisuus\nKeskustelujen tallentaminen edellyttää suostumustasi. Tietosuojaseloste",
+    "links": [
+      {
+        "text": "Tietosuojaseloste",
+        "href": "/fi/legal/privacy"
+      }
+    ],
+    "buttons": [
+      "Uusi keskustelu",
+      "Hae tuote",
+      "Vertaile tuotteita",
+      "Tarkista eräasiakirjat",
+      "Laske pitoisuus",
+      ""
+    ]
+  },
+  {
+    "locale": "fi",
+    "path": "/research-tools",
+    "status": 200,
+    "title": "Tutkimustyökalut · AverianLabs",
+    "headings": [
+      "Tutkimustyökalut",
+      "Laboratoriolaskuri →",
+      "Averia →",
+      "Tutkimusyhteisö →",
+      "Analyysitulosten tulkinta →"
+    ],
+    "main": "Tutkimustyökalut\n\nLaske laboratoriomääriä, tarkista lähteet ja esitä tutkimuskysymyksiä.\n\nLaboratoriolaskuri →\n\nLaske massapitoisuus, laimennus ja osanäytteet. Tulokset perustuvat laskennalliseen massataseeseen, eivät materiaalin sisällön mittaukseen.\n\nAveria →\n\nHae tuotetietoja ja eräasiakirjoja tai kysy laboratoriolaskelmasta.\n\nTutkimusyhteisö →\n\nKeskustele asiakirjoista ja jaa laboratoriotutkimukseen liittyviä kysymyksiä.\n\nAnalyysitulosten tulkinta →\n\nLue valitun erän alkuperäinen raportti. Alla kuvatut menetelmät vastaavat eri analyyttisiin kysymyksiin. Kuvaukset eivät tarkoita, että jokaiselle tuotteelle olisi tehty kaikki analyysit.",
+    "links": [
+      {
+        "text": "Laboratoriolaskuri →\n\nLaske massapitoisuus, laimennus ja osanäytteet. Tulokset perustuvat laskennalliseen massataseeseen, eivät materiaalin sisällön mittaukseen.",
+        "href": "/fi/peptide-calculator"
+      },
+      {
+        "text": "Averia →\n\nHae tuotetietoja ja eräasiakirjoja tai kysy laboratoriolaskelmasta.",
+        "href": "/fi/assistant"
+      },
+      {
+        "text": "Tutkimusyhteisö →\n\nKeskustele asiakirjoista ja jaa laboratoriotutkimukseen liittyviä kysymyksiä.",
+        "href": "/fi/community"
+      },
+      {
+        "text": "Analyysitulosten tulkinta →\n\nLue valitun erän alkuperäinen raportti. Alla kuvatut menetelmät vastaavat eri analyyttisiin kysymyksiin. Kuvaukset eivät tarkoita, että jokaiselle tuotteelle olisi tehty kaikki analyysit.",
+        "href": "/fi/lab-tests"
+      }
+    ],
+    "buttons": []
+  },
+  {
+    "locale": "fi",
+    "path": "/peptide-calculator",
+    "status": 200,
+    "title": "Laboratoriolaskuri · AverianLabs",
+    "headings": ["Laboratoriolaskuri", "Lähtötiedot", "Laskennan tulokset"],
+    "main": "TUTKIMUSTYÖKALUT\n\nLaboratoriolaskuri\n\nLaske massapitoisuus, laimennus ja osanäytteet. Tulokset perustuvat laskennalliseen massataseeseen, eivät materiaalin sisällön mittaukseen.\n\nPitoisuus\nLaimennus\nOsanäytteet\nLähtötiedot\nLaske tarvittava lopullinen tilavuus\nMateriaalin massa\nYksikkö\nmg\nµg\nLiuoksen lopullinen tilavuus\nYksikkö\nmL\nµL\n\nSuomeksi voit käyttää desimaalipilkkua tai -pistettä. Myös tieteellinen merkintä, kuten 1e-3, on tuettu.\n\nEsimerkkilähtötiedot. Korvaa arvot oman laboratoriolaskelmasi tiedoilla.\n\nLaskennan tulokset\nPitoisuus\n5 mg/mL\n\nLaskennallinen massatase ilman materiaalihävikkiä. Käytä liuoksen lopullista tilavuutta. Nimellismassa ei osoita mitattua sisältöä, puhtautta, liukoisuutta tai käsittelyolosuhteita.\n\nNäytetyt luvut pyöristetään enintään kahdeksaan merkitsevään numeroon. Ne eivät osoita mittauksen tarkkuutta.\n\nPalauta lähtötiedot\nKopioi tulos\nVie CSV-tiedostoon\nTulosta\nKirjaudu sisään tallentaaksesi laskelmia\nKysy Averialta tästä laskelmasta\nValmistele yhteisökysymys\nKaava ja oletukset",
+    "links": [
+      {
+        "text": "Kirjaudu sisään tallentaaksesi laskelmia",
+        "href": "/fi/account?returnTo=%2Ffi%2Fpeptide-calculator%3Fmode%3Dconcentration%26massMg%3D10%26finalVolumeMl%3D2"
+      },
+      {
+        "text": "Kysy Averialta tästä laskelmasta",
+        "href": "/fi/assistant?mode=concentration&massMg=10&finalVolumeMl=2"
+      },
+      {
+        "text": "Valmistele yhteisökysymys",
+        "href": "/fi/community/new?calculation=Laboratoriolaskelma%0ALaskentatapa%3A%20Pitoisuus%0AKaava%20ja%20oletukset%3A%20c%20%3D%20m%20%2F%20V%0AMateriaalin%20massa%3A%2010%20mg%0ALiuoksen%20lopullinen%20tilavuus%3A%202%20mL%0APitoisuus%3A%205%20mg%2FmL%0APitoisuus%3A%205%C2%A0000%20%C2%B5g%2FmL%0AK%C3%A4ytt%C3%A4j%C3%A4n%20antamat%20m%C3%A4%C3%A4r%C3%A4t%0ALaskennallinen%20massatase%20ilman%20materiaalih%C3%A4vikki%C3%A4.%20K%C3%A4yt%C3%A4%20liuoksen%20lopullista%20tilavuutta.%20Nimellismassa%20ei%20osoita%20mitattua%20sis%C3%A4lt%C3%B6%C3%A4%2C%20puhtautta%2C%20liukoisuutta%20tai%20k%C3%A4sittelyolosuhteita.%0AN%C3%A4ytetyt%20luvut%20py%C3%B6ristet%C3%A4%C3%A4n%20enint%C3%A4%C3%A4n%20kahdeksaan%20merkitsev%C3%A4%C3%A4n%20numeroon.%20Ne%20eiv%C3%A4t%20osoita%20mittauksen%20tarkkuutta.%0AKaavan%20versio%3A%20laboratory-v2"
+      }
+    ],
+    "buttons": [
+      "Pitoisuus",
+      "Laimennus",
+      "Osanäytteet",
+      "Palauta lähtötiedot",
+      "Kopioi tulos",
+      "Vie CSV-tiedostoon",
+      "Tulosta"
+    ]
+  }
+]

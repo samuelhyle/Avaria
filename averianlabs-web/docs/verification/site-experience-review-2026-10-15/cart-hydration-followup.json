@@ -1,0 +1,141 @@
+{
+  "checkedAt": "2026-10-15T14:24:48.995Z",
+  "base": "https://averianlabs-demo.netlify.app",
+  "scope": "Read-only browser loads; no accounts, orders, posts, email, payment, AI or other application mutation requests submitted. Age-confirmed, essential cookie consent, AI consent declined, light theme, 1440 by 1000 viewport. Each run uses a fresh browser context.",
+  "initialFindingPreserved": {
+    "source": "docs/verification/site-experience-review-2026-10-15/live-review.json",
+    "route": "/en/checkout/cart",
+    "viewport": 1440,
+    "theme": "light",
+    "status": 200,
+    "error": "Minified React error #418 observed once by root audit."
+  },
+  "rows": [
+    {
+      "run": 1,
+      "mode": "fresh_context_direct",
+      "startedAt": "2026-10-15T14:24:10.856Z",
+      "completedAt": "2026-10-15T14:24:16.653Z",
+      "visits": [
+        {
+          "path": "/en/checkout/cart",
+          "status": 200,
+          "at": "2026-10-15T14:24:15.145Z"
+        }
+      ],
+      "errors": [],
+      "consoleErrors": [],
+      "title": "AverianLabs — Laboratory research materials",
+      "headings": ["Checkout", "Cart"],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "emptyCart": true
+    },
+    {
+      "run": 2,
+      "mode": "fresh_context_direct",
+      "startedAt": "2026-10-15T14:24:16.732Z",
+      "completedAt": "2026-10-15T14:24:22.117Z",
+      "visits": [
+        {
+          "path": "/en/checkout/cart",
+          "status": 200,
+          "at": "2026-10-15T14:24:20.615Z"
+        }
+      ],
+      "errors": [],
+      "consoleErrors": [],
+      "title": "AverianLabs — Laboratory research materials",
+      "headings": ["Checkout", "Cart"],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "emptyCart": true
+    },
+    {
+      "run": 3,
+      "mode": "fresh_context_direct",
+      "startedAt": "2026-10-15T14:24:22.191Z",
+      "completedAt": "2026-10-15T14:24:27.109Z",
+      "visits": [
+        {
+          "path": "/en/checkout/cart",
+          "status": 200,
+          "at": "2026-10-15T14:24:25.604Z"
+        }
+      ],
+      "errors": [],
+      "consoleErrors": [],
+      "title": "AverianLabs — Laboratory research materials",
+      "headings": ["Checkout", "Cart"],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "emptyCart": true
+    },
+    {
+      "run": 4,
+      "mode": "fresh_context_prior_home_and_shop",
+      "startedAt": "2026-10-15T14:24:27.185Z",
+      "completedAt": "2026-10-15T14:24:39.473Z",
+      "visits": [
+        {
+          "path": "/en",
+          "status": 200,
+          "at": "2026-10-15T14:24:31.607Z"
+        },
+        {
+          "path": "/en/shop",
+          "status": 200,
+          "at": "2026-10-15T14:24:33.929Z"
+        },
+        {
+          "path": "/en/checkout/cart",
+          "status": 200,
+          "at": "2026-10-15T14:24:37.969Z"
+        }
+      ],
+      "errors": [],
+      "consoleErrors": [],
+      "title": "AverianLabs — Laboratory research materials",
+      "headings": ["Checkout", "Cart"],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "emptyCart": true
+    },
+    {
+      "run": 5,
+      "mode": "fresh_context_prior_home_and_shop",
+      "startedAt": "2026-10-15T14:24:39.549Z",
+      "completedAt": "2026-10-15T14:24:48.960Z",
+      "visits": [
+        {
+          "path": "/en",
+          "status": 200,
+          "at": "2026-10-15T14:24:42.862Z"
+        },
+        {
+          "path": "/en/shop",
+          "status": 200,
+          "at": "2026-10-15T14:24:45.193Z"
+        },
+        {
+          "path": "/en/checkout/cart",
+          "status": 200,
+          "at": "2026-10-15T14:24:47.457Z"
+        }
+      ],
+      "errors": [],
+      "consoleErrors": [],
+      "title": "AverianLabs — Laboratory research materials",
+      "headings": ["Checkout", "Cart"],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "emptyCart": true
+    }
+  ],
+  "summary": {
+    "runs": 5,
+    "cartPageErrorRuns": 0,
+    "anyPageErrorRuns": 0,
+    "hydrationConsoleRuns": 0
+  }
+}

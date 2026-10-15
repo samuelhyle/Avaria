@@ -1,0 +1,1145 @@
+{
+  "checkedAt": "2026-10-15T14:22:58.379Z",
+  "base": "https://averianlabs-demo.netlify.app",
+  "scope": "Anonymous visual/content review; no customer writes or provider requests. Main views are age-confirmed and essential-only; fresh first-visit gate is separate. This is a plan audit, not a new complete release test.",
+  "rows": [
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1782,
+      "theme": "light",
+      "id": "home",
+      "path": "",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "en-1440-light-home.png",
+      "errors": [],
+      "title": "AverianLabs — Laboratory research materials",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Research materials for laboratory work."
+        },
+        {
+          "tag": "H2",
+          "text": "Retatrutide"
+        },
+        {
+          "tag": "H2",
+          "text": "Find a material"
+        },
+        {
+          "tag": "H2",
+          "text": "Inspect the records"
+        },
+        {
+          "tag": "H2",
+          "text": "Confirm availability"
+        },
+        {
+          "tag": "H2",
+          "text": "Explore the catalogue"
+        },
+        {
+          "tag": "H3",
+          "text": "BAC water"
+        },
+        {
+          "tag": "H3",
+          "text": "Retatrutide"
+        },
+        {
+          "tag": "H3",
+          "text": "GHK-Cu"
+        },
+        {
+          "tag": "H3",
+          "text": "MOTS-c"
+        },
+        {
+          "tag": "H2",
+          "text": "Quality and product documentation"
+        },
+        {
+          "tag": "H2",
+          "text": "Research tools"
+        }
+      ],
+      "text": "FOR LABORATORY RESEARCH\n\nResearch materials for laboratory work.\n\nExplore products, review batch documents and check availability before ordering.\n\nBrowse the catalogue →\nReview batch documents\n\nFor laboratory research only.\n\nProduct\nRetatrutide\n\nRETA-20\n\n20 mg / 30 mg\n\nAvailability\nCurrently unavailable\nBatch documents\nNo publicly available documents.\nIllustrative product view\nView → →\nExplore in 3D\n1\nFind a material\n\nSearch by name or SKU.\n\n2\nInspect the records\n\nCheck the original sources for the exact product and batch.\n\n3\nConfirm availability\n\nReview purchasing information before ordering.\n\nExplore the catalogue\n\nBrowse product information and find materials relevant to your research.\n\nBrowse products →\nBAC water\n\nBACW-10\n\n10 mL\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nRetatrutide\n\nRETA-20\n\n20 mg / 30 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nGHK-Cu\n\nGHKCU-50\n\n50 mg / 100 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nMOTS-c\n\nMOTSC-10\n\n10 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nQuality and product documentation\n\nEvaluate materials using the documents for the actual product and batch. Availability of a report is shown explicitly; missing reports are not presented as verified results.\n\nView batch documents →\nUnderstanding test results →\nResearch tools\n\nCalculate laboratory quantities, inspect sources and ask research questions.\n\nLaboratory calculator\nResearch community",
+      "footerText": "Æ\nAverianLabs\n\nLaboratory materials and product-specific documents for research purchasing.\n\nUnderstanding test results →\nRESEARCH\nShop\nLab Tests\nCOA library\nCalculator\nCommunity\nCOMPANY\nAbout us\nQuality\nPartner program\nContact\nSUPPORT\nFAQ\nShipping & returns\nContact\nAccount\nLEGAL\nTerms\nPrivacy\nCookies\nResearch disclaimer\nACCEPTED PAYMENT METHODS\nCookie settings\nFor laboratory research only. Not for human or veterinary use.\n© 2026 AverianLabs. All rights reserved.\nSeller registration details are awaiting confirmation. Contact us before placing an order.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "smallTextCount": 18
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 2572,
+      "theme": "light",
+      "id": "catalogue",
+      "path": "/shop",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "en-1440-light-catalogue.png",
+      "errors": [],
+      "title": "Research catalog · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Research catalog"
+        },
+        {
+          "tag": "H2",
+          "text": "Filters"
+        },
+        {
+          "tag": "H3",
+          "text": "HGH Frag 176-191"
+        },
+        {
+          "tag": "H3",
+          "text": "AOD-9604"
+        },
+        {
+          "tag": "H3",
+          "text": "CJC-1295"
+        },
+        {
+          "tag": "H3",
+          "text": "Semax"
+        },
+        {
+          "tag": "H3",
+          "text": "Selank"
+        },
+        {
+          "tag": "H3",
+          "text": "BPC-157 + TB-500 blend"
+        },
+        {
+          "tag": "H3",
+          "text": "KLOW blend"
+        },
+        {
+          "tag": "H3",
+          "text": "Melanotan I"
+        },
+        {
+          "tag": "H3",
+          "text": "BPC-157"
+        },
+        {
+          "tag": "H3",
+          "text": "NAD+"
+        },
+        {
+          "tag": "H3",
+          "text": "Melanotan II"
+        },
+        {
+          "tag": "H3",
+          "text": "MOTS-c"
+        },
+        {
+          "tag": "H3",
+          "text": "GHK-Cu"
+        },
+        {
+          "tag": "H3",
+          "text": "Retatrutide"
+        },
+        {
+          "tag": "H3",
+          "text": "BAC water"
+        }
+      ],
+      "text": "Research catalog\n\nCheck SKU availability and original batch documents before ordering.\n\n15 products\nSearch products…\nCompare\nAll material types\nPeptides\nCosmetic raw materials\nReagents\nLaboratory supplies\nPublished documents\nFilters\nClear all\nCATEGORY\nMetabolic Research\n4\nTissue Research\n1\nNeurobiology\n2\nCell Ageing\n2\nCosmetic Research\n3\nBlends\n2\nLaboratory Supplies\n1\n\nPurity filtering becomes available when published batch results exist.\n\nIn stock\nQuote-only items\nSORT\nNewest\nPrice ↑\nPrice ↓\nName (A→Z)\nPurity (high→low)\nHGH Frag 176-191\n\nHGHFR-5\n\n5 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nAOD-9604\n\nAOD-5\n\n5 mg\n\nRequest a quote\nNo publicly available documents.\nCompare\nCJC-1295\n\nCJC-1\n\n1 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nSemax\n\nSEMX-5\n\n5 mg / 10 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nSelank\n\nSELK-5\n\n5 mg / 10 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nBPC-157 + TB-500 blend\n\nBPC-TB-10\n\n10 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nKLOW blend\n\nKLOW-80\n\n80 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nMelanotan I\n\nMT1-10\n\n10 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nBPC-157\n\nBPC157-5\n\n5 mg / 10 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nNAD+\n\nNAD-1000\n\n1,000 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nMelanotan II\n\nMT2-10\n\n10 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nMOTS-c\n\nMOTSC-10\n\n10 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nGHK-Cu\n\nGHKCU-50\n\n50 mg / 100 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nRetatrutide\n\nRETA-20\n\n20 mg / 30 mg\n\nCurrently unavailable\nNo publicly available documents.\nCompare\nBAC water\n\nBACW-10\n\n10 mL\n\nCurrently unavailable\nNo publicly available documents.\nCompare",
+      "footerText": "Æ\nAverianLabs\n\nLaboratory materials and product-specific documents for research purchasing.\n\nUnderstanding test results →\nRESEARCH\nShop\nLab Tests\nCOA library\nCalculator\nCommunity\nCOMPANY\nAbout us\nQuality\nPartner program\nContact\nSUPPORT\nFAQ\nShipping & returns\nContact\nAccount\nLEGAL\nTerms\nPrivacy\nCookies\nResearch disclaimer\nACCEPTED PAYMENT METHODS\nCookie settings\nFor laboratory research only. Not for human or veterinary use.\n© 2026 AverianLabs. All rights reserved.\nSeller registration details are awaiting confirmation. Contact us before placing an order.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "smallTextCount": 48
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1981,
+      "theme": "light",
+      "id": "product",
+      "path": "/shop/bpc-157",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "en-1440-light-product.png",
+      "errors": [],
+      "title": "BPC-157 · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "BPC-157"
+        },
+        {
+          "tag": "H3",
+          "text": "Request a quote"
+        },
+        {
+          "tag": "H2",
+          "text": "Specifications"
+        },
+        {
+          "tag": "H2",
+          "text": "Batch documents"
+        },
+        {
+          "tag": "H2",
+          "text": "Frequently asked questions"
+        }
+      ],
+      "text": "Browse products\n›\nTissue research\n›\nBPC-157\nBPC-157\nIllustrative product view\nExplore in 3D\n\nTissue research\n\nBPC-157\n\nLaboratory research material. Review the product-specific documentation before use.\n\nCompare\nSign in to save\nSelect vial size\n5 mg\nBPC157-5\nCurrently unavailable\n10 mg\nBPC157-10\nCurrently unavailable\nRequest a quote\nUse in calculator · BPC157-5\n\nReleased batch data is not confirmed for this variant.\n\nSpecifications\n\nSpecifications are awaiting review. Contact us for the current product documentation.\n\nBatch documents\n\nNo publicly available documents.\n\nUnderstanding test results\nFrequently asked questions\nWhat are these materials intended for?\nThese materials are for laboratory research. Product-specific documentation describes identity, composition and handling; the catalogue does not provide instructions for human or veterinary administration.\nWhere can I find batch documents?\nWhere can I place a direct order?\nHow do I request a quote?",
+      "footerText": "Æ\nAverianLabs\n\nLaboratory materials and product-specific documents for research purchasing.\n\nUnderstanding test results →\nRESEARCH\nShop\nLab Tests\nCOA library\nCalculator\nCommunity\nCOMPANY\nAbout us\nQuality\nPartner program\nContact\nSUPPORT\nFAQ\nShipping & returns\nContact\nAccount\nLEGAL\nTerms\nPrivacy\nCookies\nResearch disclaimer\nACCEPTED PAYMENT METHODS\nCookie settings\nFor laboratory research only. Not for human or veterinary use.\n© 2026 AverianLabs. All rights reserved.\nSeller registration details are awaiting confirmation. Contact us before placing an order.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "smallTextCount": 5
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1496,
+      "theme": "light",
+      "id": "calculator",
+      "path": "/peptide-calculator",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "en-1440-light-calculator.png",
+      "errors": [],
+      "title": "Laboratory calculator · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Laboratory calculator"
+        },
+        {
+          "tag": "H2",
+          "text": "Inputs"
+        },
+        {
+          "tag": "H2",
+          "text": "Calculated results"
+        }
+      ],
+      "text": "RESEARCH TOOLS\n\nLaboratory calculator\n\nCalculate mass concentration, dilution and aliquots. Results describe ideal mass balance, not measured material content.\n\nConcentration\nDilution\nAliquots\nInputs\nCalculate the required final volume\nMaterial mass\nUnit\nmg\nµg\nFinal solution volume\nUnit\nmL\nµL\n\nUse a decimal point in English. Scientific notation, such as 1e-3, is supported.\n\nExample inputs. Replace these values with your own laboratory quantities.\n\nCalculated results\nConcentration\n5 mg/mL\n\nIdeal mass balance, no material loss. Use final solution volume. Values based on nominal mass do not establish measured content, purity, solubility or handling conditions.\n\nDisplayed values are rounded to at most eight significant digits. They do not establish measurement precision.\n\nReset\nCopy result\nExport CSV\nPrint\nSign in to save calculations\nAsk Averia about this calculation\nPrepare a community question\nFormula and assumptions",
+      "footerText": "Æ\nAverianLabs\n\nLaboratory materials and product-specific documents for research purchasing.\n\nUnderstanding test results →\nRESEARCH\nShop\nLab Tests\nCOA library\nCalculator\nCommunity\nCOMPANY\nAbout us\nQuality\nPartner program\nContact\nSUPPORT\nFAQ\nShipping & returns\nContact\nAccount\nLEGAL\nTerms\nPrivacy\nCookies\nResearch disclaimer\nACCEPTED PAYMENT METHODS\nCookie settings\nFor laboratory research only. Not for human or veterinary use.\n© 2026 AverianLabs. All rights reserved.\nSeller registration details are awaiting confirmation. Contact us before placing an order.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "smallTextCount": 7
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1619,
+      "theme": "light",
+      "id": "community",
+      "path": "/community",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "en-1440-light-community.png",
+      "errors": [],
+      "title": "Community · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Community"
+        },
+        {
+          "tag": "H2",
+          "text": "Recent activity"
+        },
+        {
+          "tag": "H3",
+          "text": "Start a useful research discussion"
+        },
+        {
+          "tag": "H2",
+          "text": "Topics"
+        },
+        {
+          "tag": "H2",
+          "text": "Research discussions"
+        }
+      ],
+      "text": "RESEARCH DISCUSSIONS\n\nCommunity\n\nDiscuss laboratory methods, documentation and research questions with cited sources.\n\nNew thread\nSearch\nCategory\nAll topics\nAnnouncements\nResearch discussion\nDocumentation & COAs\nMethods & analytics\nStorage & handling\nMarket & regulation\nOff-topic lounge\nDiscussion language\nAll languages\nSuomi\nEnglish\nUnanswered\nSearch\nRecent activity\nStart a useful research discussion\n\nAsk a specific question, describe the method or document, and link your sources. New submissions are reviewed before publication.\n\nRead the community rules\nTopics\nAnnouncements\n0\nResearch discussion\n0\nDocumentation & COAs\n0\nMethods & analytics\n0\nStorage & handling\n0\nMarket & regulation\n0\nOff-topic lounge\n0\nResearch discussions\n\nNew submissions await a moderator’s publication decision. AI assists the review. Community posts and reactions do not establish scientific qualifications or replace original sources.\n\nRead the community rules →\nUnderstanding test results →\nView batch documents →",
+      "footerText": "Æ\nAverianLabs\n\nLaboratory materials and product-specific documents for research purchasing.\n\nUnderstanding test results →\nRESEARCH\nShop\nLab Tests\nCOA library\nCalculator\nCommunity\nCOMPANY\nAbout us\nQuality\nPartner program\nContact\nSUPPORT\nFAQ\nShipping & returns\nContact\nAccount\nLEGAL\nTerms\nPrivacy\nCookies\nResearch disclaimer\nACCEPTED PAYMENT METHODS\nCookie settings\nFor laboratory research only. Not for human or veterinary use.\n© 2026 AverianLabs. All rights reserved.\nSeller registration details are awaiting confirmation. Contact us before placing an order.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "smallTextCount": 4
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1496,
+      "theme": "light",
+      "id": "assistant",
+      "path": "/assistant",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "en-1440-light-assistant.png",
+      "errors": [],
+      "title": "Averia — AverianLabs · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Averia"
+        },
+        {
+          "tag": "H3",
+          "text": "Hi — I'm Averia."
+        },
+        {
+          "tag": "H3",
+          "text": "Ask about research purchasing"
+        }
+      ],
+      "text": "Averia\n\nAI research assistant\n\nNew conversation\nHi — I'm Averia.\n\nI can help find products, check published batch documents, compare selected SKUs and explain laboratory calculations.\n\nFind a product\nCompare products\nCheck batch documents\nCalculate concentration\nAsk about research purchasing\n· Find a product or SKU\n· Check available batch documents\n· Calculate a laboratory concentration\nSaved conversations require your consent. Privacy notice",
+      "footerText": "Æ\nAverianLabs\n\nLaboratory materials and product-specific documents for research purchasing.\n\nUnderstanding test results →\nRESEARCH\nShop\nLab Tests\nCOA library\nCalculator\nCommunity\nCOMPANY\nAbout us\nQuality\nPartner program\nContact\nSUPPORT\nFAQ\nShipping & returns\nContact\nAccount\nLEGAL\nTerms\nPrivacy\nCookies\nResearch disclaimer\nACCEPTED PAYMENT METHODS\nCookie settings\nFor laboratory research only. Not for human or veterinary use.\n© 2026 AverianLabs. All rights reserved.\nSeller registration details are awaiting confirmation. Contact us before placing an order.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "smallTextCount": 7
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1496,
+      "theme": "light",
+      "id": "reports",
+      "path": "/coa",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "en-1440-light-reports.png",
+      "errors": [],
+      "title": "Certificates of Analysis · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Certificates of Analysis"
+        }
+      ],
+      "text": "Certificates of Analysis\n\nFind published documents for a product or batch. A document link is not a blanket PASS designation; assess the methods and results in the original report.\n\nBatch documents\n\nNo publicly available documents.",
+      "footerText": "Æ\nAverianLabs\n\nLaboratory materials and product-specific documents for research purchasing.\n\nUnderstanding test results →\nRESEARCH\nShop\nLab Tests\nCOA library\nCalculator\nCommunity\nCOMPANY\nAbout us\nQuality\nPartner program\nContact\nSUPPORT\nFAQ\nShipping & returns\nContact\nAccount\nLEGAL\nTerms\nPrivacy\nCookies\nResearch disclaimer\nACCEPTED PAYMENT METHODS\nCookie settings\nFor laboratory research only. Not for human or veterinary use.\n© 2026 AverianLabs. All rights reserved.\nSeller registration details are awaiting confirmation. Contact us before placing an order.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "smallTextCount": 0
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1496,
+      "theme": "light",
+      "id": "quality",
+      "path": "/quality",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "en-1440-light-quality.png",
+      "errors": [],
+      "title": "Quality assurance · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Quality and product documentation"
+        },
+        {
+          "tag": "H2",
+          "text": "Product identity"
+        },
+        {
+          "tag": "H2",
+          "text": "Batch evidence"
+        },
+        {
+          "tag": "H2",
+          "text": "Storage and handling"
+        },
+        {
+          "tag": "H2",
+          "text": "Batch documents"
+        }
+      ],
+      "text": "Quality and product documentation\n\nEvaluate materials using the documents for the actual product and batch. Availability of a report is shown explicitly; missing reports are not presented as verified results.\n\nProduct identity\n\nCheck the chemical identity, composition, quantity and unit against the original specification. Analytical purity, material content and identity are different measurements.\n\nBatch evidence\n\nA report should identify the batch, laboratory, test method, result, unit and date. Accreditation or supplier quality claims are published only when their supporting evidence has been approved.\n\nStorage and handling\n\nUse the conditions in the product-specific documentation. Do not assume that the same storage or preparation conditions apply to every material.\n\nBatch documents\n\nNo publicly available documents.\n\nView batch documents\nContact us\nView batch documents\nRequest a quote",
+      "footerText": "Æ\nAverianLabs\n\nLaboratory materials and product-specific documents for research purchasing.\n\nUnderstanding test results →\nRESEARCH\nShop\nLab Tests\nCOA library\nCalculator\nCommunity\nCOMPANY\nAbout us\nQuality\nPartner program\nContact\nSUPPORT\nFAQ\nShipping & returns\nContact\nAccount\nLEGAL\nTerms\nPrivacy\nCookies\nResearch disclaimer\nACCEPTED PAYMENT METHODS\nCookie settings\nFor laboratory research only. Not for human or veterinary use.\n© 2026 AverianLabs. All rights reserved.\nSeller registration details are awaiting confirmation. Contact us before placing an order.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "smallTextCount": 0
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1496,
+      "theme": "light",
+      "id": "methods",
+      "path": "/lab-tests",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "en-1440-light-methods.png",
+      "errors": [],
+      "title": "Lab testing — HPLC, endotoxin, mass spec · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Understanding laboratory reports"
+        },
+        {
+          "tag": "H2",
+          "text": "Chromatographic purity"
+        },
+        {
+          "tag": "H2",
+          "text": "Identity and composition"
+        },
+        {
+          "tag": "H2",
+          "text": "Product-specific tests"
+        },
+        {
+          "tag": "H2",
+          "text": "Batch documents"
+        }
+      ],
+      "text": "Understanding laboratory reports\n\nRead the original report for the selected batch. The methods below describe different analytical questions and do not imply that every product has undergone every test.\n\nChromatographic purity\n\nHPLC area purity describes the relative chromatographic peak areas under the reported method. It does not by itself establish the mass of peptide in a container; quantitative content requires an appropriate assay.\n\nIdentity and composition\n\nMass spectrometry can provide molecular-mass evidence. A sequence or composition claim needs the appropriate supporting analysis and specification; mass alone is not a complete sequence determination.\n\nProduct-specific tests\n\nEndotoxin, sterility and other test results are shown only when applicable and supported by the report. Retain the units used in the original result, such as EU/mg.\n\nBatch documents\n\nNo publicly available documents.\n\nView batch documents\nContact us\nView batch documents\nRequest a quote",
+      "footerText": "Æ\nAverianLabs\n\nLaboratory materials and product-specific documents for research purchasing.\n\nUnderstanding test results →\nRESEARCH\nShop\nLab Tests\nCOA library\nCalculator\nCommunity\nCOMPANY\nAbout us\nQuality\nPartner program\nContact\nSUPPORT\nFAQ\nShipping & returns\nContact\nAccount\nLEGAL\nTerms\nPrivacy\nCookies\nResearch disclaimer\nACCEPTED PAYMENT METHODS\nCookie settings\nFor laboratory research only. Not for human or veterinary use.\n© 2026 AverianLabs. All rights reserved.\nSeller registration details are awaiting confirmation. Contact us before placing an order.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "smallTextCount": 0
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1496,
+      "theme": "light",
+      "id": "contact",
+      "path": "/contact",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "en-1440-light-contact.png",
+      "errors": [],
+      "title": "Contact · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Contact us"
+        }
+      ],
+      "text": "Contact us\n\nAsk about products, documentation, availability or an existing order. Include the SKU or order number when available.\n\nhello@averianlabs.eu\nName\nEmail\nSubject\nMessage\nSend message",
+      "footerText": "Æ\nAverianLabs\n\nLaboratory materials and product-specific documents for research purchasing.\n\nUnderstanding test results →\nRESEARCH\nShop\nLab Tests\nCOA library\nCalculator\nCommunity\nCOMPANY\nAbout us\nQuality\nPartner program\nContact\nSUPPORT\nFAQ\nShipping & returns\nContact\nAccount\nLEGAL\nTerms\nPrivacy\nCookies\nResearch disclaimer\nACCEPTED PAYMENT METHODS\nCookie settings\nFor laboratory research only. Not for human or veterinary use.\n© 2026 AverianLabs. All rights reserved.\nSeller registration details are awaiting confirmation. Contact us before placing an order.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "smallTextCount": 4
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1496,
+      "theme": "light",
+      "id": "cart",
+      "path": "/checkout/cart",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "en-1440-light-cart.png",
+      "errors": [
+        "Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      ],
+      "title": "AverianLabs — Laboratory research materials",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Checkout"
+        },
+        {
+          "tag": "H1",
+          "text": "Cart"
+        },
+        {
+          "tag": "H2",
+          "text": "Your cart is empty."
+        }
+      ],
+      "text": "Checkout\n1\nEmail\n2\nAddress\n3\nShipping\n4\nPayment\nCart\n\nYour selected peptides and supplies — ready for review.\n\nYour cart is empty.\nBrowse products",
+      "footerText": "Æ\nAverianLabs\n\nLaboratory materials and product-specific documents for research purchasing.\n\nUnderstanding test results →\nRESEARCH\nShop\nLab Tests\nCOA library\nCalculator\nCommunity\nCOMPANY\nAbout us\nQuality\nPartner program\nContact\nSUPPORT\nFAQ\nShipping & returns\nContact\nAccount\nLEGAL\nTerms\nPrivacy\nCookies\nResearch disclaimer\nACCEPTED PAYMENT METHODS\nCookie settings\nFor laboratory research only. Not for human or veterinary use.\n© 2026 AverianLabs. All rights reserved.\nSeller registration details are awaiting confirmation. Contact us before placing an order.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "smallTextCount": 0
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1496,
+      "theme": "light",
+      "id": "tools",
+      "path": "/research-tools",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "en-1440-light-tools.png",
+      "errors": [],
+      "title": "Research tools · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Research tools"
+        },
+        {
+          "tag": "H2",
+          "text": "Laboratory calculator →"
+        },
+        {
+          "tag": "H2",
+          "text": "Averia →"
+        },
+        {
+          "tag": "H2",
+          "text": "Research community →"
+        },
+        {
+          "tag": "H2",
+          "text": "Understanding test results →"
+        }
+      ],
+      "text": "Research tools\n\nCalculate laboratory quantities, inspect sources and ask research questions.\n\nLaboratory calculator →\n\nCalculate mass concentration, dilution and aliquots. Results describe ideal mass balance, not measured material content.\n\nAveria →\n\nFind product information and batch documents, or ask about a laboratory calculation.\n\nResearch community →\n\nDiscuss documentation and share laboratory research questions.\n\nUnderstanding test results →\n\nRead the original report for the selected batch. The methods below describe different analytical questions and do not imply that every product has undergone every test.",
+      "footerText": "Æ\nAverianLabs\n\nLaboratory materials and product-specific documents for research purchasing.\n\nUnderstanding test results →\nRESEARCH\nShop\nLab Tests\nCOA library\nCalculator\nCommunity\nCOMPANY\nAbout us\nQuality\nPartner program\nContact\nSUPPORT\nFAQ\nShipping & returns\nContact\nAccount\nLEGAL\nTerms\nPrivacy\nCookies\nResearch disclaimer\nACCEPTED PAYMENT METHODS\nCookie settings\nFor laboratory research only. Not for human or veterinary use.\n© 2026 AverianLabs. All rights reserved.\nSeller registration details are awaiting confirmation. Contact us before placing an order.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "smallTextCount": 0
+    },
+    {
+      "locale": "fi",
+      "width": 390,
+      "height": 3457,
+      "theme": "light",
+      "id": "home",
+      "path": "",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "fi-390-light-home.png",
+      "errors": [],
+      "title": "AverianLabs — Materiaalit laboratoriotutkimukseen",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Tutkimusmateriaalit laboratoriotyöhön."
+        },
+        {
+          "tag": "H2",
+          "text": "Retatrutidi"
+        },
+        {
+          "tag": "H2",
+          "text": "Löydä materiaali"
+        },
+        {
+          "tag": "H2",
+          "text": "Tarkista asiakirjat"
+        },
+        {
+          "tag": "H2",
+          "text": "Varmista saatavuus"
+        },
+        {
+          "tag": "H2",
+          "text": "Tutustu tuotevalikoimaan"
+        },
+        {
+          "tag": "H3",
+          "text": "BAC-vesi"
+        },
+        {
+          "tag": "H3",
+          "text": "Retatrutidi"
+        },
+        {
+          "tag": "H3",
+          "text": "GHK-Cu"
+        },
+        {
+          "tag": "H3",
+          "text": "MOTS-c"
+        },
+        {
+          "tag": "H2",
+          "text": "Laatu ja tuoteasiakirjat"
+        },
+        {
+          "tag": "H2",
+          "text": "Tutkimustyökalut"
+        }
+      ],
+      "text": "LABORATORIOTUTKIMUKSEEN\n\nTutkimusmateriaalit laboratoriotyöhön.\n\nTutustu tuotteisiin, tarkista erän asiakirjat ja kysy saatavuudesta ennen tilaamista.\n\nSelaa valikoimaa →\nTarkista eräasiakirjat\n\nVain laboratoriotutkimukseen.\n\nTuote\nRetatrutidi\n\nRETA-20\n\n20 mg / 30 mg\n\nSaatavuus\nEi saatavilla tällä hetkellä\nEräasiakirjat\nEi julkisesti saatavilla olevia asiakirjoja.\nHavainnollistava tuotekuva\nNäytä → →\nTutustu 3D-näkymässä\n1\nLöydä materiaali\n\nHae nimellä tai tuotekoodilla.\n\n2\nTarkista asiakirjat\n\nTarkista juuri tuotteen ja erän alkuperäiset lähteet.\n\n3\nVarmista saatavuus\n\nTarkista hankintatiedot ennen tilaamista.\n\nTutustu tuotevalikoimaan\n\nSelaa tuotetietoja ja valitse tutkimustyösi kannalta olennaiset materiaalit.\n\nSelaa tuotteita →\nBAC-vesi\n\nBACW-10\n\n10 mL\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nRetatrutidi\n\nRETA-20\n\n20 mg / 30 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nGHK-Cu\n\nGHKCU-50\n\n50 mg / 100 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nMOTS-c\n\nMOTSC-10\n\n10 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nLaatu ja tuoteasiakirjat\n\nArvioi materiaalit kyseisen tuotteen ja erän asiakirjojen perusteella. Kerromme selkeästi, onko raportti saatavilla. Puuttuvia raportteja ei esitetä varmennettuina tuloksina.\n\nTarkastele erän asiakirjoja →\nAnalyysitulosten tulkinta →\nTutkimustyökalut\n\nLaske laboratoriomääriä, tarkista lähteet ja esitä tutkimuskysymyksiä.\n\nLaboratoriolaskuri\nTutkimusyhteisö",
+      "footerText": "Æ\nAverianLabs\n\nLaboratoriomateriaalit ja tuotekohtaiset asiakirjat tutkimushankintojen tueksi.\n\nTestitulosten tulkinta →\nTUTKIMUS\nKauppa\nLaboratoriotestit\nAnalyysitodistusarkisto\nLaskuri\nYhteisö\nYRITYS\nTietoa meistä\nLaatu\nKumppanuusohjelma\nYhteystiedot\nTUKI\nUKK\nToimitus ja palautukset\nYhteystiedot\nAsiakastili\nOIKEUDELLISET\nEhdot\nTietosuoja\nEvästeet\nTutkimuskäytön ehdot\nHYVÄKSYTYT MAKSUTAVAT\nEvästeasetukset\nVain laboratoriotutkimukseen. Ei ihmis- tai eläinkäyttöön.\n© 2026 AverianLabs. Kaikki oikeudet pidätetään.\nMyyjän rekisteritiedot odottavat vahvistusta. Ota meihin yhteyttä ennen tilaamista.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 390,
+      "viewport": 390,
+      "smallTextCount": 18
+    },
+    {
+      "locale": "fi",
+      "width": 390,
+      "height": 4040,
+      "theme": "light",
+      "id": "catalogue",
+      "path": "/shop",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "fi-390-light-catalogue.png",
+      "errors": [],
+      "title": "Tuotevalikoima · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Tuotevalikoima"
+        },
+        {
+          "tag": "H2",
+          "text": "Suodattimet"
+        },
+        {
+          "tag": "H3",
+          "text": "HGH Frag 176-191"
+        },
+        {
+          "tag": "H3",
+          "text": "AOD-9604"
+        },
+        {
+          "tag": "H3",
+          "text": "CJC-1295"
+        },
+        {
+          "tag": "H3",
+          "text": "Semax"
+        },
+        {
+          "tag": "H3",
+          "text": "Selank"
+        },
+        {
+          "tag": "H3",
+          "text": "BPC-157 + TB-500 -seos"
+        },
+        {
+          "tag": "H3",
+          "text": "KLOW-seos"
+        },
+        {
+          "tag": "H3",
+          "text": "Melanotan I"
+        },
+        {
+          "tag": "H3",
+          "text": "BPC-157"
+        },
+        {
+          "tag": "H3",
+          "text": "NAD+"
+        },
+        {
+          "tag": "H3",
+          "text": "Melanotan II"
+        },
+        {
+          "tag": "H3",
+          "text": "MOTS-c"
+        },
+        {
+          "tag": "H3",
+          "text": "GHK-Cu"
+        },
+        {
+          "tag": "H3",
+          "text": "Retatrutidi"
+        },
+        {
+          "tag": "H3",
+          "text": "BAC-vesi"
+        }
+      ],
+      "text": "Tuotevalikoima\n\nTarkista tuotetunnuksen saatavuus ja alkuperäiset eräasiakirjat ennen tilaamista.\n\n15 tuotetta\nHae tuotteita…\nSuodattimet\nKaikki materiaalityypit\nPeptidit\nKosmetiikan raaka-aineet\nReagenssit\nLaboratoriotarvikkeet\nJulkaistut asiakirjat\nHGH Frag 176-191\n\nHGHFR-5\n\n5 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nAOD-9604\n\nAOD-5\n\n5 mg\n\nPyydä tarjous\nEi julkisesti saatavilla olevia asiakirjoja.\nCJC-1295\n\nCJC-1\n\n1 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nSemax\n\nSEMX-5\n\n5 mg / 10 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nSelank\n\nSELK-5\n\n5 mg / 10 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nBPC-157 + TB-500 -seos\n\nBPC-TB-10\n\n10 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nKLOW-seos\n\nKLOW-80\n\n80 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nMelanotan I\n\nMT1-10\n\n10 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nBPC-157\n\nBPC157-5\n\n5 mg / 10 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nNAD+\n\nNAD-1000\n\n1 000 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nMelanotan II\n\nMT2-10\n\n10 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nMOTS-c\n\nMOTSC-10\n\n10 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nGHK-Cu\n\nGHKCU-50\n\n50 mg / 100 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nRetatrutidi\n\nRETA-20\n\n20 mg / 30 mg\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.\nBAC-vesi\n\nBACW-10\n\n10 mL\n\nEi saatavilla tällä hetkellä\nEi julkisesti saatavilla olevia asiakirjoja.",
+      "footerText": "Æ\nAverianLabs\n\nLaboratoriomateriaalit ja tuotekohtaiset asiakirjat tutkimushankintojen tueksi.\n\nTestitulosten tulkinta →\nTUTKIMUS\nKauppa\nLaboratoriotestit\nAnalyysitodistusarkisto\nLaskuri\nYhteisö\nYRITYS\nTietoa meistä\nLaatu\nKumppanuusohjelma\nYhteystiedot\nTUKI\nUKK\nToimitus ja palautukset\nYhteystiedot\nAsiakastili\nOIKEUDELLISET\nEhdot\nTietosuoja\nEvästeet\nTutkimuskäytön ehdot\nHYVÄKSYTYT MAKSUTAVAT\nEvästeasetukset\nVain laboratoriotutkimukseen. Ei ihmis- tai eläinkäyttöön.\n© 2026 AverianLabs. Kaikki oikeudet pidätetään.\nMyyjän rekisteritiedot odottavat vahvistusta. Ota meihin yhteyttä ennen tilaamista.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 390,
+      "viewport": 390,
+      "smallTextCount": 48
+    },
+    {
+      "locale": "fi",
+      "width": 390,
+      "height": 2963,
+      "theme": "light",
+      "id": "product",
+      "path": "/shop/bpc-157",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "fi-390-light-product.png",
+      "errors": [],
+      "title": "BPC-157 · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "BPC-157"
+        },
+        {
+          "tag": "H3",
+          "text": "Pyydä tarjous"
+        },
+        {
+          "tag": "H2",
+          "text": "Tuotetiedot"
+        },
+        {
+          "tag": "H2",
+          "text": "Eräasiakirjat"
+        },
+        {
+          "tag": "H2",
+          "text": "Usein kysytyt kysymykset"
+        }
+      ],
+      "text": "Selaa tuotteita\n›\nKudostutkimus\n›\nBPC-157\nBPC-157\nHavainnollistava tuotekuva\nTutustu 3D-näkymässä\n\nKudostutkimus\n\nBPC-157\n\nMateriaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.\n\nVertaa\nKirjaudu sisään tallentaaksesi\nValitse pullokoko\n5 mg\nBPC157-5\nEi saatavilla tällä hetkellä\n10 mg\nBPC157-10\nEi saatavilla tällä hetkellä\nPyydä tarjous\nKäytä laskurissa · BPC157-5\n\nTämän tuoteversion vapautetun erän tietoja ei ole vahvistettu.\n\nTuotetiedot\n\nTuotetietoja tarkistetaan. Ota meihin yhteyttä saadaksesi ajantasaiset asiakirjat.\n\nEräasiakirjat\n\nEi julkisesti saatavilla olevia asiakirjoja.\n\nAnalyysitulosten tulkinta\nUsein kysytyt kysymykset\nMihin materiaalit on tarkoitettu?\nMateriaalit on tarkoitettu laboratoriotutkimukseen. Tuotekohtaiset asiakirjat kuvaavat tunnistetiedot, koostumuksen ja käsittelyn. Tuotevalikoima ei sisällä ohjeita materiaalien antamiseen ihmisille tai eläimille.\nMistä löydän erän asiakirjat?\nMinne voin tehdä suoran tilauksen?\nMiten pyydän tarjouksen?",
+      "footerText": "Æ\nAverianLabs\n\nLaboratoriomateriaalit ja tuotekohtaiset asiakirjat tutkimushankintojen tueksi.\n\nTestitulosten tulkinta →\nTUTKIMUS\nKauppa\nLaboratoriotestit\nAnalyysitodistusarkisto\nLaskuri\nYhteisö\nYRITYS\nTietoa meistä\nLaatu\nKumppanuusohjelma\nYhteystiedot\nTUKI\nUKK\nToimitus ja palautukset\nYhteystiedot\nAsiakastili\nOIKEUDELLISET\nEhdot\nTietosuoja\nEvästeet\nTutkimuskäytön ehdot\nHYVÄKSYTYT MAKSUTAVAT\nEvästeasetukset\nVain laboratoriotutkimukseen. Ei ihmis- tai eläinkäyttöön.\n© 2026 AverianLabs. Kaikki oikeudet pidätetään.\nMyyjän rekisteritiedot odottavat vahvistusta. Ota meihin yhteyttä ennen tilaamista.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 390,
+      "viewport": 390,
+      "smallTextCount": 5
+    },
+    {
+      "locale": "fi",
+      "width": 390,
+      "height": 2215,
+      "theme": "light",
+      "id": "calculator",
+      "path": "/peptide-calculator",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "fi-390-light-calculator.png",
+      "errors": [],
+      "title": "Laboratoriolaskuri · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Laboratoriolaskuri"
+        },
+        {
+          "tag": "H2",
+          "text": "Lähtötiedot"
+        },
+        {
+          "tag": "H2",
+          "text": "Laskennan tulokset"
+        }
+      ],
+      "text": "TUTKIMUSTYÖKALUT\n\nLaboratoriolaskuri\n\nLaske massapitoisuus, laimennus ja osanäytteet. Tulokset perustuvat laskennalliseen massataseeseen, eivät materiaalin sisällön mittaukseen.\n\nPitoisuus\nLaimennus\nOsanäytteet\nLähtötiedot\nLaske tarvittava lopullinen tilavuus\nMateriaalin massa\nYksikkö\nmg\nµg\nLiuoksen lopullinen tilavuus\nYksikkö\nmL\nµL\n\nSuomeksi voit käyttää desimaalipilkkua tai -pistettä. Myös tieteellinen merkintä, kuten 1e-3, on tuettu.\n\nEsimerkkilähtötiedot. Korvaa arvot oman laboratoriolaskelmasi tiedoilla.\n\nLaskennan tulokset\nPitoisuus\n5 mg/mL\n\nLaskennallinen massatase ilman materiaalihävikkiä. Käytä liuoksen lopullista tilavuutta. Nimellismassa ei osoita mitattua sisältöä, puhtautta, liukoisuutta tai käsittelyolosuhteita.\n\nNäytetyt luvut pyöristetään enintään kahdeksaan merkitsevään numeroon. Ne eivät osoita mittauksen tarkkuutta.\n\nPalauta lähtötiedot\nKopioi tulos\nVie CSV-tiedostoon\nTulosta\nKirjaudu sisään tallentaaksesi laskelmia\nKysy Averialta tästä laskelmasta\nValmistele yhteisökysymys\nKaava ja oletukset",
+      "footerText": "Æ\nAverianLabs\n\nLaboratoriomateriaalit ja tuotekohtaiset asiakirjat tutkimushankintojen tueksi.\n\nTestitulosten tulkinta →\nTUTKIMUS\nKauppa\nLaboratoriotestit\nAnalyysitodistusarkisto\nLaskuri\nYhteisö\nYRITYS\nTietoa meistä\nLaatu\nKumppanuusohjelma\nYhteystiedot\nTUKI\nUKK\nToimitus ja palautukset\nYhteystiedot\nAsiakastili\nOIKEUDELLISET\nEhdot\nTietosuoja\nEvästeet\nTutkimuskäytön ehdot\nHYVÄKSYTYT MAKSUTAVAT\nEvästeasetukset\nVain laboratoriotutkimukseen. Ei ihmis- tai eläinkäyttöön.\n© 2026 AverianLabs. Kaikki oikeudet pidätetään.\nMyyjän rekisteritiedot odottavat vahvistusta. Ota meihin yhteyttä ennen tilaamista.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 390,
+      "viewport": 390,
+      "smallTextCount": 7
+    },
+    {
+      "locale": "fi",
+      "width": 390,
+      "height": 2575,
+      "theme": "light",
+      "id": "community",
+      "path": "/community",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "fi-390-light-community.png",
+      "errors": [],
+      "title": "Yhteisö · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Yhteisö"
+        },
+        {
+          "tag": "H2",
+          "text": "Viimeisin toiminta"
+        },
+        {
+          "tag": "H3",
+          "text": "Aloita hyödyllinen tutkimuskeskustelu"
+        },
+        {
+          "tag": "H2",
+          "text": "Aiheet"
+        },
+        {
+          "tag": "H2",
+          "text": "Tutkimuskeskustelut"
+        }
+      ],
+      "text": "TUTKIMUSKESKUSTELUT\n\nYhteisö\n\nKeskustele laboratoriomenetelmistä, asiakirjoista ja tutkimuskysymyksistä alkuperäisiin lähteisiin viitaten.\n\nUusi ketju\nHae\nKategoria\nKaikki aiheet\nTiedotteet\nTutkimuskeskustelu\nDokumentaatio ja analyysitodistukset\nMenetelmät ja analytiikka\nSäilytys ja käsittely\nMarkkinat ja sääntely\nVapaa keskustelu\nKeskustelun kieli\nKaikki kielet\nSuomi\nEnglish\nVastaamattomat\nHae\nViimeisin toiminta\nAloita hyödyllinen tutkimuskeskustelu\n\nEsitä tarkka kysymys, kuvaa menetelmä tai asiakirja ja linkitä lähteet. Uudet viestit tarkistetaan ennen julkaisua.\n\nLue yhteisön säännöt\nAiheet\nTiedotteet\n0\nTutkimuskeskustelu\n0\nDokumentaatio ja analyysitodistukset\n0\nMenetelmät ja analytiikka\n0\nSäilytys ja käsittely\n0\nMarkkinat ja sääntely\n0\nVapaa keskustelu\n0\nTutkimuskeskustelut\n\nUudet viestit odottavat moderaattorin julkaisupäätöstä. Tekoäly tukee tarkistusta. Yhteisön viestit ja reaktiot eivät vahvista tieteellistä pätevyyttä tai korvaa alkuperäisiä lähteitä.\n\nLue yhteisön säännöt →\nAnalyysitulosten tulkinta →\nTarkastele erän asiakirjoja →",
+      "footerText": "Æ\nAverianLabs\n\nLaboratoriomateriaalit ja tuotekohtaiset asiakirjat tutkimushankintojen tueksi.\n\nTestitulosten tulkinta →\nTUTKIMUS\nKauppa\nLaboratoriotestit\nAnalyysitodistusarkisto\nLaskuri\nYhteisö\nYRITYS\nTietoa meistä\nLaatu\nKumppanuusohjelma\nYhteystiedot\nTUKI\nUKK\nToimitus ja palautukset\nYhteystiedot\nAsiakastili\nOIKEUDELLISET\nEhdot\nTietosuoja\nEvästeet\nTutkimuskäytön ehdot\nHYVÄKSYTYT MAKSUTAVAT\nEvästeasetukset\nVain laboratoriotutkimukseen. Ei ihmis- tai eläinkäyttöön.\n© 2026 AverianLabs. Kaikki oikeudet pidätetään.\nMyyjän rekisteritiedot odottavat vahvistusta. Ota meihin yhteyttä ennen tilaamista.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 390,
+      "viewport": 390,
+      "smallTextCount": 4
+    },
+    {
+      "locale": "fi",
+      "width": 390,
+      "height": 1839,
+      "theme": "light",
+      "id": "assistant",
+      "path": "/assistant",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "fi-390-light-assistant.png",
+      "errors": [],
+      "title": "Averia — AverianLabs · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Averia"
+        },
+        {
+          "tag": "H3",
+          "text": "Hei — olen Averia."
+        },
+        {
+          "tag": "H3",
+          "text": "Kysy tutkimushankinnoista"
+        }
+      ],
+      "text": "Averia\n\nTekoälyavustaja\n\nUusi keskustelu\nHei — olen Averia.\n\nVoin auttaa hakemaan tuotteita, tarkistamaan julkaistuja eräasiakirjoja, vertailemaan tuotekoodeja ja tulkitsemaan laboratoriolaskelmia.\n\nHae tuote\nVertaile tuotteita\nTarkista eräasiakirjat\nLaske pitoisuus\nKysy tutkimushankinnoista\n· Hae tuote tai SKU-tunnus\n· Tarkista saatavilla olevat eräasiakirjat\n· Laske laboratorioliuoksen pitoisuus\nKeskustelujen tallentaminen edellyttää suostumustasi. Tietosuojaseloste",
+      "footerText": "Æ\nAverianLabs\n\nLaboratoriomateriaalit ja tuotekohtaiset asiakirjat tutkimushankintojen tueksi.\n\nTestitulosten tulkinta →\nTUTKIMUS\nKauppa\nLaboratoriotestit\nAnalyysitodistusarkisto\nLaskuri\nYhteisö\nYRITYS\nTietoa meistä\nLaatu\nKumppanuusohjelma\nYhteystiedot\nTUKI\nUKK\nToimitus ja palautukset\nYhteystiedot\nAsiakastili\nOIKEUDELLISET\nEhdot\nTietosuoja\nEvästeet\nTutkimuskäytön ehdot\nHYVÄKSYTYT MAKSUTAVAT\nEvästeasetukset\nVain laboratoriotutkimukseen. Ei ihmis- tai eläinkäyttöön.\n© 2026 AverianLabs. Kaikki oikeudet pidätetään.\nMyyjän rekisteritiedot odottavat vahvistusta. Ota meihin yhteyttä ennen tilaamista.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 390,
+      "viewport": 390,
+      "smallTextCount": 7
+    },
+    {
+      "locale": "fi",
+      "width": 390,
+      "height": 1735,
+      "theme": "light",
+      "id": "reports",
+      "path": "/coa",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "fi-390-light-reports.png",
+      "errors": [],
+      "title": "Analyysitodistukset · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Analyysitodistukset"
+        }
+      ],
+      "text": "Analyysitodistukset\n\nEtsi julkaistut asiakirjat tuotteen tai erätunnuksen perusteella. Asiakirjalinkki ei ole yleinen hyväksymismerkintä. Arvioi menetelmät ja tulokset alkuperäisestä raportista.\n\nEräasiakirjat\n\nEi julkisesti saatavilla olevia asiakirjoja.",
+      "footerText": "Æ\nAverianLabs\n\nLaboratoriomateriaalit ja tuotekohtaiset asiakirjat tutkimushankintojen tueksi.\n\nTestitulosten tulkinta →\nTUTKIMUS\nKauppa\nLaboratoriotestit\nAnalyysitodistusarkisto\nLaskuri\nYhteisö\nYRITYS\nTietoa meistä\nLaatu\nKumppanuusohjelma\nYhteystiedot\nTUKI\nUKK\nToimitus ja palautukset\nYhteystiedot\nAsiakastili\nOIKEUDELLISET\nEhdot\nTietosuoja\nEvästeet\nTutkimuskäytön ehdot\nHYVÄKSYTYT MAKSUTAVAT\nEvästeasetukset\nVain laboratoriotutkimukseen. Ei ihmis- tai eläinkäyttöön.\n© 2026 AverianLabs. Kaikki oikeudet pidätetään.\nMyyjän rekisteritiedot odottavat vahvistusta. Ota meihin yhteyttä ennen tilaamista.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 390,
+      "viewport": 390,
+      "smallTextCount": 0
+    },
+    {
+      "locale": "fi",
+      "width": 390,
+      "height": 1987,
+      "theme": "light",
+      "id": "quality",
+      "path": "/quality",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "fi-390-light-quality.png",
+      "errors": [],
+      "title": "Laadunvarmistus · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Laatu ja tuoteasiakirjat"
+        },
+        {
+          "tag": "H2",
+          "text": "Tuotteen tunnistetiedot"
+        },
+        {
+          "tag": "H2",
+          "text": "Eräkohtainen näyttö"
+        },
+        {
+          "tag": "H2",
+          "text": "Säilytys ja käsittely"
+        },
+        {
+          "tag": "H2",
+          "text": "Eräasiakirjat"
+        }
+      ],
+      "text": "Laatu ja tuoteasiakirjat\n\nArvioi materiaalit kyseisen tuotteen ja erän asiakirjojen perusteella. Kerromme selkeästi, onko raportti saatavilla. Puuttuvia raportteja ei esitetä varmennettuina tuloksina.\n\nTuotteen tunnistetiedot\n\nTarkista kemiallinen identiteetti, koostumus, määrä ja yksikkö alkuperäisestä tuoteselosteesta. Analyyttinen puhtaus, materiaalin sisältö ja identiteetti ovat eri asioita.\n\nEräkohtainen näyttö\n\nRaportista tulee käydä ilmi erä, laboratorio, analyysimenetelmä, tulos, yksikkö ja päivämäärä. Akkreditointia tai toimittajan laatua koskevat väitteet julkaistaan vasta, kun niitä tukeva näyttö on hyväksytty.\n\nSäilytys ja käsittely\n\nNoudata tuotekohtaisissa asiakirjoissa annettuja olosuhteita. Eri materiaalien säilytys- ja valmisteluohjeet voivat poiketa toisistaan.\n\nEräasiakirjat\n\nEi julkisesti saatavilla olevia asiakirjoja.\n\nTarkastele erän asiakirjoja\nOta yhteyttä\nTarkastele erän asiakirjoja\nPyydä tarjous",
+      "footerText": "Æ\nAverianLabs\n\nLaboratoriomateriaalit ja tuotekohtaiset asiakirjat tutkimushankintojen tueksi.\n\nTestitulosten tulkinta →\nTUTKIMUS\nKauppa\nLaboratoriotestit\nAnalyysitodistusarkisto\nLaskuri\nYhteisö\nYRITYS\nTietoa meistä\nLaatu\nKumppanuusohjelma\nYhteystiedot\nTUKI\nUKK\nToimitus ja palautukset\nYhteystiedot\nAsiakastili\nOIKEUDELLISET\nEhdot\nTietosuoja\nEvästeet\nTutkimuskäytön ehdot\nHYVÄKSYTYT MAKSUTAVAT\nEvästeasetukset\nVain laboratoriotutkimukseen. Ei ihmis- tai eläinkäyttöön.\n© 2026 AverianLabs. Kaikki oikeudet pidätetään.\nMyyjän rekisteritiedot odottavat vahvistusta. Ota meihin yhteyttä ennen tilaamista.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 390,
+      "viewport": 390,
+      "smallTextCount": 0
+    },
+    {
+      "locale": "fi",
+      "width": 390,
+      "height": 2068,
+      "theme": "light",
+      "id": "methods",
+      "path": "/lab-tests",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "fi-390-light-methods.png",
+      "errors": [],
+      "title": "Laboratorioraportit — HPLC, endotoksiini ja massaspektrometria · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Laboratorioraporttien tulkinta"
+        },
+        {
+          "tag": "H2",
+          "text": "Kromatografinen puhtaus"
+        },
+        {
+          "tag": "H2",
+          "text": "Identiteetti ja koostumus"
+        },
+        {
+          "tag": "H2",
+          "text": "Tuotekohtaiset analyysit"
+        },
+        {
+          "tag": "H2",
+          "text": "Eräasiakirjat"
+        }
+      ],
+      "text": "Laboratorioraporttien tulkinta\n\nLue valitun erän alkuperäinen raportti. Alla kuvatut menetelmät vastaavat eri analyyttisiin kysymyksiin. Kuvaukset eivät tarkoita, että jokaiselle tuotteelle olisi tehty kaikki analyysit.\n\nKromatografinen puhtaus\n\nHPLC:n pinta-alapuhtaus kuvaa kromatografisten piikkien suhteellisia pinta-aloja raportoidulla menetelmällä. Se ei yksin osoita näytepullon sisältämän peptidin massaa; sisällön määritys edellyttää asianmukaista kvantitatiivista analyysiä.\n\nIdentiteetti ja koostumus\n\nMassaspektrometria voi antaa näyttöä molekyylimassasta. Sekvenssiä tai koostumusta koskeva väite edellyttää asianmukaista analyysiä ja tuoteselostetta. Pelkkä massa ei määritä koko sekvenssiä.\n\nTuotekohtaiset analyysit\n\nEndotoksiini-, steriiliys- ja muut tulokset näytetään vain, kun ne soveltuvat tuotteeseen ja perustuvat raporttiin. Säilytä alkuperäisessä tuloksessa käytetyt yksiköt, kuten EU/mg.\n\nEräasiakirjat\n\nEi julkisesti saatavilla olevia asiakirjoja.\n\nTarkastele erän asiakirjoja\nOta yhteyttä\nTarkastele erän asiakirjoja\nPyydä tarjous",
+      "footerText": "Æ\nAverianLabs\n\nLaboratoriomateriaalit ja tuotekohtaiset asiakirjat tutkimushankintojen tueksi.\n\nTestitulosten tulkinta →\nTUTKIMUS\nKauppa\nLaboratoriotestit\nAnalyysitodistusarkisto\nLaskuri\nYhteisö\nYRITYS\nTietoa meistä\nLaatu\nKumppanuusohjelma\nYhteystiedot\nTUKI\nUKK\nToimitus ja palautukset\nYhteystiedot\nAsiakastili\nOIKEUDELLISET\nEhdot\nTietosuoja\nEvästeet\nTutkimuskäytön ehdot\nHYVÄKSYTYT MAKSUTAVAT\nEvästeasetukset\nVain laboratoriotutkimukseen. Ei ihmis- tai eläinkäyttöön.\n© 2026 AverianLabs. Kaikki oikeudet pidätetään.\nMyyjän rekisteritiedot odottavat vahvistusta. Ota meihin yhteyttä ennen tilaamista.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 390,
+      "viewport": 390,
+      "smallTextCount": 0
+    },
+    {
+      "locale": "fi",
+      "width": 390,
+      "height": 1735,
+      "theme": "light",
+      "id": "contact",
+      "path": "/contact",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "fi-390-light-contact.png",
+      "errors": [],
+      "title": "Yhteystiedot · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Ota yhteyttä"
+        }
+      ],
+      "text": "Ota yhteyttä\n\nKysy tuotteista, asiakirjoista, saatavuudesta tai tilauksesta. Ilmoita SKU-tunnus tai tilausnumero, jos se on saatavilla.\n\nhello@averianlabs.eu\nNimi\nSähköposti\nAihe\nViesti\nLähetä viesti",
+      "footerText": "Æ\nAverianLabs\n\nLaboratoriomateriaalit ja tuotekohtaiset asiakirjat tutkimushankintojen tueksi.\n\nTestitulosten tulkinta →\nTUTKIMUS\nKauppa\nLaboratoriotestit\nAnalyysitodistusarkisto\nLaskuri\nYhteisö\nYRITYS\nTietoa meistä\nLaatu\nKumppanuusohjelma\nYhteystiedot\nTUKI\nUKK\nToimitus ja palautukset\nYhteystiedot\nAsiakastili\nOIKEUDELLISET\nEhdot\nTietosuoja\nEvästeet\nTutkimuskäytön ehdot\nHYVÄKSYTYT MAKSUTAVAT\nEvästeasetukset\nVain laboratoriotutkimukseen. Ei ihmis- tai eläinkäyttöön.\n© 2026 AverianLabs. Kaikki oikeudet pidätetään.\nMyyjän rekisteritiedot odottavat vahvistusta. Ota meihin yhteyttä ennen tilaamista.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 390,
+      "viewport": 390,
+      "smallTextCount": 4
+    },
+    {
+      "locale": "fi",
+      "width": 390,
+      "height": 1735,
+      "theme": "light",
+      "id": "cart",
+      "path": "/checkout/cart",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "fi-390-light-cart.png",
+      "errors": [],
+      "title": "AverianLabs — Materiaalit laboratoriotutkimukseen",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Kassa"
+        },
+        {
+          "tag": "H1",
+          "text": "Ostoskori"
+        },
+        {
+          "tag": "H2",
+          "text": "Ostoskorisi on tyhjä."
+        }
+      ],
+      "text": "Kassa\n1\nSähköposti\n2\nOsoite\n3\nToimitus\n4\nMaksu\nOstoskori\n\nValitsemasi peptidit ja tarvikkeet — valmiina tarkistettavaksi.\n\nOstoskorisi on tyhjä.\nSelaa tuotteita",
+      "footerText": "Æ\nAverianLabs\n\nLaboratoriomateriaalit ja tuotekohtaiset asiakirjat tutkimushankintojen tueksi.\n\nTestitulosten tulkinta →\nTUTKIMUS\nKauppa\nLaboratoriotestit\nAnalyysitodistusarkisto\nLaskuri\nYhteisö\nYRITYS\nTietoa meistä\nLaatu\nKumppanuusohjelma\nYhteystiedot\nTUKI\nUKK\nToimitus ja palautukset\nYhteystiedot\nAsiakastili\nOIKEUDELLISET\nEhdot\nTietosuoja\nEvästeet\nTutkimuskäytön ehdot\nHYVÄKSYTYT MAKSUTAVAT\nEvästeasetukset\nVain laboratoriotutkimukseen. Ei ihmis- tai eläinkäyttöön.\n© 2026 AverianLabs. Kaikki oikeudet pidätetään.\nMyyjän rekisteritiedot odottavat vahvistusta. Ota meihin yhteyttä ennen tilaamista.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 390,
+      "viewport": 390,
+      "smallTextCount": 0
+    },
+    {
+      "locale": "fi",
+      "width": 390,
+      "height": 1844,
+      "theme": "light",
+      "id": "tools",
+      "path": "/research-tools",
+      "status": 200,
+      "headers": {
+        "robots": "noindex, nofollow"
+      },
+      "filename": "fi-390-light-tools.png",
+      "errors": [],
+      "title": "Tutkimustyökalut · AverianLabs",
+      "headings": [
+        {
+          "tag": "H1",
+          "text": "Tutkimustyökalut"
+        },
+        {
+          "tag": "H2",
+          "text": "Laboratoriolaskuri →"
+        },
+        {
+          "tag": "H2",
+          "text": "Averia →"
+        },
+        {
+          "tag": "H2",
+          "text": "Tutkimusyhteisö →"
+        },
+        {
+          "tag": "H2",
+          "text": "Analyysitulosten tulkinta →"
+        }
+      ],
+      "text": "Tutkimustyökalut\n\nLaske laboratoriomääriä, tarkista lähteet ja esitä tutkimuskysymyksiä.\n\nLaboratoriolaskuri →\n\nLaske massapitoisuus, laimennus ja osanäytteet. Tulokset perustuvat laskennalliseen massataseeseen, eivät materiaalin sisällön mittaukseen.\n\nAveria →\n\nHae tuotetietoja ja eräasiakirjoja tai kysy laboratoriolaskelmasta.\n\nTutkimusyhteisö →\n\nKeskustele asiakirjoista ja jaa laboratoriotutkimukseen liittyviä kysymyksiä.\n\nAnalyysitulosten tulkinta →\n\nLue valitun erän alkuperäinen raportti. Alla kuvatut menetelmät vastaavat eri analyyttisiin kysymyksiin. Kuvaukset eivät tarkoita, että jokaiselle tuotteelle olisi tehty kaikki analyysit.",
+      "footerText": "Æ\nAverianLabs\n\nLaboratoriomateriaalit ja tuotekohtaiset asiakirjat tutkimushankintojen tueksi.\n\nTestitulosten tulkinta →\nTUTKIMUS\nKauppa\nLaboratoriotestit\nAnalyysitodistusarkisto\nLaskuri\nYhteisö\nYRITYS\nTietoa meistä\nLaatu\nKumppanuusohjelma\nYhteystiedot\nTUKI\nUKK\nToimitus ja palautukset\nYhteystiedot\nAsiakastili\nOIKEUDELLISET\nEhdot\nTietosuoja\nEvästeet\nTutkimuskäytön ehdot\nHYVÄKSYTYT MAKSUTAVAT\nEvästeasetukset\nVain laboratoriotutkimukseen. Ei ihmis- tai eläinkäyttöön.\n© 2026 AverianLabs. Kaikki oikeudet pidätetään.\nMyyjän rekisteritiedot odottavat vahvistusta. Ota meihin yhteyttä ennen tilaamista.\nhello@averianlabs.eu",
+      "images": [],
+      "canvasCount": 0,
+      "scrollWidth": 390,
+      "viewport": 390,
+      "smallTextCount": 0
+    },
+    {
+      "id": "assistant-narrow",
+      "locale": "fi",
+      "width": 320,
+      "height": 844,
+      "theme": "light",
+      "path": "/assistant",
+      "filename": "assistant-narrow.png",
+      "scope": "Supplementary theme/narrow visual capture"
+    },
+    {
+      "id": "home-dark",
+      "locale": "en",
+      "width": 1440,
+      "height": 1000,
+      "theme": "dark",
+      "path": "",
+      "filename": "home-dark.png",
+      "scope": "Supplementary theme/narrow visual capture"
+    },
+    {
+      "id": "calculator-dark",
+      "locale": "fi",
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "path": "/peptide-calculator",
+      "filename": "calculator-dark.png",
+      "scope": "Supplementary theme/narrow visual capture"
+    },
+    {
+      "id": "first-visit",
+      "locale": "fi",
+      "width": 390,
+      "filename": "fi-390-first-visit.png",
+      "dialogs": [
+        "Evästeet ja analytiikka✕✓Evästeet ja analytiikkaKäytämme evästeitä ostoskorin toimintaan ja — suostumuksellasi — sivuston käytön analytiikkaan.Hylkää ei-välttämättömätHyväksy kaikki"
+      ],
+      "scope": "No gate confirmation or form submission in this fresh context"
+    }
+  ]
+}

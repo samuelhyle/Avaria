@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-10-15T14:25:50.118Z",
+  "scope": "Fresh Playwright context, no cookies/localStorage set, no user clicks or submissions, 3.5 seconds after DOMContentLoaded",
+  "url": "https://averianlabs-demo.netlify.app/fi",
+  "status": 200,
+  "errors": [],
+  "title": "AverianLabs — Materiaalit laboratoriotutkimukseen",
+  "dialogs": [
+    {
+      "role": "dialog",
+      "text": "Oletko 18 vuotta täyttänyt?\n\nTutkimuspeptidit on tarkoitettu päteville tutkijoille ja institutionaalisille ostajille.\n\nKyllä, olen 18+\nEn, poistu",
+      "rect": {
+        "x": 16,
+        "y": 268,
+        "width": 358,
+        "height": 308
+      }
+    },
+    {
+      "role": "dialog",
+      "text": "Evästeet ja analytiikka\n\n✕\n✓",
+      "rect": {
+        "x": 12,
+        "y": 786,
+        "width": 366,
+        "height": 46
+      }
+    }
+  ],
+  "cookieRelated": [
+    {
+      "tag": "BUTTON",
+      "text": "Evästeasetukset",
+      "rect": {
+        "x": 259.875,
+        "y": 3208.15625,
+        "width": 106.125,
+        "height": 20
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Kyllä, olen 18+",
+      "rect": {
+        "x": 49,
+        "y": 501,
+        "width": 139,
+        "height": 42
+      }
+    }
+  ],
+  "overflow": false,
+  "visualObservation": "Age eligibility dialog clearly visible and centered. Its rectangle does not overlap the cookie dialog rectangle. Cookie dialog is present in DOM but visually behind the age-modal backdrop; screenshot shows a bottom-right Powered by Netlify badge. Focus interaction was not tested; no bug inferred from DOM visibility alone."
+}

@@ -1,0 +1,94 @@
+{
+  "scope": "Local proposed direction board only, not application release acceptance. EN/FI controls and theme switches exercised. Copy inside component studies is intentionally static; explanatory board notes remain English.",
+  "rows": [
+    {
+      "width": 390,
+      "locale": "en",
+      "theme": "light",
+      "scrollWidth": 390,
+      "viewport": 390,
+      "dark": false,
+      "errors": [],
+      "blocking": [],
+      "filename": "direction-en-390-light.png"
+    },
+    {
+      "width": 390,
+      "locale": "en",
+      "theme": "dark",
+      "scrollWidth": 390,
+      "viewport": 390,
+      "dark": true,
+      "errors": [],
+      "blocking": [],
+      "filename": "direction-en-390-dark.png"
+    },
+    {
+      "width": 390,
+      "locale": "fi",
+      "theme": "light",
+      "scrollWidth": 390,
+      "viewport": 390,
+      "dark": false,
+      "errors": [],
+      "blocking": [],
+      "filename": "direction-fi-390-light.png"
+    },
+    {
+      "width": 390,
+      "locale": "fi",
+      "theme": "dark",
+      "scrollWidth": 390,
+      "viewport": 390,
+      "dark": true,
+      "errors": [],
+      "blocking": [],
+      "filename": "direction-fi-390-dark.png"
+    },
+    {
+      "width": 1440,
+      "locale": "en",
+      "theme": "light",
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "dark": false,
+      "errors": [],
+      "blocking": [],
+      "filename": "direction-en-1440-light.png"
+    },
+    {
+      "width": 1440,
+      "locale": "en",
+      "theme": "dark",
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "dark": true,
+      "errors": [],
+      "blocking": [],
+      "filename": "direction-en-1440-dark.png"
+    },
+    {
+      "width": 1440,
+      "locale": "fi",
+      "theme": "light",
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "dark": false,
+      "errors": [],
+      "blocking": [],
+      "filename": "direction-fi-1440-light.png"
+    },
+    {
+      "width": 1440,
+      "locale": "fi",
+      "theme": "dark",
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "dark": true,
+      "errors": [],
+      "blocking": [],
+      "filename": "direction-fi-1440-dark.png"
+    }
+  ],
+  "failures": []
+}

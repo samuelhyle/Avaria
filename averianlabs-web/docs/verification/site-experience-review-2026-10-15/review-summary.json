@@ -1,0 +1,32 @@
+{
+  "reviewedAt": "2026-10-15T14:32:59.893653+00:00",
+  "userTimezone": "Europe/Helsinki",
+  "origin": "https://averianlabs-demo.netlify.app",
+  "deliverable": "Implementation plan and separate proposed visual reference board",
+  "applicationSourceChanged": false,
+  "mainVisualStates": 24,
+  "supplementaryVisualStates": 4,
+  "delayedFirstVisitObservation": "separate; age dialog visible after hydration; focus not evaluated",
+  "independentBilingualTextStates": 24,
+  "textStateScope": "Overlapping public routes, not 24 additional unique journeys",
+  "initialRuntimeFindings": [
+    {
+      "route": "/checkout/cart",
+      "locale": "en",
+      "errors": [
+        "Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      ]
+    }
+  ],
+  "cartFollowup": "Five clean fresh-context reads; original intermittent finding remains unresolved",
+  "socialImagesIdentical": true,
+  "referenceBoard": {
+    "states": 8,
+    "failures": 0,
+    "scope": "Local planning artifact only; EN/FI component examples and light/dark controls"
+  },
+  "sourceReview": "UI, content and image reviews completed; master plan sanity-checked independently",
+  "ownerSourceRecords": "Deferred by owner; not invented",
+  "scientificApproval": "Pending independent review",
+  "futureImplementationAcceptance": "Specified in the plan; not executed or represented as passed"
+}
