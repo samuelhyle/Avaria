@@ -104,3 +104,9 @@ export function renderMissingCalculationInputs(
     ...fields.map((field) => `- ${field}`),
   ].join("\n")
 }
+
+export function renderIncompleteCalculation(locale: string): string {
+  return locale === "fi"
+    ? "Laskelmaa ei voitu vahvistaa. Tarkista lähtötiedot ja yksiköt tai avaa [laboratoriolaskuri](/fi/peptide-calculator)."
+    : "The calculation could not be completed. Check the quantities and units, or open the [laboratory calculator](/en/peptide-calculator)."
+}

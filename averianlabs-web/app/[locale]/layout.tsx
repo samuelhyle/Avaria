@@ -164,7 +164,7 @@ export default async function LocaleLayout({
         <ThemeProvider>
           <MotionProvider>
             <OrganizationJsonLd />
-            <WebsiteJsonLd />
+            <WebsiteJsonLd locale={locale} />
             <NextIntlClientProvider locale={locale} messages={clientMessages}>
               <Chrome locale={locale}>{children}</Chrome>
               <Suspense fallback={null}>

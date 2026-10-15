@@ -24,11 +24,18 @@
 import { getAdminOrNull } from "@/lib/admin/guard"
 import { type AgentEvent, type PersistedMessage, runAgent } from "@/lib/ai/agent/loop"
 import {
+  renderIncompleteCalculation,
   renderLaboratoryAnswer,
   renderMissingCalculationInputs,
 } from "@/lib/ai/answers/calculation"
 import { catalogueVerificationText, renderCatalogueAnswer } from "@/lib/ai/answers/catalogue"
 import { renderGuidanceAnswer } from "@/lib/ai/answers/guidance"
+import {
+  hasExplicitNumericalCalculationIntent,
+  isReadOnlyCapabilityRequest,
+  renderReadOnlyCapabilities,
+  requiredGuidanceTopic,
+} from "@/lib/ai/answers/request-intent"
 import { calculationProseWarnings } from "@/lib/ai/guardrails/calculation"
 import { unsupportedCitationMarkers } from "@/lib/ai/guardrails/citations"
 import { preflightInput } from "@/lib/ai/guardrails/input"
@@ -44,6 +51,7 @@ import {
 import { RESEARCH_FOOTER } from "@/lib/ai/prompts/system"
 import { isMinimaxConfigured } from "@/lib/ai/providers/minimax"
 import { type ChatIdentity, checkChatRateLimit } from "@/lib/ai/rate-limit"
+import { researchGuidanceTool } from "@/lib/ai/tools/research-guidance"
 import type { ChatErrorBody } from "@/lib/ai/types"
 import { auth } from "@/lib/auth"
 import { type Locale, locales } from "@/lib/i18n/config"
@@ -177,7 +185,7 @@ export async function POST(request: Request): Promise<Response> {
       start(controller) {
         controller.enqueue(
           encoder.encode(
-            `data: ${JSON.stringify({ type: "text", delta: blockedCheck.userMessage })}\n\n`,
+            `data: ${JSON.stringify({ type: "text", delta: parsed.readOnly && blockedCheck.reason === "pii_request" ? renderReadOnlyCapabilities(locale) : blockedCheck.userMessage })}\n\n`,
           ),
         )
         controller.enqueue(
@@ -326,6 +334,11 @@ export async function POST(request: Request): Promise<Response> {
   // Soft guardrail hits steer the model via a system note instead of cutting
   // the user off with a canned refusal.
   const softRefusal = inputCheck && !inputCheck.hard ? inputCheck.userMessage : undefined
+  const requiredTopic = !inputCheck ? requiredGuidanceTopic(lastMsg.content) : null
+  const readOnlyCapabilityAnswer =
+    parsed.readOnly && !inputCheck && isReadOnlyCapabilityRequest(lastMsg.content)
+      ? renderReadOnlyCapabilities(locale)
+      : null
 
   const stream = new ReadableStream<Uint8Array>({
     start(controller) {
@@ -351,24 +364,50 @@ export async function POST(request: Request): Promise<Response> {
         } catch {}
       }
 
-      void runAgent(
-        {
-          locale,
-          context: parsed.context as import("@/lib/ai/types").ChatContext | undefined,
-          history,
-          newUserMessage,
-          cart: parsed.cart ?? [],
-          owner: owner ?? undefined,
-          auth: userId ? { userId, email: userEmail, role: userRole } : undefined,
-          isAdmin,
-          conversationId: conversation?.id,
-          systemNote: softRefusal,
-          signal: agentAbort.signal,
-          noRetrieve: parsed.noRetrieve,
-          readOnly: parsed.readOnly,
-        },
-        sink,
-      )
+      const run = async () => {
+        if (readOnlyCapabilityAnswer) {
+          sink.enqueue({ type: "text", delta: readOnlyCapabilityAnswer })
+          sink.enqueue({ type: "done", usage })
+          return
+        }
+        if (requiredTopic) {
+          const id = "reviewed-guidance"
+          const args = { topic: requiredTopic }
+          sink.enqueue({ type: "tool-call", id, name: "getResearchGuidance", args })
+          const result = await researchGuidanceTool.execute(args, {
+            locale,
+            cart: parsed.cart ?? [],
+            readOnly: parsed.readOnly,
+          })
+          sink.enqueue({
+            type: "tool-result",
+            id,
+            name: "getResearchGuidance",
+            content: result.content,
+          })
+          sink.enqueue({ type: "done", usage })
+          return
+        }
+        await runAgent(
+          {
+            locale,
+            context: parsed.context as import("@/lib/ai/types").ChatContext | undefined,
+            history,
+            newUserMessage,
+            cart: parsed.cart ?? [],
+            owner: owner ?? undefined,
+            auth: userId ? { userId, email: userEmail, role: userRole } : undefined,
+            isAdmin,
+            conversationId: conversation?.id,
+            systemNote: softRefusal,
+            signal: agentAbort.signal,
+            noRetrieve: parsed.noRetrieve,
+            readOnly: parsed.readOnly,
+          },
+          sink,
+        )
+      }
+      void run()
         .catch((err) => {
           if (!cancelled) {
             console.error("[averia] agent failed", err)
@@ -451,14 +490,19 @@ export async function POST(request: Request): Promise<Response> {
               })
             }
             if (!report.passed)
-              accumulatedText = calculationIncomplete
-                ? (renderMissingCalculationInputs(toolTrace, locale) ??
-                  (locale === "fi"
-                    ? "Laskelmaa ei voitu vahvistaa. Tarkista lähtötiedot ja yksiköt tai avaa [laboratoriolaskuri](/fi/peptide-calculator)."
-                    : "The calculation could not be completed. Check the quantities and units, or open the [laboratory calculator](/en/peptide-calculator)."))
-                : locale === "fi"
-                  ? "En pysty vahvistamaan vastausta nykyisistä tuotetiedoista. Tarkista linkitetyt tuotetiedot ja alkuperäiset asiakirjat tai ota yhteyttä tiimiimme."
-                  : "I could not verify this answer against the current product records. Check the linked product information and original documents, or contact our team."
+              accumulatedText =
+                calculationIncomplete ||
+                (!inputCheck &&
+                  !report.needsMedicalReminder &&
+                  !controlledGuidance &&
+                  !controlledCatalogue &&
+                  !controlledCalculation &&
+                  hasExplicitNumericalCalculationIntent(lastMsg.content))
+                  ? (renderMissingCalculationInputs(toolTrace, locale) ??
+                    renderIncompleteCalculation(locale))
+                  : locale === "fi"
+                    ? "En pysty vahvistamaan vastausta nykyisistä tuotetiedoista. Tarkista linkitetyt tuotetiedot ja alkuperäiset asiakirjat tai ota yhteyttä tiimiimme."
+                    : "I could not verify this answer against the current product records. Check the linked product information and original documents, or contact our team."
             if (report.needsMedicalReminder && !accumulatedText.includes(RESEARCH_FOOTER))
               accumulatedText += `\n\n${locale === "fi" ? "Vain laboratoriotutkimukseen. Tuotetiedot eivät ole annostelu- tai hoito-ohjeita." : RESEARCH_FOOTER}`
             if (!cancelled) {

@@ -1,5 +1,6 @@
 import { getLegalIdentity } from "@/lib/legal"
 import type { Product } from "@/lib/products/types"
+import { siteOrigin } from "@/lib/seo/site-origin"
 
 interface JsonLdProps {
   data: Record<string, unknown>
@@ -19,6 +20,12 @@ export function JsonLd({ data, id }: JsonLdProps) {
       dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
     />
   )
+}
+
+/** These schema properties describe this site's routes, including legacy absolute callers. */
+function internalSchemaUrl(href: string): string {
+  const url = new URL(href, siteOrigin())
+  return `${siteOrigin()}${url.pathname}${url.search}${url.hash}`
 }
 
 interface ProductJsonLdProps {
@@ -70,7 +77,7 @@ export function BreadcrumbJsonLd({ items }: { items: Array<{ name: string; href:
           "@type": "ListItem",
           position: i + 1,
           name: item.name,
-          item: `https://averianlabs.eu${item.href}`,
+          item: internalSchemaUrl(item.href),
         })),
       }}
     />
@@ -86,7 +93,7 @@ export function OrganizationJsonLd() {
         "@context": "https://schema.org",
         "@type": "Organization",
         name: identity.companyName,
-        url: "https://averianlabs.eu",
+        url: siteOrigin(),
         contactPoint: {
           "@type": "ContactPoint",
           contactType: "customer support",
@@ -98,7 +105,7 @@ export function OrganizationJsonLd() {
   )
 }
 
-export function WebsiteJsonLd() {
+export function WebsiteJsonLd({ locale = "en" }: { locale?: string } = {}) {
   return (
     <JsonLd
       id="ld-website"
@@ -106,12 +113,12 @@ export function WebsiteJsonLd() {
         "@context": "https://schema.org",
         "@type": "WebSite",
         name: "AverianLabs",
-        url: "https://averianlabs.eu",
+        url: siteOrigin(),
         potentialAction: {
           "@type": "SearchAction",
           target: {
             "@type": "EntryPoint",
-            urlTemplate: "https://averianlabs.eu/en/shop?q={search_term_string}",
+            urlTemplate: `${siteOrigin()}/${locale}/shop?q={search_term_string}`,
           },
           "query-input": "required name=search_term_string",
         },
@@ -141,9 +148,9 @@ export function GlossaryTermJsonLd({
         inDefinedTermSet: {
           "@type": "DefinedTermSet",
           name: "AverianLabs Glossary",
-          url: `https://averianlabs.eu/${locale}/glossary`,
+          url: `${siteOrigin()}/${locale}/glossary`,
         },
-        url,
+        url: internalSchemaUrl(url),
       }}
     />
   )
@@ -170,7 +177,7 @@ export function DiscussionForumPostingJsonLd({
         "@context": "https://schema.org",
         "@type": "DiscussionForumPosting",
         headline: title,
-        url,
+        url: internalSchemaUrl(url),
         datePublished,
         author: { "@type": "Person", name: authorName },
         interactionStatistic: {
@@ -181,7 +188,7 @@ export function DiscussionForumPostingJsonLd({
         isPartOf: {
           "@type": "WebSite",
           name: "AverianLabs",
-          url: `https://averianlabs.eu/${locale}`,
+          url: `${siteOrigin()}/${locale}`,
         },
       }}
     />
@@ -205,18 +212,18 @@ export function ItemListJsonLd({
         "@context": "https://schema.org",
         "@type": "ItemList",
         name,
-        url,
+        url: internalSchemaUrl(url),
         numberOfItems: items.length,
         itemListElement: items.map((it) => ({
           "@type": "ListItem",
           position: it.position,
           name: it.name,
-          url: it.url,
+          url: internalSchemaUrl(it.url),
         })),
         isPartOf: {
           "@type": "WebSite",
           name: "AverianLabs",
-          url: `https://averianlabs.eu/${locale}`,
+          url: `${siteOrigin()}/${locale}`,
         },
       }}
     />
