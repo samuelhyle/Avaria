@@ -267,9 +267,17 @@ export async function POST(request: Request): Promise<Response> {
 
   const encoder = new TextEncoder()
   let cancelled = false
-  request.signal.addEventListener("abort", () => {
-    cancelled = true
-  })
+  let heartbeat: ReturnType<typeof setInterval> | undefined
+  const agentAbort = new AbortController()
+  request.signal.addEventListener(
+    "abort",
+    () => {
+      cancelled = true
+      clearInterval(heartbeat)
+      agentAbort.abort()
+    },
+    { once: true },
+  )
 
   // Collect events for persistence — only for messages + tool trace + actions.
   const assistantId = `a-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
@@ -317,6 +325,16 @@ export async function POST(request: Request): Promise<Response> {
   const stream = new ReadableStream<Uint8Array>({
     start(controller) {
       controllerRef.current = controller
+      // Keep buffered, source-checked answers alive through idle intermediaries.
+      // SSE comments carry no unverified prose and are ignored by the client parser.
+      heartbeat = setInterval(() => {
+        if (cancelled) return
+        try {
+          controller.enqueue(encoder.encode(": keep-alive\n\n"))
+        } catch {
+          clearInterval(heartbeat)
+        }
+      }, 3000)
 
       if (conversation) {
         try {
@@ -340,7 +358,7 @@ export async function POST(request: Request): Promise<Response> {
           isAdmin,
           conversationId: conversation?.id,
           systemNote: softRefusal,
-          signal: request.signal,
+          signal: agentAbort.signal,
           noRetrieve: parsed.noRetrieve,
           readOnly: parsed.readOnly,
         },
@@ -359,99 +377,111 @@ export async function POST(request: Request): Promise<Response> {
           }
         })
         .finally(async () => {
-          // ── Output verification ───────────────────────────────────────────
-          // Strip model reasoning blocks before verification + persistence
-          // (the client also hides them at render time).
-          accumulatedText = accumulatedText.replace(/<think>[\s\S]*?(<\/think>|$)/gi, "").trim()
-          if (locale === "fi")
-            accumulatedText = accumulatedText.replace(
-              /^\*{0,2}Research use only\.?\*{0,2}$/gim,
-              "Vain laboratoriotutkimukseen.",
-            )
-          const calculationInputs = toolTrace.flatMap((trace) => {
-            const result = trace.result as
-              | { calculation?: { inputs: import("@/lib/calculations").LaboratoryInputs } }
-              | undefined
-            return result?.calculation?.inputs ? [result.calculation.inputs] : []
-          })
-          const controlledCalculation = renderLaboratoryAnswer(calculationInputs, locale)
-          accumulatedText = controlledCalculation ?? accumulatedText
-          const report = verifyResponse(accumulatedText, await getStorefrontCatalogue())
-          report.warnings.push(
-            ...unsupportedCitationMarkers(accumulatedText, citations as Array<{ index?: number }>),
-          )
-          if (!controlledCalculation)
-            report.warnings.push(
-              ...calculationProseWarnings(accumulatedText, calculationInputs, locale),
-            )
-          const calculationIncomplete =
-            calculationInputs.length === 0 &&
-            toolTrace.some(
-              (trace) =>
-                ["calculateLaboratory", "getReconstitution"].includes(trace.name) &&
-                (trace.result as { error?: unknown } | undefined)?.error,
-            )
-          if (calculationIncomplete) report.warnings.push("calculation_not_completed")
-          report.passed = report.warnings.length === 0
-          if (
-            report.unknownSkus.length > 0 ||
-            report.priceMismatches.length > 0 ||
-            report.warnings.length > 0
-          ) {
-            console.warn("[averia] output verification", {
-              conversationId: conversation?.id,
-              unknownSkus: report.unknownSkus,
-              priceMismatches: report.priceMismatches,
-              warnings: report.warnings,
+          try {
+            // ── Output verification ───────────────────────────────────────────
+            // Strip model reasoning blocks before verification + persistence
+            // (the client also hides them at render time).
+            accumulatedText = accumulatedText.replace(/<think>[\s\S]*?(<\/think>|$)/gi, "").trim()
+            if (locale === "fi")
+              accumulatedText = accumulatedText.replace(
+                /^\*{0,2}Research use only\.?\*{0,2}$/gim,
+                "Vain laboratoriotutkimukseen.",
+              )
+            const calculationInputs = toolTrace.flatMap((trace) => {
+              const result = trace.result as
+                | { calculation?: { inputs: import("@/lib/calculations").LaboratoryInputs } }
+                | undefined
+              return result?.calculation?.inputs ? [result.calculation.inputs] : []
             })
-          }
-          if (!report.passed)
-            accumulatedText = calculationIncomplete
-              ? locale === "fi"
-                ? "Laskelmaa ei voitu vahvistaa. Tarkista lähtötiedot ja yksiköt tai avaa [laboratoriolaskuri](/fi/peptide-calculator)."
-                : "The calculation could not be completed. Check the quantities and units, or open the [laboratory calculator](/en/peptide-calculator)."
-              : locale === "fi"
-                ? "En pysty vahvistamaan vastausta nykyisistä tuotetiedoista. Tarkista linkitetyt tuotetiedot ja alkuperäiset asiakirjat tai ota yhteyttä tiimiimme."
-                : "I could not verify this answer against the current product records. Check the linked product information and original documents, or contact our team."
-          if (report.needsMedicalReminder && !accumulatedText.includes(RESEARCH_FOOTER))
-            accumulatedText += `\n\n${locale === "fi" ? "Vain laboratoriotutkimukseen. Tuotetiedot eivät ole annostelu- tai hoito-ohjeita." : RESEARCH_FOOTER}`
-          if (!cancelled) {
-            controller.enqueue(
-              encoder.encode(
-                `data: ${JSON.stringify({ type: "text", delta: accumulatedText })}\n\n`,
+            const controlledCalculation = renderLaboratoryAnswer(calculationInputs, locale)
+            accumulatedText = controlledCalculation ?? accumulatedText
+            const report = verifyResponse(accumulatedText, await getStorefrontCatalogue())
+            report.warnings.push(
+              ...unsupportedCitationMarkers(
+                accumulatedText,
+                citations as Array<{ index?: number }>,
               ),
             )
-            if (completion)
-              controller.enqueue(encoder.encode(`data: ${JSON.stringify(completion)}\n\n`))
-          }
-
-          // Persist the turn (best-effort, never blocks the stream).
-          if (conversation && !parsed.noPersist && !cancelled) {
-            try {
-              await appendMessages(conversation.id, [
-                newUserMessage,
-                {
-                  id: assistantId,
-                  role: "assistant",
-                  content: accumulatedText,
-                  metadata: {
-                    citations,
-                    toolTrace,
-                    proposedActions: actions,
-                  },
-                  tokensIn: usage.tokensIn,
-                  tokensOut: usage.tokensOut,
-                  latencyMs: usage.latencyMs,
-                },
-              ])
-            } catch (err) {
-              console.error("[averia] persist failed", err)
+            if (!controlledCalculation)
+              report.warnings.push(
+                ...calculationProseWarnings(accumulatedText, calculationInputs, locale),
+              )
+            const calculationIncomplete =
+              calculationInputs.length === 0 &&
+              toolTrace.some(
+                (trace) =>
+                  ["calculateLaboratory", "getReconstitution"].includes(trace.name) &&
+                  (trace.result as { error?: unknown } | undefined)?.error,
+              )
+            if (calculationIncomplete) report.warnings.push("calculation_not_completed")
+            report.passed = report.warnings.length === 0
+            if (
+              report.unknownSkus.length > 0 ||
+              report.priceMismatches.length > 0 ||
+              report.warnings.length > 0
+            ) {
+              console.warn("[averia] output verification", {
+                conversationId: conversation?.id,
+                unknownSkus: report.unknownSkus,
+                priceMismatches: report.priceMismatches,
+                warnings: report.warnings,
+              })
             }
+            if (!report.passed)
+              accumulatedText = calculationIncomplete
+                ? locale === "fi"
+                  ? "Laskelmaa ei voitu vahvistaa. Tarkista lähtötiedot ja yksiköt tai avaa [laboratoriolaskuri](/fi/peptide-calculator)."
+                  : "The calculation could not be completed. Check the quantities and units, or open the [laboratory calculator](/en/peptide-calculator)."
+                : locale === "fi"
+                  ? "En pysty vahvistamaan vastausta nykyisistä tuotetiedoista. Tarkista linkitetyt tuotetiedot ja alkuperäiset asiakirjat tai ota yhteyttä tiimiimme."
+                  : "I could not verify this answer against the current product records. Check the linked product information and original documents, or contact our team."
+            if (report.needsMedicalReminder && !accumulatedText.includes(RESEARCH_FOOTER))
+              accumulatedText += `\n\n${locale === "fi" ? "Vain laboratoriotutkimukseen. Tuotetiedot eivät ole annostelu- tai hoito-ohjeita." : RESEARCH_FOOTER}`
+            if (!cancelled) {
+              controller.enqueue(
+                encoder.encode(
+                  `data: ${JSON.stringify({ type: "text", delta: accumulatedText })}\n\n`,
+                ),
+              )
+              if (completion)
+                controller.enqueue(encoder.encode(`data: ${JSON.stringify(completion)}\n\n`))
+            }
+
+            // Persist the turn (best-effort, never blocks the stream).
+            if (conversation && !parsed.noPersist && !cancelled) {
+              try {
+                await appendMessages(conversation.id, [
+                  newUserMessage,
+                  {
+                    id: assistantId,
+                    role: "assistant",
+                    content: accumulatedText,
+                    metadata: {
+                      citations,
+                      toolTrace,
+                      proposedActions: actions,
+                    },
+                    tokensIn: usage.tokensIn,
+                    tokensOut: usage.tokensOut,
+                    latencyMs: usage.latencyMs,
+                  },
+                ])
+              } catch (err) {
+                console.error("[averia] persist failed", err)
+              }
+            }
+          } finally {
+            clearInterval(heartbeat)
+            try {
+              controller.close()
+            } catch {}
           }
-          try {
-            controller.close()
-          } catch {}
         })
+    },
+    cancel() {
+      cancelled = true
+      clearInterval(heartbeat)
+      agentAbort.abort()
     },
   })
 

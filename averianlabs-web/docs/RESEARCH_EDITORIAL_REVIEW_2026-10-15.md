@@ -30,7 +30,8 @@ Corrections:
 2. A numbered citation must correspond to a source actually returned for that response. An unsupported reference withholds the generated factual answer.
 3. Upward-dilution instructions distinguish the mass-balance equation from the requirement to add solvent. They do not propose unapproved concentration procedures.
 4. Explicit `noPersist` now prevents conversation creation, history loading and automatic title updates as well as message persistence, including for a signed-in owner who previously consented.
-5. Route-level tests exercise hostile generated calculation prose, eight-digit rounding in both locales, unsupported citations and no-persistence behavior. A completed numerical calculation is still not an analytical measurement or scientific certification.
+5. Buffered streams send periodic SSE keep-alive comments and clean up on completion, cancellation or request abort. This addresses idle intermediaries without releasing unchecked prose. The initial deployment also returned incomplete streams for several conceptual questions; hosted retesting is recorded separately, and the precise infrastructure cause is not assumed.
+6. Route-level tests exercise hostile generated calculation prose, eight-digit rounding in both locales, unsupported citations and no-persistence behavior. A completed numerical calculation is still not an analytical measurement or scientific certification.
 
 The live answer archive and its final assessment are in [the evidence directory](verification/research-review-2026-10-15/). Execution counts, deployment identity and final findings are recorded there after the run; no partial run is counted as a full pass.
 
@@ -41,6 +42,8 @@ The private snapshot for deployment `6acfdd709ba5414797142d54` was checksum-veri
 The reusable [restore script](../scripts/rehearse-restore.ts) refuses a remote database, an ordinary application database name, a non-empty database, a checksum mismatch and a migration/table/column mismatch. Create an empty local database named `averian_restore_rehearsal_*`, then set `RESTORE_TEST_DATABASE_URL`, `RESTORE_SNAPSHOT_PATH` and `RESTORE_SNAPSHOT_SHA256` privately before running `pnpm exec tsx scripts/rehearse-restore.ts`.
 
 This establishes the application logical-snapshot restore path for the recorded snapshot. It does not establish Neon PITR, provider failover, recovery time objectives or future backup retention. Those operational approvals remain open.
+
+The maintenance endpoint was also rehearsed against the isolated local app: missing and incorrect credentials returned 401; two successive authorized runs returned 200. This verifies the endpoint locally with real external providers disabled; it does not configure or certify the hosted schedule. See [maintenance-local.json](verification/research-review-2026-10-15/maintenance-local.json).
 
 ## Owner-supplied inputs and remaining order
 

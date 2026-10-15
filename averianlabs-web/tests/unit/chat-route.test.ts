@@ -1,5 +1,5 @@
 import { calculateLaboratory } from "@/lib/calculations"
-import { beforeEach, describe, expect, it, vi } from "vitest"
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 
 const state = vi.hoisted(() => ({
   mode: "calculation",
@@ -27,6 +27,7 @@ vi.mock("@/lib/ai/memory/store", () => ({
 }))
 vi.mock("@/lib/ai/agent/loop", () => ({
   runAgent: async (_input: unknown, sink: { enqueue: (event: unknown) => void }) => {
+    if (state.mode === "slow") await new Promise((resolve) => setTimeout(resolve, 13000))
     if (state.mode === "calculation") {
       const inputs = { mode: "concentration" as const, massMg: 1, finalVolumeMl: 3 }
       sink.enqueue({ type: "tool-call", id: "calc", name: "calculateLaboratory", args: inputs })
@@ -53,6 +54,7 @@ describe("research chat final output", () => {
     vi.clearAllMocks()
     state.mode = "calculation"
   })
+  afterEach(() => vi.useRealTimers())
   async function ask(locale = "en") {
     const response = await POST(
       new Request("http://localhost/api/ai/chat", {
@@ -93,5 +95,16 @@ describe("research chat final output", () => {
     const response = await ask()
     expect(response).not.toContain("proves this claim")
     expect(response).toContain("I could not verify this answer")
+  })
+  it("keeps a slow buffered answer alive without sending unverified content and clears the timer", async () => {
+    vi.useFakeTimers()
+    state.mode = "slow"
+    const answer = ask()
+    await vi.advanceTimersByTimeAsync(13001)
+    const text = await answer
+    expect(text.match(/: keep-alive/g)).toHaveLength(4)
+    expect(text).toContain('"type":"done"')
+    expect(text).not.toContain("proves this claim")
+    expect(vi.getTimerCount()).toBe(0)
   })
 })
