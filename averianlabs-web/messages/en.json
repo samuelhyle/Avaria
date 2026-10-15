@@ -430,7 +430,8 @@
     "markdown": {
       "table": "Scrollable research table",
       "image": "image",
-      "imageLink": "View image: {description}"
+      "imageLink": "View image: {description}",
+      "codeBlock": "Code block"
     }
   },
   "nav": {

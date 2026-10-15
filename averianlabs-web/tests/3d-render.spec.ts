@@ -20,11 +20,12 @@ for (const locale of ["en", "fi"]) {
     await expect(caption).toContainText(t.threeDNotice)
     await expect(gallery.locator("canvas")).toHaveCount(0)
     await gallery.getByRole("button", { name: t.optional3d, exact: true }).click()
-    await expect(
-      gallery.locator("canvas").or(gallery.getByText(t.threeDUnavailable, { exact: true })),
-    ).toBeVisible({ timeout: 20_000 })
+    const fallback = gallery
+      .locator('[role="status"]:not(canvas *)')
+      .filter({ hasText: t.threeDUnavailable })
+    await expect(gallery.locator("canvas").or(fallback).first()).toBeVisible({ timeout: 20_000 })
     test.skip(
-      await gallery.getByText(t.threeDUnavailable, { exact: true }).isVisible(),
+      await fallback.isVisible(),
       "This browser has no WebGL; deterministic no-WebGL fallback is covered separately",
     )
     const start = gallery.getByRole("button", { name: t.resumeRotation, exact: true })
@@ -61,11 +62,12 @@ test("neutral 3D responds to reduced-motion changes and retains manual controls"
   await page.goto("/en/shop/bpc-157?sku=BPC157-10")
   const gallery = page.locator("main figure").first()
   await gallery.getByRole("button", { name: t.optional3d, exact: true }).click()
-  await expect(
-    gallery.locator("canvas").or(gallery.getByText(t.threeDUnavailable, { exact: true })),
-  ).toBeVisible({ timeout: 20_000 })
+  const fallback = gallery
+    .locator('[role="status"]:not(canvas *)')
+    .filter({ hasText: t.threeDUnavailable })
+  await expect(gallery.locator("canvas").or(fallback).first()).toBeVisible({ timeout: 20_000 })
   test.skip(
-    await gallery.getByText(t.threeDUnavailable, { exact: true }).isVisible(),
+    await fallback.isVisible(),
     "This browser has no WebGL; deterministic no-WebGL fallback is covered separately",
   )
   await expect(gallery.getByRole("button", { name: t.resumeRotation, exact: true })).toBeDisabled()

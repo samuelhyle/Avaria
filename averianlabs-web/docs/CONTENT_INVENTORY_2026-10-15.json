@@ -3,8 +3,8 @@
   "baselineCommit": "c82cbb4b2c82d44ede4a7e2909463f2988176a1b",
   "scope": "Working-tree interface content inventory; not native-language/scientific/legal/merchant approval.",
   "summary": {
-    "dictionaryRows": 1319,
-    "changedDictionaryRows": 138,
+    "dictionaryRows": 1320,
+    "changedDictionaryRows": 139,
     "transactionalEmailRows": 25,
     "missingFinnishKeys": [],
     "observedLocales": ["en", "fi"],
@@ -12034,6 +12034,19 @@
       "changedSinceHead": false,
       "reviewStatus": "inventoried-existing-wording",
       "independentApproval": "pending-where-applicable"
+    },
+    {
+      "key": "research.markdown.codeBlock",
+      "source": "messages/{en,fi}.json",
+      "routeGroup": "Shared research/product/commerce/account UI",
+      "stateFamily": "default/context-dependent",
+      "en": "Code block",
+      "fi": "Koodilohko",
+      "changedSinceHead": true,
+      "reviewStatus": "code-assisted-editorial-review",
+      "independentApproval": "pending-where-applicable",
+      "previousEn": null,
+      "previousFi": null
     },
     {
       "key": "research.markdown.image",

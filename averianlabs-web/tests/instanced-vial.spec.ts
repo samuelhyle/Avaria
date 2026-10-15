@@ -11,11 +11,10 @@ test("optional catalogue 3D keeps product navigation and SKU identity consistent
   await page.goto("/en/shop?view=3d")
   const carousel = page.getByRole("region", { name: m.shop.carouselLabel, exact: true })
   await expect(carousel).toBeVisible()
-  await expect(
-    carousel
-      .locator("canvas")
-      .or(carousel.getByText(m.research.threeDUnavailable, { exact: true })),
-  ).toBeVisible({ timeout: 20_000 })
+  const fallback = carousel
+    .locator('[role="status"]:not(canvas *)')
+    .filter({ hasText: m.research.threeDUnavailable })
+  await expect(carousel.locator("canvas").or(fallback).first()).toBeVisible({ timeout: 20_000 })
   if (await carousel.locator("canvas").count()) {
     await expectRenderedContainer(
       carousel.locator("canvas"),

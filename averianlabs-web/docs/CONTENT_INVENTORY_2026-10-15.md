@@ -2,7 +2,7 @@
 
 This records the current working-tree text and its source. It is an implementation inventory, not independent language, scientific, legal or merchant approval.
 
-- Dictionary rows: **1319**, of which **138** differ from the committed baseline.
+- Dictionary rows: **1320**, of which **139** differ from the committed baseline.
 - Separately authored transactional email rows: **25**.
 - Missing Finnish keys: **0**.
 - [Full key-by-key EN/FI ledger, previous changed text and source/state families](CONTENT_INVENTORY_2026-10-15.json).

@@ -39,7 +39,13 @@ export function ResearchMarkdown({ body, className }: { body: string; className?
           ),
           hr: () => <hr className="my-5 border-line" />,
           pre: ({ children }) => (
-            <pre className="max-w-full overflow-x-auto whitespace-pre rounded-lg border border-line bg-surface-2 p-3 text-sm leading-relaxed">
+            <pre
+              role="region"
+              aria-label={t("codeBlock")}
+              // biome-ignore lint/a11y/noNoninteractiveTabindex: overflowing research code must be reachable and scrollable by keyboard.
+              tabIndex={0}
+              className="max-w-full overflow-x-auto whitespace-pre rounded-lg border border-line bg-surface-2 p-3 text-sm leading-relaxed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
               {children}
             </pre>
           ),
