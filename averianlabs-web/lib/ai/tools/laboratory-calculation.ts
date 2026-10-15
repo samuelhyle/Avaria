@@ -1,4 +1,5 @@
-import { calculateLaboratory } from "@/lib/calculations"
+import { missingUserQuantities } from "@/lib/ai/guardrails/quantities"
+import { type LaboratoryInputs, calculateLaboratory } from "@/lib/calculations"
 import { z } from "zod"
 import type { Tool } from "./registry"
 export const laboratoryInputSchema = z
@@ -54,8 +55,22 @@ export const laboratoryCalculationTool: Tool = {
             "Retry this tool with all required values explicitly supplied by the user. Do not invent a value or perform manual arithmetic. If a required value was not supplied, ask the user for it.",
         },
       }
-    const calculation = calculateLaboratory(parsed.data)
-    if (!calculation) return { content: { error: "invalid_calculation", inputs: parsed.data } }
+    const inputs: LaboratoryInputs = { mode: parsed.data.mode }
+    for (const key of required[parsed.data.mode] ?? []) {
+      if (key !== "mode" && typeof parsed.data[key] === "number") inputs[key] = parsed.data[key]
+    }
+    const calculation = calculateLaboratory(inputs)
+    if (!calculation) return { content: { error: "invalid_calculation", inputs } }
+    const unprovided = missingUserQuantities(inputs, ctx.transcript, ctx.locale)
+    if (unprovided.length)
+      return {
+        content: {
+          error: "unprovided_quantities",
+          missing: unprovided,
+          recovery:
+            "Do not invent example quantities. Ask for the actual missing quantities and units. For conceptual questions use getResearchGuidance instead of calculating an unsolicited example.",
+        },
+      }
     return {
       content: {
         calculation,

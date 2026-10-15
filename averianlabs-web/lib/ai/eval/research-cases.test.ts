@@ -29,6 +29,7 @@ describe("research evaluation contracts", () => {
       const result = await laboratoryCalculationTool.execute(entry.calculation, {
         locale: entry.locale,
         cart: [],
+        transcript: [{ role: "user", content: entry.prompt, at: "2026-10-15T00:00:00Z" }],
       })
       expect(
         (result.content as { calculation: { values: Record<string, number> } }).calculation.values,

@@ -23,7 +23,10 @@
 
 import { getAdminOrNull } from "@/lib/admin/guard"
 import { type AgentEvent, type PersistedMessage, runAgent } from "@/lib/ai/agent/loop"
-import { renderLaboratoryAnswer } from "@/lib/ai/answers/calculation"
+import {
+  renderLaboratoryAnswer,
+  renderMissingCalculationInputs,
+} from "@/lib/ai/answers/calculation"
 import { catalogueVerificationText, renderCatalogueAnswer } from "@/lib/ai/answers/catalogue"
 import { renderGuidanceAnswer } from "@/lib/ai/answers/guidance"
 import { calculationProseWarnings } from "@/lib/ai/guardrails/calculation"
@@ -417,6 +420,7 @@ export async function POST(request: Request): Promise<Response> {
                 ...calculationProseWarnings(accumulatedText, calculationInputs, locale),
               )
             const calculationIncomplete =
+              !controlledGuidance &&
               calculationInputs.length === 0 &&
               toolTrace.some(
                 (trace) =>
@@ -448,9 +452,10 @@ export async function POST(request: Request): Promise<Response> {
             }
             if (!report.passed)
               accumulatedText = calculationIncomplete
-                ? locale === "fi"
-                  ? "Laskelmaa ei voitu vahvistaa. Tarkista lähtötiedot ja yksiköt tai avaa [laboratoriolaskuri](/fi/peptide-calculator)."
-                  : "The calculation could not be completed. Check the quantities and units, or open the [laboratory calculator](/en/peptide-calculator)."
+                ? (renderMissingCalculationInputs(toolTrace, locale) ??
+                  (locale === "fi"
+                    ? "Laskelmaa ei voitu vahvistaa. Tarkista lähtötiedot ja yksiköt tai avaa [laboratoriolaskuri](/fi/peptide-calculator)."
+                    : "The calculation could not be completed. Check the quantities and units, or open the [laboratory calculator](/en/peptide-calculator)."))
                 : locale === "fi"
                   ? "En pysty vahvistamaan vastausta nykyisistä tuotetiedoista. Tarkista linkitetyt tuotetiedot ja alkuperäiset asiakirjat tai ota yhteyttä tiimiimme."
                   : "I could not verify this answer against the current product records. Check the linked product information and original documents, or contact our team."

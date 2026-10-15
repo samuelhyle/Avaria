@@ -5,6 +5,7 @@
  * Refuses inputs that suggest human-use framing.
  */
 
+import { missingUserQuantities } from "@/lib/ai/guardrails/quantities"
 import type { Tool, ToolContext, ToolResult } from "@/lib/ai/tools/registry"
 import { calculateAliquots, calculateLaboratory } from "@/lib/calculations"
 interface Args {
@@ -36,6 +37,19 @@ export const reconstitutionTool: Tool = {
     const args = (rawArgs ?? {}) as Args
     const result = calculateAliquots(args.vialMg, args.solventMl, args.aliquotMcg)
     if (!result) return { content: { error: "invalid_inputs" } }
+    if (
+      missingUserQuantities(
+        {
+          mode: "aliquots",
+          massMg: args.vialMg,
+          finalVolumeMl: args.solventMl,
+          aliquotMcg: args.aliquotMcg,
+        },
+        _ctx.transcript,
+        _ctx.locale,
+      ).length
+    )
+      return { content: { error: "unprovided_quantities" } }
     return {
       content: {
         inputs: args,

@@ -77,3 +77,30 @@ export function renderLaboratoryAnswer(inputs: LaboratoryInputs[], locale: strin
   lines.push(labels.rounding, "", copy.research.researchOnly)
   return lines.join("\n")
 }
+
+export function renderMissingCalculationInputs(
+  trace: Array<{ name: string; result?: unknown }>,
+  locale: string,
+) {
+  const copy = locale === "fi" ? fi : en
+  const labels = copy.averia.assistant.inputs
+  const failure = trace.findLast(
+    (item) =>
+      ["calculateLaboratory", "getReconstitution"].includes(item.name) &&
+      Array.isArray((item.result as { missing?: unknown } | undefined)?.missing),
+  )
+  const missing = (failure?.result as { missing?: unknown[] } | undefined)?.missing ?? []
+  const fields = [...new Set(missing)].flatMap((field) =>
+    typeof field === "string" && Object.hasOwn(labels, field)
+      ? [labels[field as keyof typeof labels]]
+      : [],
+  )
+  if (!fields.length) return null
+  return [
+    locale === "fi"
+      ? "Vahvista seuraavat laskelman lähtötiedot yksiköineen:"
+      : "Please confirm these calculation inputs and their units:",
+    "",
+    ...fields.map((field) => `- ${field}`),
+  ].join("\n")
+}

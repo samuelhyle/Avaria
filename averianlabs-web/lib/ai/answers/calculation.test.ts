@@ -1,9 +1,22 @@
 import { describe, expect, it } from "vitest"
 import { RESEARCH_EVAL_CASES } from "../eval/research-cases"
 import { unsupportedCitationMarkers } from "../guardrails/citations"
-import { renderLaboratoryAnswer } from "./calculation"
+import { renderLaboratoryAnswer, renderMissingCalculationInputs } from "./calculation"
 
 describe("controlled laboratory answers", () => {
+  it("asks for missing quantities with physical units without exposing tool properties or invented values", () => {
+    const answer = renderMissingCalculationInputs(
+      [
+        {
+          name: "calculateLaboratory",
+          result: { error: "unprovided_quantities", missing: ["stockMgPerMl", "unknownField"] },
+        },
+      ],
+      "fi",
+    )
+    expect(answer).toContain("Kantaliuoksen pitoisuus (mg/mL)")
+    expect(answer).not.toMatch(/stockMgPerMl|unknownField|10 mg/)
+  })
   it.each(RESEARCH_EVAL_CASES.filter((entry) => entry.calculation))(
     "renders $locale/$id from the same validated inputs as the result card",
     (entry) => {
