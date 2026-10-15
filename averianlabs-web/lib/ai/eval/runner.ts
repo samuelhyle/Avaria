@@ -8,7 +8,10 @@ export function validateEvaluationTarget(env: Record<string, string | undefined>
   if (url.username || url.password || url.search || url.hash || url.pathname !== "/")
     throw new Error("Use an origin without credentials, a path or parameters")
   if (env.AI_EVAL_TARGET === "review") {
-    if (url.origin !== "https://averianlabs-demo.netlify.app")
+    if (
+      url.origin !== "https://averianlabs-demo.netlify.app" &&
+      !/^https:\/\/[a-f0-9]{24}--averianlabs-demo\.netlify\.app$/.test(url.origin)
+    )
       throw new Error("Hosted evaluation is restricted to the approved review origin")
     if (env.AI_EVAL_COOKIE) throw new Error("Hosted review evaluation must be anonymous")
     return { origin: url.origin, kind: "hosted_review" as const }

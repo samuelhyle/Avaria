@@ -24,6 +24,7 @@
 import { getAdminOrNull } from "@/lib/admin/guard"
 import { type AgentEvent, type PersistedMessage, runAgent } from "@/lib/ai/agent/loop"
 import { renderLaboratoryAnswer } from "@/lib/ai/answers/calculation"
+import { renderCatalogueAnswer } from "@/lib/ai/answers/catalogue"
 import { calculationProseWarnings } from "@/lib/ai/guardrails/calculation"
 import { unsupportedCitationMarkers } from "@/lib/ai/guardrails/citations"
 import { preflightInput } from "@/lib/ai/guardrails/input"
@@ -394,7 +395,8 @@ export async function POST(request: Request): Promise<Response> {
               return result?.calculation?.inputs ? [result.calculation.inputs] : []
             })
             const controlledCalculation = renderLaboratoryAnswer(calculationInputs, locale)
-            accumulatedText = controlledCalculation ?? accumulatedText
+            accumulatedText =
+              controlledCalculation ?? renderCatalogueAnswer(toolTrace, locale) ?? accumulatedText
             const report = verifyResponse(accumulatedText, await getStorefrontCatalogue())
             report.warnings.push(
               ...unsupportedCitationMarkers(

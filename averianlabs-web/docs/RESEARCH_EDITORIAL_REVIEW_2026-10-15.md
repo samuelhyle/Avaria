@@ -33,7 +33,9 @@ Corrections:
 5. Buffered streams send periodic SSE keep-alive comments and clean up on completion, cancellation or request abort. This addresses idle intermediaries without releasing unchecked prose. The initial deployment also returned incomplete streams for several conceptual questions; hosted retesting is recorded separately, and the precise infrastructure cause is not assumed.
 6. Route-level tests exercise hostile generated calculation prose, eight-digit rounding in both locales, unsupported citations and no-persistence behavior. A completed numerical calculation is still not an analytical measurement or scientific certification.
 
-The live answer archive and its final assessment are in [the evidence directory](verification/research-review-2026-10-15/). Execution counts, deployment identity and final findings are recorded there after the run; no partial run is counted as a full pass.
+The baseline answers also identify free-form weaknesses: some internal field/category names remain visible; unknown SKUs can trigger an unhelpful generic fallback; some answers suggest future stock monitoring or automatic report publication; and one batch-association explanation adds an unsourced regulatory claim. These findings are recorded separately and prevent treating numerical completion as editorial acceptance. Catalogue, comparison and document prose now use controlled responses from returned records, including explicit no-match states, real units, supported prices and missing evidence. Separate community/action narratives retain their existing workflow. Platform facts now explicitly ground participation levels, human moderation, consent, the static assistant label, unimplemented monitoring/molar conversion, and report sampling scope. Independent scientific/editorial acceptance still remains open.
+
+The full baseline executed all 60 cases: 50 completed and 10 interrupted streams; all 16 numerical cases agreed with the shared calculator and no invalid-input case returned a successful calculation. This baseline is a finding-bearing evaluation, not a release pass. The live answer archive and its final assessment are in [the evidence directory](verification/research-review-2026-10-15/). Execution counts, deployment identity and final findings are recorded there after the run; no partial run is counted as a full pass.
 
 ## Recovery rehearsal
 
@@ -44,6 +46,8 @@ The reusable [restore script](../scripts/rehearse-restore.ts) refuses a remote d
 This establishes the application logical-snapshot restore path for the recorded snapshot. It does not establish Neon PITR, provider failover, recovery time objectives or future backup retention. Those operational approvals remain open.
 
 The maintenance endpoint was also rehearsed against the isolated local app: missing and incorrect credentials returned 401; two successive authorized runs returned 200. This verifies the endpoint locally with real external providers disabled; it does not configure or certify the hosted schedule. See [maintenance-local.json](verification/research-review-2026-10-15/maintenance-local.json).
+
+The production dependency audit reported no high or critical advisories and one moderate transitive `sprintf-js` advisory, with no patched version listed in the advisory response. The command exited 1; this is retained as a finding rather than an all-clear. See [dependency-audit.json](verification/research-review-2026-10-15/dependency-audit.json).
 
 ## Owner-supplied inputs and remaining order
 

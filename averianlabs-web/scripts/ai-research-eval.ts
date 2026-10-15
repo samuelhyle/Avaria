@@ -6,6 +6,12 @@ import { RESEARCH_EVAL_CASES } from "@/lib/ai/eval/research-cases"
 import { assessResearchResponse, validateEvaluationTarget } from "@/lib/ai/eval/runner"
 
 const target = validateEvaluationTarget(process.env)
+const selectedIds = process.env.AI_EVAL_ONLY?.split(",").filter(Boolean)
+if (selectedIds?.some((id) => !RESEARCH_EVAL_CASES.some((entry) => entry.id === id)))
+  throw new Error("AI_EVAL_ONLY contains an unknown scenario ID")
+const cases = selectedIds?.length
+  ? RESEARCH_EVAL_CASES.filter((entry) => selectedIds.includes(entry.id))
+  : RESEARCH_EVAL_CASES
 if (target.kind === "hosted_review") {
   const response = await fetch(`${target.origin}/en`, {
     redirect: "error",
@@ -21,7 +27,7 @@ type Row = ReturnType<typeof assessResearchResponse> & { latencyMs: number; chec
 const output =
   process.env.AI_EVAL_OUTPUT ??
   `docs/verification/research-evaluation/${new Date().toISOString().slice(0, 10)}/answers.json`
-const suiteHash = createHash("sha256").update(JSON.stringify(RESEARCH_EVAL_CASES)).digest("hex")
+const suiteHash = createHash("sha256").update(JSON.stringify(cases)).digest("hex")
 const rows: Row[] = []
 if (process.env.AI_EVAL_RESUME === "1") {
   const previous = JSON.parse(await readFile(output, "utf8"))
@@ -49,7 +55,8 @@ async function checkpoint(state: "running" | "incomplete" | "executed", reason?:
         suiteHash,
         state,
         reason,
-        expectedCases: RESEARCH_EVAL_CASES.length,
+        selection: selectedIds?.length ? "paired_subset" : "full_suite",
+        expectedCases: cases.length,
         executedCases: rows.length,
         scope:
           "Live API, no persistence, no retrieval, read-only tools. Hosted review runs are anonymous with no cookies. Source, language and scientific assessment are separate from runtime/numerical checks.",
@@ -62,7 +69,7 @@ async function checkpoint(state: "running" | "incomplete" | "executed", reason?:
 }
 
 await checkpoint("running")
-for (const entry of RESEARCH_EVAL_CASES) {
+for (const entry of cases) {
   if (rows.some((row) => row.id === entry.id && row.locale === entry.locale)) continue
   const started = Date.now()
   try {
@@ -97,7 +104,7 @@ for (const entry of RESEARCH_EVAL_CASES) {
     rows.push(row)
     await checkpoint("running")
     console.log(
-      `${rows.length}/${RESEARCH_EVAL_CASES.length} ${entry.locale}/${entry.id}: ${row.completed && row.numericalCorrectness && !row.invalidSuccess ? "checked" : "needs review"}`,
+      `${rows.length}/${cases.length} ${entry.locale}/${entry.id}: ${row.completed && row.numericalCorrectness && !row.invalidSuccess ? "checked" : "needs review"}`,
     )
   } catch (error) {
     await checkpoint("incomplete", (error as Error).name)

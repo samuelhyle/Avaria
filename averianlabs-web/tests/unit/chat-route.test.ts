@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 
 const state = vi.hoisted(() => ({
   mode: "calculation",
+  agentSignal: undefined as AbortSignal | undefined,
   getOrCreateConversation: vi.fn(),
   loadRecentMessages: vi.fn(),
   appendMessages: vi.fn(),
@@ -26,7 +27,8 @@ vi.mock("@/lib/ai/memory/store", () => ({
   setConversationTitle: state.setConversationTitle,
 }))
 vi.mock("@/lib/ai/agent/loop", () => ({
-  runAgent: async (_input: unknown, sink: { enqueue: (event: unknown) => void }) => {
+  runAgent: async (input: { signal: AbortSignal }, sink: { enqueue: (event: unknown) => void }) => {
+    state.agentSignal = input.signal
     if (state.mode === "slow") await new Promise((resolve) => setTimeout(resolve, 13000))
     if (state.mode === "calculation") {
       const inputs = { mode: "concentration" as const, massMg: 1, finalVolumeMl: 3 }
@@ -105,6 +107,26 @@ describe("research chat final output", () => {
     expect(text.match(/: keep-alive/g)).toHaveLength(4)
     expect(text).toContain('"type":"done"')
     expect(text).not.toContain("proves this claim")
+    expect(vi.getTimerCount()).toBe(0)
+  })
+  it("aborts the provider and removes heartbeats when the client cancels a slow stream", async () => {
+    vi.useFakeTimers()
+    state.mode = "slow"
+    const response = await POST(
+      new Request("http://localhost/api/ai/chat", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          noPersist: true,
+          messages: [{ id: "cancel", role: "user", content: "Explain nominal mass." }],
+        }),
+      }),
+    )
+    await response.body?.cancel()
+    expect(state.agentSignal?.aborted).toBe(true)
+    // Only the mocked provider's delay remains; the server heartbeat is gone.
+    expect(vi.getTimerCount()).toBe(1)
+    await vi.advanceTimersByTimeAsync(13001)
     expect(vi.getTimerCount()).toBe(0)
   })
 })

@@ -38,6 +38,12 @@ describe("live evaluation evidence", () => {
   it("keeps hosted evaluation anonymous and restricted to the review origin", () => {
     const env = { AI_EVAL_TARGET: "review", BASE_URL: "https://averianlabs-demo.netlify.app" }
     expect(validateEvaluationTarget(env).kind).toBe("hosted_review")
+    expect(
+      validateEvaluationTarget({
+        ...env,
+        BASE_URL: "https://6acfdd709ba5414797142d54--averianlabs-demo.netlify.app",
+      }).kind,
+    ).toBe("hosted_review")
     expect(() => validateEvaluationTarget({ ...env, AI_EVAL_COOKIE: "session" })).toThrow()
     expect(() => validateEvaluationTarget({ ...env, BASE_URL: "https://averianlabs.eu" })).toThrow()
     expect(() =>

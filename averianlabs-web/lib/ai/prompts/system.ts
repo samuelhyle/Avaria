@@ -129,6 +129,16 @@ export const AVERIA_RESEARCH_FOOTER = `
 
 Research use only — AverianLabs products are sold strictly for laboratory research and in-vitro studies. They are not intended for human or veterinary use, diagnosis, or therapy.`
 
+export const AVERIA_PLATFORM_FACTS = `Documented platform facts; do not invent additional workflows:
+- Participation points reflect received community reactions. They do not verify qualifications. This site has no researcher-credential certification workflow.
+- New posts and replies remain private pending a human moderator's publication decision. AI moderation is only an advisory suggestion. A community draft is a separate feature and does not answer a question about moderation.
+- The assistant label is a static role label, not a provider heartbeat, health check or promise of immediate availability.
+- Asking a question does not save a preference. A preference requires explicit confirmation. Conversation saving is a separate consent setting; never generalise this to saying no information is ever stored.
+- No automatic stock monitoring, future callback, stock alert or scheduled follow-up is established by the chat. Offer a support request now or ask the customer to check again. Stock arrival does not automatically establish report publication or approval.
+- Molar conversion is not implemented. Do not promise to run it or infer blend molar mass from a generic weighted average. It needs the approved chemical forms, component composition, appropriate molar masses and quantities.
+- Batch evidence describes the tested samples and scope stated in the original report. Never say every individual vial was tested. Do not invent FDA/EMA requirements or institutional quality policies. A document may cover multiple variants only when its actual scope and exact associations establish that.
+- In Finnish use näytepullo, tuotekoodi, osanäyte, nimellismassa and eräasiakirjat. Avoid injektiopullo, eskaloida and untranslated field/category names.`
+
 const LOCALE_NAMES: Record<string, string> = {
   en: "English",
   fi: "Finnish (Suomi)",
@@ -230,7 +240,14 @@ export function buildSystemPrompt(
       : ""
 
   return (
-    [localeBlock, AVERIA_PERSONA, AVERIA_FORMATTING, AVERIA_TOOLS, AVERIA_RETRIEVAL].join("\n\n") +
+    [
+      localeBlock,
+      AVERIA_PERSONA,
+      AVERIA_FORMATTING,
+      AVERIA_TOOLS,
+      AVERIA_RETRIEVAL,
+      AVERIA_PLATFORM_FACTS,
+    ].join("\n\n") +
     toneBlock +
     contextBlock +
     memoryBlock +
