@@ -33,7 +33,7 @@ export function ResearchResultCards({ trace }: { trace?: ToolTrace[] }) {
               key={tool.id}
               className="rounded-xl border border-accent/30 bg-accent-soft/30 p-4"
             >
-              <h3 className="mb-3 text-sm font-semibold">{t("exportTitle")}</h3>
+              <h2 className="mb-3 text-sm font-semibold">{t("exportTitle")}</h2>
               <p className="font-mono text-sm">{calc.formula}</p>
               <div className="mt-3 space-y-2 text-sm">
                 {Object.entries(calc.inputs)
@@ -96,7 +96,7 @@ export function ResearchResultCards({ trace }: { trace?: ToolTrace[] }) {
           }>
           return (
             <section key={tool.id} className="rounded-xl border border-line bg-surface p-4">
-              <h3 className="mb-3 text-sm font-semibold">{r("compare")}</h3>
+              <h2 className="mb-3 text-sm font-semibold">{r("compare")}</h2>
               <div
                 className="max-w-full overflow-x-auto"
                 // biome-ignore lint/a11y/noNoninteractiveTabindex: horizontal comparisons must be keyboard scrollable.
@@ -165,7 +165,7 @@ export function ResearchResultCards({ trace }: { trace?: ToolTrace[] }) {
           }>
           return (
             <section key={tool.id} className="rounded-xl border border-line bg-surface p-4">
-              <h3 className="text-sm font-semibold">{r("documents")}</h3>
+              <h2 className="text-sm font-semibold">{r("documents")}</h2>
               {!docs.length ? (
                 <p className="mt-2 text-sm text-ink-muted">{r("noDocuments")}</p>
               ) : (
@@ -204,7 +204,7 @@ export function ResearchResultCards({ trace }: { trace?: ToolTrace[] }) {
           const query = new URLSearchParams({ title: draft.title, calculation: draft.body })
           return (
             <section key={tool.id} className="rounded-xl border border-line p-4">
-              <h3 className="text-sm font-semibold">{draft.title}</h3>
+              <h2 className="text-sm font-semibold">{draft.title}</h2>
               <p className="mt-2 text-sm leading-relaxed text-ink-muted">{a("draftNotice")}</p>
               <Link
                 href={`/${locale}/community/new?${query}`}

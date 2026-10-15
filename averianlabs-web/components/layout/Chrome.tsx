@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer"
 import { Header } from "@/components/layout/Header"
 import { CatalogueProvider } from "@/components/product/CatalogueProvider"
 import { getStorefrontCatalogue } from "@/lib/products/catalogue"
+import { Suspense } from "react"
 
 /**
  * Composition shell. Header is interactive (cart/wishlist/compare stores),
@@ -26,7 +27,9 @@ export async function Chrome({
       <main id="main" className="min-h-[calc(100vh-64px)]">
         {children}
       </main>
-      <Footer locale={locale} />
+      <Suspense fallback={null}>
+        <Footer locale={locale} />
+      </Suspense>
       <ChromeIslands locale={locale} />
     </CatalogueProvider>
   )

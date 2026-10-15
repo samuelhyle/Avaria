@@ -70,10 +70,6 @@ for (const locale of ["en", "fi"]) {
       )
       await makePublic.click()
       expect((await enabledResponse).status()).toBe(200)
-      expect(await (await enabledResponse).json()).toMatchObject({
-        ok: true,
-        plan: { isPublic: true },
-      })
       await enabledNavigation
       await expect(page).toHaveURL(/\?review=privacy&share=1#state$/)
       await expect(
@@ -83,6 +79,13 @@ for (const locale of ["en", "fi"]) {
       const link = share.getByRole("textbox")
       await expect(link).toBeVisible()
       const shareUrl = await link.inputValue()
+      // A full document navigation can discard the browser's old PATCH body.
+      // Verify the persisted state through the authenticated API after the GET.
+      const persistedPublic = await page.request.get(`/api/plans/${planId}`)
+      expect(persistedPublic.status()).toBe(200)
+      expect(await persistedPublic.json()).toMatchObject({
+        plan: { isPublic: true, shareSlug: new URL(shareUrl).pathname.split("/").pop() },
+      })
       const published = await request.get(shareUrl)
       expect(published.status()).toBe(200)
       expect(await published.text()).toContain("Browser QA laboratory plan")
@@ -107,10 +110,6 @@ for (const locale of ["en", "fi"]) {
         })
         .click()
       expect((await revokedResponse).status()).toBe(200)
-      expect(await (await revokedResponse).json()).toMatchObject({
-        ok: true,
-        plan: { isPublic: false, shareSlug: null },
-      })
       await revokedNavigation
       await expect(page).toHaveURL(/\?review=privacy#state$/)
       await expect(makePublic).toBeVisible()
