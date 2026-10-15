@@ -1,0 +1,6 @@
+{
+  "state": "incomplete",
+  "scope": "Browser replay helper, no extra provider request",
+  "reason": "Redundant click on consent decline after the explicit declined cookie was hydrated; the button detached.",
+  "resolution": "Keep the explicit consent cookie and remove the redundant click; repeat the rendering check."
+}

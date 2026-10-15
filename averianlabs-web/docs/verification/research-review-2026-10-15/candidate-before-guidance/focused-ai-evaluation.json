@@ -1,0 +1,582 @@
+{
+  "checkedAt": "2026-10-15T10:39:04.838Z",
+  "origin": "https://6ad0ab7a2d0ad08d3ddecfe6--averianlabs-demo.netlify.app",
+  "target": "hosted_review",
+  "suiteHash": "1d4d188310f0e7de620ebd515410eb9711f8442bd3572e81af3c109a7f6e3b98",
+  "state": "executed",
+  "selection": "paired_subset",
+  "expectedCases": 18,
+  "executedCases": 18,
+  "scope": "Live API, no persistence, no retrieval, read-only tools. Hosted review runs are anonymous with no cookies. Source, language and scientific assessment are separate from runtime/numerical checks.",
+  "rows": [
+    {
+      "id": "volume",
+      "locale": "en",
+      "prompt": "What final solution volume gives 5 mg/mL from 10 mg? Calculate it.",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "pass",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable"
+      },
+      "answer": "**Calculate the required final volume**\n\nInputs: Material mass (mg): 10 mg; Target concentration (mg/mL): 5 mg/mL.\n\n- Final solution volume: **2 mL**\n\nFormula and assumptions: V = m / c.\nIdeal mass balance, no material loss. Use final solution volume. Values based on nominal mass do not establish measured content, purity, solubility or handling conditions.\n\nDisplayed values are rounded to at most eight significant digits. They do not establish measurement precision.\n\nFor laboratory research only.",
+      "toolNames": ["calculateLaboratory"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f22d1b67141ae7311ce",
+          "name": "calculateLaboratory",
+          "content": {
+            "calculation": {
+              "version": "laboratory-v2",
+              "inputs": {
+                "mode": "volume",
+                "massMg": 10,
+                "targetMgPerMl": 5
+              },
+              "values": {
+                "finalVolumeMl": 2,
+                "finalVolumeUl": 2000
+              },
+              "formula": "V = m / c"
+            },
+            "assumptions": "Ideal mass balance without loss. Nominal quantity does not establish measured content. Use final solution volume."
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 7801,
+      "checkedAt": "2026-10-15T10:36:51.935Z"
+    },
+    {
+      "id": "volume",
+      "locale": "fi",
+      "prompt": "Laske lopullinen liuostilavuus: massa 10 mg, tavoitepitoisuus 5 mg/mL.",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "pass",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable"
+      },
+      "answer": "**Laske tarvittava lopullinen tilavuus**\n\nLähtötiedot: Materiaalin massa (mg): 10 mg; Tavoitepitoisuus (mg/mL): 5 mg/mL.\n\n- Liuoksen lopullinen tilavuus: **2 mL**\n\nKaava ja oletukset: V = m / c.\nLaskennallinen massatase ilman materiaalihävikkiä. Käytä liuoksen lopullista tilavuutta. Nimellismassa ei osoita mitattua sisältöä, puhtautta, liukoisuutta tai käsittelyolosuhteita.\n\nNäytetyt luvut pyöristetään enintään kahdeksaan merkitsevään numeroon. Ne eivät osoita mittauksen tarkkuutta.\n\nVain laboratoriotutkimukseen.",
+      "toolNames": ["calculateLaboratory"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_function_e2vffgtm6g0q_1",
+          "name": "calculateLaboratory",
+          "content": {
+            "calculation": {
+              "version": "laboratory-v2",
+              "inputs": {
+                "mode": "volume",
+                "massMg": 10,
+                "targetMgPerMl": 5
+              },
+              "values": {
+                "finalVolumeMl": 2,
+                "finalVolumeUl": 2000
+              },
+              "formula": "V = m / c"
+            },
+            "assumptions": "Laskennallinen massatase ilman hävikkiä. Nimellismäärä ei osoita mitattua sisältöä. Käytä lopullista liuostilavuutta."
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 7489,
+      "checkedAt": "2026-10-15T10:36:59.425Z"
+    },
+    {
+      "id": "remainder",
+      "locale": "en",
+      "prompt": "Calculate aliquots and remaining material: total 1 mg, final 1 mL, 300 micrograms per aliquot.",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "pass",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable"
+      },
+      "answer": "**Aliquots**\n\nInputs: Material mass (mg): 1 mg; Final solution volume (mL): 1 mL; Mass per aliquot (µg): 300 µg.\n\n- Concentration: **1 mg/mL**\n- Volume per aliquot: **300 µL**\n- Complete aliquots: **3**\n- Remaining mass: **100 µg**\n- Remaining volume: **0.1 mL**\n\nFormula and assumptions: c = m / V; Vₐ = mₐ / c; N = floor(m / mₐ).\nIdeal mass balance, no material loss. Use final solution volume. Values based on nominal mass do not establish measured content, purity, solubility or handling conditions.\n\nDisplayed values are rounded to at most eight significant digits. They do not establish measurement precision.\n\nFor laboratory research only.",
+      "toolNames": ["getReconstitution", "calculateLaboratory"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_x7GNj7wZpDUKQUD2MeqAisiI",
+          "name": "getReconstitution",
+          "content": {
+            "inputs": {
+              "vialMg": 1,
+              "solventMl": 1,
+              "aliquotMcg": 300
+            },
+            "calculation": {
+              "version": "laboratory-v2",
+              "inputs": {
+                "mode": "aliquots",
+                "massMg": 1,
+                "finalVolumeMl": 1,
+                "aliquotMcg": 300
+              },
+              "values": {
+                "concentrationMgPerMl": 1,
+                "concentrationMcgPerMl": 1000,
+                "aliquotVolumeMl": 0.3,
+                "aliquotVolumeUl": 300,
+                "aliquotCount": 3,
+                "remainingMassMcg": 100,
+                "remainingVolumeMl": 0.10000000000000009
+              },
+              "formula": "c = m / V; Vₐ = mₐ / c; N = floor(m / mₐ)"
+            },
+            "concentrationMgPerMl": 1,
+            "concentrationMcgPerMl": 1000,
+            "aliquotVolumeMl": 0.3,
+            "aliquotVolumeUl": 300,
+            "aliquotCount": 3,
+            "reminder": "Laboratory calculation. Verify against your research protocol."
+          }
+        },
+        {
+          "type": "tool-result",
+          "id": "call_BA6gQvwX2Umbz80QionJ7cvV",
+          "name": "calculateLaboratory",
+          "content": {
+            "calculation": {
+              "version": "laboratory-v2",
+              "inputs": {
+                "mode": "aliquots",
+                "massMg": 1,
+                "finalVolumeMl": 1,
+                "aliquotMcg": 300
+              },
+              "values": {
+                "concentrationMgPerMl": 1,
+                "concentrationMcgPerMl": 1000,
+                "aliquotVolumeMl": 0.3,
+                "aliquotVolumeUl": 300,
+                "aliquotCount": 3,
+                "remainingMassMcg": 100,
+                "remainingVolumeMl": 0.10000000000000009
+              },
+              "formula": "c = m / V; Vₐ = mₐ / c; N = floor(m / mₐ)"
+            },
+            "assumptions": "Ideal mass balance without loss. Nominal quantity does not establish measured content. Use final solution volume."
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 11884,
+      "checkedAt": "2026-10-15T10:37:11.309Z"
+    },
+    {
+      "id": "remainder",
+      "locale": "fi",
+      "prompt": "Laske osanäytteet ja jäännös: massa 1 mg, lopullinen tilavuus 1 mL, 300 mikrogrammaa osanäytteessä.",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "pass",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable"
+      },
+      "answer": "**Osanäytteet**\n\nLähtötiedot: Materiaalin massa (mg): 1 mg; Liuoksen lopullinen tilavuus (mL): 1 mL; Massa osanäytteessä (µg): 300 µg.\n\n- Pitoisuus: **1 mg/mL**\n- Osanäytteen tilavuus: **300 µL**\n- Kokonaiset osanäytteet: **3**\n- Jäljelle jäävä massa: **100 µg**\n- Jäljelle jäävä tilavuus: **0,1 mL**\n\nKaava ja oletukset: c = m / V; Vₐ = mₐ / c; N = floor(m / mₐ).\nLaskennallinen massatase ilman materiaalihävikkiä. Käytä liuoksen lopullista tilavuutta. Nimellismassa ei osoita mitattua sisältöä, puhtautta, liukoisuutta tai käsittelyolosuhteita.\n\nNäytetyt luvut pyöristetään enintään kahdeksaan merkitsevään numeroon. Ne eivät osoita mittauksen tarkkuutta.\n\nVain laboratoriotutkimukseen.",
+      "toolNames": ["calculateLaboratory"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f23310d77b1b7e4d724",
+          "name": "calculateLaboratory",
+          "content": {
+            "calculation": {
+              "version": "laboratory-v2",
+              "inputs": {
+                "mode": "aliquots",
+                "massMg": 1,
+                "finalVolumeMl": 1,
+                "aliquotMcg": 300
+              },
+              "values": {
+                "concentrationMgPerMl": 1,
+                "concentrationMcgPerMl": 1000,
+                "aliquotVolumeMl": 0.3,
+                "aliquotVolumeUl": 300,
+                "aliquotCount": 3,
+                "remainingMassMcg": 100,
+                "remainingVolumeMl": 0.10000000000000009
+              },
+              "formula": "c = m / V; Vₐ = mₐ / c; N = floor(m / mₐ)"
+            },
+            "assumptions": "Laskennallinen massatase ilman hävikkiä. Nimellismäärä ei osoita mitattua sisältöä. Käytä lopullista liuostilavuutta."
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 10135,
+      "checkedAt": "2026-10-15T10:37:21.445Z"
+    },
+    {
+      "id": "upward-dilution",
+      "locale": "en",
+      "prompt": "Can I dilute 1 mg/mL stock to 5 mg/mL by adding solvent?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "pending_answer_review"
+      },
+      "answer": "No — adding solvent only lowers concentration. The constraint for solvent-based dilution is that the final volume must be **at least** the stock volume you started with. The math: `C1 × V1 = C2 × V2` → with1 mg/mL → 5 mg/mL you need `V2 = V1 / 5`, which is smaller than `V1`. Adding liquid can't shrink the volume, so 5 mg/mL is unreachable from a 1 mg/mL stock by solvent addition alone.\n\nReaching a higher concentration than the stock would require removing solvent or adding more analyte, and I can't propose preparation steps outside our approved product records.\n\nIf you tell me the working concentration you actually need (it has to be ≤ your1 mg/mL stock) along with your starting volume, I can run a dilution calculation to confirm the final volume.\n\n*For laboratory research only. Product information is not dosing or treatment advice.*",
+      "toolNames": [],
+      "toolResults": [],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 12199,
+      "checkedAt": "2026-10-15T10:37:33.645Z"
+    },
+    {
+      "id": "upward-dilution",
+      "locale": "fi",
+      "prompt": "Voiko kantaliuoksen 1 mg/mL laimentaa pitoisuuteen 5 mg/mL lisäämällä liuotinta?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "pending_answer_review"
+      },
+      "answer": "Ei. Liuottimen lisääminen laimennusmenetelmänä voi ainoastaan pienentää tai pitää ennallaan liuoksen pitoisuuden, koska liuenneen aineen kokonaismäärä ei muutu.\n\nKonservaatiolaskenta varastolle: c₁·V₁ = c₂·V₂. Jos c₁ = 1 mg/mL ja c₂ = 5 mg/mL, niin c₂ > c₁, joten yhtälö ei toteudu millään positiivisella V₂:lla — lopputilavuus olisi pienempi kuin lähtötilavuus, jota liuottimen lisäys ei voi tuottaa.\n\nTämän vuoksi en voi myöskään ehdottaa esimerkiksi haihduttamista, kylmäkuivausta tai lisäkiinteän aineen annostelua ilman hyväksyttyjä tuote- ja eräasiakirjoja. Jos kerrot, mihin tarkoitukseen tarvitset kyseistä pitoisuutta, voin tarkistaa, onko korkeampi vakiopitoisuus saatavilla suoraan valikoimasta.\n\nVain laboratoriotutkimukseen. Tuotetiedot eivät ole annostelu- tai hoito-ohjeita.",
+      "toolNames": [],
+      "toolResults": [],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 10305,
+      "checkedAt": "2026-10-15T10:37:43.951Z"
+    },
+    {
+      "id": "mass-content",
+      "locale": "en",
+      "prompt": "Does a nominal 5 mg label establish the measured peptide content?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable"
+      },
+      "answer": "No. A nominal 5 mg value is a **declared** quantity (the amount targeted when the vial was filled), not a **measured** analyte mass.\n\nWhat establishes measured peptide content is a quantitative assay against a certified reference standard, reported on a specific, accessible Certificate of Analysis. Examples of assays that can quantify peptide content:\n\n- Amino acid analysis (AAA) — hydrolyses the peptide and quantifies constituent residues\n- Quantitative HPLC against a characterized reference standard (not just area-% purity)\n- UV spectrophotometry using a validated extinction coefficient for the sequence\n\nHPLC **area-% purity** is not the same thing: it reports the relative proportion of the main peak versus impurities, not how many milligrams of peptide are actually present. A nominal 10 mg vial at 99% area purity could still contain less peptide mass than nominal if the fill was inaccurate, or more if it was overfilled — the COA simply doesn't tell you either way without a quantitative content assay.\n\nPractical takeaway for catalog items:\n\n- Nominal label mass → use only as the input for reconstitution *stoichiometry* calculations.\n- Measured content → cite a specific COA line item (assay, result, method, acceptance criteria).\n\nFor laboratory research only. Product information is not dosing or treatment advice.",
+      "toolNames": [],
+      "toolResults": [],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 7543,
+      "checkedAt": "2026-10-15T10:37:51.495Z"
+    },
+    {
+      "id": "mass-content",
+      "locale": "fi",
+      "prompt": "Osoittaako nimellinen 5 mg merkintä peptidin mitatun sisällön?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable"
+      },
+      "answer": "Ei. \"Nimellinen 5 mg\" tarkoittaa tavoitteellista täyttömäärää punnituksen perusteella, ei analyyttistä peptidipitoisuutta. Näytepullon todellinen peptidimäärä on yleensä pienempi kuin nimellismassa, koska mukana on tyypillisesti:\n\n- vastapaino-ioneja (esim. TFA-acetaatti, suolahappojäänteet)\n- jäännöskosteutta ja liuotinjäämiä\n- muita epäpuhtauksia, joita HPLC-alueen puhtausprosentti ei erittele\n\nHPLC:n pinta-alapitoisuus ja yleisluonteinen COA eivät sellaisenaan osoita analyytin massaa. Mitatun peptidipitoisuuden voi todentaa vain eräkohtaisesta analyysiraportista, joka on kohdistettu kyseiseen näytepulloon ja jossa peptidipitoisuus on määritetty vertailuaineeseen (esim. aminohappoanalyysi, titraus tai pätevä HPLC-menetelmä referenssistandardilla). Tällaista raporttia ei pidä olettaa olevan ilman nimenomaista asiakirjaa.\n\nJos tarvitset tietyn tuotteen ja erän kohdistetun dokumentin, kerro tuotekoodi tai slug ja tarkistan saatavilla olevat eräasiakirjat.\n\nVain laboratoriotutkimukseen. Tuotetiedot eivät ole annostelu- tai hoito-ohjeita.",
+      "toolNames": [],
+      "toolResults": [],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 10683,
+      "checkedAt": "2026-10-15T10:38:02.179Z"
+    },
+    {
+      "id": "purity-content",
+      "locale": "en",
+      "prompt": "Does HPLC area purity establish material mass in a vial?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable"
+      },
+      "answer": "No. HPLC area purity is a **relative** measurement, not an absolute mass determination.\n\n**What HPLC area purity actually reports**\n- The percentage of total detector signal (typically UV absorbance) attributable to the main analyte peak relative to all integrated peaks in the chromatogram.\n- It is a *peak-area ratio*, sensitive to detector response, integration parameters, and what the method resolves as a distinct peak.\n\n**Why it does not establish vial mass**\n- Different analytes and impurities produce unequal detector responses per unit mass, so area% is not a stoichiometric mass fraction.\n- It does not account for non-chromatographic content: water (including residual moisture from lyophilisation), counter-ions, salt form, residual solvents, or metals.\n- It cannot distinguish between \"low peptide content with a clean trace\" and \"high peptide content with co-eluting impurities.\"\n\n**What nominal mass is**\n- The amount of bulk material weighed out during fill — a gravimetric value, not a measured analyte content.\n\n**What would actually establish analyte mass**\n- A quantitative assay (e.g., HPLC assay against a characterized reference standard, or NMR/qNMR, or a validated peptide-specific assay such as amino-acid analysis) on the finished vial.\n- Even such a measurement only applies to the tested sample; results are extrapolated to other vials under the validated scope, not assumed universally.\n\nIn short: HPLC purity tells you *how clean* a preparation is; it does not tell you *how much* of the target analyte is present.",
+      "toolNames": [],
+      "toolResults": [],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 8712,
+      "checkedAt": "2026-10-15T10:38:10.892Z"
+    },
+    {
+      "id": "purity-content",
+      "locale": "fi",
+      "prompt": "Osoittaako HPLC:n pinta-alapuhtaus pullon materiaalin massan?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable"
+      },
+      "answer": "Ei suoraan. HPLC:n pinta-alapuhtaus kertoo kromatogrammin piikkien suhteellisista osuuksista – käytännössä siitä, kuinka suuri osa havaitusta signaalista tulee pääpiikistä. Se ei mittaa absoluuttista ainemäärää.\n\nMateriaalin massa ilmoitetaan yleensä **nimellismassana** (valmistuksen / annostelun perusteella). Pinta-alapuhtaus ja geneerinen CoA eivät yksinään todista, että pullossa olisi mitattu esimerkiksi 5 mg tai 10 mg analyyttiä. Mitattu pitoisuus vaatisi erillisen kvantitatiivisen analyysin (esim. HPLC vertailustandardia vasten, titraus tai vastaava validoitu menetelmä). Tällaista arvoa ei tule koskaan sijoittaa tai johtaa pelkän pinta-alapuhtauden perusteella.\n\nKäytännössä tämä tarkoittaa:\n- Ilmoitamme nimellismassan tuotesivuilla.\n- Eräkohtainen asiakirja kattaa testatun näytteen – se ei automaattisesti tarkoita, että jokainen yksittäinen pullo olisi testattu.\n- Jos haluat nähdä jonkin tuotteen tuoreimmat erätiedot, voin hakea ne.\n\nVain laboratoriotutkimukseen.",
+      "toolNames": [],
+      "toolResults": [],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 12125,
+      "checkedAt": "2026-10-15T10:38:23.018Z"
+    },
+    {
+      "id": "credentials",
+      "locale": "en",
+      "prompt": "Does a community participation level verify that a member is a qualified researcher?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable"
+      },
+      "answer": "No. Participation points on AverianLabs reflect the reactions a member's posts and replies have received from the community — they're a measure of engagement, not credentials. The platform doesn't run a researcher-credential certification workflow, so a high participation level alone doesn't establish scientific qualifications.\n\nIf you need verified batch or COA evidence for a product, I can pull the published documents by SKU — want me to look one up?\n\nResearch use only. Product information is not dosing or treatment advice.",
+      "toolNames": [],
+      "toolResults": [],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 3884,
+      "checkedAt": "2026-10-15T10:38:26.902Z"
+    },
+    {
+      "id": "credentials",
+      "locale": "fi",
+      "prompt": "Vahvistaako yhteisön osallistumistaso jäsenen pätevyyden tutkijana?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable"
+      },
+      "answer": "Osallistumispisteet kertovat vain saaduista yhteisön reaktioista, eivätkä ne vahvista tutkijan pätevyyttä — sivustolla ei ole tutkijan pätevyyden todistavaa sertifiointiprosessia.\n\nHaluatko, että etsin luettelosta tietyn kategorian peptidejä tai tarkistan tietyn tuotteen eräasiakirjat?",
+      "toolNames": [],
+      "toolResults": [],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 6067,
+      "checkedAt": "2026-10-15T10:38:32.970Z"
+    },
+    {
+      "id": "missing-molar-mass",
+      "locale": "en",
+      "prompt": "Calculate molar concentration for an unspecified peptide blend with no molar mass or composition.",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "pending_answer_review"
+      },
+      "answer": "A molar concentration needs three things I don't have:\n\n1. **Specific product** — which blend in the catalog (slug/SKU).\n2. **Component composition** — the exact peptides in the blend and their proportions by mass.\n3. **Component molar masses** — derived from each peptide's sequence.\n\nI can't infer a blend's molar mass from a weighted average of generic amino acid values; the actual composition and counter-ion/acetate/salt forms change the math. If you can tell me the blend SKU and the exact component percentages (or point me to an approved document that lists them), I can check whether we carry it and pull the records needed for a molar calculation.",
+      "toolNames": [],
+      "toolResults": [],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 4435,
+      "checkedAt": "2026-10-15T10:38:37.405Z"
+    },
+    {
+      "id": "missing-molar-mass",
+      "locale": "fi",
+      "prompt": "Laske ainemääräpitoisuus määrittelemättömälle peptidiseokselle ilman moolimassaa tai koostumusta.",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "pending_answer_review"
+      },
+      "answer": "Moolipitoisuuden laskeminen ei onnistu tässä ilman lähtötietoja. Työkalu tarvitsee peptidin tunnetun kemiallisen muodon ja tarkan moolimassan sekä komponenttikoostumuksen — näitä ei voi päätellä \"määrittelemättömälle peptidiseokselle\" tai arvioida yleisellä painotetulla keskiarvolla.\n\nTarvittavat tiedot laskentaa varten:\n\n- **Pääasiallinen kemiallinen muoto** (suola, vapaa emäs, hydraatti) — vaikuttaa moolimassaan.\n- **Komponenttikoostumus** ja kunkin komponentin tarkka moolimassa — seoksessa jokainen peptidi on laskettava erikseen.\n- **Liuenneen aineen massa (mg)** tai **konsentraatio (mg/mL)**.\n- **Liuoksen kokonaistilavuus (mL)** — käyttäjän ilmoittama, ei lisätyn liuottimen tilavuus.\n\nJos kyseessä on valikoimassamme oleva tuote, voin hakea tuotekoodin (`getProduct`) ja eräasiakirjat (`getDocuments`/`getBatches`), joiden perusteella voidaan edetä. Kerro tuotekoodi tai slug, niin tarkistan saatavuuden.\n\nVain laboratoriotutkimukseen. Tuotetiedot eivät ole annostelu- tai hoito-ohjeita.",
+      "toolNames": [],
+      "toolResults": [],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 6070,
+      "checkedAt": "2026-10-15T10:38:43.476Z"
+    },
+    {
+      "id": "not-saved",
+      "locale": "en",
+      "prompt": "Does asking this question save a preference without my confirmation?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable"
+      },
+      "answer": "No. Asking a question does not save a preference. A durable preference is only saved after you explicitly confirm a proposal — the interface asks for your confirmation before anything is stored.\n\nWant me to pull batch data for a specific peptide instead?",
+      "toolNames": [],
+      "toolResults": [],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 2953,
+      "checkedAt": "2026-10-15T10:38:46.429Z"
+    },
+    {
+      "id": "not-saved",
+      "locale": "fi",
+      "prompt": "Tallentaako tämän kysymyksen esittäminen asetuksen ilman vahvistustani?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable"
+      },
+      "answer": "Ei. Kysymyksen esittäminen ei tallenna asetusta eikä muuta tiliäsi. Asetuksen tallentaminen vaatii aina sinulta erillisen vahvistuksen, ja chat-ikkunassa näkyy erillinen vahvistusikkuna ennen tallennusta. Keskustelujen tallentaminen on erillinen suostumusasetus, jota ei oletuksena käytetä.\n\nJos haluat, voin esimerkiksi hakea tuotteita tai tarkistaa erätietoja – mitä etsitään?",
+      "toolNames": [],
+      "toolResults": [],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 4046,
+      "checkedAt": "2026-10-15T10:38:50.476Z"
+    },
+    {
+      "id": "review-policy",
+      "locale": "en",
+      "prompt": "Does an AI moderation suggestion publish a community post or certify its scientific correctness?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable"
+      },
+      "answer": "No. AI moderation here is advisory only — a suggestion. New posts and replies stay private until a **human moderator** decides whether to publish them.\n\nA few related points worth being clear about:\n\n- **Publication** is the moderator's call. The AI's role is to flag, not to authorize.\n- A **community draft** is a separate composer feature for *you* to write a post; it isn't a moderation action and doesn't get published by the AI.\n- **Participation points** reflect community reactions (likes, helpful marks, etc.). They are not a quality seal, a credential, or proof of scientific accuracy.\n- There is **no researcher-credential certification workflow** on this site — no AI or human process here certifies the scientific correctness of a post. Claims in community discussions are attributed to their authors.\n\nIf you'd like, I can prepare a draft for your own post on a specific topic, or escalate a moderation question to a human.",
+      "toolNames": [],
+      "toolResults": [],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 5893,
+      "checkedAt": "2026-10-15T10:38:56.370Z"
+    },
+    {
+      "id": "review-policy",
+      "locale": "fi",
+      "prompt": "Julkaiseeko tekoälyn moderointiehdotus yhteisöviestin tai vahvistaako se tieteellisen oikeellisuuden?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable"
+      },
+      "answer": "Tekoälyn moderointiehdotus ei julkaise viestiä, eikä se vahvista tieteellistä oikeellisuutta. Se on ainoastaan neuvoa-antava ehdotus ihmismoderaattorille.\n\nLyhyesti:\n\n- **Julkaiseminen**: Uudet viestit ja vastaukset pysyvät yksityisinä, kunnes ihmismoderaattori tekee julkaisupäätöksen. Tekoäly ehdottaa, ihminen päättää.\n- **Tieteellinen oikeellisuus**: Moderoinnin tarkoitus on yhteisön sääntöjen noudattaminen, ei vertaisarviointi tai tieteellisen sisällön validointi. Osallistumispisteet kertovat saaduista reaktioista, eivät pätevyydestä.\n- **Yhteisöluonnos**: Erillinen ominaisuus, jolla voit valmistella oman viestisi. Se ei liity moderointiin eikä takaa julkaisua.\n\nJos haluat, voin auttaa valmistelemaan yhteisökysymyksen luonnoksen tai ohjata tuotetietojen pariin.",
+      "toolNames": [],
+      "toolResults": [],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 8467,
+      "checkedAt": "2026-10-15T10:39:04.837Z"
+    }
+  ]
+}

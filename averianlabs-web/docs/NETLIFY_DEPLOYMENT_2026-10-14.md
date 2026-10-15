@@ -1,5 +1,7 @@
 # Research workspace deployment — 14 October 2026
 
+Historical release record. Superseded by the [15 October follow-up deployment](NETLIFY_DEPLOYMENT_2026-10-15.md); the results and outstanding items below describe the original 14 October release.
+
 Published at [averianlabs-demo.netlify.app/fi](https://averianlabs-demo.netlify.app/fi), with [English](https://averianlabs-demo.netlify.app/en) available. This remains a review application with noindex and draft-stock purchasing restrictions.
 
 | Item | Exact release |

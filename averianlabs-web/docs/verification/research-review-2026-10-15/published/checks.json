@@ -1,0 +1,435 @@
+{
+  "checkedAt": "2026-10-15T11:34:26.363Z",
+  "base": "https://averianlabs-demo.netlify.app",
+  "scope": "Read-only online review application; no customer accounts, posts, orders, emails or payments created.",
+  "http": [
+    {
+      "path": "/en",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/en/shop",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/en/shop/bpc-157",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/en/peptide-calculator",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/en/research-tools",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/en/community",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/en/assistant",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/en/quality",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/en/documents",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/en/account",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/en/checkout/cart",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/fi",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/fi/shop",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/fi/shop/bpc-157",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/fi/peptide-calculator",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/fi/research-tools",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/fi/community",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/fi/assistant",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/fi/quality",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/fi/documents",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/fi/account",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/fi/checkout/cart",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "path": "/api/health",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "path": "/api/calculations",
+      "status": 401,
+      "expected": 401
+    },
+    {
+      "path": "/api/forum/drafts",
+      "status": 401,
+      "expected": 401
+    },
+    {
+      "path": "/api/cron/maintenance",
+      "status": 401,
+      "expected": 401
+    },
+    {
+      "path": "/api/quotes",
+      "status": 400,
+      "expected": 400
+    },
+    {
+      "path": "/api/ai/chat",
+      "status": 400,
+      "expected": 400
+    }
+  ],
+  "pages": [
+    {
+      "locale": "en",
+      "path": "",
+      "status": 200,
+      "filename": "en-390-home.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "en",
+      "path": "/shop",
+      "status": 200,
+      "filename": "en-390-shop.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "en",
+      "path": "/shop/bpc-157",
+      "status": 200,
+      "filename": "en-390-product.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "en",
+      "path": "/peptide-calculator",
+      "status": 200,
+      "filename": "en-390-calculator.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "en",
+      "path": "/research-tools",
+      "status": 200,
+      "filename": "en-390-tools.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "en",
+      "path": "/community",
+      "status": 200,
+      "filename": "en-390-community.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "en",
+      "path": "/assistant",
+      "status": 200,
+      "filename": "en-390-assistant.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "en",
+      "path": "",
+      "status": 200,
+      "filename": "en-1440-home.png",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "en",
+      "path": "/shop",
+      "status": 200,
+      "filename": "en-1440-shop.png",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "en",
+      "path": "/shop/bpc-157",
+      "status": 200,
+      "filename": "en-1440-product.png",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "en",
+      "path": "/peptide-calculator",
+      "status": 200,
+      "filename": "en-1440-calculator.png",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "en",
+      "path": "/research-tools",
+      "status": 200,
+      "filename": "en-1440-tools.png",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "en",
+      "path": "/community",
+      "status": 200,
+      "filename": "en-1440-community.png",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "en",
+      "path": "/assistant",
+      "status": 200,
+      "filename": "en-1440-assistant.png",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "fi",
+      "path": "",
+      "status": 200,
+      "filename": "fi-390-home.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "fi",
+      "path": "/shop",
+      "status": 200,
+      "filename": "fi-390-shop.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "fi",
+      "path": "/shop/bpc-157",
+      "status": 200,
+      "filename": "fi-390-product.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "fi",
+      "path": "/peptide-calculator",
+      "status": 200,
+      "filename": "fi-390-calculator.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "fi",
+      "path": "/research-tools",
+      "status": 200,
+      "filename": "fi-390-tools.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "fi",
+      "path": "/community",
+      "status": 200,
+      "filename": "fi-390-community.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "fi",
+      "path": "/assistant",
+      "status": 200,
+      "filename": "fi-390-assistant.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "fi",
+      "path": "",
+      "status": 200,
+      "filename": "fi-1440-home.png",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "fi",
+      "path": "/shop",
+      "status": 200,
+      "filename": "fi-1440-shop.png",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "fi",
+      "path": "/shop/bpc-157",
+      "status": 200,
+      "filename": "fi-1440-product.png",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "fi",
+      "path": "/peptide-calculator",
+      "status": 200,
+      "filename": "fi-1440-calculator.png",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "fi",
+      "path": "/research-tools",
+      "status": 200,
+      "filename": "fi-1440-tools.png",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "fi",
+      "path": "/community",
+      "status": 200,
+      "filename": "fi-1440-community.png",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "errors": [],
+      "blockingAxe": []
+    },
+    {
+      "locale": "fi",
+      "path": "/assistant",
+      "status": 200,
+      "filename": "fi-1440-assistant.png",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "errors": [],
+      "blockingAxe": []
+    }
+  ],
+  "failures": []
+}

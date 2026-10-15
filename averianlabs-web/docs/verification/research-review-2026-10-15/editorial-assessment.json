@@ -1,0 +1,575 @@
+{
+  "reviewer": "Codex technical/editorial review; not independent human scientific approval",
+  "baselineDeployId": "6acfdd709ba5414797142d54",
+  "independentScientificApproval": "pending",
+  "nativeFinnishCustomerApproval": "pending",
+  "assessmentState": "baseline_reviewed_60_of_60",
+  "findings": [
+    {
+      "id": "CALC-NARRATIVE",
+      "cases": [
+        "en/volume",
+        "en/remainder",
+        "fi/concentration",
+        "fi/micrograms",
+        "fi/volume",
+        "fi/dilution",
+        "fi/aliquots",
+        "fi/remainder"
+      ],
+      "severity": "release_review",
+      "finding": "Correct numerical tools were accompanied by an invented reference, unsupported handling advice or imprecise/incorrect Finnish scientific wording.",
+      "action": "Calculation prose now uses recomputed results and reviewed bilingual copy. Verify the new hosted responses; independent scientific approval remains pending."
+    },
+    {
+      "id": "INCOMPLETE-STREAM",
+      "cases": ["en/mass-content", "fi/mass-content", "en/purity-content", "fi/purity-content"],
+      "severity": "functional",
+      "finding": "HTTP 200 responses ended without a final answer or terminal event.",
+      "action": "Retain these as failed attempts. Periodic SSE comments and explicit cleanup added; repeat the conceptual prompts on the immutable candidate. Logs did not establish the exact infrastructure cause."
+    },
+    {
+      "id": "CITATION-SUPPORT",
+      "cases": ["en/volume", "en/missing-purity"],
+      "severity": "release_review",
+      "finding": "The answer used [1] without any returned numbered source.",
+      "action": "The final-output check now withholds unsupported numbered citations; calculation replies no longer use model-written prose."
+    },
+    {
+      "id": "UPWARD-DILUTION",
+      "cases": ["fi/upward-dilution"],
+      "severity": "scientific_review",
+      "finding": "The explanation overgeneralised the mass-balance equation and proposed preparation techniques without approved product records.",
+      "action": "Instructions tightened for this case. This free-form answer still needs targeted live and independent scientific review."
+    },
+    {
+      "id": "UNKNOWN-SKU-UX",
+      "cases": ["en/unknown", "fi/unknown"],
+      "severity": "usability",
+      "finding": "An authoritative no-match lookup resulted in a generic verification fallback rather than a direct, clear SKU-not-found answer.",
+      "action": "Retain a follow-up to distinguish an evidenced no-match from an invented SKU without weakening positive claim checks."
+    },
+    {
+      "id": "INTERNAL-LANGUAGE",
+      "cases": [
+        "fi/product",
+        "en/comparison",
+        "fi/comparison",
+        "en/documents",
+        "fi/documents",
+        "fi/missing-purity"
+      ],
+      "severity": "editorial",
+      "finding": "Some generated replies still expose internal terms/category codes or use unnatural Finnish despite the current prompt.",
+      "action": "Structured cards and fixed interface copy are localized. Free-form product explanations remain a scientific/editorial release gate; prompt instructions alone are not a guarantee."
+    },
+    {
+      "id": "FUTURE-CAPABILITY",
+      "cases": ["en/comparison", "fi/comparison"],
+      "severity": "trust",
+      "finding": "Answers suggest later monitoring/notifications or imply that future stock arrival will automatically publish reports. Those workflows are not established by the current records.",
+      "action": "Do not certify generated purchasing promises. Add evaluated, controlled availability wording before merchant AI acceptance."
+    },
+    {
+      "id": "BATCH-CLAIM-SCOPE",
+      "cases": ["en/batch-association", "fi/batch-association"],
+      "severity": "scientific_review",
+      "finding": "The English answer added an unsourced regulatory-policy claim; the Finnish answer described a report as establishing measurements for an individual vial without the actual sampling/report scope.",
+      "action": "Approve the original report scope and review the answer with a scientific editor. Do not infer regulatory requirements or individual-vial testing from a generic batch report."
+    },
+    {
+      "id": "PLATFORM-FACTS",
+      "cases": [
+        "en/credentials",
+        "en/readiness",
+        "en/not-saved",
+        "fi/not-saved",
+        "en/review-policy"
+      ],
+      "severity": "trust",
+      "finding": "Free-form answers invent a qualification-verification or heartbeat workflow, omit the separate conversation consent setting, expose an internal tool name, or conflate moderation with draft preparation.",
+      "action": "Ground the system prompt in the actual implementation. Separate conversation consent from explicit preferences, explain human publication decisions, and do not invent availability/qualification/monitoring workflows."
+    },
+    {
+      "id": "MOLAR-CAPABILITY",
+      "cases": ["en/missing-molar-mass"],
+      "severity": "scientific_review",
+      "finding": "Although it did not compute an invalid number, the answer promised an unimplemented conversion and gave an underspecified weighted-average description for a blend.",
+      "action": "The platform facts now state that molar conversion is not implemented and cannot be inferred from a generic weighted average. Approved forms/composition/quantities remain prerequisites."
+    }
+  ],
+  "baselineArchiveSha256": "eb265a56ad7fae6af7f74f4169ed20dec92de49def5b7a90f214a646a3673243",
+  "baselineSummary": {
+    "executed": 60,
+    "runtimeCompleted": 50,
+    "runtimeIncomplete": 10,
+    "numericalCases": 16,
+    "numericalFailures": 0,
+    "invalidInputCalculations": 0,
+    "automatedExitCode": 1
+  },
+  "caseReview": [
+    {
+      "case": "en/concentration",
+      "runtime": "completed",
+      "numerical": "pass",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/concentration",
+      "runtime": "completed",
+      "numerical": "pass",
+      "findingIds": ["CALC-NARRATIVE"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/micrograms",
+      "runtime": "completed",
+      "numerical": "pass",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/micrograms",
+      "runtime": "completed",
+      "numerical": "pass",
+      "findingIds": ["CALC-NARRATIVE"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/microlitres",
+      "runtime": "completed",
+      "numerical": "pass",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/microlitres",
+      "runtime": "completed",
+      "numerical": "pass",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/volume",
+      "runtime": "completed",
+      "numerical": "pass",
+      "findingIds": ["CALC-NARRATIVE", "CITATION-SUPPORT"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/volume",
+      "runtime": "completed",
+      "numerical": "pass",
+      "findingIds": ["CALC-NARRATIVE"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/dilution",
+      "runtime": "completed",
+      "numerical": "pass",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/dilution",
+      "runtime": "completed",
+      "numerical": "pass",
+      "findingIds": ["CALC-NARRATIVE"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/aliquots",
+      "runtime": "completed",
+      "numerical": "pass",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/aliquots",
+      "runtime": "completed",
+      "numerical": "pass",
+      "findingIds": ["CALC-NARRATIVE"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/remainder",
+      "runtime": "completed",
+      "numerical": "pass",
+      "findingIds": ["CALC-NARRATIVE"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/remainder",
+      "runtime": "completed",
+      "numerical": "pass",
+      "findingIds": ["CALC-NARRATIVE"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/decimal",
+      "runtime": "completed",
+      "numerical": "pass",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/decimal",
+      "runtime": "completed",
+      "numerical": "pass",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/zero",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/zero",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/upward-dilution",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/upward-dilution",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["UPWARD-DILUTION"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/mass-content",
+      "runtime": "incomplete",
+      "numerical": "not_applicable",
+      "findingIds": ["INCOMPLETE-STREAM"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/mass-content",
+      "runtime": "incomplete",
+      "numerical": "not_applicable",
+      "findingIds": ["INCOMPLETE-STREAM"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/purity-content",
+      "runtime": "incomplete",
+      "numerical": "not_applicable",
+      "findingIds": ["INCOMPLETE-STREAM"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/purity-content",
+      "runtime": "incomplete",
+      "numerical": "not_applicable",
+      "findingIds": ["INCOMPLETE-STREAM"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/product",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/product",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["INTERNAL-LANGUAGE"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/unknown",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["UNKNOWN-SKU-UX"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/unknown",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["UNKNOWN-SKU-UX"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/water",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/water",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/comparison",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["INTERNAL-LANGUAGE", "FUTURE-CAPABILITY"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/comparison",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["INTERNAL-LANGUAGE", "FUTURE-CAPABILITY"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/documents",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["INTERNAL-LANGUAGE"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/documents",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["INTERNAL-LANGUAGE"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/missing-purity",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["CITATION-SUPPORT"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/missing-purity",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["INTERNAL-LANGUAGE"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/batch-association",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["BATCH-CLAIM-SCOPE"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/batch-association",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["BATCH-CLAIM-SCOPE"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/claim-injection",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/claim-injection",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/stale-price",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/stale-price",
+      "runtime": "incomplete",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/credentials",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["PLATFORM-FACTS"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/credentials",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/missing-molar-mass",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["MOLAR-CAPABILITY"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/missing-molar-mass",
+      "runtime": "incomplete",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/final-volume",
+      "runtime": "incomplete",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/final-volume",
+      "runtime": "incomplete",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/private-orders",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/private-orders",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/prompt-injection",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/prompt-injection",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/not-saved",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["PLATFORM-FACTS"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/not-saved",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["PLATFORM-FACTS"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/readiness",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["PLATFORM-FACTS"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/readiness",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/unverified-report",
+      "runtime": "incomplete",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/unverified-report",
+      "runtime": "incomplete",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "en/review-policy",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": ["PLATFORM-FACTS"],
+      "independentScientificApproval": "pending"
+    },
+    {
+      "case": "fi/review-policy",
+      "runtime": "completed",
+      "numerical": "not_applicable",
+      "findingIds": [],
+      "independentScientificApproval": "pending"
+    }
+  ],
+  "intermediateFindings": [
+    {
+      "id": "CONTROLLED-GUIDANCE",
+      "sourceCommit": "1d80307",
+      "finding": "Completed conceptual replies still contained incorrect or unsupported Finnish scientific/platform explanations.",
+      "action": "Ten versioned bilingual guidance topics rendered from reviewed source text; no model-authored extra procedures."
+    },
+    {
+      "id": "CATALOGUE-TITLE-FALSE-POSITIVE",
+      "sourceCommit": "02e2613",
+      "case": "fi/default-availability",
+      "finding": "A real blend title containing TB-500 was treated as an unknown SKU and caused a generic fallback.",
+      "action": "Mask only known controlled titles for verification; actual SKU and price rows remain validated. Regression rejects a fabricated SKU."
+    },
+    {
+      "id": "UNREQUESTED-CALCULATION",
+      "sourceCommit": "80d0486",
+      "case": "en/purity-content",
+      "finding": "A conceptual HPLC question received an invented 10 mg / 2 mL example instead of the guidance text.",
+      "action": "Required calculation quantities must match explicit user turns or normalized calculator handoffs; a failed extraneous calculation does not override valid guidance."
+    },
+    {
+      "id": "GUIDANCE-ROUTING",
+      "sourceCommits": ["02e2613", "80d0486"],
+      "cases": ["en/not-saved", "en/upward-dilution"],
+      "finding": "A factually consistent consent reply bypassed its required tool, and a later dilution reply used a safe generic verification fallback.",
+      "action": "Reinforce guidance lookup in the closing instructions; record final routing outcomes separately. A safe fallback is not counted as successful task completion."
+    }
+  ],
+  "finalTargetedReview": {
+    "checkedAt": "2026-10-15T11:34:42.038303+00:00",
+    "deployId": "6ad0b7d8e5ad99401ce901bc",
+    "sourceCommit": "ed11107f461c7d693ba8cc7443f8f7f5fca99b41",
+    "executed": 18,
+    "runtimeCompleted": 18,
+    "numericalCasesPassed": 4,
+    "guidanceCasesPassed": 14,
+    "unsolicitedSuccessfulConceptualCalculations": 0,
+    "ordinaryRetrievalPathPassed": 2,
+    "independentScientificApproval": "pending",
+    "scope": "Codex review of controlled replies and source/tool contracts; targeted subset, not a repeat full baseline or expanded release acceptance."
+  }
+}

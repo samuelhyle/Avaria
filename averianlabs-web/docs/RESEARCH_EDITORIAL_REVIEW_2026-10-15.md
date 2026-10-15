@@ -43,6 +43,12 @@ A subsequent guided run completed all 18 requests, with 17 of 18 controlled-guid
 
 Another targeted run caught an unrequested numerical example inside a conceptual HPLC question. The new quantity-provenance check rejects that calculation; all 16 paired numerical examples still pass with their actual user prompts supplied. This check applies to both the shared laboratory tool and the legacy aliquot tool. Unknown inputs require clarification instead of being presented as user-supplied values.
 
+## Final published follow-up
+
+The [15 October deployment record](NETLIFY_DEPLOYMENT_2026-10-15.md) identifies the published source and evidence. All 18 final targeted requests completed and passed their required contracts: four numerical examples and 14 controlled scientific/platform guidance replies. Both ordinary retrieval-path requests passed. The conceptual HPLC/content questions returned no successful unrequested calculations. The previously missed English consent and dilution guidance checks passed in this final run.
+
+Both the immutable URL and public domain passed 29 HTTP checks, 28 FI/EN page states and four additional recorded-answer replay states each. Replays are display checks of exact live responses, not additional model requests. The updated unit suite passed 274 tests, including actual local embeddings; TypeScript, five route budgets and translation checks passed. These targeted checks are narrower than rerunning the full baseline or satisfying the expanded release evaluation. Independent scientific/native Finnish approval remains pending.
+
 ## Recovery rehearsal
 
 The private snapshot for deployment `6acfdd709ba5414797142d54` was checksum-verified and restored into a new, empty local PostgreSQL/pgvector database. All 47 public tables and 125 stored rows matched; the six migration hashes matched; all 48 foreign keys were re-added and validated. A second attempt correctly refused the already populated database. The scratch database was removed after the rehearsal. Only aggregate evidence is stored in [restore-rehearsal.json](verification/research-review-2026-10-15/restore-rehearsal.json); original snapshot data stays private outside the repository.

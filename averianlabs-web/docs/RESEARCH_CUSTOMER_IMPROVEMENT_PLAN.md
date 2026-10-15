@@ -156,7 +156,7 @@ Online mobile checks exposed a scrollable checkout progress list that could not 
 ### Next improvement order after approval
 
 1. Release a small, approved catalogue with complete batch reports; perform merchant sandbox and fulfilment rehearsals before enabling real customer orders.
-2. Establish immutable report versions/object keys and recorded file hashes, an operator workflow for `payment_review`, and backup/restore rehearsal. Review operational-message and order-data retention.
+2. Establish immutable report versions/object keys and recorded file hashes, an operator workflow for `payment_review`, and provider recovery/retention approval. The application logical-snapshot restore was rehearsed on 15 October; provider PITR remains open. Review operational-message and order-data retention.
 3. Test product discovery, batch verification, quotation and checkout with Finnish/English laboratory buyers, including keyboard/screen-reader users. Shorten wording or layout where observed customer friction remains.
 4. Profile Finnish catalogue hydration on actual target devices, then measure consent-respecting field LCP/INP/CLS. The lab report is a diagnostic; it cannot certify field responsiveness.
 5. Add validated additional-country tax/shipping support and purchasing features only after operations approve them. Before any marketing campaign, implement a signed unsubscribe route and its message link; subscriptions, loyalty discounts, cart marketing and public product reviews stay disabled until their actual workflows exist.
@@ -185,3 +185,5 @@ These changes preserve the outstanding scientific evidence, seller/provider setu
 ## Follow-up — 15 October 2026
 
 The [editorial, assistant-evaluation and recovery review](RESEARCH_EDITORIAL_REVIEW_2026-10-15.md) continues the remaining work. It records corrected Finnish/English terminology and workflow copy, controlled calculation explanations, source-backed numbered citations and a successful application-snapshot restore rehearsal. The live evaluation preserves partial and failed evidence separately. Approved seller details, original product/batch records and independent scientific/customer approval remain pending; the owner will provide the source records later.
+
+The verified follow-up is published: see the [15 October deployment record](NETLIFY_DEPLOYMENT_2026-10-15.md) for exact source, final targeted assistant checks, independent public-domain verification and remaining release requirements. The full baseline and intermediate failed attempts remain separate evidence.

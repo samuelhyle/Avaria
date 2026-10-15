@@ -42,8 +42,8 @@ The live evaluation script defaults to an isolated local target and disables wri
 
 ## Remaining gates
 
-1. Supply approved seller details, product specifications, exact batch records and original reports; rehearse merchant payment/email/storage/shipping and backup restore before taking orders.
-2. Complete the full live-provider evaluation and human scientific/language review. Targeted numerical and claim checks reduce known errors; they cannot certify the entire generated answer.
+1. Supply approved seller details, product specifications, exact batch records and original reports; rehearse merchant payment/email/storage/shipping and approve provider recovery/retention before taking orders. The application logical-snapshot restore was rehearsed on 15 October.
+2. Complete the expanded approved-source/action/privacy evaluation and human scientific/language review. Targeted numerical and claim checks reduce known errors; they cannot certify the entire generated answer.
 3. Supply real reviewed introductory discussions and configure the maintenance scheduler. No fake users, researchers, popularity statistics or community activity were added.
 4. Add molar conversion only with the correct approved chemical form, molar mass and composition. Add original-report summaries only when approved source text, access/version handling and evaluations exist. Broader community summaries and answer acceptance need their own product and evaluation review.
 5. Measure actual customer friction and consent-respecting field performance before claiming improved conversion or responsiveness.
@@ -60,3 +60,5 @@ Final public-domain checks passed: 29 HTTP checks, 28 browser states with no ove
 ## Follow-up — 15 October 2026
 
 The [editorial, assistant-evaluation and recovery review](RESEARCH_EDITORIAL_REVIEW_2026-10-15.md) continues the remaining work. It records corrected Finnish/English terminology and workflow copy, controlled calculation explanations, source-backed numbered citations and a successful application-snapshot restore rehearsal. The live evaluation preserves partial and failed evidence separately. Approved seller details, original product/batch records and independent scientific/customer approval remain pending; the owner will provide the source records later.
+
+The verified follow-up is published: see the [15 October deployment record](NETLIFY_DEPLOYMENT_2026-10-15.md) for exact source, final targeted assistant checks, independent public-domain verification and remaining release requirements. The full baseline and intermediate failed attempts remain separate evidence.

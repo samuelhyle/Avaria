@@ -1,0 +1,89 @@
+{
+  "checkedAt": "2026-10-15T11:24:13.778662+00:00",
+  "sourceCommit": "ed11107f461c7d693ba8cc7443f8f7f5fca99b41",
+  "unit": {
+    "passed": 274,
+    "skipped": 0,
+    "includesActualLocalEmbeddingModel": true
+  },
+  "integration": {
+    "passed": 26,
+    "skipped": 0,
+    "scope": "Isolated database, mocked merchant providers; CI placeholder signing keys",
+    "interruptedAttempt": {
+      "failed": 19,
+      "skipped": 7,
+      "cause": "Local Docker daemon became unavailable: ECONNREFUSED 127.0.0.1:5438",
+      "resolution": "Docker restored; only the owned averian-workspace-qa container started; fresh suite passed 26/26 with no skips."
+    },
+    "versionScope": "Fresh 26-case run after Docker recovery, before the final pure AI quantity guard; no subsequent database schema or merchant workflow changes."
+  },
+  "targetedBrowser": {
+    "passed": 22,
+    "skipped": 0,
+    "scope": "Research workspace and authentication; isolated local production build"
+  },
+  "deploymentGuards": {
+    "passed": 12,
+    "skipped": 0
+  },
+  "typescript": "passed",
+  "productionBuild": {
+    "state": "passed_hosted",
+    "sourceCommit": "ed11107",
+    "compiledSeconds": 68,
+    "staticPages": 278,
+    "routeBudgetsPassed": 5
+  },
+  "routeBudgets": "5_passed",
+  "i18n": {
+    "locales": 5,
+    "leafKeys": 1216,
+    "missing": 0,
+    "literalCalls": "passed"
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 52
+  },
+  "verificationLimit": "No merchant provider rehearsal or independent scientific/editorial approval.",
+  "maintenanceLocal": {
+    "unauthenticated": 401,
+    "wrongSecret": 401,
+    "authorized": 200,
+    "repeat": 200,
+    "hostedSchedule": "not_configured_by_this_check"
+  },
+  "streamFollowUp": {
+    "sourceCommit": "2455bad",
+    "unit": "256_passed_after_catalogue_grounding",
+    "typescript": "passed",
+    "localBrowser": "Previous 22-case production-build run; stream cleanup and slow-response follow-up covered by route tests"
+  },
+  "dependencyAudit": {
+    "high": 0,
+    "critical": 0,
+    "moderate": 1,
+    "exitCode": 1
+  },
+  "catalogueFollowUp": {
+    "sourceCommit": "1d803076c37bdb9a9485863d571eda2a461964b0",
+    "unitPassed": 256,
+    "typescript": "passed",
+    "scope": "Record-derived catalogue prose and factual platform rules; no schema changes."
+  },
+  "guidanceFollowUp": {
+    "unitPassed": 267,
+    "typescript": "passed",
+    "scope": "Ten versioned read-only bilingual guidance topics and controlled final output; separate action workflows preserved."
+  },
+  "catalogueNameGuard": {
+    "unitRegression": "Known blend title accepted; fabricated SKU row rejected",
+    "typescript": "passed",
+    "unitPassed": 267
+  },
+  "quantityProvenance": {
+    "unitPassed": 274,
+    "scope": "User-only quantities, normalized calculator handoffs, decimal-comma/unit conversion, no unsolicited example calculations; trusted direct calculation contracts preserved."
+  }
+}

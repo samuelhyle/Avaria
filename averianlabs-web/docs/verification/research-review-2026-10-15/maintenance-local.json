@@ -1,0 +1,53 @@
+{
+  "checkedAt": "2026-10-15T10:13:38.340Z",
+  "scope": "Owned isolated local database and disabled real email/payment/AI providers. Authenticated maintenance only; no hosted schedule configured by this check.",
+  "rows": [
+    {
+      "mode": "missing",
+      "status": 401,
+      "body": {
+        "code": "unauthorized"
+      }
+    },
+    {
+      "mode": "incorrect",
+      "status": 401,
+      "body": {
+        "code": "unauthorized"
+      }
+    },
+    {
+      "mode": "authorized",
+      "status": 200,
+      "body": {
+        "released": 0,
+        "purged": 0,
+        "sent": 0,
+        "failed": 0,
+        "moderation": {
+          "processed": 0
+        },
+        "index": {
+          "updated": 2
+        }
+      }
+    },
+    {
+      "mode": "authorized-repeat",
+      "status": 200,
+      "body": {
+        "released": 0,
+        "purged": 0,
+        "sent": 0,
+        "failed": 0,
+        "moderation": {
+          "processed": 0
+        },
+        "index": {
+          "updated": 2
+        }
+      }
+    }
+  ],
+  "failures": []
+}

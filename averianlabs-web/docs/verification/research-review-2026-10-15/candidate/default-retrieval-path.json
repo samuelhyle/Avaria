@@ -1,0 +1,158 @@
+{
+  "checkedAt": "2026-10-15T11:29:56.266Z",
+  "base": "https://6ad0b7d8e5ad99401ce901bc--averianlabs-demo.netlify.app",
+  "scope": "Actual hosted customer retrieval path: noRetrieve omitted. Anonymous, read-only tools, no persistence. The approved-source corpus is currently empty; this is not source-recall or Linux native-embedding certification.",
+  "rows": [
+    {
+      "id": "en-default-documents",
+      "locale": "en",
+      "status": 200,
+      "completed": true,
+      "requiredTool": true,
+      "latencyMs": 12150,
+      "heartbeats": 3,
+      "answer": "A report supports only the samples, methods, results and scope it actually describes. A report for a different batch does not establish results for the requested batch. Check the exact SKU and batch association in the original document. A report may cover several variants only when its scope and associations establish that. Do not assume that every vial was individually tested, that all tests passed, or that an unavailable report contains a particular result.\n\n[Guidance and scope](/en/quality)",
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f53246e74f0ae6108c6",
+          "name": "getProduct",
+          "content": {
+            "slug": "bpc-157",
+            "category": "recovery",
+            "name": "BPC-157",
+            "tagline": "Laboratory research material. Review the product-specific documentation before use.",
+            "description": "Laboratory research material. Review the product-specific documentation before use.",
+            "casNumber": null,
+            "molecularFormula": null,
+            "molecularWeight": null,
+            "sequence": null,
+            "storageTemp": "",
+            "purityPercent": null,
+            "vials": [
+              {
+                "mg": 5,
+                "sizeValue": 5,
+                "sizeUnit": "mg",
+                "sku": "BPC157-5",
+                "priceCents": 0,
+                "stockQty": 0,
+                "lowStockThreshold": null,
+                "purchaseMode": "unavailable",
+                "contactOnly": false,
+                "documentLocales": []
+              },
+              {
+                "mg": 10,
+                "sizeValue": 10,
+                "sizeUnit": "mg",
+                "sku": "BPC157-10",
+                "priceCents": 0,
+                "stockQty": 0,
+                "lowStockThreshold": null,
+                "purchaseMode": "unavailable",
+                "contactOnly": false,
+                "documentLocales": []
+              }
+            ],
+            "latestBatch": null,
+            "url": "/en/shop/bpc-157"
+          }
+        },
+        {
+          "type": "tool-result",
+          "id": "call_01a13f53246e74f0ae6108c5",
+          "name": "getDocuments",
+          "content": {
+            "slug": "bpc-157",
+            "source": "published_document_registry",
+            "documents": [],
+            "notice": "Assess the original methods and results. A link is not a blanket approval."
+          }
+        },
+        {
+          "type": "tool-result",
+          "id": "call_01a13f533444777280188753",
+          "name": "getResearchGuidance",
+          "content": {
+            "topic": "batch_evidence",
+            "text": "A report supports only the samples, methods, results and scope it actually describes. A report for a different batch does not establish results for the requested batch. Check the exact SKU and batch association in the original document. A report may cover several variants only when its scope and associations establish that. Do not assume that every vial was individually tested, that all tests passed, or that an unavailable report contains a particular result.",
+            "url": "/en/quality",
+            "scope": "site_guidance_not_product_evidence",
+            "version": "site-guidance-2026-10-15"
+          }
+        },
+        {
+          "type": "tool-result",
+          "id": "call_01a13f533444777280188752",
+          "name": "getBatches",
+          "content": {
+            "slug": "bpc-157",
+            "source": "database",
+            "batches": []
+          }
+        }
+      ],
+      "citations": []
+    },
+    {
+      "id": "fi-default-availability",
+      "locale": "fi",
+      "status": 200,
+      "completed": true,
+      "requiredTool": true,
+      "latencyMs": 11484,
+      "heartbeats": 3,
+      "answer": "**BPC-157**\n\n| SKU | Koot | Saatavuus | Hinta |\n|---|---|---|---|\n| BPC157-5 | 5 mg | Ei saatavilla tällä hetkellä | — |\n| BPC157-10 | 10 mg | Ei saatavilla tällä hetkellä | — |\n\nMäärä perustuu tuoteluetteloon, ei sisällön analyysimittaukseen. Muokatut määrät ovat käyttäjän antamia.\n\n[Tuotteen kaikki tiedot](/fi/shop/bpc-157)\n\nArvioi alkuperäinen menetelmä ja tulokset. Lähdelinkki ei ole yleinen hyväksyntä. Vain laboratoriotutkimukseen.",
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_ATbM97lurdRQk9WSzULVP4ew",
+          "name": "getProduct",
+          "content": {
+            "slug": "bpc-157",
+            "category": "recovery",
+            "name": "BPC-157",
+            "tagline": "Materiaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.",
+            "description": "Materiaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.",
+            "casNumber": null,
+            "molecularFormula": null,
+            "molecularWeight": null,
+            "sequence": null,
+            "storageTemp": "",
+            "purityPercent": null,
+            "vials": [
+              {
+                "mg": 5,
+                "sizeValue": 5,
+                "sizeUnit": "mg",
+                "sku": "BPC157-5",
+                "priceCents": 0,
+                "stockQty": 0,
+                "lowStockThreshold": null,
+                "purchaseMode": "unavailable",
+                "contactOnly": false,
+                "documentLocales": []
+              },
+              {
+                "mg": 10,
+                "sizeValue": 10,
+                "sizeUnit": "mg",
+                "sku": "BPC157-10",
+                "priceCents": 0,
+                "stockQty": 0,
+                "lowStockThreshold": null,
+                "purchaseMode": "unavailable",
+                "contactOnly": false,
+                "documentLocales": []
+              }
+            ],
+            "latestBatch": null,
+            "url": "/fi/shop/bpc-157"
+          }
+        }
+      ],
+      "citations": []
+    }
+  ]
+}

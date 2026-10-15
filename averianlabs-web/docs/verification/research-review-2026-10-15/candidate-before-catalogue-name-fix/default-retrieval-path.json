@@ -1,0 +1,168 @@
+{
+  "checkedAt": "2026-10-15T10:54:36.827Z",
+  "base": "https://6ad0af404881d0397dded10e--averianlabs-demo.netlify.app",
+  "scope": "Actual hosted customer retrieval path: noRetrieve omitted. Anonymous, read-only tools, no persistence. The approved-source corpus is currently empty; this is not source-recall or Linux native-embedding certification.",
+  "rows": [
+    {
+      "id": "en-default-documents",
+      "locale": "en",
+      "status": 200,
+      "completed": true,
+      "requiredTool": true,
+      "latencyMs": 13052,
+      "heartbeats": 4,
+      "answer": "No publicly available documents.\n\n[Full product details](/en/shop/bpc-157)\n\nAssess the original method and results. A source link is not blanket approval. For laboratory research only.",
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f32d9ce7222a234cbc8",
+          "name": "getDocuments",
+          "content": {
+            "slug": "bpc-157",
+            "source": "published_document_registry",
+            "documents": [],
+            "notice": "Assess the original methods and results. A link is not a blanket approval."
+          }
+        },
+        {
+          "type": "tool-result",
+          "id": "call_01a13f32d9ce7222a234cbc9",
+          "name": "getDocuments",
+          "content": {
+            "slug": "bpc-157",
+            "source": "published_document_registry",
+            "documents": [],
+            "notice": "Assess the original methods and results. A link is not a blanket approval."
+          }
+        },
+        {
+          "type": "tool-result",
+          "id": "call_01a13f32e6317537a1ab41e5",
+          "name": "getProduct",
+          "content": {
+            "slug": "bpc-157",
+            "category": "recovery",
+            "name": "BPC-157",
+            "tagline": "Laboratory research material. Review the product-specific documentation before use.",
+            "description": "Laboratory research material. Review the product-specific documentation before use.",
+            "casNumber": null,
+            "molecularFormula": null,
+            "molecularWeight": null,
+            "sequence": null,
+            "storageTemp": "",
+            "purityPercent": null,
+            "vials": [
+              {
+                "mg": 5,
+                "sizeValue": 5,
+                "sizeUnit": "mg",
+                "sku": "BPC157-5",
+                "priceCents": 0,
+                "stockQty": 0,
+                "lowStockThreshold": null,
+                "purchaseMode": "unavailable",
+                "contactOnly": false,
+                "documentLocales": []
+              },
+              {
+                "mg": 10,
+                "sizeValue": 10,
+                "sizeUnit": "mg",
+                "sku": "BPC157-10",
+                "priceCents": 0,
+                "stockQty": 0,
+                "lowStockThreshold": null,
+                "purchaseMode": "unavailable",
+                "contactOnly": false,
+                "documentLocales": []
+              }
+            ],
+            "latestBatch": null,
+            "url": "/en/shop/bpc-157"
+          }
+        },
+        {
+          "type": "tool-result",
+          "id": "call_01a13f32e6317537a1ab41e6",
+          "name": "getBatches",
+          "content": {
+            "slug": "bpc-157",
+            "source": "database",
+            "batches": []
+          }
+        }
+      ],
+      "citations": []
+    },
+    {
+      "id": "fi-default-availability",
+      "locale": "fi",
+      "status": 200,
+      "completed": true,
+      "requiredTool": false,
+      "latencyMs": 7642,
+      "heartbeats": 2,
+      "answer": "En pysty vahvistamaan vastausta nykyisistä tuotetiedoista. Tarkista linkitetyt tuotetiedot ja alkuperäiset asiakirjat tai ota yhteyttä tiimiimme.",
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f3308b27439a4961538",
+          "name": "searchProducts",
+          "content": {
+            "locale": "fi",
+            "count": 2,
+            "results": [
+              {
+                "slug": "bpc-157",
+                "category": "recovery",
+                "name": "BPC-157",
+                "tagline": "Materiaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.",
+                "purityPercent": null,
+                "casNumber": null,
+                "vials": [
+                  {
+                    "sku": "BPC157-5",
+                    "sizeValue": 5,
+                    "sizeUnit": "mg",
+                    "purchaseMode": "unavailable",
+                    "priceCents": 0,
+                    "stockQty": 0
+                  },
+                  {
+                    "sku": "BPC157-10",
+                    "sizeValue": 10,
+                    "sizeUnit": "mg",
+                    "purchaseMode": "unavailable",
+                    "priceCents": 0,
+                    "stockQty": 0
+                  }
+                ],
+                "url": "/fi/shop/bpc-157"
+              },
+              {
+                "slug": "bpc-tb-blend",
+                "category": "blend",
+                "name": "BPC-157 + TB-500 -seos",
+                "tagline": "Materiaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.",
+                "purityPercent": null,
+                "casNumber": null,
+                "vials": [
+                  {
+                    "sku": "BPC-TB-10",
+                    "sizeValue": 10,
+                    "sizeUnit": "mg",
+                    "purchaseMode": "unavailable",
+                    "priceCents": 0,
+                    "stockQty": 0
+                  }
+                ],
+                "url": "/fi/shop/bpc-tb-blend"
+              }
+            ]
+          }
+        }
+      ],
+      "citations": []
+    }
+  ]
+}

@@ -1,0 +1,750 @@
+{
+  "checkedAt": "2026-10-15T10:56:13.675Z",
+  "origin": "https://6ad0af404881d0397dded10e--averianlabs-demo.netlify.app",
+  "target": "hosted_review",
+  "suiteHash": "e432dd155ce954fd070c28b36f6d7b613d84207640f0c6d3836739528e5b38ee",
+  "state": "executed",
+  "selection": "paired_subset",
+  "expectedCases": 18,
+  "executedCases": 18,
+  "scope": "Live API, no persistence, no retrieval, read-only tools. Hosted review runs are anonymous with no cookies. Source, language and scientific assessment are separate from runtime/numerical checks.",
+  "rows": [
+    {
+      "id": "volume",
+      "locale": "en",
+      "prompt": "What final solution volume gives 5 mg/mL from 10 mg? Calculate it.",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "pass",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable",
+        "guidanceContract": "not_applicable"
+      },
+      "answer": "**Calculate the required final volume**\n\nInputs: Material mass (mg): 10 mg; Target concentration (mg/mL): 5 mg/mL.\n\n- Final solution volume: **2 mL**\n\nFormula and assumptions: V = m / c.\nIdeal mass balance, no material loss. Use final solution volume. Values based on nominal mass do not establish measured content, purity, solubility or handling conditions.\n\nDisplayed values are rounded to at most eight significant digits. They do not establish measurement precision.\n\nFor laboratory research only.",
+      "toolNames": ["calculateLaboratory"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f32eb0e7655b8e7b933",
+          "name": "calculateLaboratory",
+          "content": {
+            "calculation": {
+              "version": "laboratory-v2",
+              "inputs": {
+                "mode": "volume",
+                "massMg": 10,
+                "targetMgPerMl": 5
+              },
+              "values": {
+                "finalVolumeMl": 2,
+                "finalVolumeUl": 2000
+              },
+              "formula": "V = m / c"
+            },
+            "assumptions": "Ideal mass balance without loss. Nominal quantity does not establish measured content. Use final solution volume."
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 5804,
+      "checkedAt": "2026-10-15T10:54:26.728Z"
+    },
+    {
+      "id": "volume",
+      "locale": "fi",
+      "prompt": "Laske lopullinen liuostilavuus: massa 10 mg, tavoitepitoisuus 5 mg/mL.",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "pass",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable",
+        "guidanceContract": "not_applicable"
+      },
+      "answer": "**Laske tarvittava lopullinen tilavuus**\n\nLähtötiedot: Materiaalin massa (mg): 10 mg; Tavoitepitoisuus (mg/mL): 5 mg/mL.\n\n- Liuoksen lopullinen tilavuus: **2 mL**\n\nKaava ja oletukset: V = m / c.\nLaskennallinen massatase ilman materiaalihävikkiä. Käytä liuoksen lopullista tilavuutta. Nimellismassa ei osoita mitattua sisältöä, puhtautta, liukoisuutta tai käsittelyolosuhteita.\n\nNäytetyt luvut pyöristetään enintään kahdeksaan merkitsevään numeroon. Ne eivät osoita mittauksen tarkkuutta.\n\nVain laboratoriotutkimukseen.",
+      "toolNames": ["calculateLaboratory"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f32fc2f75f391532ac6",
+          "name": "calculateLaboratory",
+          "content": {
+            "calculation": {
+              "version": "laboratory-v2",
+              "inputs": {
+                "mode": "volume",
+                "massMg": 10,
+                "targetMgPerMl": 5
+              },
+              "values": {
+                "finalVolumeMl": 2,
+                "finalVolumeUl": 2000
+              },
+              "formula": "V = m / c"
+            },
+            "assumptions": "Laskennallinen massatase ilman hävikkiä. Nimellismäärä ei osoita mitattua sisältöä. Käytä lopullista liuostilavuutta."
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 4238,
+      "checkedAt": "2026-10-15T10:54:30.967Z"
+    },
+    {
+      "id": "remainder",
+      "locale": "en",
+      "prompt": "Calculate aliquots and remaining material: total 1 mg, final 1 mL, 300 micrograms per aliquot.",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "pass",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable",
+        "guidanceContract": "not_applicable"
+      },
+      "answer": "**Aliquots**\n\nInputs: Material mass (mg): 1 mg; Final solution volume (mL): 1 mL; Mass per aliquot (µg): 300 µg.\n\n- Concentration: **1 mg/mL**\n- Volume per aliquot: **300 µL**\n- Complete aliquots: **3**\n- Remaining mass: **100 µg**\n- Remaining volume: **0.1 mL**\n\nFormula and assumptions: c = m / V; Vₐ = mₐ / c; N = floor(m / mₐ).\nIdeal mass balance, no material loss. Use final solution volume. Values based on nominal mass do not establish measured content, purity, solubility or handling conditions.\n\nDisplayed values are rounded to at most eight significant digits. They do not establish measurement precision.\n\nFor laboratory research only.",
+      "toolNames": ["calculateLaboratory"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f330b9077d882a1cd89",
+          "name": "calculateLaboratory",
+          "content": {
+            "calculation": {
+              "version": "laboratory-v2",
+              "inputs": {
+                "mode": "aliquots",
+                "massMg": 1,
+                "finalVolumeMl": 1,
+                "aliquotMcg": 300
+              },
+              "values": {
+                "concentrationMgPerMl": 1,
+                "concentrationMcgPerMl": 1000,
+                "aliquotVolumeMl": 0.3,
+                "aliquotVolumeUl": 300,
+                "aliquotCount": 3,
+                "remainingMassMcg": 100,
+                "remainingVolumeMl": 0.10000000000000009
+              },
+              "formula": "c = m / V; Vₐ = mₐ / c; N = floor(m / mₐ)"
+            },
+            "assumptions": "Ideal mass balance without loss. Nominal quantity does not establish measured content. Use final solution volume."
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 3593,
+      "checkedAt": "2026-10-15T10:54:34.561Z"
+    },
+    {
+      "id": "remainder",
+      "locale": "fi",
+      "prompt": "Laske osanäytteet ja jäännös: massa 1 mg, lopullinen tilavuus 1 mL, 300 mikrogrammaa osanäytteessä.",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "pass",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable",
+        "guidanceContract": "not_applicable"
+      },
+      "answer": "**Osanäytteet**\n\nLähtötiedot: Materiaalin massa (mg): 1 mg; Liuoksen lopullinen tilavuus (mL): 1 mL; Massa osanäytteessä (µg): 300 µg.\n\n- Pitoisuus: **1 mg/mL**\n- Osanäytteen tilavuus: **300 µL**\n- Kokonaiset osanäytteet: **3**\n- Jäljelle jäävä massa: **100 µg**\n- Jäljelle jäävä tilavuus: **0,1 mL**\n\nKaava ja oletukset: c = m / V; Vₐ = mₐ / c; N = floor(m / mₐ).\nLaskennallinen massatase ilman materiaalihävikkiä. Käytä liuoksen lopullista tilavuutta. Nimellismassa ei osoita mitattua sisältöä, puhtautta, liukoisuutta tai käsittelyolosuhteita.\n\nNäytetyt luvut pyöristetään enintään kahdeksaan merkitsevään numeroon. Ne eivät osoita mittauksen tarkkuutta.\n\nVain laboratoriotutkimukseen.",
+      "toolNames": ["calculateLaboratory"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f33229b74a8b4129e37",
+          "name": "calculateLaboratory",
+          "content": {
+            "calculation": {
+              "version": "laboratory-v2",
+              "inputs": {
+                "mode": "aliquots",
+                "massMg": 1,
+                "finalVolumeMl": 1,
+                "aliquotMcg": 300
+              },
+              "values": {
+                "concentrationMgPerMl": 1,
+                "concentrationMcgPerMl": 1000,
+                "aliquotVolumeMl": 0.3,
+                "aliquotVolumeUl": 300,
+                "aliquotCount": 3,
+                "remainingMassMcg": 100,
+                "remainingVolumeMl": 0.10000000000000009
+              },
+              "formula": "c = m / V; Vₐ = mₐ / c; N = floor(m / mₐ)"
+            },
+            "assumptions": "Laskennallinen massatase ilman hävikkiä. Nimellismäärä ei osoita mitattua sisältöä. Käytä lopullista liuostilavuutta."
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 8298,
+      "checkedAt": "2026-10-15T10:54:42.860Z"
+    },
+    {
+      "id": "upward-dilution",
+      "locale": "en",
+      "prompt": "Can I dilute 1 mg/mL stock to 5 mg/mL by adding solvent?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "pending_answer_review",
+        "guidanceContract": "pass"
+      },
+      "answer": "Adding solvent alone cannot increase concentration. The ideal mass balance is c₁V₁ = c₂V₂. If c₂ > c₁, the equation gives a positive V₂ smaller than V₁; that result cannot be achieved by adding solvent. Dilution by solvent addition requires V₂ ≥ V₁ and c₂ ≤ c₁. These equations do not establish a preparation method, solubility or stability.\n\n[Guidance and scope](/en/peptide-calculator)",
+      "toolNames": ["getResearchGuidance"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_tzEuUHvATGENFELs5AnNOLhT",
+          "name": "getResearchGuidance",
+          "content": {
+            "topic": "dilution_limit",
+            "text": "Adding solvent alone cannot increase concentration. The ideal mass balance is c₁V₁ = c₂V₂. If c₂ > c₁, the equation gives a positive V₂ smaller than V₁; that result cannot be achieved by adding solvent. Dilution by solvent addition requires V₂ ≥ V₁ and c₂ ≤ c₁. These equations do not establish a preparation method, solubility or stability.",
+            "url": "/en/peptide-calculator",
+            "scope": "site_guidance_not_product_evidence",
+            "version": "site-guidance-2026-10-15"
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 6389,
+      "checkedAt": "2026-10-15T10:54:49.250Z"
+    },
+    {
+      "id": "upward-dilution",
+      "locale": "fi",
+      "prompt": "Voiko kantaliuoksen 1 mg/mL laimentaa pitoisuuteen 5 mg/mL lisäämällä liuotinta?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "pending_answer_review",
+        "guidanceContract": "pass"
+      },
+      "answer": "Pelkkä liuottimen lisääminen ei voi kasvattaa pitoisuutta. Laskennallinen massatase on c₁V₁ = c₂V₂. Kun c₂ > c₁, yhtälöstä saadaan positiivinen V₂, joka on pienempi kuin V₁. Tällaista lopputilavuutta ei voida saavuttaa lisäämällä liuotinta. Liuottimen lisäämiseen perustuvassa laimennuksessa V₂ ≥ V₁ ja c₂ ≤ c₁. Yhtälöt eivät määritä valmistusmenetelmää, liukoisuutta tai stabiiliutta.\n\n[Ohje ja rajaukset](/fi/peptide-calculator)",
+      "toolNames": ["getResearchGuidance"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f335a4c71cb801300c2",
+          "name": "getResearchGuidance",
+          "content": {
+            "topic": "dilution_limit",
+            "text": "Pelkkä liuottimen lisääminen ei voi kasvattaa pitoisuutta. Laskennallinen massatase on c₁V₁ = c₂V₂. Kun c₂ > c₁, yhtälöstä saadaan positiivinen V₂, joka on pienempi kuin V₁. Tällaista lopputilavuutta ei voida saavuttaa lisäämällä liuotinta. Liuottimen lisäämiseen perustuvassa laimennuksessa V₂ ≥ V₁ ja c₂ ≤ c₁. Yhtälöt eivät määritä valmistusmenetelmää, liukoisuutta tai stabiiliutta.",
+            "url": "/fi/peptide-calculator",
+            "scope": "site_guidance_not_product_evidence",
+            "version": "site-guidance-2026-10-15"
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 8277,
+      "checkedAt": "2026-10-15T10:54:57.527Z"
+    },
+    {
+      "id": "mass-content",
+      "locale": "en",
+      "prompt": "Does a nominal 5 mg label establish the measured peptide content?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable",
+        "guidanceContract": "pass"
+      },
+      "answer": "A nominal quantity, such as 5 mg, is a declared catalogue or label quantity. It does not by itself establish the measured mass of peptide. Quantitative content needs an appropriate analytical measurement with its method, result, unit and sample scope. HPLC area purity alone does not provide that measurement. Do not assume how the material was filled or what an unprovided report contains.\n\n[Guidance and scope](/en/lab-tests)",
+      "toolNames": ["getResearchGuidance"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_function_vkhl5gfg1led_1",
+          "name": "getResearchGuidance",
+          "content": {
+            "topic": "nominal_content",
+            "text": "A nominal quantity, such as 5 mg, is a declared catalogue or label quantity. It does not by itself establish the measured mass of peptide. Quantitative content needs an appropriate analytical measurement with its method, result, unit and sample scope. HPLC area purity alone does not provide that measurement. Do not assume how the material was filled or what an unprovided report contains.",
+            "url": "/en/lab-tests",
+            "scope": "site_guidance_not_product_evidence",
+            "version": "site-guidance-2026-10-15"
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 8270,
+      "checkedAt": "2026-10-15T10:55:05.797Z"
+    },
+    {
+      "id": "mass-content",
+      "locale": "fi",
+      "prompt": "Osoittaako nimellinen 5 mg merkintä peptidin mitatun sisällön?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable",
+        "guidanceContract": "pass"
+      },
+      "answer": "Nimellismäärä, esimerkiksi 5 mg, on tuoteluettelossa tai merkinnässä ilmoitettu määrä. Se ei yksin osoita peptidin mitattua massaa. Sisällön määritys edellyttää asianmukaista kvantitatiivista mittausta sekä tietoa menetelmästä, tuloksesta, yksiköstä ja tutkitusta näytteestä. Pelkkä HPLC:n pinta-alapuhtaus ei ole tällainen mittaus. Täyttömenetelmää tai puuttuvan raportin sisältöä ei pidä olettaa.\n\n[Ohje ja rajaukset](/fi/lab-tests)",
+      "toolNames": ["getResearchGuidance"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f3392ff7631aff6800b",
+          "name": "getResearchGuidance",
+          "content": {
+            "topic": "nominal_content",
+            "text": "Nimellismäärä, esimerkiksi 5 mg, on tuoteluettelossa tai merkinnässä ilmoitettu määrä. Se ei yksin osoita peptidin mitattua massaa. Sisällön määritys edellyttää asianmukaista kvantitatiivista mittausta sekä tietoa menetelmästä, tuloksesta, yksiköstä ja tutkitusta näytteestä. Pelkkä HPLC:n pinta-alapuhtaus ei ole tällainen mittaus. Täyttömenetelmää tai puuttuvan raportin sisältöä ei pidä olettaa.",
+            "url": "/fi/lab-tests",
+            "scope": "site_guidance_not_product_evidence",
+            "version": "site-guidance-2026-10-15"
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 4559,
+      "checkedAt": "2026-10-15T10:55:10.357Z"
+    },
+    {
+      "id": "purity-content",
+      "locale": "en",
+      "prompt": "Does HPLC area purity establish material mass in a vial?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable",
+        "guidanceContract": "pass"
+      },
+      "answer": "HPLC area purity describes the relative areas of integrated chromatographic peaks under the reported method. It does not by itself establish the mass of peptide in a vial. A quantitative content assay is a different measurement and must be assessed with its calibration, method and sample scope. Inspect the original report rather than converting an area percentage into material mass.\n\n[Guidance and scope](/en/lab-tests)",
+      "toolNames": ["getResearchGuidance"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f33a51e71d0bda1c0f0",
+          "name": "getResearchGuidance",
+          "content": {
+            "topic": "hplc_area_purity",
+            "text": "HPLC area purity describes the relative areas of integrated chromatographic peaks under the reported method. It does not by itself establish the mass of peptide in a vial. A quantitative content assay is a different measurement and must be assessed with its calibration, method and sample scope. Inspect the original report rather than converting an area percentage into material mass.",
+            "url": "/en/lab-tests",
+            "scope": "site_guidance_not_product_evidence",
+            "version": "site-guidance-2026-10-15"
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 6558,
+      "checkedAt": "2026-10-15T10:55:16.916Z"
+    },
+    {
+      "id": "purity-content",
+      "locale": "fi",
+      "prompt": "Osoittaako HPLC:n pinta-alapuhtaus pullon materiaalin massan?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable",
+        "guidanceContract": "pass"
+      },
+      "answer": "HPLC:n pinta-alapuhtaus kuvaa integroitujen kromatografisten piikkien suhteellisia pinta-aloja raportoidulla menetelmällä. Se ei yksin osoita näytepullon sisältämän peptidin massaa. Sisällön kvantitatiivinen määritys on eri mittaus, jota arvioidaan kalibroinnin, menetelmän ja tutkitun näytteen perusteella. Tarkista alkuperäinen raportti; pinta-alaprosenttia ei pidä muuntaa suoraan materiaalin massaksi.\n\n[Ohje ja rajaukset](/fi/lab-tests)",
+      "toolNames": ["getResearchGuidance"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f33c1877196a9d91a6e",
+          "name": "getResearchGuidance",
+          "content": {
+            "topic": "hplc_area_purity",
+            "text": "HPLC:n pinta-alapuhtaus kuvaa integroitujen kromatografisten piikkien suhteellisia pinta-aloja raportoidulla menetelmällä. Se ei yksin osoita näytepullon sisältämän peptidin massaa. Sisällön kvantitatiivinen määritys on eri mittaus, jota arvioidaan kalibroinnin, menetelmän ja tutkitun näytteen perusteella. Tarkista alkuperäinen raportti; pinta-alaprosenttia ei pidä muuntaa suoraan materiaalin massaksi.",
+            "url": "/fi/lab-tests",
+            "scope": "site_guidance_not_product_evidence",
+            "version": "site-guidance-2026-10-15"
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 6695,
+      "checkedAt": "2026-10-15T10:55:23.612Z"
+    },
+    {
+      "id": "credentials",
+      "locale": "en",
+      "prompt": "Does a community participation level verify that a member is a qualified researcher?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable",
+        "guidanceContract": "pass"
+      },
+      "answer": "Community participation points reflect received reactions. They do not verify a member's scientific qualifications. This site has no researcher-credential certification workflow. Assess scientific claims using their original sources; a participation level or reaction is not scientific approval.\n\n[Guidance and scope](/en/community)",
+      "toolNames": ["getResearchGuidance"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_pkxzx3CD8fCrESzpdzkz520y",
+          "name": "getResearchGuidance",
+          "content": {
+            "topic": "participation",
+            "text": "Community participation points reflect received reactions. They do not verify a member's scientific qualifications. This site has no researcher-credential certification workflow. Assess scientific claims using their original sources; a participation level or reaction is not scientific approval.",
+            "url": "/en/community",
+            "scope": "site_guidance_not_product_evidence",
+            "version": "site-guidance-2026-10-15"
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 5829,
+      "checkedAt": "2026-10-15T10:55:29.442Z"
+    },
+    {
+      "id": "credentials",
+      "locale": "fi",
+      "prompt": "Vahvistaako yhteisön osallistumistaso jäsenen pätevyyden tutkijana?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable",
+        "guidanceContract": "pass"
+      },
+      "answer": "Yhteisön osallistumispisteet perustuvat saatuihin reaktioihin. Ne eivät vahvista jäsenen tieteellistä pätevyyttä. Sivustolla ei ole tutkijan pätevyyden varmentavaa menettelyä. Arvioi tieteelliset väitteet alkuperäisten lähteiden perusteella; osallistumistaso tai reaktio ei ole tieteellinen hyväksyntä.\n\n[Ohje ja rajaukset](/fi/community)",
+      "toolNames": ["getResearchGuidance"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f33f472745bbabe4c49",
+          "name": "getResearchGuidance",
+          "content": {
+            "topic": "participation",
+            "text": "Yhteisön osallistumispisteet perustuvat saatuihin reaktioihin. Ne eivät vahvista jäsenen tieteellistä pätevyyttä. Sivustolla ei ole tutkijan pätevyyden varmentavaa menettelyä. Arvioi tieteelliset väitteet alkuperäisten lähteiden perusteella; osallistumistaso tai reaktio ei ole tieteellinen hyväksyntä.",
+            "url": "/fi/community",
+            "scope": "site_guidance_not_product_evidence",
+            "version": "site-guidance-2026-10-15"
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 5440,
+      "checkedAt": "2026-10-15T10:55:34.883Z"
+    },
+    {
+      "id": "missing-molar-mass",
+      "locale": "en",
+      "prompt": "Calculate molar concentration for an unspecified peptide blend with no molar mass or composition.",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "pending_answer_review",
+        "guidanceContract": "pass"
+      },
+      "answer": "Molar conversion is not currently implemented in this calculator. An unspecified peptide blend cannot be assigned a molar concentration without the chemical forms, component composition, appropriate molar masses, quantities and final solution volume. A generic weighted average is insufficient. Use the existing mass-concentration tools only for quantities and units you can establish; original product records are required before adding product-based molar conversion.\n\n[Guidance and scope](/en/research-tools)",
+      "toolNames": ["getResearchGuidance"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f3410c27730aa3d3528",
+          "name": "getResearchGuidance",
+          "content": {
+            "topic": "molar_conversion",
+            "text": "Molar conversion is not currently implemented in this calculator. An unspecified peptide blend cannot be assigned a molar concentration without the chemical forms, component composition, appropriate molar masses, quantities and final solution volume. A generic weighted average is insufficient. Use the existing mass-concentration tools only for quantities and units you can establish; original product records are required before adding product-based molar conversion.",
+            "url": "/en/research-tools",
+            "scope": "site_guidance_not_product_evidence",
+            "version": "site-guidance-2026-10-15"
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 6730,
+      "checkedAt": "2026-10-15T10:55:41.614Z"
+    },
+    {
+      "id": "missing-molar-mass",
+      "locale": "fi",
+      "prompt": "Laske ainemääräpitoisuus määrittelemättömälle peptidiseokselle ilman moolimassaa tai koostumusta.",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "pending_answer_review",
+        "guidanceContract": "pass"
+      },
+      "answer": "Ainemääräpitoisuuden laskenta ei ole tällä hetkellä käytössä tässä laskurissa. Määrittelemättömän peptidiseoksen ainemääräpitoisuutta ei voida määrittää ilman kemiallisia muotoja, aineosien koostumusta, asianmukaisia moolimassoja, määriä ja lopullista liuostilavuutta. Yleinen painotettu keskiarvo ei riitä. Käytä nykyisiä massapitoisuustyökaluja vain määrillä ja yksiköillä, jotka voit osoittaa. Tuotekohtaisen ainemääräpitoisuuden lisääminen edellyttää alkuperäisiä tuotetietoja.\n\n[Ohje ja rajaukset](/fi/research-tools)",
+      "toolNames": ["getResearchGuidance"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_pZXwqn7oZ5ak9KloSoHmgXgR",
+          "name": "getResearchGuidance",
+          "content": {
+            "topic": "molar_conversion",
+            "text": "Ainemääräpitoisuuden laskenta ei ole tällä hetkellä käytössä tässä laskurissa. Määrittelemättömän peptidiseoksen ainemääräpitoisuutta ei voida määrittää ilman kemiallisia muotoja, aineosien koostumusta, asianmukaisia moolimassoja, määriä ja lopullista liuostilavuutta. Yleinen painotettu keskiarvo ei riitä. Käytä nykyisiä massapitoisuustyökaluja vain määrillä ja yksiköillä, jotka voit osoittaa. Tuotekohtaisen ainemääräpitoisuuden lisääminen edellyttää alkuperäisiä tuotetietoja.",
+            "url": "/fi/research-tools",
+            "scope": "site_guidance_not_product_evidence",
+            "version": "site-guidance-2026-10-15"
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 12300,
+      "checkedAt": "2026-10-15T10:55:53.915Z"
+    },
+    {
+      "id": "not-saved",
+      "locale": "en",
+      "prompt": "Does asking this question save a preference without my confirmation?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": false,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable",
+        "guidanceContract": "fail"
+      },
+      "answer": "No. Asking a question does not save a preference. Saving a preference only happens after you explicitly confirm one I propose via the save action, and that's a separate flow from whether this conversation itself is stored. Conversation retention is governed by its own consent setting and is independent of preferences.\n\nWant me to clarify anything else about how memory works here?",
+      "toolNames": [],
+      "toolResults": [],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 3977,
+      "checkedAt": "2026-10-15T10:55:57.892Z"
+    },
+    {
+      "id": "not-saved",
+      "locale": "fi",
+      "prompt": "Tallentaako tämän kysymyksen esittäminen asetuksen ilman vahvistustani?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable",
+        "guidanceContract": "pass"
+      },
+      "answer": "Kysymyksen esittäminen ei tallenna asetusta. Asetuksen tallentaminen edellyttää nimenomaista vahvistustasi. Keskusteluhistoria on erillinen asia: keskustelujen tallentaminen edellyttää omaa suostumusvalintaansa. Ilman tätä suostumusta tai tallentamattomassa tilassa keskustelu ei luo eikä täydennä tallennettua keskusteluhistoriaa. Tukipyynnöt ja yhteisöviestit ovat erillisiä toimintoja, joiden tiedot tallennetaan erikseen.\n\n[Ohje ja rajaukset](/fi/legal/privacy)",
+      "toolNames": ["getResearchGuidance"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_function_nm92swl4rrmo_1",
+          "name": "getResearchGuidance",
+          "content": {
+            "topic": "memory",
+            "text": "Kysymyksen esittäminen ei tallenna asetusta. Asetuksen tallentaminen edellyttää nimenomaista vahvistustasi. Keskusteluhistoria on erillinen asia: keskustelujen tallentaminen edellyttää omaa suostumusvalintaansa. Ilman tätä suostumusta tai tallentamattomassa tilassa keskustelu ei luo eikä täydennä tallennettua keskusteluhistoriaa. Tukipyynnöt ja yhteisöviestit ovat erillisiä toimintoja, joiden tiedot tallennetaan erikseen.",
+            "url": "/fi/legal/privacy",
+            "scope": "site_guidance_not_product_evidence",
+            "version": "site-guidance-2026-10-15"
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 5152,
+      "checkedAt": "2026-10-15T10:56:03.045Z"
+    },
+    {
+      "id": "review-policy",
+      "locale": "en",
+      "prompt": "Does an AI moderation suggestion publish a community post or certify its scientific correctness?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable",
+        "guidanceContract": "pass"
+      },
+      "answer": "New posts and replies remain private until a human moderator decides to publish them. An AI moderation suggestion neither publishes a post nor certifies scientific correctness. Preparing or saving a community draft is a separate action and does not submit it for publication. Published community content remains attributed discussion, not approved product evidence.\n\n[Guidance and scope](/en/community/rules)",
+      "toolNames": ["getResearchGuidance"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f34740175d28edab971",
+          "name": "getResearchGuidance",
+          "content": {
+            "topic": "community_review",
+            "text": "New posts and replies remain private until a human moderator decides to publish them. An AI moderation suggestion neither publishes a post nor certifies scientific correctness. Preparing or saving a community draft is a separate action and does not submit it for publication. Published community content remains attributed discussion, not approved product evidence.",
+            "url": "/en/community/rules",
+            "scope": "site_guidance_not_product_evidence",
+            "version": "site-guidance-2026-10-15"
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 5034,
+      "checkedAt": "2026-10-15T10:56:08.083Z"
+    },
+    {
+      "id": "review-policy",
+      "locale": "fi",
+      "prompt": "Julkaiseeko tekoälyn moderointiehdotus yhteisöviestin tai vahvistaako se tieteellisen oikeellisuuden?",
+      "status": 200,
+      "completed": true,
+      "numericalCorrectness": true,
+      "invalidSuccess": false,
+      "guidanceCorrectness": true,
+      "assessment": {
+        "taskCompletion": "runtime_completed",
+        "numericalCorrectness": "not_applicable",
+        "factualSupport": "pending_editorial_review",
+        "citationValidity": "pending_source_review",
+        "languageQuality": "pending_finnish_english_editorial_review",
+        "abstention": "not_applicable",
+        "guidanceContract": "pass"
+      },
+      "answer": "Uudet viestit ja vastaukset pysyvät yksityisinä, kunnes moderaattori päättää niiden julkaisemisesta. Tekoälyn moderointiehdotus ei julkaise viestiä eikä vahvista tieteellistä oikeellisuutta. Yhteisöluonnoksen valmistelu tai tallentaminen on erillinen toiminto eikä lähetä sitä julkaistavaksi. Julkaistu yhteisösisältö on kirjoittajalle kuuluvaa keskustelua, ei hyväksyttyä tuotenäyttöä.\n\n[Ohje ja rajaukset](/fi/community/rules)",
+      "toolNames": ["getResearchGuidance"],
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f34873070718e85ad93",
+          "name": "getResearchGuidance",
+          "content": {
+            "topic": "community_review",
+            "text": "Uudet viestit ja vastaukset pysyvät yksityisinä, kunnes moderaattori päättää niiden julkaisemisesta. Tekoälyn moderointiehdotus ei julkaise viestiä eikä vahvista tieteellistä oikeellisuutta. Yhteisöluonnoksen valmistelu tai tallentaminen on erillinen toiminto eikä lähetä sitä julkaistavaksi. Julkaistu yhteisösisältö on kirjoittajalle kuuluvaa keskustelua, ei hyväksyttyä tuotenäyttöä.",
+            "url": "/fi/community/rules",
+            "scope": "site_guidance_not_product_evidence",
+            "version": "site-guidance-2026-10-15"
+          }
+        }
+      ],
+      "citations": [],
+      "errors": [],
+      "latencyMs": 5591,
+      "checkedAt": "2026-10-15T10:56:13.674Z"
+    }
+  ]
+}

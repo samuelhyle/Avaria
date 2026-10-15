@@ -1,0 +1,40 @@
+{
+  "checkedAt": "2026-10-15T11:04:27.211Z",
+  "base": "https://6ad0af404881d0397dded10e--averianlabs-demo.netlify.app",
+  "scope": "Browser replay of exact live candidate guidance/tool results. No additional provider calls or backend persistence. Separate from the live API evaluation.",
+  "states": [
+    {
+      "locale": "en",
+      "width": 320,
+      "scrollWidth": 320,
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "en-320-guidance-answer.png"
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "en-1440-guidance-answer.png"
+    },
+    {
+      "locale": "fi",
+      "width": 320,
+      "scrollWidth": 320,
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "fi-320-guidance-answer.png"
+    },
+    {
+      "locale": "fi",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "errors": [],
+      "blockingAxe": [],
+      "filename": "fi-1440-guidance-answer.png"
+    }
+  ],
+  "failures": []
+}

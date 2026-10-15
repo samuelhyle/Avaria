@@ -181,3 +181,7 @@ Published delivery: [14 October deployment record](NETLIFY_DEPLOYMENT_2026-10-14
 ## Follow-up — 15 October 2026
 
 The [editorial, assistant-evaluation and recovery review](RESEARCH_EDITORIAL_REVIEW_2026-10-15.md) continues the remaining work. It records corrected Finnish/English terminology and workflow copy, controlled calculation explanations, source-backed numbered citations and a successful application-snapshot restore rehearsal. The live evaluation preserves partial and failed evidence separately. Approved seller details, original product/batch records and independent scientific/customer approval remain pending; the owner will provide the source records later.
+
+The verified follow-up is published: see the [15 October deployment record](NETLIFY_DEPLOYMENT_2026-10-15.md) for exact source, final targeted assistant checks, independent public-domain verification and remaining release requirements. The full baseline and intermediate failed attempts remain separate evidence.
+
+In the laboratory-buyer usability pass, prioritize the assistant at 320 px: assess conversation width, avatar/tool spacing and the multi-line composer placeholder. Automated overflow checks passed, but the narrow layout remains compact and needs customer/keyboard review.

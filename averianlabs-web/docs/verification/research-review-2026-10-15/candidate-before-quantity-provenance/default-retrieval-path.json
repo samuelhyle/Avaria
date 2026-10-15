@@ -1,0 +1,90 @@
+{
+  "checkedAt": "2026-10-15T11:10:35.900Z",
+  "base": "https://6ad0b31e8370b1d5b04aaa23--averianlabs-demo.netlify.app",
+  "scope": "Actual hosted customer retrieval path: noRetrieve omitted. Anonymous, read-only tools, no persistence. The approved-source corpus is currently empty; this is not source-recall or Linux native-embedding certification.",
+  "rows": [
+    {
+      "id": "en-default-documents",
+      "locale": "en",
+      "status": 200,
+      "completed": true,
+      "requiredTool": true,
+      "latencyMs": 9541,
+      "heartbeats": 2,
+      "answer": "No publicly available documents.\n\n[Full product details](/en/shop/bpc-157)\n\nAssess the original method and results. A source link is not blanket approval. For laboratory research only.",
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_01a13f418959707eb076e572",
+          "name": "getDocuments",
+          "content": {
+            "slug": "bpc-157",
+            "source": "published_document_registry",
+            "documents": [],
+            "notice": "Assess the original methods and results. A link is not a blanket approval."
+          }
+        }
+      ],
+      "citations": []
+    },
+    {
+      "id": "fi-default-availability",
+      "locale": "fi",
+      "status": 200,
+      "completed": true,
+      "requiredTool": true,
+      "latencyMs": 9126,
+      "heartbeats": 2,
+      "answer": "**BPC-157**\n\n| SKU | Koot | Saatavuus | Hinta |\n|---|---|---|---|\n| BPC157-5 | 5 mg | Ei saatavilla tällä hetkellä | — |\n| BPC157-10 | 10 mg | Ei saatavilla tällä hetkellä | — |\n\nMäärä perustuu tuoteluetteloon, ei sisällön analyysimittaukseen. Muokatut määrät ovat käyttäjän antamia.\n\n[Tuotteen kaikki tiedot](/fi/shop/bpc-157)\n\nArvioi alkuperäinen menetelmä ja tulokset. Lähdelinkki ei ole yleinen hyväksyntä. Vain laboratoriotutkimukseen.",
+      "toolResults": [
+        {
+          "type": "tool-result",
+          "id": "call_qvtXqaGZekcNkkRW0KKrUJ6J",
+          "name": "getProduct",
+          "content": {
+            "slug": "bpc-157",
+            "category": "recovery",
+            "name": "BPC-157",
+            "tagline": "Materiaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.",
+            "description": "Materiaali laboratoriotutkimukseen. Tarkista tuotekohtaiset asiakirjat ennen käyttöä.",
+            "casNumber": null,
+            "molecularFormula": null,
+            "molecularWeight": null,
+            "sequence": null,
+            "storageTemp": "",
+            "purityPercent": null,
+            "vials": [
+              {
+                "mg": 5,
+                "sizeValue": 5,
+                "sizeUnit": "mg",
+                "sku": "BPC157-5",
+                "priceCents": 0,
+                "stockQty": 0,
+                "lowStockThreshold": null,
+                "purchaseMode": "unavailable",
+                "contactOnly": false,
+                "documentLocales": []
+              },
+              {
+                "mg": 10,
+                "sizeValue": 10,
+                "sizeUnit": "mg",
+                "sku": "BPC157-10",
+                "priceCents": 0,
+                "stockQty": 0,
+                "lowStockThreshold": null,
+                "purchaseMode": "unavailable",
+                "contactOnly": false,
+                "documentLocales": []
+              }
+            ],
+            "latestBatch": null,
+            "url": "/fi/shop/bpc-157"
+          }
+        }
+      ],
+      "citations": []
+    }
+  ]
+}

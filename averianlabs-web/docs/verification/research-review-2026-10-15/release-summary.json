@@ -1,0 +1,33 @@
+{
+  "checkedAt": "2026-10-15T11:34:42.039693+00:00",
+  "deployId": "6ad0b7d8e5ad99401ce901bc",
+  "buildId": "6ad0b7d8e5ad99401ce901ba",
+  "sourceCommit": "ed11107f461c7d693ba8cc7443f8f7f5fca99b41",
+  "sourceSha256": "630fedd6891eaacd8da708b95c3b3105ae893544c5c2f686b2622b0d2999d23d",
+  "previousDeployId": "6acfdd709ba5414797142d54",
+  "published": true,
+  "publishedAt": "2026-10-15T11:32:28.393Z",
+  "publishedLocked": true,
+  "backup": {
+    "sha256": "8aede7e699d0a4211439c017bde0c83005e633f9501ae13326378889a97e0119",
+    "publicTables": 47,
+    "migrationLedgerEntries": 6,
+    "private": true
+  },
+  "immutable": {
+    "http": 29,
+    "pageStates": 28,
+    "answerReplayStates": 4,
+    "focusedLiveCasesPassed": 18,
+    "ordinaryRetrievalCasesPassed": 2
+  },
+  "public": {
+    "http": 29,
+    "pageStates": 28,
+    "answerReplayStates": 4
+  },
+  "noindex": true,
+  "merchantRelease": "not_activated",
+  "ownerSourceRecords": "deferred_by_owner",
+  "independentScientificApproval": "pending"
+}
