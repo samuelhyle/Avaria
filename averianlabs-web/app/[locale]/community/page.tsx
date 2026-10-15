@@ -35,6 +35,7 @@ export default async function CommunityHubPage({
   const language = query.language === "fi" || query.language === "en" ? query.language : undefined
   const page = Math.min(500, Math.max(1, Number(query.page) || 1))
   const offset = (Math.trunc(page) - 1) * 20
+  const hasFilters = Boolean(text || category || language || query.unanswered === "true")
   const threads = await listThreads({
     query: text,
     categorySlug: category || undefined,
@@ -73,22 +74,22 @@ export default async function CommunityHubPage({
         className="mb-6 grid gap-3 rounded-xl border border-line bg-surface p-4 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_190px_160px_auto]"
         action={`/${locale}/community`}
       >
-        <label className="block text-xs font-medium text-ink-muted">
+        <label className="block text-sm font-medium text-ink-muted">
           {t("search")}
           <input
             type="search"
             name="q"
             defaultValue={text}
             placeholder={t("searchPlaceholder")}
-            className="mt-1.5 h-10 w-full rounded-lg border bg-surface px-3 text-sm text-ink"
+            className="mt-1.5 h-11 w-full rounded-lg border bg-surface px-3 text-base text-ink"
           />
         </label>
-        <label className="block text-xs font-medium text-ink-muted">
+        <label className="block text-sm font-medium text-ink-muted">
           {t("fieldCategory")}
           <select
             name="category"
             defaultValue={category}
-            className="mt-1.5 h-10 w-full rounded-lg border bg-surface px-3 text-sm text-ink"
+            className="mt-1.5 h-11 w-full rounded-lg border bg-surface px-3 text-base text-ink"
           >
             <option value="">{t("allCategories")}</option>
             {categories.map((c) => (
@@ -98,12 +99,12 @@ export default async function CommunityHubPage({
             ))}
           </select>
         </label>
-        <label className="block text-xs font-medium text-ink-muted">
+        <label className="block text-sm font-medium text-ink-muted">
           {t("language")}
           <select
             name="language"
             defaultValue={language ?? ""}
-            className="mt-1.5 h-10 w-full rounded-lg border bg-surface px-3 text-sm text-ink"
+            className="mt-1.5 h-11 w-full rounded-lg border bg-surface px-3 text-base text-ink"
           >
             <option value="">{t("allLanguages")}</option>
             <option value="fi">Suomi</option>
@@ -120,7 +121,7 @@ export default async function CommunityHubPage({
             />
             {t("unanswered")}
           </label>
-          <Button type="submit" size="sm">
+          <Button type="submit" size="sm" className="min-h-11">
             {t("search")}
           </Button>
         </div>
@@ -147,11 +148,33 @@ export default async function CommunityHubPage({
           ) : (
             <div className="rounded-xl border border-dashed border-line bg-surface px-6 py-10">
               <h3 className="text-lg font-semibold">
-                {t(text || category || language || query.unanswered ? "noResults" : "emptyHeading")}
+                {t(hasFilters ? "noResults" : "emptyHeading")}
               </h3>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-muted">
-                {t("emptyGuide")}
+                {t(hasFilters ? "noResultsHelp" : "emptyGuide")}
               </p>
+              {hasFilters ? (
+                <Link
+                  className="mt-4 inline-flex min-h-11 items-center text-sm font-medium text-accent underline"
+                  href={`/${locale}/community`}
+                >
+                  {t("clearFilters")}
+                </Link>
+              ) : (
+                <div className="mt-6 border-t border-line pt-5">
+                  <h4 className="text-sm font-semibold">{t("questionIdeas")}</h4>
+                  <ul className="mt-3 space-y-4 text-sm leading-relaxed text-ink-muted">
+                    {(["question", "methods", "document"] as const).map((kind) => (
+                      <li key={kind}>
+                        <span className="block font-medium text-ink">
+                          {t(`type${kind}` as never)}
+                        </span>
+                        {t(`emptyIdea.${kind}`)}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               <Link
                 className="mt-4 inline-block text-sm text-accent underline"
                 href={`/${locale}/community/rules`}
@@ -186,9 +209,9 @@ export default async function CommunityHubPage({
                     className="flex items-center justify-between gap-3 py-3 text-sm hover:text-accent"
                   >
                     <span>{t(c.nameKey.replace("community.", "") as never)}</span>
-                    <span className="font-mono text-xs text-ink-muted">
-                      {counts.get(c.id) ?? 0}
-                    </span>
+                    {(counts.get(c.id) ?? 0) > 0 && (
+                      <span className="font-mono text-xs text-ink-muted">{counts.get(c.id)}</span>
+                    )}
                   </Link>
                 </li>
               ))}

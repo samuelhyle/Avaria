@@ -10,6 +10,7 @@ import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/seo/JsonLd"
 import { Toaster } from "@/components/ui/Toaster"
 import { isDemoBuild } from "@/lib/demo"
 import { isLocale } from "@/lib/i18n/config"
+import { siteOrigin, socialImagePath } from "@/lib/seo/site-origin"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
 import type { Metadata, Viewport } from "next"
@@ -26,6 +27,8 @@ import "../../styles/globals.css"
  * Keep this list in sync when adding a namespace to a client component.
  */
 const CLIENT_NAMESPACES = [
+  "experience",
+  "documentLibrary",
   "a11y",
   "notFound",
   "research",
@@ -70,7 +73,7 @@ export async function generateMetadata({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "meta" })
   return {
-    metadataBase: new URL("https://averianlabs.eu"),
+    metadataBase: new URL(siteOrigin()),
     manifest: `/${locale}/manifest.webmanifest`,
     title: { default: t("title"), template: "%s · AverianLabs" },
     description: t("description"),
@@ -88,7 +91,9 @@ export async function generateMetadata({
       description: t("description"),
       images: [
         {
-          url: isDemoBuild() ? "/og-default.svg" : `/api/og/default?locale=${locale}`,
+          url: isDemoBuild()
+            ? `/og-default-${locale === "fi" ? "fi" : "en"}.svg`
+            : socialImagePath("default", locale),
           width: 1200,
           height: 630,
           alt: t("title"),
@@ -99,7 +104,11 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: t("title"),
       description: t("description"),
-      images: [isDemoBuild() ? "/og-default.svg" : `/api/og/default?locale=${locale}`],
+      images: [
+        isDemoBuild()
+          ? `/og-default-${locale === "fi" ? "fi" : "en"}.svg`
+          : socialImagePath("default", locale),
+      ],
     },
     robots:
       isDemoBuild() || process.env.NEXT_PUBLIC_REVIEW_SITE === "true"

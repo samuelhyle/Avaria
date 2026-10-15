@@ -1,7 +1,12 @@
 import { batches, documents, productTranslations, products, vials } from "@/db/schema"
 import { getDocumentsTool } from "@/lib/ai/tools/get-documents"
 import { db } from "@/lib/db"
-import { listDocumentsForProduct, listDocumentsForProductSlug } from "@/lib/documents/service"
+import { readDocumentFilters } from "@/lib/documents/library"
+import {
+  listDocumentsForProduct,
+  listDocumentsForProductSlug,
+  listPublicDocumentLibrary,
+} from "@/lib/documents/service"
 import { getStorefrontCatalogue } from "@/lib/products/catalogue"
 import { hasPublishedDocuments } from "@/lib/products/document-status"
 import { eq, inArray } from "drizzle-orm"
@@ -66,6 +71,20 @@ it("associates a batch-only public report without confusing its availability wit
     const listed = await listDocumentsForProduct(firstId, "en")
     expect(listed.map((doc) => doc.id)).toEqual([docIds[0]])
     expect(listed[0]).toMatchObject({ productId: ids[0], batchSku: prefix, batchStatus: "pending" })
+    expect(
+      (await listPublicDocumentLibrary(readDocumentFilters({ sku: prefix }), "en")).map(
+        (doc) => doc.id,
+      ),
+    ).toEqual([docIds[0]])
+    expect(
+      (await listPublicDocumentLibrary(readDocumentFilters({ q: prefix, type: "coa" }), "en")).map(
+        (doc) => doc.id,
+      ),
+    ).toEqual([docIds[0]])
+    expect(
+      await listPublicDocumentLibrary(readDocumentFilters({ batch: prefix, type: "sds" }), "en"),
+    ).toEqual([])
+    expect(await listPublicDocumentLibrary(readDocumentFilters({ sku: prefix }), "fi")).toEqual([])
     expect((await listDocumentsForProductSlug(otherId, "en")).length).toBe(0)
     expect((await listDocumentsForProduct(firstId, "fi")).length).toBe(0)
     const product = (await getStorefrontCatalogue()).find((product) => product.slug === ids[0])
@@ -78,6 +97,34 @@ it("associates a batch-only public report without confusing its availability wit
     expect(
       (found.content as { documents: Array<{ sku: string; batchStatus: string }> }).documents,
     ).toMatchObject([{ sku: prefix, batchStatus: "pending" }])
+    const specificationId = `${prefix}-specification`
+    docIds.push(specificationId)
+    await db.insert(vials).values({
+      id: `${prefix}-larger`,
+      productId: firstId,
+      sku: `${prefix}-larger`,
+      sizeValue: 10,
+      sizeUnit: "mg",
+      stockQty: 0,
+      priceCents: 0,
+      purchaseMode: "unavailable",
+    })
+    await db.insert(documents).values({
+      id: specificationId,
+      productId: firstId,
+      batchId: null,
+      type: "spec",
+      title: "QA product-wide specification — not supplier evidence",
+      displayLocales: ["en"],
+      publishedAt: new Date("2026-01-01"),
+      externalUrl: "https://example.invalid/qa-spec.pdf",
+    })
+    const larger = await listPublicDocumentLibrary(
+      readDocumentFilters({ sku: `${prefix}-larger` }),
+      "en",
+    )
+    expect(larger.map((doc) => doc.id)).toEqual([specificationId])
+    expect(larger[0]).toMatchObject({ batchId: null, productId: firstId })
   } finally {
     await db.delete(documents).where(inArray(documents.id, docIds))
     await db.delete(batches).where(eq(batches.id, prefix))

@@ -1,4 +1,5 @@
 import { DocumentList } from "@/components/documents/DocumentList"
+import { DocumentState } from "@/components/documents/DocumentState"
 import { ProductCard } from "@/components/product/ProductCard"
 import { ProductDetailActions } from "@/components/product/ProductDetailActions"
 import { ProductFAQ } from "@/components/product/ProductFAQ"
@@ -7,11 +8,14 @@ import { ProductTrustBadges } from "@/components/product/ProductTrustBadges"
 import { BreadcrumbJsonLd, ProductJsonLd } from "@/components/seo/JsonLd"
 import { Container } from "@/components/ui/Container"
 import { getCurrentMember } from "@/lib/community"
+import { documentAppliesToSku } from "@/lib/documents/library"
 import { listDocumentsForProductSlug } from "@/lib/documents/service"
 import { locales } from "@/lib/i18n/config"
 import { getStorefrontCatalogue } from "@/lib/products/catalogue"
+import { defaultVial } from "@/lib/products/selection"
 import type { Locale } from "@/lib/products/types"
 import { listPlansForOwner } from "@/lib/research-plans"
+import { siteOrigin } from "@/lib/seo/site-origin"
 import { formatNumber } from "@/lib/utils/format"
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
@@ -39,7 +43,11 @@ export async function generateMetadata({
 
 export default async function ProductPage({
   params,
-}: { params: Promise<{ locale: string; slug: string }> }) {
+  searchParams,
+}: {
+  params: Promise<{ locale: string; slug: string }>
+  searchParams: Promise<{ sku?: string | string[] }>
+}) {
   const { locale, slug } = await params
   setRequestLocale(locale)
   const catalogue = await getStorefrontCatalogue()
@@ -47,9 +55,13 @@ export default async function ProductPage({
   if (!product) notFound()
   const t = await getTranslations({ locale, namespace: "research" })
   const translation = product.translations?.[locale as Locale] ?? product.defaultTranslation
+  const query = await searchParams
+  const selectedSku =
+    product.vials.find((vial) => vial.sku === query.sku)?.sku ?? defaultVial(product).sku
   const member = await getCurrentMember().catch(() => null)
   const plans = member ? await listPlansForOwner(member.id, locale).catch(() => []) : []
-  const productDocs = await listDocumentsForProductSlug(slug, locale).catch(() => [])
+  const productDocs = await listDocumentsForProductSlug(slug, locale).catch(() => null)
+  const selectedDocs = productDocs?.filter((doc) => documentAppliesToSku(doc, selectedSku))
   const related = catalogue
     .filter((p) => p.category === product.category && p.slug !== slug)
     .slice(0, 4)
@@ -58,7 +70,7 @@ export default async function ProductPage({
       <ProductJsonLd
         product={product}
         locale={locale}
-        url={`https://averianlabs.eu/${locale}/shop/${slug}`}
+        url={`${siteOrigin()}/${locale}/shop/${slug}`}
       />
       <BreadcrumbJsonLd
         items={[
@@ -79,7 +91,7 @@ export default async function ProductPage({
       </nav>
       <div className="grid gap-10 lg:grid-cols-2">
         <div className="order-2 lg:order-1">
-          <ProductGallery product={product} />
+          <ProductGallery product={product} selectedSku={selectedSku} />
         </div>
         <div className="order-1 lg:order-2">
           <p className="text-sm text-ink-muted">{t(`categories.${product.category}`)}</p>
@@ -97,6 +109,7 @@ export default async function ProductPage({
             locale={locale}
             isAuthed={Boolean(member)}
             plans={plans.map((p) => ({ id: p.id, title: p.title }))}
+            initialSku={selectedSku}
           />
           <div className="mt-8">
             <ProductTrustBadges />
@@ -131,28 +144,19 @@ export default async function ProductPage({
       </section>
       <section className="mt-12">
         <h2 className="mb-5 font-display text-2xl font-semibold">{t("documents")}</h2>
-        {productDocs.length ? (
-          <DocumentList
-            docs={productDocs.map((d) => ({
-              id: d.id,
-              type: d.type,
-              title: d.title,
-              version: d.version,
-              publishedAt: d.publishedAt,
-              productSlug: d.productSlug,
-              productName: d.productName,
-            }))}
-            locale={locale}
-          />
+        {productDocs === null ? (
+          <DocumentState locale={locale} state="unavailable" />
+        ) : selectedDocs?.length ? (
+          <DocumentList docs={selectedDocs} locale={locale} />
         ) : (
-          <p className="text-ink-muted">{t("noDocuments")}</p>
+          <DocumentState locale={locale} state="empty" />
         )}
         <Link href={`/${locale}/lab-tests`} className="mt-5 inline-block text-accent underline">
           {t("methodology")}
         </Link>
       </section>
       <div className="mt-12">
-        <ProductFAQ pageUrl={`https://averianlabs.eu/${locale}/shop/${slug}`} />
+        <ProductFAQ pageUrl={`${siteOrigin()}/${locale}/shop/${slug}`} />
       </div>
       {related.length ? (
         <section className="mt-16">

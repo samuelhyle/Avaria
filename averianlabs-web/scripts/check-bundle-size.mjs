@@ -17,6 +17,10 @@ const manifest = JSON.parse(readFileSync(manifestFile, "utf8")).pages
 const budgets = {
   "/[locale]/page": 300 * 1024,
   "/[locale]/shop/page": 350 * 1024,
+  "/[locale]/peptide-calculator/page": 350 * 1024,
+  "/[locale]/assistant/page": 400 * 1024,
+  "/[locale]/community/page": 350 * 1024,
+  "/[locale]/documents/page": 350 * 1024,
   "/[locale]/shop/[slug]/page": 350 * 1024,
   "/[locale]/checkout/cart/page": 350 * 1024,
   "/[locale]/checkout/payment/page": 400 * 1024,

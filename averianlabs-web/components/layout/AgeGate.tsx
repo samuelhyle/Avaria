@@ -23,6 +23,7 @@ export function AgeGate() {
     if (value) {
       document.cookie = `${STORAGE_KEY}=1; Max-Age=${60 * 60 * 24 * 365}; Path=/; SameSite=Lax`
       setOpen(false)
+      window.dispatchEvent(new Event("averianlabs:age-confirmed"))
     } else {
       window.location.href = "https://www.google.com"
     }
@@ -45,7 +46,7 @@ export function AgeGate() {
         <h2 id="age-gate-title" className="font-display text-2xl font-semibold text-ink">
           {t("title")}
         </h2>
-        <p className="mt-2 text-sm text-ink-muted text-pretty">{t("body")}</p>
+        <p className="mt-2 text-base leading-relaxed text-ink-muted text-pretty">{t("body")}</p>
         <div className="mt-6 flex gap-3">
           <button
             type="button"

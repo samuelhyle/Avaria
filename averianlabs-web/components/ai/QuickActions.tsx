@@ -21,7 +21,7 @@ export function QuickActions({ onSelect, disabled, className }: QuickActionsProp
   ]
 
   return (
-    <div className={cn("flex flex-wrap gap-2", className)}>
+    <div className={cn("grid w-full max-w-xl grid-cols-2 gap-2", className)}>
       {items.map((it) => (
         <button
           key={it.id}
@@ -29,7 +29,7 @@ export function QuickActions({ onSelect, disabled, className }: QuickActionsProp
           disabled={disabled}
           onClick={() => onSelect(t(`${it.id}.prompt`))}
           className={cn(
-            "inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1.5 text-xs font-medium text-ink",
+            "inline-flex h-full min-h-14 items-center gap-2 rounded-lg border border-line bg-surface px-3 py-2 text-left text-sm font-medium leading-snug text-ink [&_svg]:shrink-0",
             "transition-colors duration-150 hover:border-accent/40 hover:bg-accent-soft hover:text-accent",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 focus-visible:ring-offset-bg",
             "disabled:opacity-50 disabled:cursor-not-allowed",

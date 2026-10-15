@@ -2,6 +2,7 @@ import { CATEGORY_LABELS, getGlossaryTermBySlug } from "@/lib/glossary"
 import { ogLocale, renderOg } from "@/lib/og/render"
 
 export const runtime = "nodejs"
+export const dynamic = "force-dynamic"
 
 export async function GET(req: Request, ctx: { params: Promise<{ slug: string }> }) {
   const { slug } = await ctx.params

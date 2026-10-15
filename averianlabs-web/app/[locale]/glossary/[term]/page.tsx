@@ -1,12 +1,14 @@
+import { ScientificFigure } from "@/components/media/ScientificFigure"
+import type { ScientificFigureRecord } from "@/components/media/ScientificFigure"
 import { GlossaryTermJsonLd } from "@/components/seo/JsonLd"
 import { Badge } from "@/components/ui/Badge"
 import { Container } from "@/components/ui/Container"
 import { isDemoBuild } from "@/lib/demo"
 import { CATEGORY_LABELS, getGlossaryTermBySlug, listGlossaryTerms } from "@/lib/glossary"
+import { socialImagePath } from "@/lib/seo/site-origin"
 import { ArrowLeft, BookText } from "lucide-react"
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
-import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
@@ -35,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: record.term,
       description: record.shortDefinition,
       type: "article",
-      images: [`/api/og/glossary/${term}?locale=${locale}`],
+      images: [socialImagePath("glossary", locale, term)],
     },
   }
 }
@@ -87,7 +89,7 @@ export default async function GlossaryTermPage({ params }: Props) {
         <p className="mt-4 text-base text-ink-muted">{record.shortDefinition}</p>
       </header>
 
-      {hasBody ? <PortableTextLite value={record.body as unknown[]} /> : null}
+      {hasBody ? <PortableTextLite value={record.body as unknown[]} locale={locale} /> : null}
 
       {record.relatedTerms && record.relatedTerms.length > 0 ? (
         <section className="mt-10">
@@ -135,7 +137,7 @@ export default async function GlossaryTermPage({ params }: Props) {
  * (paragraph, h2/h3, lists, image) without pulling in @portabletext/react.
  * Add `@portabletext/react` later for the full feature set.
  */
-interface PTBlock {
+interface PTBlock extends ScientificFigureRecord {
   _type: string
   _key?: string
   style?: string
@@ -143,9 +145,8 @@ interface PTBlock {
   listItem?: string
   children?: PTBlock[]
   markDefs?: unknown[]
-  asset?: { _ref?: string; url?: string; metadata?: { lqip?: string } }
 }
-function PortableTextLite({ value }: { value: unknown[] }) {
+function PortableTextLite({ value, locale }: { value: unknown[]; locale: string }) {
   return (
     <article className="prose prose-sm max-w-none text-ink">
       {value.map((raw, i) => {
@@ -189,21 +190,8 @@ function PortableTextLite({ value }: { value: unknown[] }) {
             </p>
           )
         }
-        if (block._type === "image" && block.asset?.url) {
-          return (
-            <div
-              key={block._key ?? i}
-              className="relative my-6 h-64 w-full overflow-hidden rounded-[var(--radius)] border border-line"
-            >
-              <Image
-                src={block.asset.url}
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 768px, 100vw"
-                className="object-cover"
-              />
-            </div>
-          )
+        if (block._type === "image") {
+          return <ScientificFigure key={block._key ?? i} figure={block} locale={locale} />
         }
         return null
       })}

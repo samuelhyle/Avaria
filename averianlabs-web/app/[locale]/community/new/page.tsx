@@ -42,7 +42,7 @@ export default async function NewThreadPage({
         locale={locale}
         categories={categories.map((c) => ({ slug: c.slug, nameKey: c.nameKey }))}
         isAuthed={!!member}
-        signInHref={`/${locale}/account?returnTo=${encodeURIComponent(`/${locale}/community/new?${new URLSearchParams({ calculation: initialBody })}`)}`}
+        signInHref={`/${locale}/account?returnTo=${encodeURIComponent(`/${locale}/community/new?${new URLSearchParams({ calculation: initialBody, title: typeof query.title === "string" ? query.title.slice(0, 140) : "" })}`)}`}
       />
     </Container>
   )

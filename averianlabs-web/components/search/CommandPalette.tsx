@@ -26,11 +26,12 @@ const RECENT_KEY = "averianlabs-recent-searches"
 export function CommandPalette({ locale, products }: CommandPaletteProps) {
   const t = useTranslations("research")
   const nav = useTranslations("nav")
+  const e = useTranslations("experience")
   const links = [
     { href: `/${locale}/shop`, label: t("browse"), icon: FlaskConical },
     { href: `/${locale}/lab-tests`, label: t("methodology"), icon: Layers },
     { href: `/${locale}/peptide-calculator`, label: t("calculator"), icon: FlaskConical },
-    { href: `/${locale}/coa`, label: t("coaTitle"), icon: ShoppingBag },
+    { href: `/${locale}/documents`, label: e("documents"), icon: ShoppingBag },
   ]
   const [open, setOpen] = useState(false)
   const [recent, setRecent] = useState<string[]>([])
@@ -54,8 +55,8 @@ export function CommandPalette({ locale, products }: CommandPaletteProps) {
 
   useEffect(() => {
     if (!open) return
-    const saved = localStorage.getItem(RECENT_KEY)
     try {
+      const saved = localStorage.getItem(RECENT_KEY)
       const values = JSON.parse(saved ?? "[]")
       if (Array.isArray(values))
         setRecent(values.filter((v): v is string => typeof v === "string").slice(0, 5))
@@ -68,7 +69,11 @@ export function CommandPalette({ locale, products }: CommandPaletteProps) {
     (value: string) => {
       const next = [value, ...recent.filter((v) => v !== value)].slice(0, 5)
       setRecent(next)
-      localStorage.setItem(RECENT_KEY, JSON.stringify(next))
+      try {
+        localStorage.setItem(RECENT_KEY, JSON.stringify(next))
+      } catch {
+        // Optional local history must not prevent ordinary product search.
+      }
     },
     [recent],
   )
@@ -169,6 +174,22 @@ export function CommandPalette({ locale, products }: CommandPaletteProps) {
               {recent.length > 0 ? (
                 <>
                   <Command.Separator className="my-1 h-px bg-line" />
+                  <div className="flex justify-end px-4">
+                    <button
+                      type="button"
+                      className="min-h-10 text-sm text-accent underline underline-offset-4"
+                      onClick={() => {
+                        setRecent([])
+                        try {
+                          localStorage.removeItem(RECENT_KEY)
+                        } catch {
+                          /* Optional browser history. */
+                        }
+                      }}
+                    >
+                      {e("clearSearchHistory")}
+                    </button>
+                  </div>
                   <Command.Group
                     heading={t("recent")}
                     className="px-1 pb-2 [&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-3xs [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wider [&_[cmdk-group-heading]]:text-ink-subtle"

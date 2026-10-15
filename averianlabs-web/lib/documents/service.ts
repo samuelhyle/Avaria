@@ -1,10 +1,12 @@
 import { batches, documents, productTranslations, products, vials } from "@/db/schema"
 import { db } from "@/lib/db"
 import { privateDocumentUrl } from "@/lib/storage/documents"
-import { type SQL, and, desc, eq, inArray, lte, sql } from "drizzle-orm"
+import { type SQL, and, desc, eq, exists, ilike, inArray, lte, or, sql } from "drizzle-orm"
+import { alias } from "drizzle-orm/pg-core"
 import { cache } from "react"
 import { publicDocumentUrl } from "./availability"
 import { DOCUMENT_TYPES, type DocumentType } from "./constants"
+import { type DocumentLibraryFilters, literalSearchPattern } from "./library"
 
 export interface DocumentRecord {
   id: string
@@ -30,6 +32,7 @@ async function queryDocuments(
   locale = "en",
   allowPrivate = false,
   limit = 100,
+  offset = 0,
 ): Promise<DocumentRecord[]> {
   const rows = await db
     .select({
@@ -67,8 +70,9 @@ async function queryDocuments(
         ...(allowPrivate ? [] : [eq(documents.requiresLogin, false)]),
       ),
     )
-    .orderBy(desc(documents.publishedAt))
+    .orderBy(desc(documents.publishedAt), desc(documents.id))
     .limit(limit)
+    .offset(offset)
   return rows
     .filter((row) => isDocumentType(row.type))
     .map((row) => ({ ...row, type: row.type as DocumentType }))
@@ -118,4 +122,49 @@ export function listDocumentsForBatchIds(ids: string[], locale = "en") {
   return ids.length
     ? queryDocuments([inArray(documents.batchId, ids), eq(documents.type, "coa")], locale)
     : Promise.resolve([])
+}
+
+/** Public library filters retain the same locale/date/access/association predicates as all reads. */
+export function listPublicDocumentLibrary(filters: DocumentLibraryFilters, locale = "en") {
+  const variants = alias(vials, "document_search_variants")
+  const matchingSku = (value: string) => {
+    const pattern = literalSearchPattern(value)
+    return (
+      or(
+        ilike(vials.sku, pattern),
+        and(
+          sql`${documents.batchId} is null`,
+          exists(
+            db
+              .select({ id: variants.id })
+              .from(variants)
+              .where(and(eq(variants.productId, products.id), ilike(variants.sku, pattern))),
+          ),
+        ),
+      ) ?? sql`false`
+    )
+  }
+  const conditions: SQL[] = []
+  if (filters.type) conditions.push(eq(documents.type, filters.type))
+  if (filters.product) {
+    const pattern = literalSearchPattern(filters.product)
+    conditions.push(
+      or(ilike(products.slug, pattern), ilike(productTranslations.name, pattern)) ?? sql`false`,
+    )
+  }
+  if (filters.sku) conditions.push(matchingSku(filters.sku))
+  if (filters.batch) conditions.push(ilike(batches.code, literalSearchPattern(filters.batch)))
+  if (filters.q) {
+    const pattern = literalSearchPattern(filters.q)
+    conditions.push(
+      or(
+        ilike(documents.title, pattern),
+        ilike(products.slug, pattern),
+        ilike(productTranslations.name, pattern),
+        ilike(batches.code, pattern),
+        matchingSku(filters.q),
+      ) ?? sql`false`,
+    )
+  }
+  return queryDocuments(conditions, locale, false, 21, (filters.page - 1) * 20)
 }

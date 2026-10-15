@@ -34,8 +34,8 @@ export function ResearchResultCards({ trace }: { trace?: ToolTrace[] }) {
               className="rounded-xl border border-accent/30 bg-accent-soft/30 p-4"
             >
               <h3 className="mb-3 text-sm font-semibold">{t("exportTitle")}</h3>
-              <p className="font-mono text-xs">{calc.formula}</p>
-              <div className="mt-3 space-y-2 text-xs">
+              <p className="font-mono text-sm">{calc.formula}</p>
+              <div className="mt-3 space-y-2 text-sm">
                 {Object.entries(calc.inputs)
                   .filter(([k]) => k !== "mode")
                   .map(([k, v]) => (
@@ -71,10 +71,10 @@ export function ResearchResultCards({ trace }: { trace?: ToolTrace[] }) {
                     )
                   })}
               </div>
-              <p className="mt-3 text-xs leading-relaxed text-ink-muted">{t("assumptions")}</p>
-              <p className="mt-2 text-xs text-ink-muted">{t("rounding")}</p>
+              <p className="mt-3 text-sm leading-relaxed text-ink-muted">{t("assumptions")}</p>
+              <p className="mt-2 text-sm leading-relaxed text-ink-muted">{t("rounding")}</p>
               <Link
-                className="mt-3 inline-block min-h-8 text-xs font-medium text-accent underline"
+                className="mt-3 inline-flex min-h-11 items-center text-sm font-medium text-accent underline"
                 href={`/${locale}/peptide-calculator?${params}`}
               >
                 {r("useCalculator")} →
@@ -104,7 +104,7 @@ export function ResearchResultCards({ trace }: { trace?: ToolTrace[] }) {
                 role="region"
                 aria-label={r("compareHelp")}
               >
-                <table className="w-full min-w-[340px] text-left text-xs">
+                <table className="w-full min-w-[340px] text-left text-sm">
                   <thead>
                     <tr className="border-b border-line">
                       <th scope="col" className="p-2">
@@ -167,7 +167,7 @@ export function ResearchResultCards({ trace }: { trace?: ToolTrace[] }) {
             <section key={tool.id} className="rounded-xl border border-line bg-surface p-4">
               <h3 className="text-sm font-semibold">{r("documents")}</h3>
               {!docs.length ? (
-                <p className="mt-2 text-xs text-ink-muted">{r("noDocuments")}</p>
+                <p className="mt-2 text-sm text-ink-muted">{r("noDocuments")}</p>
               ) : (
                 <ul className="mt-3 space-y-3">
                   {docs.map((doc) => (
@@ -190,7 +190,7 @@ export function ResearchResultCards({ trace }: { trace?: ToolTrace[] }) {
                   ))}
                 </ul>
               )}
-              <p className="mt-3 text-xs text-ink-muted">{a("sourceNotice")}</p>
+              <p className="mt-3 text-sm leading-relaxed text-ink-muted">{a("sourceNotice")}</p>
             </section>
           )
         }
@@ -205,7 +205,7 @@ export function ResearchResultCards({ trace }: { trace?: ToolTrace[] }) {
           return (
             <section key={tool.id} className="rounded-xl border border-line p-4">
               <h3 className="text-sm font-semibold">{draft.title}</h3>
-              <p className="mt-2 text-xs text-ink-muted">{a("draftNotice")}</p>
+              <p className="mt-2 text-sm leading-relaxed text-ink-muted">{a("draftNotice")}</p>
               <Link
                 href={`/${locale}/community/new?${query}`}
                 className="mt-3 inline-block text-sm text-accent underline"

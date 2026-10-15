@@ -14,7 +14,8 @@ import { formatCurrency, formatPercent, formatSize } from "@/lib/utils/format"
 import { GitCompare } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
-import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
 export function ProductDetailActions({
@@ -22,31 +23,48 @@ export function ProductDetailActions({
   locale,
   isAuthed = false,
   plans = [],
+  initialSku,
 }: {
   product: Product
   locale: string
   isAuthed?: boolean
   plans?: Array<{ id: string; title: string }>
+  initialSku?: string
 }) {
   const t = useTranslations("product")
   const r = useTranslations("research")
   const common = useTranslations("common")
   const compare = useCompare()
+  const router = useRouter()
   const [index, setIndex] = useState(() =>
     Math.max(
       0,
-      product.vials.findIndex((v) => v.purchaseMode === "direct" && v.stockQty > 0),
+      product.vials.findIndex((v) => v.sku === initialSku),
     ),
   )
   const [qty, setQty] = useState(1)
+  useEffect(() => {
+    setIndex(
+      Math.max(
+        0,
+        product.vials.findIndex((v) => v.sku === initialSku),
+      ),
+    )
+    setQty(1)
+  }, [initialSku, product.vials])
   const add = useCart((s) => s.add)
   const vial = product.vials[index]
   if (!vial) return null
   const name = (product.translations?.[locale as Locale] ?? product.defaultTranslation).name
   const direct = vial.purchaseMode === "direct" && vial.priceCents > 0 && vial.stockQty > 0
   const changeVial = (next: number) => {
+    const selected = product.vials[next]
+    if (!selected) return
     setIndex(next)
     setQty(1)
+    const url = new URL(window.location.href)
+    url.searchParams.set("sku", selected.sku)
+    router.replace(`${url.pathname}${url.search}${url.hash}`, { scroll: false })
   }
   const handleAdd = () => {
     if (!direct) return
@@ -93,7 +111,7 @@ export function ProductDetailActions({
         </div>
         <fieldset>
           <legend className="text-sm font-medium">{t("selectVialSize")}</legend>
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="mt-3 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
             {product.vials.map((variant, i) => (
               <button
                 key={variant.sku}
@@ -101,12 +119,12 @@ export function ProductDetailActions({
                 aria-pressed={index === i}
                 onClick={() => changeVial(i)}
                 className={cn(
-                  "min-w-28 rounded-[var(--radius)] border p-3 text-left",
+                  "min-w-0 rounded-[var(--radius)] border p-3 text-left [overflow-wrap:anywhere] sm:min-w-28",
                   index === i ? "border-accent bg-accent-soft" : "border-line bg-surface",
                 )}
               >
                 <span className="block font-semibold">{formatSize(variant, locale)}</span>
-                <span className="block font-mono text-xs text-ink-muted">{variant.sku}</span>
+                <span className="block font-mono text-sm text-ink-muted">{variant.sku}</span>
                 <span className="block text-sm">
                   {variant.purchaseMode === "direct"
                     ? formatCurrency(variant.priceCents, "EUR", locale)
@@ -147,13 +165,13 @@ export function ProductDetailActions({
             <Button size="lg" fullWidth onClick={handleAdd}>
               {t("addToCart")} · {formatCurrency(vial.priceCents * qty, "EUR", locale)}
             </Button>
-            <p className="text-xs text-ink-muted">
+            <p className="text-sm text-ink-muted">
               {t("vatNote")} {r("shippingAtCheckout")}
             </p>
           </>
         ) : (
           <details key={vial.sku} className="rounded-lg border border-line">
-            <summary className="cursor-pointer rounded-lg bg-accent px-4 py-3 text-center text-sm font-semibold text-on-accent">
+            <summary className="min-h-11 cursor-pointer list-none rounded-lg bg-accent px-4 py-3 text-center text-sm font-semibold text-on-accent [&::-webkit-details-marker]:hidden">
               {r("quote")}
             </summary>
             <div className="p-4">
@@ -180,7 +198,7 @@ export function ProductDetailActions({
               </p>
             ) : null}
             <a
-              href={`/${locale}/coa?q=${encodeURIComponent(vial.batch.code)}`}
+              href={`/${locale}/documents?sku=${encodeURIComponent(vial.sku)}&batch=${encodeURIComponent(vial.batch.code)}`}
               className="mt-2 inline-block text-accent underline"
             >
               {r("viewDocuments")}

@@ -10,6 +10,8 @@ import { CONSENT_COOKIE } from "@/lib/ai/memory/cookies"
 
 const ANON_LS_KEY = "averia:anon"
 const PROVISIONED_KEY = "averia:identity-provisioned"
+let pageAnonId: string | undefined
+const provisionedOnPage = new Set<string>()
 
 function uuid(): string {
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) return crypto.randomUUID()
@@ -32,17 +34,32 @@ async function provisionAnonIdentity(id: string): Promise<void> {
 export function getOrCreateAnonId(): string {
   if (typeof window === "undefined") return "ssr"
 
-  let id = window.localStorage.getItem(ANON_LS_KEY)
-  if (!id) {
-    id = uuid()
-    window.localStorage.setItem(ANON_LS_KEY, id)
-    void provisionAnonIdentity(id)
-    return id
+  let storedId: string | null = null
+  try {
+    storedId = window.localStorage.getItem(ANON_LS_KEY)
+  } catch {
+    // Browser storage is optional; keep a consistent identity in this page.
+  }
+  const id = storedId ?? pageAnonId ?? uuid()
+  pageAnonId = id
+  if (!storedId) {
+    try {
+      window.localStorage.setItem(ANON_LS_KEY, id)
+    } catch {
+      // The signed server cookie remains independent of this client cache.
+    }
   }
 
   // Existing visitors may hold an unsigned cookie from before signing shipped.
-  if (!window.sessionStorage.getItem(PROVISIONED_KEY)) {
-    window.sessionStorage.setItem(PROVISIONED_KEY, "1")
+  let alreadyProvisioned = provisionedOnPage.has(id)
+  try {
+    alreadyProvisioned ||= Boolean(window.sessionStorage.getItem(PROVISIONED_KEY))
+    if (!alreadyProvisioned) window.sessionStorage.setItem(PROVISIONED_KEY, "1")
+  } catch {
+    // A denied sessionStorage accessor must not break catalogue navigation.
+  }
+  if (!alreadyProvisioned) {
+    provisionedOnPage.add(id)
     void provisionAnonIdentity(id)
   }
   return id

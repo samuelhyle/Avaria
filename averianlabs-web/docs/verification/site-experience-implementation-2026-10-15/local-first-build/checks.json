@@ -1,0 +1,77 @@
+{
+  "scope": "Local first implementation build, visual inspection; real providers disabled. Later fixes/results are separate.",
+  "rows": [
+    {
+      "id": "home",
+      "locale": "en",
+      "scrollWidth": 1440,
+      "width": 1440,
+      "status": 200,
+      "errors": [],
+      "filename": "en-1440-home.png"
+    },
+    {
+      "id": "product",
+      "locale": "en",
+      "scrollWidth": 1440,
+      "width": 1440,
+      "status": 200,
+      "errors": [],
+      "filename": "en-1440-product.png"
+    },
+    {
+      "id": "calculator",
+      "locale": "en",
+      "scrollWidth": 1440,
+      "width": 1440,
+      "status": 200,
+      "errors": [],
+      "filename": "en-1440-calculator.png"
+    },
+    {
+      "id": "assistant",
+      "locale": "en",
+      "scrollWidth": 1440,
+      "width": 1440,
+      "status": 200,
+      "errors": [],
+      "filename": "en-1440-assistant.png"
+    },
+    {
+      "id": "home",
+      "locale": "fi",
+      "scrollWidth": 390,
+      "width": 390,
+      "status": 200,
+      "errors": [],
+      "filename": "fi-390-home.png"
+    },
+    {
+      "id": "product",
+      "locale": "fi",
+      "scrollWidth": 390,
+      "width": 390,
+      "status": 200,
+      "errors": [],
+      "filename": "fi-390-product.png"
+    },
+    {
+      "id": "calculator",
+      "locale": "fi",
+      "scrollWidth": 390,
+      "width": 390,
+      "status": 200,
+      "errors": [],
+      "filename": "fi-390-calculator.png"
+    },
+    {
+      "id": "assistant",
+      "locale": "fi",
+      "scrollWidth": 390,
+      "width": 390,
+      "status": 200,
+      "errors": [],
+      "filename": "fi-390-assistant.png"
+    }
+  ]
+}

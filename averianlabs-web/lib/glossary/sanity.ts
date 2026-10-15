@@ -37,7 +37,7 @@ const FRAGMENT = /* groq */ `
   "slug": slug.current,
   category,
   shortDefinition,
-  body,
+  "body": body[]{ ..., _type == "image" => { ..., "asset": asset->{ url, metadata{ dimensions } } } },
   relatedProductSlugs,
   "relatedTerms": relatedTerms[]->{ _id, term, "slug": slug.current },
   synonyms

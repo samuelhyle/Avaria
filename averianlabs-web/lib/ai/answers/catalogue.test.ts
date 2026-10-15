@@ -73,13 +73,13 @@ for (const locale of ["en", "fi"])
           [{ name: "getDocuments", result: { slug: "bac-water", documents: [] } }],
           locale,
         ),
-      ).toContain(locale === "fi" ? "Ei julkisesti" : "No publicly")
+      ).toContain(locale === "fi" ? "Ei julkisia" : "No public")
       expect(
         renderCatalogueAnswer(
           [{ name: "getBatches", result: { slug: "bac-water", batches: [] } }],
           locale,
         ),
-      ).toContain(locale === "fi" ? "vapautetun erän" : "Released batch")
+      ).toContain(locale === "fi" ? "myyntiin vapautettua erää" : "No released batch")
     })
     it("uses customer labels in exact-SKU comparisons without inventing future notifications", () => {
       const answer = renderCatalogueAnswer(

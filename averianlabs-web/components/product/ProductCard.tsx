@@ -32,7 +32,7 @@ export function ProductCard({
       className={cn(
         "group relative rounded-xl border border-line bg-surface p-4 transition-colors hover:border-accent/40",
         variant === "list" &&
-          "sm:grid sm:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_auto] sm:items-center sm:gap-5",
+          "sm:grid lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_auto] lg:items-center lg:gap-5",
         className,
       )}
     >
@@ -53,7 +53,7 @@ export function ProductCard({
             </Link>
           </h3>
           <p className="mt-1 break-words font-mono text-xs text-ink-muted">{vial.sku}</p>
-          <p className="mt-1 text-xs text-ink-muted">
+          <p className="mt-1 text-sm text-ink-muted">
             {product.vials.map((v) => formatSize(v, locale)).join(" / ")}
           </p>
         </div>
@@ -63,8 +63,8 @@ export function ProductCard({
         <Badge tone={canAdd ? "success" : "muted"}>
           {canAdd ? t("inStockBadge") : quotation ? r("quote") : r("unavailable")}
         </Badge>
-        <span className="text-xs text-ink-muted">
-          {documents ? r("documentAvailable") : r("noDocuments")}
+        <span className="text-sm text-ink-muted">
+          {documents ? r("documentAvailable") : r("noPublicDocumentsShort")}
         </span>
         {canAdd && (
           <span className="font-mono text-sm font-medium">
@@ -72,14 +72,16 @@ export function ProductCard({
           </span>
         )}
       </div>
-      <div className="relative z-10 mt-3 hidden items-center sm:flex gap-2 sm:mt-0">
+      <div className="relative z-10 mt-3 flex flex-wrap items-center gap-2 sm:mt-0">
         <WishlistButton slug={product.slug} size="sm" />
         <button
           type="button"
           onClick={() => compare.toggle(product.slug)}
-          aria-label={compare.has(product.slug) ? t("removeFromCompare") : t("addToCompare")}
-          aria-pressed={compare.has(product.slug)}
-          disabled={!compare.has(product.slug) && compare.items.length >= compare.max}
+          aria-label={
+            compare.items.includes(product.slug) ? t("removeFromCompare") : t("addToCompare")
+          }
+          aria-pressed={compare.items.includes(product.slug)}
+          disabled={!compare.items.includes(product.slug) && compare.items.length >= compare.max}
           className="inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-line px-2.5 text-xs text-ink-muted hover:text-ink disabled:opacity-50"
         >
           <GitCompare className="h-3.5 w-3.5" />

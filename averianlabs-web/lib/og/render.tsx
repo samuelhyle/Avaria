@@ -1,3 +1,6 @@
+import { BrandSymbol } from "@/components/media/BrandSymbol"
+import { BRAND_BLUE } from "@/lib/brand/mark"
+import { siteOrigin } from "@/lib/seo/site-origin"
 /**
  * Shared OG image renderer. Used by every `/api/og/[type]/[slug]`
  * route handler so the visual language stays consistent.
@@ -7,7 +10,7 @@ import { ImageResponse } from "next/og"
 export const OG_SIZE = { width: 1200, height: 630 } as const
 export const OG_CONTENT_TYPE = "image/png"
 
-const ACCENT = "#2563eb"
+const ACCENT = BRAND_BLUE
 const ACCENT_SOFT = "#dbeafe"
 const SURFACE = "#ffffff"
 const SURFACE_DARK = "#f8fafc"
@@ -30,7 +33,15 @@ export interface OgBase {
 }
 
 export async function renderOg(input: OgBase): Promise<ImageResponse> {
-  const { kind, title, subtitle, badge, meta, locale = "en", url = "averianlabs.eu" } = input
+  const {
+    kind,
+    title,
+    subtitle,
+    badge,
+    meta,
+    locale = "en",
+    url = new URL(siteOrigin()).host,
+  } = input
   return new ImageResponse(
     <div
       style={{
@@ -65,7 +76,7 @@ export async function renderOg(input: OgBase): Promise<ImageResponse> {
             fontWeight: 700,
           }}
         >
-          Æ
+          <BrandSymbol width={34} height={34} />
         </div>
         <div style={{ fontSize: 24, fontWeight: 600, letterSpacing: "-0.02em" }}>AVERIANLABS</div>
         <div style={{ marginLeft: "auto", fontSize: 14, color: INK_MUTED }}>{url}</div>
@@ -112,14 +123,14 @@ export async function renderOg(input: OgBase): Promise<ImageResponse> {
       <div
         style={{
           marginTop: 24,
-          fontSize: 64,
+          fontSize: title.length > 95 ? 44 : title.length > 65 ? 52 : 64,
           fontWeight: 700,
           lineHeight: 1.1,
           letterSpacing: "-0.03em",
           display: "flex",
         }}
       >
-        {title}
+        {title.length > 150 ? `${title.slice(0, 147)}…` : title}
       </div>
 
       {subtitle ? (
@@ -169,7 +180,8 @@ export async function renderOg(input: OgBase): Promise<ImageResponse> {
     {
       ...OG_SIZE,
       headers: {
-        "cache-control": "public, s-maxage=86400, stale-while-revalidate=604800",
+        "cache-control": "private, no-store",
+        "content-language": locale,
       },
     },
   )

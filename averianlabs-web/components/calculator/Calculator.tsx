@@ -16,24 +16,31 @@ import { useLocale, useTranslations } from "next-intl"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
+import {
+  type CalculationField,
+  type InputOrigin,
+  calculationFields,
+  calculationOrigins,
+} from "./input-state"
 
 export function Calculator({
   initial,
   source,
   isAuthed = false,
-}: { initial?: LaboratoryInputs; source?: { sku: string; name: string }; isAuthed?: boolean }) {
+}: {
+  initial?: LaboratoryInputs
+  source?: { sku: string; name: string; nominalMassMg?: number }
+  isAuthed?: boolean
+}) {
   const t = useTranslations("calculator")
   const r = useTranslations("research")
   const locale = useLocale()
   const [currentSource, setCurrentSource] = useState(source)
   const [mode, setMode] = useState<CalculationMode>(initial?.mode ?? "concentration")
-  const [fields, setFields] = useState({
-    mass: String(initial?.massMg ?? 10),
-    volume: String(initial?.finalVolumeMl ?? 2),
-    aliquot: String(initial?.aliquotMcg ?? 250),
-    stock: String(initial?.stockMgPerMl ?? 5),
-    target: String(initial?.targetMgPerMl ?? 1),
-  })
+  const [fields, setFields] = useState(() => calculationFields(initial))
+  const [origins, setOrigins] = useState(() =>
+    calculationOrigins(initial, Boolean(source && initial?.massMg === source.nominalMassMg)),
+  )
   const [units, setUnits] = useState({
     mass: "mg",
     volume: "mL",
@@ -45,6 +52,9 @@ export function Calculator({
     Array<{ id: string; createdAt: string; inputs: LaboratoryInputs; sourceSku: string | null }>
   >([])
   const [busy, setBusy] = useState(false)
+  const [historyLoaded, setHistoryLoaded] = useState(false)
+  const [savedAt, setSavedAt] = useState<Date | null>(null)
+  const [announcement, setAnnouncement] = useState("")
   const formulaRef = useRef<HTMLDetailsElement>(null)
   useEffect(() => {
     const key = "averianlabs:calculation-language-transfer"
@@ -68,6 +78,18 @@ export function Calculator({
           setMode(saved.mode)
           setFields(saved.fields)
           setUnits(saved.units)
+          setOrigins(
+            Object.fromEntries(
+              ["mass", "volume", "aliquot", "stock", "target"].map((key) => [
+                key,
+                ["example", "catalogue", "transferred", "user", "saved"].includes(
+                  saved.origins?.[key],
+                )
+                  ? saved.origins[key]
+                  : "transferred",
+              ]),
+            ) as Record<CalculationField, InputOrigin>,
+          )
           setCurrentSource(
             saved.source &&
               typeof saved.source.sku === "string" &&
@@ -94,6 +116,7 @@ export function Calculator({
             at: Date.now(),
             mode,
             units,
+            origins,
             source: currentSource ?? null,
             fields: Object.fromEntries(
               Object.entries(fields).map(([key, value]) => {
@@ -109,7 +132,7 @@ export function Calculator({
     }
     window.addEventListener("averianlabs:before-locale-switch", transfer)
     return () => window.removeEventListener("averianlabs:before-locale-switch", transfer)
-  }, [fields, units, mode, locale, currentSource])
+  }, [fields, units, origins, mode, locale, currentSource])
   useEffect(() => {
     let wasOpen = false
     const beforePrint = () => {
@@ -202,6 +225,28 @@ export function Calculator({
     remainingMassMcg: "remainingMass",
     remainingVolumeMl: "remainingVolume",
   }
+  const primaryResultKey =
+    mode === "concentration"
+      ? "concentrationMgPerMl"
+      : mode === "volume"
+        ? "finalVolumeMl"
+        : mode === "dilution"
+          ? "stockVolumeMl"
+          : "aliquotVolumeMl"
+  const compactResult = result
+    ? Object.entries(result.values)
+        .filter(([key]) => !key.endsWith("Ul") && key !== "concentrationMcgPerMl")
+        .slice(0, 2)
+        .map(
+          ([key, value]) =>
+            `${t(labels[key] ?? "concentration")}: ${number(value)} ${symbols[key]}`,
+        )
+        .join(". ")
+    : t(error)
+  useEffect(() => {
+    const timer = window.setTimeout(() => setAnnouncement(compactResult), 650)
+    return () => window.clearTimeout(timer)
+  }, [compactResult])
   const exportText = (calc: LaboratoryResult) =>
     [
       t("exportTitle"),
@@ -230,17 +275,22 @@ export function Calculator({
     ].join("\n")
   const handoff = new URLSearchParams(Object.entries(inputs).map(([k, v]) => [k, String(v)]))
   if (currentSource) handoff.set("sku", currentSource.sku)
-  const load = (next: LaboratoryInputs, nextSource?: { sku: string; name: string }) => {
+  const load = (
+    next: LaboratoryInputs | undefined,
+    nextSource?: { sku: string; name: string; nominalMassMg?: number },
+    saved = false,
+  ) => {
     setCurrentSource(nextSource)
-    setMode(next.mode)
+    setMode(next?.mode ?? "concentration")
     setUnits({ mass: "mg", volume: "mL", aliquot: "mcg", stock: "mg/mL", target: "mg/mL" })
-    setFields({
-      mass: String(next.massMg ?? 10),
-      volume: String(next.finalVolumeMl ?? 2),
-      aliquot: String(next.aliquotMcg ?? 250),
-      stock: String(next.stockMgPerMl ?? 5),
-      target: String(next.targetMgPerMl ?? 1),
-    })
+    setFields(calculationFields(next))
+    setOrigins(
+      calculationOrigins(
+        next,
+        Boolean(nextSource && next?.massMg === nextSource.nominalMassMg),
+        saved,
+      ),
+    )
   }
   const readHistory = async () => {
     setBusy(true)
@@ -249,6 +299,7 @@ export function Calculator({
       if (!response.ok) throw new Error()
       const data = await response.json()
       setHistory(data.items)
+      setHistoryLoaded(true)
     } catch {
       toast.error(t("requestFailed"))
     } finally {
@@ -265,6 +316,7 @@ export function Calculator({
         body: JSON.stringify({ inputs, sourceSku: currentSource?.sku ?? null }),
       })
       if (!response.ok) throw new Error()
+      setSavedAt(new Date())
       toast.success(t("saved"))
       await readHistory()
     } catch {
@@ -282,7 +334,7 @@ export function Calculator({
             type="button"
             aria-pressed={mode === m || (m === "concentration" && mode === "volume")}
             onClick={() => setMode(m)}
-            className={`rounded-lg border px-4 py-2.5 text-sm font-medium ${mode === m || (m === "concentration" && mode === "volume") ? "border-accent bg-accent-soft text-accent-ink" : "border-line bg-surface"}`}
+            className={`min-h-11 flex-1 rounded-lg border px-4 py-2.5 text-sm font-medium sm:flex-none ${mode === m || (m === "concentration" && mode === "volume") ? "border-accent bg-accent-soft text-accent-ink" : "border-line bg-surface"}`}
           >
             {t(m)}
           </button>
@@ -324,7 +376,11 @@ export function Calculator({
                     label={t(k)}
                     value={fields[k]}
                     inputMode="decimal"
-                    onChange={(e) => setFields({ ...fields, [k]: e.target.value })}
+                    onChange={(e) => {
+                      setFields({ ...fields, [k]: e.target.value })
+                      setOrigins({ ...origins, [k]: "user" })
+                    }}
+                    hint={fields[k] ? t(`origin.${origins[k]}`) : t("requiredQuantity")}
                     error={fields[k] && parsed[k] === null ? t("invalid") : undefined}
                   />
                   <label className="block">
@@ -348,7 +404,7 @@ export function Calculator({
                         }
                         setUnits({ ...units, [k]: next })
                       }}
-                      className="h-10 w-full rounded-lg border border-line bg-surface px-2 text-sm"
+                      className="h-11 w-full rounded-lg border border-line bg-surface px-2 text-base"
                     >
                       {options.map((u) => (
                         <option key={u} value={u}>
@@ -361,14 +417,13 @@ export function Calculator({
               )
             })}
           </div>
-          <p className="mt-4 text-xs text-ink-muted">{t("entryHint")}</p>
+          <p className="mt-4 text-sm leading-relaxed text-ink-muted">{t("entryHint")}</p>
           {!initial && !currentSource && (
-            <p className="mt-2 text-xs text-ink-muted">{t("exampleInputs")}</p>
+            <p className="mt-2 text-sm text-ink-muted">{t("exampleInputs")}</p>
           )}
         </section>
         <section
-          aria-live="polite"
-          aria-atomic="true"
+          aria-live="off"
           className="rounded-xl border border-accent/30 bg-accent-soft/40 p-5 sm:p-6"
         >
           <h2 className="text-lg font-semibold">{r("results")}</h2>
@@ -376,11 +431,35 @@ export function Calculator({
             <dl className="mt-4 divide-y divide-line">
               {Object.entries(result.values)
                 .filter(([k]) => !k.endsWith("Ul") && k !== "concentrationMcgPerMl")
+                .sort(([a], [b]) => Number(b === primaryResultKey) - Number(a === primaryResultKey))
                 .map(([k, v]) => (
-                  <div key={k} className="flex flex-wrap justify-between gap-2 py-3">
+                  <div
+                    key={k}
+                    data-primary-result={k === primaryResultKey ? "true" : undefined}
+                    className={
+                      k === primaryResultKey
+                        ? "min-w-0 pb-5 pt-1"
+                        : "flex flex-wrap justify-between gap-2 py-3"
+                    }
+                  >
                     <dt className="text-sm text-ink-muted">{t(labels[k] ?? "concentration")}</dt>
-                    <dd className="font-mono text-lg font-medium">
-                      {number(v)} <span className="text-sm">{symbols[k]}</span>
+                    <dd
+                      className={
+                        k === primaryResultKey
+                          ? "mt-2 break-words font-mono text-3xl font-semibold leading-tight tracking-tight text-accent-ink tabular-nums [overflow-wrap:anywhere] sm:text-4xl"
+                          : "font-mono text-lg font-medium tabular-nums"
+                      }
+                    >
+                      {number(v)}{" "}
+                      <span
+                        className={
+                          k === primaryResultKey
+                            ? "whitespace-nowrap text-lg font-medium"
+                            : "text-sm"
+                        }
+                      >
+                        {symbols[k]}
+                      </span>
                       {k === "aliquotVolumeMl" && (
                         <span className="block text-right text-xs text-ink-muted">
                           {number(result.values.aliquotVolumeUl ?? 0)} µL
@@ -391,22 +470,30 @@ export function Calculator({
                 ))}
             </dl>
           ) : (
-            <p role="status" className="mt-5 text-sm text-danger">
+            <p
+              role="status"
+              aria-live="off"
+              className={`mt-5 text-sm ${incomplete ? "text-ink-muted" : "text-danger"}`}
+            >
               {t(error)}
             </p>
           )}
-          <p className="mt-4 text-xs leading-relaxed text-ink-muted">{t("assumptions")}</p>
-          <p className="mt-2 text-xs leading-relaxed text-ink-muted">{t("rounding")}</p>
+          <p className="mt-4 text-sm leading-relaxed text-ink-muted">{t("assumptions")}</p>
+          <p className="mt-2 text-sm leading-relaxed text-ink-muted">{t("rounding")}</p>
         </section>
       </div>
+      <p role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+        {announcement}
+      </p>
+      {savedAt && (
+        <p role="status" className="text-sm text-ink-muted">
+          {t("savedAt", {
+            time: new Intl.DateTimeFormat(locale, { timeStyle: "short" }).format(savedAt),
+          })}
+        </p>
+      )}
       <div className="flex flex-wrap gap-2">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() =>
-            load(initial ?? { mode: "concentration", massMg: 10, finalVolumeMl: 2 }, source)
-          }
-        >
+        <Button variant="outline" size="sm" onClick={() => load(initial, source)}>
           {t("reset")}
         </Button>
         <Button
@@ -503,10 +590,11 @@ export function Calculator({
         )}
         <p className="mt-4 text-sm text-ink-muted">{r("calculatorNotice")}</p>
       </details>
-      {history.length > 0 && (
+      {historyLoaded && (
         <section className="rounded-xl border border-line bg-surface p-5">
           <h2 className="mb-3 text-lg font-semibold">{t("history")}</h2>
-          <p className="mb-4 text-xs text-ink-muted">{t("historyPrivate")}</p>
+          <p className="mb-4 text-sm leading-relaxed text-ink-muted">{t("historyPrivate")}</p>
+          {history.length === 0 && <p className="text-sm text-ink-muted">{t("historyEmpty")}</p>}
           {history.map((item) => (
             <div
               key={item.id}
@@ -528,6 +616,7 @@ export function Calculator({
                   load(
                     item.inputs,
                     item.sourceSku ? { sku: item.sourceSku, name: item.sourceSku } : undefined,
+                    true,
                   )
                 }
               >

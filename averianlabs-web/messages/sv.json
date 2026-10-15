@@ -2,45 +2,45 @@
   "meta": {
     "title": "AverianLabs — Laboratory research materials",
     "description": "A catalogue of research materials and batch documents for laboratory research.",
-    "keywords": "forskningspeptider, BPC-157, semaglutid, tirzepatid, TB-500, GHK-Cu, EU, Finland, COA, HPLC",
+    "keywords": "research peptides, BPC-157, semaglutide, tirzepatide, TB-500, GHK-Cu, EU, Finland, COA, HPLC",
     "home": {
       "title": "AverianLabs — Laboratory research materials",
-      "description": "EU-levererade, HPLC-verifierade forskningspeptider. COA för varje sats."
+      "description": "Explore products, review batch documents and check availability before ordering."
     },
     "about": {
-      "title": "Om AverianLabs",
-      "description": "Grundat av forskare, för forskare — transparent peptidleveranskedja från Finland, varje sats HPLC-verifierad."
+      "title": "About AverianLabs",
+      "description": "AverianLabs provides a catalogue and ordering tools for laboratory research materials. Product documentation and clear purchasing information help customers evaluate materials for their work."
     },
     "contact": {
-      "title": "Kontakt",
+      "title": "Contact",
       "description": "Contact AverianLabs about product documents, your order or purchasing for an organisation."
     },
     "faq": {
-      "title": "Vanliga frågor",
+      "title": "Frequently asked questions",
       "description": "Answers about laboratory use, batch documents, checkout and supported delivery destinations."
     },
     "labTests": {
-      "title": "Labbtester — HPLC, endotoxin, masspektrometri",
-      "description": "Varje sats HPLC-testas för renhet (≥98%), endotoxin och masspektrometri i ISO 17025-lab."
+      "title": "Lab testing — HPLC, endotoxin, mass spec",
+      "description": "Read the original report for the selected batch. The methods below describe different analytical questions and do not imply that every product has undergone every test."
     },
     "coa": {
-      "title": "Analyscertifikat",
-      "description": "Öppet register för varje produkts senaste sats — HPLC-renhet, endotoxin, masspektrometri och laboratorium."
+      "title": "Certificates of Analysis",
+      "description": "Find published documents for a product or batch. A document link is not a blanket PASS designation; assess the methods and results in the original report."
     },
     "compare": {
       "title": "Compare materials",
       "description": "Compare documented product specifications, sizes and current availability."
     },
     "calculator": {
-      "title": "Spädningskalkylator",
-      "description": "Laboratory concentration calculation only. This tool does not determine a biological activity or an administration dose."
+      "title": "Laboratory calculator",
+      "description": "Calculate mass concentration, dilution, final solution volume and aliquots using explicit laboratory quantities and units."
     },
     "quality": {
-      "title": "Kvalitetssäkring",
-      "description": "EU-GMP-leverantörsaudits, ISO 17025-oberoende tester och 24h EU-logistik."
+      "title": "Quality assurance",
+      "description": "Evaluate materials using the documents for the actual product and batch. Availability of a report is shown explicitly; missing reports are not presented as verified results."
     },
     "partner": {
-      "title": "Partnerprogram",
+      "title": "Partner program",
       "description": "Tell us about your organisation, required quantities and documentation. Our team will review the request and discuss available purchasing arrangements."
     },
     "rewards": {
@@ -48,19 +48,19 @@
       "description": "Rewards and referral discounts are not currently available at checkout. Contact us to discuss purchasing for your organisation."
     },
     "wishlist": {
-      "title": "Önskelista",
+      "title": "Wishlist",
       "description": "Browse the products saved in your browser and check current availability."
     },
     "shippingReturns": {
-      "title": "Frakt och returer",
+      "title": "Shipping & returns",
       "description": "Direct checkout currently supports Finland. Contact us for other destinations and purchasing arrangements."
     },
     "legalCookies": {
-      "title": "Cookiepolicy",
+      "title": "Cookie policy",
       "description": "Essential browser storage supports sign-in, your cart, checkout progress, saved products and your consent choices. Optional analytics require your consent."
     },
     "legalPrivacy": {
-      "title": "Integritetspolicy",
+      "title": "Privacy policy",
       "description": "This notice describes the storefront’s personal data processing. For questions about your information, contact the seller using the details below."
     },
     "legalResearchDisclaimer": {
@@ -68,7 +68,7 @@
       "description": "Catalogue information supports the evaluation and purchase of laboratory materials."
     },
     "legalTerms": {
-      "title": "Användarvillkor",
+      "title": "Terms of sale",
       "description": "These purchasing terms describe the currently supported storefront. Obtain the seller’s registered details and approved commercial terms before placing an order."
     }
   },
@@ -244,7 +244,7 @@
     "refundedBody": "The payment for this order has been refunded. Contact support if you need further information.",
     "businessId": "Business ID",
     "legalPending": "Seller registration details are awaiting confirmation. Contact us before placing an order.",
-    "documentsTitle": "Published documents",
+    "documentsTitle": "Dokument",
     "documentsIntro": "Find available certificates of analysis, safety data sheets, analytical reports and product specifications.",
     "version": "Version",
     "fileUnavailable": "The original file is currently unavailable. Contact us for the document.",
@@ -415,11 +415,27 @@
     "notificationModerationApproved": "published your reviewed submission",
     "notificationModerationRemoved": "declined or removed your submission; contact support about the review decision",
     "documentsUnavailable": "Document information could not be loaded. Try again or contact our team.",
-    "noDocumentsShort": "No public documents"
+    "noDocumentsShort": "No public documents",
+    "methodologyCard": "Lär dig vad olika analysmetoder kan berätta om ett material.",
+    "noPublicDocumentsShort": "No public documents",
+    "threeDNotice": "Illustrative container. Packaging, material appearance and fill are not represented.",
+    "threeDUnavailable": "3D is unavailable on this device. Product details remain available below.",
+    "turnLeft": "Turn illustration left",
+    "turnRight": "Turn illustration right",
+    "pauseRotation": "Pause rotation",
+    "resumeRotation": "Start rotation",
+    "resetView": "Reset illustration",
+    "figureSource": "Source",
+    "figureCredit": "Image credit",
+    "markdown": {
+      "table": "Scrollable research table",
+      "image": "image",
+      "imageLink": "View image: {description}"
+    }
   },
   "nav": {
     "shop": "Butik",
-    "labTests": "Batchverifiering",
+    "labTests": "Dokument",
     "calculator": "Kalkylator",
     "blog": "Forskning",
     "about": "Företag",
@@ -900,7 +916,10 @@
       "lookup": "Record lookup",
       "getResearchGuidance": "Guidance and scope"
     },
-    "preparing": "Preparing an answer…"
+    "preparing": "Preparing an answer…",
+    "inputLabel": "Message to Averia",
+    "inputHint": "Enter to send · Shift+Enter for a new line",
+    "newAnswer": "New answer · Jump to latest"
   },
   "glossary": {
     "title": "Glossary",
@@ -1067,7 +1086,29 @@
     "sources": "Linked sources",
     "sourceNotice": "Links supplied by the author. Assess the original source; inclusion is not scientific approval.",
     "locked": "Locked",
-    "metadata": "{replies} replies · {views} views"
+    "metadata": "{replies} replies · {views} views",
+    "privateDraftNotice": "Drafts are private to your account. Save your work before leaving; this editor does not save automatically.",
+    "unsavedChanges": "Unsaved changes",
+    "draftUpToDate": "The editor matches your saved draft.",
+    "noSavedChanges": "No draft saved from this editor yet.",
+    "lastSaved": "Last saved: {time}",
+    "draftLoaded": "Your private draft is open in the editor.",
+    "draftRemovedEditorKept": "The saved draft was removed. Your text remains in the editor.",
+    "replaceDraftTitle": "Replace unsaved text?",
+    "replaceDraftBody": "Loading your saved draft replaces the title, category and text currently in this editor. Save these changes first if you want to keep them.",
+    "removeDraftTitle": "Remove the saved draft?",
+    "removeDraftBody": "This removes the private draft saved in your account. The text currently in this editor will remain. Published discussions are unchanged.",
+    "keepEditing": "Keep editing",
+    "replaceEditor": "Load and replace text",
+    "removeSavedDraft": "Remove saved draft",
+    "noResultsHelp": "No published discussions match these filters. Clear the filters or try a different search.",
+    "clearFilters": "Clear filters",
+    "questionIdeas": "A useful discussion starts with a clear question",
+    "emptyIdea": {
+      "question": "Describe the research question and what you have already checked.",
+      "methods": "Name the analytical method and link the source you want to discuss.",
+      "document": "Include the product code, batch and document version when available."
+    }
   },
   "plans": {
     "signInCta": "Logga in för att spara",
@@ -1373,6 +1414,78 @@
     "askAssistant": "Ask Averia about this calculation",
     "discuss": "Prepare a community question",
     "rounding": "Displayed values are rounded to at most eight significant digits. They do not establish measurement precision.",
-    "exampleInputs": "Example inputs. Replace these values with your own laboratory quantities."
+    "exampleInputs": "Example inputs. Replace these values with your own laboratory quantities.",
+    "origin": {
+      "example": "Example value",
+      "catalogue": "Nominal catalogue quantity",
+      "transferred": "From the calculation link",
+      "user": "Your value",
+      "saved": "From your saved calculation"
+    },
+    "requiredQuantity": "Enter your laboratory quantity.",
+    "savedAt": "Saved privately at {time}",
+    "historyEmpty": "No saved calculations yet. Save a result to return to it here."
+  },
+  "documentLibrary": {
+    "filterq": "Sök dokument",
+    "placeholderq": "Titel, produktnamn, SKU eller batch-ID",
+    "filterproduct": "Produkt",
+    "placeholderproduct": "Produktnamn eller katalogreferens",
+    "filtersku": "Produktkod (SKU)",
+    "placeholdersku": "Hela eller delar av produktkoden",
+    "filterbatch": "Batch-ID",
+    "placeholderbatch": "Hela eller delar av batch-ID",
+    "filtertype": "Dokumenttyp",
+    "allTypes": "Alla dokumenttyper",
+    "search": "Sök",
+    "clear": "Rensa sökning och filter",
+    "publicScope": "Endast offentliga dokument publicerade för detta språk visas.",
+    "pagination": "Dokumentsidor",
+    "page": "Sida {page}",
+    "previous": "Föregående",
+    "next": "Nästa",
+    "retry": "Försök igen",
+    "retrying": "Försöker igen…",
+    "enquiry": "Fråga om dokumentation",
+    "emptyTitle": "Inga offentliga dokument ännu",
+    "emptyBody": "Här finns för närvarande inga offentliga dokument. Fråga efter de produkt- eller batchdokument du behöver. Saknad dokumentation är inget analysresultat.",
+    "noMatchTitle": "Inga matchande dokument",
+    "noMatchBody": "Prova en annan produkt, produktkod eller batch-ID, eller rensa filtren. Sökningen visar inte åtkomstbegränsade dokument.",
+    "unavailableTitle": "Dokumenten kunde inte laddas",
+    "unavailableBody": "Dokumenttjänsten kunde inte nås. Försök igen eller kontakta oss. Detta innebär inte att dokumenten saknas.",
+    "fileUnavailableTitle": "Originalfilen är inte tillgänglig",
+    "fileUnavailableBody": "Det här dokumentets originalfil går inte att öppna just nu. Försök igen eller fråga efter dokumentet med titel och version.",
+    "restrictedTitle": "Inloggning eller behörighet kan krävas",
+    "restrictedBody": "Vissa dokument kräver behörighet. Kontakta supporten om du inte kan öppna ett dokument som har delats med dig.",
+    "batchScope": "Batchspecifikt dokument",
+    "productScope": "Produktövergripande dokument",
+    "generalScope": "Allmänt dokument",
+    "scope": "Dokumentets omfattning",
+    "originalNotice": "Kontrollera prov, metod och resultat i originaldokumentet. Publicering visar inte lämplighet för just ditt arbete."
+  },
+  "experience": {
+    "documents": "Documents",
+    "showResults": "Show results",
+    "clearSearchHistory": "Clear recent searches",
+    "heroEyebrow": "For laboratory research",
+    "heroTitle": "Materials and tools for laboratory research.",
+    "heroIntro": "Find a material, inspect its available records and work through your laboratory calculations.",
+    "heroSearchLabel": "Search by product name or SKU",
+    "heroSearchPlaceholder": "Product name or SKU",
+    "searchAction": "Search",
+    "browseMaterials": "Browse materials",
+    "documentsAction": "Find batch documents",
+    "recordPreviewTitle": "Understand the records",
+    "recordPreviewHeading": "A clear link from the material to its original records.",
+    "recordPreviewIntro": "Product information, batch reports and general method guidance have different scopes. Check which record applies to your question.",
+    "catalogueTitle": "Explore the catalogue",
+    "catalogueIntro": "A selection from the current catalogue. Availability and public-document status are shown for each material.",
+    "chooseTask": "Tools for your next research task",
+    "homeCalcTitle": "Work through a calculation",
+    "homeCalcBody": "Calculate mass concentration, dilution and aliquots using explicit inputs, units and formulas.",
+    "homeAssistantTitle": "Ask Averia",
+    "homeAssistantBody": "Find a product, inspect its published records or ask a focused calculation question.",
+    "homeCommunityTitle": "Discuss an original source",
+    "homeCommunityBody": "Prepare a private draft or start a methods discussion with references. New submissions go to human publication review."
   }
 }

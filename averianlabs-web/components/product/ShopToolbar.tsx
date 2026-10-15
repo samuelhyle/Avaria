@@ -26,7 +26,9 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
     const params = new URLSearchParams(searchParams?.toString())
     if (value === null || value === "") params.delete(key)
     else params.set(key, value)
-    router.push(`${pathname}?${params.toString()}`)
+    router.push(`${pathname}${params.size ? `?${params.toString()}` : ""}${window.location.hash}`, {
+      scroll: false,
+    })
   }
 
   const chips = [
@@ -86,9 +88,9 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
             defaultValue={searchParams?.get("q") ?? ""}
             aria-label={r("searchPlaceholder")}
             placeholder={r("searchPlaceholder")}
-            className="h-11 min-w-0 flex-1 bg-transparent text-sm outline-none"
+            className="h-11 min-w-0 flex-1 bg-transparent text-base sm:text-sm outline-none"
           />
-          <button type="submit" className="min-h-9 shrink-0 text-xs font-medium text-accent">
+          <button type="submit" className="min-h-11 shrink-0 text-sm font-medium text-accent">
             {t("search")}
           </button>
         </form>
@@ -96,7 +98,7 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
         <div className="flex flex-wrap items-center gap-2">
           <Link
             href={`/${locale}/compare`}
-            className="hidden md:inline-flex h-10 items-center gap-2 rounded-[var(--radius)] border border-line bg-surface px-3 text-sm text-ink-muted hover:bg-surface-2 hover:text-ink"
+            className="inline-flex h-11 items-center gap-2 rounded-[var(--radius)] border border-line bg-surface px-3 text-base sm:text-sm text-ink-muted hover:bg-surface-2 hover:text-ink"
           >
             <GitCompare className="h-4 w-4" />
             {r("compare")}
@@ -105,7 +107,7 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
           <button
             type="button"
             onClick={() => window.dispatchEvent(new CustomEvent("averianlabs:toggle-filters"))}
-            className="inline-flex h-10 items-center gap-2 rounded-[var(--radius)] border border-line bg-surface px-3 text-sm hover:bg-surface-2 lg:hidden"
+            className="inline-flex h-11 items-center gap-2 rounded-[var(--radius)] border border-line bg-surface px-3 text-base sm:text-sm hover:bg-surface-2 lg:hidden"
           >
             <FilterIcon className="h-4 w-4" />
             {t("filters")}
@@ -147,7 +149,7 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
           aria-label={r("materialType")}
           value={filters.materialType}
           onChange={(e) => update("type", e.target.value === "all" ? null : e.target.value)}
-          className="h-10 max-w-full rounded-lg border border-line bg-surface px-3 text-sm"
+          className="h-10 max-w-full rounded-lg border border-line bg-surface px-3 text-base sm:text-sm"
         >
           <option value="all">{r("allTypes")}</option>
           {["peptide", "cosmetic", "reagent", "supplies"].map((type) => (
@@ -174,7 +176,7 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
               onClick={chip.onRemove}
               className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1 text-xs hover:border-danger/40 hover:bg-danger-soft hover:text-danger"
             >
-              <span className="capitalize">{chip.label}</span>
+              <span className="text-left">{chip.label}</span>
               <X className="h-3 w-3" />
             </button>
           ))}

@@ -1,3 +1,4 @@
+import { socialImagePath } from "@/lib/seo/site-origin"
 // Sharing can be revoked immediately; never cache a private plan's former URL.
 export const dynamic = "force-dynamic"
 
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: t("sharedPlanTitle", { title: plan.title }),
       description: t("sharedPlanSubtitle"),
       type: "article",
-      images: [`/api/og/plan/${slug}?locale=${locale}`],
+      images: [socialImagePath("plan", locale, slug)],
     },
   }
 }

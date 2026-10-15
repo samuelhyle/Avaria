@@ -3,6 +3,7 @@ import { ogLocale, renderOg } from "@/lib/og/render"
 import { getTranslations } from "next-intl/server"
 
 export const runtime = "nodejs"
+export const dynamic = "force-dynamic"
 
 export async function GET(req: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params

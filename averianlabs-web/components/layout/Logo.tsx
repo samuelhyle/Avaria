@@ -1,3 +1,4 @@
+import { BrandSymbol } from "@/components/media/BrandSymbol"
 import { cn } from "@/lib/utils/cn"
 import Link from "next/link"
 import type { ComponentPropsWithoutRef } from "react"
@@ -56,7 +57,7 @@ export function Logo({
           glow && size === "md" && "shadow-glow",
         )}
       >
-        Æ
+        <BrandSymbol className="h-[70%] w-[70%]" />
       </span>
       {wordmarkVisible ? <span className={wordmarkClass}>AverianLabs</span> : null}
     </Link>

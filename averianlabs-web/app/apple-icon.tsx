@@ -1,3 +1,5 @@
+import { BrandSymbol } from "@/components/media/BrandSymbol"
+import { BRAND_BLUE } from "@/lib/brand/mark"
 import { ImageResponse } from "next/og"
 
 export const size = { width: 180, height: 180 }
@@ -13,14 +15,14 @@ export default function AppleIcon() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "linear-gradient(135deg, #3b82f6 0%, #0ea5e9 100%)",
+        background: BRAND_BLUE,
         color: "#ffffff",
         fontSize: 104,
         fontWeight: 700,
         fontFamily: "system-ui, -apple-system, sans-serif",
       }}
     >
-      Æ
+      <BrandSymbol width={132} height={132} />
     </div>,
     { ...size },
   )

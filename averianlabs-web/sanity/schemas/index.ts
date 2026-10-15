@@ -1,5 +1,63 @@
 import { defineField, defineType } from "sanity"
 
+/** Content figures must be accessible, attributable and explicitly reviewed before publication. */
+const reviewedImageFields = [
+  defineField({
+    name: "decorative",
+    type: "boolean",
+    initialValue: false,
+    description: "Only for an image that adds no information beyond adjacent text.",
+  }),
+  defineField({
+    name: "alt",
+    title: "Alternative text in this document’s language",
+    type: "text",
+    rows: 2,
+    validation: (rule) =>
+      rule.custom((value, context) =>
+        (context.parent as { decorative?: boolean })?.decorative ||
+        (typeof value === "string" && value.trim().length > 0)
+          ? true
+          : "Describe the information conveyed by this figure.",
+      ),
+  }),
+  defineField({
+    name: "caption",
+    type: "text",
+    rows: 2,
+    description: "Explain scope and important limits in this document’s language.",
+    validation: (rule) => rule.required(),
+  }),
+  defineField({
+    name: "credit",
+    title: "Creator / image credit",
+    type: "string",
+    validation: (rule) => rule.required(),
+  }),
+  defineField({
+    name: "rights",
+    title: "License or documented permission",
+    type: "string",
+    validation: (rule) => rule.required(),
+  }),
+  defineField({
+    name: "sourceUrl",
+    title: "Original source or asset record",
+    type: "url",
+    validation: (rule) => rule.required().uri({ scheme: ["https"] }),
+  }),
+  defineField({
+    name: "reviewed",
+    title: "Image, rights and scientific/language scope reviewed",
+    type: "boolean",
+    initialValue: false,
+    validation: (rule) =>
+      rule.custom((value) =>
+        value === true ? true : "Review this figure before publishing the document.",
+      ),
+  }),
+]
+
 export const peptideMonograph = defineType({
   name: "peptideMonograph",
   title: "Peptide monograph",
@@ -26,7 +84,10 @@ export const peptideMonograph = defineType({
       name: "content",
       title: "Body",
       type: "array",
-      of: [{ type: "block" }, { type: "image", options: { hotspot: true } }],
+      of: [
+        { type: "block" },
+        { type: "image", options: { hotspot: false }, fields: reviewedImageFields },
+      ],
     }),
     defineField({
       name: "citations",
@@ -83,7 +144,7 @@ export const blogPost = defineType({
       type: "array",
       of: [
         { type: "block" },
-        { type: "image", options: { hotspot: true } },
+        { type: "image", options: { hotspot: false }, fields: reviewedImageFields },
         { type: "object", name: "peptideCallout", fields: [{ name: "slug", type: "string" }] },
       ],
     }),
@@ -171,7 +232,10 @@ export const glossaryTerm = defineType({
       name: "body",
       title: "Body",
       type: "array",
-      of: [{ type: "block" }, { type: "image", options: { hotspot: true } }],
+      of: [
+        { type: "block" },
+        { type: "image", options: { hotspot: false }, fields: reviewedImageFields },
+      ],
     }),
     defineField({
       name: "relatedProductSlugs",

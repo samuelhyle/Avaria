@@ -21,7 +21,7 @@ export default async function PeptideCalculatorPage({
     getCurrentMember(),
   ])
   let initial = readCalculationHandoff(query)
-  let source: { sku: string; name: string } | undefined
+  let source: { sku: string; name: string; nominalMassMg: number } | undefined
   if (typeof query.sku === "string") {
     const products = await getStorefrontCatalogue()
     const product = products.find((p) => p.vials.some((v) => v.sku === query.sku))
@@ -30,12 +30,12 @@ export default async function PeptideCalculatorPage({
       source = {
         sku: vial.sku,
         name: (product.translations?.[locale as "en" | "fi"] ?? product.defaultTranslation).name,
+        nominalMassMg:
+          vial.sizeValue * (vial.sizeUnit === "mcg" ? 0.001 : vial.sizeUnit === "g" ? 1000 : 1),
       }
       initial ??= {
         mode: "concentration",
-        massMg:
-          vial.sizeValue * (vial.sizeUnit === "mcg" ? 0.001 : vial.sizeUnit === "g" ? 1000 : 1),
-        finalVolumeMl: 2,
+        massMg: source.nominalMassMg,
       }
     }
   }

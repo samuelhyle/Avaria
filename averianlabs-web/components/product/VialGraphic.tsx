@@ -1,90 +1,75 @@
 import { cn } from "@/lib/utils/cn"
-import type { CSSProperties } from "react"
 
 interface VialGraphicProps {
-  hue: number
+  /** Retained for existing callers; colour never represents material appearance. */
+  hue?: number
   name?: string
   sku?: string
   showLabel?: boolean
   className?: string
 }
 
-/**
- * Shared CSS vial illustration used by product cards, quick view, the gallery
- * fallback and the 3D-carousel fallback. The wrapper controls the size; the
- * art fills it.
- */
-export function VialGraphic({ hue, name, sku, showLabel = true, className }: VialGraphicProps) {
-  const style = { "--vial-hue": hue } as CSSProperties
-
-  // Decorative — the product name and SKU are already announced by the
-  // parent card / list-item context, so the duplicate text inside the
-  // vial label would be read twice. `role="presentation"` makes the
-  // relationship explicit for screen-reader users.
+/** Neutral diagram, not a packaging photograph or a representation of contents. */
+export function VialGraphic({ showLabel = true, className }: VialGraphicProps) {
   return (
-    <div aria-hidden="true" role="presentation" className={cn("relative", className)} style={style}>
-      {/* Vial body */}
-      <div
-        className="absolute inset-x-[28%] inset-y-0 rounded-[35%] shadow-lg"
-        style={{
-          background:
-            "linear-gradient(135deg, hsl(var(--vial-hue) 70% 88% / 0.6), hsl(var(--vial-hue) 70% 60% / 0.4))",
-          boxShadow:
-            "inset 8px 0 24px hsl(var(--vial-hue) 70% 30% / 0.18), inset -8px 0 24px hsl(var(--vial-hue) 70% 30% / 0.10)",
-        }}
-      />
-      {/* Cap */}
-      <div
-        className="absolute inset-x-[20%] top-[8%] h-[12%] rounded-sm"
-        style={{ background: "hsl(var(--vial-hue) 15% 22%)" }}
-      />
-      {/* Flip-off cap */}
-      <div
-        className="absolute inset-x-[16%] top-[2%] h-[8%] rounded-sm"
-        style={{ background: "hsl(220 15% 78%)" }}
-      />
-      {showLabel ? (
-        <div
-          className="absolute inset-x-[30%] inset-y-[44%] rounded-sm"
-          style={{
-            background: "hsl(var(--vial-hue) 70% 96%)",
-            boxShadow: "inset 0 0 0 1px hsl(var(--vial-hue) 70% 45% / 0.2)",
-          }}
-        >
-          <div className="flex h-full w-full flex-col items-center justify-center px-1 text-center">
-            {name ? (
-              <span
-                className="truncate text-3xs font-semibold"
-                style={{ color: "hsl(var(--vial-hue) 70% 22%)" }}
-              >
-                {name}
-              </span>
-            ) : null}
-            {sku ? (
-              <span
-                className="mt-0.5 truncate font-mono text-3xs"
-                style={{ color: "hsl(var(--vial-hue) 30% 35%)" }}
-              >
-                {sku}
-              </span>
-            ) : null}
-          </div>
-        </div>
-      ) : null}
+    <div aria-hidden="true" role="presentation" className={cn("relative", className)}>
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 96 128"
+        fill="none"
+        className="h-full w-full text-ink-muted"
+      >
+        <rect
+          x="25"
+          y="31"
+          width="46"
+          height="84"
+          rx="10"
+          className="fill-surface stroke-current"
+          strokeWidth="2"
+        />
+        <path
+          d="M30 44v55c0 6 3 10 8 11"
+          stroke="currentColor"
+          strokeOpacity=".2"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+        <rect
+          x="23"
+          y="22"
+          width="50"
+          height="15"
+          rx="4"
+          className="fill-surface-2 stroke-current"
+          strokeWidth="2"
+        />
+        <path d="M29 27h38M29 32h38" stroke="currentColor" strokeOpacity=".25" strokeWidth="1.5" />
+        {showLabel ? (
+          <rect
+            x="29"
+            y="62"
+            width="38"
+            height="29"
+            rx="3"
+            className="fill-surface-2 stroke-current"
+            strokeOpacity=".35"
+            strokeWidth="1.5"
+            strokeDasharray="3 3"
+          />
+        ) : null}
+        <path
+          d="M32 121h32"
+          stroke="currentColor"
+          strokeOpacity=".14"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+      </svg>
     </div>
   )
 }
 
 export function VialGraphicSkeleton({ className }: { className?: string }) {
-  return (
-    <div className={cn("relative", className)}>
-      <div
-        className="absolute inset-x-[28%] inset-y-0 animate-pulse rounded-[35%]"
-        style={{
-          background: "linear-gradient(135deg, hsl(214 70% 92% / 0.5), hsl(214 70% 65% / 0.3))",
-        }}
-      />
-      <div className="absolute inset-x-[20%] top-[8%] h-[12%] rounded-sm bg-[hsl(220_15%_78%)]" />
-    </div>
-  )
+  return <VialGraphic className={cn("opacity-40", className)} />
 }

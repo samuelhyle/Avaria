@@ -12,7 +12,7 @@ export function storefrontManifest(locale = "en"): MetadataRoute.Manifest {
     start_url: `/${locale}`,
     display: "standalone",
     background_color: "#fbfcfe",
-    theme_color: "#2563eb",
+    theme_color: "#105BE1",
     icons: [{ src: "/favicon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" }],
   }
 }

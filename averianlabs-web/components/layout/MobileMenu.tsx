@@ -1,41 +1,58 @@
 "use client"
-
 import { LocaleSwitcher } from "@/components/layout/LocaleSwitcher"
 import { Logo } from "@/components/layout/Logo"
 import { ThemeToggle } from "@/components/layout/ThemeToggle"
 import { useCart } from "@/lib/cart/store"
 import { useOverlay } from "@/lib/hooks/use-overlay"
 import { CATEGORIES } from "@/lib/products/categories"
-import { cn } from "@/lib/utils/cn"
-import { ChevronRight, Menu, Search, ShoppingCart, X } from "lucide-react"
+import { ChevronDown, ChevronRight, Menu, Search, ShoppingCart, X } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
-import { type CSSProperties, useState } from "react"
-
-interface MobileMenuProps {
-  locale: string
-  productsCount: number
-}
-
-export function MobileMenu({ locale, productsCount }: MobileMenuProps) {
+import { usePathname } from "next/navigation"
+import { useState } from "react"
+export function MobileMenu({ locale, productsCount }: { locale: string; productsCount: number }) {
   const t = useTranslations("nav")
-  const tShop = useTranslations("shop")
   const r = useTranslations("research")
+  const e = useTranslations("experience")
+  const pathname = usePathname()
   const [open, setOpen] = useState(false)
-  const count = useCart((s) => s.count())
+  const count = useCart((s) => s.items.reduce((count, item) => count + item.qty, 0))
   const openCart = useCart((s) => s.open)
-
-  const openSearch = () => {
-    setOpen(false)
+  const close = () => setOpen(false)
+  const ref = useOverlay({ open, onClose: close })
+  const search = () => {
+    close()
     window.dispatchEvent(new CustomEvent("averianlabs:open-search"))
   }
-
-  const handleClose = () => setOpen(false)
-
-  const linkClick = () => setOpen(false)
-
-  const containerRef = useOverlay({ open, onClose: handleClose })
-
+  const primary = [
+    { path: "shop", label: t("allProducts") },
+    { path: "documents", label: e("documents") },
+    { path: "research-tools", label: r("tools") },
+    { path: "community", label: t("community") },
+    { path: "contact", label: t("support") },
+  ]
+  const resources = [
+    { path: "lab-tests", label: r("methodology") },
+    { path: "quality", label: t("quality") },
+    { path: "blog", label: t("blog") },
+    { path: "glossary", label: t("glossary") },
+    { path: "about", label: t("about") },
+    { path: "partner", label: t("partner") },
+    { path: "account", label: t("account") },
+    { path: "wishlist", label: t("wishlist") },
+    { path: "compare", label: t("compare") },
+  ]
+  const item = (link: { path: string; label: string }) => (
+    <Link
+      href={`/${locale}/${link.path}`}
+      onClick={close}
+      aria-current={pathname === `/${locale}/${link.path}` ? "page" : undefined}
+      className="flex min-h-12 items-center justify-between gap-3 rounded-lg px-3 text-sm text-ink-muted hover:bg-surface-2 aria-[current=page]:bg-accent-soft aria-[current=page]:font-semibold aria-[current=page]:text-accent"
+    >
+      <span>{link.label}</span>
+      <ChevronRight aria-hidden className="h-4 w-4 shrink-0" />
+    </Link>
+  )
   return (
     <>
       <button
@@ -44,165 +61,127 @@ export function MobileMenu({ locale, productsCount }: MobileMenuProps) {
         aria-label={t("openMenu")}
         aria-expanded={open}
         aria-controls="mobile-menu-panel"
-        className="xl:hidden inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] text-ink-muted hover:bg-surface-2 hover:text-ink"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-ink-muted hover:bg-surface-2 xl:hidden"
       >
-        <Menu className="h-4 w-4" aria-hidden />
+        <Menu aria-hidden className="h-5 w-5" />
       </button>
-
-      {open ? (
+      {open && (
         <div className="fixed inset-0 z-50 xl:hidden">
           <button
             type="button"
             aria-label={t("close")}
-            onClick={handleClose}
-            className="absolute inset-0 bg-ink/40 backdrop-blur-sm animate-in fade-in-0"
+            onClick={close}
+            className="absolute inset-0 bg-ink/40"
           />
           <aside
-            ref={containerRef}
+            ref={ref}
             id="mobile-menu-panel"
             role="dialog"
             aria-modal="true"
             aria-label={t("openMenu")}
-            className="absolute right-0 top-0 flex h-full w-full max-w-sm flex-col bg-surface shadow-2xl animate-in slide-in-from-right"
+            className="absolute inset-y-0 right-0 flex h-dvh w-full max-w-sm flex-col bg-surface shadow-xl"
           >
             <header className="flex items-center justify-between border-b border-line px-5 py-4">
-              <Logo href={`/${locale}`} size="sm" onClick={linkClick} />
+              <Logo href={`/${locale}`} size="sm" onClick={close} />
               <button
                 type="button"
-                onClick={handleClose}
+                onClick={close}
                 aria-label={t("close")}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] text-ink-muted hover:bg-surface-2 hover:text-ink"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-lg hover:bg-surface-2"
               >
-                <X className="h-4 w-4" aria-hidden />
+                <X aria-hidden className="h-5 w-5" />
               </button>
             </header>
-
-            <div className="flex-1 overflow-y-auto p-5">
+            <div className="min-h-0 flex-1 overflow-y-auto p-4">
               <button
                 type="button"
-                onClick={openSearch}
-                className="flex w-full items-center gap-2 rounded-[var(--radius)] border border-line bg-surface-2 px-3 py-2.5 text-left text-sm text-ink-subtle"
+                onClick={search}
+                className="mb-4 flex min-h-12 w-full items-center gap-3 rounded-lg border border-line px-3 text-sm text-ink-muted"
               >
-                <Search className="h-4 w-4" />
-                <span>{tShop("search")}</span>
-                <span className="ml-auto font-mono text-3xs">⌘K</span>
+                <Search aria-hidden className="h-4 w-4" />
+                {t("search")}
               </button>
-
-              <div className="mt-6">
-                <h3 className="text-3xs font-semibold uppercase tracking-wider text-ink-subtle">
-                  {t("sectionShop")}
-                </h3>
-                <ul className="mt-2 space-y-1">
-                  <li>
-                    <Link
-                      href={`/${locale}/shop`}
-                      onClick={linkClick}
-                      className="flex items-center justify-between rounded-[var(--radius)] px-3 py-2.5 text-sm font-medium text-ink hover:bg-surface-2"
-                    >
-                      <span>{t("allProducts")}</span>
-                      <span className="font-mono text-3xs text-ink-subtle">{productsCount}</span>
-                    </Link>
-                  </li>
-                  {CATEGORIES.map(({ slug, icon: Icon, hue }) => (
-                    <li key={slug}>
-                      <Link
-                        href={`/${locale}/shop?category=${slug}`}
-                        onClick={linkClick}
-                        className="flex items-center gap-3 rounded-[var(--radius)] px-3 py-2 text-sm text-ink-muted hover:bg-surface-2 hover:text-ink"
-                      >
-                        <div
-                          className="hue-chip flex h-7 w-7 items-center justify-center rounded-[var(--radius-sm)]"
-                          style={{ "--cat-hue": hue } as CSSProperties}
+              <nav aria-label={t("openMenu")}>
+                <ul>
+                  {primary.map((link) => (
+                    <li key={link.path}>{item(link)}</li>
+                  ))}
+                </ul>
+                <div className="my-4 grid grid-cols-2 gap-2">
+                  <Link
+                    href={`/${locale}/peptide-calculator`}
+                    onClick={close}
+                    className="flex min-h-11 items-center justify-center rounded-lg border border-line px-3 text-sm font-medium text-accent"
+                  >
+                    {t("calculator")}
+                  </Link>
+                  <Link
+                    href={`/${locale}/assistant`}
+                    onClick={close}
+                    className="flex min-h-11 items-center justify-center rounded-lg border border-line px-3 text-sm font-medium text-accent"
+                  >
+                    Averia
+                  </Link>
+                </div>
+                <details className="group border-t border-line">
+                  <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between px-3 text-sm font-semibold [&::-webkit-details-marker]:hidden">
+                    {t("sectionShop")} · {productsCount}
+                    <ChevronDown
+                      aria-hidden
+                      className="h-4 w-4 transition-transform group-open:rotate-180"
+                    />
+                  </summary>
+                  <ul className="pb-3">
+                    {CATEGORIES.map(({ slug }) => (
+                      <li key={slug}>
+                        <Link
+                          href={`/${locale}/shop?category=${slug}`}
+                          onClick={close}
+                          className="flex min-h-11 items-center rounded-lg px-3 text-sm text-ink-muted hover:bg-surface-2"
                         >
-                          <Icon className="h-3.5 w-3.5" />
-                        </div>
-                        <span className="flex-1">{r(`categories.${slug}`)}</span>
-                        <ChevronRight className="h-3.5 w-3.5" />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mt-6">
-                <h3 className="text-3xs font-semibold uppercase tracking-wider text-ink-subtle">
-                  {t("sectionResearch")}
-                </h3>
-                <ul className="mt-2 space-y-1">
-                  {[
-                    { href: `/${locale}/lab-tests`, label: t("labTests") },
-                    { href: `/${locale}/quality`, label: t("quality") },
-                    { href: `/${locale}/research-tools`, label: r("tools") },
-                    { href: `/${locale}/peptide-calculator`, label: t("calculator") },
-                    { href: `/${locale}/assistant`, label: "Averia" },
-                    { href: `/${locale}/blog`, label: t("blog") },
-                    { href: `/${locale}/glossary`, label: t("glossary") },
-                    { href: `/${locale}/documents`, label: t("documents") },
-                    { href: `/${locale}/coa`, label: t("coaLibrary") },
-                    { href: `/${locale}/community`, label: t("community") },
-                  ].map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        onClick={linkClick}
-                        className="flex items-center justify-between rounded-[var(--radius)] px-3 py-2 text-sm text-ink-muted hover:bg-surface-2 hover:text-ink"
-                      >
-                        <span>{link.label}</span>
-                        <ChevronRight className="h-3.5 w-3.5" />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mt-6">
-                <h3 className="text-3xs font-semibold uppercase tracking-wider text-ink-subtle">
-                  {t("sectionCompany")}
-                </h3>
-                <ul className="mt-2 space-y-1">
-                  {[
-                    { href: `/${locale}/contact`, label: t("support") },
-                    { href: `/${locale}/about`, label: t("about") },
-                    { href: `/${locale}/partner`, label: t("partner") },
-                    { href: `/${locale}/account`, label: t("account") },
-                    { href: `/${locale}/wishlist`, label: t("wishlist") },
-                    { href: `/${locale}/compare`, label: t("compare") },
-                  ].map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        onClick={linkClick}
-                        className="flex items-center justify-between rounded-[var(--radius)] px-3 py-2 text-sm text-ink-muted hover:bg-surface-2 hover:text-ink"
-                      >
-                        <span>{link.label}</span>
-                        <ChevronRight className="h-3.5 w-3.5" />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                          {r(`categories.${slug}`)}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+                <details className="group border-t border-line">
+                  <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between px-3 text-sm font-semibold [&::-webkit-details-marker]:hidden">
+                    {t("sectionResearch")}
+                    <ChevronDown
+                      aria-hidden
+                      className="h-4 w-4 transition-transform group-open:rotate-180"
+                    />
+                  </summary>
+                  <ul>
+                    {resources.map((link) => (
+                      <li key={link.path}>{item(link)}</li>
+                    ))}
+                  </ul>
+                </details>
+              </nav>
             </div>
-
-            <footer className="platform-bottom-safe space-y-3 border-t border-line p-5">
-              <div className="flex items-center justify-between gap-2">
+            <footer className="platform-bottom-safe space-y-3 border-t border-line p-4">
+              <div className="flex items-center justify-between gap-3">
                 <LocaleSwitcher currentLocale={locale} />
                 <ThemeToggle />
               </div>
               <button
                 type="button"
                 onClick={() => {
-                  setOpen(false)
+                  close()
                   openCart()
                 }}
-                className="flex w-full items-center justify-center gap-2 rounded-[var(--radius)] bg-accent px-4 py-2.5 text-sm font-medium text-white hover:bg-accent-hover"
+                className="flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-accent px-3 text-sm font-semibold text-on-accent"
               >
-                <ShoppingCart className="h-4 w-4" />
-                {t("cart")} {count > 0 ? `(${count})` : ""}
+                <ShoppingCart aria-hidden className="h-4 w-4" />
+                {t("cart")}
+                {count > 0 && ` (${count})`}
               </button>
             </footer>
           </aside>
         </div>
-      ) : null}
+      )}
     </>
   )
 }

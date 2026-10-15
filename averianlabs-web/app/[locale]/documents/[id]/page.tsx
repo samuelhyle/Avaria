@@ -1,8 +1,10 @@
 import { DocumentList } from "@/components/documents/DocumentList"
+import { DocumentState } from "@/components/documents/DocumentState"
 import { PdfViewer } from "@/components/documents/PdfViewer"
 import { Container } from "@/components/ui/Container"
 import { getCurrentMember } from "@/lib/community"
 import { getDocumentById, listRecentDocuments, resolveDocumentUrl } from "@/lib/documents/service"
+import { socialImagePath } from "@/lib/seo/site-origin"
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import Link from "next/link"
@@ -21,19 +23,33 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: t("documentsIntro"),
     alternates: { canonical: `/${locale}/documents/${id}` },
     robots: { index: false, follow: false },
+    openGraph: { images: [socialImagePath("document", locale, id)] },
   }
 }
 export default async function DocumentPage({ params }: Props) {
   const { locale, id } = await params
   setRequestLocale(locale)
   const member = await getCurrentMember().catch(() => null)
-  const doc = await getDocumentById(id, locale, Boolean(member)).catch(() => null)
-  if (!doc) notFound()
   const t = await getTranslations("research")
   const d = await getTranslations("documents")
-  const fileUrl = await resolveDocumentUrl(doc)
+  const l = await getTranslations("documentLibrary")
+  const loaded = await getDocumentById(id, locale, Boolean(member)).then(
+    (doc) => ({ ok: true as const, doc }),
+    () => ({ ok: false as const, doc: null }),
+  )
+  if (!loaded.ok)
+    return (
+      <Container className="py-8 sm:py-12">
+        <h1 className="mb-6 text-3xl font-semibold">{t("documentsTitle")}</h1>
+        <DocumentState locale={locale} state="unavailable" />
+      </Container>
+    )
+  const doc = loaded.doc
+  // Unauthenticated requests do not discover private metadata or whether a private ID exists.
+  if (!doc) notFound()
+  const fileUrl = await resolveDocumentUrl(doc).catch(() => null)
   const related = doc.productId
-    ? await listRecentDocuments({ productId: doc.productId, locale, limit: 8 }).catch(() => [])
+    ? await listRecentDocuments({ productId: doc.productId, locale, limit: 8 }).catch(() => null)
     : []
   return (
     <Container className="py-12">
@@ -46,7 +62,16 @@ export default async function DocumentPage({ params }: Props) {
       <header className="mt-6 mb-8">
         <p className="text-sm text-ink-muted">{t(`docLabels.${doc.type}`)}</p>
         <h1 className="mt-2 font-display text-3xl font-semibold">{doc.title}</h1>
-        <dl className="mt-6 flex flex-wrap gap-8 text-sm">
+        <p className="mt-4 max-w-3xl text-base leading-relaxed text-ink-muted">
+          {l("originalNotice")}
+        </p>
+        <dl className="mt-6 grid gap-5 rounded-xl border border-line bg-surface p-5 text-sm sm:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <dt className="text-ink-muted">{l("scope")}</dt>
+            <dd className="mt-1 font-medium">
+              {l(doc.batchId ? "batchScope" : doc.productId ? "productScope" : "generalScope")}
+            </dd>
+          </div>
           <div>
             <dt>{t("version")}</dt>
             <dd>{doc.version}</dd>
@@ -61,6 +86,12 @@ export default async function DocumentPage({ params }: Props) {
             <div>
               <dt>{t("batch")}</dt>
               <dd className="font-mono">{doc.batchCode}</dd>
+            </div>
+          )}
+          {doc.batchSku && (
+            <div>
+              <dt className="text-ink-muted">{l("filtersku")}</dt>
+              <dd className="mt-1 font-mono">{doc.batchSku}</dd>
             </div>
           )}
           {doc.productSlug && (
@@ -90,15 +121,19 @@ export default async function DocumentPage({ params }: Props) {
           </div>
         </>
       ) : (
-        <p role="status" className="rounded-[var(--radius)] border border-line p-6 text-ink-muted">
-          {t("fileUnavailable")}
-        </p>
+        <DocumentState locale={locale} state="fileUnavailable" />
       )}
-      {related.some((row) => row.id !== doc.id) && (
-        <section className="mt-12">
-          <h2 className="mb-4 text-xl font-semibold">{d("otherForProduct")}</h2>
-          <DocumentList docs={related.filter((row) => row.id !== doc.id)} locale={locale} />
-        </section>
+      {related === null ? (
+        <div className="mt-10">
+          <DocumentState locale={locale} state="unavailable" />
+        </div>
+      ) : (
+        related.some((row) => row.id !== doc.id) && (
+          <section className="mt-12">
+            <h2 className="mb-4 text-xl font-semibold">{d("otherForProduct")}</h2>
+            <DocumentList docs={related.filter((row) => row.id !== doc.id)} locale={locale} />
+          </section>
+        )
       )}
     </Container>
   )

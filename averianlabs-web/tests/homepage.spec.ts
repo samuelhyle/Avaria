@@ -1,4 +1,18 @@
+import { readFileSync } from "node:fs"
 import { expect, test } from "@/tests/fixtures"
+
+function headOf(html: string) {
+  return html.slice(0, html.indexOf("</head>") + "</head>".length)
+}
+function attributesOf(tag: string) {
+  const attributes: Record<string, string> = {}
+  for (const match of tag.matchAll(/([\w:-]+)=(["'])(.*?)\2/g)) {
+    const name = match[1]
+    const value = match[3]
+    if (name && value !== undefined) attributes[name.toLowerCase()] = value
+  }
+  return attributes
+}
 
 test.describe("homepage", () => {
   test("metadata stays in the head through repeated full-page hydration", async ({
@@ -16,17 +30,20 @@ test.describe("homepage", () => {
       expect(errors).toEqual([])
     }
   })
-  test("shows product records with an optional illustration and a catalogue path", async ({
-    cleanPage,
+  test("puts material search, records and research tasks before decorative media", async ({
+    cleanPage: page,
   }) => {
-    await cleanPage.goto("/en")
-
-    const hero = cleanPage.locator("main section[aria-label]").first()
-    await expect(hero.locator("dl")).toContainText("Availability")
-    await expect(hero).toContainText("Illustrative product view")
-    await expect(cleanPage.locator("main canvas")).toHaveCount(0)
-    await expect(cleanPage.getByRole("link", { name: /browse the catalogue/i })).toBeVisible()
-    await expect(cleanPage.getByRole("link", { name: /view/i }).first()).toBeVisible()
+    await page.goto("/en")
+    await expect(
+      page.getByRole("searchbox", { name: /search by product name or sku/i }),
+    ).toBeVisible()
+    await expect(page.getByRole("link", { name: /browse materials/i })).toBeVisible()
+    await expect(page.locator("main canvas")).toHaveCount(0)
+    await expect(page.getByRole("heading", { name: /original records/i })).toBeVisible()
+    await page.getByRole("searchbox", { name: /search by product name or sku/i }).fill("BPC157-5")
+    await page.locator("main form").getByRole("button", { name: "Search", exact: true }).click()
+    await expect(page).toHaveURL(/\/en\/shop\?q=BPC157-5$/)
+    await expect(page.locator("article")).toContainText("BPC157-5")
   })
 
   test("emits a translated title and full hreflang set", async ({ request }) => {
@@ -35,28 +52,41 @@ test.describe("homepage", () => {
     const res = await request.get("/en")
     expect(res.status()).toBe(200)
     const html = await res.text()
-    const head = html.slice(0, html.indexOf("</head>") + "</head>".length)
+    const head = headOf(html)
 
     expect(head).toMatch(/<title>AverianLabs[^<]*<\/title>/i)
-    for (const lang of ["en", "fi", "de", "sv", "nl"]) {
-      // Next.js renders `hrefLang` (camelCase) — match case-insensitively.
-      expect(head).toMatch(new RegExp(`hreflang=["']${lang}["']`, "i"))
-      // The href ends in either "/" (home) or the path.
-      expect(head).toMatch(new RegExp(`href=["']https://averianlabs\\.eu/${lang}/?["']`, "i"))
+    const alternates = [...head.matchAll(/<link\b[^>]*>/gi)]
+      .map(([tag]) => attributesOf(tag))
+      .filter((attributes) => attributes.rel === "alternate" && attributes.hreflang)
+    expect(alternates.map((link) => link.hreflang).sort()).toEqual(["de", "en", "fi", "nl", "sv"])
+    const origin = new URL(
+      process.env.BASE_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? "https://averianlabs.eu",
+    ).origin
+    for (const link of alternates) {
+      if (!link.href) throw new Error(`Missing hreflang URL for ${link.hreflang}`)
+      const url = new URL(link.href)
+      expect(url.origin).toBe(origin)
+      // /fi and /fi/ are equivalent home URLs; the language and absence of filters are material.
+      expect(url.pathname.replace(/\/$/, "")).toBe(`/${link.hreflang}`)
+      expect(url.search).toBe("")
+      expect(url.hash).toBe("")
     }
   })
 
   test("translates metadata per locale", async ({ request }) => {
-    const checks = [
-      { path: "/en", needle: "Laboratory research materials" },
-      { path: "/fi", needle: "Materiaalit laboratoriotutkimukseen" },
-      { path: "/de", needle: "Laboratory research materials" },
-      { path: "/sv", needle: "Laboratory research materials" },
-      { path: "/nl", needle: "Laboratory research materials" },
-    ]
-    for (const { path, needle } of checks) {
-      const html = await (await request.get(path)).text()
-      expect(html, `expected ${path} to contain '${needle}'`).toContain(needle)
+    for (const locale of ["en", "fi", "de", "sv", "nl"]) {
+      const copy = JSON.parse(
+        readFileSync(new URL(`../messages/${locale}.json`, import.meta.url), "utf8"),
+      ).meta.home
+      const response = await request.get(`/${locale}`)
+      expect(response.status()).toBe(200)
+      const head = headOf(await response.text())
+      const title = head.match(/<title>([^<]*)<\/title>/i)?.[1]
+      const description = [...head.matchAll(/<meta\b[^>]*>/gi)]
+        .map(([tag]) => attributesOf(tag))
+        .find((attributes) => attributes.name === "description")?.content
+      expect(title, `localized title for ${locale}`).toContain(copy.title)
+      expect(description, `localized description for ${locale}`).toBe(copy.description)
     }
   })
 })

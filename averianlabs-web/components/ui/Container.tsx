@@ -10,7 +10,7 @@ export function Container({ children, className, size = "default" }: ContainerPr
   return (
     <div
       className={cn(
-        "mx-auto w-full px-6 lg:px-10",
+        "mx-auto w-full px-4 sm:px-6 lg:px-10",
         size === "default" && "max-w-[var(--container-page)]",
         size === "wide" && "max-w-[1600px]",
         size === "narrow" && "max-w-[var(--container-prose)]",

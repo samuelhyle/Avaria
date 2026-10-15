@@ -22,7 +22,12 @@ export function CartDrawer({ locale }: { locale: string }) {
   const close = useCart((s) => s.close)
   const setQty = useCart((s) => s.setQty)
   const remove = useCart((s) => s.remove)
-  const subtotal = useCart((s) => s.subtotal())
+  const subtotal = useCart((s) =>
+    s.items.reduce(
+      (sum, item) => sum + (item.purchaseMode === "direct" ? item.unitPriceCents * item.qty : 0),
+      0,
+    ),
+  )
 
   const containerRef = useOverlay({ open: isOpen, onClose: close })
 

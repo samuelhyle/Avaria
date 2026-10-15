@@ -56,10 +56,6 @@ export function ChatDrawer({
       {open ? (
         <motion.div
           key="averia-drawer"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.15 }}
           className="fixed inset-0 z-50 flex items-end justify-end md:items-stretch md:justify-end"
         >
           <button
@@ -74,12 +70,12 @@ export function ChatDrawer({
             role="dialog"
             aria-modal="true"
             aria-label={t("title")}
-            initial={{ y: 32, opacity: 0, scale: 0.98 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: 32, opacity: 0, scale: 0.98 }}
+            initial={{ y: 32, scale: 0.98 }}
+            animate={{ y: 0, scale: 1 }}
+            exit={{ y: 32, scale: 0.98 }}
             transition={{ type: "spring", stiffness: 280, damping: 30 }}
             className={cn(
-              "relative z-10 flex h-full w-full flex-col bg-surface shadow-2xl",
+              "relative z-10 flex h-[100dvh] max-h-[100dvh] w-full flex-col bg-surface shadow-2xl",
               "md:ml-auto md:max-w-md md:rounded-l-[var(--radius-lg)] md:border md:border-line md:border-r-0",
             )}
           >
@@ -106,7 +102,7 @@ export function ChatDrawer({
                     onClick={onClearConversation}
                     aria-label={t("clearConversation")}
                     title={t("clearConversation")}
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-[var(--radius)] text-ink-muted hover:bg-surface-2 hover:text-ink"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-[var(--radius)] text-ink-muted hover:bg-surface-2 hover:text-ink"
                   >
                     <Trash2 className="h-3.5 w-3.5" />
                   </button>
@@ -115,7 +111,7 @@ export function ChatDrawer({
                   type="button"
                   onClick={onClose}
                   aria-label={t("close")}
-                  className="inline-flex h-8 w-8 items-center justify-center rounded-[var(--radius)] text-ink-muted hover:bg-surface-2 hover:text-ink"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-[var(--radius)] text-ink-muted hover:bg-surface-2 hover:text-ink"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -132,7 +128,10 @@ export function ChatDrawer({
             />
 
             {error ? (
-              <div className="mx-4 mb-2 flex items-start gap-2 rounded-[var(--radius)] border border-danger/30 bg-danger/5 px-3 py-2 text-xs text-danger">
+              <div
+                role="alert"
+                className="mx-4 mb-2 flex shrink-0 flex-wrap items-start gap-2 rounded-[var(--radius)] border border-danger/30 bg-danger/5 px-3 py-3 text-sm text-danger"
+              >
                 <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
                 <div className="flex-1">
                   <p className="font-medium">{errorTitleFor(t, error)}</p>
@@ -160,6 +159,7 @@ export function ChatDrawer({
               onStop={onStop}
               isLoading={isLoading}
               placeholder={t("inputPlaceholder")}
+              reservePlatformSpace
             />
           </motion.aside>
         </motion.div>
@@ -171,13 +171,13 @@ export function ChatDrawer({
 function EmptyState({ onPrompt }: { onPrompt?: (prompt: string) => void }) {
   const t = useTranslations("averia")
   return (
-    <div className="mx-auto flex h-full max-w-sm flex-col items-center justify-center gap-4 text-center">
+    <div className="mx-auto flex min-h-full max-w-sm flex-col items-center justify-center gap-4 text-center">
       <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 text-accent">
         <HelixGlyph className="h-6 w-6" />
       </div>
       <div>
-        <h3 className="text-sm font-semibold">{t("greeting")}</h3>
-        <p className="mt-1 text-xs text-ink-muted">{t("greetingSub")}</p>
+        <h2 className="text-lg font-semibold">{t("greeting")}</h2>
+        <p className="mt-2 text-base leading-relaxed text-ink-muted">{t("greetingSub")}</p>
       </div>
       {onPrompt ? <QuickActions onSelect={onPrompt} /> : null}
     </div>

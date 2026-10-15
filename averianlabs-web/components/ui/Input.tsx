@@ -13,7 +13,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const sizeClass: Record<InputSize, string> = {
   sm: "h-9",
-  md: "h-10",
+  md: "h-11",
   lg: "h-12",
 }
 
@@ -27,7 +27,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div>
         {label ? (
-          <label htmlFor={inputId} className="mb-1.5 block text-xs font-medium text-ink-muted">
+          <label htmlFor={inputId} className="mb-1.5 block text-sm font-medium text-ink-muted">
             {label}
           </label>
         ) : null}
@@ -46,7 +46,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             aria-invalid={error ? true : undefined}
             aria-describedby={hasMessage ? helpId : undefined}
             className={cn(
-              "w-full rounded-[var(--radius)] border border-line bg-surface text-sm placeholder:text-ink-subtle focus:border-accent focus:outline-none",
+              "w-full rounded-[var(--radius)] border border-line bg-surface text-base sm:text-sm placeholder:text-ink-subtle focus:border-accent focus:outline-none",
               sizeClass[inputSize],
               leftIcon ? "pl-10 pr-3" : "px-3",
               error && "border-danger focus:border-danger",
@@ -58,7 +58,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <p
             id={helpId}
             role={error ? "alert" : undefined}
-            className={cn("mt-1 text-xs", error ? "text-danger" : "text-ink-subtle")}
+            className={cn(
+              "mt-1.5 text-sm leading-relaxed",
+              error ? "text-danger" : "text-ink-subtle",
+            )}
           >
             {error ?? hint}
           </p>

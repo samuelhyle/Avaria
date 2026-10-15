@@ -1,28 +1,25 @@
 import { Logo } from "@/components/layout/Logo"
 import { Container } from "@/components/ui/Container"
 import { getLegalIdentity } from "@/lib/legal"
-import { FlaskConical } from "lucide-react"
+import { ChevronDown, FlaskConical } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import Link from "next/link"
 import { CookieSettings } from "./CookieSettings"
 
-interface FooterProps {
-  locale: string
-}
-
-export async function Footer({ locale }: FooterProps) {
-  const t = await getTranslations("footer")
-  const r = await getTranslations("research")
+export async function Footer({ locale }: { locale: string }) {
+  const [t, r, e] = await Promise.all([
+    getTranslations("footer"),
+    getTranslations("research"),
+    getTranslations("experience"),
+  ])
   const legal = getLegalIdentity()
-
   const cols = [
     {
       title: t("research"),
       links: [
         { href: `/${locale}/shop`, label: t("shop") },
-        { href: `/${locale}/lab-tests`, label: t("labTests") },
-        { href: `/${locale}/coa`, label: t("coa") },
-        { href: `/${locale}/peptide-calculator`, label: t("calculator") },
+        { href: `/${locale}/documents`, label: e("documents") },
+        { href: `/${locale}/research-tools`, label: r("tools") },
         { href: `/${locale}/community`, label: t("community") },
       ],
     },
@@ -32,7 +29,6 @@ export async function Footer({ locale }: FooterProps) {
         { href: `/${locale}/about`, label: t("about") },
         { href: `/${locale}/quality`, label: t("quality") },
         { href: `/${locale}/partner`, label: t("partner") },
-        { href: `/${locale}/contact`, label: t("contact") },
       ],
     },
     {
@@ -54,73 +50,85 @@ export async function Footer({ locale }: FooterProps) {
       ],
     },
   ]
-
-  const year = new Date().getFullYear()
-
+  const links = (col: (typeof cols)[number]) => (
+    <ul className="mt-3 space-y-1">
+      {col.links.map((link) => (
+        <li key={link.href}>
+          <Link
+            href={link.href}
+            prefetch={false}
+            className="inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4"
+          >
+            {link.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
   return (
     <footer className="platform-bottom-safe mt-12 border-t border-line bg-surface-2">
       <Container>
-        <div className="grid gap-8 py-8 lg:grid-cols-[280px_minmax(0,1fr)]">
+        <div className="grid gap-7 py-8 lg:grid-cols-[260px_minmax(0,1fr)]">
           <div>
             <Logo href={`/${locale}`} size="md" />
-            <p className="mt-3 max-w-md text-sm text-ink-muted text-pretty">{t("tagline")}</p>
-
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-ink-muted">{t("tagline")}</p>
             <Link
               href={`/${locale}/lab-tests`}
-              className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-accent hover:text-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+              className="mt-3 inline-flex min-h-10 items-center text-sm font-medium text-accent hover:underline underline-offset-4"
             >
               {t("verifiedBy")} →
             </Link>
           </div>
-
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          <div className="grid gap-x-6 sm:grid-cols-4">
             {cols.map((col) => (
               <div key={col.title} className="min-w-0">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-ink-subtle">
-                  {col.title}
-                </h3>
-                <ul className="mt-3 space-y-2">
-                  {col.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        prefetch={false}
-                        className="inline-flex min-h-6 max-w-full items-center break-words hyphens-auto [overflow-wrap:anywhere] text-sm text-ink-muted hover:text-ink"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                <div className="hidden sm:block">
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-ink-muted">
+                    {col.title}
+                  </h3>
+                  {links(col)}
+                </div>
+                <details className="group border-b border-line sm:hidden">
+                  <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold [&::-webkit-details-marker]:hidden">
+                    {col.title}
+                    <ChevronDown
+                      aria-hidden
+                      className="h-4 w-4 transition-transform group-open:rotate-180"
+                    />
+                  </summary>
+                  <div className="pb-3">{links(col)}</div>
+                </details>
               </div>
             ))}
           </div>
         </div>
-
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line py-4 text-xs text-ink-muted">
-          <span className="font-semibold uppercase tracking-wider text-ink-subtle">
-            {t("paymentsTitle")}
-          </span>
-          {process.env.STRIPE_SECRET_KEY && <span>{r("card")}</span>}
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line py-4 text-sm text-ink-muted">
+          {process.env.STRIPE_SECRET_KEY ? (
+            <span>
+              {t("paymentsTitle")} · {r("card")}
+            </span>
+          ) : null}
           <CookieSettings />
         </div>
-
-        <div className="flex flex-col gap-3 border-t border-line py-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-2 text-xs text-ink-muted">
-            <FlaskConical className="h-3.5 w-3.5 text-accent" />
+        <div className="grid gap-4 border-t border-line py-6 text-sm text-ink-muted sm:grid-cols-[1fr_2fr]">
+          <p className="flex items-start gap-2">
+            <FlaskConical aria-hidden className="mt-1 h-4 w-4 shrink-0 text-accent" />
             <span>{t("researchUse")}</span>
-          </div>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-ink-muted">
-            <span>{t("rightsReserved", { year })}</span>
+          </p>
+          <div className="space-y-2">
+            <p>{t("rightsReserved", { year: new Date().getFullYear() })}</p>
             {legal.businessId && legal.vatId ? (
-              <span className="font-mono">
+              <p className="font-mono text-xs">
                 {r("businessId")} {legal.businessId} · VAT {legal.vatId}
-              </span>
+              </p>
             ) : (
-              <span>{r("legalPending")}</span>
+              <p>{r("legalPending")}</p>
             )}
             <address className="not-italic">
-              <a href={`mailto:${legal.contactEmail}`} className="hover:text-ink hover:underline">
+              <a
+                href={`mailto:${legal.contactEmail}`}
+                className="text-accent underline underline-offset-4"
+              >
                 {legal.contactEmail}
               </a>
               {legal.addressLine1 || legal.addressLine2 ? " · " : ""}

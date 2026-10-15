@@ -17,7 +17,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
 
   useEffect(() => setMounted(true), [])
 
-  const isDark = resolvedTheme === "dark"
+  const isDark = mounted && resolvedTheme === "dark"
 
   return (
     <button

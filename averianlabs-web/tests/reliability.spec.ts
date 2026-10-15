@@ -116,7 +116,10 @@ test("cookie settings can reopen and withdraw analytics consent", async ({ clean
 test("invalid concentration inputs do not expose infinite results", async ({ cleanPage: page }) => {
   await page.goto("/fi/peptide-calculator")
   await page.getByRole("textbox", { name: "Liuoksen lopullinen tilavuus", exact: true }).fill("0")
-  await expect(page.locator("main").getByRole("status")).toBeVisible()
+  const result = page.locator('main section[aria-live="off"]')
+  await expect(result.getByRole("status")).toBeVisible()
+  await expect(result.getByRole("status")).toContainText("Anna positiivinen luku")
+  await expect(result.locator("dl")).toHaveCount(0)
   await expect(page.locator("main")).not.toContainText(/Infinity|NaN|IU/)
 })
 
@@ -158,13 +161,17 @@ for (const locale of ["en", "fi"]) {
   })
 }
 
-test("hero preserves SI unit case and spacing", async ({ cleanPage: page }) => {
+test("catalogue quantities preserve SI unit case and spacing", async ({ cleanPage: page }) => {
   await page.setViewportSize({ width: 1440, height: 900 })
-  await page.goto("/fi")
-  const unit = page
-    .locator("main section[aria-label]")
-    .first()
-    .getByText(/\d+ mg \/ \d+ mg/)
-  await expect(unit).toHaveText(/\d+ (mg|g|µg|mL|µL|vial)/)
-  expect(await unit.evaluate((element) => getComputedStyle(element).textTransform)).toBe("none")
+  await page.goto("/fi/shop?q=QA-WATER-10")
+  const water = page.locator("main article").filter({ hasText: "QA-WATER-10" })
+  const volume = water.getByText("10 mL", { exact: true })
+  await expect(volume).toBeVisible()
+  expect(await volume.evaluate((element) => getComputedStyle(element).textTransform)).toBe("none")
+  await expect(water).not.toContainText("10 mg")
+  await page.goto("/fi/shop?q=QA-PEPTIDE-5")
+  const peptide = page.locator("main article").filter({ hasText: "QA-PEPTIDE-5" })
+  const mass = peptide.getByText("5 mg / 10 mg", { exact: true })
+  await expect(mass).toBeVisible()
+  expect(await mass.evaluate((element) => getComputedStyle(element).textTransform)).toBe("none")
 })

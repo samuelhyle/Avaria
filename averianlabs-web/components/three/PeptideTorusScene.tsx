@@ -105,8 +105,8 @@ function Scene({ products, reducedMotion, onSelect }: PeptideTorusProps) {
     // focused vial (which is the centre of the composition at all times).
     const t = state.clock.getElapsedTime()
     if (camera instanceof THREE.PerspectiveCamera) {
-      const targetX = Math.sin(t * 0.08) * 0.12
-      const targetY = 0.9 + Math.cos(t * 0.1) * 0.04
+      const targetX = reducedMotion ? 0 : Math.sin(t * 0.08) * 0.12
+      const targetY = reducedMotion ? 0.9 : 0.9 + Math.cos(t * 0.1) * 0.04
       camera.position.x = damp(camera.position.x, targetX, 4, dt)
       camera.position.y = damp(camera.position.y, targetY, 4, dt)
       camera.lookAt(0, 0, 0)

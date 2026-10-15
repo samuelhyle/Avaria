@@ -103,6 +103,9 @@ for (const locale of ["en", "fi"]) {
       .click()
     await expect(page.getByRole("textbox", { name: t.mass, exact: true })).toHaveValue("10")
     await expect(page.locator("main")).toContainText("QA-PEPTIDE-10")
+    await expect(page.getByRole("textbox", { name: t.volume, exact: true })).toHaveValue("")
+    await expect(page.getByRole("link", { name: t.askAssistant })).toHaveCount(0)
+    await page.getByRole("textbox", { name: t.volume, exact: true }).fill("2")
     await page.getByRole("link", { name: t.askAssistant }).click()
     const input = page.locator("main textarea")
     await expect(input).not.toHaveValue("")
@@ -225,6 +228,10 @@ for (const locale of ["en", "fi"]) {
       ).toContain(title)
       await page.goto(`/${locale}/community/new`)
       await page.getByRole("button", { name: m.community.clearDraft, exact: true }).click()
+      await page
+        .getByRole("dialog")
+        .getByRole("button", { name: m.community.removeSavedDraft, exact: true })
+        .click()
     } finally {
       await cleanBrowserRecords(email)
     }
@@ -372,5 +379,5 @@ test("a populated cart badge fits the narrow header", async ({ cleanPage: page }
     true,
   )
   await expect(page.getByRole("button", { name: "Cart", exact: true })).toBeVisible()
-  await expect(page.getByRole("link", { name: "Æ AverianLabs", exact: true }).first()).toBeVisible()
+  await expect(page.getByRole("link", { name: "AverianLabs", exact: true }).first()).toBeVisible()
 })

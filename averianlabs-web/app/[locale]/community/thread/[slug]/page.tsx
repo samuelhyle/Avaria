@@ -1,3 +1,4 @@
+import { socialImagePath } from "@/lib/seo/site-origin"
 export const dynamic = "force-dynamic"
 
 import { PostCard } from "@/components/community/PostCard"
@@ -44,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: thread.title,
       type: "article",
-      images: [`/api/og/thread/${slug}?locale=${locale}`],
+      images: [socialImagePath("thread", locale, slug)],
     },
   }
 }
@@ -180,7 +181,7 @@ export default async function ThreadPage({ params }: Props) {
         </div>
 
         <aside className="space-y-4">
-          <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-4 text-xs text-ink-muted">
+          <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-4 text-sm leading-relaxed text-ink-muted">
             <Badge tone="muted" size="sm" className="mb-2">
               {r("moderation")}
             </Badge>

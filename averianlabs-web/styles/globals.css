@@ -32,7 +32,7 @@
   --font-display: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 
   /* Type scale — two micro steps below `text-xs` (12px) so tiny UI text stops
-     using one-off arbitrary values. Floor is 10px for legibility. */
+     using one-off arbitrary values. Metadata uses a 12px floor; explanatory copy uses larger role-specific styles. */
   --text-3xs: 0.75rem;
   --text-3xs--line-height: 0.875rem;
   --text-2xs: 0.75rem;
@@ -132,6 +132,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    scroll-padding-bottom: calc(1rem + var(--platform-bottom-inset, 0px));
     color-scheme: light;
   }
 
@@ -143,6 +145,7 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv01", "cv02";
+    line-height: 1.6;
   }
 
   ::selection {
@@ -418,4 +421,25 @@ body[data-review-site="true"] {
 }
 .platform-bottom-safe {
   padding-bottom: calc(1rem + var(--platform-bottom-inset, 0px) + env(safe-area-inset-bottom));
+}
+
+/* Research interfaces share a readable rhythm, including long localised labels. */
+@layer utilities {
+  .research-heading {
+    font-size: clamp(1.875rem, 4vw, 3rem);
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+    font-weight: 650;
+  }
+  .research-intro {
+    max-width: 65ch;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-ink-muted);
+  }
+  .research-panel {
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
 }

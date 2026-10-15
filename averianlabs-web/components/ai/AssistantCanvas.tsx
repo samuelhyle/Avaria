@@ -11,7 +11,7 @@ import { chatErrorBody, chatErrorTitle } from "@/lib/ai/errors"
 import { type ChatMessageWithExtras, useAveriaChat } from "@/lib/ai/hooks/use-averia-chat"
 import { usePageContext } from "@/lib/ai/hooks/use-page-context"
 import { useCart } from "@/lib/cart/store"
-import { AlertCircle, MessageSquare, RefreshCw, Trash2 } from "lucide-react"
+import { AlertCircle, RefreshCw, Trash2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { useCallback, useEffect } from "react"
@@ -30,8 +30,9 @@ export function AssistantCanvas({ locale, initialPrompt }: AssistantCanvasProps)
   const t = useTranslations("averia")
   const products = useCatalogue()
   const tAssistant = useTranslations("averia.assistant")
+  const r = useTranslations("research")
   const cart = useCart((s) => s.items)
-  const cartCount = useCart((s) => s.count())
+  const cartCount = cart.reduce((count, item) => count + item.qty, 0)
   const cartAdd = useCart((s) => s.add)
   const cartRemove = useCart((s) => s.remove)
   const context = usePageContext({ itemCount: cartCount })
@@ -121,9 +122,9 @@ export function AssistantCanvas({ locale, initialPrompt }: AssistantCanvasProps)
   const messages: ChatMessageWithExtras[] = chat.messages
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_300px]">
-      <div className="flex min-h-[540px] sm:min-h-[65vh] flex-col overflow-hidden rounded-xl border border-line bg-surface shadow-sm">
-        <header className="flex items-center justify-between border-b border-line bg-surface-2/50 px-5 py-4">
+    <div className="mx-auto max-w-5xl space-y-4">
+      <div className="flex h-[min(780px,calc(100dvh-8rem))] min-h-96 flex-col overflow-hidden rounded-xl border border-line bg-surface shadow-sm">
+        <header className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-b border-line bg-surface-2/50 px-4 py-3 sm:px-5">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent/10 text-accent">
               <HelixGlyph className="h-4 w-4" />
@@ -137,7 +138,7 @@ export function AssistantCanvas({ locale, initialPrompt }: AssistantCanvasProps)
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" onClick={() => chat.reset()}>
+            <Button variant="ghost" size="sm" className="min-h-11" onClick={() => chat.reset()}>
               <Trash2 className="h-3.5 w-3.5" aria-hidden />
               {tAssistant("newChat")}
             </Button>
@@ -148,13 +149,13 @@ export function AssistantCanvas({ locale, initialPrompt }: AssistantCanvasProps)
           messages={messages as ChatMessage[]}
           isStreaming={chat.isLoading}
           emptyState={
-            <div className="mx-auto flex h-full max-w-md flex-col items-center justify-center gap-4 text-center">
+            <div className="mx-auto flex min-h-full max-w-xl flex-col items-center justify-center gap-5 text-center">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 text-accent">
                 <HelixGlyph className="h-6 w-6" />
               </div>
               <div>
-                <h3 className="text-sm font-semibold">{t("greeting")}</h3>
-                <p className="mt-1 text-xs text-ink-muted">{t("greetingSub")}</p>
+                <h2 className="text-xl font-semibold tracking-tight">{t("greeting")}</h2>
+                <p className="mt-2 text-base leading-relaxed text-ink-muted">{t("greetingSub")}</p>
               </div>
               <QuickActions onSelect={(prompt) => chat.submit(prompt)} />
             </div>
@@ -165,7 +166,10 @@ export function AssistantCanvas({ locale, initialPrompt }: AssistantCanvasProps)
         />
 
         {chat.error ? (
-          <div className="mx-5 mb-2 flex items-start gap-2 rounded-[var(--radius)] border border-danger/30 bg-danger/5 px-3 py-2 text-xs text-danger">
+          <div
+            role="alert"
+            className="mx-4 mb-2 flex shrink-0 flex-wrap items-start gap-2 rounded-[var(--radius)] border border-danger/30 bg-danger/5 px-3 py-3 text-sm text-danger"
+          >
             <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />
             <div className="flex-1">
               <p className="font-medium">{chatErrorTitle(t, chat.error)}</p>
@@ -194,20 +198,8 @@ export function AssistantCanvas({ locale, initialPrompt }: AssistantCanvasProps)
         />
       </div>
 
-      <aside className="space-y-5">
-        <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-5">
-          <h3 className="flex items-center gap-2 text-sm font-semibold">
-            <MessageSquare className="h-4 w-4 text-accent" aria-hidden />
-            {tAssistant("tipsTitle")}
-          </h3>
-          <ul className="mt-3 space-y-2 text-xs text-ink-muted">
-            <li>· {tAssistant("tip1")}</li>
-            <li>· {tAssistant("tip2")}</li>
-            <li>· {tAssistant("tip3")}</li>
-          </ul>
-        </div>
-
-        <div className="rounded-[var(--radius-lg)] border border-line bg-surface-2/50 p-5 text-xs text-ink-muted">
+      <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 text-sm text-ink-muted">
+        <p>
           {tAssistant("privacyNote")}{" "}
           <Link
             href={`/${locale}/legal/privacy`}
@@ -215,8 +207,16 @@ export function AssistantCanvas({ locale, initialPrompt }: AssistantCanvasProps)
           >
             {tAssistant("privacyLink")}
           </Link>
+        </p>
+        <div className="flex flex-wrap gap-4 text-accent">
+          <Link className="underline underline-offset-2" href={`/${locale}/peptide-calculator`}>
+            {r("calculator")}
+          </Link>
+          <Link className="underline underline-offset-2" href={`/${locale}/documents`}>
+            {r("documents")}
+          </Link>
         </div>
-      </aside>
+      </div>
     </div>
   )
 }

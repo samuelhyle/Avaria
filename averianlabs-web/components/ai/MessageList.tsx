@@ -1,6 +1,7 @@
 "use client"
 
 import { HelixGlyph } from "@/components/ai/icons/HelixGlyph"
+import { ResearchMarkdown } from "@/components/ui/ResearchMarkdown"
 import type { CitationRef } from "@/lib/ai/types"
 import {
   type ActionResolution,
@@ -11,6 +12,7 @@ import {
 import { cn } from "@/lib/utils/cn"
 import { formatCurrency, formatSize } from "@/lib/utils/format"
 import {
+  ArrowDown,
   Beaker,
   Calculator,
   Check,
@@ -29,9 +31,7 @@ import {
 } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 import Link from "next/link"
-import { useEffect, useRef } from "react"
-import ReactMarkdown from "react-markdown"
-import remarkGfm from "remark-gfm"
+import { useEffect, useRef, useState } from "react"
 import { ResearchResultCards } from "./ResearchResultCards"
 
 export type { ProposedAction, ProposedActionAddToCart, ActionResolution }
@@ -215,7 +215,7 @@ export function Message({
       <div className="flex justify-end">
         <div
           className={cn(
-            "max-w-[85%] rounded-2xl rounded-br-md bg-accent-soft px-4 py-2.5 text-sm text-ink shadow-sm",
+            "max-w-[92%] rounded-xl rounded-br-md bg-accent-soft px-4 py-3 text-base leading-relaxed text-ink",
           )}
         >
           <p className="whitespace-pre-wrap break-words">{message.content}</p>
@@ -226,10 +226,10 @@ export function Message({
 
   return (
     <div className="flex items-start gap-2.5">
-      <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
+      <div className="mt-0.5 hidden h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent sm:flex">
         <HelixGlyph className="h-4 w-4" />
       </div>
-      <div className="flex min-w-0 max-w-[85%] flex-col gap-2">
+      <div className="flex min-w-0 max-w-full flex-1 flex-col gap-3 sm:max-w-[92%]">
         {message.toolTrace && message.toolTrace.length > 0 ? (
           <ToolTraceList trace={message.toolTrace} />
         ) : null}
@@ -241,11 +241,11 @@ export function Message({
         {message.content ? (
           <div
             className={cn(
-              "rounded-2xl rounded-tl-md border border-line/60 bg-surface px-4 py-2.5 text-sm text-ink shadow-sm",
+              "min-w-0 rounded-xl rounded-tl-md border border-line bg-surface px-3 py-3 text-base text-ink sm:px-4",
             )}
           >
-            <div className="prose prose-sm prose-neutral max-w-none dark:prose-invert prose-p:my-1.5 prose-ul:my-1.5 prose-ol:my-1.5 prose-li:my-0.5 prose-headings:my-2 prose-headings:text-sm prose-headings:font-semibold prose-strong:text-ink prose-code:rounded prose-code:bg-surface-2 prose-code:px-1 prose-code:py-0.5 prose-code:text-xs prose-code:font-mono prose-code:before:content-none prose-code:after:content-none prose-pre:my-2 prose-pre:bg-surface-2 prose-pre:text-xs prose-table:my-2 prose-th:text-left prose-th:font-medium prose-td:align-top">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{renderedContent}</ReactMarkdown>
+            <div>
+              <ResearchMarkdown body={renderedContent} />
               {isStreaming ? (
                 <span
                   className="ml-0.5 inline-block h-3 w-1.5 translate-y-0.5 animate-pulse bg-accent"
@@ -292,7 +292,6 @@ function FeedbackBar({
   onFeedback: (feedback: "up" | "down") => void
 }) {
   const t = useTranslations("averia")
-  const locale = useLocale()
   return (
     <div className="flex items-center gap-1 px-1">
       <button
@@ -301,7 +300,7 @@ function FeedbackBar({
         aria-label={t("feedback.helpful")}
         aria-pressed={feedback === "up"}
         className={cn(
-          "inline-flex h-6 w-6 items-center justify-center rounded-full transition-colors",
+          "inline-flex h-9 w-9 items-center justify-center rounded-lg transition-colors",
           feedback === "up"
             ? "bg-success/20 text-success"
             : "text-ink-subtle hover:bg-surface-2 hover:text-ink",
@@ -315,7 +314,7 @@ function FeedbackBar({
         aria-label={t("feedback.notHelpful")}
         aria-pressed={feedback === "down"}
         className={cn(
-          "inline-flex h-6 w-6 items-center justify-center rounded-full transition-colors",
+          "inline-flex h-9 w-9 items-center justify-center rounded-lg transition-colors",
           feedback === "down"
             ? "bg-danger/20 text-danger"
             : "text-ink-subtle hover:bg-surface-2 hover:text-ink",
@@ -494,15 +493,15 @@ function CitationChips({ citations }: { citations: CitationRef[] }) {
           key={`${c.source}-${c.sourceId}-${c.index}`}
           href={c.url ?? "#"}
           className={cn(
-            "inline-flex items-center gap-1 rounded-full border border-line bg-surface px-2 py-0.5 text-2xs font-medium text-ink-muted",
+            "inline-flex max-w-full items-start gap-2 rounded-lg border border-line bg-surface px-3 py-2 text-sm font-medium text-ink-muted",
             "transition-colors hover:border-accent/40 hover:bg-accent-soft hover:text-accent",
           )}
           target={c.url ? "_blank" : undefined}
           rel={c.url ? "noreferrer noopener" : undefined}
         >
           <span className="font-mono text-3xs text-accent">[{c.index}]</span>
-          <span className="max-w-[180px] truncate">{c.title}</span>
-          {c.url ? <ExternalLink className="h-3 w-3 opacity-60" aria-hidden /> : null}
+          <span className="min-w-0 break-words [overflow-wrap:anywhere]">{c.title}</span>
+          {c.url ? <ExternalLink className="mt-1 h-3 w-3 shrink-0 opacity-60" aria-hidden /> : null}
         </a>
       ))}
     </div>
@@ -526,44 +525,77 @@ export function MessageList({
   onDismissAction,
   onFeedback,
 }: MessageListProps) {
+  const t = useTranslations("averia")
   const scrollRef = useRef<HTMLDivElement>(null)
+  const following = useRef(true)
+  const [hasNewAnswer, setHasNewAnswer] = useState(false)
   const messageCount = messages.length
   const lastMessageContent = messages.at(-1)?.content ?? ""
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: scroll on streaming tokens requires `isStreaming`
-  useEffect(() => {
+  const lastMessageRole = messages.at(-1)?.role
+  const jumpToLatest = () => {
+    following.current = true
+    setHasNewAnswer(false)
     const el = scrollRef.current
-    if (!el) return
-    el.scrollTo({ top: el.scrollHeight, behavior: messageCount <= 1 ? "auto" : "smooth" })
-  }, [messageCount, lastMessageContent, isStreaming])
-
-  if (messages.length === 0) {
-    return (
-      <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-6">
-        {emptyState}
-      </div>
-    )
+    if (el) el.scrollTop = el.scrollHeight
   }
 
+  // Preserve the reader's position while an answer grows; sending a question resumes following.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: answer content and streaming completion can change the rendered height.
+  useEffect(() => {
+    if (messageCount === 0) {
+      following.current = true
+      setHasNewAnswer(false)
+      return
+    }
+    const el = scrollRef.current
+    if (!el) return
+    if (following.current || lastMessageRole === "user") {
+      following.current = true
+      el.scrollTop = el.scrollHeight
+      setHasNewAnswer(false)
+    } else if (lastMessageRole === "assistant") setHasNewAnswer(true)
+  }, [messageCount, lastMessageContent, isStreaming, lastMessageRole])
+
   return (
-    <div
-      ref={scrollRef}
-      role="log"
-      aria-live="polite"
-      aria-relevant="additions text"
-      aria-busy={isStreaming}
-      className="flex-1 space-y-4 overflow-y-auto px-4 py-4"
-    >
-      {messages.map((m) => (
-        <Message
-          key={m.id}
-          message={m}
-          isStreaming={isStreaming && m === messages.at(-1) && m.role === "assistant"}
-          onConfirmAction={onConfirmAction}
-          onDismissAction={onDismissAction}
-          onFeedback={onFeedback}
-        />
-      ))}
+    <div className="relative flex min-h-0 flex-1 flex-col">
+      <div
+        ref={scrollRef}
+        role="log"
+        aria-live="polite"
+        aria-relevant="additions text"
+        aria-busy={isStreaming}
+        onScroll={() => {
+          const el = scrollRef.current
+          if (!el) return
+          following.current = el.scrollHeight - el.scrollTop - el.clientHeight < 80
+          if (following.current) setHasNewAnswer(false)
+        }}
+        className="min-h-0 flex-1 space-y-5 overflow-y-auto overscroll-contain px-3 py-5 sm:px-5"
+      >
+        {messages.length === 0 && emptyState}
+        {messages.map((m) => (
+          <Message
+            key={m.id}
+            message={m}
+            isStreaming={isStreaming && m === messages.at(-1) && m.role === "assistant"}
+            onConfirmAction={onConfirmAction}
+            onDismissAction={onDismissAction}
+            onFeedback={onFeedback}
+          />
+        ))}
+      </div>
+      {hasNewAnswer && (
+        <div className="pointer-events-none absolute inset-x-0 bottom-3 flex justify-center px-3">
+          <button
+            type="button"
+            onClick={jumpToLatest}
+            className="pointer-events-auto inline-flex min-h-11 items-center gap-2 rounded-full border border-accent/30 bg-surface px-4 py-2 text-sm font-medium text-accent shadow-sm"
+          >
+            <ArrowDown className="h-4 w-4" aria-hidden />
+            {t("newAnswer")}
+          </button>
+        </div>
+      )}
     </div>
   )
 }

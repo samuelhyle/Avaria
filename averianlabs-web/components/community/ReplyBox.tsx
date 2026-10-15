@@ -70,7 +70,7 @@ export function ReplyBox({ threadSlug, isAuthed, signInHref, isLocked }: ReplyBo
 
   return (
     <div className="space-y-3 rounded-[var(--radius)] border border-line bg-surface p-4">
-      <label htmlFor="reply-body" className="block text-xs font-medium text-ink-muted">
+      <label htmlFor="reply-body" className="block text-sm font-medium text-ink-muted">
         {t("replyTitle")}
       </label>
       <textarea
@@ -81,7 +81,7 @@ export function ReplyBox({ threadSlug, isAuthed, signInHref, isLocked }: ReplyBo
         maxLength={8000}
         placeholder={t("replyPlaceholder")}
         className={cn(
-          "w-full rounded-[var(--radius)] border border-line bg-surface px-3 py-2 text-sm leading-relaxed placeholder:text-ink-subtle focus:border-accent focus:outline-none",
+          "w-full rounded-[var(--radius)] border border-line bg-surface px-3 py-2 text-base leading-relaxed placeholder:text-ink-subtle focus:border-accent focus:outline-none",
           error && "border-danger focus:border-danger",
         )}
       />
@@ -90,7 +90,11 @@ export function ReplyBox({ threadSlug, isAuthed, signInHref, isLocked }: ReplyBo
           {t("pendingReview")}
         </p>
       )}
-      {error ? <p className="text-xs text-danger">{error}</p> : null}
+      {error ? (
+        <p role="alert" className="text-sm text-danger">
+          {error}
+        </p>
+      ) : null}
       <div className="flex items-center justify-end">
         <Button size="sm" onClick={submit} disabled={isPending || !body.trim()}>
           {isPending ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : null}

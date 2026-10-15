@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs"
 import { type APIRequestContext, type Page, expect, test } from "@/tests/fixtures"
 
 /**
@@ -15,11 +16,19 @@ import { type APIRequestContext, type Page, expect, test } from "@/tests/fixture
 
 // Localised "Open Averia" button label (en: "Open Averia", fi: "Avaa Averia", …).
 const CHAT_BUBBLE = 'button[aria-label*="Averia" i]'
-const CHAT_DRAWER = '[data-averia-drawer], aside[aria-label*="Averia" i], aside:has(textarea)'
-const CHAT_INPUT =
-  'textarea[aria-label*="Ask" i], textarea[aria-label*="Tutkimus" i], textarea[aria-label*="Frag" i], textarea[aria-label*="Ställ" i], textarea[aria-label*="Vraag" i]'
+const CHAT_INPUT_LABELS = [
+  ...new Set(
+    ["en", "fi", "de", "sv", "nl"].map(
+      (locale) =>
+        JSON.parse(readFileSync(new URL(`../messages/${locale}.json`, import.meta.url), "utf8"))
+          .averia.inputLabel as string,
+    ),
+  ),
+]
+const CHAT_INPUT_NAME = new RegExp(
+  `^(?:${CHAT_INPUT_LABELS.map((label) => label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})$`,
+)
 const STOP_BUTTON = 'button[aria-label="Stop"]'
-const SEND_BUTTON = 'button[aria-label="Send"], button[type="submit"]'
 
 async function openChat(page: Page) {
   // The widget is lazy-loaded via requestIdleCallback (3s fallback). Give it
@@ -27,7 +36,13 @@ async function openChat(page: Page) {
   // can take a few seconds, so allow 30s.
   await page.locator(CHAT_BUBBLE).first().waitFor({ state: "visible", timeout: 30_000 })
   await page.locator(CHAT_BUBBLE).first().click()
-  await expect(page.locator(CHAT_INPUT).first()).toBeVisible({ timeout: 5_000 })
+  await expect(chatInput(page)).toBeVisible({ timeout: 5_000 })
+}
+
+function chatInput(page: Page) {
+  return page
+    .getByRole("dialog", { name: "Averia", exact: true })
+    .getByRole("textbox", { name: CHAT_INPUT_NAME })
 }
 
 async function skipIfProviderDown(request: APIRequestContext): Promise<boolean> {
@@ -50,7 +65,7 @@ test.describe("Averia chat widget", () => {
   test("opening the chat reveals the input + greeting", async ({ cleanPage }) => {
     await cleanPage.goto("/en", { waitUntil: "networkidle" })
     await openChat(cleanPage)
-    await expect(cleanPage.locator(CHAT_INPUT).first()).toBeVisible()
+    await expect(chatInput(cleanPage)).toBeVisible()
     await expect(cleanPage.locator("body")).toContainText(/Averia/i)
   })
 
@@ -59,7 +74,7 @@ test.describe("Averia chat widget", () => {
     await cleanPage.goto("/en", { waitUntil: "networkidle" })
     await openChat(cleanPage)
 
-    const textarea = cleanPage.locator(CHAT_INPUT).first()
+    const textarea = chatInput(cleanPage)
     await textarea.fill("List your top 3 in-stock peptides.")
     await textarea.press("Enter")
 

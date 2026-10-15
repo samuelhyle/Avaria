@@ -68,7 +68,7 @@ export function ChatWidget({ locale, demoMode = false }: ChatWidgetProps) {
   }, [])
 
   const cart = useCart((s) => s.items)
-  const cartCount = useCart((s) => s.count())
+  const cartCount = cart.reduce((count, item) => count + item.qty, 0)
   const context = usePageContext({ itemCount: cartCount })
   const cartAdd = useCart((s) => s.add)
   const cartRemove = useCart((s) => s.remove)

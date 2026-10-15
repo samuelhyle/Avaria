@@ -3,7 +3,14 @@
 import { useEffect, useState } from "react"
 export const CONSENT_KEY = "averianlabs-cookie-consent"
 export function analyticsAllowed() {
-  return typeof window !== "undefined" && localStorage.getItem(CONSENT_KEY) === "all"
+  if (typeof window === "undefined") return false
+  try {
+    const saved = localStorage.getItem(CONSENT_KEY)
+    if (saved !== null) return saved === "all"
+  } catch {
+    // Optional analytics stay consent-gated even when localStorage is blocked.
+  }
+  return document.cookie.split("; ").some((cookie) => cookie === `${CONSENT_KEY}=all`)
 }
 export function useAnalyticsConsent() {
   const [allowed, setAllowed] = useState(false)

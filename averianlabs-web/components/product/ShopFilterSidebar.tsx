@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils/cn"
 import { SlidersHorizontal, X } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { type CSSProperties, useCallback, useEffect, useState } from "react"
+import { type CSSProperties, useCallback, useEffect, useRef, useState } from "react"
 
 interface ShopFilterSidebarProps {
   initial: ShopFilters
@@ -33,6 +33,12 @@ function FilterContent({
   const router = useRouter()
   const pathname = usePathname()
   const sp = useSearchParams()
+  const [selection, setSelection] = useState(initial)
+  const selectionRef = useRef(initial)
+  useEffect(() => {
+    selectionRef.current = initial
+    setSelection(initial)
+  }, [initial])
 
   const sortLabels: Record<SortOption, string> = {
     newest: t("sortNewest"),
@@ -44,7 +50,9 @@ function FilterContent({
 
   const update = useCallback(
     (next: Partial<ShopFilters>) => {
-      const merged = { ...initial, ...next }
+      const merged = { ...selectionRef.current, ...next }
+      selectionRef.current = merged
+      setSelection(merged)
       const p = new URLSearchParams(sp?.toString())
       if (merged.category.length > 0) p.set("category", merged.category.join(","))
       else p.delete("category")
@@ -56,20 +64,22 @@ function FilterContent({
       else p.delete("purityMin")
       if (merged.sort !== "newest") p.set("sort", merged.sort)
       else p.delete("sort")
-      router.push(`${pathname}?${p.toString()}`)
+      router.push(`${pathname}${p.size ? `?${p.toString()}` : ""}${window.location.hash}`, {
+        scroll: false,
+      })
     },
-    [initial, sp, pathname, router],
+    [sp, pathname, router],
   )
 
   const toggleCategory = (slug: string) => {
-    const next = initial.category.includes(slug)
-      ? initial.category.filter((c) => c !== slug)
-      : [...initial.category, slug]
+    const next = selection.category.includes(slug)
+      ? selection.category.filter((c) => c !== slug)
+      : [...selection.category, slug]
     update({ category: next })
   }
 
   const clearAll = () => {
-    router.push(pathname)
+    router.push(`${pathname}${window.location.hash}`, { scroll: false })
     onClose?.()
   }
 
@@ -80,7 +90,11 @@ function FilterContent({
           <SlidersHorizontal className="h-4 w-4" />
           {t("filters")}
         </h2>
-        <button type="button" onClick={clearAll} className="text-xs text-ink-muted hover:text-ink">
+        <button
+          type="button"
+          onClick={clearAll}
+          className="min-h-9 text-sm text-ink-muted hover:text-ink"
+        >
           {t("clearAll")}
         </button>
       </div>
@@ -91,13 +105,15 @@ function FilterContent({
         </h4>
         <ul className="mt-3 space-y-1">
           {CATEGORY_META.map(({ slug, hue }) => {
-            const checked = initial.category.includes(slug)
+            const checked = selection.category.includes(slug)
             const count = counts[slug] ?? 0
             return (
               <li key={slug}>
                 <button
                   type="button"
                   onClick={() => toggleCategory(slug)}
+                  role="checkbox"
+                  aria-checked={checked}
                   className={cn(
                     "flex w-full items-center gap-3 rounded-[var(--radius)] px-2 py-1.5 text-sm transition-colors",
                     checked
@@ -124,7 +140,7 @@ function FilterContent({
                     className="hue-dot h-2 w-2 rounded-full"
                     style={{ "--cat-hue": hue } as CSSProperties}
                   />
-                  <span className="flex-1 text-left capitalize">{r(`categories.${slug}`)}</span>
+                  <span className="flex-1 text-left">{r(`categories.${slug}`)}</span>
                   <span className="font-mono text-3xs text-ink-subtle">{count}</span>
                 </button>
               </li>
@@ -140,7 +156,7 @@ function FilterContent({
           </h4>
           <div className="mt-3">
             <div className="flex items-center justify-between text-xs">
-              <span className="font-mono">{initial.purityMin}%</span>
+              <span className="font-mono">{selection.purityMin}%</span>
               <span className="text-ink-subtle">{r("minPurity")}</span>
             </div>
             <input
@@ -148,7 +164,7 @@ function FilterContent({
               min={0}
               max={100}
               step={0.1}
-              value={initial.purityMin}
+              value={selection.purityMin}
               onChange={(e) => update({ purityMin: Number(e.target.value) })}
               aria-label={t("purity")}
               className="mt-2 w-full accent-accent"
@@ -156,14 +172,16 @@ function FilterContent({
           </div>
         </div>
       ) : (
-        <p className="border-t border-line pt-4 text-xs text-ink-muted">{r("noVerifiedPurity")}</p>
+        <p className="border-t border-line pt-4 text-sm leading-relaxed text-ink-muted">
+          {r("noVerifiedPurity")}
+        </p>
       )}
 
       <div className="border-t border-line pt-5 space-y-2">
         <label className="flex cursor-pointer items-center gap-2 text-sm">
           <input
             type="checkbox"
-            checked={initial.inStock}
+            checked={selection.inStock}
             onChange={(e) => update({ inStock: e.target.checked })}
             className="h-4 w-4 rounded border-line text-accent focus:ring-accent"
           />
@@ -172,7 +190,7 @@ function FilterContent({
         <label className="flex cursor-pointer items-center gap-2 text-sm">
           <input
             type="checkbox"
-            checked={initial.quoteOnly}
+            checked={selection.quoteOnly}
             onChange={(e) => update({ quoteOnly: e.target.checked })}
             className="h-4 w-4 rounded border-line text-accent focus:ring-accent"
           />
@@ -185,10 +203,10 @@ function FilterContent({
           {t("sort")}
         </h4>
         <select
-          value={initial.sort}
+          value={selection.sort}
           onChange={(e) => update({ sort: e.target.value as SortOption })}
           aria-label={t("sort")}
-          className="mt-2 h-10 w-full rounded-[var(--radius)] border border-line bg-surface px-3 text-sm focus:outline-none focus:border-accent"
+          className="mt-2 h-10 w-full rounded-[var(--radius)] border border-line bg-surface px-3 text-base sm:text-sm focus:outline-none focus:border-accent"
         >
           {SORT_OPTIONS.map((s) => (
             <option key={s} value={s}>
@@ -203,7 +221,7 @@ function FilterContent({
 
 export function ShopFilterSidebar({ initial, counts, hasPurity }: ShopFilterSidebarProps) {
   const t = useTranslations("shop")
-  const r = useTranslations("research")
+  const e = useTranslations("experience")
   const tCommon = useTranslations("common")
   const [mobileOpen, setMobileOpen] = useState(false)
   const containerRef = useOverlay({ open: mobileOpen, onClose: () => setMobileOpen(false) })
@@ -264,7 +282,7 @@ export function ShopFilterSidebar({ initial, counts, hasPurity }: ShopFilterSide
                 onClick={() => setMobileOpen(false)}
                 className="w-full rounded-[var(--radius)] bg-accent py-3 text-sm font-semibold text-on-accent hover:bg-accent-hover"
               >
-                {t("applyFilters")}
+                {e("showResults")}
               </button>
             </footer>
           </aside>

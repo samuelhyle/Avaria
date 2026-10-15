@@ -11,7 +11,7 @@ export function CartHydration() {
   const locale = useLocale()
   useEffect(() => {
     let active = true
-    Promise.resolve(useCart.persist.rehydrate()).then(() => {
+    Promise.resolve(useCart.persist?.rehydrate()).then(() => {
       if (!active) return
       const state = useCart.getState()
       const items = state.items.map((item) => {

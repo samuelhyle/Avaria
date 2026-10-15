@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils/cn"
 import { Search, ShoppingCart, User } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 interface HeaderProps {
   locale: string
@@ -19,9 +20,11 @@ interface HeaderProps {
 
 export function Header({ locale }: HeaderProps) {
   const products = useCatalogue()
+  const pathname = usePathname()
+  const e = useTranslations("experience")
   const t = useTranslations("nav")
   const r = useTranslations("research")
-  const cartCount = useCart((s) => s.count())
+  const cartCount = useCart((s) => s.items.reduce((count, item) => count + item.qty, 0))
   const openCart = useCart((s) => s.open)
 
   const openSearch = () => {
@@ -33,13 +36,14 @@ export function Header({ locale }: HeaderProps) {
   // live inside the Mega Menu or the mobile menu — they are reachable but not in
   // the top-level chrome.
   const navItems = [
-    { href: `/${locale}/coa`, label: t("coaLibrary") },
+    { href: `/${locale}/documents`, label: e("documents") },
     { href: `/${locale}/research-tools`, label: r("tools") },
     { href: `/${locale}/community`, label: t("community") },
+    { href: `/${locale}/contact`, label: t("support") },
   ]
 
   return (
-    <header className="sticky top-0 z-40 glass border-b border-line">
+    <header className="sticky top-0 z-40 bg-surface border-b border-line">
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-accent focus:px-3 focus:py-1.5 focus:text-white"
@@ -57,9 +61,17 @@ export function Header({ locale }: HeaderProps) {
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={
+                  pathname?.startsWith(item.href) ||
+                  (item.href.endsWith("/documents") && pathname?.startsWith(`/${locale}/coa`)) ||
+                  (item.href.endsWith("/research-tools") &&
+                    /\/(assistant|peptide-calculator)(?:\/|$)/.test(pathname ?? ""))
+                    ? "page"
+                    : undefined
+                }
                 className={cn(
                   "relative inline-flex h-9 items-center rounded-[var(--radius)] px-3 text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink",
-                  "before:absolute before:inset-x-3 before:bottom-1 before:h-px before:origin-left before:scale-x-0 before:bg-accent before:transition-transform before:duration-300 before:ease-[var(--ease-crystal)] before:content-[''] hover:before:scale-x-100",
+                  "aria-[current=page]:bg-accent-soft aria-[current=page]:text-accent aria-[current=page]:font-semibold before:absolute before:inset-x-3 before:bottom-1 before:h-px before:origin-left before:scale-x-0 before:bg-accent before:transition-transform before:duration-300 before:ease-[var(--ease-crystal)] before:content-[''] hover:before:scale-x-100",
                 )}
               >
                 {item.label}
@@ -72,7 +84,7 @@ export function Header({ locale }: HeaderProps) {
               type="button"
               onClick={openSearch}
               aria-label={t("search")}
-              className="inline-flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-[var(--radius)] border border-line bg-surface text-sm text-ink-subtle transition-colors hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg xl:w-auto xl:px-3"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-[var(--radius)] border border-line bg-surface text-sm text-ink-subtle transition-colors hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg xl:w-auto xl:px-3"
             >
               <Search className="h-4 w-4" />
               <span className="hidden xl:inline">{t("search")}</span>
@@ -89,7 +101,7 @@ export function Header({ locale }: HeaderProps) {
             <Link
               href={`/${locale}/account`}
               aria-label={t("account")}
-              className="hidden xl:inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+              className="hidden xl:inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius)] text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
             >
               <User className="h-4 w-4" />
             </Link>
@@ -98,7 +110,7 @@ export function Header({ locale }: HeaderProps) {
               type="button"
               onClick={openCart}
               aria-label={t("cart")}
-              className="relative inline-flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-[var(--radius)] bg-surface text-sm text-ink transition-colors hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg xl:w-auto xl:px-3"
+              className="relative inline-flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-[var(--radius)] bg-surface text-sm text-ink transition-colors hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg xl:w-auto xl:px-3"
             >
               <ShoppingCart className="h-4 w-4" aria-hidden />
               <span className="hidden xl:inline">{t("cart")}</span>

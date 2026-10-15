@@ -1,11 +1,14 @@
 "use client"
 
 import { CATEGORIES } from "@/lib/products/categories"
+import { defaultVial } from "@/lib/products/selection"
 import type { Locale, Product } from "@/lib/products/types"
 import { cn } from "@/lib/utils/cn"
+import { formatCurrency } from "@/lib/utils/format"
 import { ArrowRight, ChevronDown, FlaskConical } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { type CSSProperties, useRef, useState } from "react"
 
 interface MegaMenuProps {
@@ -17,6 +20,8 @@ export function MegaMenu({ locale, products }: MegaMenuProps) {
   const t = useTranslations("nav")
   const tShop = useTranslations("shop")
   const tHome = useTranslations("home")
+  const r = useTranslations("research")
+  const pathname = usePathname()
   const [openSlug, setOpenSlug] = useState<string | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
@@ -88,10 +93,11 @@ export function MegaMenu({ locale, products }: MegaMenuProps) {
           aria-expanded={openSlug === "shop"}
           aria-haspopup="true"
           aria-controls="mega-shop-panel"
+          aria-current={pathname?.startsWith(`/${locale}/shop`) ? "page" : undefined}
           onClick={() => setOpenSlug((s) => (s === "shop" ? null : "shop"))}
           className={cn(
             "flex items-center gap-1 rounded-[var(--radius)] px-3 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg",
-            openSlug === "shop"
+            openSlug === "shop" || pathname?.startsWith(`/${locale}/shop`)
               ? "bg-surface-2 text-ink"
               : "text-ink-muted hover:bg-surface-2 hover:text-ink",
           )}
@@ -150,14 +156,12 @@ export function MegaMenu({ locale, products }: MegaMenuProps) {
                 <ul className="mt-3 space-y-1">
                   {products.slice(0, 4).map((p) => {
                     const translation = p.translations?.[locale as Locale] ?? p.defaultTranslation
-                    const minVial = p.vials.reduce(
-                      (min, v) => ((v.priceCents ?? 0) < (min.priceCents ?? 0) ? v : min),
-                      p.vials[0]!,
-                    )
+                    const minVial = defaultVial(p)
+                    if (!minVial) return null
                     return (
                       <li key={p.slug}>
                         <Link
-                          href={`/${locale}/shop/${p.slug}`}
+                          href={`/${locale}/shop/${p.slug}?sku=${encodeURIComponent(minVial.sku)}`}
                           className="group flex items-center gap-3 rounded-[var(--radius)] p-2 transition-colors hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                         >
                           <div
@@ -171,9 +175,13 @@ export function MegaMenu({ locale, products }: MegaMenuProps) {
                             <p className="font-mono text-3xs text-ink-subtle">{minVial.sku}</p>
                           </div>
                           <span className="text-xs font-medium text-ink-muted">
-                            {minVial.contactOnly
-                              ? "Quote"
-                              : `€${(minVial.priceCents / 100).toFixed(2)}`}
+                            {minVial.purchaseMode === "direct" &&
+                            minVial.stockQty > 0 &&
+                            minVial.priceCents > 0
+                              ? formatCurrency(minVial.priceCents, "EUR", locale)
+                              : minVial.purchaseMode === "quotation"
+                                ? r("quote")
+                                : r("unavailable")}
                           </span>
                         </Link>
                       </li>

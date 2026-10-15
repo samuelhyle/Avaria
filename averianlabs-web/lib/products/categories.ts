@@ -1,12 +1,12 @@
 import {
+  Atom,
   Beaker,
-  Brain,
-  Droplets,
+  Boxes,
+  FlaskConical,
   Layers,
   type LucideIcon,
-  Shield,
-  Sparkles,
-  Sun,
+  Microscope,
+  Pipette,
 } from "lucide-react"
 import type { ProductCategory } from "./types"
 
@@ -25,12 +25,12 @@ export interface CategoryMeta {
 
 export const CATEGORIES: CategoryMeta[] = [
   { slug: "metabolic", key: "weight", hue: 220, icon: Beaker },
-  { slug: "recovery", key: "recovery", hue: 214, icon: Shield },
-  { slug: "cognitive", key: "cognitive", hue: 250, icon: Brain },
-  { slug: "longevity", key: "longevity", hue: 260, icon: Sparkles },
-  { slug: "cosmetic", key: "cosmetic", hue: 340, icon: Sun },
+  { slug: "recovery", key: "recovery", hue: 214, icon: FlaskConical },
+  { slug: "cognitive", key: "cognitive", hue: 250, icon: Atom },
+  { slug: "longevity", key: "longevity", hue: 260, icon: Microscope },
+  { slug: "cosmetic", key: "cosmetic", hue: 340, icon: Pipette },
   { slug: "blend", key: "blends", hue: 280, icon: Layers },
-  { slug: "supplies", key: "supplies", hue: 198, icon: Droplets },
+  { slug: "supplies", key: "supplies", hue: 198, icon: Boxes },
 ]
 
 const CATEGORY_BY_SLUG = new Map<string, CategoryMeta>(

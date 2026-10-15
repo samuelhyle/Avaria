@@ -25,22 +25,22 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-accent text-on-accent hover:bg-accent-hover hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:scale-[0.97] shadow-sm",
+    "bg-accent text-on-accent hover:bg-accent-hover hover:shadow-lg active:translate-y-0 active:scale-[0.99] shadow-sm",
   secondary:
-    "bg-surface-2 text-ink hover:bg-surface-3 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] border border-line hover:border-ink-subtle/30",
+    "bg-surface-2 text-ink hover:bg-surface-3 active:translate-y-0 active:scale-[0.99] border border-line hover:border-ink-subtle/30",
   ghost:
-    "bg-transparent text-ink hover:bg-surface-2 hover:text-ink active:bg-surface-3 active:scale-[0.97]",
+    "bg-transparent text-ink hover:bg-surface-2 hover:text-ink active:bg-surface-3 active:scale-[0.99]",
   outline:
-    "bg-transparent text-accent border border-accent/40 hover:bg-accent-soft hover:border-accent hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97]",
+    "bg-transparent text-accent border border-accent/40 hover:bg-accent-soft hover:border-accent active:translate-y-0 active:scale-[0.99]",
   danger:
-    "bg-danger text-on-accent hover:bg-danger/90 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] shadow-sm",
+    "bg-danger text-on-accent hover:bg-danger/90 active:translate-y-0 active:scale-[0.99] shadow-sm",
 }
 
 const sizeClasses: Record<Size, string> = {
-  sm: "h-8 px-3 text-sm rounded-[var(--radius-sm)] gap-1.5",
-  md: "h-10 px-4 text-sm rounded-[var(--radius)] gap-2",
+  sm: "min-h-9 px-3 py-1.5 text-sm rounded-[var(--radius-sm)] gap-1.5",
+  md: "min-h-11 px-4 py-2 text-sm rounded-[var(--radius)] gap-2",
   lg: "h-12 px-6 text-base rounded-[var(--radius-lg)] gap-2",
-  icon: "h-9 w-9 rounded-[var(--radius)]",
+  icon: "h-10 w-10 rounded-[var(--radius)]",
 }
 
 const baseClasses =

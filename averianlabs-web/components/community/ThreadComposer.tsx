@@ -1,10 +1,11 @@
 "use client"
 import { PostMarkdown } from "@/components/community/PostMarkdown"
 import { Button } from "@/components/ui/Button"
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/Dialog"
 import { Input } from "@/components/ui/Input"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { toast } from "sonner"
 interface ComposerProps {
   categories: { slug: string; nameKey: string }[]
@@ -33,6 +34,23 @@ export function ThreadComposer({
   const [preview, setPreview] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [submitted, setSubmitted] = useState(false)
+  const [savedSnapshot, setSavedSnapshot] = useState(() =>
+    JSON.stringify({ title: "", body: "", categorySlug: defaultCategory ?? "research-discussion" }),
+  )
+  const [lastSavedAt, setLastSavedAt] = useState<Date | null>(null)
+  const [draftNotice, setDraftNotice] = useState<string | null>(null)
+  const [confirmation, setConfirmation] = useState<"load" | "clear" | null>(null)
+  const currentSnapshot = JSON.stringify({ title, body, categorySlug })
+  const dirty = currentSnapshot !== savedSnapshot
+  useEffect(() => {
+    if (!isAuthed || !dirty || submitted) return
+    const preserveWork = (event: BeforeUnloadEvent) => {
+      event.preventDefault()
+      event.returnValue = ""
+    }
+    window.addEventListener("beforeunload", preserveWork)
+    return () => window.removeEventListener("beforeunload", preserveWork)
+  }, [isAuthed, dirty, submitted])
   if (!isAuthed)
     return (
       <div className="rounded-xl border border-line bg-surface p-6 text-center">
@@ -79,6 +97,9 @@ export function ThreadComposer({
   }
   const draft = async (action: "save" | "load" | "clear") => {
     setPending(true)
+    setError(null)
+    setDraftNotice(null)
+    const requestedSnapshot = currentSnapshot
     try {
       const res = await fetch(
         "/api/forum/drafts",
@@ -104,13 +125,40 @@ export function ThreadComposer({
           setTitle(data.draft.title)
           setBody(data.draft.body)
           setCategorySlug(data.draft.categorySlug)
-        } else toast.info(t("noDraft"))
-      } else toast.success(t(action === "save" ? "draftSaved" : "draftCleared"))
+          setSavedSnapshot(
+            JSON.stringify({
+              title: data.draft.title,
+              body: data.draft.body,
+              categorySlug: data.draft.categorySlug,
+            }),
+          )
+          const updated = new Date(data.draft.updatedAt)
+          setLastSavedAt(Number.isFinite(updated.getTime()) ? updated : null)
+          setDraftNotice(t("draftLoaded"))
+        } else {
+          setDraftNotice(t("noDraft"))
+          toast.info(t("noDraft"))
+        }
+      } else if (action === "save") {
+        setSavedSnapshot(requestedSnapshot)
+        setLastSavedAt(new Date())
+        setDraftNotice(t("draftSaved"))
+        toast.success(t("draftSaved"))
+      } else {
+        setSavedSnapshot(JSON.stringify({ title: "", body: "", categorySlug }))
+        setLastSavedAt(null)
+        setDraftNotice(t("draftRemovedEditorKept"))
+        toast.success(t("draftCleared"))
+      }
     } catch {
       setError(t("requestFailed"))
     } finally {
       setPending(false)
     }
+  }
+  const requestDraftAction = (action: "load" | "clear") => {
+    if (action === "clear" || dirty) setConfirmation(action)
+    else void draft(action)
   }
   return (
     <div className="space-y-5 rounded-xl border border-line bg-surface p-5 sm:p-6">
@@ -124,19 +172,20 @@ export function ThreadComposer({
             size="sm"
             variant="outline"
             key={kind}
-            disabled={!!body.trim()}
+            disabled={pending || !!body.trim()}
             onClick={() => setBody(t(`template${kind}` as never))}
           >
             {t(`type${kind}` as never)}
           </Button>
         ))}
       </div>
-      <label className="block text-xs font-medium text-ink-muted">
+      <label className="block text-sm font-medium text-ink-muted">
         {t("fieldCategory")}
         <select
           value={categorySlug}
+          disabled={pending || submitted}
           onChange={(e) => setCategorySlug(e.target.value)}
-          className="mt-1.5 h-10 w-full rounded-lg border bg-surface px-3 text-sm text-ink"
+          className="mt-1.5 h-11 w-full rounded-lg border bg-surface px-3 text-base text-ink"
         >
           {categories.map((c) => (
             <option value={c.slug} key={c.slug}>
@@ -148,22 +197,41 @@ export function ThreadComposer({
       <Input
         label={t("fieldTitle")}
         value={title}
+        disabled={pending || submitted}
         onChange={(e) => setTitle(e.target.value)}
         maxLength={140}
         placeholder={t("titlePlaceholder")}
       />
-      <label className="block text-xs font-medium text-ink-muted">
+      <label className="block text-sm font-medium text-ink-muted">
         {t("fieldBody")}
         <textarea
           value={body}
+          disabled={pending || submitted}
           onChange={(e) => setBody(e.target.value)}
           rows={10}
           maxLength={8000}
           placeholder={t("bodyPlaceholder")}
-          className="mt-1.5 w-full rounded-lg border bg-surface px-3 py-3 text-sm leading-relaxed text-ink"
+          className="mt-1.5 w-full rounded-lg border bg-surface px-3 py-3 text-base leading-relaxed text-ink"
         />
       </label>
-      <p className="text-xs leading-relaxed text-ink-muted">{t("fieldBodyHint")}</p>
+      <p className="text-sm leading-relaxed text-ink-muted">{t("fieldBodyHint")}</p>
+      <div className="space-y-1 rounded-lg bg-surface-2 px-4 py-3 text-sm text-ink-muted">
+        <p>{t("privateDraftNotice")}</p>
+        <p className="font-medium text-ink">
+          {dirty ? t("unsavedChanges") : lastSavedAt ? t("draftUpToDate") : t("noSavedChanges")}
+        </p>
+        {lastSavedAt && (
+          <p>
+            {t("lastSaved", {
+              time: new Intl.DateTimeFormat(locale, {
+                dateStyle: "medium",
+                timeStyle: "short",
+              }).format(lastSavedAt),
+            })}
+          </p>
+        )}
+        {draftNotice && <p role="status">{draftNotice}</p>}
+      </div>
       <div className="flex flex-wrap gap-2">
         <Button size="sm" variant="outline" onClick={() => setPreview(!preview)}>
           {t(preview ? "hidePreview" : "preview")}
@@ -171,10 +239,20 @@ export function ThreadComposer({
         <Button size="sm" variant="outline" disabled={pending} onClick={() => void draft("save")}>
           {t("saveDraft")}
         </Button>
-        <Button size="sm" variant="ghost" disabled={pending} onClick={() => void draft("load")}>
+        <Button
+          size="sm"
+          variant="ghost"
+          disabled={pending || submitted}
+          onClick={() => requestDraftAction("load")}
+        >
           {t("loadDraft")}
         </Button>
-        <Button size="sm" variant="ghost" disabled={pending} onClick={() => void draft("clear")}>
+        <Button
+          size="sm"
+          variant="ghost"
+          disabled={pending || submitted}
+          onClick={() => requestDraftAction("clear")}
+        >
           {t("clearDraft")}
         </Button>
       </div>
@@ -195,7 +273,7 @@ export function ThreadComposer({
         </p>
       )}
       <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line pt-4">
-        <p className="max-w-sm text-xs text-ink-muted">{t("pendingPolicy")}</p>
+        <p className="max-w-sm text-sm leading-relaxed text-ink-muted">{t("pendingPolicy")}</p>
         <Button
           disabled={pending || !title.trim() || !body.trim() || submitted}
           onClick={() => void submit()}
@@ -203,6 +281,36 @@ export function ThreadComposer({
           {t(pending ? "submitting" : "submit")}
         </Button>
       </div>
+      <Dialog
+        open={confirmation !== null}
+        onOpenChange={(open) => {
+          if (!open) setConfirmation(null)
+        }}
+      >
+        <DialogContent>
+          <DialogTitle>
+            {t(confirmation === "clear" ? "removeDraftTitle" : "replaceDraftTitle")}
+          </DialogTitle>
+          <DialogDescription>
+            {t(confirmation === "clear" ? "removeDraftBody" : "replaceDraftBody")}
+          </DialogDescription>
+          <div className="flex flex-wrap justify-end gap-2">
+            <Button variant="outline" onClick={() => setConfirmation(null)}>
+              {t("keepEditing")}
+            </Button>
+            <Button
+              variant={confirmation === "clear" ? "danger" : "primary"}
+              onClick={() => {
+                const action = confirmation
+                setConfirmation(null)
+                if (action) void draft(action)
+              }}
+            >
+              {t(confirmation === "clear" ? "removeSavedDraft" : "replaceEditor")}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
