@@ -27,11 +27,11 @@ Current executed check results and rendered application evidence are recorded un
 
 | Check | Executed result |
 | --- | --- |
-| Unit suite, including the actual local ONNX embedding model | 216 passed, 0 skipped |
+| Unit suite, including the actual local ONNX embedding model | 274 passed, 0 skipped (15 October follow-up) |
 | Isolated database integration suite | 26 passed, 0 skipped |
-| Full browser suite | 121 passed; 2 live-provider tests explicitly skipped |
+| Browser suites | 14 October full run: 121 passed, 2 explicit provider skips; 15 October targeted run: 22 passed, no skips |
 | Rendered application | 42 FI/EN light/dark states; HTTP 200, no overflow or runtime errors in the final serial capture |
-| TypeScript / lint / translation keys and literal calls | Passed; 0 lint errors, 52 warnings; 1,215 keys, 5 locales, 0 missing |
+| TypeScript / lint / translation keys and literal calls | Passed; 0 lint errors, 52 warnings; 1,216 keys, 5 locales, 0 missing |
 | Production build / five route budgets / deployment guards | Passed; 12 deployment guards |
 | Scientific editor and laboratory-buyer review | Pending; automated tests do not replace it |
 | Paired live-model answer evaluation | 60-case baseline executed on 15 October: 50 completed, 10 interrupted, all 16 numerical results correct; see the follow-up review and post-fix evidence |

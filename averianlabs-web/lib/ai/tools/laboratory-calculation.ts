@@ -55,10 +55,11 @@ export const laboratoryCalculationTool: Tool = {
             "Retry this tool with all required values explicitly supplied by the user. Do not invent a value or perform manual arithmetic. If a required value was not supplied, ask the user for it.",
         },
       }
-    const inputs: LaboratoryInputs = { mode: parsed.data.mode }
-    for (const key of required[parsed.data.mode] ?? []) {
-      if (key !== "mode" && typeof parsed.data[key] === "number") inputs[key] = parsed.data[key]
-    }
+    const inputs: LaboratoryInputs = ctx.transcript ? { mode: parsed.data.mode } : parsed.data
+    if (ctx.transcript)
+      for (const key of required[parsed.data.mode] ?? []) {
+        if (key !== "mode" && typeof parsed.data[key] === "number") inputs[key] = parsed.data[key]
+      }
     const calculation = calculateLaboratory(inputs)
     if (!calculation) return { content: { error: "invalid_calculation", inputs } }
     const unprovided = missingUserQuantities(inputs, ctx.transcript, ctx.locale)

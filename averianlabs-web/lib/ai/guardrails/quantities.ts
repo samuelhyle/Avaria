@@ -2,6 +2,7 @@ import { type LaboratoryInputs, parseLaboratoryNumber } from "@/lib/calculations
 type Turn = { role: string; content: string }
 type Kind = "mass" | "volume" | "concentration"
 const numeric = "[+-]?(?:\\d+(?:[.,]\\d*)?|[.,]\\d+)(?:e[+-]?\\d+)?"
+const jsonNumeric = "[+-]?(?:\\d+(?:\\.\\d+)?|\\.\\d+)(?:e[+-]?\\d+)?"
 const mass = "(?:microgram\\p{L}*|mikrogram\\p{L}*|milligram\\p{L}*|[µμu]g|mcg|mg|g)"
 const volume =
   "(?:microlit\\p{L}*|mikrolit\\p{L}*|millilit\\p{L}*|[µμu]l|ml|litre\\p{L}*|liter\\p{L}*|litra\\p{L}*|l)"
@@ -49,7 +50,7 @@ export function missingUserQuantities(
     }
     // The calculator handoff deliberately supplies normalized, named JSON fields.
     const structured = new RegExp(
-      `"?(massMg|aliquotMcg|finalVolumeMl|stockMgPerMl|targetMgPerMl)"?\\s*:\\s*(${numeric})`,
+      `"?(massMg|aliquotMcg|finalVolumeMl|stockMgPerMl|targetMgPerMl)"?\\s*:\\s*(${jsonNumeric})`,
       "g",
     )
     for (const match of turn.content.matchAll(structured)) {
