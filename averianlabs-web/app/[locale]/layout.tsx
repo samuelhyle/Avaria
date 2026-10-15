@@ -152,16 +152,16 @@ export default async function LocaleLayout({
   )
 
   return (
-    <html
-      lang={locale}
-      className={`${GeistSans.variable} ${GeistMono.variable}`}
-      suppressHydrationWarning
-    >
-      <body
-        data-review-site={process.env.NEXT_PUBLIC_REVIEW_SITE === "true" ? "true" : undefined}
-        className="min-h-screen bg-bg text-ink antialiased"
+    <DocumentHydrationGate>
+      <html
+        lang={locale}
+        className={`${GeistSans.variable} ${GeistMono.variable}`}
+        suppressHydrationWarning
       >
-        <DocumentHydrationGate>
+        <body
+          data-review-site={process.env.NEXT_PUBLIC_REVIEW_SITE === "true" ? "true" : undefined}
+          className="min-h-screen bg-bg text-ink antialiased"
+        >
           <ThemeProvider>
             <MotionProvider>
               <OrganizationJsonLd />
@@ -176,8 +176,8 @@ export default async function LocaleLayout({
               </NextIntlClientProvider>
             </MotionProvider>
           </ThemeProvider>
-        </DocumentHydrationGate>
-      </body>
-    </html>
+        </body>
+      </html>
+    </DocumentHydrationGate>
   )
 }
