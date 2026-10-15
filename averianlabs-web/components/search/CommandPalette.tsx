@@ -9,7 +9,9 @@ import {
 } from "@/components/ui/Dialog"
 import { defaultVial } from "@/lib/products/selection"
 import type { Locale, Product } from "@/lib/products/types"
-import { formatCurrency } from "@/lib/utils/format"
+import { useSearchPalette } from "@/lib/search/palette"
+import { exactSkuVariant } from "@/lib/search/variant"
+import { formatCurrency, formatSize } from "@/lib/utils/format"
 import { Command } from "cmdk"
 import { ArrowRight, FlaskConical, Layers, Search, ShoppingBag } from "lucide-react"
 import { useTranslations } from "next-intl"
@@ -33,25 +35,11 @@ export function CommandPalette({ locale, products }: CommandPaletteProps) {
     { href: `/${locale}/peptide-calculator`, label: t("calculator"), icon: FlaskConical },
     { href: `/${locale}/documents`, label: e("documents"), icon: ShoppingBag },
   ]
-  const [open, setOpen] = useState(false)
+  const open = useSearchPalette((state) => state.open)
+  const setOpen = useSearchPalette((state) => state.setOpen)
   const [recent, setRecent] = useState<string[]>([])
+  const [query, setQuery] = useState("")
   const router = useRouter()
-
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
-        e.preventDefault()
-        setOpen((o) => !o)
-      }
-    }
-    const eventHandler = () => setOpen(true)
-    document.addEventListener("keydown", handler)
-    window.addEventListener("averianlabs:open-search", eventHandler)
-    return () => {
-      document.removeEventListener("keydown", handler)
-      window.removeEventListener("averianlabs:open-search", eventHandler)
-    }
-  }, [])
 
   useEffect(() => {
     if (!open) return
@@ -78,9 +66,10 @@ export function CommandPalette({ locale, products }: CommandPaletteProps) {
     [recent],
   )
 
-  const navigate = (href: string) => {
+  const navigate = (href: string, fullDocument = false) => {
     setOpen(false)
-    router.push(href)
+    if (fullDocument) window.location.assign(href)
+    else router.push(href)
   }
 
   return (
@@ -93,6 +82,8 @@ export function CommandPalette({ locale, products }: CommandPaletteProps) {
             <div className="flex items-center gap-3 border-b border-line px-4">
               <Search className="h-4 w-4 text-ink-subtle" />
               <Command.Input
+                value={query}
+                onValueChange={setQuery}
                 placeholder={t("searchPlaceholder")}
                 aria-label={t("searchPlaceholder")}
                 className="h-14 w-full bg-transparent text-base text-ink placeholder:text-ink-subtle focus:outline-none"
@@ -110,14 +101,17 @@ export function CommandPalette({ locale, products }: CommandPaletteProps) {
               >
                 {products.map((p) => {
                   const translation = p.translations?.[locale as Locale] ?? p.defaultTranslation
-                  const minVial = defaultVial(p)
+                  const exactVariant = exactSkuVariant(p, query)
+                  const vial = exactVariant ?? defaultVial(p)
+                  const href = `/${locale}/shop/${p.slug}${exactVariant ? `?sku=${encodeURIComponent(exactVariant.sku)}` : ""}`
                   return (
                     <Command.Item
                       key={p.slug}
                       value={`${p.slug} ${translation.name} ${p.casNumber ?? ""} ${p.vials.map((v) => `${v.sku} ${v.batch?.code ?? ""}`).join(" ")}`}
                       onSelect={() => {
-                        pushRecent(translation.name)
-                        navigate(`/${locale}/shop/${p.slug}`)
+                        pushRecent(exactVariant ? exactVariant.sku : translation.name)
+                        // A document navigation keeps the selected SKU, media and records atomic.
+                        navigate(href, true)
                       }}
                       className="flex cursor-pointer items-center gap-3 rounded-[var(--radius)] px-3 py-2.5 text-sm text-ink aria-selected:bg-accent-soft aria-selected:text-accent-ink"
                     >
@@ -135,13 +129,13 @@ export function CommandPalette({ locale, products }: CommandPaletteProps) {
                       <div className="flex-1">
                         <div className="font-medium">{translation.name}</div>
                         <div className="font-mono text-3xs text-ink-subtle">
-                          {minVial.sku} · {p.casNumber ?? translation.tagline}
+                          {vial.sku} · {formatSize(vial, locale)}
                         </div>
                       </div>
                       <div className="text-xs font-medium text-ink-muted">
-                        {minVial.purchaseMode === "direct"
-                          ? formatCurrency(minVial.priceCents, "EUR", locale)
-                          : minVial.purchaseMode === "quotation"
+                        {vial.purchaseMode === "direct" && vial.stockQty > 0 && vial.priceCents > 0
+                          ? formatCurrency(vial.priceCents, "EUR", locale)
+                          : vial.purchaseMode === "quotation"
                             ? t("quote")
                             : t("unavailable")}
                       </div>

@@ -114,9 +114,17 @@ test("search remains usable when localStorage is unavailable", async ({ cleanPag
     .first()
     .getByRole("button", { name: messages.en.nav.search, exact: true })
     .click()
-  await page.getByPlaceholder(messages.en.research.searchPlaceholder).fill("QA-PEPTIDE-5")
-  await page.getByRole("option", { name: /QA peptide/i }).click()
-  await expect(page).toHaveURL(/\/en\/shop\/qa-peptide/)
+  await page.getByPlaceholder(messages.en.research.searchPlaceholder).fill("QA-PEPTIDE-10")
+  const result = page.getByRole("option", { name: /QA peptide/i })
+  await expect(result).toContainText("QA-PEPTIDE-10")
+  await expect(result).toContainText("10 mg")
+  await expect(result).toContainText("€65")
+  await result.click()
+  await expect(page).toHaveURL(/\/en\/shop\/qa-peptide\?sku=QA-PEPTIDE-10$/)
+  await expect(page.locator("main figure figcaption").first()).toContainText("QA-PEPTIDE-10")
+  await expect(page.locator("main fieldset button[aria-pressed=true]")).toContainText(
+    "QA-PEPTIDE-10",
+  )
   expect(errors).toEqual([])
 })
 test("first visit completes eligibility before showing readable cookie choices", async ({

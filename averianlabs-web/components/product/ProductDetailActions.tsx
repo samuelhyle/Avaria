@@ -14,8 +14,7 @@ import { formatCurrency, formatPercent, formatSize } from "@/lib/utils/format"
 import { GitCompare } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { toast } from "sonner"
 
 export function ProductDetailActions({
@@ -35,23 +34,11 @@ export function ProductDetailActions({
   const r = useTranslations("research")
   const common = useTranslations("common")
   const compare = useCompare()
-  const router = useRouter()
-  const [index, setIndex] = useState(() =>
-    Math.max(
-      0,
-      product.vials.findIndex((v) => v.sku === initialSku),
-    ),
+  const index = Math.max(
+    0,
+    product.vials.findIndex((v) => v.sku === initialSku),
   )
   const [qty, setQty] = useState(1)
-  useEffect(() => {
-    setIndex(
-      Math.max(
-        0,
-        product.vials.findIndex((v) => v.sku === initialSku),
-      ),
-    )
-    setQty(1)
-  }, [initialSku, product.vials])
   const add = useCart((s) => s.add)
   const vial = product.vials[index]
   if (!vial) return null
@@ -59,12 +46,12 @@ export function ProductDetailActions({
   const direct = vial.purchaseMode === "direct" && vial.priceCents > 0 && vial.stockQty > 0
   const changeVial = (next: number) => {
     const selected = product.vials[next]
-    if (!selected) return
-    setIndex(next)
-    setQty(1)
+    if (!selected || selected.sku === vial.sku) return
     const url = new URL(window.location.href)
     url.searchParams.set("sku", selected.sku)
-    router.replace(`${url.pathname}${url.search}${url.hash}`, { scroll: false })
+    // Keep actions, imagery and exact batch evidence on the same server-selected SKU.
+    // A full GET commits them together rather than optimistically changing only the actions.
+    window.location.assign(`${url.pathname}${url.search}${url.hash}`)
   }
   const handleAdd = () => {
     if (!direct) return

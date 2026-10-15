@@ -5,6 +5,7 @@ import { ThemeToggle } from "@/components/layout/ThemeToggle"
 import { useCart } from "@/lib/cart/store"
 import { useOverlay } from "@/lib/hooks/use-overlay"
 import { CATEGORIES } from "@/lib/products/categories"
+import { requestSearchPalette } from "@/lib/search/palette"
 import { ChevronDown, ChevronRight, Menu, Search, ShoppingCart, X } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
@@ -22,7 +23,7 @@ export function MobileMenu({ locale, productsCount }: { locale: string; products
   const ref = useOverlay({ open, onClose: close })
   const search = () => {
     close()
-    window.dispatchEvent(new CustomEvent("averianlabs:open-search"))
+    requestSearchPalette()
   }
   const primary = [
     { path: "shop", label: t("allProducts") },

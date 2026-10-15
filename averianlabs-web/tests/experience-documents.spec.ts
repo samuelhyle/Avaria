@@ -123,11 +123,20 @@ for (const locale of ["en", "fi"]) {
       await expect(link(records.five)).toBeVisible()
       await expect(link(records.ten)).toHaveCount(0)
       await expect(link(fixture.id)).toBeVisible()
+      const selectedNavigation = page.waitForRequest((request) => {
+        const url = new URL(request.url())
+        return (
+          request.isNavigationRequest() &&
+          url.pathname === `/${locale}/shop/qa-peptide` &&
+          url.searchParams.get("sku") === "QA-PEPTIDE-10"
+        )
+      })
       await page
         .locator("main fieldset")
         .getByRole("button")
         .filter({ hasText: "QA-PEPTIDE-10" })
         .click()
+      await selectedNavigation
       await expect(page).toHaveURL(/sku=QA-PEPTIDE-10/)
       await expect(link(records.ten)).toBeVisible()
       await expect(link(records.five)).toHaveCount(0)

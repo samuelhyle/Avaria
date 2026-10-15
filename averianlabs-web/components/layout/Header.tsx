@@ -8,11 +8,13 @@ import { ThemeToggle } from "@/components/layout/ThemeToggle"
 import { useCatalogue } from "@/components/product/CatalogueProvider"
 import { Container } from "@/components/ui/Container"
 import { useCart } from "@/lib/cart/store"
+import { registerSearchShortcut, requestSearchPalette } from "@/lib/search/palette"
 import { cn } from "@/lib/utils/cn"
 import { Search, ShoppingCart, User } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useEffect } from "react"
 
 interface HeaderProps {
   locale: string
@@ -27,9 +29,7 @@ export function Header({ locale }: HeaderProps) {
   const cartCount = useCart((s) => s.items.reduce((count, item) => count + item.qty, 0))
   const openCart = useCart((s) => s.open)
 
-  const openSearch = () => {
-    window.dispatchEvent(new CustomEvent("averianlabs:open-search"))
-  }
+  useEffect(() => registerSearchShortcut(document), [])
 
   // Primary nav (Plan §6): Products · Batch verification · Quality · Support · Company.
   // Secondary resources (calculator, blog, community, glossary, documents, partner)
@@ -82,7 +82,7 @@ export function Header({ locale }: HeaderProps) {
           <div className="ml-auto flex items-center gap-1">
             <button
               type="button"
-              onClick={openSearch}
+              onClick={requestSearchPalette}
               aria-label={t("search")}
               className="inline-flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-[var(--radius)] border border-line bg-surface text-sm text-ink-subtle transition-colors hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg xl:w-auto xl:px-3"
             >
