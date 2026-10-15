@@ -24,7 +24,7 @@
   publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "22"
+  NODE_VERSION = "24.22.0"
   PNPM_VERSION = "10"
   # Declared explicitly so the deploy context matches the local intent.
   NODE_ENV = "production"
