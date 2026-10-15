@@ -25,6 +25,7 @@ import { getAdminOrNull } from "@/lib/admin/guard"
 import { type AgentEvent, type PersistedMessage, runAgent } from "@/lib/ai/agent/loop"
 import { renderLaboratoryAnswer } from "@/lib/ai/answers/calculation"
 import { renderCatalogueAnswer } from "@/lib/ai/answers/catalogue"
+import { renderGuidanceAnswer } from "@/lib/ai/answers/guidance"
 import { calculationProseWarnings } from "@/lib/ai/guardrails/calculation"
 import { unsupportedCitationMarkers } from "@/lib/ai/guardrails/citations"
 import { preflightInput } from "@/lib/ai/guardrails/input"
@@ -395,8 +396,12 @@ export async function POST(request: Request): Promise<Response> {
               return result?.calculation?.inputs ? [result.calculation.inputs] : []
             })
             const controlledCalculation = renderLaboratoryAnswer(calculationInputs, locale)
+            const controlledGuidance = renderGuidanceAnswer(toolTrace, locale)
             accumulatedText =
-              controlledCalculation ?? renderCatalogueAnswer(toolTrace, locale) ?? accumulatedText
+              controlledCalculation ??
+              controlledGuidance ??
+              renderCatalogueAnswer(toolTrace, locale) ??
+              accumulatedText
             const report = verifyResponse(accumulatedText, await getStorefrontCatalogue())
             report.warnings.push(
               ...unsupportedCitationMarkers(
@@ -416,6 +421,15 @@ export async function POST(request: Request): Promise<Response> {
                   (trace.result as { error?: unknown } | undefined)?.error,
               )
             if (calculationIncomplete) report.warnings.push("calculation_not_completed")
+            if (
+              !controlledGuidance &&
+              toolTrace.some(
+                (trace) =>
+                  trace.name === "getResearchGuidance" &&
+                  (trace.result as { error?: unknown } | undefined)?.error,
+              )
+            )
+              report.warnings.push("guidance_not_completed")
             report.passed = report.warnings.length === 0
             if (
               report.unknownSkus.length > 0 ||

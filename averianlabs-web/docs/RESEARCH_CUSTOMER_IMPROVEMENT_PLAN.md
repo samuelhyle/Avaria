@@ -169,7 +169,8 @@ The ordered scope and acceptance criteria are maintained in the [UI, calculator,
 - [x] Deliver explicit units, concentration/required-volume/dilution/aliquot modes, numerical boundaries, formula/assumption displays, calculation exports and owner-only private history.
 - [x] Deliver inspectable original-document references, exact-SKU comparisons, deterministic calculation cards, truthful service/action status and catalogue source-version lifecycle checks.
 - [x] Deliver human-gated community publication, durable moderation retries, discovery/search/filtering/pagination, exact counts, Markdown/source links, private drafts and localized review notifications.
-- [ ] Execute the complete live-provider answer evaluation and obtain Finnish/English scientific editorial and laboratory-buyer review. The 60 paired scenarios and deterministic contracts are implemented; model-free tests are not a live-provider certification.
+- [x] Execute and review the 60-case live baseline. It produced 50 completed answers, 10 interrupted streams and 16 correct numerical tool results. Record-derived answers, citation checks, platform facts and stream keep-alives address the findings.
+- [ ] Complete independent Finnish/English scientific editorial and laboratory-buyer acceptance, including real approved sources and release-specific answer review. A baseline or targeted rerun is not a scientific certification.
 - [ ] Add molar conversion after approved chemical-form/molar-mass data and numerical review. Add original-report summaries after approved report text, permissions, source/version checks and model evaluations exist.
 
 These changes preserve the outstanding scientific evidence, seller/provider setup and merchant release requirements. Real reviewed introductory community content and the authenticated maintenance scheduler remain operational setup tasks; empty states and durable human-review queues do not imply they have been supplied.

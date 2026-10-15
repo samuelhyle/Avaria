@@ -30,6 +30,7 @@ import type { Locale } from "@/lib/i18n/config"
 import { prepareCommunityDraftTool, readDiscussionTool } from "./community"
 import { getDocumentsTool } from "./get-documents"
 import { laboratoryCalculationTool } from "./laboratory-calculation"
+import { researchGuidanceTool } from "./research-guidance"
 
 export type { ProposedAction }
 
@@ -86,6 +87,7 @@ export interface Tool {
 }
 
 export const TOOL_REGISTRY: Record<string, Tool> = {
+  [researchGuidanceTool.definition.name]: researchGuidanceTool,
   [laboratoryCalculationTool.definition.name]: laboratoryCalculationTool,
   [getDocumentsTool.definition.name]: getDocumentsTool,
   [readDiscussionTool.definition.name]: readDiscussionTool,
@@ -137,6 +139,7 @@ export async function runTool(name: string, args: unknown, ctx: ToolContext): Pr
 }
 
 const READ_ONLY_TOOLS = new Set([
+  "getResearchGuidance",
   "searchProducts",
   "getProduct",
   "getBatches",

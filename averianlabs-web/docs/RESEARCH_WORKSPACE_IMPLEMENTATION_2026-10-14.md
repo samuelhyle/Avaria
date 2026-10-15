@@ -34,11 +34,11 @@ Current executed check results and rendered application evidence are recorded un
 | TypeScript / lint / translation keys and literal calls | Passed; 0 lint errors, 52 warnings; 1,215 keys, 5 locales, 0 missing |
 | Production build / five route budgets / deployment guards | Passed; 12 deployment guards |
 | Scientific editor and laboratory-buyer review | Pending; automated tests do not replace it |
-| Paired live-model answer evaluation | 60 scenarios implemented; full execution pending isolated provider configuration |
+| Paired live-model answer evaluation | 60-case baseline executed on 15 October: 50 completed, 10 interrupted, all 16 numerical results correct; see the follow-up review and post-fix evidence |
 
 The integration checks cover account isolation/export/deletion, private drafts, held submissions, publication/reply counts, moderation failure/retry, permission enforcement, and batch-only public reports versus wrong-product/private/future/other-language reports. Existing checkout tests retain signed-provider replay, idempotency and stock protection using test configuration.
 
-The live evaluation script refuses a non-isolated target and disables write tools. A missing provider or a rate limit exits as incomplete instead of reporting success. Its answer archive requires separate factual-support, citation and Finnish/English editorial assessment.
+The live evaluation script defaults to an isolated local target and disables write tools. The 15 October follow-up adds an explicit anonymous, noindex/nofollow hosted-review target with no persistence and resumable checkpoints. A missing provider or a rate limit exits as incomplete instead of reporting success. Its answer archive requires separate factual-support, citation and Finnish/English editorial assessment.
 
 ## Remaining gates
 

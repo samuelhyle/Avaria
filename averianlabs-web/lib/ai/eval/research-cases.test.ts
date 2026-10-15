@@ -45,6 +45,7 @@ describe("research evaluation contracts", () => {
     const ctx = { locale: "en" as const, cart: [], readOnly: true }
     const names = listToolDefinitions(ctx).map((t) => t.function.name)
     expect(names).toContain("calculateLaboratory")
+    expect(names).toContain("getResearchGuidance")
     expect(names).not.toContain("createSupportTicket")
     await expect(runTool("createSupportTicket", {}, ctx)).rejects.toThrow("read_only")
   })

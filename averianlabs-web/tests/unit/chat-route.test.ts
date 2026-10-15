@@ -30,7 +30,27 @@ vi.mock("@/lib/ai/agent/loop", () => ({
   runAgent: async (input: { signal: AbortSignal }, sink: { enqueue: (event: unknown) => void }) => {
     state.agentSignal = input.signal
     if (state.mode === "slow") await new Promise((resolve) => setTimeout(resolve, 13000))
-    if (state.mode === "calculation") {
+    if (state.mode.startsWith("guidance")) {
+      sink.enqueue({
+        type: "tool-call",
+        id: "guide",
+        name: "getResearchGuidance",
+        args: { topic: "dilution_limit" },
+      })
+      sink.enqueue({
+        type: "tool-result",
+        id: "guide",
+        name: "getResearchGuidance",
+        content:
+          state.mode === "guidance-error"
+            ? { error: "unknown_guidance_topic" }
+            : { topic: "dilution_limit" },
+      })
+      sink.enqueue({
+        type: "text",
+        delta: "There is no positive solution and an unapproved preparation procedure is required.",
+      })
+    } else if (state.mode === "calculation") {
       const inputs = { mode: "concentration" as const, massMg: 1, finalVolumeMl: 3 }
       sink.enqueue({ type: "tool-call", id: "calc", name: "calculateLaboratory", args: inputs })
       sink.enqueue({
@@ -128,5 +148,18 @@ describe("research chat final output", () => {
     expect(vi.getTimerCount()).toBe(1)
     await vi.advanceTimersByTimeAsync(13001)
     expect(vi.getTimerCount()).toBe(0)
+  })
+  it("renders scientific guidance from the reviewed topic and suppresses generated procedures", async () => {
+    state.mode = "guidance"
+    const response = await ask("fi")
+    expect(response).toContain("positiivinen V₂")
+    expect(response).toContain("V₂ ≥ V₁")
+    expect(response).not.toContain("unapproved preparation")
+  })
+  it("cannot fall back to a generated scientific explanation after a failed guidance lookup", async () => {
+    state.mode = "guidance-error"
+    const response = await ask()
+    expect(response).not.toContain("unapproved preparation")
+    expect(response).toContain("I could not verify this answer")
   })
 })

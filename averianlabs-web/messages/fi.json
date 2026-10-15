@@ -897,7 +897,8 @@
       "getOrderStatus": "Tilauksen tila",
       "trackShipment": "Toimituksen seuranta",
       "createSupportTicket": "Tukipyyntö",
-      "lookup": "Tietojen haku"
+      "lookup": "Tietojen haku",
+      "getResearchGuidance": "Taustatiedot ja rajaukset"
     },
     "preparing": "Valmistellaan vastausta…"
   },

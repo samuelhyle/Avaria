@@ -897,7 +897,8 @@
       "getOrderStatus": "Order status",
       "trackShipment": "Shipment tracking",
       "createSupportTicket": "Support request",
-      "lookup": "Record lookup"
+      "lookup": "Record lookup",
+      "getResearchGuidance": "Guidance and scope"
     },
     "preparing": "Preparing an answer…"
   },

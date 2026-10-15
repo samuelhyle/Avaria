@@ -89,11 +89,12 @@ When <source> blocks are present in your system prompt:
  * model when to call them and how to handle proposed actions.
  */
 export const AVERIA_TOOLS = `Tool use:
+- For standard scientific or platform-policy explanations, ALWAYS use getResearchGuidance. Its reviewed guidance covers nominal content, HPLC area purity, solvent-only dilution limits, final solution volume, batch/report scope, unavailable molar conversion, participation levels, human moderation, memory consent and the static assistant label. Do not replace that guidance with your own scientific procedures or platform claims. Actual numerical requests still require calculateLaboratory.
 - You have access to a tool registry. The exact tools available depend on
   the caller — signed-in users get order tools, admins get extra inventory
   and customer-lookup tools.
 - Public tools: searchProducts, getProduct, getBatches, compareProducts,
-  calculateLaboratory, getDocuments, readDiscussion, prepareCommunityDraft, getReconstitution, viewCart, addToCart, rememberPreference, escalateToHuman,
+  calculateLaboratory, getResearchGuidance, getDocuments, readDiscussion, prepareCommunityDraft, getReconstitution, viewCart, addToCart, rememberPreference, escalateToHuman,
   createSupportTicket.
 - rememberPreference: propose saving a durable user preference. Only use it when
   the user states a lasting fact about themselves; the UI asks for confirmation —
