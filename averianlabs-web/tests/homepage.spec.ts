@@ -30,6 +30,57 @@ test.describe("homepage", () => {
       expect(errors).toEqual([])
     }
   })
+  test("cached scripts hydrate complete EN/FI content during slow HTML delivery", async ({
+    cleanPage: page,
+    context,
+  }) => {
+    test.setTimeout(120_000)
+    const errors: string[] = []
+    page.on("pageerror", (error) => errors.push(error.message))
+    await page.setViewportSize({ width: 1440, height: 900 })
+    const openAndCloseCart = async (locale: "en" | "fi") => {
+      await page
+        .locator("header")
+        .getByRole("button", { name: locale === "fi" ? "Ostoskori" : "Cart", exact: true })
+        .click()
+      await expect(page.getByRole("dialog")).toBeVisible()
+      await page.keyboard.press("Escape")
+      await expect(page.getByRole("dialog")).toBeHidden()
+    }
+    // Warm the native script cache and prove its event handlers are attached first.
+    await page.goto("/en")
+    await openAndCloseCart("en")
+    const cdp = await context.newCDPSession(page)
+    await cdp.send("Network.enable")
+    try {
+      await cdp.send("Network.emulateNetworkConditions", {
+        offline: false,
+        latency: 30,
+        downloadThroughput: 32 * 1024,
+        uploadThroughput: 256 * 1024,
+        connectionType: "wifi",
+      })
+      for (let index = 0; index < 6; index++) {
+        const locale = index % 2 ? "en" : "fi"
+        await page.goto(`/${locale}`)
+        await expect(page.locator("main h1")).toBeVisible()
+        await expect(page.locator("main + footer")).toBeVisible()
+        await openAndCloseCart(locale)
+        expect(
+          errors,
+          `native cached-script hydration for ${locale}, navigation ${index + 1}`,
+        ).toEqual([])
+      }
+    } finally {
+      await cdp.send("Network.emulateNetworkConditions", {
+        offline: false,
+        latency: 0,
+        downloadThroughput: -1,
+        uploadThroughput: -1,
+      })
+      await cdp.detach()
+    }
+  })
   test("puts material search, records and research tasks before decorative media", async ({
     cleanPage: page,
   }) => {
