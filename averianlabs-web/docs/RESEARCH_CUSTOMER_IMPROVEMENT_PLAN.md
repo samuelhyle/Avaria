@@ -179,3 +179,8 @@ These changes preserve the outstanding scientific evidence, seller/provider setu
 - [Stripe idempotent requests](https://docs.stripe.com/api/idempotent_requests)
 - [Vero: intra-community trade](https://www.vero.fi/en/businesses-and-corporations/taxes-and-charges/vat/international-commerce/intra-community-trade/)
 - [W3C: understanding WCAG 2.2](https://www.w3.org/WAI/WCAG22/Understanding/)
+
+
+## Follow-up — 15 October 2026
+
+The [editorial, assistant-evaluation and recovery review](RESEARCH_EDITORIAL_REVIEW_2026-10-15.md) continues the remaining work. It records corrected Finnish/English terminology and workflow copy, controlled calculation explanations, source-backed numbered citations and a successful application-snapshot restore rehearsal. The live evaluation preserves partial and failed evidence separately. Approved seller details, original product/batch records and independent scientific/customer approval remain pending; the owner will provide the source records later.

@@ -56,7 +56,7 @@ function renderProductDocument(
   if (product.casNumber) specs.push(`CAS number: ${product.casNumber}`)
   if (product.molecularFormula) specs.push(`Molecular formula: ${product.molecularFormula}`)
   if (product.molecularWeight !== undefined)
-    specs.push(`Molecular weight: ${product.molecularWeight} g/mol`)
+    specs.push(`Molar mass: ${product.molecularWeight} g/mol`)
   if (product.sequence) specs.push(`Sequence: ${product.sequence}`)
   specs.push(`Storage: ${product.storageTemp}`)
 

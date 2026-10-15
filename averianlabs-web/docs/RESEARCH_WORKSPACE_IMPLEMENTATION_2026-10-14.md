@@ -55,3 +55,8 @@ The verified build is published on [the Finnish site](https://averianlabs-demo.n
 Localized metadata is emitted in the initial head, using the supported [Next.js blocking-metadata setting](https://nextjs.org/docs/app/api-reference/config/next-config-js/htmlLimitedBots). This addresses the suspected streaming interaction behind an intermittent hydration warning found during release checks; repeated local and hosted rendering checks validate the final behavior.
 
 Final public-domain checks passed: 29 HTTP checks, 28 browser states with no overflow/runtime errors or blocking axe findings, and four completed live assistant/tool checks. The same four cases also passed on the immutable deployment URL. See [published evidence](verification/research-workspace-2026-10-14/published/checks.json) and [live assistant evidence](verification/research-workspace-2026-10-14/published/ai-smoke.json).
+
+
+## Follow-up — 15 October 2026
+
+The [editorial, assistant-evaluation and recovery review](RESEARCH_EDITORIAL_REVIEW_2026-10-15.md) continues the remaining work. It records corrected Finnish/English terminology and workflow copy, controlled calculation explanations, source-backed numbered citations and a successful application-snapshot restore rehearsal. The live evaluation preserves partial and failed evidence separately. Approved seller details, original product/batch records and independent scientific/customer approval remain pending; the owner will provide the source records later.

@@ -23,7 +23,9 @@
 
 import { getAdminOrNull } from "@/lib/admin/guard"
 import { type AgentEvent, type PersistedMessage, runAgent } from "@/lib/ai/agent/loop"
+import { renderLaboratoryAnswer } from "@/lib/ai/answers/calculation"
 import { calculationProseWarnings } from "@/lib/ai/guardrails/calculation"
+import { unsupportedCitationMarkers } from "@/lib/ai/guardrails/citations"
 import { preflightInput } from "@/lib/ai/guardrails/input"
 import { verifyResponse } from "@/lib/ai/guardrails/verify"
 import { getAnonFromRequest, getConsentFromRequest } from "@/lib/ai/memory/consent"
@@ -222,7 +224,7 @@ export async function POST(request: Request): Promise<Response> {
   let conversation: Awaited<ReturnType<typeof getOrCreateConversation>> | null = null
   let history: PersistedMessage[] = []
 
-  if (owner) {
+  if (owner && !parsed.noPersist) {
     try {
       conversation = await getOrCreateConversation({
         owner,
@@ -366,16 +368,22 @@ export async function POST(request: Request): Promise<Response> {
               /^\*{0,2}Research use only\.?\*{0,2}$/gim,
               "Vain laboratoriotutkimukseen.",
             )
-          const report = verifyResponse(accumulatedText, await getStorefrontCatalogue())
           const calculationInputs = toolTrace.flatMap((trace) => {
             const result = trace.result as
               | { calculation?: { inputs: import("@/lib/calculations").LaboratoryInputs } }
               | undefined
             return result?.calculation?.inputs ? [result.calculation.inputs] : []
           })
+          const controlledCalculation = renderLaboratoryAnswer(calculationInputs, locale)
+          accumulatedText = controlledCalculation ?? accumulatedText
+          const report = verifyResponse(accumulatedText, await getStorefrontCatalogue())
           report.warnings.push(
-            ...calculationProseWarnings(accumulatedText, calculationInputs, locale),
+            ...unsupportedCitationMarkers(accumulatedText, citations as Array<{ index?: number }>),
           )
+          if (!controlledCalculation)
+            report.warnings.push(
+              ...calculationProseWarnings(accumulatedText, calculationInputs, locale),
+            )
           const calculationIncomplete =
             calculationInputs.length === 0 &&
             toolTrace.some(

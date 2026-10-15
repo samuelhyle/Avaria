@@ -1,6 +1,6 @@
 # Research storefront release and operations runbook
 
-Updated: 13 October 2026. This accompanies [the implementation plan](RESEARCH_CUSTOMER_IMPROVEMENT_PLAN.md).
+Updated: 15 October 2026. This accompanies [the implementation plan](RESEARCH_CUSTOMER_IMPROVEMENT_PLAN.md).
 
 ## Current hosting and deployment
 
@@ -116,3 +116,14 @@ Making a plan private removes its activity events, filters stale share events fr
 Newsletter registration uses double opt-in and queues its confirmation transactionally. Marketing delivery is not enabled. The displayed withdrawal route is support contact; implement an authenticated or signed unsubscribe route before enabling any campaign and include it in each marketing message. No monthly frequency is promised.
 
 The research workspace adds private history/drafts and stricter pending-post visibility. Before restoring older code, verify that pending threads/posts remain private. Additive schema compatibility alone does not establish safe publication behavior. Preserve the latest private database snapshot and published deployment lock until the connected source branch is synchronized.
+
+
+## 15 October follow-up: evidence and recovery
+
+The [editorial and release review](RESEARCH_EDITORIAL_REVIEW_2026-10-15.md) records the terminology corrections, live-answer findings, controlled calculation explanations and recovery rehearsal. Seller details and original specifications/reports remain owner-supplied inputs; the owner will provide them later.
+
+An application logical-snapshot restore was rehearsed against a new empty local database: 47 public tables, 125 rows, 6 matching migration hashes and 48 validated foreign keys. The source snapshot was checksum-verified, and an existing target was refused. This is narrower than a provider PITR/full-cluster rehearsal. Keep the original private snapshot, and approve backup retention and provider recovery before merchant launch.
+
+To repeat against a suitable snapshot, create an empty local PostgreSQL/pgvector database named `averian_restore_rehearsal_*`. Supply `RESTORE_TEST_DATABASE_URL`, `RESTORE_SNAPSHOT_PATH` and `RESTORE_SNAPSHOT_SHA256` through the local environment, run `pnpm exec tsx scripts/rehearse-restore.ts`, inspect the aggregate result and remove that scratch database afterward. The script only accepts a local dedicated database and requires an exact migration revision; it never resets an existing target.
+
+The live assistant evaluator defaults to an isolated local app with a matching local `TEST_DATABASE_URL`. The existing hosted review origin can be evaluated explicitly with `BASE_URL=https://averianlabs-demo.netlify.app AI_EVAL_TARGET=review AI_EVAL_OUTPUT=<new-evidence-path> pnpm ai:eval:research`. Hosted runs are anonymous, require noindex/nofollow and disable persistence, retrieval and write tools. They use the usual limits. A limited/unavailable run saves an incomplete checkpoint and exits 2; resume after recovery with `AI_EVAL_RESUME=1` and the same output path. A runtime/numerical pass still needs separate answer, source and language assessment. Keep baseline and post-fix runs separately identified.

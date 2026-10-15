@@ -1,100 +1,110 @@
-/** Live-provider evaluation against an isolated local app, with write tools disabled. */
-import { mkdir, writeFile } from "node:fs/promises"
+/** Live evaluation: isolated local app, or explicitly selected anonymous review site. */
+import { createHash } from "node:crypto"
+import { mkdir, readFile, writeFile } from "node:fs/promises"
+import { dirname } from "node:path"
 import { RESEARCH_EVAL_CASES } from "@/lib/ai/eval/research-cases"
-import { calculateLaboratory } from "@/lib/calculations"
-const base = process.env.BASE_URL
-if (
-  !base ||
-  !["localhost", "127.0.0.1"].includes(new URL(base).hostname) ||
-  !process.env.TEST_DATABASE_URL ||
-  process.env.TEST_DATABASE_URL !== process.env.DATABASE_URL
-)
-  throw new Error("An isolated local target and matching TEST_DATABASE_URL are required.")
-const rows = []
-for (const entry of RESEARCH_EVAL_CASES) {
-  const started = Date.now()
-  const response = await fetch(`${base}/api/ai/chat`, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      ...(process.env.AI_EVAL_COOKIE ? { cookie: process.env.AI_EVAL_COOKIE } : {}),
-    },
-    body: JSON.stringify({
-      locale: entry.locale,
-      noPersist: true,
-      readOnly: true,
-      noRetrieve: true,
-      messages: [{ id: crypto.randomUUID(), role: "user", content: entry.prompt }],
-    }),
+import { assessResearchResponse, validateEvaluationTarget } from "@/lib/ai/eval/runner"
+
+const target = validateEvaluationTarget(process.env)
+if (target.kind === "hosted_review") {
+  const response = await fetch(`${target.origin}/en`, {
+    redirect: "error",
+    signal: AbortSignal.timeout(60_000),
   })
-  if (response.status === 503) {
-    console.error("Live provider unavailable: evaluation not executed; this is not a pass.")
-    process.exit(2)
+  const robots = response.headers.get("x-robots-tag") ?? ""
+  await response.body?.cancel()
+  if (!response.ok || !/noindex/i.test(robots) || !/nofollow/i.test(robots))
+    throw new Error("Hosted target must still be a noindex, nofollow review site")
+}
+
+type Row = ReturnType<typeof assessResearchResponse> & { latencyMs: number; checkedAt: string }
+const output =
+  process.env.AI_EVAL_OUTPUT ??
+  `docs/verification/research-evaluation/${new Date().toISOString().slice(0, 10)}/answers.json`
+const suiteHash = createHash("sha256").update(JSON.stringify(RESEARCH_EVAL_CASES)).digest("hex")
+const rows: Row[] = []
+if (process.env.AI_EVAL_RESUME === "1") {
+  const previous = JSON.parse(await readFile(output, "utf8"))
+  if (previous.origin !== target.origin || previous.suiteHash !== suiteHash)
+    throw new Error("Resume target and scenario revision must match the saved evaluation")
+  rows.push(...previous.rows)
+} else {
+  try {
+    await readFile(output)
+    throw new Error("Output already exists; select a new path or explicitly resume")
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error
   }
-  if (response.status === 429) {
-    console.error("Evaluation rate limited. Resume after the limit resets; this is not a pass.")
-    process.exit(2)
-  }
-  const events = (await response.text())
-    .split("\n")
-    .filter((s) => s.startsWith("data: "))
-    .flatMap((s) => {
-      try {
-        return [JSON.parse(s.slice(6))]
-      } catch {
-        return []
-      }
-    })
-  const answer = events
-    .filter((e) => e.type === "text")
-    .map((e) => e.delta)
-    .join("")
-  const calculations = events
-    .filter((e) => e.type === "tool-result" && e.content?.calculation)
-    .map((e) => e.content.calculation)
-  const expected = entry.calculation ? calculateLaboratory(entry.calculation) : null
-  const numericalCorrectness =
-    !expected ||
-    calculations.some((c) =>
-      Object.entries(expected.values).every(
-        ([k, v]) =>
-          typeof c.values?.[k] === "number" &&
-          Math.abs(c.values[k] - v) <= 1e-8 * Math.max(1, Math.abs(v)),
-      ),
-    )
-  const invalidSuccess = Boolean(entry.mustAbstain && calculations.length > 0)
-  const completed = response.ok && answer.length > 0 && !events.some((e) => e.type === "error")
-  rows.push({
-    id: entry.id,
-    locale: entry.locale,
-    status: response.status,
-    completed,
-    numericalCorrectness,
-    invalidSuccess,
-    assessment: {
-      taskCompletion: completed ? "runtime_completed" : "incomplete",
-      numericalCorrectness: expected ? (numericalCorrectness ? "pass" : "fail") : "not_applicable",
-      factualSupport: "pending_human_review",
-      citationValidity: "pending_source_review",
-      languageQuality: "pending_finnish_english_editorial_review",
-      abstention: entry.mustAbstain ? "pending_answer_review" : "not_applicable",
-    },
-    latencyMs: Date.now() - started,
-    answer,
-    toolNames: events.filter((e) => e.type === "tool-result").map((e) => e.name),
-    citations: events.filter((e) => e.type === "citations").flatMap((e) => e.citations),
-  })
-  console.log(
-    `${entry.locale} ${entry.id}: ${completed && numericalCorrectness && !invalidSuccess ? "checked" : "needs review"}`,
+}
+
+async function checkpoint(state: "running" | "incomplete" | "executed", reason?: string) {
+  await mkdir(dirname(output), { recursive: true })
+  await writeFile(
+    output,
+    `${JSON.stringify(
+      {
+        checkedAt: new Date().toISOString(),
+        origin: target.origin,
+        target: target.kind,
+        suiteHash,
+        state,
+        reason,
+        expectedCases: RESEARCH_EVAL_CASES.length,
+        executedCases: rows.length,
+        scope:
+          "Live API, no persistence, no retrieval, read-only tools. Hosted review runs are anonymous with no cookies. Source, language and scientific assessment are separate from runtime/numerical checks.",
+        rows,
+      },
+      null,
+      2,
+    )}\n`,
   )
 }
-await mkdir("docs/verification/research-workspace-2026-10-14", { recursive: true })
-await writeFile(
-  "docs/verification/research-workspace-2026-10-14/live-ai-evaluation.json",
-  `${JSON.stringify({ checkedAt: new Date().toISOString(), scope: "Isolated app, live model, read-only tool registry. Automated numerical/task checks; scientific/editorial judgement of each answer remains required.", rows }, null, 2)}\n`,
-)
 
-if (rows.some((r) => !r.completed || !r.numericalCorrectness || r.invalidSuccess)) process.exit(1)
-console.log(
-  "Runtime/numerical checks passed; review factual support, citations and Finnish/English wording in the saved answers before release.",
-)
+await checkpoint("running")
+for (const entry of RESEARCH_EVAL_CASES) {
+  if (rows.some((row) => row.id === entry.id && row.locale === entry.locale)) continue
+  const started = Date.now()
+  try {
+    const response = await fetch(`${target.origin}/api/ai/chat`, {
+      method: "POST",
+      redirect: "error",
+      signal: AbortSignal.timeout(180_000),
+      headers: {
+        "content-type": "application/json",
+        ...(process.env.AI_EVAL_COOKIE ? { cookie: process.env.AI_EVAL_COOKIE } : {}),
+      },
+      body: JSON.stringify({
+        locale: entry.locale,
+        noPersist: true,
+        readOnly: true,
+        noRetrieve: true,
+        messages: [{ id: crypto.randomUUID(), role: "user", content: entry.prompt }],
+      }),
+    })
+    if (response.status === 429 || response.status === 503) {
+      await response.body?.cancel()
+      const reason = response.status === 429 ? "rate_limited" : "provider_unavailable"
+      await checkpoint("incomplete", reason)
+      console.error(`${reason}: answers saved; resume after recovery. This is not a pass.`)
+      process.exit(2)
+    }
+    const row = {
+      ...assessResearchResponse(entry, response.status, await response.text()),
+      latencyMs: Date.now() - started,
+      checkedAt: new Date().toISOString(),
+    }
+    rows.push(row)
+    await checkpoint("running")
+    console.log(
+      `${rows.length}/${RESEARCH_EVAL_CASES.length} ${entry.locale}/${entry.id}: ${row.completed && row.numericalCorrectness && !row.invalidSuccess ? "checked" : "needs review"}`,
+    )
+  } catch (error) {
+    await checkpoint("incomplete", (error as Error).name)
+    throw error
+  }
+}
+await checkpoint("executed")
+if (rows.some((row) => !row.completed || !row.numericalCorrectness || row.invalidSuccess))
+  process.exit(1)
+console.log("Runtime/numerical checks completed. Saved answers still require editorial assessment.")

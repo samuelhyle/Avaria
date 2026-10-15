@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-10-15T10:06:12.288Z",
+  "scope": "Private application logical snapshot restored into empty local PostgreSQL/pgvector. No hosted database writes; not a provider PITR or full-cluster recovery test.",
+  "snapshotDeployId": "6acfdd709ba5414797142d54",
+  "snapshotSha256": "8ccdd4f84bf7aa2ab8f79662023ee693b37af117b4b14acd717a8e33d7a4d5e0",
+  "migrationHashesMatched": 6,
+  "publicTables": 47,
+  "restoredRows": 125,
+  "validatedForeignKeys": 48,
+  "allValuesMatched": true,
+  "state": "passed",
+  "existingDatabaseRefusedOnSecondAttempt": true,
+  "snapshotFileMode": "0600"
+}
