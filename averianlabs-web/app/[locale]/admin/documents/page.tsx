@@ -36,7 +36,7 @@ export default async function AdminDocumentsPage({
             href={`/${locale}`}
             className="mt-4 inline-block text-sm text-accent hover:underline"
           >
-            ← Home
+            ← {t("home")}
           </Link>
         </ForbiddenShell>
       </Container>
@@ -55,15 +55,12 @@ export default async function AdminDocumentsPage({
       <AdminShell member={member}>
         <header className="mb-6">
           <Badge tone="warn" size="sm" className="mb-2">
-            Admin · Documents
+            {t("badge")}
           </Badge>
           <h1 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">
             {t("documents")}
           </h1>
-          <p className="mt-1 text-sm text-ink-muted">
-            Manage the typed documents (COA, SDS, HPLC, METHOD, NMR, SPEC, MSDS) that surface on
-            product pages and at /documents/[id].
-          </p>
+          <p className="mt-1 text-sm text-ink-muted">{t("documentsSub")}</p>
         </header>
 
         <AdminDocumentsClient

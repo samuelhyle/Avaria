@@ -5,13 +5,16 @@ import type { AdminMember } from "@/lib/admin"
 import { cn } from "@/lib/utils/cn"
 import {
   Activity,
+  Boxes,
   ChevronRight,
   FileText,
   LogOut,
+  Package,
   ScrollText,
   ShieldAlert,
   Users,
 } from "lucide-react"
+import { signOut } from "next-auth/react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -32,27 +35,46 @@ export function AdminShell({ member, children }: AdminShellProps) {
   const pathname = usePathname()
   const t = useTranslations("admin")
 
+  // The admin routes live under a locale prefix. The links below used to point
+  // at the bare `/admin` paths, so every click went through the middleware
+  // redirect, and the client-side RSC prefetch for the link was upgraded to
+  // HTTPS by the CSP — which a plain-HTTP local server cannot answer.
+  const locale = pathname.split("/").filter(Boolean)[0] ?? "en"
+  const adminPath = (path: string) => `/${locale}${path}`
+
   const navItems: NavItem[] = [
     {
-      href: "/admin",
+      href: adminPath("/admin"),
       label: t("dashboard"),
       icon: Activity,
       description: t("dashboardSub"),
     },
     {
-      href: "/admin/moderation",
+      href: adminPath("/admin/moderation"),
       label: t("moderation"),
       icon: ShieldAlert,
       description: t("moderationSub"),
     },
     {
-      href: "/admin/documents",
+      href: adminPath("/admin/orders"),
+      label: t("orders"),
+      icon: Package,
+      description: t("ordersSub"),
+    },
+    {
+      href: adminPath("/admin/inventory"),
+      label: t("inventory"),
+      icon: Boxes,
+      description: t("inventorySub"),
+    },
+    {
+      href: adminPath("/admin/documents"),
       label: t("documents"),
       icon: FileText,
       description: t("documentsSub"),
     },
     {
-      href: "/admin/audit",
+      href: adminPath("/admin/audit"),
       label: t("audit"),
       icon: ScrollText,
       description: t("auditSub"),
@@ -104,18 +126,26 @@ export function AdminShell({ member, children }: AdminShellProps) {
           </nav>
 
           <div className="mt-4 border-t border-line pt-4">
-            <Link
-              href="/api/auth/signout"
-              className="flex items-center gap-2 rounded-[var(--radius)] px-3 py-2 text-xs text-ink-muted hover:bg-danger-soft hover:text-danger"
+            <button
+              type="button"
+              onClick={() =>
+                signOut({ redirect: false }).then(() => window.location.assign(`/${locale}`))
+              }
+              className="flex w-full items-center gap-2 rounded-[var(--radius)] px-3 py-2 text-xs text-ink-muted hover:bg-danger-soft hover:text-danger"
             >
-              <LogOut className="h-3 w-3" />
+              <LogOut className="h-3 w-3" aria-hidden />
               {t("signOut")}
-            </Link>
+            </button>
           </div>
         </div>
       </aside>
 
-      <main>{children}</main>
+      {/*
+        The page layout already renders the single `<main>` landmark, so this
+        must not be another one: nested `<main>` elements are invalid HTML and
+        give assistive technology two competing content landmarks.
+      */}
+      <div>{children}</div>
     </div>
   )
 }
@@ -125,13 +155,12 @@ interface ForbiddenShellProps {
 }
 
 export function ForbiddenShell({ children }: ForbiddenShellProps) {
+  const t = useTranslations("admin.documentsUi")
   return (
     <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-8 text-center">
-      <ShieldAlert className="mx-auto mb-3 h-8 w-8 text-warn" />
-      <h1 className="text-xl font-semibold text-ink">Moderators only</h1>
-      <p className="mt-2 text-sm text-ink-muted">
-        This page is restricted to community moderators and administrators.
-      </p>
+      <ShieldAlert className="mx-auto mb-3 h-8 w-8 text-warn" aria-hidden />
+      <h1 className="text-xl font-semibold text-ink">{t("forbiddenTitle")}</h1>
+      <p className="mt-2 text-sm text-ink-muted">{t("forbiddenBody")}</p>
       {children}
     </div>
   )

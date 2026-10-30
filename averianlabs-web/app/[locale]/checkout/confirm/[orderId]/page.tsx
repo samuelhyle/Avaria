@@ -1,7 +1,10 @@
 import { OrderStatus } from "@/components/checkout/OrderStatus"
-import { Container } from "@/components/ui/Container"
-import { orderItems } from "@/db/schema"
+import { OrderTimeline } from "@/components/checkout/OrderTimeline"
+import { cryptoCheckoutSessions, orderItems } from "@/db/schema"
+import { CHECKOUT_TEST_SKU } from "@/lib/checkout/test-product"
 import { getCurrentMember } from "@/lib/community"
+import { CHAINS, type ChainId } from "@/lib/crypto/chains"
+import { telegramDeepLink } from "@/lib/crypto/session"
 import { db } from "@/lib/db"
 import { listDocumentsForBatchIds } from "@/lib/documents/service"
 import { getOrderById, getOrderSkuQuantities, releaseExpiredReservations } from "@/lib/orders"
@@ -32,30 +35,37 @@ export default async function Page({
     order && ((member && member.id === order.userId) || hasOrderAccess(orderId, token))
   if (!order || !allowed)
     return (
-      <Container className="py-16">
+      <div className="py-10">
         <h1 className="font-display text-3xl font-semibold">{t("notFound")}</h1>
         <p className="mt-4">{t("notFoundBody")}</p>
-      </Container>
+      </div>
     )
-  const state = ["paid", "shipped", "delivered"].includes(order.status)
+  const state = ["paid", "packed", "shipped", "delivered"].includes(order.status)
     ? "paid"
     : order.status === "pending"
       ? "processingPayment"
-      : order.status === "payment_review"
-        ? "review"
-        : order.status === "refunded"
-          ? "refunded"
-          : "failed"
+      : order.status === "awaiting_crypto"
+        ? "awaitingCrypto"
+        : order.status === "payment_review"
+          ? "review"
+          : order.status === "refunded"
+            ? "refunded"
+            : "failed"
   const title = state === "processingPayment" ? t("processingPayment") : t(`${state}Title`)
   const body = state === "processingPayment" ? t("processingPaymentBody") : t(`${state}Body`)
   const items = await getOrderSkuQuantities(order.id)
   const lines = await db.select().from(orderItems).where(eq(orderItems.orderId, order.id))
+  const [session] = await db
+    .select()
+    .from(cryptoCheckoutSessions)
+    .where(eq(cryptoCheckoutSessions.orderId, order.id))
+    .limit(1)
   const docs = await listDocumentsForBatchIds(
     lines.flatMap((line) => (line.batchId ? [line.batchId] : [])),
     locale,
   )
   return (
-    <Container className="py-16">
+    <div className="py-10">
       <div className="mx-auto max-w-2xl rounded-[var(--radius-lg)] border border-line bg-surface p-8">
         <h1 className="font-display text-3xl font-semibold">{title}</h1>
         <p className="mt-4 leading-relaxed text-ink-muted">{body}</p>
@@ -64,11 +74,70 @@ export default async function Page({
             <dt>{t("orderNumber")}</dt>
             <dd className="font-mono">{order.number}</dd>
           </div>
+          {order.discountCents > 0 ? (
+            <div className="flex justify-between">
+              <dt>
+                {t("discount")}
+                {order.promoCode ? ` (${order.promoCode})` : ""}
+              </dt>
+              <dd className="text-success">
+                −{formatCurrency(order.discountCents, "EUR", locale)}
+              </dd>
+            </div>
+          ) : null}
           <div className="flex justify-between">
             <dt>{t("total")}</dt>
             <dd>{formatCurrency(order.totalCents, "EUR", locale)}</dd>
           </div>
         </dl>
+        {session ? (
+          <section className="mt-6 rounded-[var(--radius)] border border-line bg-surface-2/60 p-4">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-ink-subtle">
+              {t("crypto")}
+            </h2>
+            {order.status === "awaiting_crypto" && session.expiresAt > new Date() ? (
+              <p className="mt-3 text-sm">
+                <a
+                  className="text-accent underline"
+                  href={telegramDeepLink(session.id)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {locale === "fi" ? "Avaa lasku Telegramissa" : "Open invoice in Telegram"}
+                </a>
+                <br />
+                {locale === "fi"
+                  ? "Paina Start. Lähetä täsmällinen laskun summa vain valitussa verkossa."
+                  : "Press Start in the bot. Send the exact invoice amount on the selected network only."}
+              </p>
+            ) : null}
+            <dl className="mt-3 space-y-2 text-sm">
+              <div className="flex justify-between gap-3">
+                <dt>{t("cryptoAmount")}</dt>
+                <dd className="font-mono tabular-nums">
+                  {session.amountCrypto} {CHAINS[session.chain as ChainId]?.symbol ?? session.chain}
+                </dd>
+              </div>
+              {session.status === "paid" && order.cryptoTxHash ? (
+                <div className="flex justify-between gap-3">
+                  <dt>{t("cryptoTx")}</dt>
+                  <dd className="max-w-[60%] break-all text-right font-mono text-xs">
+                    {order.cryptoTxHash}
+                  </dd>
+                </div>
+              ) : null}
+            </dl>
+          </section>
+        ) : null}
+        {lines.length === 1 && lines[0]?.skuSnapshot === CHECKOUT_TEST_SKU ? (
+          <p className="mt-6 rounded border border-line p-4 text-sm">
+            {locale === "fi"
+              ? "Kassan testitilaus. Ei fyysisiä tuotteita tai toimitusta."
+              : "Checkout test order. No physical goods or shipment."}
+          </p>
+        ) : (
+          <OrderTimeline status={order.status} locale={locale} />
+        )}
         <ul className="mt-6 space-y-4">
           {lines.map((line) => (
             <li key={line.id} className="border-t border-line pt-4">
@@ -84,7 +153,8 @@ export default async function Page({
                 × {line.qty}
               </p>
               <p className="text-xs text-ink-muted">
-                {line.skuSnapshot} · {t("batch")}: {line.batchCodeSnapshot}
+                {line.skuSnapshot}
+                {line.batchCodeSnapshot ? ` · ${t("batch")}: ${line.batchCodeSnapshot}` : ""}
               </p>
               <p>{formatCurrency(line.unitPriceCents * line.qty, "EUR", locale)}</p>
             </li>
@@ -109,6 +179,6 @@ export default async function Page({
         </Link>
         <OrderStatus id={order.id} status={order.status} items={items} />
       </div>
-    </Container>
+    </div>
   )
 }

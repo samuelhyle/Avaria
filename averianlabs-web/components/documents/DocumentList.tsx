@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/Badge"
+import { formatDate } from "@/lib/utils/format"
 import { ArrowUpRight } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import Link from "next/link"
@@ -49,10 +50,7 @@ export async function DocumentList({ docs, locale, emptyMessage }: DocumentListP
                 <p className="break-words text-base font-semibold text-ink">{d.title}</p>
               </div>
               <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                {new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(
-                  new Date(d.publishedAt),
-                )}{" "}
-                · {t("version")} {d.version}
+                {formatDate(d.publishedAt, locale)} · {t("version")} {d.version}
                 {d.productName ? <> · {d.productName}</> : null}
               </p>
               {d.batchId !== undefined && (

@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/Button"
 import { Container } from "@/components/ui/Container"
-import * as Sentry from "@sentry/nextjs"
+import { reportClientError } from "@/lib/observability/client-reporter"
 import { AlertTriangle, ArrowLeft, RefreshCw } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 import Link from "next/link"
@@ -18,7 +18,7 @@ export default function ErrorPage({
   const r = useTranslations("research")
   const locale = useLocale()
   useEffect(() => {
-    Sentry.captureException(error)
+    reportClientError(error)
   }, [error])
 
   return (

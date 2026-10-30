@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export async function generateStaticParams() {
   const authors = await listAuthors()
   return authors.flatMap((a) =>
-    ["en", "fi", "de", "sv", "nl"].map((locale) => ({ locale, slug: a.slug })),
+    ["en", "fi", "sv", "ru"].map((locale) => ({ locale, slug: a.slug })),
   )
 }
 

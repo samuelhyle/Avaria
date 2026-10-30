@@ -57,7 +57,7 @@ const DEFAULT_CANDIDATE_K = 30
 const DEFAULT_RRF_K = 60
 
 /**
- * Postgres text-search config per locale — gives stemming for fi/de/sv/nl
+ * Postgres text-search config per locale — gives stemming for fi/sv/ru
  * instead of the language-agnostic `simple` config. (For very large corpora
  * this expression scan should be replaced with per-locale generated tsvector
  * columns + GIN indexes; at the current corpus size it is comfortably fast.)

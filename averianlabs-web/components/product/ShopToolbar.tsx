@@ -2,6 +2,7 @@
 
 import type { ShopFilters } from "@/lib/shop/filters"
 import { cn } from "@/lib/utils/cn"
+import { formatNumber } from "@/lib/utils/format"
 import { Box, Filter as FilterIcon, GitCompare, LayoutGrid, List, Search, X } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
@@ -18,6 +19,7 @@ interface ShopToolbarProps {
 export function ShopToolbar({ initialView, locale, filters, activeFilterCount }: ShopToolbarProps) {
   const t = useTranslations("shop")
   const r = useTranslations("research")
+  const c = useTranslations("common")
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -31,10 +33,9 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
     })
   }
 
+  const queryValue = searchParams?.get("q") ?? ""
   const chips = [
-    ...(searchParams?.get("q")
-      ? [{ key: "q", label: searchParams.get("q")!, onRemove: () => update("q", null) }]
-      : []),
+    ...(queryValue ? [{ key: "q", label: queryValue, onRemove: () => update("q", null) }] : []),
     ...(filters.inStock
       ? [{ key: "stock", label: t("inStock"), onRemove: () => update("inStock", null) }]
       : []),
@@ -59,7 +60,7 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
       ? [
           {
             key: "purity",
-            label: `≥ ${new Intl.NumberFormat(locale).format(filters.purityMin)}% HPLC`,
+            label: `≥ ${formatNumber(filters.purityMin, locale)}% HPLC`,
             onRemove: () => update("purityMin", null),
           },
         ]
@@ -71,27 +72,30 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
 
   return (
     <div className="space-y-3">
-      <div className="flex flex-col gap-3 rounded-[var(--radius-lg)] border border-line bg-surface p-4 shadow-sm sm:flex-row sm:items-center">
+      <div className="flex flex-col gap-3 rounded-[var(--radius-lg)] border border-line bg-surface p-3 shadow-sm sm:flex-row sm:items-center">
         <form
           onSubmit={(e) => {
             e.preventDefault()
             const value = new FormData(e.currentTarget).get("q")
             update("q", typeof value === "string" ? value : null)
           }}
-          className="flex min-w-0 flex-1 items-center gap-2 rounded-lg border border-line bg-surface px-3"
+          className="flex min-w-0 flex-1 items-center gap-2 rounded-[var(--radius)] border border-line bg-surface-2/60 px-3 transition-colors focus-within:border-accent focus-within:bg-surface"
         >
-          <Search className="h-4 w-4 shrink-0 text-ink-muted" aria-hidden />
+          <Search className="h-4 w-4 shrink-0 text-ink-subtle" aria-hidden />
           <input
             key={searchParams?.get("q") ?? ""}
             name="q"
             type="search"
             defaultValue={searchParams?.get("q") ?? ""}
-            aria-label={r("searchPlaceholder")}
-            placeholder={r("searchPlaceholder")}
-            className="h-11 min-w-0 flex-1 bg-transparent text-base sm:text-sm outline-none"
+            aria-label={t("search")}
+            placeholder={t("search")}
+            className="h-11 min-w-0 flex-1 bg-transparent text-base sm:text-sm outline-none placeholder:text-ink-subtle"
           />
-          <button type="submit" className="min-h-11 shrink-0 text-sm font-medium text-accent">
-            {t("search")}
+          <button
+            type="submit"
+            className="min-h-11 shrink-0 rounded-[var(--radius-sm)] bg-accent px-3 text-sm font-medium text-on-accent transition-colors hover:bg-accent-hover"
+          >
+            {c("search")}
           </button>
         </form>
 
@@ -121,7 +125,7 @@ export function ShopToolbar({ initialView, locale, filters, activeFilterCount }:
           <div className="inline-flex h-10 shrink-0 items-center rounded-[var(--radius)] border border-line bg-surface p-0.5">
             {[
               { v: "grid", icon: LayoutGrid, label: t("viewGrid") },
-              { v: "3d", icon: Box, label: t("view3D") },
+              { v: "3d", icon: Box, label: t("view3d") },
               { v: "list", icon: List, label: t("viewList") },
             ].map(({ v, icon: Icon, label }) => (
               <button

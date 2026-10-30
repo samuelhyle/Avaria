@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
+import { Textarea } from "@/components/ui/Textarea"
 import { useTranslations } from "next-intl"
 import { useRef, useState } from "react"
 import { toast } from "sonner"
@@ -13,7 +14,7 @@ export function QuoteForm({ sku, locale }: { sku: string; locale: string }) {
   const attempt = useRef<{ fingerprint: string; key: string } | null>(null)
   return (
     <section className="mt-6 rounded-[var(--radius-lg)] border border-line bg-surface-2 p-5">
-      <h3 className="font-display text-lg font-semibold">{t("quote")}</h3>
+      <h3 className="font-display text-lg font-semibold">{t("quoteLabel")}</h3>
       <p className="mt-2 text-sm text-ink-muted">{t("quoteDescription")}</p>
       {received ? (
         <p role="status" className="mt-4 text-sm">
@@ -76,9 +77,9 @@ export function QuoteForm({ sku, locale }: { sku: string; locale: string }) {
             autoComplete="organization"
             maxLength={200}
           />
-          <Input name="message" label={t("quoteMessage")} maxLength={2000} />
-          <Button type="submit" disabled={pending} fullWidth>
-            {pending ? t("quoteSending") : t("quote")}
+          <Textarea name="message" label={t("quoteMessage")} maxLength={2000} rows={5} />
+          <Button type="submit" disabled={pending} fullWidth data-testid="quote-submit">
+            {pending ? t("quoteSending") : t("quoteSubmit")}
           </Button>
         </form>
       )}

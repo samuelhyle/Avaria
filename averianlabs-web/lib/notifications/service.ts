@@ -9,7 +9,22 @@ import { notificationPreferences, notifications } from "@/db/schema"
 import { db } from "@/lib/db"
 import { and, desc, eq, isNull, sql } from "drizzle-orm"
 
-export type NotificationKind = "reply" | "reaction" | "mention" | "system" | "plan_shared"
+/**
+ * The kinds of notification the application emits.
+ *
+ * `moderation_approved` and `moderation_removed` were written by a direct
+ * insert that bypassed this service, and the inbox rendered them without them
+ * being in the union — so the type did not describe what the application
+ * actually did. They are part of the union now.
+ */
+export type NotificationKind =
+  | "reply"
+  | "reaction"
+  | "mention"
+  | "system"
+  | "plan_shared"
+  | "moderation_approved"
+  | "moderation_removed"
 
 export interface EmitInput {
   userId: string
@@ -32,6 +47,8 @@ const KIND_DEFAULT_PREFS: Record<
   mention: "mentionEnabled",
   plan_shared: "planSharedEnabled",
   system: "replyEnabled",
+  moderation_approved: "replyEnabled",
+  moderation_removed: "replyEnabled",
 }
 
 export function emitNotification(input: EmitInput): void {

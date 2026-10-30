@@ -24,12 +24,12 @@ export interface CategoryMeta {
 }
 
 export const CATEGORIES: CategoryMeta[] = [
-  { slug: "metabolic", key: "weight", hue: 220, icon: Beaker },
+  { slug: "metabolic", key: "metabolic", hue: 220, icon: Beaker },
   { slug: "recovery", key: "recovery", hue: 214, icon: FlaskConical },
   { slug: "cognitive", key: "cognitive", hue: 250, icon: Atom },
   { slug: "longevity", key: "longevity", hue: 260, icon: Microscope },
   { slug: "cosmetic", key: "cosmetic", hue: 340, icon: Pipette },
-  { slug: "blend", key: "blends", hue: 280, icon: Layers },
+  { slug: "blend", key: "blend", hue: 280, icon: Layers },
   { slug: "supplies", key: "supplies", hue: 198, icon: Boxes },
 ]
 

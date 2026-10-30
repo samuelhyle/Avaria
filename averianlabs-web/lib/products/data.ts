@@ -36,34 +36,28 @@ export const products: Product[] = [
     },
     defaultTranslation: {
       name: "BAC water",
-      tagline: "Bacteriostatic water for reconstitution — 0.9% benzyl alcohol",
+      tagline: "Sterile bacteriostatic water (0.9 % benzyl alcohol) for reconstitution",
       description:
-        "Sterile bacteriostatic water (10 mL) for laboratory reconstitution of research peptides.",
+        "Sterile bacteriostatic water in a 10 mL ampoule, used to reconstitute lyophilised peptides into solution. The 0.9 % benzyl alcohol suppresses bacterial growth so a reconstituted vial stays usable across a working day.",
     },
     translations: {
       fi: {
         name: "BAC-vesi",
-        tagline: "Bakteriostaattinen vesi liuotukseen — 0,9 % bentsyylialkoholi",
+        tagline: "Sterili bakteriostaattinen vesi (0,9 % bentsyylialkoholi) liuotukseen",
         description:
-          "Steriili bakteriostaattinen vesi (10 mL) tutkimuspeptidien liuottamiseen laboratoriossa.",
-      },
-      de: {
-        name: "BAC-Wasser",
-        tagline: "Bakteriostatisches Wasser zur Rekonstitution — 0,9 % Benzylalkohol",
-        description:
-          "Steriles bakteriostatisches Wasser (10 mL) zur Rekonstitution von Forschungspeptiden.",
+          "Sterili bakteriostaattinen vesi 10 mL:n ampullissa, jolla lyofilisoitu peptidi liuotetaan liuokseksi. 0,9 % bentsyylialkoholi hillitsee bakteerikasvun, joten liuotettu pullo säilyy käyttökelpoisena työpäivän ajan.",
       },
       sv: {
         name: "BAC-vatten",
-        tagline: "Bakteriostatiskt vatten för rekonstitution — 0,9 % bensylalkohol",
+        tagline: "Sterilt bakteriostatiskt vatten (0,9 % bensylalkohol) för rekonstitution",
         description:
-          "Sterilt bakteriostatiskt vatten (10 mL) för rekonstitution av forskningspeptider.",
+          "Sterilt bakteriostatiskt vatten i en 10 mL-ampull, som används för att rekonstituera lyofiliserade peptider till lösning. Bensylalkoholen på 0,9 % hämmar bakterietillväxt, så en rekonstituerad flaska är användbar en arbetsdag.",
       },
-      nl: {
-        name: "BAC-water",
-        tagline: "Bacteriostatisch water voor reconstitutie — 0,9% benzylalcohol",
+      ru: {
+        name: "BAC-вода",
+        tagline: "Стериальная бактериостатическая вода (0,9 % бензилового спирта) для разведения",
         description:
-          "Steriel bacteriostatisch water (10 mL) voor reconstitutie van onderzoekspeptiden.",
+          "Стериальная бактериостатическая вода в ампуле 10 мл для разведения лиофилизированных пептидов в раствор. Бензиловый спирт 0,9 % подавляет рост бактерий, поэтому разведённый флакон остаётся пригодным в течение рабочего дня.",
       },
     },
   },
@@ -112,30 +106,28 @@ export const products: Product[] = [
     },
     defaultTranslation: {
       name: "Retatrutide",
-      tagline: "Triple-agonist (GLP-1 / GIP / glucagon) — metabolic research",
+      tagline: "Triple-agonist peptide (GLP-1 / GIP / glucagon) — metabolic research",
       description:
-        "A synthetic triple-receptor agonist peptide studied in metabolic regulation research.",
+        "A synthetic 41-amino-acid peptide that acts on three receptors at once. It is the most requested compound in the metabolic category and is used as a reference in receptor-signalling and glucose-handling models.",
     },
     translations: {
       fi: {
         name: "Retatrutidi",
-        tagline: "Tripla-agonisti (GLP-1 / GIP / glukagoni) — metabolinen tutkimus",
-        description: "Synteettinen tripla-reseptoriagonistipeptidi metabolian tutkimukseen.",
-      },
-      de: {
-        name: "Retatrutid",
-        tagline: "Trippelagonist (GLP-1 / GIP / Glucagon) — Stoffwechselforschung",
-        description: "Synthetisches Trippelrezeptor-Agonist-Peptid für Stoffwechselforschung.",
+        tagline: "Triaginistinen peptidi (GLP-1 / GIP / glukagoni) — ainevaihduntatutkimus",
+        description:
+          "Synteettinen 41 aminohappoa sisältävä peptidi, joka vaikuttaa kolmeen reseptoriin samanaikaisesti. Ainevaihduntakategorian eniten kysytty yhdiste, jota käytetään referenssinä reseptorisignaalin ja glukoosinsäätelyn malleissa.",
       },
       sv: {
         name: "Retatrutid",
-        tagline: "Trippelagonist (GLP-1 / GIP / glukagon) — metabol forskning",
-        description: "Syntetisk trippelreceptoragonistpeptid för metabol forskning.",
+        tagline: "Triagonistpeptid (GLP-1 / GIP / glukagon) — metabolforskning",
+        description:
+          "Ett syntetiskt peptid med 41 aminosyror som verkar på tre receptorer samtidigt. Det är det mest efterfrågade ämnet i kategorin och används som referens i modeller för receptorsignalering och glukosreglering.",
       },
-      nl: {
-        name: "Retatrutide",
-        tagline: "Triple-agonist (GLP-1 / GIP / glucagon) — metabolisch onderzoek",
-        description: "Synthetische triplereceptoragonistpeptide voor metabolisch onderzoek.",
+      ru: {
+        name: "Ретатрутид",
+        tagline: "Триагонистный пептид (GLP-1 / GIP / глюкагон) — метаболические исследования",
+        description:
+          "Синтетический пептид из 41 аминокислоты, действующий одновременно на три рецептора. Самое востребованное соединение в метаболической категории; применяется как референс в моделях рецепторной сигнализации и регуляции глюкозы.",
       },
     },
   },
@@ -184,33 +176,29 @@ export const products: Product[] = [
     },
     defaultTranslation: {
       name: "GHK-Cu",
-      tagline: "Copper-binding tripeptide — cosmetic & recovery research",
+      tagline: "Copper-binding tripeptide (Gly-His-Lys) — cosmetic and tissue research",
       description:
-        "A copper-binding tripeptide (Gly-His-Lys) studied in dermal and tissue-recovery research.",
+        "A natural copper-binding tripeptide that occurs in human skin and wound tissue. It is studied for its effect on collagen synthesis and tissue remodelling, and is the reference compound for cosmetic and dermal research.",
     },
     translations: {
       fi: {
         name: "GHK-Cu",
-        tagline: "Kuparia sitova tripeptidi — kosmeettinen ja toipumistutkimus",
+        tagline: "Kuparia sitova tripeptidi (Gly-His-Lys) — kosmeettinen ja kudosresearch",
         description:
-          "Kuparia sitova tripeptidi (Gly-His-Lys), tutkittu ihon ja kudosten palautumisen malleissa.",
-      },
-      de: {
-        name: "GHK-Cu",
-        tagline: "Kupferbindendes Tripeptid — kosmetische & Erholungsforschung",
-        description:
-          "Kupferbindendes Tripeptid (Gly-His-Lys) für Haut- und Gewebeerholungsforschung.",
+          "Luonnollinen kuparia sitova tripeptidi, jota esiintyy ihmisen ihossa ja haavakudoksessa. Sitä tutkitaan kollageenisynteesiin ja kudosten uudistumiseen liittyvissä kokeissa, ja se on kosmeettisen ja ihokudostutkimuksen referenssiyhdiste.",
       },
       sv: {
         name: "GHK-Cu",
-        tagline: "Kopparbindande tripeptid — kosmetisk & återhämtningsforskning",
+        tagline: "Kopparbindande tripeptid (Gly-His-Lys) — kosmetik- och vävnadsforskning",
         description:
-          "Kopparbindande tripeptid (Gly-His-Lys) för hud- och vävnadsåterhämtningsforskning.",
+          "En naturlig kopparbindande tripeptid som finns i mänsklig hud och sårvävnad. Den studeras för sin effekt på kollagensyntes och vävnadsombyggnad och är referensämnet inom kosmetik- och hudforskning.",
       },
-      nl: {
+      ru: {
         name: "GHK-Cu",
-        tagline: "Koperbindend tripeptide — cosmetisch & herstelonderzoek",
-        description: "Koperbindend tripeptide (Gly-His-Lys) voor huid- en weefselherstelonderzoek.",
+        tagline:
+          "Связывающий медь трипептид (Gly-His-Lys) — косметические исследования и исследования тканей",
+        description:
+          "Природный связывающий медь трипептид, который содержится в коже и раневой ткани человека. Его изучают как фактор синтеза коллагена и ремоделирования тканей; это референсное соединение в косметических и дерматологических исследованиях.",
       },
     },
   },
@@ -248,33 +236,29 @@ export const products: Product[] = [
     },
     defaultTranslation: {
       name: "MOTS-c",
-      tagline: "Mitochondrial-derived peptide — longevity & metabolic research",
+      tagline: "Mitochondrial-derived peptide (16 amino acids) — ageing and metabolic research",
       description:
-        "A 16-amino-acid mitochondrial-derived peptide studied in cellular metabolism and longevity models.",
+        "A 16-amino-acid peptide encoded by mitochondrial DNA and expressed in skeletal muscle. It is used in studies of cellular metabolism, exercise adaptation and models of cellular ageing.",
     },
     translations: {
       fi: {
         name: "MOTS-c",
-        tagline: "Mitokondrioperäinen peptidi — pitkäikäisyys ja metabolia",
+        tagline:
+          "Mitokondriaalinen peptidi (16 aminohappoa) — vanhenemis- ja ainevaihduntatutkimus",
         description:
-          "16-aminohapon mitokondrioperäinen peptidi, tutkittu soluaineenvaihdunnan ja ikääntymisen malleissa.",
-      },
-      de: {
-        name: "MOTS-c",
-        tagline: "Mitochondriales Peptid — Langlebigkeits- & Stoffwechselforschung",
-        description:
-          "16-Aminosäure-Peptid aus Mitochondrien, erforscht in Stoffwechsel- und Alterungsmodellen.",
+          "Mitochondriaalisesta DNA:stä koodattu 16 aminohapon peptidi, joka ilmaisee luustolihaksessa. Sitä käytetään soluaineenvaihdun, liikuntaadaptation ja solujen vanhenemisen malleissa.",
       },
       sv: {
         name: "MOTS-c",
-        tagline: "Mitokondriellt peptid — livslängd & metabolism",
-        description: "16-aminosyramitokondriellt peptid för metabolism- och åldringsforskning.",
-      },
-      nl: {
-        name: "MOTS-c",
-        tagline: "Mitochondriaal peptide — levensduur & metabolisme",
+        tagline: "Mitokondriellt peptid (16 aminosyror) — åldrande och metabolforskning",
         description:
-          "16-aminozuur mitochondriaal peptide voor metabolisme- en verouderingsonderzoek.",
+          "Ett peptid med 16 aminosyror kodat av mitokondriellt DNA och uttryckt i skelettmuskulatur. Det används i studier av cellmetabolism, träningsanpassning och modeller för cellåldrande.",
+      },
+      ru: {
+        name: "MOTS-c",
+        tagline: "Митохондриальный пептид (16 аминокислот) — исследования старения и метаболизма",
+        description:
+          "Пептид из 16 аминокислот, кодируемый митохондриальной ДНК и экспрессируемый в скелетной мышце. Применяется в исследованиях клеточного метаболизма, адаптации к нагрузке и моделях клеточного старения.",
       },
     },
   },
@@ -312,34 +296,28 @@ export const products: Product[] = [
     },
     defaultTranslation: {
       name: "Melanotan II",
-      tagline: "Synthetic melanocortin analog — pigmentation research",
+      tagline: "Synthetic α-MSH analog — melanocortin receptor research",
       description:
-        "A synthetic cyclic heptapeptide analog of α-MSH studied in melanocortin receptor research.",
+        "A synthetic cyclic heptapeptide analog of α-melanocyte-stimulating hormone. It is the standard research compound for melanocortin-1 receptor signalling and pigmentation pathways.",
     },
     translations: {
       fi: {
         name: "Melanotan II",
-        tagline: "Synteettinen melanokortiinianalogi — pigmentaatiotutkimus",
+        tagline: "Synteettinen α-MSH-analogi — melanokortiinireseptoritutkimus",
         description:
-          "Synteettinen syklinen heptapeptidi-α-MSH-analogi, tutkittu melanokortiinireseptorimalleissa.",
-      },
-      de: {
-        name: "Melanotan II",
-        tagline: "Synthetisches Melanocortin-Analogon — Pigmentierungsforschung",
-        description:
-          "Synthetisches zyklisches Heptapeptid-α-MSH-Analogon für Melanocortin-Rezeptorforschung.",
+          "Synteettinen syklinen heptapeptidianalogi α-melanokyyttistä stimuloivasta hormonista. Se on tutkimuksen vakioyhdiste melanokortiini-1-reseptorin signaloinnin ja pigmentaation tutkimuksessa.",
       },
       sv: {
         name: "Melanotan II",
-        tagline: "Syntetisk melanokortinanalog — pigmenteringsforskning",
+        tagline: "Syntetisk α-MSH-analog — melanokortinreceptorforskning",
         description:
-          "Syntetisk cyklisk heptapeptid-α-MSH-analog för melanokortinreceptorforskning.",
+          "En syntetisk cyklisk heptapeptidanalog av α-melanocytstimulerande hormon. Det är standardämnet inom forskning om melanokortin-1-receptorns signalering och pigmentering.",
       },
-      nl: {
-        name: "Melanotan II",
-        tagline: "Synthetisch melanocortine-analoog — pigmentatieonderzoek",
+      ru: {
+        name: "Меланотан II",
+        tagline: "Синтетический аналог α-MSH — исследования меланокортиновых рецепторов",
         description:
-          "Synthetisch cyclisch heptapeptide-α-MSH-analoog voor melanocortinereceptoronderzoek.",
+          "Синтетический циклический гептапептидный аналог α-меланоцитстимулирующего гормона. Стандартное исследовательское соединение для изучения сигналинга рецептора MC1R и пигментации.",
       },
     },
   },
@@ -379,30 +357,26 @@ export const products: Product[] = [
       name: "NAD+",
       tagline: "Nicotinamide adenine dinucleotide — cellular energy research",
       description:
-        "Oxidised nicotinamide adenine dinucleotide studied in cellular energetics and sirtuin-pathway research.",
+        "The oxidised form of nicotinamide adenine dinucleotide, a coenzyme present in every living cell. It is supplied as a 1 g research vial and used in studies of cellular energetics and sirtuin-pathway activity.",
     },
     translations: {
       fi: {
         name: "NAD+",
-        tagline: "Nikotiiniamidiadeniinidinukleotidi — solujen energiatutkimus",
+        tagline: "Nikotiiniamidiadeniinidinukleotiidi — solun energia-ainevaihdun tutkimus",
         description:
-          "Oksidoitu NAD+, tutkittu solujen energiantuotannon ja sirtuiinireittien malleissa.",
-      },
-      de: {
-        name: "NAD+",
-        tagline: "Nicotinamidadenindinukleotid — zelluläre Energieforschung",
-        description:
-          "Oxidiertes NAD für Forschung zu zellulärer Energetik und Sirtuin-Signalwegen.",
+          "Nikotiiniamidiadeniinidinukleotiidin oksonoitu muoto, koentsyymi joka esiintyy jokaisessa elävässä solussa. Toimitetaan 1 g:n tutkimuspullona ja käytetään soluenergetiikan ja sirtuiinipolun aktiivisuuden tutkimuksissa.",
       },
       sv: {
         name: "NAD+",
-        tagline: "Nikotinamidadenindinukleotid — cellulär energiforskning",
-        description: "Oxiderat NAD för forskning om cellulär energetik och sirtuinsignalering.",
+        tagline: "Nikotinamidadenindinukleotid — cellenergiforskning",
+        description:
+          "Den oxiderade formen av nikotinamidadenindinukleotid, ett koenzym som finns i varje levande cell. Levereras som ett 1 g-forskningsämne och används i studier av cellenergi och sirtuinaktivitet.",
       },
-      nl: {
+      ru: {
         name: "NAD+",
-        tagline: "Nicotinamide-adenine-dinucleotide — cellulair energieonderzoek",
-        description: "Geoxideerd NAD voor onderzoek naar cellulaire energie en sirtuine-routes.",
+        tagline: "Никотинамидадениндинуклеотид — исследования клеточной энергетики",
+        description:
+          "Окисленная форма никотинамидадениндинуклеотида — кофермента, присутствующего в каждой живой клетке. Поставляется в исследовательском флаконе 1 г и применяется в исследованиях клеточной энергетики и активности пути сиртуинов.",
       },
     },
   },
@@ -450,33 +424,30 @@ export const products: Product[] = [
     },
     defaultTranslation: {
       name: "BPC-157",
-      tagline: "Body Protection Compound — recovery & tissue research",
+      tagline: "Body Protection Compound — a 15-amino-acid sequence for tissue research",
       description:
-        "A synthetic 15-amino-acid fragment studied in tissue-recovery and gut-mucosa research models.",
+        "A synthetic 15-amino-acid sequence derived from a gastric protein. It is the reference compound in soft-tissue and gut-mucosa research, where it is studied for its effect on collagen deposition and healing response.",
     },
     translations: {
       fi: {
         name: "BPC-157",
-        tagline: "Body Protection Compound — toipumis- ja kudostutkimus",
+        tagline: "Body Protection Compound — 15 aminohapon järjestelmä kudosresearchiin",
         description:
-          "Synteettinen 15-aminohapon fragmentti, tutkittu kudosten ja suolen limakalvon tutkimusmalleissa.",
-      },
-      de: {
-        name: "BPC-157",
-        tagline: "Body Protection Compound — Erholungs- & Gewebeforschung",
-        description: "Synthetisches 15-Aminosäure-Fragment für Gewebe- und Schleimhautforschung.",
+          "Synteettinen 15 aminohapon järjestelmä, joka on johdettu mahalimakuun proteiinista. Se on referenssiyhdiste pehmytkudos- ja suolen limakalvotutkimuksissa, joissa sitä tutkitaan kollageenisaostumisen ja paranemisvasteen vaikutuksen osalta.",
       },
       sv: {
         name: "BPC-157",
-        tagline: "Body Protection Compound — återhämtning & vävnadsforskning",
+        tagline:
+          "Body Protection Compound — en aminosyrussekvens på 15 aminosyror för vävnadsforskning",
         description:
-          "Syntetiskt 15-aminosyrafragment för vävnadsåterhämtnings- och slemhinneforskning.",
+          "En syntetisk aminosyrussekvens på 15 aminosyror som härletts från ett mageprotein. Det är referensämnet inom forskning om mjukvävnad och tarmlimhinna, där dess effekt på kollagenavsättning och läkningssvar studeras.",
       },
-      nl: {
+      ru: {
         name: "BPC-157",
-        tagline: "Body Protection Compound — herstel- en weefselonderzoek",
+        tagline:
+          "Body Protection Compound — последовательность из 15 аминокислот для исследований тканей",
         description:
-          "Synthetisch 15-aminozuurfragment voor weefselherstel- en slijmvliesonderzoek.",
+          "Синтетическая последовательность из 15 аминокислот, полученная из желудочного белка. Это референсное соединение в исследованиях мягких тканей и слизистой кишечника, где изучают его влияние на отложение коллагена и заживление.",
       },
     },
   },
@@ -516,28 +487,26 @@ export const products: Product[] = [
       name: "Melanotan I",
       tagline: "Afamelanotide — melanocortin-1 receptor research",
       description:
-        "A synthetic 13-amino-acid α-MSH analog studied in MC1R signalling and pigmentation research.",
+        "A linear 13-amino-acid analog of α-MSH with a stabilising C-terminal extension. It is used in melanocortin-1 receptor signalling studies alongside Melanotan II as a comparison compound.",
     },
     translations: {
       fi: {
         name: "Melanotan I",
-        tagline: "Afamelanotidi — MC1R-reseptoritutkimus",
-        description: "Synteettinen 13-aminohapon α-MSH-analogi, tutkittu MC1R-signaloinnissa.",
-      },
-      de: {
-        name: "Melanotan I",
-        tagline: "Afamelanotid — MC1R-Rezeptorforschung",
-        description: "Synthetisches 13-Aminosäure-α-MSH-Analogon für MC1R-Signalforschung.",
+        tagline: "Afamelanotidi — melanokortiini-1-reseptoritutkimus",
+        description:
+          "Lineaarinen 13 aminohapon α-MSH-analogi, jossa on stabiloiva C-terminaalinen laajennus. Sitä käytetään melanokortiini-1-reseptorin signaalintutkimuksissa Melanotan II:n vertailuaineena.",
       },
       sv: {
         name: "Melanotan I",
-        tagline: "Afamelanotid — MC1R-receptorforskning",
-        description: "Syntetisk 13-aminosyra-α-MSH-analog för MC1R-signaleringsforskning.",
+        tagline: "Afamelanotid — melanokortin-1-receptorforskning",
+        description:
+          "En linjär α-MSH-analog med 13 aminosyror och en stabiliserande C-terminal förlängning. Den används i studier av melanokortin-1-receptorns signalering, som jämförelseämne mot Melanotan II.",
       },
-      nl: {
-        name: "Melanotan I",
-        tagline: "Afamelanotide — MC1R-receptoronderzoek",
-        description: "Synthetisch 13-aminozuur-α-MSH-analoog voor MC1R-signaleringsonderzoek.",
+      ru: {
+        name: "Меланотан I",
+        tagline: "Афамеланотид — исследования рецептора MC1R",
+        description:
+          "Линейный 13-аминокислотный аналог α-MSH со стабилизирующим С-концевым расширением. Применяется в исследованиях сигналинга рецептора MC1R как соединение для сравнения с Меланотаном II.",
       },
     },
   },
@@ -570,33 +539,28 @@ export const products: Product[] = [
     },
     defaultTranslation: {
       name: "KLOW blend",
-      tagline: "KPV + BPC-157 + GHK-Cu — 80 mg multi-compound research blend",
+      tagline: "KPV + BPC-157 + GHK-Cu — a pre-formulated 80 mg research blend",
       description:
-        "A pre-formulated blend of KPV, BPC-157, and GHK-Cu researched together in gut-immune-tissue models.",
+        "A single vial containing KPV, BPC-157 and GHK-Cu in one lyophilised 80 mg dose. It is used when a study needs all three components in a fixed ratio rather than three separate vials.",
     },
     translations: {
       fi: {
-        name: "KLOW-seos",
-        tagline: "KPV + BPC-157 + GHK-Cu — 80 mg moniyhdisteen tutkimusseos",
+        name: "KLOW-sekoitus",
+        tagline: "KPV + BPC-157 + GHK-Cu — valmis 80 mg:n tutkimussekoitus",
         description:
-          "Esiformuloitu KPV:n, BPC-157:n ja GHK-Cu:n seos suoliston ja kudosten tutkimusmalleihin.",
-      },
-      de: {
-        name: "KLOW-Mischung",
-        tagline: "KPV + BPC-157 + GHK-Cu — 80 mg Mehrkomponenten-Forschungsmischung",
-        description: "Vormischung aus KPV, BPC-157 und GHK-Cu für Darm- und Gewebeforschung.",
+          "Yksi pullo, jossa on KPV, BPC-157 ja GHK-Cu yhtenä lyofilisoituna 80 mg:n annoksena. Sitä käytetään, kun tutkimuksessa tarvitaan kaikki kolme ainetta kiinteässä suhteessa eikä kolmena erillisenä pullona.",
       },
       sv: {
         name: "KLOW-blandning",
-        tagline: "KPV + BPC-157 + GHK-Cu — 80 mg flerkomponentforskning",
+        tagline: "KPV + BPC-157 + GHK-Cu — färdigblandat 80 mg forskningsblandning",
         description:
-          "Förformulerad blandning av KPV, BPC-157 och GHK-Cu för tarm- och vävnadsforskning.",
+          "En flaska som innehåller KPV, BPC-157 och GHK-Cu i en lyofiliserad dos på 80 mg. Används när en studie behöver alla tre komponenterna i fast proportion i stället för i tre separata flaskor.",
       },
-      nl: {
-        name: "KLOW-mengsel",
-        tagline: "KPV + BPC-157 + GHK-Cu — 80 mg multicomponent onderzoeksmengsel",
+      ru: {
+        name: "Смесь KLOW",
+        tagline: "KPV + BPC-157 + GHK-Cu — готовая исследовательская смесь 80 мг",
         description:
-          "Voorgeformuleerd mengsel van KPV, BPC-157 en GHK-Cu voor darm- en weefselonderzoek.",
+          "Один флакон, содержащий KPV, BPC-157 и GHK-Cu в виде единой лиофилизированной дозы 80 мг. Используется, когда исследованию нужны все три компонента в фиксированном соотношении, а не в трёх отдельных флаконах.",
       },
     },
   },
@@ -629,34 +593,28 @@ export const products: Product[] = [
     },
     defaultTranslation: {
       name: "BPC-157 + TB-500 blend",
-      tagline: "Pre-mixed BPC-157 + Thymosin β4 fragment — tissue-recovery research",
+      tagline: "Pre-mixed BPC-157 and Thymosin β4 fragment — tissue research",
       description:
-        "A blended vial of BPC-157 and the TB-500 fragment of Thymosin β4 for combined-recovery research.",
+        "A pre-formulated vial combining BPC-157 with the TB-500 fragment of Thymosin β4. It is used in soft-tissue research where both sequences are studied together in the same model.",
     },
     translations: {
       fi: {
-        name: "BPC-157 + TB-500 -seos",
-        tagline: "Esisekoitus BPC-157 + tymosiini β4 -fragmentti — kudosten palautumistutkimus",
+        name: "BPC-157 + TB-500 -sekoitus",
+        tagline: "Valmiiksi sekoitettu BPC-157 ja tymosiini β4 -fragmentti — kudosresearch",
         description:
-          "BPC-157:n ja tymosiini β4:n TB-500-fragmentin esisekoitus yhdistettyyn palautumistutkimukseen.",
-      },
-      de: {
-        name: "BPC-157 + TB-500 Mischung",
-        tagline: "Vorgemischtes BPC-157 + Thymosin-β4-Fragment — Gewebeerholungsforschung",
-        description:
-          "Vorgemischtes Vial aus BPC-157 und TB-500-Fragment für kombinierte Erholungsforschung.",
+          "Valmiiksi formuloidu pullo, joka yhdistää BPC-157:n tymosiini β4:n TB-500-fragmenttiin. Sitä käytetään pehmytkudosresearchissa, jossa molemmat järjestelmät tutkitaan samassa mallissa.",
       },
       sv: {
-        name: "BPC-157 + TB-500 blandning",
-        tagline: "Förblandad BPC-157 + tymosin β4-fragment — vävnadsåterhämtning",
+        name: "BPC-157 + TB-500-blandning",
+        tagline: "Förblandad BPC-157 och tymosin β4-fragment — vävnadsforskning",
         description:
-          "Förblandad injektionsflaska med BPC-157 och TB-500-fragment för kombinerad återhämtningsforskning.",
+          "En förformulerad flaska som kombinerar BPC-157 med TB-500-fragmentet av tymosin β4. Används inom mjukvävnadsforskning där båda sekvenserna studeras i samma modell.",
       },
-      nl: {
-        name: "BPC-157 + TB-500 mengsel",
-        tagline: "Voorgemengd BPC-157 + Thymosine β4-fragment — weefselherstelonderzoek",
+      ru: {
+        name: "Смесь BPC-157 + TB-500",
+        tagline: "Готовая смесь BPC-157 и фрагмента тимозина β4 — исследования тканей",
         description:
-          "Voorgemengde flacon BPC-157 en TB-500-fragment voor gecombineerd herstelonderzoek.",
+          "Предварительно сформулированный флакон, объединяющий BPC-157 и фрагмент тимозина β4 (TB-500). Применяется в исследованиях мягких тканей, где обе последовательности изучаются в одной модели.",
       },
     },
   },
@@ -704,34 +662,29 @@ export const products: Product[] = [
     },
     defaultTranslation: {
       name: "Selank",
-      tagline: "Synthetic tuftsin analog — cognitive & anxiolytic research",
+      tagline: "Synthetic tuftsin analog — cognitive and anxiolytic research",
       description:
-        "A synthetic heptapeptide analog of tuftsin studied in serotonin and BDNF pathway research.",
+        "A synthetic heptapeptide analog of the immunomodulatory peptide tuftsin. It is studied for its influence on BDNF expression and serotonin signalling in neurobiology models.",
     },
     translations: {
       fi: {
         name: "Selank",
-        tagline: "Synteettinen tuftsiinianalogi — kognitiivinen ja ahdistuneisuustutkimus",
+        tagline: "Synteettinen tuftsuiinianalogi — kognitiivinen ja anksiolyyttinen tutkimus",
         description:
-          "Synteettinen heptapeptidi-tuftsiinianalogi, tutkittu serotoniini- ja BDNF-reittimalleissa.",
-      },
-      de: {
-        name: "Selank",
-        tagline: "Synthetisches Tuftsin-Analogon — kognitive & anxiolytische Forschung",
-        description:
-          "Synthetisches Heptapeptid-Tuftsin-Analogon für Serotonin- und BDNF-Signalwegforschung.",
+          "Synteettinen heptapeptidianalogi immunomoduloivasta tuftsuiinipeptidistä. Sitä tutkitaan BDNF:n ilmentymisen ja serotoniinisignaalin vaikutuksesta neurobiologisissa malleissa.",
       },
       sv: {
         name: "Selank",
-        tagline: "Syntetisk tuftsinanalog — kognitiv & ångestforskning",
+        tagline: "Syntetisk tuftsinanalog — kognitiv och anxiolytisk forskning",
         description:
-          "Syntetisk heptapeptid-tuftsinanalog för serotonin- och BDNF-signaleringsforskning.",
+          "En syntetisk heptapeptidanalog av det immunomodulerande peptidet tuftsin. Den studeras för sitt inflytande på BDNF-uttryck och serotoninsignalering i neurobiologiska modeller.",
       },
-      nl: {
-        name: "Selank",
-        tagline: "Synthetisch tuftsine-analoog — cognitief en anxiolytisch onderzoek",
+      ru: {
+        name: "Селанк",
+        tagline:
+          "Синтетический аналог туфтсина — когнитивные исследования и исследования анксиолитических эффектов",
         description:
-          "Synthetisch heptapeptide-tuftsine-analoog voor serotonine- en BDNF-routeonderzoek.",
+          "Синтетический гептапептидный аналог иммуномодулирующего пептида туфтсина. Изучается как фактор влияния на экспрессию BDNF и серотониновую сигнализацию в нейробиологических моделях.",
       },
     },
   },
@@ -780,34 +733,28 @@ export const products: Product[] = [
     },
     defaultTranslation: {
       name: "Semax",
-      tagline: "ACTH 4-10 fragment — neuroprotection & cognition research",
+      tagline: "ACTH 4–10 fragment — neuroprotection and cognition research",
       description:
-        "A synthetic melanocortin derivative studied in neuroprotection and BDNF-expression research.",
+        "A synthetic melanocortin derivative corresponding to the ACTH 4–10 fragment. It is used in neuroprotection studies and as a comparison compound in BDNF-expression research.",
     },
     translations: {
       fi: {
         name: "Semax",
-        tagline: "ACTH 4-10 -fragmentti — neuroprotektio- ja kognitiotutkimus",
+        tagline: "ACTH 4–10 -fragmentti — neuroprotektio- ja kognitiotutkimus",
         description:
-          "Synteettinen melanokortiinijohdannainen, tutkittu neuroprotektio- ja BDNF-ilmentymismalleissa.",
-      },
-      de: {
-        name: "Semax",
-        tagline: "ACTH 4-10 Fragment — Neuroprotektion & Kognitionsforschung",
-        description:
-          "Synthetisches Melanocortin-Derivat für Neuroprotektion und BDNF-Expressionsforschung.",
+          "Synteettinen melakortiinijohdannainen, joka vastaa ACTH 4–10 -fragmenttia. Sitä käytetään neuroprotektiotutkimuksissa ja vertailuaineena BDDF:n ilmentymistä koskevissa kokeissa.",
       },
       sv: {
         name: "Semax",
-        tagline: "ACTH 4-10-fragment — neuroprotektion & kognitionsforskning",
+        tagline: "ACTH 4–10-fragment — neuroprotektion och kognitionsforskning",
         description:
-          "Syntetiskt melanokortinderivat för neuroprotektions- och BDNF-uttrycksforskning.",
+          "En syntetisk melanokortinderivat som motsvarar ACTH 4–10-fragmentet. Används i neuroprotektionsstudier och som jämförelseämne i forskning om BDNF-uttryck.",
       },
-      nl: {
-        name: "Semax",
-        tagline: "ACTH 4-10 fragment — neuroprotectie en cognitieonderzoek",
+      ru: {
+        name: "Семакс",
+        tagline: "Фрагмент АКТГ 4–10 — исследования нейропротекции и когнитивных функций",
         description:
-          "Synthetisch melanocortine-derivaat voor neuroprotectie- en BDNF-expressieonderzoek.",
+          "Синтетический производный меланокортина, соответствующий фрагменту АКТГ 4–10. Применяется в исследованиях нейропротекции и как соединение для сравнения при изучении экспрессии BDNF.",
       },
     },
   },
@@ -848,30 +795,26 @@ export const products: Product[] = [
       name: "CJC-1295",
       tagline: "Modified GHRH analog (no DAC) — growth-hormone research",
       description:
-        "A 30-amino-acid synthetic GHRH analog without the drug-affinity complex, studied in pulsatile GH research.",
+        "A 30-amino-acid synthetic analog of growth-hormone-releasing hormone without the drug-affinity complex. It is the standard compound for studying pulsatile growth-hormone signalling and receptor response.",
     },
     translations: {
       fi: {
         name: "CJC-1295",
-        tagline: "Muokattu GHRH-analogi (ei DAC:ia) — kasvuhormonitutkimus",
+        tagline: "Muokattu GHRH-analogi (ei DAC) — kasvuhormonitutkimus",
         description:
-          "30-aminohapon synteettinen GHRH-analogi ilman DAC-kompleksia, tutkittu pulssittaisen GH:n malleissa.",
-      },
-      de: {
-        name: "CJC-1295",
-        tagline: "Modifiziertes GHRH-Analogon (ohne DAC) — Wachstumshormonforschung",
-        description: "30-Aminosäure-GHRH-Analogon ohne DAC, erforscht in pulsatiler GH-Forschung.",
+          "Synteettinen 30 aminohapon kasvuhormonin vapauttajahormonin (GHRH) analogi ilman drug-affinity complexia. Se on vakioyhdiste pulssittaisen kasvuhormonisignaalin ja reseptorivasteen tutkimuksessa.",
       },
       sv: {
         name: "CJC-1295",
         tagline: "Modifierad GHRH-analog (utan DAC) — tillväxthormonforskning",
-        description: "30-aminosyramodifierad GHRH-analog utan DAC för pulserande GH-forskning.",
-      },
-      nl: {
-        name: "CJC-1295",
-        tagline: "Gemodificeerd GHRH-analoog (zonder DAC) — groeihormoononderzoek",
         description:
-          "30-aminozuur synthetisch GHRH-analoog zonder DAC voor pulserend GH-onderzoek.",
+          "En syntetisk analog på 30 aminosyror av tillväxthormonfrisättande hormon (GHRH) utan drug-affinity-komplex. Det är standardämnet för studier av pulserande tillväxthormonsignalering och receptorrespons.",
+      },
+      ru: {
+        name: "CJC-1295",
+        tagline: "Модифицированный аналог GHRH (без DAC) — исследования гормона роста",
+        description:
+          "Синтетический 30-аминокислотный аналог гормона, высвобождающего гормон роста (GHRH), без drug-affinity-комплекса. Это стандартное соединение для изучения пульсирующей сигнализации гормона роста и ответа рецептора.",
       },
     },
   },
@@ -910,33 +853,28 @@ export const products: Product[] = [
     },
     defaultTranslation: {
       name: "AOD-9604",
-      tagline: "Modified hGH fragment 176-191 — metabolic research (contact for pricing)",
+      tagline: "Modified hGH fragment 176–191 — metabolic research",
       description:
-        "A modified fragment of human growth hormone studied in lipid-metabolism research. Contact for current batch availability.",
+        "A modified C-terminal fragment of human growth hormone, supplied on request only. Contact us for current batch availability and pricing for this compound.",
     },
     translations: {
       fi: {
         name: "AOD-9604",
-        tagline: "Muokattu hGH-fragmentti 176-191 — metaboliatutkimus (kysy hinta)",
+        tagline: "Muokattu hGH-fragmentti 176–191 — ainevaihduntatutkimus",
         description:
-          "Muokattu ihmisen kasvuhormonin fragmentti, tutkittu lipidien metabolian malleissa. Kysy saatavuus.",
-      },
-      de: {
-        name: "AOD-9604",
-        tagline: "Modifiziertes hGH-Fragment 176-191 — Stoffwechselforschung (Preis auf Anfrage)",
-        description:
-          "Modifiziertes Fragment des menschlichen Wachstumshormons für Lipidstoffwechselforschung.",
+          "Ihmisen kasvuhormonin muokattu C-terminaalinen fragmentti, toimitetaan vain pyynnöstä. Pyydä meiltä yhteyttä nykyisen erän saatavuuteen ja hintaan.",
       },
       sv: {
         name: "AOD-9604",
-        tagline: "Modifierad hGH-fragment 176-191 — metabolismforskning (kontakta för pris)",
-        description: "Modifierad fragment av humant tillväxthormon för lipidmetabolismforskning.",
-      },
-      nl: {
-        name: "AOD-9604",
-        tagline: "Gemodificeerd hGH-fragment 176-191 — metabolisch onderzoek (prijs op aanvraag)",
+        tagline: "Modifierat hGH-fragment 176–191 — metabolforskning",
         description:
-          "Gemodificeerd fragment van humaan groeihormoon voor lipidenmetabolismeonderzoek.",
+          "Ett modifierat C-terminalt fragment av mänskligt tillväxthormon, som endast levereras på begäran. Kontakta oss för aktuell batchtillgänglighet och pris.",
+      },
+      ru: {
+        name: "AOD-9604",
+        tagline: "Модифицированный фрагмент hGH 176–191 — исследования метаболизма",
+        description:
+          "Модифицированный С-концевой фрагмент гормона роста человека, поставляемый только по запросу. Свяжитесь с нами по поводу наличия партии и цены.",
       },
     },
   },
@@ -973,35 +911,29 @@ export const products: Product[] = [
       lab: labs[0],
     },
     defaultTranslation: {
-      name: "HGH Frag 176-191",
+      name: "HGH Frag 176–191",
       tagline: "Native hGH lipolytic fragment — metabolic research",
       description:
-        "The native 16-residue C-terminal fragment of human growth hormone, studied in lipolysis research.",
+        "The native 16-residue C-terminal fragment of human growth hormone, also called AOD-9604 without modification. It is studied in lipolysis and metabolic models as a reference for the modified and unmodified forms.",
     },
     translations: {
       fi: {
-        name: "HGH Frag 176-191",
-        tagline: "Natiivi hGH:n lipolyyttinen fragmentti — metaboliatutkimus",
+        name: "HGH-fragmentti 176–191",
+        tagline: "Luonnollinen hGH:n lipolyysifragmentti — ainevaihduntatutkimus",
         description:
-          "Ihmisen kasvuhormonin natiivi 16-jäännöksen C-terminaalinen fragmentti, tutkittu lipolyysimalleissa.",
-      },
-      de: {
-        name: "HGH Frag 176-191",
-        tagline: "Natives lipolytisches hGH-Fragment — Stoffwechselforschung",
-        description:
-          "Natives 16-Rest-C-terminales Fragment des menschlichen Wachstumshormons für Lipolyseforschung.",
+          "Ihmisen kasvuhormonin luonnollinen 16 jääkkeen C-terminaalinen fragmentti, jota kutsutaan myös modifioimattomaksi AOD-9604:ksi. Sitä tutkitaan lipolyysi- ja ainevaihduntamalleissa referenssinä modifioituun ja modifioimattomaan muotoon.",
       },
       sv: {
-        name: "HGH Frag 176-191",
-        tagline: "Nativt lipolytiskt hGH-fragment — metabolismforskning",
+        name: "HGH-frag 176–191",
+        tagline: "Nativt hGH-lipolytiskt fragment — metabolforskning",
         description:
-          "Nativt 16-rest C-terminalt fragment av humant tillväxthormon för lipolysforskning.",
+          "Det nativa C-terminala fragmentet med 16 aminosyror ur mänskligt tillväxthormon, även kallat AOD-9604 utan modifiering. Det studeras i lipolys- och metabolmodeller som referens för de modifierade och omoderade formerna.",
       },
-      nl: {
-        name: "HGH Frag 176-191",
-        tagline: "Native lipolytische hGH-fragment — metabolisch onderzoek",
+      ru: {
+        name: "Фрагмент гормона роста 176–191",
+        tagline: "Нативный липолитический фрагмент гормона роста — исследования метаболизма",
         description:
-          "Native 16-residu C-terminale fragment van humaan groeihormoon voor lipolyseonderzoek.",
+          "Нативный С-концевой фрагмент гормона роста человека из 16 аминокислот, также известный как AOD-9604 без модификации. Изучается в моделях липолиза и метаболизма как референс модифицированной и немодифицированной форм.",
       },
     },
   },

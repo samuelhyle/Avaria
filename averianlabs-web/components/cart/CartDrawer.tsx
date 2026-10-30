@@ -1,5 +1,6 @@
 "use client"
 
+import { CartMiniSummary } from "@/components/cart/CartMiniSummary"
 import { Button } from "@/components/ui/Button"
 import { useCart } from "@/lib/cart/store"
 import { useOverlay } from "@/lib/hooks/use-overlay"
@@ -7,12 +8,10 @@ import { getProduct } from "@/lib/products/data"
 import type { Locale } from "@/lib/products/types"
 import { cn } from "@/lib/utils/cn"
 import { formatCurrency, formatSize } from "@/lib/utils/format"
-import { ArrowRight, Minus, Plus, ShoppingBag, Truck, X } from "lucide-react"
+import { ArrowRight, Minus, Plus, ShoppingBag, X } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
 import type { CSSProperties } from "react"
-
-const FREE_SHIPPING_THRESHOLD_CENTS = 15000
 
 export function CartDrawer({ locale }: { locale: string }) {
   const t = useTranslations("cart")
@@ -22,19 +21,10 @@ export function CartDrawer({ locale }: { locale: string }) {
   const close = useCart((s) => s.close)
   const setQty = useCart((s) => s.setQty)
   const remove = useCart((s) => s.remove)
-  const subtotal = useCart((s) =>
-    s.items.reduce(
-      (sum, item) => sum + (item.purchaseMode === "direct" ? item.unitPriceCents * item.qty : 0),
-      0,
-    ),
-  )
 
   const containerRef = useOverlay({ open: isOpen, onClose: close })
 
   if (!isOpen) return null
-
-  const freeShipProgress = Math.min(100, (subtotal / FREE_SHIPPING_THRESHOLD_CENTS) * 100)
-  const isFreeShipping = subtotal >= FREE_SHIPPING_THRESHOLD_CENTS
 
   return (
     <div className="fixed inset-0 z-50">
@@ -74,42 +64,12 @@ export function CartDrawer({ locale }: { locale: string }) {
               <ShoppingBag className="h-6 w-6" />
             </div>
             <p className="text-sm text-ink-muted">{t("empty")}</p>
-            <Button variant="outline" size="md" onClick={close}>
+            <Button variant="outline" size="md" asChild>
               <Link href={`/${locale}/shop`}>{t("emptyCta")}</Link>
             </Button>
           </div>
         ) : (
           <>
-            {/* Free shipping progress bar */}
-            <div
-              className={cn(
-                "flex items-center gap-2 border-b border-line px-5 py-3 text-xs",
-                isFreeShipping
-                  ? "bg-success-soft/40 text-success"
-                  : "bg-surface-2/50 text-ink-muted",
-              )}
-            >
-              <Truck className="h-3.5 w-3.5" />
-              {isFreeShipping ? (
-                <span className="font-medium">{t("freeShippingUnlocked")}</span>
-              ) : (
-                <span className="text-pretty">
-                  {t("freeShippingProgress", {
-                    amount: formatCurrency(FREE_SHIPPING_THRESHOLD_CENTS - subtotal, "EUR", locale),
-                  })}
-                </span>
-              )}
-            </div>
-            <div className="h-1 w-full overflow-hidden bg-surface-3">
-              <div
-                className={cn(
-                  "h-full transition-all duration-500 ease-[var(--ease-crystal)]",
-                  isFreeShipping ? "bg-success" : "bg-accent",
-                )}
-                style={{ width: `${freeShipProgress}%` }}
-              />
-            </div>
-
             <ul className="flex-1 overflow-auto divide-y divide-line">
               {items.map((item) => {
                 const product = getProduct(item.productSlug)
@@ -171,30 +131,7 @@ export function CartDrawer({ locale }: { locale: string }) {
               })}
             </ul>
 
-            <footer className="border-t border-line bg-surface-2/40 p-5">
-              <div className="space-y-1.5 text-sm">
-                <div className="flex justify-between text-ink-muted">
-                  <span>{t("subtotal")}</span>
-                  <span className="font-medium tabular-nums text-ink">
-                    {formatCurrency(subtotal, "EUR", locale)}
-                  </span>
-                </div>
-                <div className="flex justify-between text-xs text-ink-subtle">
-                  <span>{t("vat")}</span>
-                  <span>{t("vatIncluded")}</span>
-                </div>
-                <div className="flex justify-between border-t border-line pt-2 font-display text-base font-semibold">
-                  <span>{t("total")}</span>
-                  <span className="tabular-nums">{formatCurrency(subtotal, "EUR", locale)}</span>
-                </div>
-              </div>
-              <Button asChild fullWidth size="lg" className="mt-4">
-                <Link href={`/${locale}/checkout/cart`} onClick={close}>
-                  {t("checkout")}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-            </footer>
+            <CartMiniSummary locale={locale as Locale} showRecent={false} />
           </>
         )}
       </aside>

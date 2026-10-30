@@ -1,10 +1,9 @@
 /**
- * Map the app's short locale codes (en, fi, de, sv, nl) to the BCP-47 tags
- * used by `Intl.*`. The short codes work for some operations (German
- * currency), but fall back to a non-default region for others (e.g. "en"
- * would fall back to the system default, not en-GB). Mapping the short
- * codes to canonical tags keeps currency, number and date formatting
- * consistent across the app.
+ * Map the app's short locale codes (en, fi, sv, ru) to the BCP-47 tags
+ * used by `Intl.*`. The short codes work for some operations, but fall back
+ * to a non-default region for others (e.g. "en" would fall back to the system
+ * default, not en-GB). Mapping the short codes to canonical tags keeps
+ * currency, number and date formatting consistent across the app.
  */
 export function toIntlLocale(locale: string): string {
   switch (locale) {
@@ -12,12 +11,10 @@ export function toIntlLocale(locale: string): string {
       return "en-GB"
     case "fi":
       return "fi-FI"
-    case "de":
-      return "de-DE"
     case "sv":
       return "sv-SE"
-    case "nl":
-      return "nl-NL"
+    case "ru":
+      return "ru-RU"
     default:
       return locale
   }

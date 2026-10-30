@@ -10,7 +10,7 @@ import { orderAccessToken } from "@/lib/orders/access"
 import { stripe } from "@/lib/payments/stripe"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
-import { getCachedShippingRates } from "@/lib/shipping/cached"
+import { getCheckoutShippingRates } from "@/lib/shipping/cached"
 import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
   try {
     await releaseExpiredReservations()
     const member = await getCurrentMember().catch(() => null)
-    const rates = await getCachedShippingRates(input.shippingAddress)
+    const rates = await getCheckoutShippingRates(input.shippingAddress, input.items)
     const rate = rates.find((rate) => rate.id === input.shippingMethodId)
     if (!rate) return NextResponse.json({ code: "unknown_shipping" }, { status: 400 })
     const checkoutHash = crypto.createHash("sha256").update(JSON.stringify(input)).digest("hex")
@@ -72,6 +72,8 @@ export async function POST(request: Request) {
       clientSecret: intent.client_secret,
       totalCents: order.totalCents,
       subtotalCents: order.subtotalCents,
+      discountCents: order.discountCents,
+      promoCode: order.promoCode,
       shippingCents: order.shippingCents,
       vatCents: order.vatCents,
     })

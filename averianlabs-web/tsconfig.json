@@ -29,10 +29,13 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    ".next-store/types/**/*.ts",
     ".next-verify/types/**/*.ts",
     ".next-workspace/types/**/*.ts",
     ".next/types/**/*.ts",
-    "next-env.d.ts"
+    "/tmp/opencode/netlify-build/types/**/*.ts",
+    "next-env.d.ts",
+    ".next-netlify/types/**/*.ts"
   ],
   "exclude": ["node_modules", ".next", ".next-verify", "dist", "tests"]
 }

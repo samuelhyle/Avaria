@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/Button"
 import { Container } from "@/components/ui/Container"
-import * as Sentry from "@sentry/nextjs"
+import { reportClientError } from "@/lib/observability/client-reporter"
 import { FlaskConical, Mail, RefreshCw } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
@@ -11,7 +11,7 @@ export default function GlobalError({ error, reset }: { error: Error; reset: () 
   const [fi, setFi] = useState(false)
   useEffect(() => {
     setFi(window.location.pathname.startsWith("/fi"))
-    Sentry.captureException(error)
+    reportClientError(error)
   }, [error])
 
   return (

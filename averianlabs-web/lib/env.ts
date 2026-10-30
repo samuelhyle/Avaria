@@ -49,6 +49,56 @@ const serverSchema = z.object({
   SENDCLOUD_SECRET_KEY: z.string().min(1).optional(),
   SENDCLOUD_WEBHOOK_SECRET: z.string().min(1).optional(),
 
+  // Telegram — crypto checkout. All optional so the site builds and runs
+  // without the bot; the crypto route reports "not configured" instead.
+  TELEGRAM_BOT_TOKEN: z.string().min(1).optional(),
+  /**
+   * The secret Telegram sends in `X-Telegram-Bot-Api-Secret-Token`.
+   *
+   * Telegram only accepts 1–256 characters from `A-Z`, `a-z`, `0-9`, `_` and
+   * `-`, and refuses the whole `setWebhook` call otherwise. The constraint is
+   * checked here so a bad value fails at boot rather than at the first
+   * webhook delivery.
+   */
+  TELEGRAM_WEBHOOK_SECRET: z
+    .string()
+    .min(16)
+    .max(256)
+    .regex(/^[A-Za-z0-9_-]+$/, "TELEGRAM_WEBHOOK_SECRET may only contain A-Z, a-z, 0-9, _ and -")
+    .optional(),
+  /** Shared secret for bot -> site service calls. */
+  TELEGRAM_INTERNAL_SECRET: z.string().min(16).optional(),
+  /** The team's chat that receives every order notification. */
+  TELEGRAM_OPS_CHAT_ID: z.string().min(1).optional(),
+  /** The public @username of the bot, used to build the t.me deep link. */
+  TELEGRAM_BOT_USERNAME: z.string().min(1).optional(),
+
+  // Crypto — receiving wallet and rate source.
+  CRYPTO_WALLET_ADDRESS: z.string().min(1).optional(),
+  /** Comma-separated per-chain overrides, e.g. "btc=bc1...,usdt_trc20=T...". */
+  CRYPTO_WALLET_ADDRESSES: z.string().min(1).optional(),
+  CHECKOUT_TEST_PRODUCT_ENABLED: z.enum(["true", "false"]).default("false"),
+  CRYPTO_ENABLED_CHAINS: z.string().min(1).optional(),
+  /** Public price API used to lock the EUR rate when an invoice is issued. */
+  CRYPTO_RATE_API_URL: z.string().url().optional(),
+  /** Fallback rate when the API is unreachable: "btc=60000,usdt_trc20=0.92". */
+  CRYPTO_FALLBACK_RATES: z.string().min(1).optional(),
+  /**
+   * Explorer keys for the deposit watcher.
+   *
+   * Bitcoin needs none. Without the key for a chain the watcher reports
+   * `explorer_not_configured` for it and skips it, so the other chains keep
+   * working.
+   */
+  ETHERSCAN_API_KEY: z.string().min(1).optional(),
+  TRONGRID_API_KEY: z.string().min(1).optional(),
+  /** Mainnet RPC endpoint used to verify finalized native USDC deposits on Solana. */
+  SOLANA_RPC_URL: z
+    .string()
+    .url()
+    .refine((value) => new URL(value).protocol === "https:", "SOLANA_RPC_URL must use HTTPS")
+    .optional(),
+
   RESEND_API_KEY: z.string().min(1).optional(),
   RESEND_FROM_EMAIL: z.string().min(1).optional(),
 

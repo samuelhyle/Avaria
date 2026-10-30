@@ -3,20 +3,35 @@
 import { QuoteForm } from "@/components/product/QuoteForm"
 import { StickyDesktopAtc } from "@/components/product/StickyDesktopAtc"
 import { StickyMobileAtc } from "@/components/product/StickyMobileAtc"
+import { StockIndicator } from "@/components/product/StockIndicator"
 import { WishlistButton } from "@/components/product/WishlistButton"
 import { SaveToPlanWrapper } from "@/components/research-plans/SaveToPlanWrapper"
+import { ResearchNotice } from "@/components/store/ResearchNotice"
 import { Button } from "@/components/ui/Button"
 import { useCart } from "@/lib/cart/store"
 import { useCompare } from "@/lib/compare/store"
 import type { Locale, Product } from "@/lib/products/types"
 import { cn } from "@/lib/utils/cn"
 import { formatCurrency, formatPercent, formatSize } from "@/lib/utils/format"
-import { GitCompare } from "lucide-react"
+import { CheckCircle2, GitCompare, Info, Minus, PackageCheck, Plus, Truck } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { useState } from "react"
 import { toast } from "sonner"
 
+/**
+ * Store-style "buy box" for the product detail page.
+ *
+ * Composition:
+ *   1. Pricing hero — current variant price, unit, stock, batch row
+ *   2. Variant selector — chips with SKU, stock-by-variant indicator
+ *   3. Quantity + Add-to-cart CTA, live total
+ *   4. Wishlist · Compare · Save-to-plan secondary actions
+ *   5. Trust strip — secure checkout, batch traceability, free-shipping threshold
+ *   6. Calculator shortcut + assigned batch details
+ *
+ * Quotation-mode variants swap the buy box for an inline `QuoteForm`.
+ */
 export function ProductDetailActions({
   product,
   locale,
@@ -31,6 +46,7 @@ export function ProductDetailActions({
   initialSku?: string
 }) {
   const t = useTranslations("product")
+  const pt = t
   const r = useTranslations("research")
   const common = useTranslations("common")
   const compare = useCompare()
@@ -68,14 +84,169 @@ export function ProductDetailActions({
     })
     toast.success(r("added"), { description: `${name} · ${formatSize(vial, locale)} × ${qty}` })
   }
+
   return (
     <>
-      <div className="mt-5 space-y-5">
-        <div className="flex flex-wrap items-center gap-3">
-          <WishlistButton slug={product.slug} />
+      <div className="mt-6 space-y-6">
+        {product.checkoutTest ? (
+          <p role="note" className="rounded border border-line p-4 text-sm">
+            {pt("checkoutTestNotice")}
+          </p>
+        ) : null}
+        {/* 1. Pricing hero */}
+        <section
+          aria-label={pt("priceAvailability")}
+          className="rounded-[var(--radius-lg)] border border-line bg-surface p-5 sm:p-6"
+        >
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            {direct ? (
+              <div>
+                <p className="text-2xs font-semibold uppercase tracking-[0.14em] text-ink-subtle">
+                  {t("priceLabel")}
+                </p>
+                <p className="mt-1 flex items-baseline gap-2">
+                  <span className="font-display text-4xl font-bold tracking-tight tabular-nums text-ink">
+                    {formatCurrency(vial.priceCents, "EUR", locale)}
+                  </span>
+                  {vial.compareAtCents ? (
+                    <span className="text-sm text-ink-subtle line-through tabular-nums">
+                      {formatCurrency(vial.compareAtCents, "EUR", locale)}
+                    </span>
+                  ) : null}
+                </p>
+                <p className="mt-1.5 text-xs text-ink-muted">{t("vatNote")}</p>
+              </div>
+            ) : (
+              <div>
+                <p className="text-2xs font-semibold uppercase tracking-[0.14em] text-ink-subtle">
+                  {t("pricingLabel")}
+                </p>
+                <p className="mt-1 font-display text-3xl font-bold tracking-tight text-ink">
+                  {r("quote")}
+                </p>
+                <p className="mt-1.5 text-sm text-ink-muted">{r("quoteDescription")}</p>
+              </div>
+            )}
+            <StockIndicator stockQty={vial.stockQty} purchaseMode={vial.purchaseMode} />
+          </div>
+        </section>
+
+        {/* 2. Variant selector */}
+        <fieldset>
+          <legend className="text-sm font-semibold uppercase tracking-wider text-ink-subtle">
+            {t("selectVialSize")}
+          </legend>
+          <p className="mt-1 text-xs text-ink-muted">{t("sizeHelper")}</p>
+          <div className="mt-3 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+            {product.vials.map((variant, i) => {
+              const variantAvailable =
+                variant.purchaseMode === "direct" && variant.priceCents > 0 && variant.stockQty > 0
+              return (
+                <button
+                  key={variant.sku}
+                  type="button"
+                  aria-pressed={index === i}
+                  onClick={() => changeVial(i)}
+                  className={cn(
+                    "group relative min-w-0 rounded-[var(--radius-lg)] border p-3 text-left [overflow-wrap:anywhere] transition-colors sm:min-w-32",
+                    index === i
+                      ? "border-accent bg-accent-soft shadow-sm"
+                      : "border-line bg-surface hover:border-accent/40",
+                  )}
+                >
+                  <span className="block text-sm font-semibold tracking-tight">
+                    {formatSize(variant, locale)}
+                  </span>
+                  <span
+                    className={cn(
+                      "mt-1 block break-all font-mono text-2xs",
+                      index === i ? "text-accent-ink" : "text-ink-muted",
+                    )}
+                  >
+                    {variant.sku}
+                  </span>
+                  <span className="mt-1.5 block text-sm font-semibold tabular-nums">
+                    {variantAvailable
+                      ? formatCurrency(variant.priceCents, "EUR", locale)
+                      : variant.purchaseMode === "quotation"
+                        ? r("quote")
+                        : r("unavailable")}
+                  </span>
+                  <span className="mt-0.5 block text-2xs text-ink-subtle">
+                    {variantAvailable ? t("perVial") : ""}
+                  </span>
+                  {index === i && (
+                    <span
+                      aria-hidden
+                      className="absolute right-2 top-2 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-on-accent"
+                    >
+                      <CheckCircle2 className="h-3 w-3" />
+                    </span>
+                  )}
+                </button>
+              )
+            })}
+          </div>
+        </fieldset>
+
+        {/* 3. Quantity + ATC */}
+        {direct ? (
+          <div className="space-y-3">
+            <p className="text-sm font-semibold uppercase tracking-wider text-ink-subtle">
+              {t("quantity")}
+            </p>
+            <div className="flex flex-wrap items-stretch gap-3">
+              <div className="inline-flex items-center rounded-[var(--radius-lg)] border border-line bg-surface">
+                <button
+                  type="button"
+                  aria-label={common("decreaseQuantity")}
+                  onClick={() => setQty(Math.max(1, qty - 1))}
+                  className="inline-flex h-12 w-12 items-center justify-center text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink"
+                >
+                  <Minus className="h-4 w-4" aria-hidden />
+                </button>
+                <span
+                  className="w-12 border-x border-line text-center font-mono text-base tabular-nums"
+                  aria-live="polite"
+                >
+                  {qty}
+                </span>
+                <button
+                  type="button"
+                  aria-label={common("increaseQuantity")}
+                  onClick={() =>
+                    setQty(Math.min(product.checkoutTest ? 1 : 20, vial.stockQty, qty + 1))
+                  }
+                  className="inline-flex h-12 w-12 items-center justify-center text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink"
+                >
+                  <Plus className="h-4 w-4" aria-hidden />
+                </button>
+              </div>
+              <Button size="lg" onClick={handleAdd} className="flex-1">
+                {t("addToCart")}
+                <span className="ml-2 font-mono font-semibold tabular-nums opacity-90">
+                  {formatCurrency(vial.priceCents * qty, "EUR", locale)}
+                </span>
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-4">
+            <QuoteForm sku={vial.sku} locale={locale} />
+          </div>
+        )}
+
+        {/* 3b. Research-use fine print */}
+        <ResearchNotice />
+
+        {/* 4. Wishlist · Compare · Save-to-plan */}
+        <div className="flex flex-wrap items-center gap-2">
+          <WishlistButton slug={product.slug}>
+            <span className="ml-1.5">{r("wishlist")}</span>
+          </WishlistButton>
           <Button
             variant="outline"
-            size="sm"
+            size="md"
             aria-pressed={compare.items.includes(product.slug)}
             onClick={() => {
               compare.toggle(product.slug)
@@ -84,7 +255,7 @@ export function ProductDetailActions({
             disabled={!compare.items.includes(product.slug) && compare.items.length >= compare.max}
           >
             <GitCompare className="h-4 w-4" />
-            {r("compare")}
+            <span className="ml-1.5">{r("compare")}</span>
           </Button>
           {product.dataSource === "database" && (
             <SaveToPlanWrapper
@@ -96,105 +267,75 @@ export function ProductDetailActions({
             />
           )}
         </div>
-        <fieldset>
-          <legend className="text-sm font-medium">{t("selectVialSize")}</legend>
-          <div className="mt-3 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
-            {product.vials.map((variant, i) => (
-              <button
-                key={variant.sku}
-                type="button"
-                aria-pressed={index === i}
-                onClick={() => changeVial(i)}
-                className={cn(
-                  "min-w-0 rounded-[var(--radius)] border p-3 text-left [overflow-wrap:anywhere] sm:min-w-28",
-                  index === i ? "border-accent bg-accent-soft" : "border-line bg-surface",
-                )}
-              >
-                <span className="block font-semibold">{formatSize(variant, locale)}</span>
-                <span className="block font-mono text-sm text-ink-muted">{variant.sku}</span>
-                <span className="block text-sm">
-                  {variant.purchaseMode === "direct"
-                    ? formatCurrency(variant.priceCents, "EUR", locale)
-                    : variant.purchaseMode === "quotation"
-                      ? r("quote")
-                      : r("unavailable")}
-                </span>
-              </button>
-            ))}
-          </div>
-        </fieldset>
-        {direct ? (
-          <>
-            <div>
-              <p className="text-sm font-medium">{t("quantity")}</p>
-              <div className="mt-3 inline-flex items-center rounded-[var(--radius)] border border-line">
-                <button
-                  type="button"
-                  aria-label={common("decreaseQuantity")}
-                  onClick={() => setQty(Math.max(1, qty - 1))}
-                  className="h-11 w-11"
-                >
-                  −
-                </button>
-                <span className="w-10 text-center font-mono" aria-live="polite">
-                  {qty}
-                </span>
-                <button
-                  type="button"
-                  aria-label={common("increaseQuantity")}
-                  onClick={() => setQty(Math.min(20, vial.stockQty, qty + 1))}
-                  className="h-11 w-11"
-                >
-                  +
-                </button>
+
+        {/* 5. Trust strip */}
+        {!product.checkoutTest && (
+          <ul className="grid gap-2 rounded-[var(--radius-lg)] border border-line bg-surface-2/40 p-2 sm:grid-cols-3">
+            <li className="flex items-start gap-2 rounded-[var(--radius)] bg-surface px-3 py-2 text-xs">
+              <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 text-success" aria-hidden />
+              <div>
+                <p className="font-semibold text-ink">{r("trustSecure")}</p>
+                <p className="text-ink-muted">{r("trustSecureBody")}</p>
               </div>
-            </div>
-            <Button size="lg" fullWidth onClick={handleAdd}>
-              {t("addToCart")} · {formatCurrency(vial.priceCents * qty, "EUR", locale)}
-            </Button>
-            <p className="text-sm text-ink-muted">
-              {t("vatNote")} {r("shippingAtCheckout")}
-            </p>
-          </>
-        ) : (
-          <details key={vial.sku} className="rounded-lg border border-line">
-            <summary className="min-h-11 cursor-pointer list-none rounded-lg bg-accent px-4 py-3 text-center text-sm font-semibold text-on-accent [&::-webkit-details-marker]:hidden">
-              {r("quote")}
-            </summary>
-            <div className="p-4">
-              <QuoteForm sku={vial.sku} locale={locale} />
-            </div>
-          </details>
+            </li>
+            <li className="flex items-start gap-2 rounded-[var(--radius)] bg-surface px-3 py-2 text-xs">
+              <PackageCheck className="mt-0.5 h-3.5 w-3.5 text-success" aria-hidden />
+              <div>
+                <p className="font-semibold text-ink">{r("trustTraceable")}</p>
+                <p className="text-ink-muted">{r("trustTraceableBody")}</p>
+              </div>
+            </li>
+            <li className="flex items-start gap-2 rounded-[var(--radius)] bg-surface px-3 py-2 text-xs">
+              <Truck className="mt-0.5 h-3.5 w-3.5 text-accent" aria-hidden />
+              <div>
+                <p className="font-semibold text-ink">{r("trustFreeShipping")}</p>
+                <p className="text-ink-muted">{r("trustFreeShippingBody")}</p>
+              </div>
+            </li>
+          </ul>
         )}
+
+        {/* 6. Calculator shortcut + batch card */}
         {["mg", "mcg", "g"].includes(vial.sizeUnit) && (
           <Link
             href={`/${locale}/peptide-calculator?sku=${encodeURIComponent(vial.sku)}`}
-            className="inline-flex min-h-10 items-center text-sm text-accent underline"
+            className="flex items-center gap-2 rounded-[var(--radius)] border border-line bg-surface px-3 py-2 text-sm text-accent transition-colors hover:border-accent/40"
           >
-            {r("useCalculator")} · {vial.sku}
+            <Info className="h-4 w-4" />
+            <span>
+              <span className="font-semibold">{r("useCalculator")}</span>
+              <span className="ml-1 font-mono text-ink-muted">{vial.sku}</span>
+            </span>
           </Link>
         )}
         {vial.batch ? (
-          <div className="rounded-[var(--radius)] border border-line p-4 text-sm">
-            <p className="font-medium">
-              {r("batch")}: <span className="font-mono">{vial.batch.code}</span>
-            </p>
-            {product.productType !== "supplies" && vial.batch.hplcPurity > 0 ? (
-              <p>
-                {r("purity")}: {formatPercent(vial.batch.hplcPurity, locale)}
-              </p>
-            ) : null}
+          <div className="rounded-[var(--radius)] border border-line bg-surface p-4 text-sm">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p className="text-2xs uppercase tracking-wider text-ink-subtle">{r("batch")}</p>
+                <p className="font-mono font-medium">{vial.batch.code}</p>
+              </div>
+              {product.productType !== "supplies" && vial.batch.hplcPurity > 0 ? (
+                <div className="text-right">
+                  <p className="text-2xs uppercase tracking-wider text-ink-subtle">{r("purity")}</p>
+                  <p className="font-mono font-medium">
+                    {formatPercent(vial.batch.hplcPurity, locale)}
+                  </p>
+                </div>
+              ) : null}
+            </div>
             <a
               href={`/${locale}/documents?sku=${encodeURIComponent(vial.sku)}&batch=${encodeURIComponent(vial.batch.code)}`}
-              className="mt-2 inline-block text-accent underline"
+              className="mt-3 inline-flex items-center gap-1 text-accent underline underline-offset-4"
             >
               {r("viewDocuments")}
             </a>
           </div>
         ) : (
-          <p className="text-sm text-ink-muted">{r("batchPending")}</p>
+          !product.checkoutTest && <p className="text-sm text-ink-muted">{t("batchPending")}</p>
         )}
       </div>
+
       {direct ? (
         <>
           <StickyMobileAtc

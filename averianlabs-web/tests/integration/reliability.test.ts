@@ -39,7 +39,7 @@ import {
 } from "@/lib/orders/service"
 import { stripe } from "@/lib/payments/stripe"
 import { privateDocumentUrl } from "@/lib/storage/documents"
-import { and, eq, inArray, like } from "drizzle-orm"
+import { and, eq, inArray, like, ne } from "drizzle-orm"
 import { NextRequest } from "next/server"
 import Stripe from "stripe"
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest"
@@ -51,7 +51,10 @@ vi.mock("@/lib/email/index", async (importOriginal) => ({
 vi.mock("@/lib/auth", () => ({ auth: vi.fn(async () => null) }))
 vi.mock("@/lib/community", () => ({ getCurrentMember: vi.fn(async () => null) }))
 vi.mock("@/lib/shipping/cached", () => ({
-  getCachedShippingRates: vi.fn(async () => [{ id: "posti-standard", priceCents: 590 }]),
+  // The checkout route calls `getCheckoutShippingRates`; the mock has to
+  // provide the same export, or the route throws before it reaches the
+  // provider and every checkout assertion fails with a 503.
+  getCheckoutShippingRates: vi.fn(async () => [{ id: "posti-standard", priceCents: 590 }]),
 }))
 import { sendEmail } from "@/lib/email/index"
 
@@ -414,26 +417,50 @@ describe("provider replay and durable notifications", () => {
   })
   it("retries delivery with the same provider idempotency key", async () => {
     process.env.RESEND_API_KEY = "local-mocked-provider"
+    // The outbox is a shared queue: `deliverEmailOutbox` drains every due
+    // row, and earlier runs can leave pending rows behind. Those rows would
+    // consume the provider mock and shift the sequence, so this test owns
+    // the queue while it runs.
+    await db.delete(emailOutbox).where(ne(emailOutbox.status, "sent"))
     await enqueueEmail(
       { to: `${prefix}@example.invalid`, subject: "Fixture", html: "<p>Fixture</p>" },
       `${prefix}:delivery`,
     )
-    vi.mocked(sendEmail).mockResolvedValueOnce(false).mockResolvedValueOnce(true)
-    expect(await deliverEmailOutbox()).toEqual({ sent: 0, failed: 1 })
     const [row] = await db
       .select()
       .from(emailOutbox)
       .where(eq(emailOutbox.dedupeKey, `${prefix}:delivery`))
-    expect(row!.status).toBe("pending")
+    const ownId = row!.id
+    // The provider fails the first attempt and accepts the second. The mock
+    // is keyed on the idempotency key rather than on the call order, so the
+    // outcome does not depend on how many other rows were in the queue.
+    const attempts = new Map<string, number>()
+    vi.mocked(sendEmail).mockImplementation(async ({ idempotencyKey }) => {
+      const seen = (attempts.get(idempotencyKey ?? "") ?? 0) + 1
+      attempts.set(idempotencyKey ?? "", seen)
+      return seen > 1
+    })
+    const deliveryRow = async () => {
+      const [current] = await db
+        .select()
+        .from(emailOutbox)
+        .where(eq(emailOutbox.dedupeKey, `${prefix}:delivery`))
+      return current!
+    }
+    await deliverEmailOutbox()
+    expect((await deliveryRow()).status).toBe("pending")
     await db
       .update(emailOutbox)
       .set({ nextAttemptAt: new Date(0) })
-      .where(eq(emailOutbox.id, row!.id))
-    expect(await deliverEmailOutbox()).toEqual({ sent: 1, failed: 0 })
-    expect(vi.mocked(sendEmail).mock.calls.map(([input]) => input.idempotencyKey)).toEqual([
-      row!.id,
-      row!.id,
-    ])
+      .where(eq(emailOutbox.id, ownId))
+    await deliverEmailOutbox()
+    expect((await deliveryRow()).status).toBe("sent")
+    expect(
+      vi
+        .mocked(sendEmail)
+        .mock.calls.map(([input]) => input.idempotencyKey)
+        .filter((key) => key === ownId),
+    ).toEqual([ownId, ownId])
     Reflect.deleteProperty(process.env, "RESEND_API_KEY")
   })
 })

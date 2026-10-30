@@ -26,7 +26,9 @@ export const checkoutSchema = z.object({
   shippingAddress: addressSchema,
   billingAddress: addressSchema.optional(),
   vatId: z.string().max(32).optional(),
-  paymentMethod: z.enum(["stripe", "coinbase"]).default("stripe"),
+  paymentMethod: z.enum(["stripe", "coinbase", "crypto"]).default("stripe"),
+  /** Promotion code. Resolved server-side; the discount is never sent by the client. */
+  promoCode: z.string().trim().max(32).optional(),
   locale: z.enum(locales).default("en"),
   researchConsent: z.literal(true),
 })
@@ -34,6 +36,7 @@ export const quoteSchema = z.object({
   items: itemsSchema,
   locale: z.enum(locales).default("en"),
   shippingMethodId: z.string().max(64).optional(),
+  promoCode: z.string().trim().max(32).optional(),
   country: z
     .string()
     .length(2)

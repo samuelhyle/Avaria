@@ -29,11 +29,31 @@
   # Declared explicitly so the deploy context matches the local intent.
   NODE_ENV = "production"
   NEXT_TELEMETRY_DISABLED = "1"
-  NEXT_PUBLIC_REVIEW_SITE = "true"
   # CPU libraries are already included in the npm package. Netlify has no CUDA GPU.
   ONNXRUNTIME_NODE_INSTALL = "skip"
   # Next.js tracing needs more than Node's default 2 GiB heap for this app.
   NODE_OPTIONS = "--max-old-space-size=4096"
+
+# Scheduled functions.
+#
+# The cron routes are the only things that release expired inventory holds,
+# deliver the email and Telegram outboxes, settle forum moderation and watch
+# for crypto payments. Without a schedule on the host that serves the site,
+# none of them run: the bot would never deliver an invoice and order receipts
+# would wait for a customer who happened to trigger an unrelated request.
+#
+# Each function calls its route with the CRON_SECRET bearer header, because a
+# Netlify scheduled invocation cannot carry custom headers.
+#
+# Netlify caps scheduled functions at 30 seconds; the routes are budgeted
+# below that and stop early rather than being killed mid-run.
+[functions."cron-maintenance"]
+  schedule = "*/5 * * * *"
+  timeout = 30
+
+[functions."cron-crypto"]
+  schedule = "*/2 * * * *"
+  timeout = 30
 
 # Use the official Next.js Runtime to package server and edge routes.
 [[plugins]]
@@ -42,17 +62,21 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+# Register Telegram only after the production endpoint is published, using
+# the secrets inside Netlify. Previews never change the bot's webhook.
+[[plugins]]
+  package = "./netlify/plugins/telegram-webhook"
+
 # Locale-prefix redirect: the production app uses middleware to 307 → /en/...
 # when a request hits a non-locale path. With the Next.js Runtime the
 # middleware executes server-side per request, so we no longer need the
 # static-export rewrite engine that the previous demo required. Root only.
 
-# Noindex headers on every response while merchant release inputs are pending.
-# The planned canonical custom domain has not been connected to this project.
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Robots-Tag = "noindex, nofollow"
+# No `X-Robots-Tag: noindex` here any more: the merchant release is approved,
+# so the storefront is indexable. The review flag was removed from
+# `next.config.ts`, `app/robots.ts` and the `[build.environment]` block in the
+# same change. Leaving any one of them in place would have kept the site out
+# of the index while the others said it was public.
 
 # Long-cache hashed assets emitted by Next/Tailwind.
 [[headers]]

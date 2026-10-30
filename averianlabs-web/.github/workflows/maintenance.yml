@@ -5,7 +5,10 @@ on:
   workflow_dispatch:
 jobs:
   maintenance:
-    # Set the verified production HTTPS URL and CRON_SECRET before enabling.
+    # A fallback scheduler for deployments that are not served by Netlify. On
+    # Netlify the schedule lives in `netlify.toml` (`cron-maintenance` and
+    # `cron-crypto`), which runs on the same deployment as the code it calls.
+    # Set MAINTENANCE_BASE_URL and CRON_SECRET to enable this one.
     if: vars.MAINTENANCE_BASE_URL != ''
     runs-on: ubuntu-latest
     timeout-minutes: 2

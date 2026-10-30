@@ -334,6 +334,15 @@ export const orders = pgTable(
      */
     paymentProviderFeeCents: integer("payment_provider_fee_cents"),
     exchangeRateEurPerUnit: doublePrecision("exchange_rate_eur_per_unit"),
+    /**
+     * How the order was refunded: `stripe`, `crypto` (a manual outbound
+     * transfer, with the transaction hash) or `manual` (settled outside the
+     * application). `null` means the order has not been refunded.
+     */
+    refundMethod: text("refund_method"),
+    /** The provider's refund reference, or the outbound crypto transaction hash. */
+    refundReference: text("refund_reference"),
+    refundedAt: timestamp("refunded_at", { withTimezone: true }),
     placedAt: timestamp("placed_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
     reviewRequestedAt: timestamp("review_requested_at", { withTimezone: true }),
@@ -344,6 +353,14 @@ export const orders = pgTable(
     checkoutHash: text("checkout_hash"),
     paymentMethod: text("payment_method").notNull().default("stripe"),
     vatId: text("vat_id"),
+    /**
+     * Discount applied by a promotion. `subtotal_cents` holds the amount the
+     * customer actually pays for the products, so `subtotal + shipping = total`
+     * still holds; the pre-discount figure is `subtotal + discount`.
+     */
+    discountCents: integer("discount_cents").notNull().default(0),
+    /** The promotion code that produced the discount, for audit and re-orders. */
+    promoCode: text("promo_code"),
   },
   (t) => [
     index("orders_user_placed_idx").on(t.userId, t.placedAt),
@@ -373,6 +390,166 @@ export const orderItems = pgTable(
   (t) => [
     uniqueIndex("order_items_order_vial_idx").on(t.orderId, t.vialId),
     index("order_items_vial_idx").on(t.vialId),
+  ],
+)
+
+/**
+ * Promotions — server-side discount rules.
+ *
+ * A promotion is resolved and priced on the server inside `quoteCart`, and the
+ * resulting discount is part of the quote hash. The client can therefore never
+ * decide its own discount, and a quote that was priced without a code cannot
+ * be spent with one. See `lib/promotions/service.ts`.
+ *
+ * `kind`:
+ *   - `percent`     — `value` is a whole percentage (1–100) off the product subtotal.
+ *   - `fixed`       — `value` is a discount in cents.
+ *   - `free_shipping` — waives the delivery charge (the products are unchanged).
+ */
+export const promotions = pgTable(
+  "promotions",
+  {
+    id: text("id").primaryKey().default(sql`gen_random_uuid()`),
+    /** Upper-case, customer-facing code. Unique. */
+    code: text("code").notNull().unique(),
+    kind: text("kind").notNull().default("percent"),
+    /** Percent points for `percent`, cents for `fixed`, unused for `free_shipping`. */
+    value: integer("value").notNull().default(0),
+    /** The subtotal (in cents) the cart must reach for the code to apply. */
+    minSubtotalCents: integer("min_subtotal_cents").notNull().default(0),
+    /** How many orders may use the code. `null` means unlimited. */
+    maxRedemptions: integer("max_redemptions"),
+    /** How many orders have used the code. Enforced at order creation. */
+    redemptionCount: integer("redemption_count").notNull().default(0),
+    active: boolean("active").notNull().default(true),
+    startsAt: timestamp("starts_at", { withTimezone: true }),
+    endsAt: timestamp("ends_at", { withTimezone: true }),
+    /** Short operator note shown to the customer when the code is applied. */
+    label: text("label"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    uniqueIndex("promotions_code_idx").on(t.code),
+    index("promotions_active_idx").on(t.active),
+  ],
+)
+
+/**
+ * One row per accepted use of a promotion. Written when the order is created,
+ * inside the same transaction, so the redemption count cannot drift from the
+ * number of orders that actually used the code.
+ */
+export const promotionRedemptions = pgTable(
+  "promotion_redemptions",
+  {
+    id: text("id").primaryKey().default(sql`gen_random_uuid()`),
+    promotionId: text("promotion_id")
+      .notNull()
+      .references(() => promotions.id, { onDelete: "cascade" }),
+    orderId: text("order_id").references(() => orders.id, { onDelete: "cascade" }),
+    email: text("email"),
+    discountCents: integer("discount_cents").notNull().default(0),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("promotion_redemptions_promo_idx").on(t.promotionId),
+    index("promotion_redemptions_order_idx").on(t.orderId),
+  ],
+)
+
+/**
+ * Telegram delivery queue.
+ *
+ * Mirrors `email_outbox`: a dedupe key makes every message exactly-once, a
+ * lease prevents two workers from claiming the same row, and a failed send
+ * backs off exponentially. The cron route drains it.
+ */
+export const telegramOutbox = pgTable(
+  "telegram_outbox",
+  {
+    id: text("id").primaryKey().default(sql`gen_random_uuid()`),
+    dedupeKey: text("dedupe_key").notNull(),
+    chatId: text("chat_id").notNull(),
+    text: text("text").notNull(),
+    parseMode: text("parse_mode").notNull().default("HTML"),
+    /** Set when the message replaces an earlier one (invoice -> payment received). */
+    replacesMessageId: text("replaces_message_id"),
+    status: text("status").notNull().default("pending"),
+    attempts: integer("attempts").notNull().default(0),
+    nextAttemptAt: timestamp("next_attempt_at", { withTimezone: true }).notNull().defaultNow(),
+    leaseUntil: timestamp("lease_until", { withTimezone: true }),
+    sentAt: timestamp("sent_at", { withTimezone: true }),
+    lastError: text("last_error"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    uniqueIndex("telegram_outbox_dedupe_key_unique").on(t.dedupeKey),
+    index("telegram_outbox_due_idx").on(t.status, t.nextAttemptAt),
+  ],
+)
+
+/**
+ * A crypto checkout session — one Telegram invoice.
+ *
+ * The `id` is the opaque token in the `t.me` deep link. The session is created
+ * together with the order, so the bot renders an order that already exists on
+ * the server rather than becoming a place where commerce happens. The crypto
+ * amount and the EUR rate are locked here at issue time.
+ */
+export const cryptoCheckoutSessions = pgTable(
+  "crypto_checkout_sessions",
+  {
+    id: text("id").primaryKey(),
+    orderId: text("order_id")
+      .notNull()
+      .references(() => orders.id, { onDelete: "cascade" }),
+    chain: text("chain").notNull(),
+    /** Exact amount the customer must send, as a decimal string. */
+    amountCrypto: text("amount_crypto").notNull(),
+    /** EUR minor units the amount was derived from. */
+    amountEurCents: integer("amount_eur_cents").notNull(),
+    /** EUR per one unit of the asset at issue time. */
+    rateEurPerUnit: doublePrecision("rate_eur_per_unit").notNull(),
+    walletAddress: text("wallet_address").notNull(),
+    /** How a deposit is matched to this session. */
+    matchMode: text("match_mode").notNull().default("address"),
+    status: text("status").notNull().default("created"),
+    telegramUserId: text("telegram_user_id"),
+    telegramChatId: text("telegram_chat_id"),
+    botMessageId: text("bot_message_id"),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("crypto_sessions_order_idx").on(t.orderId),
+    index("crypto_sessions_status_idx").on(t.status),
+    index("crypto_sessions_chain_idx").on(t.chain),
+  ],
+)
+
+/**
+ * Every on-chain deposit the watcher has seen, matched or not. Keeping the
+ * unmatched ones is what makes a manual "match by transaction hash" override
+ * possible when an automatic match is ambiguous.
+ */
+export const cryptoDeposits = pgTable(
+  "crypto_deposits",
+  {
+    id: text("id").primaryKey().default(sql`gen_random_uuid()`),
+    chain: text("chain").notNull(),
+    txHash: text("tx_hash").notNull(),
+    walletAddress: text("wallet_address").notNull(),
+    amountCrypto: text("amount_crypto").notNull(),
+    confirmations: integer("confirmations").notNull().default(0),
+    seenAt: timestamp("seen_at", { withTimezone: true }).notNull().defaultNow(),
+    matchedSessionId: text("matched_session_id"),
+    raw: jsonb("raw"),
+  },
+  (t) => [
+    uniqueIndex("crypto_deposits_chain_tx_idx").on(t.chain, t.txHash),
+    index("crypto_deposits_session_idx").on(t.matchedSessionId),
   ],
 )
 
@@ -449,10 +626,16 @@ export const referralRedemptions = pgTable("referral_redemptions", {
   referredUserId: text("referred_user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  orderId: text("order_id").references(() => orders.id),
+  orderId: text("order_id").references(() => orders.id, { onDelete: "set null" }),
   referrerCreditCents: integer("referrer_credit_cents").notNull().default(1500),
   referredDiscountCents: integer("referred_discount_cents").notNull().default(1500),
   status: text("status").notNull().default("pending"),
+  /**
+   * The personal promotion code issued for the referred customer's discount.
+   * The order records the code it used, which is how the referrer's credit is
+   * found when that order is paid.
+   */
+  promotionCode: text("promotion_code"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 })
 
@@ -688,9 +871,18 @@ export const notifications = pgTable(
     targetTitle: text("target_title"),
     preview: text("preview"),
     readAt: timestamp("read_at", { withTimezone: true }),
+    /**
+     * When this notification was included in an email digest. A digest must
+     * not repeat itself, and the preference that turns it on had nothing to
+     * act on without this.
+     */
+    digestedAt: timestamp("digested_at", { withTimezone: true }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
-  (t) => [index("notifications_user_unread_idx").on(t.userId, t.readAt, t.createdAt)],
+  (t) => [
+    index("notifications_user_unread_idx").on(t.userId, t.readAt, t.createdAt),
+    index("notifications_digest_idx").on(t.digestedAt, t.createdAt),
+  ],
 )
 
 /* ──────────────────────────────────────────────────────────────────────────

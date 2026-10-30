@@ -51,7 +51,7 @@ for (const [locale, copy] of [
     const footer = container.querySelector("footer")
     expect(footer).not.toBeNull()
     expect(footer?.closest("[hidden]")).toBeNull()
-    expect(footer?.querySelector(".mt-3.max-w-md")?.textContent).toBe(copy.footer.tagline)
+    expect(footer?.querySelector("p")?.textContent).toBe(copy.footer.tagline)
     expect(footer?.textContent).toContain(copy.footer.researchUse)
     expect(footer?.textContent).toContain(copy.footer.rightsReserved.replace("{year}", "2026"))
     expect(footer?.textContent).toContain(copy.research.legalPending)

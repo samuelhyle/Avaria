@@ -8,6 +8,10 @@ import { afterEach, beforeEach, expect, it, vi } from "vitest"
 const state = vi.hoisted(() => ({ catalogue: vi.fn() }))
 vi.mock("@/lib/products/catalogue", () => ({ getStorefrontCatalogue: state.catalogue }))
 vi.mock("@/lib/layout/footer-content", () => ({ getFooterContent: async () => ({}) }))
+// The shell asks whether somebody is signed in so the header only shows the
+// notification bell to a member. The auth module pulls in next-auth, which
+// cannot load outside a Next.js server, so it is stubbed here.
+vi.mock("@/lib/community/auth", () => ({ getCurrentMember: async () => null }))
 vi.mock("@/components/layout/Header", () => ({ Header: () => null }))
 vi.mock("@/components/layout/Footer", () => ({ Footer: () => null }))
 vi.mock("@/components/layout/ChromeIslands", () => ({ ChromeIslands: () => null }))

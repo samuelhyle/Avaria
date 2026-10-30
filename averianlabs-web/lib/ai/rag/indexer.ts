@@ -19,7 +19,7 @@ import { formatSize } from "@/lib/utils/format"
 import { and, eq, inArray } from "drizzle-orm"
 import { catalogueSourceVersion } from "./version"
 
-const SUPPORTED_LOCALES: ProductLocale[] = ["en", "fi", "de", "sv", "nl"]
+const SUPPORTED_LOCALES: ProductLocale[] = ["en", "fi", "sv", "ru"]
 const CATEGORY_LABELS: Record<Product["category"], string> = {
   metabolic: "Metabolic research",
   recovery: "Recovery & tissue",

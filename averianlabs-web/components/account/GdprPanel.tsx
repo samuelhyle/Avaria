@@ -117,7 +117,7 @@ export function GdprPanel() {
             value={phrase}
             onChange={(e) => setPhrase(e.target.value.toUpperCase())}
             aria-label={t("deleteConfirm")}
-            placeholder="DELETE"
+            placeholder={t("deleteConfirmPhrase")}
             className="mt-3 h-10 w-full rounded-[var(--radius)] border border-line bg-surface px-3 font-mono text-sm text-ink focus:border-danger focus:outline-none"
           />
           <div className="mt-4 flex justify-end gap-2">
@@ -128,7 +128,7 @@ export function GdprPanel() {
               variant="danger"
               size="sm"
               onClick={confirmDelete}
-              disabled={phrase !== "DELETE" || isPending}
+              disabled={phrase !== t("deleteConfirmPhrase") || isPending}
             >
               {t("deleteButton")}
             </Button>

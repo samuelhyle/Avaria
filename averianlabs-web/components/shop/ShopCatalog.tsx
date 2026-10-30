@@ -3,11 +3,12 @@ import { hasPublishedDocuments } from "@/lib/products/document-status"
 
 import { useCatalogue } from "@/components/product/CatalogueProvider"
 import { ProductCard } from "@/components/product/ProductCard"
+import { QuickFilters } from "@/components/product/QuickFilters"
+import { QuickViewProvider } from "@/components/product/QuickViewProvider"
 import { RecentlyViewed } from "@/components/product/RecentlyViewed"
 import { ShopFilterSidebar } from "@/components/product/ShopFilterSidebar"
 import { ShopToolbar } from "@/components/product/ShopToolbar"
 import { TrustStrip } from "@/components/product/TrustStrip"
-import { Badge } from "@/components/ui/Badge"
 import type { Locale } from "@/lib/products/types"
 import {
   type ShopFilters,
@@ -18,6 +19,7 @@ import {
 import { useTranslations } from "next-intl"
 import dynamic from "next/dynamic"
 import { useSearchParams } from "next/navigation"
+import { useMemo } from "react"
 
 // three.js only loads when the visitor switches to the 3D view.
 const Shop3DCarousel = dynamic(
@@ -35,8 +37,21 @@ export function ShopCatalog({ locale }: { locale: string }) {
   const t = useTranslations("shop")
   const r = useTranslations("research")
   const sp = useSearchParams()
-  const params = new URLSearchParams(sp?.toString() ?? "")
-  const filters: ShopFilters = { ...defaultFilters, ...parseFiltersFromSearch(params) }
+  // `useSearchParams` returns a stable object for the current URL, so the
+  // parsed params are stable too. That matters: `filters` is the `initial`
+  // prop of `ShopFilterSidebar`, which resets its local selection whenever
+  // that object's identity changes. Building the params inside the memo
+  // keeps the identity stable across unrelated re-renders.
+  const params = useMemo(() => new URLSearchParams(sp?.toString() ?? ""), [sp])
+  // `filters` is passed to `ShopFilterSidebar` as its `initial` prop, and the
+  // sidebar resets its local selection whenever that identity changes. A new
+  // object on every render made the reset fire on every render, discarding
+  // in-flight edits and adding a render pass each time. Key the memo on the
+  // serialised query string instead.
+  const filters: ShopFilters = useMemo(
+    () => ({ ...defaultFilters, ...parseFiltersFromSearch(params) }),
+    [params],
+  )
 
   let filtered = products
   if (filters.category.length > 0) {
@@ -92,7 +107,7 @@ export function ShopCatalog({ locale }: { locale: string }) {
     }
   })
 
-  const view = params.get("view") === "grid" ? "grid" : params.get("view") === "3d" ? "3d" : "list"
+  const view = params.get("view") === "list" ? "list" : params.get("view") === "3d" ? "3d" : "grid"
   const counts: Record<string, number> = {}
   for (const p of products) {
     counts[p.category] = (counts[p.category] ?? 0) + 1
@@ -100,11 +115,53 @@ export function ShopCatalog({ locale }: { locale: string }) {
 
   const activeFilterCount = countActiveFilters(filters) + Number(!!query)
 
+  /**
+   * Split the results into what can be bought now and what cannot.
+   *
+   * A flat list of seventeen materials where fifteen read "Currently
+   * unavailable" hides the two that can actually be ordered. Grouping them
+   * puts the buyable path first without hiding anything: a researcher still
+   * sees the whole catalogue, and still knows a quote can be asked for.
+   */
+  const isAvailable = (product: (typeof products)[number]) =>
+    product.vials.some(
+      (vial) => vial.purchaseMode === "direct" && vial.priceCents > 0 && vial.stockQty > 0,
+    )
+  const available = filtered.filter(isAvailable)
+  const unavailable = filtered.filter((product) => !isAvailable(product))
+
+  const renderList = (items: typeof filtered, showAvailability = true) =>
+    items.map((p) => (
+      <ProductCard
+        key={p.slug}
+        product={p}
+        locale={locale as Locale}
+        variant="list"
+        headingLevel={2}
+        showAvailability={showAvailability}
+      />
+    ))
+
+  const renderGrid = (items: typeof filtered, showAvailability = true) =>
+    items.map((p) => (
+      <ProductCard
+        key={p.slug}
+        product={p}
+        locale={locale as Locale}
+        headingLevel={2}
+        showAvailability={showAvailability}
+      />
+    ))
+
   return (
     <>
-      <Badge tone="muted" className="mb-4 self-start">
-        {t("resultsCount", { count: filtered.length })}
-      </Badge>
+      <QuickFilters
+        active={{
+          inStock: filters.inStock,
+          quoteOnly: filters.quoteOnly,
+          hasDocuments: filters.hasDocuments,
+        }}
+      />
 
       <ShopToolbar
         initialView={view}
@@ -113,7 +170,7 @@ export function ShopCatalog({ locale }: { locale: string }) {
         activeFilterCount={activeFilterCount}
       />
 
-      <div className="mt-5 grid gap-5 lg:grid-cols-[210px_minmax(0,1fr)]">
+      <div className="mt-5 grid gap-6 lg:grid-cols-[230px_minmax(0,1fr)]">
         <ShopFilterSidebar
           initial={filters}
           counts={counts}
@@ -129,22 +186,64 @@ export function ShopCatalog({ locale }: { locale: string }) {
           ) : view === "3d" ? (
             <Shop3DCarousel products={filtered} locale={locale} />
           ) : view === "list" ? (
-            <div className="grid gap-3">
-              {filtered.map((p) => (
-                <ProductCard
-                  key={p.slug}
-                  product={p}
-                  locale={locale as Locale}
-                  variant="list"
-                  headingLevel={2}
-                />
-              ))}
+            <div className="space-y-8">
+              {available.length > 0 ? (
+                <section aria-labelledby="shop-available-heading">
+                  <h2
+                    id="shop-available-heading"
+                    className="mb-4 flex items-baseline gap-2 text-2xs font-semibold uppercase tracking-[0.18em] text-accent"
+                  >
+                    {t("availableNow")}
+                    <span className="font-mono text-ink-subtle">{available.length}</span>
+                  </h2>
+                  <div className="grid gap-3">{renderList(available)}</div>
+                </section>
+              ) : null}
+              {unavailable.length > 0 ? (
+                <section aria-labelledby="shop-unavailable-heading">
+                  <h2
+                    id="shop-unavailable-heading"
+                    className="mb-2 flex items-baseline gap-2 text-2xs font-semibold uppercase tracking-[0.18em] text-ink-subtle"
+                  >
+                    {t("currentlyUnavailable")}
+                    <span className="font-mono text-ink-subtle">{unavailable.length}</span>
+                  </h2>
+                  <p className="mb-4 text-sm text-ink-muted">{t("unavailableHint")}</p>
+                  <div className="grid gap-3">{renderList(unavailable, false)}</div>
+                </section>
+              ) : null}
             </div>
           ) : (
-            <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-              {filtered.map((p) => (
-                <ProductCard key={p.slug} product={p} locale={locale as Locale} headingLevel={2} />
-              ))}
+            <div className="space-y-8">
+              {available.length > 0 ? (
+                <section aria-labelledby="shop-available-heading">
+                  <h2
+                    id="shop-available-heading"
+                    className="mb-4 flex items-baseline gap-2 text-2xs font-semibold uppercase tracking-[0.18em] text-accent"
+                  >
+                    {t("availableNow")}
+                    <span className="font-mono text-ink-subtle">{available.length}</span>
+                  </h2>
+                  <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                    {renderGrid(available)}
+                  </div>
+                </section>
+              ) : null}
+              {unavailable.length > 0 ? (
+                <section aria-labelledby="shop-unavailable-heading">
+                  <h2
+                    id="shop-unavailable-heading"
+                    className="mb-2 flex items-baseline gap-2 text-2xs font-semibold uppercase tracking-[0.18em] text-ink-subtle"
+                  >
+                    {t("currentlyUnavailable")}
+                    <span className="font-mono text-ink-subtle">{unavailable.length}</span>
+                  </h2>
+                  <p className="mb-4 text-sm text-ink-muted">{t("unavailableHint")}</p>
+                  <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                    {renderGrid(unavailable, false)}
+                  </div>
+                </section>
+              ) : null}
             </div>
           )}
 
@@ -159,5 +258,19 @@ export function ShopCatalog({ locale }: { locale: string }) {
         </div>
       </div>
     </>
+  )
+}
+
+/**
+ * Wrapper that mounts the QuickViewProvider once for the whole catalogue.
+ * Doing it here means the existing `<ProductCard>` instances don't need a
+ * prop-drilled callback.
+ */
+export function ShopPageCatalog({ locale }: { locale: string }) {
+  const products = useCatalogue()
+  return (
+    <QuickViewProvider locale={locale as Locale} products={products}>
+      <ShopCatalog locale={locale} />
+    </QuickViewProvider>
   )
 }

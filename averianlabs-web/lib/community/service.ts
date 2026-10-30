@@ -322,6 +322,22 @@ export async function createReply(
   })
 
   moderateAsync({ postId, body: input.body, lexical: guard })
+  // Tell the thread's author that somebody replied. A reply previously
+  // notified nobody: the `reply` kind existed and was never emitted.
+  if (thread.authorId && thread.authorId !== member.id) {
+    const { emitNotification } = await import("@/lib/notifications")
+    emitNotification({
+      userId: thread.authorId,
+      kind: "reply",
+      actorId: member.id,
+      actorName: member.name ?? null,
+      targetType: "thread",
+      targetId: thread.id,
+      targetSlug: thread.slug,
+      targetTitle: thread.title,
+      preview: input.body.trim().slice(0, 240),
+    })
+  }
   return { ok: true, postId, status: "pending" }
 }
 

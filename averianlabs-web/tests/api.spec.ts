@@ -49,7 +49,16 @@ test.describe("public APIs", () => {
     expect(res.status()).toBe(200)
     const body = await res.text()
     expect(body).toContain("<urlset")
-    expect(body).toContain("averianlabs.eu")
+    // Every entry has to point at the origin that actually serves the site.
+    // A hardcoded domain fails as soon as the site is served from another
+    // host, and `averianlabs.eu` is not a registered domain — every such URL
+    // was a dead link.
+    const locations = [...body.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1])
+    expect(locations.length).toBeGreaterThan(0)
+    const served = new URL(res.url()).origin
+    for (const location of locations) {
+      expect(new URL(location).origin).toBe(served)
+    }
   })
 
   test("GET /robots.txt disallows AI bots and the admin", async ({ request }) => {

@@ -83,10 +83,11 @@ const emailCopy = {
     newsletter: [
       "Confirm your subscription",
       "Confirm your subscription",
-      "Confirm this address to receive optional AverianLabs updates. The link expires in 24 hours. Contact support to withdraw your consent at any time.",
+      "Confirm this address to receive optional AverianLabs updates. The link expires in 24 hours. You can unsubscribe at any time using the link below.",
       "Confirm subscription",
     ],
     ignore: "If you did not request this, you can ignore this email.",
+    unsubscribe: "Unsubscribe from these updates",
     footer: "For laboratory research only.",
     shipped: "Your order has shipped",
     tracking: "Track shipment",
@@ -118,10 +119,11 @@ const emailCopy = {
     newsletter: [
       "Vahvista uutiskirjeen tilaus",
       "Vahvista uutiskirjeen tilaus",
-      "Vahvista tämä osoite saadaksesi AverianLabsin vapaaehtoisia päivityksiä. Linkki on voimassa 24 tuntia. Voit perua suostumuksesi milloin tahansa ottamalla yhteyttä tukeen.",
+      "Vahvista tämä osoite saadaksesi AverianLabsin vapaaehtoisia päivityksiä. Linkki on voimassa 24 tuntia. Voit lopettaa tilauksen milloin tahansa alla olevasta linkistä.",
       "Vahvista tilaus",
     ],
     ignore: "Jos et tehnyt tätä pyyntöä, voit jättää viestin huomiotta.",
+    unsubscribe: "Lopeta tilaus",
     footer: "Vain laboratoriotutkimukseen.",
     shipped: "Tilauksesi on lähetetty",
     tracking: "Seuraa lähetystä",
@@ -152,8 +154,13 @@ export const verifyEmailHtml = (opts: EmailLocale & { url: string }) => actionHt
 export const passwordResetHtml = (opts: EmailLocale & { url: string }) => actionHtml("reset", opts)
 export const accountDeletionHtml = (opts: EmailLocale & { url: string }) =>
   actionHtml("deletion", opts)
-export const newsletterConfirmHtml = (opts: EmailLocale & { url: string }) =>
-  actionHtml("newsletter", opts)
+export const newsletterConfirmHtml = (
+  opts: EmailLocale & { url: string; unsubscribeUrl?: string },
+) =>
+  actionHtml("newsletter", opts) +
+  (opts.unsubscribeUrl
+    ? `<p><a href="${escapeHtml(opts.unsubscribeUrl)}">${escapeHtml(copyFor(opts.locale).unsubscribe)}</a></p>`
+    : "")
 export function contactNotificationHtml(opts: {
   name: string
   email: string

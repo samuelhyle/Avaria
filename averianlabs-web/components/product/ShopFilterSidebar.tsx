@@ -100,9 +100,9 @@ function FilterContent({
       </div>
 
       <div>
-        <h4 className="text-3xs font-semibold uppercase tracking-wider text-ink-subtle">
+        <h3 className="text-3xs font-semibold uppercase tracking-wider text-ink-subtle">
           {t("category")}
-        </h4>
+        </h3>
         <ul className="mt-3 space-y-1">
           {CATEGORY_META.map(({ slug, hue }) => {
             const checked = selection.category.includes(slug)
@@ -151,9 +151,9 @@ function FilterContent({
 
       {hasPurity ? (
         <div className="border-t border-line pt-5">
-          <h4 className="text-3xs font-semibold uppercase tracking-wider text-ink-subtle">
+          <h3 className="text-3xs font-semibold uppercase tracking-wider text-ink-subtle">
             {t("purity")}
-          </h4>
+          </h3>
           <div className="mt-3">
             <div className="flex items-center justify-between text-xs">
               <span className="font-mono">{selection.purityMin}%</span>
@@ -199,9 +199,9 @@ function FilterContent({
       </div>
 
       <div className="border-t border-line pt-5">
-        <h4 className="text-3xs font-semibold uppercase tracking-wider text-ink-subtle">
+        <h3 className="text-3xs font-semibold uppercase tracking-wider text-ink-subtle">
           {t("sort")}
-        </h4>
+        </h3>
         <select
           value={selection.sort}
           onChange={(e) => update({ sort: e.target.value as SortOption })}

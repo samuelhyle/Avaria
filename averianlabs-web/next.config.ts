@@ -36,35 +36,59 @@ const scriptSrc = [
   "https://va.vercel-scripts.com",
 ].join(" ")
 
-const csp = [
-  "default-src 'self'",
-  `script-src ${scriptSrc}`,
-  "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://cdn.sanity.io https://*.r2.cloudflarestorage.com https://images.unsplash.com",
-  "font-src 'self' data:",
+/**
+ * The Content-Security-Policy.
+ *
+ * `upgrade-insecure-requests` is only correct where the site is actually served
+ * over TLS. On a plain-HTTP local server it upgrades the browser's own
+ * subresource requests — including Next.js's RSC payload fetches — to `https://`,
+ * which the server cannot answer, and every client-side navigation fails with
+ * `ERR_SSL_PROTOCOL_ERROR`.
+ *
+ * Whether the site is served over TLS is known from `AUTH_URL`, the canonical
+ * origin the application is configured with. It is `http://localhost:3000`
+ * locally and `https://…` in production, so the directive is included exactly
+ * where it belongs.
+ */
+const siteIsHttps = (process.env.AUTH_URL ?? "https://").startsWith("https://")
+
+const buildCsp = (upgradeInsecureRequests: boolean) =>
   [
-    "connect-src 'self'",
-    "https://*.r2.cloudflarestorage.com",
-    "https://*.r2.dev",
-    ...documentOrigins,
-    "https://*.sanity.io",
-    "https://eu.i.posthog.com",
-    "https://eu-assets.i.posthog.com",
-    "https://api.stripe.com",
-    "https://api.sendcloud.com",
-    "https://api.minimax.io",
-    "https://*.ingest.sentry.io",
-    "https://vitals.vercel-insights.com",
-    "https://api.commerce.coinbase.com",
-  ].join(" "),
-  "frame-src 'self' https://js.stripe.com https://commerce.coinbase.com",
-  "worker-src 'self' blob:",
-  "object-src 'none'",
-  "base-uri 'self'",
-  "form-action 'self'",
-  "frame-ancestors 'self'",
-  "upgrade-insecure-requests",
-].join("; ")
+    "default-src 'self'",
+    `script-src ${scriptSrc}`,
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: blob: https://cdn.sanity.io https://*.r2.cloudflarestorage.com https://images.unsplash.com",
+    "font-src 'self' data:",
+    [
+      "connect-src 'self'",
+      "https://*.r2.cloudflarestorage.com",
+      "https://*.r2.dev",
+      ...documentOrigins,
+      "https://*.sanity.io",
+      "https://eu.i.posthog.com",
+      "https://eu-assets.i.posthog.com",
+      "https://api.stripe.com",
+      // The Sendcloud panel is the host the shipping code actually calls. The
+      // old entry was `api.sendcloud.com`, which nothing uses.
+      "https://panel.sendcloud.sc",
+      // Chain explorers the crypto watcher polls. Server-side fetches are not
+      // bound by the document's CSP, but a browser-side call would be.
+      "https://mempool.space",
+      "https://api.trongrid.io",
+      "https://api.etherscan.io",
+      "https://api.minimax.io",
+      "https://*.ingest.sentry.io",
+      "https://vitals.vercel-insights.com",
+      "https://api.commerce.coinbase.com",
+    ].join(" "),
+    "frame-src 'self' https://js.stripe.com https://commerce.coinbase.com",
+    "worker-src 'self' blob:",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "frame-ancestors 'self'",
+    ...(upgradeInsecureRequests ? ["upgrade-insecure-requests"] : []),
+  ].join("; ")
 
 // Security headers that are static across all routes.
 const securityHeaders = [
@@ -78,7 +102,6 @@ const securityHeaders = [
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
   { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
-  { key: "Content-Security-Policy", value: csp },
 ]
 
 const config: NextConfig = isDemoBuild
@@ -151,10 +174,14 @@ const config: NextConfig = isDemoBuild
         ],
       },
       async headers() {
+        const cspHeader = {
+          key: "Content-Security-Policy",
+          value: buildCsp(siteIsHttps),
+        }
         return [
           {
             source: "/(.*)",
-            headers: securityHeaders,
+            headers: [...securityHeaders, cspHeader],
           },
           {
             // Long-cache hashed assets emitted by Next/Tailwind.
@@ -162,7 +189,7 @@ const config: NextConfig = isDemoBuild
             headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
           },
           {
-            source: "/(.*).(svg|png|jpg|jpeg|webp|avif|ico)",
+            source: "/(.*).(svg|png|jpg|jpeg|webp|avif|ico|woff2)",
             headers: [
               {
                 key: "Cache-Control",

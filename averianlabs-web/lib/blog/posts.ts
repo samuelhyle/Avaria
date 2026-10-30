@@ -48,7 +48,7 @@ const POSTS_QUERY = /* groq */ `
     "authorSlug": author->slug.current,
     relatedSlugs,
     "body": coalesce(body, content),
-    "i18n": { "fi": i18n.fi->slug.current, "de": i18n.de->slug.current, "sv": i18n.sv->slug.current, "nl": i18n.nl->slug.current }
+    "i18n": { "fi": i18n.fi->slug.current, "sv": i18n.sv->slug.current, "ru": i18n.ru->slug.current }
   }
 `
 
@@ -63,7 +63,7 @@ const POST_BY_SLUG_QUERY = /* groq */ `
     "authorSlug": author->slug.current,
     relatedSlugs,
     "body": coalesce(body, content),
-    "i18n": { "fi": i18n.fi->slug.current, "de": i18n.de->slug.current, "sv": i18n.sv->slug.current, "nl": i18n.nl->slug.current }
+    "i18n": { "fi": i18n.fi->slug.current, "sv": i18n.sv->slug.current, "ru": i18n.ru->slug.current }
   }
 `
 

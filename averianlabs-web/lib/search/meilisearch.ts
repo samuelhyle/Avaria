@@ -54,7 +54,7 @@ export async function indexProducts() {
   })
   const products = await getStorefrontCatalogue()
   await index.addDocuments(
-    ["en", "fi", "de", "sv", "nl"].flatMap((locale) => documents(products, locale)),
+    ["en", "fi", "sv", "ru"].flatMap((locale) => documents(products, locale)),
   )
 }
 export async function searchProducts(
@@ -71,9 +71,7 @@ export async function searchProducts(
   } = {},
 ) {
   // The small catalogue is hydrated on every request so a stale external index cannot advertise stock or batch evidence.
-  const locale = ["en", "fi", "de", "sv", "nl"].includes(options.locale ?? "")
-    ? options.locale!
-    : "en"
+  const locale = ["en", "fi", "sv", "ru"].includes(options.locale ?? "") ? options.locale! : "en"
   const q = query.trim().toLocaleLowerCase(locale)
   let rows = documents(await getStorefrontCatalogue(), locale).filter((row) =>
     [row.name, row.slug, row.casNumber ?? "", ...row.skus, ...row.batchCodes].some((value) =>

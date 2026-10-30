@@ -14,7 +14,7 @@ export async function generateStaticParams() {
   const sanitySlugs = await listAllPostSlugs()
   const fallbackSlugs: string[] = []
   const slugs = Array.from(new Set([...sanitySlugs, ...fallbackSlugs]))
-  return slugs.flatMap((slug) => ["en", "fi", "de", "sv", "nl"].map((locale) => ({ locale, slug })))
+  return slugs.flatMap((slug) => ["en", "fi", "sv", "ru"].map((locale) => ({ locale, slug })))
 }
 
 export async function generateMetadata({

@@ -9,6 +9,7 @@ import {
   markOrderRefunded,
   recordWebhookEvent,
 } from "@/lib/orders"
+import { notifyRefunded } from "@/lib/orders/refund"
 import { stripe } from "@/lib/payments/stripe"
 import { type NextRequest, NextResponse } from "next/server"
 import type Stripe from "stripe"
@@ -59,6 +60,10 @@ export async function POST(request: NextRequest) {
         )
           throw new OrderError("Refund mismatch", "payment_mismatch")
         await markOrderRefunded(order.id)
+        // A refund performed in the Stripe dashboard reaches the order through
+        // this webhook rather than through the admin console, so the customer
+        // has to be told here too.
+        await notifyRefunded(order.id, "stripe", charge.id)
       }
     }
     // Declines can be retried on the same intent. Only cancellation/expiry release stock.

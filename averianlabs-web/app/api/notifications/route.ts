@@ -8,7 +8,10 @@ import { NextResponse } from "next/server"
 
 export async function GET() {
   const member = await getCurrentMember()
-  if (!member) return NextResponse.json({ error: "Authentication required." }, { status: 401 })
+  // A visitor has no notifications. Answering with an empty list rather than a
+  // 401 keeps a stray call quiet: a 401 on every page view reads as a broken
+  // site in the browser console.
+  if (!member) return NextResponse.json({ notifications: [], unread: 0, authenticated: false })
   try {
     const [items, unread] = await Promise.all([
       listUnreadNotifications(member.id, 50),

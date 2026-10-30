@@ -39,9 +39,14 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm check:i18n
       - run: pnpm check:i18n:usage
+      # The browser payload is scoped per route and per namespace; a stale
+      # allowlist would silently drop a message at runtime.
+      - run: pnpm check:i18n:slice
       - run: pnpm test
+      - run: pnpm test:coverage
       - run: pnpm test:deployment
       - run: pnpm test:integration
+      - run: pnpm test:coverage:integration
       - run: pnpm audit --prod --audit-level=high
   storefront:
     needs: quality
@@ -74,8 +79,30 @@ jobs:
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm build
       - run: pnpm check:bundle
+      # The browser suite starts its own server, and so do the accessibility,
+      # narrow-viewport and runtime checks that follow it. Each one starts a
+      # fresh server against the same build.
       - run: pnpm test:e2e
         env: { CI: "true" }
+      # The accessibility smoke test and the Lighthouse budget were declared
+      # but never run, so they could not fail anything.
+      - run: pnpm test:a11y
+      # A translated string is routinely longer than the English it replaces,
+      # and a long compound word in a heading was enough to push a page past
+      # a 320px viewport. Every route in every locale is checked.
+      - run: pnpm check:narrow
+      # Walks every route in every locale and fails on a console error, an
+      # uncaught exception, a failed request, a missing translation or an
+      # uninterpolated placeholder.
+      - run: pnpm check:runtime
+      - run: pnpm check:lh
+        env:
+          CI: "true"
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/
       - uses: actions/upload-artifact@v4
         if: failure()
         with:

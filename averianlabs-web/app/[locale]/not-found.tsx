@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/Button"
 import { Container } from "@/components/ui/Container"
+import { ShortcutHint } from "@/components/ui/ShortcutHint"
 import { ArrowLeft, FlaskConical } from "lucide-react"
 import { getLocale, getTranslations } from "next-intl/server"
 import Link from "next/link"
@@ -32,7 +33,9 @@ export default async function NotFound() {
         </div>
         <p className="mt-12 text-xs text-ink-subtle">
           {t("searchHint")}{" "}
-          <kbd className="rounded border border-line bg-surface px-1 font-mono">⌘K</kbd>
+          <kbd className="rounded border border-line bg-surface px-1 font-mono">
+            <ShortcutHint />
+          </kbd>
         </p>
       </div>
     </Container>

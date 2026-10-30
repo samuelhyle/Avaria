@@ -6,7 +6,7 @@
  * keys (using dot notation for nested objects), and reports any key that is
  * missing in one or more locales.
  *
- * Exits 0 if all five locales (en, fi, de, sv, nl) have the same set of
+ * Exits 0 if all four locales (en, fi, sv, ru) have the same set of
  * leaf keys, 1 otherwise.
  *
  * Optional flags:
@@ -29,7 +29,7 @@ const argv = process.argv.slice(2)
 const jsonOut = argv.includes("--json")
 const quiet = argv.includes("--quiet")
 const localesArg = argv.find((a) => a === "--locales")
-const locales = (localesArg ? argv[argv.indexOf("--locales") + 1] : "en,fi,de,sv,nl")
+const locales = (localesArg ? argv[argv.indexOf("--locales") + 1] : "en,fi,sv,ru")
   .split(",")
   .map((s) => s.trim())
   .filter(Boolean)

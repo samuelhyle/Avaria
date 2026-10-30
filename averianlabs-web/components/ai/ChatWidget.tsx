@@ -30,6 +30,17 @@ export interface ChatWidgetProps {
 const AGE_COOKIE = "averianlabs-age-confirmed"
 const CONSENT_KEY = "averianlabs-cookie-consent"
 
+/**
+ * The demo-mode provider error. Module-level so its identity is stable:
+ * building it during render gave the chat drawer a new `error` prop on
+ * every render and invalidated its memoised effects.
+ */
+const DEMO_PROVIDER_ERROR = (() => {
+  const error = new Error("Averia is offline right now. Set MINIMAX_API_KEY to enable the chat.")
+  error.name = "provider_unavailable"
+  return error
+})()
+
 function isAgeConfirmed(): boolean {
   if (typeof document === "undefined") return false
   return document.cookie.split("; ").some((c) => c.startsWith(`${AGE_COOKIE}=`))
@@ -76,13 +87,10 @@ export function ChatWidget({ locale, demoMode = false }: ChatWidgetProps) {
   // In demo mode we inject a permanent provider_unavailable error so the
   // widget renders the "Averia is offline" state from the very first
   // send, instead of trying to POST to a non-existent /api/ai/chat.
-  const demoError = demoMode
-    ? (() => {
-        const e = new Error("Averia is offline right now. Set MINIMAX_API_KEY to enable the chat.")
-        e.name = "provider_unavailable"
-        return e
-      })()
-    : null
+  // The error is a module-level constant: building it in render created a
+  // new identity on every render, which invalidated the drawer's memo
+  // dependencies.
+  const demoError = demoMode ? DEMO_PROVIDER_ERROR : null
 
   const chat = useAveriaChat({
     locale,

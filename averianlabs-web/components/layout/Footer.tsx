@@ -3,20 +3,21 @@
 import { Logo } from "@/components/layout/Logo"
 import { Container } from "@/components/ui/Container"
 import type { FooterContent } from "@/lib/layout/footer-content"
-import { ChevronDown, FlaskConical } from "lucide-react"
+import { cn } from "@/lib/utils/cn"
+import { ChevronDown, CreditCard, FlaskConical } from "lucide-react"
 import Link from "next/link"
 import { CookieSettings } from "./CookieSettings"
 
 export function Footer({ content }: { content: FooterContent }) {
   const { locale, cols } = content
   const links = (col: (typeof cols)[number]) => (
-    <ul className="mt-3 space-y-1">
+    <ul className="mt-3 space-y-0.5">
       {col.links.map((link) => (
         <li key={link.href}>
           <Link
             href={link.href}
             prefetch={false}
-            className="inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted hover:text-ink hover:underline underline-offset-4"
+            className="inline-flex min-h-9 max-w-full items-center break-words hyphens-auto text-sm text-ink-muted transition-colors hover:text-accent"
           >
             {link.label}
           </Link>
@@ -24,23 +25,26 @@ export function Footer({ content }: { content: FooterContent }) {
       ))}
     </ul>
   )
+
   return (
-    <footer className="platform-bottom-safe mt-12 border-t border-line bg-surface-2">
+    <footer className="platform-bottom-safe mt-16 border-t border-line bg-surface">
       <Container>
-        <div className="grid gap-7 py-8 lg:grid-cols-[260px_minmax(0,1fr)]">
+        <div className="grid gap-8 py-10 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-12">
           <div>
             <Logo href={`/${locale}`} size="md" />
-            <p className="mt-3 max-w-md text-sm leading-relaxed text-ink-muted">
+            <p className="mt-3.5 max-w-sm text-sm leading-relaxed text-ink-muted">
               {content.tagline}
             </p>
             <Link
               href={`/${locale}/lab-tests`}
-              className="mt-3 inline-flex min-h-10 items-center text-sm font-medium text-accent hover:underline underline-offset-4"
+              className="mt-4 inline-flex min-h-10 items-center gap-1.5 text-sm font-medium text-accent hover:underline underline-offset-4"
             >
-              {content.testResultsLabel} →
+              {content.testResultsLabel}
+              <span aria-hidden>→</span>
             </Link>
           </div>
-          <div className="grid gap-x-6 sm:grid-cols-4">
+
+          <div className="grid gap-x-6 gap-y-2 sm:grid-cols-2 lg:grid-cols-4">
             {cols.map((col) => (
               <div key={col.title} className="min-w-0">
                 <div className="hidden sm:block">
@@ -63,19 +67,41 @@ export function Footer({ content }: { content: FooterContent }) {
             ))}
           </div>
         </div>
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line py-4 text-sm text-ink-muted">
-          {content.paymentsLabel ? <span>{content.paymentsLabel}</span> : null}
+
+        {/* Research-use restriction — always visible, never in the way. */}
+        <div className="flex items-start gap-3 border-t border-line py-5">
+          <FlaskConical aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+          <p className="fine-print max-w-4xl">{content.researchUse}</p>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line py-4">
+          <div className="flex flex-wrap items-center gap-3 text-xs text-ink-muted">
+            {content.paymentsLabel ? (
+              <span className="flex items-center gap-1.5">
+                <CreditCard aria-hidden className="h-4 w-4" />
+                {content.paymentsLabel}
+              </span>
+            ) : null}
+            {content.paymentsLabel ? (
+              <span className="hidden sm:inline" aria-hidden>
+                ·
+              </span>
+            ) : null}
+            <span>Visa · Mastercard · EUR · USDC</span>
+          </div>
           <CookieSettings />
         </div>
-        <div className="grid gap-4 border-t border-line py-6 text-sm text-ink-muted sm:grid-cols-[1fr_2fr]">
-          <p className="flex items-start gap-2">
-            <FlaskConical aria-hidden className="mt-1 h-4 w-4 shrink-0 text-accent" />
-            <span>{content.researchUse}</span>
-          </p>
-          <div className="space-y-2">
-            <p>{content.rightsReserved}</p>
+
+        <div
+          className={cn(
+            "grid gap-3 border-t border-line py-6 text-xs text-ink-muted",
+            "sm:grid-cols-[1fr_2fr]",
+          )}
+        >
+          <p>{content.rightsReserved}</p>
+          <div className="space-y-1.5">
             {content.businessIdentity ? (
-              <p className="font-mono text-xs">{content.businessIdentity}</p>
+              <p className="font-mono">{content.businessIdentity}</p>
             ) : (
               <p>{content.legalPending}</p>
             )}

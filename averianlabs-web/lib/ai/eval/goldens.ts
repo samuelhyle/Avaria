@@ -95,21 +95,36 @@ const INTENT_GOLDEN: GoldenEntry[] = [
     query: "Mikä on BPC-157:n varastointilämpötila?",
     expectSourceIds: ["bpc-157"],
   },
-  // German
+  // Russian
   {
-    locale: "de",
-    query: "Welches Peptid eignet sich für die Sehnenforschung?",
+    locale: "ru",
+    query: "Какой пептид подходит для исследования сухожилий?",
     expectSourceIds: ["bpc-157", "bpc-tb-blend"],
   },
   {
-    locale: "de",
-    query: "Wie hoch ist die HPLC-Reinheit Ihres Retatrutide?",
+    locale: "ru",
+    query: "Какова чистота ретатрутида по ВЭЖХ?",
     expectSourceIds: ["retatrutide"],
   },
   {
-    locale: "de",
-    query: "Welche Produkte gibt es für die metabolische Forschung?",
+    locale: "ru",
+    query: "Какие продукты предназначены для метаболических исследований?",
     expectSourceIds: ["retatrutide", "aod-9604"],
+  },
+  {
+    locale: "ru",
+    query: "Какова чистота GHK-Cu?",
+    expectSourceIds: ["ghk-cu"],
+  },
+  {
+    locale: "ru",
+    query: "В каких объёмах выпускается Melanotan II?",
+    expectSourceIds: ["melanotan-ii"],
+  },
+  {
+    locale: "ru",
+    query: "Как хранить NAD+?",
+    expectSourceIds: ["nad-plus"],
   },
   // Swedish
   {
@@ -127,22 +142,6 @@ const INTENT_GOLDEN: GoldenEntry[] = [
     query: "Hur förvaras NAD+?",
     expectSourceIds: ["nad-plus"],
   },
-  // Dutch
-  {
-    locale: "nl",
-    query: "Welk peptide is geschikt voor peesonderzoek?",
-    expectSourceIds: ["bpc-157", "bpc-tb-blend"],
-  },
-  {
-    locale: "nl",
-    query: "Wat is de zuiverheid van jullie GHK-Cu?",
-    expectSourceIds: ["ghk-cu"],
-  },
-  {
-    locale: "nl",
-    query: "Welke verpakkingsgroottes heeft Melanotan II?",
-    expectSourceIds: ["melanotan-ii"],
-  },
 ]
 
 // ── Generated literal-name queries (one phrasing per locale) ───────────────
@@ -157,24 +156,19 @@ const LITERAL_PHRASES: Record<ProductLocale, (name: string) => string[]> = {
     `Mikä on ${name}-tuotteen puhtaus?`,
     `Mitkä pullokoot ${name}-tuotteesta on saatavilla?`,
   ],
-  de: (name) => [
-    `Erzähl mir mehr über ${name}`,
-    `Wie hoch ist die Reinheit von ${name}?`,
-    `Welche Füllgrößen gibt es von ${name}?`,
+  ru: (name) => [
+    `Расскажите о ${name}`,
+    `Какова чистота ${name}?`,
+    `В каких объёмах выпускается ${name}?`,
   ],
   sv: (name) => [
     `Berätta om ${name}`,
     `Vad är renheten för ${name}?`,
     `Vilka flaskstorlekar finns ${name} i?`,
   ],
-  nl: (name) => [
-    `Vertel me over ${name}`,
-    `Wat is de zuiverheid van ${name}?`,
-    `Welke flesformaten zijn er van ${name}?`,
-  ],
 }
 
-const LOCALES: ProductLocale[] = ["en", "fi", "de", "sv", "nl"]
+const LOCALES: ProductLocale[] = ["en", "fi", "sv", "ru"]
 
 const GENERATED_GOLDEN: GoldenEntry[] = LOCALES.flatMap((locale) =>
   products.flatMap((product) =>

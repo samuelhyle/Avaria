@@ -11,6 +11,14 @@ export const VAT_RATE = 0.255
 /** Display label used in order summaries. */
 export const VAT_LABEL = "25.5%"
 
+/**
+ * Locale-aware VAT label. Finnish, Swedish and Russian all use a comma as
+ * the decimal separator, English uses a full stop.
+ */
+export function vatLabel(locale: string): string {
+  return locale === "en" ? "25.5%" : "25,5 %"
+}
+
 /** Free EU shipping threshold in cents (€150). */
 export const FREE_SHIPPING_THRESHOLD_CENTS = 15_000
 

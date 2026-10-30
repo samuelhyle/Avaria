@@ -1,4 +1,6 @@
 import { readFileSync } from "node:fs"
+import { locales } from "@/lib/i18n/config"
+import { siteOrigin } from "@/lib/seo/site-origin"
 import { expect, test } from "@/tests/fixtures"
 
 function headOf(html: string) {
@@ -81,17 +83,22 @@ test.describe("homepage", () => {
       await cdp.detach()
     }
   })
-  test("puts material search, records and research tasks before decorative media", async ({
+  test("puts catalogue search, categories and products before decorative media", async ({
     cleanPage: page,
   }) => {
     await page.goto("/en")
-    await expect(
-      page.getByRole("searchbox", { name: /search by product name or sku/i }),
-    ).toBeVisible()
-    await expect(page.getByRole("link", { name: /browse materials/i })).toBeVisible()
+    // The catalogue search. Its accessible label comes from the section it
+    // lives in, which the homepage redesign has changed, so the field is
+    // identified by what it is rather than by a label that moves.
+    const search = page.locator('main input[type="search"]')
+    await expect(search).toBeVisible()
+    await expect(page.getByRole("link", { name: /shop all peptides/i }).first()).toBeVisible()
     await expect(page.locator("main canvas")).toHaveCount(0)
-    await expect(page.getByRole("heading", { name: /original records/i })).toBeVisible()
-    await page.getByRole("searchbox", { name: /search by product name or sku/i }).fill("BPC157-5")
+    await expect(page.getByRole("heading", { name: /browse by research area/i })).toBeVisible()
+    await expect(
+      page.getByRole("heading", { name: /best-selling research peptides/i }),
+    ).toBeVisible()
+    await search.fill("BPC157-5")
     await page.locator("main form").getByRole("button", { name: "Search", exact: true }).click()
     await expect(page).toHaveURL(/\/en\/shop\?q=BPC157-5$/)
     await expect(page.locator("article")).toContainText("BPC157-5")
@@ -109,10 +116,10 @@ test.describe("homepage", () => {
     const alternates = [...head.matchAll(/<link\b[^>]*>/gi)]
       .map(([tag]) => attributesOf(tag))
       .filter((attributes) => attributes.rel === "alternate" && attributes.hreflang)
-    expect(alternates.map((link) => link.hreflang).sort()).toEqual(["de", "en", "fi", "nl", "sv"])
-    const origin = new URL(
-      process.env.BASE_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? "https://averianlabs.eu",
-    ).origin
+    expect(alternates.map((link) => link.hreflang).sort()).toEqual([...locales].sort())
+    // The alternate links carry the site's configured origin, not the port the
+    // suite happens to run on. The application resolves it the same way.
+    const origin = siteOrigin()
     for (const link of alternates) {
       if (!link.href) throw new Error(`Missing hreflang URL for ${link.hreflang}`)
       const url = new URL(link.href)
@@ -125,7 +132,7 @@ test.describe("homepage", () => {
   })
 
   test("translates metadata per locale", async ({ request }) => {
-    for (const locale of ["en", "fi", "de", "sv", "nl"]) {
+    for (const locale of locales) {
       const copy = JSON.parse(
         readFileSync(new URL(`../messages/${locale}.json`, import.meta.url), "utf8"),
       ).meta.home

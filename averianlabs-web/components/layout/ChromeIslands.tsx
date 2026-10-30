@@ -1,6 +1,7 @@
 "use client"
 
 import { CompareFloatingBar } from "@/components/compare/CompareFloatingBar"
+import { CompareModal } from "@/components/compare/CompareModal"
 import { useCatalogue } from "@/components/product/CatalogueProvider"
 import dynamic from "next/dynamic"
 
@@ -43,6 +44,7 @@ export function ChromeIslands({ locale }: { locale: string }) {
       <CommandPalette locale={locale} products={products} />
       <BackToTop />
       <CompareFloatingBar locale={locale} />
+      <CompareModal locale={locale as import("@/lib/products/types").Locale} products={products} />
     </>
   )
 }

@@ -13,7 +13,7 @@ export function OrderStatus({
   const router = useRouter()
   useEffect(() => {
     if (
-      ["paid", "shipped", "delivered"].includes(status) &&
+      ["paid", "packed", "shipped", "delivered"].includes(status) &&
       useCheckout.getState().pendingOrderId === id
     ) {
       const cart = useCart.getState()
@@ -25,7 +25,9 @@ export function OrderStatus({
       }
       useCheckout.getState().reset()
     }
-    if (status !== "pending") return
+    // A crypto order waits in `awaiting_crypto` for the transfer to land, so
+    // the page has to keep polling for it as well as for a card payment.
+    if (!["pending", "awaiting_crypto"].includes(status)) return
     let ticks = 0
     const timer = setInterval(() => {
       if (++ticks > 100) clearInterval(timer)

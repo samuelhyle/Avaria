@@ -5,9 +5,8 @@ import { redirect } from "next/navigation"
 const LOCALES = [
   { code: "en", label: "English" },
   { code: "fi", label: "Suomi" },
-  { code: "de", label: "Deutsch" },
   { code: "sv", label: "Svenska" },
-  { code: "nl", label: "Nederlands" },
+  { code: "ru", label: "Русский" },
 ] as const
 
 export default function RootPage() {

@@ -1,13 +1,13 @@
+import { locales } from "@/lib/i18n/config"
 import { LOCALES, expect, test } from "@/tests/fixtures"
 
 test.describe("internationalization", () => {
   test("each locale resolves with a translated title", async ({ request }) => {
     const needles: Record<string, string> = {
-      en: "Laboratory research materials",
-      fi: "Materiaalit laboratoriotutkimukseen",
-      de: "Laboratory research materials",
-      sv: "Laboratory research materials",
-      nl: "Laboratory research materials",
+      en: "Research peptides for laboratory use",
+      fi: "Tutkimuspeptidit laboratoriotyöhön",
+      sv: "Forskningspeptider för laboratoriebruk",
+      ru: "исследовательские пептиды для лабораторий",
     }
     for (const locale of LOCALES) {
       const html = await (await request.get(`/${locale}`)).text()
@@ -45,9 +45,12 @@ test.describe("internationalization", () => {
     await cleanPage.goto("/en")
     const switcher = cleanPage.getByRole("combobox", { name: /language/i }).first()
     if ((await switcher.count()) > 0) {
-      await switcher.selectOption("de")
-      await cleanPage.waitForURL(/\/de/)
-      expect(cleanPage.url()).toMatch(/\/de/)
+      // Any locale other than the one the page is on: the switcher must
+      // navigate to it. The locales come from the app's configuration.
+      const target = locales.find((locale) => locale !== "en") ?? "en"
+      await switcher.selectOption(target)
+      await cleanPage.waitForURL(new RegExp(`/${target}`))
+      expect(cleanPage.url()).toMatch(new RegExp(`/${target}`))
     }
   })
 })

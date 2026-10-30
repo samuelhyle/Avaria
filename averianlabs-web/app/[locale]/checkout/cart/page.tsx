@@ -1,6 +1,8 @@
 import { CartView } from "@/components/cart/CartView"
-import { Container } from "@/components/ui/Container"
+import { getStorefrontCatalogue } from "@/lib/products/catalogue"
 import { getTranslations, setRequestLocale } from "next-intl/server"
+
+export const dynamic = "force-dynamic"
 
 export default async function CartPage({
   params,
@@ -10,16 +12,25 @@ export default async function CartPage({
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: "cart" })
-
+  const products = await getStorefrontCatalogue()
   return (
-    <Container className="py-8 sm:py-12">
-      <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
-        {t("title")}
-      </h1>
-      <p className="mt-2 text-ink-muted">{t("subtitle")}</p>
-      <div className="mt-10">
-        <CartView locale={locale} />
+    <div className="mx-auto max-w-5xl">
+      <header>
+        {/*
+          The cart sits before the four checkout steps rather than being one
+          of them, so it is not numbered. The stepper below starts at "Email".
+        */}
+        <p className="font-mono text-2xs uppercase tracking-[0.18em] text-accent">
+          {t("reviewLabel")}
+        </p>
+        <h1 className="mt-2 text-balance font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+          {t("title")}
+        </h1>
+        <p className="mt-2 text-base text-ink-muted">{t("subtitle")}</p>
+      </header>
+      <div className="mt-8">
+        <CartView locale={locale} initialProducts={products} />
       </div>
-    </Container>
+    </div>
   )
 }

@@ -1,3 +1,7 @@
+import { products, vials } from "@/db/schema"
+import { CHECKOUT_TEST_SKU, isCheckoutTestProduct } from "@/lib/checkout/test-product"
+import { db } from "@/lib/db"
+import { eq } from "drizzle-orm"
 import { unstable_cache } from "next/cache"
 import { type ShippingAddress, type ShippingRate, getShippingRates } from "./index"
 
@@ -12,3 +16,29 @@ export const getCachedShippingRates = unstable_cache(
   ["shipping:rates"],
   { revalidate: 300, tags: ["shipping"] },
 )
+
+/** The no-goods checkout fixture has no delivery fee. Ordinary carrier quotes stay unchanged. */
+export async function getCheckoutShippingRates(
+  address: ShippingAddress,
+  items: Array<{ sku: string; qty: number }>,
+): Promise<ShippingRate[]> {
+  if (items.length === 1 && items[0]?.sku === CHECKOUT_TEST_SKU && items[0].qty === 1) {
+    const [row] = await db
+      .select({ product: products, vial: vials })
+      .from(vials)
+      .innerJoin(products, eq(products.id, vials.productId))
+      .where(eq(vials.sku, CHECKOUT_TEST_SKU))
+      .limit(1)
+    if (row && isCheckoutTestProduct(row.product, row.vial))
+      return [
+        {
+          id: "checkout-test-no-delivery",
+          carrier: "Checkout test",
+          service: "No physical shipment",
+          eta: "",
+          priceCents: 0,
+        },
+      ]
+  }
+  return getCachedShippingRates(address)
+}

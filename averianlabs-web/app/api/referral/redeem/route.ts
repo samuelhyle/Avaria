@@ -1,8 +1,6 @@
-import { referralRedemptions, rewardsAccounts } from "@/db/schema"
 import { getCurrentMember } from "@/lib/community"
-import { db } from "@/lib/db"
+import { ReferralError, redeemReferralCode } from "@/lib/referral/service"
 import { rateLimit } from "@/lib/security/rate-limit"
-import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -10,6 +8,13 @@ const bodySchema = z.object({
   referralCode: z.string().min(4).max(32),
 })
 
+/**
+ * Redeem somebody else's referral code.
+ *
+ * Returns a personal discount code for the customer's next order. The discount
+ * is a promotion, so it is priced on the server and reaches the checkout
+ * exactly like any other code.
+ */
 export async function POST(req: Request) {
   const member = await getCurrentMember().catch(() => null)
   if (!member) {
@@ -28,49 +33,18 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid referral code." }, { status: 400 })
   }
 
-  const code = body.referralCode.trim().toUpperCase()
-
-  const referrer = await db
-    .select({ userId: rewardsAccounts.userId })
-    .from(rewardsAccounts)
-    .where(eq(rewardsAccounts.referralCode, code))
-    .limit(1)
-
-  // Generic response — do not confirm which codes exist.
-  if (!referrer[0] || referrer[0].userId === member.id) {
-    return NextResponse.json({ error: "Invalid or already used referral code." }, { status: 400 })
-  }
-
-  const referrerId = referrer[0].userId
-
-  const existing = await db
-    .select({ id: referralRedemptions.id })
-    .from(referralRedemptions)
-    .where(eq(referralRedemptions.referredUserId, member.id))
-    .limit(1)
-
-  if (existing[0]) {
-    return NextResponse.json({ error: "Invalid or already used referral code." }, { status: 409 })
-  }
-
-  await db.insert(referralRedemptions).values({
-    referrerId,
-    referredUserId: member.id,
-    referrerCreditCents: 1500,
-    referredDiscountCents: 1500,
-    status: "pending",
-  })
-
-  await db
-    .insert(rewardsAccounts)
-    .values({ userId: member.id, referredBy: referrerId })
-    .onConflictDoUpdate({
-      target: rewardsAccounts.userId,
-      set: { referredBy: referrerId },
+  try {
+    const result = await redeemReferralCode(body.referralCode, member.id)
+    return NextResponse.json({
+      success: true,
+      code: result.discountCode,
+      discountCents: result.discountCents,
+      message: "Referral applied. Use the code at checkout.",
     })
-
-  return NextResponse.json({
-    success: true,
-    message: "Referral applied. €15 discount will be applied at checkout.",
-  })
+  } catch (error) {
+    if (error instanceof ReferralError)
+      // The same message for every failure: which codes exist is not public.
+      return NextResponse.json({ error: "Invalid referral code." }, { status: 400 })
+    throw error
+  }
 }

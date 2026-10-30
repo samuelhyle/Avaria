@@ -2,11 +2,15 @@ import { listPosts } from "@/lib/blog/posts"
 import { listGlossaryTerms } from "@/lib/glossary"
 import { locales } from "@/lib/i18n/config"
 import { getStorefrontCatalogue } from "@/lib/products/catalogue"
+import { siteOrigin } from "@/lib/seo/site-origin"
 import type { MetadataRoute } from "next"
 
 export const dynamic = "force-dynamic"
 
-const SITE = "https://averianlabs.eu"
+// The origin that actually serves the site. A hardcoded domain would point
+// crawlers at a host that does not resolve, and every URL in the sitemap
+// would be a dead link.
+const SITE = siteOrigin()
 
 function localeAlternates(path: string) {
   return Object.fromEntries(locales.map((l) => [l, `${SITE}/${l}${path}`]))

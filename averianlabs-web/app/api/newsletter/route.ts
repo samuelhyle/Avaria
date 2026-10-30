@@ -72,11 +72,14 @@ export async function POST(request: Request) {
       else await tx.insert(newsletterSubscribers).values({ email, ...values })
       const origin = getServerEnv().AUTH_URL ?? new URL(request.url).origin
       const url = `${origin}/${locale}/newsletter/confirm?token=${encodeURIComponent(token)}&email=${encodeURIComponent(email)}`
+      // The unsubscribe link travels with every confirmation, so withdrawing
+      // consent never needs a support request.
+      const unsubscribeUrl = `${origin}/${locale}/newsletter/unsubscribe`
       await enqueueEmail(
         {
           to: email,
           subject: actionEmailSubject("newsletter", locale),
-          html: newsletterConfirmHtml({ url, locale }),
+          html: newsletterConfirmHtml({ url, unsubscribeUrl, locale }),
         },
         `newsletter:${hashToken(token)}`,
         tx,

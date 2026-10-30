@@ -16,7 +16,10 @@
       "docs/lightning/lighthouse-baseline-*",
       "docs/lightning/**/*.report.json",
       "docs/verification/site-experience-implementation-2026-10-15/**",
-      ".next-implementation"
+      ".next-implementation",
+      ".next-store",
+      ".next-verify",
+      "lib/i18n/client-message-slice.json"
     ]
   },
   "formatter": {

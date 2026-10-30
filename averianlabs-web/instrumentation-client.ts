@@ -1,23 +1,11 @@
-import * as Sentry from "@sentry/nextjs"
+import { captureRouterTransitionStart } from "@/lib/observability/client-reporter"
 
-const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
-
-if (dsn && process.env.BUILD_MODE !== "demo") {
-  Sentry.init({
-    dsn,
-    environment: process.env.NODE_ENV,
-    tracesSampleRate: process.env.NODE_ENV === "production" ? 0.1 : 1.0,
-    debug: false,
-    replaysOnErrorSampleRate: 1.0,
-    replaysSessionSampleRate: 0.1,
-    integrations: [
-      Sentry.replayIntegration({
-        maskAllText: true,
-        blockAllMedia: true,
-      }),
-    ],
-  })
-}
-
-export const onRouterTransitionStart =
-  process.env.BUILD_MODE === "demo" ? () => {} : Sentry.captureRouterTransitionStart
+/**
+ * Browser instrumentation.
+ *
+ * The Sentry SDK is intentionally absent from this file: importing it here
+ * would put ~105 KiB of gzipped JavaScript on the critical path of every
+ * page. `lib/observability/client-reporter` loads it on demand instead, the
+ * first time an error actually needs to be reported.
+ */
+export const onRouterTransitionStart = captureRouterTransitionStart

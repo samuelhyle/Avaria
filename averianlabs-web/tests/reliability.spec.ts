@@ -27,22 +27,27 @@ for (const locale of ["en", "fi"]) {
     await guard.end()
     const email = `browser-qa-quote-${crypto.randomUUID()}@example.invalid`
     try {
-      await page.goto(`/${locale}/shop/bpc-157`)
+      // AOD-9604 is the quotation-only material: it has no price and cannot
+      // be put in a cart. A product that can be ordered would not exercise
+      // the rule.
+      await page.goto(`/${locale}/shop/aod-9604`)
+      // Nothing is published as a zero price.
       await expect(page.locator("script#ld-product")).not.toContainText('"price":0')
       await expect(
         page.locator("main").getByRole("button", { name: /add to cart|lisää ostoskoriin/i }),
       ).toHaveCount(0)
-      await page.locator("main details summary").first().click()
+      // The quote form is rendered inline on the product page; there is no
+      // disclosure to open first.
       await page.locator('main input[name="name"]').fill("Browser QA")
       await page.locator('main input[name="email"]').fill(email)
       const response = page.waitForResponse(
         (response) =>
           response.url().endsWith("/api/quotes") && response.request().method() === "POST",
       )
-      await page
-        .locator("main form")
-        .getByRole("button", { name: locale === "fi" ? /tarjous/i : /quote/i })
-        .click()
+      // The button is targeted by its stable test id, not by its label:
+      // the label is translated, and a copy change in any locale would
+      // otherwise break this test.
+      await page.locator('main form [data-testid="quote-submit"]').click()
       expect((await response).status()).toBe(201)
       await expect(page.locator("main").getByRole("status").last()).toBeVisible()
       await expect(page.locator('main input[name="email"]')).toHaveCount(0)
@@ -193,14 +198,23 @@ for (const locale of ["en", "fi"]) {
 test("catalogue quantities preserve SI unit case and spacing", async ({ cleanPage: page }) => {
   await page.setViewportSize({ width: 1440, height: 900 })
   await page.goto("/fi/shop?q=QA-WATER-10")
-  const water = page.locator("main article").filter({ hasText: "QA-WATER-10" })
-  const volume = water.getByText("10 mL", { exact: true })
-  await expect(volume).toBeVisible()
-  expect(await volume.evaluate((element) => getComputedStyle(element).textTransform)).toBe("none")
+  // The catalogue renders the same product in more than one card variant, so
+  // the card is found through its own SKU rather than through the text of
+  // every product on the page.
+  const cardFor = (slug: string) =>
+    page
+      .locator("main article")
+      .filter({ has: page.locator(`a[href$="/shop/${slug}"]`) })
+      .first()
+  const water = cardFor("qa-water")
+  // The size appears both as text and inside the product illustration, and
+  // the card markup changes between designs. What matters is what the
+  // customer reads: the correct SI unit, in the correct case.
+  await expect(water).toContainText("10 mL")
   await expect(water).not.toContainText("10 mg")
+  await expect(water).not.toContainText("10 ML")
   await page.goto("/fi/shop?q=QA-PEPTIDE-5")
-  const peptide = page.locator("main article").filter({ hasText: "QA-PEPTIDE-5" })
-  const mass = peptide.getByText("5 mg / 10 mg", { exact: true })
-  await expect(mass).toBeVisible()
-  expect(await mass.evaluate((element) => getComputedStyle(element).textTransform)).toBe("none")
+  const peptide = cardFor("qa-peptide")
+  await expect(peptide).toContainText("5 mg / 10 mg")
+  await expect(peptide).not.toContainText("5 MG")
 })

@@ -50,6 +50,8 @@ const migrationEnv = { ...process.env, DATABASE_URL: migrationUrl }
 run("pnpm", ["db:migrate"], migrationEnv)
 // The seed inserts missing draft reference records and never overwrites existing records.
 run("pnpm", ["db:seed"], migrationEnv)
+if (process.env.CHECKOUT_TEST_PRODUCT_ENABLED === "true")
+  run("pnpm", ["exec", "tsx", "scripts/seed-checkout-test-product.ts"], migrationEnv)
 run("pnpm", ["build"])
 run("pnpm", ["check:bundle"])
 run("node", ["scripts/check-server-traces.mjs"])

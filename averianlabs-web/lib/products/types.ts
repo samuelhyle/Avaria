@@ -1,4 +1,4 @@
-export type Locale = "en" | "fi" | "de" | "sv" | "nl"
+export type Locale = "en" | "fi" | "sv" | "ru"
 
 export type ProductCategory =
   | "metabolic"
@@ -63,6 +63,7 @@ export interface Product {
   /** Static reference entries are browsable but cannot establish availability or quality. */
   dataSource?: "database" | "reference"
   productType?: "peptide" | "cosmetic" | "reagent" | "supplies"
+  checkoutTest?: boolean
   specificationsVerified?: boolean
   createdAt?: string
   slug: string

@@ -79,7 +79,7 @@ async function main() {
   console.log(`top-K:    ${TOP_K}`)
   console.log(`overall recall: ${(overallRecall * 100).toFixed(1)}%`)
   console.log("\nper-locale:")
-  const localeOrder: ProductLocale[] = ["en", "fi", "de", "sv", "nl"]
+  const localeOrder: ProductLocale[] = ["en", "fi", "sv", "ru"]
   for (const loc of localeOrder) {
     const agg = byLocale.get(loc)
     if (!agg) continue

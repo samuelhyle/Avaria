@@ -89,6 +89,38 @@ If a provider shows zero recent events:
 
 ## Routine operations
 
+### Scheduled jobs
+
+The site is served from Netlify, so the schedules live in `netlify.toml` and run on
+the same deployment as the code they call:
+
+| Function | Schedule | Route | What it does |
+|---|---|---|---|
+| `cron-maintenance` | every 5 minutes | `/api/cron/maintenance` | Releases expired inventory holds, delivers the email and Telegram outboxes, closes crypto invoices, settles forum moderation, refreshes the search index |
+| `cron-crypto` | every 2 minutes | `/api/cron/crypto` | Polls the configured chains for deposits, matches them to open invoices, marks the orders paid, queues the buyer and team notifications |
+
+Both functions call their route with the `CRON_SECRET` bearer header, because a
+Netlify scheduled invocation cannot carry custom headers. `CRON_SECRET` must be set
+as a Netlify environment variable — without it the functions return 500 and
+**nothing runs**: order receipts are never delivered, expired stock is never
+released, and the Telegram bot never sends an invoice or a payment confirmation.
+
+Verify a deploy is scheduling:
+
+```sh
+# The function appears in the Netlify UI with a "Scheduled" badge.
+# Or trigger one manually and read its log:
+curl -fsS -H "Authorization: Bearer $CRON_SECRET" https://<site>/api/cron/maintenance | jq
+```
+
+The scheduled-function timeout is 30 seconds. Both routes are budgeted below that
+and stop early rather than being killed mid-run, so a slow chain explorer delays
+one sweep rather than breaking it.
+
+`.github/workflows/maintenance.yml` is a fallback scheduler for deployments that
+are not served by Netlify. It only runs when the `MAINTENANCE_BASE_URL` repository
+variable is set.
+
 ### Roll back a deploy
 Vercel → Deployments → pick the previous green build → Promote to Production.
 Then run any schema-related fixes manually (Vercel doesn't run down-migrations).

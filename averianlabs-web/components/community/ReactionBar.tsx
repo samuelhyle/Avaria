@@ -26,18 +26,31 @@ export function ReactionBar({ postId, isAuthed, counts, mine, isOwnPost }: React
   const router = useRouter()
   const [, startTransition] = useTransition()
   const [busy, setBusy] = useState<ReactionKind | null>(null)
+  const [failed, setFailed] = useState(false)
 
   const onClick = (kind: ReactionKind) => {
     if (!isAuthed || isOwnPost || busy) return
     setBusy(kind)
+    setFailed(false)
     startTransition(async () => {
-      await fetch("/api/forum/reactions", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ postId, kind }),
-      })
-      setBusy(null)
-      router.refresh()
+      try {
+        const res = await fetch("/api/forum/reactions", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ postId, kind }),
+        })
+        if (!res.ok) {
+          setFailed(true)
+          return
+        }
+        router.refresh()
+      } catch {
+        setFailed(true)
+      } finally {
+        // Without this the buttons stay disabled for the rest of the session
+        // when the request throws.
+        setBusy(null)
+      }
     })
   }
 
@@ -54,9 +67,9 @@ export function ReactionBar({ postId, isAuthed, counts, mine, isOwnPost }: React
             disabled={!isAuthed || isOwnPost}
             title={
               isOwnPost
-                ? "You can't react to your own post"
+                ? t("reactOwnPost")
                 : !isAuthed
-                  ? "Sign in to react"
+                  ? t("reactSignIn")
                   : t(`reaction${capitalize(kind)}` as never)
             }
             className={cn(
@@ -73,6 +86,11 @@ export function ReactionBar({ postId, isAuthed, counts, mine, isOwnPost }: React
           </button>
         )
       })}
+      {failed ? (
+        <span role="alert" className="text-2xs text-danger">
+          {t("reactFailed")}
+        </span>
+      ) : null}
     </div>
   )
 }

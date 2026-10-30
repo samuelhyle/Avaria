@@ -13,6 +13,7 @@ export {
   forgetWebhookEvent,
   sendOrderConfirmationEmail,
   listOrdersForUser,
+  listOrdersForUserWithLines,
   releaseExpiredReservations,
   OrderError,
   type AddressInput,

@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic"
 
 import { AiMemoryPanel } from "@/components/account/AIMemoryPanel"
 import { GdprPanel } from "@/components/account/GdprPanel"
+import { ReferralPanel } from "@/components/account/referral-panel"
 import { LoginForm } from "@/components/auth/LoginForm"
 import { SignOutButton } from "@/components/auth/SignOutButton"
 import { Badge } from "@/components/ui/Badge"
@@ -10,6 +11,7 @@ import { Container } from "@/components/ui/Container"
 import { safeReturnPath } from "@/lib/auth/return-path"
 import { getCurrentMember } from "@/lib/community"
 import { listOrdersForUser } from "@/lib/orders"
+import { getRewardsAccount } from "@/lib/referral/service"
 import { listPlansForOwner } from "@/lib/research-plans"
 import { BookmarkPlus, ChevronRight, FileText, Heart, Package, Settings } from "lucide-react"
 import type { Route } from "next"
@@ -31,9 +33,10 @@ export default async function AccountPage({
   const member = await getCurrentMember()
   const query = await searchParams
   const returnTo = safeReturnPath(query.returnTo, locale)
-  const [plans, orders] = await Promise.all([
+  const [plans, orders, rewards] = await Promise.all([
     member ? listPlansForOwner(member.id, locale).catch(() => []) : Promise.resolve([]),
     member ? listOrdersForUser(member.id).catch(() => []) : Promise.resolve([]),
+    member ? getRewardsAccount(member.id).catch(() => null) : Promise.resolve(null),
   ])
 
   return (
@@ -136,6 +139,14 @@ export default async function AccountPage({
                 ))}
               </div>
             )}
+          </section>
+
+          <section className="mt-12">
+            <h2 className="mb-4 font-display text-xl font-semibold">{t("sectionReferral")}</h2>
+            <ReferralPanel
+              referralCode={rewards?.referralCode ?? null}
+              pointsCents={rewards?.pointsBalance ?? 0}
+            />
           </section>
 
           <section className="mt-12">

@@ -31,8 +31,9 @@ test.describe("cart drawer + add-to-cart", () => {
     await inlineInc.click()
     await inlineInc.click()
 
-    // The inline qty <span className="w-12 ..."> shows the running count.
-    const qtySpan = cleanPage.locator("main span.w-10").first()
+    // The inline qty readout announces its value politely. Target the live
+    // region rather than a utility class: the width is a styling detail.
+    const qtySpan = cleanPage.locator('main span[aria-live="polite"]').first()
     await expect(qtySpan).toHaveText(/^3$/)
 
     const inlineDec = cleanPage

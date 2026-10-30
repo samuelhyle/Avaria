@@ -1,7 +1,9 @@
 "use client"
 
 import { Button } from "@/components/ui/Button"
+import { useCompare } from "@/lib/compare/store"
 import type { Locale, Product } from "@/lib/products/types"
+import { cn } from "@/lib/utils/cn"
 import { formatCurrency, formatSize } from "@/lib/utils/format"
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
@@ -35,6 +37,9 @@ export function StickyDesktopAtc({
   const [internalIndex, setInternalIndex] = useState(0)
   const [internalQty, setInternalQty] = useState(1)
   const [show, setShow] = useState(false)
+  // The compare bar is also pinned to the bottom of the viewport. When both
+  // are on screen the compare bar sits on top, so the buy bar moves up.
+  const compareCount = useCompare((s) => s.items.length)
 
   useEffect(() => {
     const onScroll = () =>
@@ -58,7 +63,12 @@ export function StickyDesktopAtc({
   const name = (product.translations?.[locale as Locale] ?? product.defaultTranslation).name
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-30 hidden border-t border-line bg-surface/95 backdrop-blur-xl lg:block">
+    <div
+      className={cn(
+        "fixed inset-x-0 bottom-0 z-30 hidden border-t border-line bg-surface/95 backdrop-blur-xl lg:block",
+        compareCount > 0 && "bottom-[72px]",
+      )}
+    >
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-6 py-3">
         <div className="flex-1">
           <p className="font-semibold">{name}</p>

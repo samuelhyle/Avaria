@@ -120,7 +120,7 @@ export const blogPost = defineType({
       name: "language",
       type: "string",
       initialValue: "en",
-      options: { list: ["en", "fi", "de", "sv", "nl"] },
+      options: { list: ["en", "fi", "sv", "ru"] },
       validation: (r) => r.required(),
     }),
     defineField({
@@ -156,9 +156,8 @@ export const blogPost = defineType({
       type: "object",
       fields: [
         { name: "fi", type: "reference", to: [{ type: "blogPost" }] },
-        { name: "de", type: "reference", to: [{ type: "blogPost" }] },
+        { name: "ru", type: "reference", to: [{ type: "blogPost" }] },
         { name: "sv", type: "reference", to: [{ type: "blogPost" }] },
-        { name: "nl", type: "reference", to: [{ type: "blogPost" }] },
       ],
     }),
   ],
@@ -187,7 +186,7 @@ export const glossaryTerm = defineType({
       name: "language",
       type: "string",
       initialValue: "en",
-      options: { list: ["en", "fi", "de", "sv", "nl"] },
+      options: { list: ["en", "fi", "sv", "ru"] },
       validation: (r) => r.required(),
     }),
     defineField({

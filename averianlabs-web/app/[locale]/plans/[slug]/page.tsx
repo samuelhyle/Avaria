@@ -1,4 +1,4 @@
-import { socialImagePath } from "@/lib/seo/site-origin"
+import { siteOrigin, socialImagePath } from "@/lib/seo/site-origin"
 // Sharing can be revoked immediately; never cache a private plan's former URL.
 export const dynamic = "force-dynamic"
 
@@ -48,11 +48,11 @@ export default async function PublicPlanPage({ params }: Props) {
     <Container size="wide" className="py-10">
       <ItemListJsonLd
         name={plan.title}
-        url={`https://averianlabs.eu/${locale}/plans/${slug}`}
+        url={`${siteOrigin()}/${locale}/plans/${slug}`}
         locale={locale}
         items={plan.items.map((it, idx) => ({
           name: it.productName,
-          url: `https://averianlabs.eu/${locale}/shop/${it.productSlug}`,
+          url: `${siteOrigin()}/${locale}/shop/${it.productSlug}`,
           position: idx + 1,
         }))}
       />

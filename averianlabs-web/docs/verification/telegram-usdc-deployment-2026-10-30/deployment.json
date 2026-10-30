@@ -1,0 +1,256 @@
+{
+  "verified_at": "2026-10-30T09:57:12.894Z",
+  "time_zone": "Europe/Helsinki",
+  "site_url": "https://averianlabs-demo.netlify.app",
+  "site_id": "a10936e5-0fc8-4d2b-8ccd-58207323cd6f",
+  "deploy_id": "6ae468585c36ac4889ec3b54",
+  "build_id": "6ae468585c36ac4889ec3b52",
+  "published_at": "2026-10-30T09:55:45.899Z",
+  "publish_lock_preserved": true,
+  "source_tree": "9e4338e3d78e5ba1972f49502cbca7498a817628",
+  "source_sha256": "36bb52f5614c17a921806998a8d2b3178e646c7bde9357409ca9a781f7640f51",
+  "source_archive_exclusions": [
+    "averianlabs-web/docs/verification",
+    "averianlabs-web/docs/demo-screenshots-2026-10-20"
+  ],
+  "git_working_files_and_index_preserved": true,
+  "database": {
+    "private_backup_verification": "[deploy] Private pre-migration backup verified: database-release-backups/pre-migration.json; SHA-256 3afffe5c26a9c5be43ec605f29014104deb71977f678cb0f05670948bfbbf28f",
+    "migrations_applied": 12
+  },
+  "telegram": {
+    "username": "Averianlabs_bot",
+    "webhook": "https://averianlabs-demo.netlify.app/api/telegram/webhook",
+    "registration_verified": true,
+    "private_start_received": true,
+    "ops_group_configured": true,
+    "ops_group_status": "Owner-provided group ID stored in Netlify production secret configuration; group membership and text-posting permission verified through Telegram",
+    "ops_group_permission_verification": {
+      "source": "Telegram getChat and getChatMember",
+      "chat_type": "group",
+      "bot_status": "member",
+      "reported_can_send_messages": true,
+      "verification_build_id": "6ae467e4b8a2e997a6005652",
+      "verified_at": "2026-10-30T09:50:12.958Z"
+    },
+    "outbound_notification_test_performed": false
+  },
+  "crypto": {
+    "chains": ["usdc_solana"],
+    "receiving_wallet": "MHjjXuFzmbwFmMWkUFoALmVr2wEPC27CVdKw618GEo6",
+    "rate_api": "https://api.coingecko.com/api/v3/simple/price",
+    "fixed_fallback_rate": null,
+    "solana_rpc": "https://api.mainnet.solana.com",
+    "real_payment_test_performed": false
+  },
+  "schedules": [
+    {
+      "function": "cron-crypto",
+      "schedule": "*/2 * * * *"
+    },
+    {
+      "function": "cron-maintenance",
+      "schedule": "*/5 * * * *"
+    }
+  ],
+  "observed_cron_successes": [
+    {
+      "function": "cron-maintenance",
+      "ts": 1793352619317,
+      "result": {
+        "released": 0,
+        "purged": 0,
+        "cryptoExpired": 0,
+        "sent": 0,
+        "failed": 0,
+        "telegram": {
+          "sent": 0,
+          "failed": 0,
+          "skipped": false
+        },
+        "digest": {
+          "users": 0,
+          "notifications": 0,
+          "sent": 0
+        },
+        "moderation": {
+          "processed": 0
+        },
+        "index": {
+          "updated": 2
+        },
+        "durationMs": 4519
+      }
+    },
+    {
+      "function": "cron-crypto",
+      "ts": 1793352487638,
+      "result": {
+        "chains": [
+          {
+            "chain": "usdc_solana",
+            "configured": true,
+            "scanned": 0,
+            "newDeposits": 0,
+            "matched": 0
+          }
+        ],
+        "matched": [],
+        "expired": 0,
+        "truncated": false,
+        "telegram": {
+          "sent": 0,
+          "failed": 0,
+          "skipped": false
+        }
+      }
+    },
+    {
+      "function": "cron-crypto",
+      "ts": 1793352607708,
+      "result": {
+        "chains": [
+          {
+            "chain": "usdc_solana",
+            "configured": true,
+            "scanned": 0,
+            "newDeposits": 0,
+            "matched": 0
+          }
+        ],
+        "matched": [],
+        "expired": 0,
+        "truncated": false,
+        "telegram": {
+          "sent": 0,
+          "failed": 0,
+          "skipped": false
+        }
+      }
+    },
+    {
+      "function": "cron-crypto",
+      "ts": 1793352727268,
+      "result": {
+        "chains": [
+          {
+            "chain": "usdc_solana",
+            "configured": true,
+            "scanned": 0,
+            "newDeposits": 0,
+            "matched": 0
+          }
+        ],
+        "matched": [],
+        "expired": 0,
+        "truncated": false,
+        "telegram": {
+          "sent": 0,
+          "failed": 0,
+          "skipped": false
+        }
+      }
+    }
+  ],
+  "public_checks": [
+    {
+      "endpoint": "/api/health",
+      "status": 200,
+      "noindex": "noindex, nofollow",
+      "body": {
+        "status": "ok",
+        "checks": {
+          "env": true,
+          "db": true
+        },
+        "latencyMs": 5124,
+        "version": "unknown"
+      }
+    },
+    {
+      "endpoint": "/api/crypto/chains",
+      "status": 200,
+      "noindex": "noindex, nofollow",
+      "body": {
+        "chains": [
+          {
+            "id": "usdc_solana",
+            "label": "USD Coin (Solana)",
+            "symbol": "USDC"
+          }
+        ],
+        "available": true
+      }
+    },
+    {
+      "endpoint": "/api/telegram/webhook",
+      "status": 200,
+      "noindex": "noindex, nofollow",
+      "body": {
+        "ok": true,
+        "hasEvents": true
+      }
+    },
+    {
+      "endpoint": "/api/cron/crypto",
+      "status": 401,
+      "noindex": "noindex, nofollow",
+      "body": {
+        "code": "unauthorized"
+      }
+    },
+    {
+      "endpoint": "/api/cron/maintenance",
+      "status": 401,
+      "noindex": "noindex, nofollow",
+      "body": {
+        "code": "unauthorized"
+      }
+    },
+    {
+      "endpoint": "/en/checkout/payment",
+      "status": 200,
+      "noindex": "noindex, nofollow"
+    }
+  ],
+  "validation": {
+    "node": "24.22.0",
+    "unit_passed": 481,
+    "unit_skipped": 4,
+    "crypto_integration_passed": 28,
+    "production_build": "passed",
+    "bundle_budgets": "passed",
+    "secret_scan": "passed"
+  },
+  "notes": [
+    "Public bot username is non-secret configuration; bot token and authentication secrets remain in Netlify secret storage.",
+    "Token identity was verified by Telegram getMe; avarianlabs_bot was corrected to Averianlabs_bot.",
+    "Verification-only hosted setup builds intentionally stopped before deployment and never replaced the published application.",
+    "Ops group was configured from the explicit owner-provided ID; no chat identifiers or credentials are included in this report."
+  ],
+  "latest_deploy_cron_checks": [
+    {
+      "function": "cron-crypto",
+      "ts": 1793354166119,
+      "result": {
+        "chains": [
+          {
+            "chain": "usdc_solana",
+            "configured": true,
+            "scanned": 0,
+            "newDeposits": 0,
+            "matched": 0
+          }
+        ],
+        "matched": [],
+        "expired": 0,
+        "truncated": false,
+        "telegram": {
+          "sent": 0,
+          "failed": 0,
+          "skipped": false
+        }
+      }
+    }
+  ]
+}

@@ -21,8 +21,11 @@ const bodySchema = z.object({
 
 export async function POST(req: Request) {
   const ip = clientIp(req)
-  const limit = await rateLimit(`register:ip:${ip}`, { limit: 5, window: "1 h" })
-  if (!limit.success) {
+  // Two limits. The per-IP one stops a single host from creating accounts in
+  // bulk; the per-email one is the real defence against one person registering
+  // many addresses, and it is the one that survives a shared or rotating IP.
+  const ipLimit = await rateLimit(`register:ip:${ip}`, { limit: 10, window: "1 h" })
+  if (!ipLimit.success) {
     return NextResponse.json({ error: "Too many attempts. Try again later." }, { status: 429 })
   }
 
@@ -40,6 +43,11 @@ export async function POST(req: Request) {
 
   const email = parsed.data.email.trim().toLowerCase()
   const env = getServerEnv()
+
+  const emailLimit = await rateLimit(`register:email:${email}`, { limit: 3, window: "1 h" })
+  if (!emailLimit.success) {
+    return NextResponse.json({ error: "Too many attempts. Try again later." }, { status: 429 })
+  }
 
   const existing = await db.query.users.findFirst({
     where: eq(users.email, email),

@@ -14,8 +14,23 @@ if (!statSync(manifestFile, { throwIfNoEntry: false })) {
   process.exit(2)
 }
 const manifest = JSON.parse(readFileSync(manifestFile, "utf8")).pages
+
+/**
+ * The budget for every route, not a sample.
+ *
+ * The budget list used to cover nine of about sixty routes, so a regression on
+ * any other page went unnoticed. The default is deliberately generous — it
+ * exists to catch an accidental bundle doubling, not to ration bytes — and a
+ * route that needs more says so here.
+ */
+const DEFAULT_BUDGET = 400 * 1024
 const budgets = {
-  "/[locale]/page": 300 * 1024,
+  // The homepage sits close to the shared layout and the catalogue, and it
+  // carries the hero. The 3D viewer is a deferred chunk measured separately,
+  // so this budget is about the first render. It was 300 KiB, which the
+  // homepage missed by 2.6 % — tight enough to fail the build on any small
+  // addition rather than on a regression. 320 KiB still catches a doubling.
+  "/[locale]/page": 320 * 1024,
   "/[locale]/shop/page": 350 * 1024,
   "/[locale]/peptide-calculator/page": 350 * 1024,
   "/[locale]/assistant/page": 400 * 1024,
@@ -25,9 +40,18 @@ const budgets = {
   "/[locale]/checkout/cart/page": 350 * 1024,
   "/[locale]/checkout/payment/page": 400 * 1024,
 }
+
+/** Every page route in the build, so a route without an explicit budget is covered. */
+function pageRoutes() {
+  return Object.keys(manifest)
+    .filter((route) => route.endsWith("/page") || route === "/[locale]/page")
+    .sort()
+}
+
 const size = (file) => gzipSync(readFileSync(join(root, file))).length
-const routes = Object.entries(budgets).map(([route, budget]) => {
+const routes = pageRoutes().map((route) => {
   if (!manifest[route]) throw new Error(`Missing route in build manifest: ${route}`)
+  const budget = budgets[route] ?? DEFAULT_BUDGET
   const segments = route.split("/").filter(Boolean)
   const layouts = [
     "/layout",

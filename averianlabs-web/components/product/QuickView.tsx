@@ -26,6 +26,7 @@ interface QuickViewProps {
 
 export function QuickView({ product, locale, open, onOpenChange }: QuickViewProps) {
   const t = useTranslations("research")
+  const r = t
   const pt = useTranslations("product")
   const tCommon = useTranslations("common")
   const [vialIdx, setVialIdx] = useState(0)
@@ -174,7 +175,7 @@ export function QuickView({ product, locale, open, onOpenChange }: QuickViewProp
                   type="button"
                   onClick={() => {
                     wishlistToggle(product.slug)
-                    toast.success(inWishlist ? "Removed from wishlist" : "Saved to wishlist")
+                    toast.success(inWishlist ? t("wishlistRemoved") : t("wishlistSaved"))
                   }}
                   className={cn(
                     "inline-flex h-10 flex-1 items-center justify-center gap-1 rounded-[var(--radius)] border text-xs font-medium",
@@ -184,13 +185,13 @@ export function QuickView({ product, locale, open, onOpenChange }: QuickViewProp
                   )}
                 >
                   <Heart className={cn("h-4 w-4", inWishlist && "fill-current")} />
-                  {inWishlist ? "Saved" : "Wishlist"}
+                  {inWishlist ? r("wishlistSaved") : r("wishlist")}
                 </button>
                 <button
                   type="button"
                   onClick={() => {
                     compareToggle(product.slug)
-                    toast.success(inCompare ? "Removed from compare" : "Added to compare")
+                    toast.success(inCompare ? t("compareRemoved") : t("compareAdded"))
                   }}
                   className={cn(
                     "inline-flex h-10 flex-1 items-center justify-center gap-1 rounded-[var(--radius)] border text-xs font-medium",
@@ -200,7 +201,7 @@ export function QuickView({ product, locale, open, onOpenChange }: QuickViewProp
                   )}
                 >
                   <GitCompare className="h-4 w-4" />
-                  {inCompare ? "Comparing" : "Compare"}
+                  {inCompare ? r("compareAdded") : r("compare")}
                 </button>
                 <Link
                   href={`/${locale}/shop/${product.slug}`}

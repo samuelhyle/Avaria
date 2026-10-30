@@ -14,6 +14,8 @@ export interface CheckoutState {
   b2b: boolean
   vatId: string
   shippingMethod: string
+  /** Promotion code the customer has applied. Resolved and priced server-side. */
+  promoCode: string
   attemptKey: string
   attemptFingerprint: string
   setAttempt: (fingerprint: string, key: string) => void
@@ -27,6 +29,7 @@ export interface CheckoutState {
   setB2b: (b2b: boolean) => void
   setVatId: (vatId: string) => void
   setShippingMethod: (method: string) => void
+  setPromoCode: (code: string) => void
   reset: () => void
 }
 
@@ -39,6 +42,7 @@ interface CheckoutActions {
   setB2b: (b2b: boolean) => void
   setVatId: (vatId: string) => void
   setShippingMethod: (method: string) => void
+  setPromoCode: (code: string) => void
   reset: () => void
 }
 
@@ -53,6 +57,7 @@ const initialState = {
   b2b: false,
   vatId: "",
   shippingMethod: "",
+  promoCode: "",
   attemptKey: "",
   attemptFingerprint: "",
   pendingOrderId: "",
@@ -71,6 +76,7 @@ export const useCheckout = create<CheckoutState>()(
       setB2b: (b2b) => set({ b2b }),
       setVatId: (vatId) => set({ vatId }),
       setShippingMethod: (shippingMethod) => set({ shippingMethod }),
+      setPromoCode: (promoCode) => set({ promoCode }),
       reset: () => set(initialState),
     }),
     {
@@ -81,6 +87,10 @@ export const useCheckout = create<CheckoutState>()(
         ...(saved as object),
         country: "FI",
         shippingMethod: "",
+        promoCode:
+          typeof (saved as { promoCode?: unknown }).promoCode === "string"
+            ? (saved as { promoCode: string }).promoCode
+            : "",
       }),
     },
   ),

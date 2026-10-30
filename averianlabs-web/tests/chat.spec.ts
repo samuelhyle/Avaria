@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs"
+import { locales } from "@/lib/i18n/config"
 import { type APIRequestContext, type Page, expect, test } from "@/tests/fixtures"
 
 /**
@@ -15,19 +16,26 @@ import { type APIRequestContext, type Page, expect, test } from "@/tests/fixture
  */
 
 // Localised "Open Averia" button label (en: "Open Averia", fi: "Avaa Averia", …).
-const CHAT_BUBBLE = 'button[aria-label*="Averia" i]'
-const CHAT_INPUT_LABELS = [
-  ...new Set(
-    ["en", "fi", "de", "sv", "nl"].map(
-      (locale) =>
-        JSON.parse(readFileSync(new URL(`../messages/${locale}.json`, import.meta.url), "utf8"))
-          .averia.inputLabel as string,
-    ),
-  ),
-]
-const CHAT_INPUT_NAME = new RegExp(
-  `^(?:${CHAT_INPUT_LABELS.map((label) => label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})$`,
-)
+// The locales come from the app's own configuration, so a locale that is
+// added or removed does not silently break this file.
+const escaped = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+
+/**
+ * The chat button and its input, in every language the storefront ships.
+ *
+ * The labels are read from the message files, because they are translated —
+ * "Averia" becomes "Аверия" in Russian — and a selector built from one
+ * language silently stops matching in the others.
+ */
+const CHAT_LABELS = locales.map((locale) => {
+  const copy = JSON.parse(
+    readFileSync(new URL(`../messages/${locale}.json`, import.meta.url), "utf8"),
+  ).averia as { open: string; inputLabel: string }
+  return copy
+})
+const CHAT_BUBBLE = CHAT_LABELS.map((c) => `button[aria-label="${c.open}"]`).join(", ")
+const CHAT_INPUT_LABELS = [...new Set(CHAT_LABELS.map((c) => c.inputLabel))]
+const CHAT_INPUT_NAME = new RegExp(`^(?:${CHAT_INPUT_LABELS.map(escaped).join("|")})$`)
 const STOP_BUTTON = 'button[aria-label="Stop"]'
 
 async function openChat(page: Page) {
@@ -51,12 +59,16 @@ async function skipIfProviderDown(request: APIRequestContext): Promise<boolean> 
     failOnStatusCode: false,
     timeout: 8_000,
   })
-  return res.status() === 503
+  // 503 is "no provider configured", 429 is "the provider is rate-limited".
+  // Both mean there is nobody to answer, so the reply test cannot run. Only
+  // the 503 case was checked, so a rate-limited provider failed the suite
+  // with a timeout instead of skipping.
+  return res.status() === 503 || res.status() === 429
 }
 
 test.describe("Averia chat widget", () => {
   test("the chat bubble is visible on every locale page", async ({ cleanPage }) => {
-    for (const locale of ["en", "fi", "de"] as const) {
+    for (const locale of locales) {
       await cleanPage.goto(`/${locale}`, { waitUntil: "networkidle" })
       await cleanPage.locator(CHAT_BUBBLE).first().waitFor({ state: "visible", timeout: 30_000 })
     }

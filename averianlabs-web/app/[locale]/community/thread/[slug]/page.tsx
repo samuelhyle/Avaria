@@ -1,4 +1,4 @@
-import { socialImagePath } from "@/lib/seo/site-origin"
+import { siteOrigin, socialImagePath } from "@/lib/seo/site-origin"
 export const dynamic = "force-dynamic"
 
 import { PostCard } from "@/components/community/PostCard"
@@ -83,7 +83,7 @@ export default async function ThreadPage({ params }: Props) {
       {thread.status !== "pending" && (
         <DiscussionForumPostingJsonLd
           title={thread.title}
-          url={`https://averianlabs.eu/${locale}/community/thread/${slug}`}
+          url={`${siteOrigin()}/${locale}/community/thread/${slug}`}
           datePublished={thread.lastActivityAt.toISOString()}
           authorName={thread.authorName ?? r("anonymousMember")}
           commentCount={thread.replyCount}

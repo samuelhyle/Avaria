@@ -26,7 +26,11 @@ export function ProductFAQ({ pageUrl }: { pageUrl?: string }) {
     <section className="rounded-[var(--radius-lg)] border border-line bg-surface">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\u003c") }}
+        dangerouslySetInnerHTML={{
+          // `replaceAll`, not `replace`: a string pattern replaces only the
+          // first match, so a second `<` in the payload would go unescaped.
+          __html: JSON.stringify(schema).replaceAll("<", "\\u003c"),
+        }}
       />
       <h2 className="p-6 font-display text-xl font-semibold">{t("faqTitle")}</h2>
       <ul className="divide-y divide-line">

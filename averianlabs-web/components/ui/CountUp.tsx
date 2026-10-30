@@ -32,6 +32,7 @@ export function CountUp({
       return
     }
     if (!ref.current) return
+    let frame = 0
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0]?.isIntersecting && !startedRef.current) {
@@ -42,16 +43,20 @@ export function CountUp({
             const t = Math.min(1, elapsed / duration)
             const eased = 1 - (1 - t) ** 3
             setValue(eased * end)
-            if (t < 1) requestAnimationFrame(tick)
+            if (t < 1) frame = requestAnimationFrame(tick)
             else setValue(end)
           }
-          requestAnimationFrame(tick)
+          frame = requestAnimationFrame(tick)
         }
       },
       { threshold: 0.3 },
     )
     observer.observe(ref.current)
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      // Without this the animation keeps calling setValue after unmount.
+      if (frame) cancelAnimationFrame(frame)
+    }
   }, [end, duration, reduced])
 
   return (

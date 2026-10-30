@@ -120,9 +120,8 @@ function scoreProduct(p: Product, tokens: string[]): number {
     p.defaultTranslation.description,
     p.translations?.en?.name ?? "",
     p.translations?.fi?.name ?? "",
-    p.translations?.de?.name ?? "",
     p.translations?.sv?.name ?? "",
-    p.translations?.nl?.name ?? "",
+    p.translations?.ru?.name ?? "",
     p.casNumber ?? "",
     p.sequence ?? "",
     p.category,
@@ -227,7 +226,7 @@ export const searchProductsTool: Tool = {
           const tr =
             ctx.locale === "en"
               ? p.defaultTranslation
-              : (p.translations?.[ctx.locale as "fi" | "de" | "sv" | "nl"] ?? p.defaultTranslation)
+              : (p.translations?.[ctx.locale as "fi" | "sv" | "ru"] ?? p.defaultTranslation)
           return {
             slug: p.slug,
             category: p.category,

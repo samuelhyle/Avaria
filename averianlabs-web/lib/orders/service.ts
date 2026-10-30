@@ -2,21 +2,29 @@ import crypto from "node:crypto"
 import {
   addresses,
   batches,
+  cryptoCheckoutSessions,
   documents,
   inventoryReservations,
   orderItems,
   orders,
   products,
+  shipments,
   vials,
   webhookEvents,
 } from "@/db/schema"
+import { isCheckoutTestProduct } from "@/lib/checkout/test-product"
+import { CHAINS, type ChainId } from "@/lib/crypto/chains"
 import { db } from "@/lib/db"
 import { publicDocumentUrl } from "@/lib/documents/availability"
+import { shippingConfirmationHtml } from "@/lib/email"
 import { type DbExecutor, enqueueEmail } from "@/lib/email/outbox"
 import { renderOrderReceipt } from "@/lib/email/receipt"
-import { and, eq, gt, inArray, isNotNull, isNull, lte, sql } from "drizzle-orm"
+import { logger } from "@/lib/logger"
+import { recordPromotionRedemption } from "@/lib/promotions/service"
+import { and, desc, eq, gt, inArray, isNotNull, isNull, lte, sql } from "drizzle-orm"
 import { orderAccessToken } from "./access"
 import { OrderError, normalizeItems, quoteCart } from "./quote"
+import { InvalidOrderTransition, type OrderStatus, canTransition } from "./status"
 export { OrderError } from "./quote"
 
 export interface AddressInput {
@@ -37,8 +45,10 @@ export interface CreateOrderInput {
   checkoutKey?: string
   checkoutHash?: string
   expectedQuoteHash?: string
-  paymentMethod?: "stripe" | "coinbase"
+  paymentMethod?: "stripe" | "coinbase" | "crypto"
   vatId?: string
+  /** Promotion code to resolve server-side. Ignored when it does not apply. */
+  promoCode?: string
   shippingAddress?: AddressInput
   billingAddress?: AddressInput
   billingAddressId?: string
@@ -50,6 +60,8 @@ export interface OrderRecord {
   email: string
   status: string
   subtotalCents: number
+  discountCents: number
+  promoCode: string | null
   shippingCents: number
   vatCents: number
   totalCents: number
@@ -60,14 +72,25 @@ export interface OrderRecord {
   paymentMethod: string
   stripePaymentIntentId: string | null
   cryptoChargeId: string | null
+  cryptoTxHash: string | null
 }
 export const RESERVATION_TTL_MINUTES = 15
+/**
+ * A crypto transfer takes minutes to hours, not seconds. The card window
+ * would expire the hold and release the stock long before the money lands,
+ * so crypto orders get a much longer window. A payment that arrives after it
+ * still lands: `markOrderPaid` tries to reacquire the inventory and falls back
+ * to `payment_review` when it cannot.
+ */
+export const CRYPTO_RESERVATION_TTL_HOURS = 6
 const toRecord = (row: typeof orders.$inferSelect): OrderRecord => ({
   id: row.id,
   number: row.number,
   email: row.email,
   status: row.status,
   subtotalCents: row.subtotalCents,
+  discountCents: row.discountCents,
+  promoCode: row.promoCode,
   shippingCents: row.shippingCents,
   vatCents: row.vatCents,
   totalCents: row.totalCents,
@@ -78,6 +101,7 @@ const toRecord = (row: typeof orders.$inferSelect): OrderRecord => ({
   paymentMethod: row.paymentMethod,
   stripePaymentIntentId: row.stripePaymentIntentId,
   cryptoChargeId: row.cryptoChargeId,
+  cryptoTxHash: row.cryptoTxHash,
 })
 
 async function storeAddress(executor: DbExecutor, userId: string | null, input: AddressInput) {
@@ -120,7 +144,14 @@ export async function createOrder(input: CreateOrderInput): Promise<OrderRecord>
         throw new OrderError("Start a new checkout attempt", "attempt_expired")
       return toRecord(existing)
     }
-    const quote = await quoteCart(items, input.shippingCents, input.locale ?? "en", tx, true)
+    const quote = await quoteCart(
+      items,
+      input.shippingCents,
+      input.locale ?? "en",
+      tx,
+      true,
+      input.promoCode,
+    )
     if (input.expectedQuoteHash && quote.hash !== input.expectedQuoteHash)
       throw new OrderError("The quote has changed", "quote_changed")
     for (const line of quote.lines)
@@ -134,13 +165,20 @@ export async function createOrder(input: CreateOrderInput): Promise<OrderRecord>
     const billingAddressId = input.billingAddress
       ? await storeAddress(tx, input.userId ?? null, input.billingAddress)
       : input.billingAddressId
+    const initialStatus = input.paymentMethod === "crypto" ? "awaiting_crypto" : "pending"
+    const reservationExpiry = new Date(
+      Date.now() +
+        (input.paymentMethod === "crypto"
+          ? CRYPTO_RESERVATION_TTL_HOURS * 60 * 60_000
+          : RESERVATION_TTL_MINUTES * 60_000),
+    )
     const [order] = await tx
       .insert(orders)
       .values({
         number: `AL-${new Date().toISOString().slice(0, 10).replaceAll("-", "")}-${crypto.randomBytes(6).toString("hex").toUpperCase()}`,
         userId: input.userId ?? null,
         email: input.email,
-        status: "pending",
+        status: initialStatus,
         subtotalCents: quote.subtotalCents,
         shippingCents: quote.shippingCents,
         vatCents: quote.vatCents,
@@ -154,6 +192,8 @@ export async function createOrder(input: CreateOrderInput): Promise<OrderRecord>
         checkoutHash: hash,
         paymentMethod: input.paymentMethod ?? "stripe",
         vatId: input.vatId,
+        discountCents: quote.discountCents,
+        promoCode: quote.promotion?.promotion.code ?? null,
         shippingAddressId,
         billingAddressId,
       })
@@ -178,9 +218,19 @@ export async function createOrder(input: CreateOrderInput): Promise<OrderRecord>
         orderId: order.id,
         vialId: line.vialId,
         qty: line.qty,
-        expiresAt: new Date(Date.now() + RESERVATION_TTL_MINUTES * 60_000),
+        expiresAt: reservationExpiry,
       })),
     )
+    // The redemption is written with the order so a failed order rolls it back
+    // together with the discount it was granted.
+    if (quote.promotion)
+      await recordPromotionRedemption(
+        tx,
+        quote.promotion.promotion,
+        order.id,
+        input.email,
+        quote.promotion.discountCents,
+      )
     return toRecord(order)
   })
 }
@@ -216,6 +266,22 @@ async function queueReceipt(executor: DbExecutor, order: typeof orders.$inferSel
     .from(orderItems)
     .leftJoin(batches, eq(orderItems.batchId, batches.id))
     .where(eq(orderItems.orderId, order.id))
+  // A crypto receipt carries the amount that was sent and the transaction that
+  // paid for it: there is no card statement to fall back on.
+  const [session] = await executor
+    .select()
+    .from(cryptoCheckoutSessions)
+    .where(eq(cryptoCheckoutSessions.orderId, order.id))
+    .limit(1)
+  const crypto = session
+    ? {
+        chainLabel: CHAINS[session.chain as ChainId]?.label ?? session.chain,
+        symbol: CHAINS[session.chain as ChainId]?.symbol ?? session.chain,
+        amount: session.amountCrypto,
+        txHash: order.cryptoTxHash ?? order.cryptoChargeId ?? "",
+        rateEurPerUnit: session.rateEurPerUnit,
+      }
+    : undefined
   const batchIds = lines.map(({ line }) => line.batchId).filter((id): id is string => Boolean(id))
   const reports = batchIds.length
     ? await executor
@@ -260,6 +326,7 @@ async function queueReceipt(executor: DbExecutor, order: typeof orders.$inferSel
         shippingCents: order.shippingCents,
         vatCents: order.vatCents,
         totalCents: order.totalCents,
+        crypto,
       }),
     },
     `order-paid:${order.id}`,
@@ -270,7 +337,7 @@ async function queueReceipt(executor: DbExecutor, order: typeof orders.$inferSel
 export async function markOrderPaid(
   orderId: string,
   paymentRef: string,
-  kind: "stripe" | "coinbase" = "stripe",
+  kind: "stripe" | "coinbase" | "crypto" = "stripe",
 ): Promise<boolean> {
   return db.transaction(async (tx) => {
     const [order] = await tx.select().from(orders).where(eq(orders.id, orderId)).for("update")
@@ -278,10 +345,13 @@ export async function markOrderPaid(
     const existingRef = kind === "stripe" ? order.stripePaymentIntentId : order.cryptoChargeId
     if (order.paymentMethod !== kind || (existingRef && existingRef !== paymentRef))
       throw new OrderError("Payment reference mismatch", "payment_mismatch")
-    if (["paid", "shipped", "delivered", "refunded", "payment_review"].includes(order.status))
+    if (
+      ["paid", "packed", "shipped", "delivered", "refunded", "payment_review"].includes(
+        order.status,
+      )
+    )
       return false
-    if (!["pending", "failed", "expired"].includes(order.status))
-      throw new OrderError("Invalid payment transition")
+    if (!canTransition(order.status, "paid")) throw new OrderError("Invalid payment transition")
     const holds = await tx
       .select()
       .from(inventoryReservations)
@@ -329,6 +399,16 @@ export async function markOrderPaid(
     let reacquired =
       lines.length > 0 &&
       lines.every(({ item, vial, product }) => {
+        if (isCheckoutTestProduct(product, vial))
+          return (
+            lines.length === 1 &&
+            item.qty === 1 &&
+            item.batchId === null &&
+            item.unitPriceCents === 150 &&
+            order.totalCents === 150 &&
+            order.shippingCents === 0 &&
+            order.discountCents === 0
+          )
         const spec = product.specJson as Record<string, unknown>
         return (
           product.status === "active" &&
@@ -372,9 +452,10 @@ export async function markOrderPaid(
     }
     const reference =
       kind === "stripe" ? { stripePaymentIntentId: paymentRef } : { cryptoChargeId: paymentRef }
+    await transitionOrder(tx, orderId, reacquired ? "paid" : "payment_review")
     const [updated] = await tx
       .update(orders)
-      .set({ ...reference, status: reacquired ? "paid" : "payment_review", updatedAt: new Date() })
+      .set({ ...reference, updatedAt: new Date() })
       .where(eq(orders.id, orderId))
       .returning()
     if (!updated) throw new OrderError("Payment could not be stored")
@@ -398,6 +479,14 @@ export async function markOrderPaid(
         tx,
       )
     }
+    // A referral discount on this order earns the referrer their credit. It
+    // runs after the transaction so a failure here cannot roll back the payment.
+    if (reacquired) {
+      const { settleReferralCredit } = await import("@/lib/referral/service")
+      await settleReferralCredit(orderId).catch((error) =>
+        logger.error("[referral] credit settlement failed", error),
+      )
+    }
     return true
   })
 }
@@ -408,9 +497,11 @@ export async function markOrderFailed(
 ): Promise<boolean> {
   return db.transaction(async (tx) => {
     const [order] = await tx.select().from(orders).where(eq(orders.id, orderId)).for("update")
-    if (!order || order.status !== "pending") return false
+    if (!order) return false
+    // A crypto order waits in `awaiting_crypto` for the transfer to land.
+    if (!canTransition(order.status, status)) return false
     await releaseHolds(tx, orderId)
-    await tx.update(orders).set({ status, updatedAt: new Date() }).where(eq(orders.id, orderId))
+    await transitionOrder(tx, orderId, status)
     return true
   })
 }
@@ -422,7 +513,9 @@ export async function releaseExpiredReservations(now = new Date()): Promise<numb
       .from(orders)
       .where(
         and(
-          eq(orders.status, "pending"),
+          // A crypto order waits in `awaiting_crypto` for the transfer to land;
+          // its hold has to be released too when the window closes.
+          inArray(orders.status, ["pending", "awaiting_crypto"]),
           sql`exists (select 1 from inventory_reservations r where r.order_id = ${orders.id} and r.released_at is null and r.expires_at < ${now.toISOString()}::timestamptz)`,
         ),
       )
@@ -431,15 +524,19 @@ export async function releaseExpiredReservations(now = new Date()): Promise<numb
     let released = 0
     for (const order of expired) {
       released += await releaseHolds(tx, order.id)
-      await tx
-        .update(orders)
-        .set({ status: "expired", updatedAt: now })
-        .where(eq(orders.id, order.id))
+      await transitionOrder(tx, order.id, "expired")
     }
     return released
   })
 }
 
+/**
+ * Mark an order as refunded and put the goods back on the shelf.
+ *
+ * The stock restoration lives here rather than in the refund service, because a
+ * refund performed in the payment provider's dashboard reaches the order
+ * through the webhook and must restore the stock too.
+ */
 export async function markOrderRefunded(orderId: string): Promise<boolean> {
   const rows = await db
     .update(orders)
@@ -447,11 +544,157 @@ export async function markOrderRefunded(orderId: string): Promise<boolean> {
     .where(
       and(
         eq(orders.id, orderId),
-        inArray(orders.status, ["paid", "shipped", "delivered", "payment_review"]),
+        inArray(orders.status, ["paid", "packed", "shipped", "delivered", "payment_review"]),
       ),
     )
     .returning({ id: orders.id })
-  return rows.length > 0
+  if (!rows.length) return false
+  await restoreOrderStock(orderId)
+  return true
+}
+
+/**
+ * Put the goods of a refunded order back into stock.
+ *
+ * A cancelled or refunded order releases its inventory hold and the stock
+ * returns to the shelf. Called when an order is failed, expired or refunded.
+ */
+export async function restoreOrderStock(orderId: string): Promise<number> {
+  return db.transaction(async (tx) => {
+    const released = await tx
+      .update(inventoryReservations)
+      .set({ releasedAt: new Date() })
+      .where(
+        and(eq(inventoryReservations.orderId, orderId), isNull(inventoryReservations.releasedAt)),
+      )
+      .returning({ vialId: inventoryReservations.vialId, qty: inventoryReservations.qty })
+    for (const row of released.sort((a, b) => a.vialId.localeCompare(b.vialId)))
+      await tx
+        .update(vials)
+        .set({ stockQty: sql`${vials.stockQty} + ${row.qty}` })
+        .where(eq(vials.id, row.vialId))
+    return released.length
+  })
+}
+
+/**
+ * Move an order to a new status, refusing illegal moves.
+ *
+ * Every status write in the codebase goes through here so the transition table
+ * in `lib/orders/status.ts` is the single authority.
+ */
+export async function transitionOrder(
+  executor: DbExecutor,
+  orderId: string,
+  to: OrderStatus,
+): Promise<void> {
+  const [row] = await executor
+    .select({ status: orders.status })
+    .from(orders)
+    .where(eq(orders.id, orderId))
+    .limit(1)
+  if (!row) throw new OrderError("Order not found", "not_found")
+  if (row.status === to) return
+  if (!canTransition(row.status, to)) throw new InvalidOrderTransition(row.status, to)
+  await executor
+    .update(orders)
+    .set({ status: to, updatedAt: new Date() })
+    .where(eq(orders.id, orderId))
+}
+
+export interface ShipmentInput {
+  carrier: string
+  service: string
+  trackingNumber?: string | null
+  labelUrl?: string | null
+}
+
+/**
+ * Record a dispatch and move the order to `shipped`.
+ *
+ * Writes the `shipments` row the AI tools already read, sends the shipping
+ * confirmation email, and leaves the customer-facing status consistent with
+ * the carrier handover.
+ */
+export async function markOrderShipped(
+  orderId: string,
+  input: ShipmentInput,
+): Promise<{ shipmentId: string; orderNumber: string }> {
+  return db.transaction(async (tx) => {
+    const [order] = await tx.select().from(orders).where(eq(orders.id, orderId)).for("update")
+    if (!order) throw new OrderError("Order not found", "not_found")
+    const [shipment] = await tx
+      .insert(shipments)
+      .values({
+        orderId,
+        carrier: input.carrier,
+        service: input.service,
+        trackingNumber: input.trackingNumber ?? null,
+        labelUrl: input.labelUrl ?? null,
+        status: input.trackingNumber ? "in_transit" : "label_created",
+        shippedAt: new Date(),
+      })
+      .returning({ id: shipments.id })
+    if (!shipment) throw new OrderError("Shipment could not be stored")
+    await transitionOrder(tx, orderId, "shipped")
+    if (input.trackingNumber)
+      await enqueueEmail(
+        {
+          to: order.email,
+          subject:
+            order.locale === "fi"
+              ? `Tilaus on lähetetty — ${order.number}`
+              : `Your order has shipped — ${order.number}`,
+          html: shippingConfirmationHtml({
+            locale: order.locale === "fi" ? "fi" : "en",
+            orderNumber: order.number,
+            carrier: input.carrier,
+            trackingNumber: input.trackingNumber,
+            trackingUrl: input.labelUrl ?? undefined,
+          }),
+        },
+        `order-shipped:${orderId}:${shipment.id}`,
+        tx,
+      )
+    return { shipmentId: shipment.id, orderNumber: order.number }
+  })
+}
+
+/** Move a dispatched order to `delivered`. */
+export async function markOrderDelivered(orderId: string): Promise<boolean> {
+  return db.transaction(async (tx) => {
+    const [order] = await tx.select().from(orders).where(eq(orders.id, orderId)).for("update")
+    if (!order) return false
+    if (!canTransition(order.status, "delivered")) return false
+    await tx
+      .update(orders)
+      .set({ status: "delivered", updatedAt: new Date() })
+      .where(eq(orders.id, orderId))
+    await tx
+      .update(shipments)
+      .set({ status: "delivered", deliveredAt: new Date() })
+      .where(and(eq(shipments.orderId, orderId), isNull(shipments.deliveredAt)))
+    return true
+  })
+}
+
+/** Mark a paid order as packed, ready for carrier handover. */
+export async function markOrderPacked(orderId: string): Promise<boolean> {
+  return db.transaction(async (tx) => {
+    const [order] = await tx.select().from(orders).where(eq(orders.id, orderId)).for("update")
+    if (!order) return false
+    if (!canTransition(order.status, "packed")) return false
+    await tx
+      .update(orders)
+      .set({ status: "packed", updatedAt: new Date() })
+      .where(eq(orders.id, orderId))
+    return true
+  })
+}
+
+/** Every shipment recorded against an order, newest first. */
+export async function listShipments(orderId: string) {
+  return db.select().from(shipments).where(eq(shipments.orderId, orderId))
 }
 export async function recordCryptoTxHash(id: string, hash: string) {
   await db
@@ -494,4 +737,32 @@ export async function sendOrderConfirmationEmail(id: string) {
 }
 export async function listOrdersForUser(id: string) {
   return (await db.select().from(orders).where(eq(orders.userId, id))).map(toRecord)
+}
+
+/**
+ * A signed-in customer's orders with their lines.
+ *
+ * The account order list shows what was bought, so a returning customer can
+ * reorder from it. The lines carry the price that was paid, which is what the
+ * reorder notice compares the current price against.
+ */
+export async function listOrdersForUserWithLines(id: string) {
+  const rows = await db
+    .select({ order: orders, line: orderItems })
+    .from(orders)
+    .leftJoin(orderItems, eq(orderItems.orderId, orders.id))
+    .where(eq(orders.userId, id))
+    .orderBy(desc(orders.placedAt))
+  const byOrder = new Map<
+    string,
+    { order: OrderRecord; lines: (typeof orderItems.$inferSelect)[] }
+  >()
+  for (const row of rows) {
+    const existing = byOrder.get(row.order.id)
+    const record = existing?.order ?? toRecord(row.order)
+    if (existing) {
+      if (row.line) existing.lines.push(row.line)
+    } else byOrder.set(row.order.id, { order: record, lines: row.line ? [row.line] : [] })
+  }
+  return [...byOrder.values()]
 }

@@ -1,10 +1,11 @@
 import { quoteSchema } from "@/lib/checkout/schema"
+import { db } from "@/lib/db"
 import { releaseExpiredReservations } from "@/lib/orders"
-import { OrderError, quoteCart } from "@/lib/orders/quote"
+import { OrderError, quoteCart, toPublicPromotion } from "@/lib/orders/quote"
 import { computeShippingCents } from "@/lib/pricing"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
-import { getCachedShippingRates } from "@/lib/shipping/cached"
+import { getCheckoutShippingRates } from "@/lib/shipping/cached"
 import { NextResponse } from "next/server"
 
 export async function POST(request: Request) {
@@ -17,14 +18,22 @@ export async function POST(request: Request) {
   try {
     await releaseExpiredReservations()
     const input = parsed.data
-    const rates = await getCachedShippingRates(input)
+    const rates = await getCheckoutShippingRates(input, input.items)
     const rate = input.shippingMethodId
       ? rates.find((rate) => rate.id === input.shippingMethodId)
       : rates[0]
     if (!rate) return NextResponse.json({ code: "unknown_shipping" }, { status: 400 })
-    const quote = await quoteCart(input.items, rate.priceCents, input.locale)
+    const quote = await quoteCart(
+      input.items,
+      rate.priceCents,
+      input.locale,
+      db,
+      false,
+      input.promoCode,
+    )
     return NextResponse.json({
-      quote,
+      // Only the public promotion fields leave the server.
+      quote: { ...quote, promotion: toPublicPromotion(quote.promotion) },
       shippingMethodId: rate.id,
       rates: rates.map((rate) => ({
         ...rate,

@@ -9,53 +9,20 @@ import { VercelInsights } from "@/components/layout/VercelInsights"
 import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/seo/JsonLd"
 import { Toaster } from "@/components/ui/Toaster"
 import { isDemoBuild } from "@/lib/demo"
+import { clientNamespacesFor } from "@/lib/i18n/client-namespaces"
 import { isLocale } from "@/lib/i18n/config"
+import { sliceNamespace } from "@/lib/i18n/slice-messages"
 import { siteOrigin, socialImagePath } from "@/lib/seo/site-origin"
-import { GeistMono } from "geist/font/mono"
-import { GeistSans } from "geist/font/sans"
 import type { Metadata, Viewport } from "next"
 import { NextIntlClientProvider, hasLocale } from "next-intl"
 import { getTranslations, setRequestLocale } from "next-intl/server"
+import { headers } from "next/headers"
 import { notFound } from "next/navigation"
 import { Suspense } from "react"
 import "../../styles/globals.css"
 
-/**
- * Namespaces consumed by client components (`useTranslations`) across the app.
- * The full locale file (~21 KB) used to be serialized into every page's RSC
- * payload; server components keep using the complete request-scoped messages.
- * Keep this list in sync when adding a namespace to a client component.
- */
-const CLIENT_NAMESPACES = [
-  "experience",
-  "documentLibrary",
-  "a11y",
-  "notFound",
-  "research",
-  "calculator",
-  "account",
-  "admin",
-  "ageGate",
-  "auth",
-  "averia",
-  "cart",
-  "checkout",
-  "common",
-  "community",
-  "contact",
-  "cookie",
-  "gdpr",
-  "home",
-  "nav",
-  "newsletter",
-  "notifications",
-  "plans",
-  "product",
-  "shop",
-] as const
-
 export function generateStaticParams() {
-  return ["en", "fi", "de", "sv", "nl"].map((locale) => ({ locale }))
+  return ["en", "fi", "sv", "ru"].map((locale) => ({ locale }))
 }
 
 export const viewport: Viewport = {
@@ -122,9 +89,8 @@ export async function generateMetadata({
       languages: {
         en: "/en",
         fi: "/fi",
-        de: "/de",
         sv: "/sv",
-        nl: "/nl",
+        ru: "/ru",
       },
     },
   }
@@ -138,7 +104,7 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
-  if (!hasLocale(["en", "fi", "de", "sv", "nl"] as const, locale) || !isLocale(locale)) {
+  if (!hasLocale(["en", "fi", "sv", "ru"] as const, locale) || !isLocale(locale)) {
     notFound()
   }
   setRequestLocale(locale)
@@ -147,17 +113,34 @@ export default async function LocaleLayout({
     string,
     unknown
   >
+  // Only the namespaces this route actually renders in the browser are
+  // serialised into the RSC payload. The shell set comes from the request
+  // path, which the middleware forwards as a header.
+  const pathname = (await headers()).get("x-pathname") ?? `/${locale}`
   const clientMessages = Object.fromEntries(
-    CLIENT_NAMESPACES.filter((ns) => ns in allMessages).map((ns) => [ns, allMessages[ns]]),
+    clientNamespacesFor(pathname)
+      .filter((ns) => ns in allMessages)
+      .map((ns) => [ns, sliceNamespace(ns, allMessages[ns])]),
   )
 
   return (
     <DocumentHydrationGate>
-      <html
-        lang={locale}
-        className={`${GeistSans.variable} ${GeistMono.variable}`}
-        suppressHydrationWarning
-      >
+      <head>
+        {/*
+          The brand face is the largest contentful paint on the home page, so
+          the file is requested before the stylesheet is parsed. A dynamic
+          route never emits the preload for a `next/font` face, so it is
+          declared here against the stable URL in `public/fonts`.
+        */}
+        <link
+          rel="preload"
+          href="/fonts/geist-variable.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
+      <html lang={locale} suppressHydrationWarning>
         <body
           data-review-site={process.env.NEXT_PUBLIC_REVIEW_SITE === "true" ? "true" : undefined}
           className="min-h-screen bg-bg text-ink antialiased"

@@ -43,9 +43,9 @@ export function AgeGate() {
         <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent-soft text-accent-ink">
           <FlaskConical className="h-5 w-5" />
         </div>
-        <h2 id="age-gate-title" className="font-display text-2xl font-semibold text-ink">
+        <h1 id="age-gate-title" className="font-display text-2xl font-semibold text-ink">
           {t("title")}
-        </h2>
+        </h1>
         <p className="mt-2 text-base leading-relaxed text-ink-muted text-pretty">{t("body")}</p>
         <div className="mt-6 flex gap-3">
           <button

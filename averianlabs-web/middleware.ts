@@ -30,9 +30,14 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
-  const response = NextResponse.next()
-  response.headers.set("x-locale", first)
-  return response
+  // The layout needs the matched path to decide which translation
+  // namespaces belong in the browser payload. Middleware is the only place
+  // that sees the raw path for every request, so it is forwarded as a
+  // request header.
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set("x-pathname", pathname)
+  requestHeaders.set("x-locale", first)
+  return NextResponse.next({ request: { headers: requestHeaders } })
 }
 
 function detectLocale(request: NextRequest): string | null {

@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/Badge"
 import { Container } from "@/components/ui/Container"
 import { isDemoBuild } from "@/lib/demo"
 import { CATEGORY_LABELS, getGlossaryTermBySlug, listGlossaryTerms } from "@/lib/glossary"
-import { socialImagePath } from "@/lib/seo/site-origin"
+import { siteOrigin, socialImagePath } from "@/lib/seo/site-origin"
 import { ArrowLeft, BookText } from "lucide-react"
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
@@ -21,7 +21,7 @@ interface Props {
 export async function generateStaticParams() {
   if (!isDemoBuild()) return []
   const terms = await listGlossaryTerms().catch(() => [])
-  const locales = ["en", "fi", "de", "sv", "nl"]
+  const locales = ["en", "fi", "sv", "ru"]
   return terms.flatMap((t) => locales.map((locale) => ({ locale, term: t.slug })))
 }
 
@@ -56,7 +56,7 @@ export default async function GlossaryTermPage({ params }: Props) {
       <GlossaryTermJsonLd
         term={record.term}
         shortDefinition={record.shortDefinition}
-        url={`https://averianlabs.eu/${locale}/glossary/${slug}`}
+        url={`${siteOrigin()}/${locale}/glossary/${slug}`}
         locale={locale}
       />
       <Link

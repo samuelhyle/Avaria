@@ -70,7 +70,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         tone: body.tone,
       },
       {
-        locale: body.locale as "en" | "fi" | "de" | "sv" | "nl",
+        locale: body.locale as "en" | "fi" | "sv" | "ru",
         cart: [],
         isAdmin: true,
         auth: {

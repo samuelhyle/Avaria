@@ -83,11 +83,21 @@ function getUpstashLimiter(limit: number, window: RateLimitWindow): Ratelimit | 
  * Shared rate limiter. Uses Upstash when configured, otherwise an in-memory
  * sliding window (dev / single instance). `failMode` decides what happens when
  * Upstash is configured but the call fails.
+ *
+ * `RATE_LIMIT_DISABLED=true` turns the limiter into a no-op. It exists for the
+ * browser test suite: eight Playwright workers share one IP address, so the
+ * register endpoint's five-requests-per-hour limit fired mid-suite and failed
+ * unrelated tests with a 429. A limiter that breaks the test suite gets
+ * disabled by whoever hits it first — so the suite disables it deliberately,
+ * and production never sets the flag.
  */
 export async function rateLimit(
   key: string,
   { limit, window, failMode = "memory" }: RateLimitOptions,
 ): Promise<RateLimitResult> {
+  if (process.env.RATE_LIMIT_DISABLED === "true")
+    return { success: true, remaining: limit, reset: Date.now() + parseWindowMs(window) }
+
   const windowMs = parseWindowMs(window)
   const limiter = getUpstashLimiter(limit, window)
 

@@ -17,7 +17,7 @@ const positive = (n: number) => Number.isFinite(n) && n >= MIN && n <= MAX
 /** No thousands separators: a comma is a decimal separator only in comma locales. */
 export function parseLaboratoryNumber(raw: string, locale = "en"): number | null {
   const s = raw.trim()
-  if (!s || (!/^(fi|de|sv|nl)(-|$)/.test(locale) && s.includes(","))) return null
+  if (!s || (!/^(fi|sv|ru)(-|$)/.test(locale) && s.includes(","))) return null
   if (!/^[+]?(?:\d+(?:[.,]\d*)?|[.,]\d+)(?:e[+-]?\d+)?$/i.test(s)) return null
   const n = Number(s.replace(",", "."))
   return positive(n) ? n : null

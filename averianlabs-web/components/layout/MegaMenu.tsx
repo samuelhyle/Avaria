@@ -110,94 +110,103 @@ export function MegaMenu({ locale, products }: MegaMenuProps) {
         </button>
 
         {openSlug === "shop" ? (
-          <div
-            id="mega-shop-panel"
-            className="absolute left-0 top-full z-50 mt-1 w-[760px] rounded-[var(--radius-lg)] border border-line bg-surface p-6 shadow-xl"
-          >
-            <div className="grid gap-6 sm:grid-cols-[1.2fr_1fr]">
-              <div>
-                <p className="text-3xs font-semibold uppercase tracking-wider text-ink-subtle">
-                  {tShop("browseByCategory")}
-                </p>
-                <ul className="mt-3 grid gap-1 sm:grid-cols-2">
-                  {CATEGORIES.map(({ slug, key, icon: Icon, hue }) => (
-                    <li key={slug}>
-                      <Link
-                        href={`/${locale}/shop?category=${slug}`}
-                        className="group flex items-center gap-3 rounded-[var(--radius)] p-2 transition-colors hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                      >
-                        <div
-                          className="hue-chip flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)]"
-                          style={{ "--cat-hue": hue } as CSSProperties}
-                        >
-                          <Icon className="h-4 w-4" />
-                        </div>
-                        <div className="flex-1">
-                          <p className="font-medium">
-                            {tHome(`cat${key.charAt(0).toUpperCase() + key.slice(1)}` as never)}
-                          </p>
-                          <p className="text-3xs text-ink-subtle">
-                            {tShop("productsCount", {
-                              count: products.filter((p) => p.category === slug).length,
-                            })}
-                          </p>
-                        </div>
-                        <ArrowRight className="h-3.5 w-3.5 -translate-x-1 text-ink-subtle opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <p className="text-3xs font-semibold uppercase tracking-wider text-ink-subtle">
-                  {tShop("featured")}
-                </p>
-                <ul className="mt-3 space-y-1">
-                  {products.slice(0, 4).map((p) => {
-                    const translation = p.translations?.[locale as Locale] ?? p.defaultTranslation
-                    const minVial = defaultVial(p)
-                    if (!minVial) return null
-                    return (
-                      <li key={p.slug}>
+          <>
+            {/*
+              The panel sits 4px below the trigger, which left a strip that
+              belonged to neither of them. Crossing it fired the nav's
+              `onMouseLeave` and closed the menu before the pointer reached
+              the panel. This invisible bridge covers the strip.
+            */}
+            <span className="absolute left-0 top-full z-40 h-1 w-[760px]" aria-hidden />
+            <div
+              id="mega-shop-panel"
+              className="absolute left-0 top-full z-50 mt-1 w-[760px] rounded-[var(--radius-lg)] border border-line bg-surface p-6 shadow-xl"
+            >
+              <div className="grid gap-6 sm:grid-cols-[1.2fr_1fr]">
+                <div>
+                  <p className="text-3xs font-semibold uppercase tracking-wider text-ink-subtle">
+                    {tShop("browseByCategory")}
+                  </p>
+                  <ul className="mt-3 grid gap-1 sm:grid-cols-2">
+                    {CATEGORIES.map(({ slug, key, icon: Icon, hue }) => (
+                      <li key={slug}>
                         <Link
-                          href={`/${locale}/shop/${p.slug}?sku=${encodeURIComponent(minVial.sku)}`}
+                          href={`/${locale}/shop?category=${slug}`}
                           className="group flex items-center gap-3 rounded-[var(--radius)] p-2 transition-colors hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                         >
                           <div
-                            className="hue-tile flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-sm)]"
-                            style={{ "--cat-hue": p.hue } as CSSProperties}
+                            className="hue-chip flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)]"
+                            style={{ "--cat-hue": hue } as CSSProperties}
                           >
-                            <FlaskConical className="h-4 w-4 text-ink-muted" />
+                            <Icon className="h-4 w-4" />
                           </div>
                           <div className="flex-1">
-                            <p className="font-medium">{translation.name}</p>
-                            <p className="font-mono text-3xs text-ink-subtle">{minVial.sku}</p>
+                            <p className="font-medium">
+                              {tHome(`cat${key.charAt(0).toUpperCase() + key.slice(1)}` as never)}
+                            </p>
+                            <p className="text-3xs text-ink-subtle">
+                              {tShop("productsCount", {
+                                count: products.filter((p) => p.category === slug).length,
+                              })}
+                            </p>
                           </div>
-                          <span className="text-xs font-medium text-ink-muted">
-                            {minVial.purchaseMode === "direct" &&
-                            minVial.stockQty > 0 &&
-                            minVial.priceCents > 0
-                              ? formatCurrency(minVial.priceCents, "EUR", locale)
-                              : minVial.purchaseMode === "quotation"
-                                ? r("quote")
-                                : r("unavailable")}
-                          </span>
+                          <ArrowRight className="h-3.5 w-3.5 -translate-x-1 text-ink-subtle opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
                         </Link>
                       </li>
-                    )
-                  })}
-                </ul>
-                <Link
-                  href={`/${locale}/shop`}
-                  className="mt-4 flex items-center gap-1 rounded-[var(--radius)] border border-line bg-surface-2 p-2.5 text-xs font-medium text-accent hover:bg-accent-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                >
-                  {tShop("viewAllProducts", { count: products.length })}
-                  <ArrowRight className="h-3 w-3" />
-                </Link>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <p className="text-3xs font-semibold uppercase tracking-wider text-ink-subtle">
+                    {tShop("featured")}
+                  </p>
+                  <ul className="mt-3 space-y-1">
+                    {products.slice(0, 4).map((p) => {
+                      const translation = p.translations?.[locale as Locale] ?? p.defaultTranslation
+                      const minVial = defaultVial(p)
+                      if (!minVial) return null
+                      return (
+                        <li key={p.slug}>
+                          <Link
+                            href={`/${locale}/shop/${p.slug}?sku=${encodeURIComponent(minVial.sku)}`}
+                            className="group flex items-center gap-3 rounded-[var(--radius)] p-2 transition-colors hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                          >
+                            <div
+                              className="hue-tile flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-sm)]"
+                              style={{ "--cat-hue": p.hue } as CSSProperties}
+                            >
+                              <FlaskConical className="h-4 w-4 text-ink-muted" />
+                            </div>
+                            <div className="flex-1">
+                              <p className="font-medium">{translation.name}</p>
+                              <p className="font-mono text-3xs text-ink-subtle">{minVial.sku}</p>
+                            </div>
+                            <span className="text-xs font-medium text-ink-muted">
+                              {minVial.purchaseMode === "direct" &&
+                              minVial.stockQty > 0 &&
+                              minVial.priceCents > 0
+                                ? formatCurrency(minVial.priceCents, "EUR", locale)
+                                : minVial.purchaseMode === "quotation"
+                                  ? r("quote")
+                                  : r("unavailable")}
+                            </span>
+                          </Link>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                  <Link
+                    href={`/${locale}/shop`}
+                    className="mt-4 flex items-center gap-1 rounded-[var(--radius)] border border-line bg-surface-2 p-2.5 text-xs font-medium text-accent hover:bg-accent-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  >
+                    {tShop("viewAllProducts", { count: products.length })}
+                    <ArrowRight className="h-3 w-3" />
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
+          </>
         ) : null}
       </div>
     </nav>

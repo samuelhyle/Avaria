@@ -1,35 +1,74 @@
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
 
+/**
+ * Geist Sans.
+ *
+ * The face is served from `public/fonts` with a stable URL and preloaded from
+ * the document head. `next/font` would hash the file into `/_next/static`,
+ * but a dynamic route never emits the preload link for it, so the headline
+ * painted in the fallback first and swapped a moment later — on the home page
+ * that headline is the largest contentful paint.
+ *
+ * The fallback carries the same metrics as the real face, so the swap does
+ * not move anything.
+ */
+@font-face {
+  font-family: "Geist Sans";
+  src: url("/fonts/geist-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Fallback";
+  src: local("Arial");
+  ascent-override: 94.56%;
+  descent-override: 27.76%;
+  line-gap-override: 0%;
+  size-adjust: 106.28%;
+}
+
 /* Class-based dark mode (next-themes sets `.dark` on <html>). */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-bg: #f5f7fa;
+  /* ── Clinical-premium storefront palette ────────────────────────────────
+     Bright neutral canvas, deep teal as the single brand accent, navy ink.
+     Surfaces stay light so product renders and prices carry the hierarchy. */
+  --color-bg: #f4f7f8;
   --color-surface: hsl(0 0% 100%);
-  --color-surface-2: hsl(210 30% 96%);
-  --color-surface-3: hsl(214 30% 93%);
-  --color-ink: #17263d;
-  --color-ink-muted: #526077;
-  --color-ink-subtle: hsl(220 10% 42%);
-  --color-line: #dce3eb;
-  --color-accent: #105be1;
-  --color-accent-hover: hsl(214 95% 39%);
-  --color-accent-soft: hsl(214 95% 96%);
-  --color-accent-ink: hsl(214 95% 22%);
+  --color-surface-2: hsl(192 20% 97%);
+  --color-surface-3: hsl(194 18% 93%);
+  --color-ink: #0e2130;
+  --color-ink-muted: #4d6273;
+  --color-ink-subtle: hsl(200 12% 43%);
+  --color-line: #e0e8ec;
+  --color-line-strong: hsl(198 18% 84%);
+  --color-accent: #0f6f78;
+  --color-accent-hover: #0b5b63;
+  --color-accent-soft: hsl(184 52% 95%);
+  --color-accent-ink: #0a4a51;
   --color-on-accent: hsl(0 0% 100%);
-  --color-ice: hsl(196 85% 32%);
-  --color-ice-soft: hsl(196 85% 96%);
-  --color-success: hsl(152 60% 28%);
-  --color-success-soft: hsl(152 60% 96%);
-  --color-warn: hsl(38 95% 30%);
-  --color-warn-soft: hsl(38 95% 96%);
-  --color-danger: hsl(0 75% 45%);
-  --color-danger-soft: hsl(0 75% 96%);
+  --color-ice: hsl(196 75% 38%);
+  --color-ice-soft: hsl(190 60% 95%);
+  --color-success: hsl(158 64% 26%);
+  --color-success-soft: hsl(156 46% 94%);
+  --color-warn: hsl(33 92% 34%);
+  --color-warn-soft: hsl(38 90% 95%);
+  --color-danger: hsl(2 72% 45%);
+  --color-danger-soft: hsl(2 80% 96%);
+  --color-brand-navy: #0b2a38;
+  --color-brand-navy-soft: hsl(197 42% 12%);
 
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
-  --font-display: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Geist Sans", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
+  /* The mono face is only used for SKUs, batch codes and tabular figures.
+     Shipping a 68 KiB variable webfont for that is not worth it, so the
+     platform's own monospace stack is used instead. */
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
+  --font-display: "Geist Sans", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
 
   /* Type scale — two micro steps below `text-xs` (12px) so tiny UI text stops
      using one-off arbitrary values. Metadata uses a 12px floor; explanatory copy uses larger role-specific styles. */
@@ -61,12 +100,12 @@
   --radius-2xl: 20px;
   --radius-full: 999px;
 
-  --shadow-xs: 0 1px 1px hsl(220 30% 12% / 0.04);
-  --shadow-sm: 0 1px 2px hsl(220 30% 12% / 0.04), 0 2px 6px hsl(220 30% 12% / 0.04);
-  --shadow: 0 1px 2px hsl(220 30% 12% / 0.04), 0 8px 24px hsl(220 30% 12% / 0.06);
-  --shadow-lg: 0 4px 12px hsl(220 30% 12% / 0.06), 0 24px 48px hsl(220 30% 12% / 0.1);
-  --shadow-xl: 0 12px 36px hsl(220 30% 12% / 0.08), 0 48px 96px hsl(220 30% 12% / 0.14);
-  --shadow-glow: 0 0 0 1px hsl(214 95% 52% / 0.16), 0 8px 32px hsl(214 95% 52% / 0.18);
+  --shadow-xs: 0 1px 1px hsl(197 30% 12% / 0.05);
+  --shadow-sm: 0 1px 2px hsl(197 30% 12% / 0.05), 0 2px 6px hsl(197 30% 12% / 0.05);
+  --shadow: 0 1px 2px hsl(197 30% 12% / 0.05), 0 10px 26px hsl(197 30% 12% / 0.07);
+  --shadow-lg: 0 4px 12px hsl(197 30% 12% / 0.07), 0 24px 48px hsl(197 30% 12% / 0.11);
+  --shadow-xl: 0 12px 36px hsl(197 30% 12% / 0.09), 0 48px 96px hsl(197 30% 12% / 0.15);
+  --shadow-glow: 0 0 0 1px hsl(184 60% 38% / 0.18), 0 10px 34px hsl(184 60% 38% / 0.2);
 
   --container-prose: 68ch;
   --container-page: 1280px;
@@ -98,27 +137,30 @@
 
 .dark {
   color-scheme: dark;
-  --color-bg: hsl(222 28% 6%);
-  --color-surface: hsl(222 26% 9%);
-  --color-surface-2: hsl(222 24% 12%);
-  --color-surface-3: hsl(222 22% 16%);
-  --color-ink: hsl(210 25% 96%);
-  --color-ink-muted: hsl(215 12% 65%);
-  --color-ink-subtle: hsl(215 10% 58%);
-  --color-line: hsl(222 18% 18%);
-  --color-accent: hsl(214 90% 60%);
-  --color-accent-hover: hsl(214 90% 66%);
-  --color-accent-soft: hsl(214 60% 18%);
-  --color-accent-ink: hsl(214 95% 80%);
-  --color-on-accent: hsl(222 30% 8%);
-  --color-ice: hsl(196 80% 65%);
-  --color-ice-soft: hsl(196 50% 18%);
-  --color-success: hsl(152 55% 60%);
-  --color-success-soft: hsl(152 40% 14%);
-  --color-warn: hsl(38 90% 62%);
-  --color-warn-soft: hsl(38 50% 16%);
-  --color-danger: hsl(0 70% 68%);
-  --color-danger-soft: hsl(0 50% 18%);
+  --color-bg: hsl(197 30% 7%);
+  --color-surface: hsl(196 28% 10%);
+  --color-surface-2: hsl(196 26% 13%);
+  --color-surface-3: hsl(196 24% 17%);
+  --color-ink: hsl(190 24% 96%);
+  --color-ink-muted: hsl(196 14% 68%);
+  --color-ink-subtle: hsl(196 12% 58%);
+  --color-line: hsl(196 20% 19%);
+  --color-line-strong: hsl(196 18% 26%);
+  --color-accent: hsl(183 62% 52%);
+  --color-accent-hover: hsl(183 64% 60%);
+  --color-accent-soft: hsl(184 42% 16%);
+  --color-accent-ink: hsl(182 70% 78%);
+  --color-on-accent: hsl(197 40% 8%);
+  --color-ice: hsl(190 70% 60%);
+  --color-ice-soft: hsl(192 40% 16%);
+  --color-success: hsl(156 52% 55%);
+  --color-success-soft: hsl(157 34% 13%);
+  --color-warn: hsl(38 88% 60%);
+  --color-warn-soft: hsl(38 44% 15%);
+  --color-danger: hsl(2 72% 64%);
+  --color-danger-soft: hsl(2 42% 16%);
+  --color-brand-navy: hsl(197 40% 8%);
+  --color-brand-navy-soft: hsl(197 42% 12%);
 }
 
 @layer base {
@@ -135,6 +177,40 @@
     scroll-padding-top: 5rem;
     scroll-padding-bottom: calc(1rem + var(--platform-bottom-inset, 0px));
     color-scheme: light;
+  }
+
+  /*
+   * Long headings must never push the page sideways.
+   *
+   * Finnish and Swedish build very long compound words ("Laboratoriotutkimusta",
+   * "tutkimusorganisaatioille"), and at the display sizes a heading uses, a
+   * single word can be wider than a 320px phone. The word then forced a
+   * horizontal scrollbar across the whole page.
+   *
+   * `overflow-wrap: break-word` is the universal fallback: it only breaks a
+   * word that genuinely does not fit. Where the browser has a hyphenation
+   * dictionary for the language, `hyphens: auto` breaks it more gracefully.
+   * English is left alone — a broken English word reads worse than a hyphen.
+   */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+  }
+
+  :lang(fi) h1,
+  :lang(fi) h2,
+  :lang(fi) h3,
+  :lang(sv) h1,
+  :lang(sv) h2,
+  :lang(sv) h3,
+  :lang(ru) h1,
+  :lang(ru) h2,
+  :lang(ru) h3 {
+    hyphens: auto;
   }
 
   html.dark {
@@ -314,16 +390,16 @@
   .gradient-radial-blue {
     background: radial-gradient(
       circle at 30% 30%,
-      hsl(214 95% 52% / 0.18),
-      hsl(196 85% 60% / 0.1) 40%,
+      hsl(184 62% 40% / 0.16),
+      hsl(196 75% 50% / 0.1) 40%,
       transparent 70%
     );
   }
 
   .gradient-mesh {
-    background: radial-gradient(at 20% 20%, hsl(214 95% 52% / 0.18) 0px, transparent 50%),
-      radial-gradient(at 80% 30%, hsl(196 85% 60% / 0.14) 0px, transparent 50%),
-      radial-gradient(at 50% 90%, hsl(214 95% 52% / 0.1) 0px, transparent 50%);
+    background: radial-gradient(at 20% 20%, hsl(184 62% 40% / 0.16) 0px, transparent 50%),
+      radial-gradient(at 80% 30%, hsl(196 70% 48% / 0.13) 0px, transparent 50%),
+      radial-gradient(at 50% 90%, hsl(184 62% 40% / 0.09) 0px, transparent 50%);
   }
 
   .noise {
@@ -441,5 +517,125 @@ body[data-review-site="true"] {
     border: 1px solid var(--color-line);
     border-radius: var(--radius-lg);
     background: var(--color-surface);
+  }
+}
+
+/* ── Storefront primitives ────────────────────────────────────────────────
+   Shared building blocks for the shop surfaces: the announcement strip, the
+   product "stage" a render sits on, and the fine-print treatment used
+   wherever the research-use restriction has to appear. */
+@layer components {
+  .store-announce {
+    background: linear-gradient(
+      90deg,
+      var(--color-brand-navy) 0%,
+      hsl(184 52% 22%) 52%,
+      var(--color-brand-navy) 100%
+    );
+    color: hsl(180 30% 92%);
+  }
+
+  .store-announce a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: hsl(180 40% 45%);
+  }
+
+  /* The soft studio backdrop a product render is photographed against. */
+  .store-stage {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: radial-gradient(
+      120% 90% at 50% 8%,
+      hsl(var(--cat-hue, 184) 70% 96%) 0%,
+      hsl(var(--cat-hue, 184) 40% 98%) 45%,
+      hsl(var(--cat-hue, 184) 30% 99%) 100%
+    );
+  }
+
+  .store-stage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      hsl(var(--cat-hue, 184) 40% 55% / 0.16) 1px,
+      transparent 0
+    );
+    background-size: 18px 18px;
+    mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.5), transparent 72%);
+    -webkit-mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.5), transparent 72%);
+    opacity: 0.55;
+  }
+
+  .dark .store-stage {
+    background: radial-gradient(
+      120% 90% at 50% 8%,
+      hsl(var(--cat-hue, 184) 40% 14%) 0%,
+      hsl(var(--cat-hue, 184) 30% 10%) 48%,
+      hsl(var(--cat-hue, 184) 25% 8%) 100%
+    );
+  }
+
+  /* Fine print. Deliberately quiet: readable, never shouty. */
+  .fine-print {
+    font-size: 0.6875rem;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+    color: var(--color-ink-subtle);
+  }
+
+  .fine-print strong {
+    font-weight: 600;
+    color: var(--color-ink-muted);
+  }
+}
+
+@layer utilities {
+  /* Hairline separator that matches the storefront surface rhythm. */
+  .store-divider {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-line) 12%,
+      var(--color-line) 88%,
+      transparent
+    );
+  }
+
+  /* Focus ring used by the new store controls. */
+  .focus-accent {
+    outline: none;
+  }
+  .focus-accent:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-accent);
+  }
+
+  .text-gradient-brand {
+    background: linear-gradient(
+      100deg,
+      var(--color-brand-navy) 0%,
+      var(--color-accent) 60%,
+      hsl(196 70% 42%) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .dark .text-gradient-brand {
+    background: linear-gradient(
+      100deg,
+      hsl(185 60% 82%) 0%,
+      var(--color-accent) 55%,
+      hsl(196 70% 62%) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 }

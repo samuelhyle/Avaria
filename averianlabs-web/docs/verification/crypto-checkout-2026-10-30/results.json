@@ -1,0 +1,95 @@
+{
+  "verified_at": "2026-10-30T11:13:35.029Z",
+  "site": "https://averianlabs-demo.netlify.app",
+  "deploy_id": "6ae471f231d7f9c2ea334b01",
+  "build_id": "6ae471f231d7f9c2ea334aff",
+  "published_at": "2026-10-30T10:36:14.833Z",
+  "source_tree": "610443615723be21c0191a6db560e8dc55505671",
+  "source_sha256": "fc67c9001a4f135367318f4e805c25c4adea8f0141ed354f83491e7a7b56034d",
+  "publish_lock_preserved": true,
+  "test_product": {
+    "url": "https://averianlabs-demo.netlify.app/en/shop/checkout-test-150",
+    "sku": "CHECKOUT-TEST-150",
+    "total_cents": 150,
+    "shipping_cents": 0,
+    "no_physical_goods": true,
+    "scientific_verification_claim": false,
+    "documents": 0,
+    "older_test_fixture_also_exists": true
+  },
+  "checks": {
+    "typecheck": "passed",
+    "targeted_lint": {
+      "errors": 0,
+      "warnings": 6
+    },
+    "integration": {
+      "passed": 32,
+      "failed": 0
+    },
+    "complete_browser_simulation": {
+      "passed": 1,
+      "failed": 0
+    },
+    "broader_units": {
+      "passed": 471,
+      "failed": 10,
+      "skipped": 4
+    },
+    "broader_lint": "existing shop errors remain"
+  },
+  "live": {
+    "health": 200,
+    "db": true,
+    "enabled_chain": "usdc_solana",
+    "checkout_total_cents": 150,
+    "checkout_shipping_cents": 0,
+    "telegram_deep_link": true,
+    "order_status_access_verified": true,
+    "invoice_retry_idempotent": true,
+    "page_errors": 0,
+    "owned_unpaid_order_expired": true,
+    "reservation_released": true,
+    "webhook_registered": true,
+    "webhook_pending_updates": 0,
+    "webhook_error": false,
+    "mainnet_rpc_reachable": true,
+    "scheduled_crypto_run": {
+      "successful": true,
+      "chain_configured": true,
+      "scanned": 0,
+      "matched": 0,
+      "telegram_failed": 0
+    },
+    "real_customer_invoice_delivery": "confirmed by owner and production invoice delivery record",
+    "real_mainnet_payment_performed": false,
+    "email": "pending by owner request",
+    "private_invoice_owner_confirmation_at": "2026-10-30T11:10:53.521Z",
+    "private_invoice_bound": true,
+    "customer_order_status": "awaiting_crypto",
+    "customer_order_total_cents": 150,
+    "customer_invoice_expires_at": "2026-10-30T11:40:17.495Z",
+    "ops_order_notification": {
+      "status": "sent",
+      "destination_matches": true,
+      "attempts": 1,
+      "sent_at": "2026-10-30T10:44:06.587Z"
+    },
+    "real_mainnet_deposit_matched": false
+  },
+  "configuration": {
+    "bot_username": "Averianlabs_bot",
+    "chain": "usdc_solana",
+    "receiving_wallet": "MHjjXuFzmbwFmMWkUFoALmVr2wEPC27CVdKw618GEo6",
+    "rate_api": "https://api.coingecko.com/api/v3/simple/price",
+    "fixed_rate_fallback": null,
+    "solana_rpc": "https://api.mainnet.solana.com",
+    "crypto_cron": "*/2 * * * *",
+    "maintenance_cron": "*/5 * * * *"
+  },
+  "cleanup": {
+    "verification_only_job_stopped_before_deployment": true,
+    "published_application_verified_after_cleanup": true,
+    "temporary_local_resources_stopped": true
+  }
+}

@@ -1,5 +1,6 @@
 import { isDemoBuild } from "@/lib/demo"
 import { locales } from "@/lib/i18n/config"
+import { siteOrigin } from "@/lib/seo/site-origin"
 import type { MetadataRoute } from "next"
 
 export const dynamic = "force-static"
@@ -32,6 +33,6 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: "CCBot", disallow: "/" },
       { userAgent: "Google-Extended", disallow: "/" },
     ],
-    sitemap: "https://averianlabs.eu/sitemap.xml",
+    sitemap: `${siteOrigin()}/sitemap.xml`,
   }
 }

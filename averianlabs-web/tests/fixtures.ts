@@ -1,6 +1,14 @@
+import { locales } from "@/lib/i18n/config"
 import { type APIRequestContext, type Page, test as base, expect } from "@playwright/test"
 
-export const LOCALES = ["en", "fi", "de", "sv", "nl"] as const
+/**
+ * The locales the storefront ships with.
+ *
+ * They come from the application's own configuration, so adding or removing a
+ * locale does not leave the test suite pointing at a language that no longer
+ * exists.
+ */
+export const LOCALES = locales
 export type Locale = (typeof LOCALES)[number]
 
 const AGE_GATE_COOKIE = {

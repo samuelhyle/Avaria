@@ -51,23 +51,13 @@ export function PartnerApplicationForm() {
       />
       <Input
         name="country"
-        label={locale === "fi" ? "Maa" : "Country"}
+        label={t("country")}
         required
         minLength={2}
         maxLength={100}
         autoComplete="country-name"
       />
-      <Input
-        name="volume"
-        type="number"
-        min={0}
-        step={1}
-        label={
-          locale === "fi"
-            ? "Arvioitu määrä näytepulloja kuukaudessa (valinnainen)"
-            : "Estimated vials per month (optional)"
-        }
-      />
+      <Input name="volume" type="number" min={0} step={1} label={t("estimatedVolume")} />
       <label className="block text-sm">
         {t("quoteMessage")}
         <textarea
