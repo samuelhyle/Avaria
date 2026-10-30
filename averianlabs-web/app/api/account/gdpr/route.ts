@@ -6,6 +6,7 @@ import { deliverEmailOutbox, enqueueEmail } from "@/lib/email/outbox"
 import { getServerEnv } from "@/lib/env"
 import { recordExportRequest } from "@/lib/gdpr"
 import { locales } from "@/lib/i18n/config"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { NextResponse } from "next/server"
 
 const TOKEN_TTL_MS = 24 * 60 * 60 * 1000
@@ -16,6 +17,9 @@ const TOKEN_TTL_MS = 24 * 60 * 60 * 1000
  * confirmation requirement; Art. 17 delete does).
  */
 export async function POST(req: Request) {
+  const csrf = assertCsrfOr403(req, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const member = await getCurrentMember()
   if (!member) {
     return NextResponse.json({ error: "Authentication required." }, { status: 401 })

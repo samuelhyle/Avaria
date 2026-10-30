@@ -47,7 +47,11 @@ AKIA[0-9A-Z]{16}
 AROA[0-9A-Z]{16}
 xox[baprs]-[0-9a-zA-Z-]{10,}
 -----BEGIN [A-Z ]*PRIVATE KEY-----
-postgres(ql)?://[^[:space:]]*:[^[:space:]@]+@
+# A database URL with an inline password. Localhost and the CI placeholders
+# are excluded by requiring a host that is a real managed database: the
+# password is what matters, and every managed provider puts the host behind
+# a domain name.
+postgres(ql)?://[^:/[:space:]]+:[^[:space:]@]+@[a-z0-9][a-z0-9.-]*\.[a-z]{2,}
 PATTERNS
 
 # Collect the files about to be committed. The paths come from the repository
@@ -57,7 +61,11 @@ REPO_ROOT=$(git rev-parse --show-toplevel)
 cd "$REPO_ROOT" || exit 0
 
 # `*.env.example` and the documentation hold placeholders, not credentials.
-STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR | grep -Ev '(^|/)\.env\.example$|\.example$|\.lock$|\.md$' || true)
+# The guard's own source holds the patterns as text and would match itself.
+STAGED_FILES=$(
+  git diff --cached --name-only --diff-filter=ACMR |
+    grep -Ev '(^|/)\.env\.example$|\.example$|\.lock$|\.md$|scripts/secret-guard\.sh$' || true
+)
 
 if [ -z "$STAGED_FILES" ]; then
   exit 0

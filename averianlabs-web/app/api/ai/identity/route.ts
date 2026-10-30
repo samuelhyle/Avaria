@@ -11,6 +11,7 @@
 
 import { signAnonId } from "@/lib/ai/memory/anon"
 import { ANON_COOKIE } from "@/lib/ai/memory/cookies"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -21,6 +22,9 @@ const bodySchema = z.object({
 })
 
 export async function POST(request: Request): Promise<NextResponse> {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   let body: z.infer<typeof bodySchema>
   try {
     body = bodySchema.parse(await request.json())

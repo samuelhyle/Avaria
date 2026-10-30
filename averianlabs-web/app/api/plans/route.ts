@@ -1,5 +1,6 @@
 import { getCurrentMember } from "@/lib/community"
 import { createPlan, listPlansForOwner } from "@/lib/research-plans"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -20,6 +21,9 @@ const Body = z.object({
 })
 
 export async function POST(req: Request) {
+  const csrf = assertCsrfOr403(req, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const member = await getCurrentMember()
   if (!member)
     return NextResponse.json({ ok: false, reason: "Authentication required." }, { status: 401 })

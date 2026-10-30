@@ -10,6 +10,7 @@ import { getServerEnv } from "@/lib/env"
 import { logger } from "@/lib/logger"
 import { OrderError, createOrder, releaseExpiredReservations } from "@/lib/orders"
 import { orderAccessToken } from "@/lib/orders/access"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { getCheckoutShippingRates } from "@/lib/shipping/cached"
@@ -31,6 +32,9 @@ const Body = checkoutSchema.extend({
  * rather than trusting anything the client sends.
  */
 export async function POST(request: Request) {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const body = await request.json().catch(() => null)
   const parsed = Body.safeParse(body)
   if (!parsed.success) return NextResponse.json({ code: "invalid_input" }, { status: 400 })

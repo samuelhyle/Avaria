@@ -4,6 +4,7 @@ import { escapeHtml } from "@/lib/email/html"
 import { enqueueEmail } from "@/lib/email/outbox"
 import { locales } from "@/lib/i18n/config"
 import { products } from "@/lib/products/data"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { eq } from "drizzle-orm"
@@ -21,6 +22,9 @@ const schema = z.object({
 })
 
 export async function POST(request: Request) {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const parsed = schema.safeParse(await request.json().catch(() => null))
   if (!parsed.success) return NextResponse.json({ code: "invalid_input" }, { status: 400 })
   if (!(await rateLimit(`quote:${clientIp(request)}`, { limit: 10, window: "1 h" })).success)

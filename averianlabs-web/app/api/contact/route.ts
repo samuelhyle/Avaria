@@ -5,6 +5,7 @@ import { contactNotificationHtml } from "@/lib/email"
 import { deliverEmailOutbox, enqueueEmail } from "@/lib/email/outbox"
 import { locales } from "@/lib/i18n/config"
 import { getLegalIdentity } from "@/lib/legal"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
@@ -19,6 +20,9 @@ const bodySchema = z.object({
 })
 
 export async function POST(request: Request) {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const ip = clientIp(request)
   const limit = await rateLimit(`contact:ip:${ip}`, { limit: 5, window: "1 h" })
   if (!limit.success) {

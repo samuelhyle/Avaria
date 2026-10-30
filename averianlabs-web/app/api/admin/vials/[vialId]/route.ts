@@ -2,6 +2,7 @@ import { vials } from "@/db/schema"
 import { adminErrorStatus, requireAdmin } from "@/lib/admin/guard"
 import { logAudit } from "@/lib/audit/log"
 import { db } from "@/lib/db"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -20,6 +21,9 @@ const Patch = z.object({
  * here either oversells a batch that does not exist or hides one that does.
  */
 export async function PATCH(request: Request, { params }: { params: Promise<{ vialId: string }> }) {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   let member: Awaited<ReturnType<typeof requireAdmin>>
   try {
     member = await requireAdmin()

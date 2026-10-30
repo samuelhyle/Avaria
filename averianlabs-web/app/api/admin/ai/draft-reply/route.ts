@@ -8,6 +8,7 @@
 
 import { getAdminOrNull } from "@/lib/admin/guard"
 import { runTool } from "@/lib/ai/tools/registry"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -35,6 +36,9 @@ const bodySchema = z.object({
 })
 
 export async function POST(request: Request): Promise<NextResponse> {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   // DB-backed role check (JWT role claims can be stale after demotion).
   const admin = await getAdminOrNull()
   if (!admin) {

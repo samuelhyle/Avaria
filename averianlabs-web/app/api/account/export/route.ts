@@ -1,8 +1,12 @@
 import { exportUserData, recordExportRequest, requireMember } from "@/lib/gdpr"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
 
-export async function POST() {
+export async function POST(request: Request) {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const member = await requireMember().catch(() => null)
   if (!member) return NextResponse.json({ error: "Authentication required." }, { status: 401 })
 

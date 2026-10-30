@@ -56,6 +56,7 @@ import type { ChatErrorBody } from "@/lib/ai/types"
 import { auth } from "@/lib/auth"
 import { type Locale, locales } from "@/lib/i18n/config"
 import { getStorefrontCatalogue } from "@/lib/products/catalogue"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { clientIp } from "@/lib/security/ip"
 import { z } from "zod"
 
@@ -113,6 +114,9 @@ function jsonError(body: ChatErrorBody, status: number): Response {
 }
 
 export async function POST(request: Request): Promise<Response> {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   let parsed: z.infer<typeof bodySchema>
   try {
     const raw = (await request.json()) as unknown

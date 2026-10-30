@@ -1,6 +1,7 @@
 import { users } from "@/db/schema"
 import { consumeToken, tokenIdentifiers } from "@/lib/auth/tokens"
 import { db } from "@/lib/db"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { hash } from "argon2"
@@ -15,6 +16,9 @@ const bodySchema = z.object({
 })
 
 export async function POST(req: Request) {
+  const csrf = assertCsrfOr403(req, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const ip = clientIp(req)
   const limit = await rateLimit(`reset:ip:${ip}`, { limit: 10, window: "1 h" })
   if (!limit.success) {

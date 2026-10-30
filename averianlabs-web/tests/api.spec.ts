@@ -1,4 +1,4 @@
-import { expect, isDegraded, test } from "@/tests/fixtures"
+import { expect, isDegraded, sameOriginHeaders, test } from "@/tests/fixtures"
 import type { APIResponse } from "@playwright/test"
 
 test.describe("public APIs", () => {
@@ -21,7 +21,13 @@ test.describe("public APIs", () => {
     test.skip(await isDegraded(request), "DB unavailable")
     let res: APIResponse | undefined
     try {
-      res = await request.post("/api/newsletter", { data: {} }, { timeout: 5_000 })
+      res = await request.post(
+        "/api/newsletter",
+        // A browser sends `Origin` on a state-changing request; the CSRF
+        // guard requires it. Playwright's request fixture does not.
+        { data: {}, headers: { origin: new URL(request.url()).origin } },
+        { timeout: 5_000 },
+      )
     } catch {
       return // the route may 500 without DB; still acceptable
     }
@@ -32,11 +38,28 @@ test.describe("public APIs", () => {
     test.skip(await isDegraded(request), "DB unavailable")
     let res: APIResponse | undefined
     try {
-      res = await request.post("/api/contact", { data: {} }, { timeout: 5_000 })
+      res = await request.post(
+        "/api/contact",
+        {
+          data: {},
+          headers: { origin: new URL(request.url()).origin },
+        },
+        { timeout: 5_000 },
+      )
     } catch {
       return
     }
     expect([400, 422, 429, 500, 503]).toContain(res.status())
+  })
+
+  test("a state-changing route refuses a cross-origin request", async ({ request }) => {
+    // The CSRF guard refuses a request whose Origin is not the site's own.
+    const res = await request.post("/api/contact", {
+      data: {},
+      headers: { origin: "https://evil.example" },
+    })
+    expect(res.status()).toBe(403)
+    expect(await res.json()).toMatchObject({ error: "csrf_forbidden" })
   })
 
   test("GET /en/shop returns 200", async ({ request }) => {

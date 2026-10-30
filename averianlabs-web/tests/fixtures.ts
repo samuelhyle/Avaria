@@ -54,6 +54,22 @@ export async function isDegraded(request: APIRequestContext): Promise<boolean> {
 }
 
 /**
+ * The headers a browser sends on a state-changing request.
+ *
+ * The application's CSRF guard refuses a request whose `Origin` is not the
+ * site's own, and a real browser always sends one. Playwright's `request`
+ * fixture does not, so every API call that changes state has to carry it
+ * explicitly — otherwise the guard rejects the request before it reaches the
+ * handler, and the test measures the guard instead of the behaviour.
+ */
+export function sameOriginHeaders(extra: Record<string, string> = {}) {
+  return {
+    origin: process.env.BASE_URL ?? "http://localhost:3000",
+    ...extra,
+  }
+}
+
+/**
  * Build an absolute URL for a given locale path.
  * Example: localePath("en", "/shop") -> "/en/shop"
  */

@@ -5,6 +5,7 @@ import { assignDepositToSession, listUnmatchedConfirmedDeposits } from "@/lib/cr
 import { enabledChains } from "@/lib/crypto/rates"
 import { settleSessionFromDeposit } from "@/lib/crypto/watcher"
 import { db } from "@/lib/db"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { and, eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -71,6 +72,9 @@ export async function GET() {
 
 /** Attach a deposit to an invoice by hand. */
 export async function POST(request: Request) {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   try {
     await requireAdmin()
   } catch (error) {

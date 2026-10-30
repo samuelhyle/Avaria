@@ -1,4 +1,5 @@
 import { getCurrentMember, reportPost } from "@/lib/community"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -10,6 +11,9 @@ const Body = z.object({
 })
 
 export async function POST(req: Request) {
+  const csrf = assertCsrfOr403(req, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const member = await getCurrentMember()
   if (!member) {
     return NextResponse.json({ ok: false, reason: "Authentication required." }, { status: 401 })

@@ -5,6 +5,7 @@ import { actionEmailSubject, verifyEmailHtml } from "@/lib/email"
 import { deliverEmailOutbox, enqueueEmail } from "@/lib/email/outbox"
 import { getServerEnv } from "@/lib/env"
 import { locales } from "@/lib/i18n/config"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { hash } from "argon2"
@@ -20,6 +21,9 @@ const bodySchema = z.object({
 })
 
 export async function POST(req: Request) {
+  const csrf = assertCsrfOr403(req, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const ip = clientIp(req)
   // Two limits. The per-IP one stops a single host from creating accounts in
   // bulk; the per-email one is the real defence against one person registering

@@ -1,5 +1,6 @@
 import { getCurrentMember } from "@/lib/community"
 import { ReferralError, redeemReferralCode } from "@/lib/referral/service"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -16,6 +17,9 @@ const bodySchema = z.object({
  * exactly like any other code.
  */
 export async function POST(req: Request) {
+  const csrf = assertCsrfOr403(req, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const member = await getCurrentMember().catch(() => null)
   if (!member) {
     return NextResponse.json({ error: "Authentication required." }, { status: 401 })

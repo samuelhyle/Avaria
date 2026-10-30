@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs"
-import { expect, test } from "@/tests/fixtures"
+import { expect, sameOriginHeaders, test } from "@/tests/fixtures"
 import { cleanBrowserRecords, isolatedBrowserDatabase } from "@/tests/helpers/test-database"
 
 for (const locale of ["en", "fi"]) {
@@ -15,6 +15,7 @@ for (const locale of ["en", "fi"]) {
     const email = `browser-qa-account-${locale}-${crypto.randomUUID()}@example.invalid`
     try {
       const registered = await request.post("/api/auth/register", {
+        headers: sameOriginHeaders(),
         data: { email, password: "QA-only-local-password-92842", name: "Browser QA", locale },
       })
       expect(registered.status()).toBe(200)

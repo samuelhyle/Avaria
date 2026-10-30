@@ -1,5 +1,6 @@
 import { getCurrentMember } from "@/lib/community"
 import { issueReferralCode } from "@/lib/referral/service"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
 
@@ -9,7 +10,10 @@ import { NextResponse } from "next/server"
  * Created on first use and stable afterwards, so a link the customer has
  * already shared keeps working.
  */
-export async function POST() {
+export async function POST(request: Request) {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const member = await getCurrentMember().catch(() => null)
   if (!member) {
     return NextResponse.json({ error: "Authentication required." }, { status: 401 })

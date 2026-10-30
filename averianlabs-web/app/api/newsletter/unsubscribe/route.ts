@@ -1,5 +1,6 @@
 import { newsletterSubscribers } from "@/db/schema"
 import { db } from "@/lib/db"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { eq } from "drizzle-orm"
@@ -19,6 +20,9 @@ import { NextResponse } from "next/server"
  * subscribes.
  */
 export async function POST(request: Request) {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const ip = clientIp(request)
   const limit = await rateLimit(`newsletter:unsubscribe:${ip}`, { limit: 20, window: "1 h" })
   if (!limit.success) {

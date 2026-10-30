@@ -1,10 +1,14 @@
 import { gdprRequests } from "@/db/schema"
 import { db } from "@/lib/db"
 import { requireMember, softDeleteUser } from "@/lib/gdpr"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
 
-export async function DELETE() {
+export async function DELETE(request: Request) {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const member = await requireMember().catch(() => null)
   if (!member) return NextResponse.json({ error: "Authentication required." }, { status: 401 })
 

@@ -1,3 +1,4 @@
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { validateVatId } from "@/lib/vat"
@@ -9,6 +10,9 @@ const bodySchema = z.object({
 })
 
 export async function POST(request: Request) {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const limit = await rateLimit(`vat:ip:${clientIp(request)}`, { limit: 30, window: "1 h" })
   if (!limit.success) {
     return NextResponse.json({ error: "Too many requests." }, { status: 429 })

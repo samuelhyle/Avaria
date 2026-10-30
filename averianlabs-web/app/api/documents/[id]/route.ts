@@ -2,6 +2,7 @@ import { documents } from "@/db/schema"
 import { logAudit } from "@/lib/audit/log"
 import { requireRole } from "@/lib/community/auth"
 import { db } from "@/lib/db"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -14,6 +15,9 @@ const Patch = z.object({
 })
 
 export async function PATCH(req: Request, ctx: { params: Promise<{ id: string }> }) {
+  const csrf = assertCsrfOr403(req, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const member = await requireRole(["admin", "moderator"]).catch(() => null)
   if (!member) {
     return NextResponse.json({ ok: false, reason: "Insufficient permissions." }, { status: 403 })
@@ -53,6 +57,9 @@ export async function PATCH(req: Request, ctx: { params: Promise<{ id: string }>
 }
 
 export async function DELETE(_req: Request, ctx: { params: Promise<{ id: string }> }) {
+  const csrf = assertCsrfOr403(_req, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const member = await requireRole(["admin", "moderator"]).catch(() => null)
   if (!member) {
     return NextResponse.json({ ok: false, reason: "Insufficient permissions." }, { status: 403 })

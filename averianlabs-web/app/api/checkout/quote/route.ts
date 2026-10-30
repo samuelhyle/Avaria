@@ -3,12 +3,16 @@ import { db } from "@/lib/db"
 import { releaseExpiredReservations } from "@/lib/orders"
 import { OrderError, quoteCart, toPublicPromotion } from "@/lib/orders/quote"
 import { computeShippingCents } from "@/lib/pricing"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { getCheckoutShippingRates } from "@/lib/shipping/cached"
 import { NextResponse } from "next/server"
 
 export async function POST(request: Request) {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const parsed = quoteSchema.safeParse(await request.json().catch(() => null))
   if (!parsed.success) return NextResponse.json({ code: "invalid_input" }, { status: 400 })
   if (

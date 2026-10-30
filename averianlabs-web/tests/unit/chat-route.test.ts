@@ -111,7 +111,10 @@ describe("research chat final output", () => {
     const response = await POST(
       new Request("http://localhost/api/ai/chat", {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        // A browser sends `Origin` on every state-changing request, and the
+        // CSRF guard relies on it. The handler is called directly here, so
+        // no browser is involved and the header has to be set explicitly.
+        headers: { "content-type": "application/json", origin: "http://localhost" },
         body: JSON.stringify({
           locale,
           noPersist: true,
@@ -166,7 +169,7 @@ describe("research chat final output", () => {
     const response = await POST(
       new Request("http://localhost/api/ai/chat", {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers: { "content-type": "application/json", origin: "http://localhost" },
         body: JSON.stringify({
           noPersist: true,
           messages: [{ id: "cancel", role: "user", content: "Explain nominal mass." }],

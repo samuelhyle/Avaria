@@ -4,6 +4,7 @@ import {
   listUnreadNotifications,
   markNotificationsRead,
 } from "@/lib/notifications"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { NextResponse } from "next/server"
 
 export async function GET() {
@@ -24,6 +25,9 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  const csrf = assertCsrfOr403(req, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const member = await getCurrentMember()
   if (!member) return NextResponse.json({ error: "Authentication required." }, { status: 401 })
   let body: unknown = {}

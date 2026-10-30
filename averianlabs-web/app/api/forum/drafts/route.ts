@@ -1,6 +1,7 @@
 import { forumDrafts } from "@/db/schema"
 import { getCurrentMember } from "@/lib/community/auth"
 import { db } from "@/lib/db"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -22,6 +23,9 @@ export async function GET() {
   )
 }
 export async function PUT(req: Request) {
+  const csrf = assertCsrfOr403(req, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const member = await getCurrentMember()
   if (!member) return NextResponse.json({ error: "authentication_required" }, { status: 401 })
   let raw: unknown

@@ -1,4 +1,4 @@
-import { expect, test } from "@/tests/fixtures"
+import { expect, sameOriginHeaders, test } from "@/tests/fixtures"
 
 test.describe("authentication pages", () => {
   test("register page loads and shows the registration form", async ({ cleanPage }) => {
@@ -24,6 +24,7 @@ test.describe("authentication pages", () => {
 
   test("auth API uses an anti-enumeration contract (200 with ok envelope)", async ({ request }) => {
     const res = await request.post("/api/auth/forgot-password", {
+      headers: sameOriginHeaders(),
       data: { email: "unregistered-browser-qa@example.invalid" },
       timeout: 5_000,
     })

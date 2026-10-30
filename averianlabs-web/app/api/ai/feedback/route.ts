@@ -6,6 +6,7 @@
 
 import { aiMessages } from "@/db/schema/ai"
 import { db } from "@/lib/db"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { eq } from "drizzle-orm"
@@ -20,6 +21,9 @@ const bodySchema = z.object({
 })
 
 export async function POST(request: Request): Promise<NextResponse> {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const limit = await rateLimit(`ai:feedback:${clientIp(request)}`, {
     limit: 30,
     window: "1 m",

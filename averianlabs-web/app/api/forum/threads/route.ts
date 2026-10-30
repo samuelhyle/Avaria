@@ -1,4 +1,5 @@
 import { createThread, getCurrentMember, listThreads } from "@/lib/community"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -32,6 +33,9 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  const csrf = assertCsrfOr403(req, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const member = await getCurrentMember()
   if (!member) {
     return NextResponse.json(

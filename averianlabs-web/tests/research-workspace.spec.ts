@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs"
 import { calculateLaboratory } from "@/lib/calculations"
-import { expect, test } from "@/tests/fixtures"
+import { expect, sameOriginHeaders, test } from "@/tests/fixtures"
 import { cleanBrowserRecords, isolatedBrowserDatabase } from "@/tests/helpers/test-database"
 import AxeBuilder from "@axe-core/playwright"
 
@@ -132,6 +132,7 @@ for (const locale of ["en", "fi"]) {
       expect(
         (
           await request.post("/api/auth/register", {
+            headers: sameOriginHeaders(),
             data: { email, password, name: "Workspace QA", locale },
           })
         ).status(),
@@ -145,6 +146,7 @@ for (const locale of ["en", "fi"]) {
       await page.getByRole("button", { name: t.save, exact: true }).click()
       await expect(page.locator("main").getByRole("heading", { name: t.history })).toBeVisible()
       const savedReference = await page.request.post("/api/calculations", {
+        headers: sameOriginHeaders(),
         data: {
           inputs: { mode: "concentration", massMg: 5, finalVolumeMl: 2 },
           sourceSku: "QA-PEPTIDE-5",

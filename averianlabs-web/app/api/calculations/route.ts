@@ -3,6 +3,7 @@ import { type LaboratoryInputs, calculateLaboratory } from "@/lib/calculations"
 import { getCurrentMember } from "@/lib/community/auth"
 import { db } from "@/lib/db"
 import { getStorefrontCatalogue } from "@/lib/products/catalogue"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { desc, eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -33,6 +34,9 @@ export async function GET() {
   return NextResponse.json({ items }, { headers: { "Cache-Control": "private, no-store" } })
 }
 export async function POST(request: Request) {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const member = await getCurrentMember()
   if (!member) return NextResponse.json({ error: "authentication_required" }, { status: 401 })
   let raw: unknown

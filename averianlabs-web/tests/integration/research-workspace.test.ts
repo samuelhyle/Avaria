@@ -250,6 +250,7 @@ describe("publication and private research records", () => {
     const input = { mode: "concentration", massMg: 10, finalVolumeMl: 2 }
     const saved = await saveCalculation(
       new Request("http://localhost/api/calculations", {
+        headers: { origin: "http://localhost" },
         method: "POST",
         body: JSON.stringify({ inputs: input }),
       }),
@@ -258,6 +259,7 @@ describe("publication and private research records", () => {
     const { item } = await saved.json()
     await saveDraft(
       new Request("http://localhost/api/forum/drafts", {
+        headers: { origin: "http://localhost" },
         method: "PUT",
         body: JSON.stringify({
           title: "Private QA draft",
@@ -274,9 +276,15 @@ describe("publication and private research records", () => {
     expect((await (await getDraft()).json()).draft).toBeNull()
     expect(
       (
-        await deleteCalculation(new Request("http://localhost/api/calculations"), {
-          params: Promise.resolve({ id: item.id }),
-        })
+        await deleteCalculation(
+          new Request("http://localhost/api/calculations", {
+            method: "DELETE",
+            headers: { origin: "http://localhost" },
+          }),
+          {
+            params: Promise.resolve({ id: item.id }),
+          },
+        )
       ).status,
     ).toBe(404)
     const data = await exportUserData(ids[0] ?? "")

@@ -1,4 +1,4 @@
-import { expect, test } from "@/tests/fixtures"
+import { expect, sameOriginHeaders, test } from "@/tests/fixtures"
 import { isolatedBrowserDatabase } from "@/tests/helpers/test-database"
 import { hash } from "argon2"
 
@@ -125,6 +125,7 @@ test.describe("admin console", () => {
     cleanPage,
   }) => {
     const response = await cleanPage.request.post("/api/telegram/webhook", {
+      headers: sameOriginHeaders(),
       data: { update_id: 1 },
     })
     expect([401, 503]).toContain(response.status())

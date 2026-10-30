@@ -1,3 +1,4 @@
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { getCachedShippingRates } from "@/lib/shipping/cached"
 import { NextResponse } from "next/server"
 import { z } from "zod"
@@ -10,6 +11,9 @@ const bodySchema = z.object({
 })
 
 export async function POST(request: Request) {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   try {
     const raw = await request.json()
     const parsed = bodySchema.parse(raw)

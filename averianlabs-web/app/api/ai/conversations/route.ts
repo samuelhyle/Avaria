@@ -14,6 +14,7 @@ import {
 } from "@/lib/ai/memory/store"
 import { auth } from "@/lib/auth"
 import { locales } from "@/lib/i18n/config"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
 import { NextResponse } from "next/server"
@@ -44,6 +45,9 @@ export async function GET(request: Request): Promise<NextResponse> {
 }
 
 export async function POST(request: Request): Promise<NextResponse> {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const limit = await rateLimit(`ai:conversations:create:${clientIp(request)}`, {
     limit: 20,
     window: "1 m",

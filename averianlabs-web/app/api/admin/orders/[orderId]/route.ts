@@ -4,6 +4,7 @@ import { logAudit } from "@/lib/audit/log"
 import { RefundError, refundOrder } from "@/lib/orders/refund"
 import { markOrderDelivered, markOrderPacked, markOrderShipped } from "@/lib/orders/service"
 import { InvalidOrderTransition } from "@/lib/orders/status"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -54,6 +55,9 @@ export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ orderId: string }> },
 ) {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   let member: Awaited<ReturnType<typeof requireAdmin>>
   try {
     member = await requireAdmin()

@@ -394,7 +394,12 @@ describe("provider replay and durable notifications", () => {
       requestQuote(
         new Request("http://localhost/api/quotes", {
           method: "POST",
-          headers: { "content-type": "application/json", "x-forwarded-for": "192.0.2.43" },
+          headers: {
+            "content-type": "application/json",
+            "x-forwarded-for": "192.0.2.43",
+            // A browser sends `Origin` on every state-changing request.
+            origin: "http://localhost",
+          },
           body: JSON.stringify(input),
         }),
       )
@@ -590,7 +595,11 @@ describe("account and provider recovery", () => {
       checkout(
         new Request("http://localhost:3000/api/checkout", {
           method: "POST",
-          headers: { "content-type": "application/json" },
+          headers: {
+            "content-type": "application/json",
+            // A browser sends `Origin` on every state-changing request.
+            origin: "http://localhost:3000",
+          },
           body: JSON.stringify(input),
         }),
       )

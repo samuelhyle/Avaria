@@ -2,10 +2,14 @@ import { gdprRequests } from "@/db/schema"
 import { getCurrentMember } from "@/lib/community"
 import { db } from "@/lib/db"
 import { confirmDeleteRequest } from "@/lib/gdpr/service"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { and, eq, gt } from "drizzle-orm"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 export async function POST(request: Request) {
+  const csrf = assertCsrfOr403(request, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const member = await getCurrentMember()
   if (!member) return NextResponse.json({ code: "unauthorized" }, { status: 401 })
   const parsed = z

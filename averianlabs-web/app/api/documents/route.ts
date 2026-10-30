@@ -3,6 +3,7 @@ import { logAudit } from "@/lib/audit/log"
 import { requireRole } from "@/lib/community/auth"
 import { db } from "@/lib/db"
 import { DOCUMENT_TYPES } from "@/lib/documents"
+import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -17,6 +18,9 @@ const Body = z.object({
 })
 
 export async function POST(req: Request) {
+  const csrf = assertCsrfOr403(req, { allowDevHosts: csrfAllowsDevHosts() })
+  if (csrf) return csrf
+
   const member = await requireRole(["admin", "moderator"]).catch(() => null)
   if (!member) {
     return NextResponse.json({ ok: false, reason: "Insufficient permissions." }, { status: 403 })
