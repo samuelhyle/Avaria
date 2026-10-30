@@ -4,12 +4,14 @@ Next.js 15 (App Router) + React 19 + TypeScript + Tailwind v4 + React Three Fibe
 
 ## Deployment targets
 
-The existing online project is [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app). It runs the full Next.js application with the site's configured database and secrets and remains a `noindex` review site. The custom domain `averianlabs.eu` was not resolving during the 13 October 2026 deployment check; its production setup and merchant release approval are still pending.
+The live site is [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app). It runs the full Next.js application with the site's configured database and secrets, and it accepts real orders: the merchant release is approved and the `noindex` review gate has been removed from the build environment, the response headers, `robots.txt` and the page metadata.
+
+The custom domain `averianlabs.eu` is **not registered** — EURid reports it as available and it has no name servers. The canonical origin, the sitemap and the `robots.txt` sitemap reference therefore resolve from the deployment (`lib/seo/site-origin.ts`) rather than naming a domain nobody owns. Connect the domain and set `NEXT_PUBLIC_SITE_URL` and all of them follow it.
 
 | Target | URL | What it is | Build mode | `X-Robots-Tag` |
 |---|---|---|---|---|
-| **Planned canonical production** | `https://averianlabs.eu` | Requires domain/hosting setup and the release approvals in the runbook | Full server runtime | Set when approved |
-| **Existing online review site** | `https://averianlabs-demo.netlify.app` | Full application for stakeholder review; no merchant release approval | Next.js Runtime plugin, hosted build | `noindex, nofollow` |
+| **Planned canonical production** | `https://averianlabs.eu` | The domain is not registered yet (EURid reports it available and it has no name servers). Connect it and set `NEXT_PUBLIC_SITE_URL`; every canonical URL, sitemap entry and robots.txt reference follows it. | Full server runtime | None — indexable |
+| **Live site** | `https://averianlabs-demo.netlify.app` | The full application, serving real orders. The merchant release is approved and the review-site gate has been removed. | Next.js Runtime plugin, hosted build | None — indexable |
 
 The repository-root `netlify.toml` sets the monorepo base directory. Hosted builds check the database migration ledger, apply forward migrations and insert missing draft references without overwriting existing records, then build the app and check bundle budgets. Private routes retain the application's cache headers.
 
@@ -290,7 +292,7 @@ written to the bundle, and never visible to the browser:
 
 | Deploy context | When it applies |
 |---|---|
-| Production | Production-context deployments, including the current review site and source-archive releases. |
+| Production | Production-context deployments, including the live site and source-archive releases. |
 | Preview | Every pull-request deploy. Use a separate, rate-limited key so PR forks can't burn your credits. |
 | Branch | Any non-main branch with `Branch deploys` enabled (e.g. `feature/*`). |
 
