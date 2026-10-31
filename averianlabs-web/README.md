@@ -17,6 +17,8 @@ The repository-root `netlify.toml` sets the monorepo base directory. Hosted buil
 
 See [the release runbook](docs/RESEARCH_CUSTOMER_RELEASE_RUNBOOK.md) before enabling real orders. The existing Netlify Git connection tracks `demo`; a hosted source archive can deploy the current local snapshot when GitHub write access is unavailable.
 
+The [31 October release](docs/NETLIFY_DEPLOYMENT_2026-10-31.md) is published and indexable. The catalogue is not yet sellable: the hosted seed deliberately creates products with no price, no stock and no assigned released batch, because supplier evidence for them does not exist. Supply the specification evidence, a reviewed batch and a published COA per SKU before enabling card checkout.
+
 See the current [site experience plan](docs/SITE_EXPERIENCE_MASTER_PLAN_2026-10-15.md), [implementation ledger](docs/SITE_EXPERIENCE_IMPLEMENTATION_2026-10-15.md) and [15 October release record](docs/NETLIFY_EXPERIENCE_DEPLOYMENT_2026-10-15.md) for the exact published source, verification, private backup checksums, publication lock and remaining approvals.
 
 ## Toolchain
