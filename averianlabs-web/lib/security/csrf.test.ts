@@ -55,6 +55,20 @@ describe("CSRF origin checks", () => {
     ).toBe(true)
   })
 
+  it("accepts the request's own host, so a deploy preview can post to itself", () => {
+    // Netlify serves a deploy preview under a unique hostname that
+    // DEPLOY_PRIME_URL does not always name. The page and its API share
+    // that hostname, so the Origin and the Host agree and the request is
+    // same-site by the browser's own reckoning.
+    vi.stubEnv("URL", SITE)
+    const preview = "https://6ae5e227--averianlabs-demo.netlify.app"
+    const request = new Request("http://localhost/api/contact", {
+      method: "POST",
+      headers: { origin: preview, host: "6ae5e227--averianlabs-demo.netlify.app" },
+    })
+    expect(checkCsrf(request).ok).toBe(true)
+  })
+
   it("accepts a loopback origin in development", () => {
     vi.stubEnv("URL", SITE)
     vi.stubEnv("NODE_ENV", "development")

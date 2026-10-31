@@ -66,14 +66,26 @@ function safeOrigin(input: string | null): string | null {
  * `DEPLOY_PRIME_URL` are included as well so a deploy preview — which is
  * served under its own unique hostname — passes the check: the preview is
  * the same application, and a legitimate visitor on it is not an attacker.
- * A request from any *other* origin is refused.
+ *
+ * The request's own `Host` header is the last entry. Netlify serves a deploy
+ * preview under a unique hostname that `DEPLOY_PRIME_URL` does not always
+ * name, and the preview's own pages must be able to post to its own API.
+ * Comparing the `Origin` against the `Host` is the same-origin test the
+ * browser performed to decide the request was same-site in the first place;
+ * a cross-site request cannot forge it, because the browser sets `Host` from
+ * the URL it is connecting to.
  */
-function allowedOrigins(): Set<string> {
+function allowedOrigins(request: Request): Set<string> {
   const origins = new Set<string>()
   const configured = safeOrigin(siteOrigin())
   if (configured) origins.add(configured)
   for (const value of [process.env.URL, process.env.DEPLOY_PRIME_URL, process.env.AUTH_URL]) {
     const origin = safeOrigin(value ?? null)
+    if (origin) origins.add(origin)
+  }
+  const host = request.headers.get("host")
+  if (host) {
+    const origin = safeOrigin(`https://${host}`)
     if (origin) origins.add(origin)
   }
   return origins
@@ -94,7 +106,7 @@ export function checkCsrf(
   const method = request.method.toUpperCase()
   if (!UNSAFE_METHODS.has(method)) return { ok: true }
 
-  const allowed = allowedOrigins()
+  const allowed = allowedOrigins(request)
 
   const accept = (origin: string | null): CsrfCheckResult | null => {
     if (!origin) return null
