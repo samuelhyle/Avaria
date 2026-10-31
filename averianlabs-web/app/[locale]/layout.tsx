@@ -117,10 +117,14 @@ export default async function LocaleLayout({
   // serialised into the RSC payload. The shell set comes from the request
   // path, which the middleware forwards as a header.
   const pathname = (await headers()).get("x-pathname") ?? `/${locale}`
+  // The route segment, without the locale prefix, so the message slice can
+  // add the keys this route's own client components read.
+  const segments = pathname.split("/").filter(Boolean)
+  const route = segments.length > 1 ? `/${segments.slice(1).join("/")}` : "/"
   const clientMessages = Object.fromEntries(
     clientNamespacesFor(pathname)
       .filter((ns) => ns in allMessages)
-      .map((ns) => [ns, sliceNamespace(ns, allMessages[ns])]),
+      .map((ns) => [ns, sliceNamespace(ns, allMessages[ns], route)]),
   )
 
   return (

@@ -99,14 +99,24 @@ function namespacesOf(file) {
   return [...found]
 }
 
-/** Every module a file imports, resolved to project files. */
+/**
+ * Every module a file imports, resolved to project files.
+ *
+ * Dynamic imports count as well: `dynamic(() => import("…"))` is how the
+ * shell loads the command palette and the chat widget, and a static-only
+ * walk does not see them.
+ */
 function importsOf(file) {
   const source = read(file)
   if (!source) return []
   const out = []
-  for (const match of source.matchAll(/from\s+["']([^"']+)["']/g)) {
+  const seen = new Set()
+  for (const match of source.matchAll(/(?:from|import\()\s*["']([^"']+)["']/g)) {
     const resolved = resolveImport(match[1], file)
-    if (resolved) out.push(resolved)
+    if (resolved && !seen.has(resolved)) {
+      seen.add(resolved)
+      out.push(resolved)
+    }
   }
   return out
 }

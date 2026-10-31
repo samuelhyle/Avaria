@@ -1,5 +1,10 @@
 import CLIENT_MESSAGE_SLICE from "@/lib/i18n/client-message-slice.json"
 
+type SliceEntry = {
+  shell: readonly string[]
+  routes: Record<string, readonly string[]>
+}
+
 /**
  * Reduce a namespace to the keys the browser actually reads.
  *
@@ -7,14 +12,58 @@ import CLIENT_MESSAGE_SLICE from "@/lib/i18n/client-message-slice.json"
  * client components in the repository. Anything not on the list stays on the
  * server: server components read the complete locale file through
  * `getTranslations`, never through the client provider.
+ *
+ * The allowlist has two parts. `shell` holds the keys the chrome around
+ * every page needs — the header, the footer, the cart drawer, the command
+ * palette and the chat widget. `routes` holds the extra keys a particular
+ * route's own client components read.
+ *
+ * The route keys are looked up by prefix, longest first, so a route that
+ * has no entry of its own falls back to the shell's keys alone. A page that
+ * shipped every route's keys would carry the shop's copy on the home page.
  */
-export function sliceNamespace(namespace: string, value: unknown): unknown {
-  const allowed = (CLIENT_MESSAGE_SLICE as Record<string, readonly string[]>)[namespace]
-  if (!allowed) return value
-  const allow = new Set(allowed)
+/**
+ * Whether a concrete request path matches a route pattern.
+ *
+ * `/shop/bpc-157` matches `/shop/[slug]`, and `/shop` matches `/shop`. A
+ * pattern segment matches exactly one path segment; a literal segment has to
+ * be equal.
+ */
+function matchesRoute(route: string, pattern: string): boolean {
+  const routeParts = route.split("/").filter(Boolean)
+  const patternParts = pattern.split("/").filter(Boolean)
+  // A pattern may be shorter than the route: `/checkout` is the segment that
+  // owns the layout, and every route below it renders that layout's client
+  // components. A pattern may also be longer, when it names a dynamic
+  // segment the concrete path does not.
+  if (patternParts.length > routeParts.length) return false
+  return patternParts.every((part, index) =>
+    part.startsWith("[") ? true : part === routeParts[index],
+  )
+}
+
+export function sliceNamespace(namespace: string, value: unknown, route?: string): unknown {
+  const entry = (CLIENT_MESSAGE_SLICE as Record<string, SliceEntry>)[namespace]
+  if (!entry) return value
+
+  const allowed = new Set(entry.shell)
+  if (route) {
+    // The allowlist is keyed by the route *pattern* — `/shop/[slug]` — while
+    // the request carries the concrete path — `/shop/bpc-157`. A pattern
+    // segment matches any single segment, so the lookup compares the two
+    // segment by segment rather than by prefix.
+    //
+    // The longest matching pattern wins, so `/shop/[slug]` is preferred over
+    // `/shop`.
+    const matches = Object.keys(entry.routes)
+      .filter((pattern) => matchesRoute(route, pattern))
+      .sort((a, b) => b.length - a.length)
+    for (const key of entry.routes[matches[0] ?? ""] ?? []) allowed.add(key)
+  }
+
   const pick = (node: unknown, prefix: string): unknown => {
     if (node === null || typeof node !== "object" || Array.isArray(node)) {
-      return allow.has(prefix) ? node : undefined
+      return allowed.has(prefix) ? node : undefined
     }
     const out: Record<string, unknown> = {}
     for (const [key, child] of Object.entries(node as Record<string, unknown>)) {

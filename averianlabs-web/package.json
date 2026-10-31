@@ -21,6 +21,7 @@
     "env:check": "tsx scripts/check-env.ts",
     "check:i18n": "node scripts/check-i18n-keys.mjs && node scripts/check-i18n-locale-leaks.mjs && node scripts/check-i18n-route-scope.mjs",
     "check:i18n:slice": "node scripts/i18n-client-slice.mjs --check",
+    "check:i18n:keys": "node scripts/check-i18n-slice.mjs",
     "i18n:slice": "node scripts/i18n-client-slice.mjs",
     "perf": "node scripts/perf-benchmark.mjs",
     "check:lh": "lhci autorun",

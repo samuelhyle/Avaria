@@ -42,6 +42,10 @@ jobs:
       # The browser payload is scoped per route and per namespace; a stale
       # allowlist would silently drop a message at runtime.
       - run: pnpm check:i18n:slice
+      # Every key the browser reads has to survive the message slice. A key
+      # the slice cannot see is dropped, and next-intl renders the raw key
+      # path in the page.
+      - run: pnpm check:i18n:keys
       - run: pnpm test
       - run: pnpm test:coverage
       - run: pnpm test:deployment
