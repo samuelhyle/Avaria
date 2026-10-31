@@ -55,6 +55,12 @@ export interface MinimaxChatRequest {
 export interface ChatCompletionChunk {
   delta: {
     content?: string
+    /**
+     * Some reasoning models stream their answer in this field and leave
+     * `content` empty. The stream reader folds it into the visible text, so
+     * the caller sees the same shape whichever model is configured.
+     */
+    reasoning_content?: string
     tool_calls?: Array<{
       index: number
       id?: string
@@ -68,7 +74,11 @@ export interface ChatCompletionChunk {
 export function getMinimaxConfig(): MinimaxConfig {
   const apiKey = process.env.MINIMAX_API_KEY ?? ""
   const baseURL = (process.env.MINIMAX_BASE_URL ?? "https://api.minimax.io/v1").replace(/\/$/, "")
-  const chatModel = process.env.MINIMAX_CHAT_MODEL ?? "MiniMax-M3"
+  // The newest chat model the provider offers. It streams the answer in
+  // `delta.content` exactly as the previous one did, and it answers tool
+  // calls with the same shape, so the agent loop needs no special case.
+  // `MiniMax-M3` stays available by setting `MINIMAX_CHAT_MODEL` explicitly.
+  const chatModel = process.env.MINIMAX_CHAT_MODEL ?? "MiniMax-M3.1-Flash"
   const embeddingModel = process.env.MINIMAX_EMBEDDING_MODEL ?? "text-embedding-MiniMax-M3"
 
   const dimRaw = process.env.MINIMAX_EMBEDDING_DIMENSIONS
@@ -177,7 +187,18 @@ export async function* streamMinimaxChat(input: {
               }
               const choice = json.choices?.[0]
               if (!choice) continue
-              yield { delta: choice.delta ?? {}, finish_reason: choice.finish_reason }
+              const delta = choice.delta ?? {}
+              // The reasoning models stream their answer in
+              // `reasoning_content` and leave `content` empty. Folding the
+              // two together means the caller reads one field whichever
+              // model the deployment configured.
+              const reasoning = delta.reasoning_content
+              yield {
+                delta: reasoning
+                  ? { ...delta, content: `${delta.content ?? ""}${reasoning}` }
+                  : delta,
+                finish_reason: choice.finish_reason,
+              }
             } catch {
               // Skip malformed lines.
             }
@@ -269,9 +290,12 @@ export async function completeMinimaxChat(input: {
       throw new Error(`MiniMax completion failed: ${res.status} ${text.slice(0, 200)}`)
     }
     const json = (await res.json()) as {
-      choices?: Array<{ message?: { content?: string } }>
+      choices?: Array<{ message?: { content?: string; reasoning_content?: string } }>
     }
-    return json.choices?.[0]?.message?.content ?? ""
+    const message = json.choices?.[0]?.message
+    // The reasoning models answer in `reasoning_content` and leave `content`
+    // empty, so both are read here for the same reason as in the stream.
+    return `${message?.content ?? ""}${message?.reasoning_content ?? ""}`
   } finally {
     clearTimeout(timeout)
     input.signal?.removeEventListener("abort", onAbort)

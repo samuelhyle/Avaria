@@ -1,10 +1,10 @@
 "use client"
 
 import { CartMiniSummary } from "@/components/cart/CartMiniSummary"
+import { useCatalogue } from "@/components/product/CatalogueProvider"
 import { Button } from "@/components/ui/Button"
 import { useCart } from "@/lib/cart/store"
 import { useOverlay } from "@/lib/hooks/use-overlay"
-import { getProduct } from "@/lib/products/data"
 import type { Locale } from "@/lib/products/types"
 import { cn } from "@/lib/utils/cn"
 import { formatCurrency, formatSize } from "@/lib/utils/format"
@@ -18,6 +18,11 @@ export function CartDrawer({ locale }: { locale: string }) {
   const tCommon = useTranslations("common")
   const isOpen = useCart((s) => s.isOpen)
   const items = useCart((s) => s.items)
+  // The catalogue comes from the layout's provider, which is already
+  // trimmed. Reading the static catalogue here instead pulled all fifteen
+  // products — every locale's translation and every batch record — into the
+  // browser bundle for a single colour value.
+  const products = useCatalogue()
   const close = useCart((s) => s.close)
   const setQty = useCart((s) => s.setQty)
   const remove = useCart((s) => s.remove)
@@ -72,8 +77,7 @@ export function CartDrawer({ locale }: { locale: string }) {
           <>
             <ul className="flex-1 overflow-auto divide-y divide-line">
               {items.map((item) => {
-                const product = getProduct(item.productSlug)
-                const hue = product?.hue ?? 214
+                const hue = products.find((p) => p.slug === item.productSlug)?.hue ?? 214
                 return (
                   <li key={item.sku} className="flex gap-4 p-5">
                     <div

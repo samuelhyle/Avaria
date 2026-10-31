@@ -141,22 +141,19 @@ export const AVERIA_PLATFORM_FACTS = `Documented platform facts; do not invent a
 - In Finnish use näytepullo, tuotekoodi, osanäyte, nimellismassa and eräasiakirjat. Avoid injektiopullo, eskaloida and untranslated field/category names.
 - Questions about these platform facts, including short preference/consent questions, MUST first call getResearchGuidance with the matching topic (memory for consent/preferences). Do not answer them directly from these bullets. Do not invoke a save action when the customer is asking how saving works.`
 
+/**
+ * The language names for the locales the storefront ships.
+ *
+ * The list is derived from `lib/i18n/config.ts` so a locale can never be
+ * added to the site without the assistant knowing how to answer in it. A
+ * locale that is missing here falls back to English, which is how the
+ * Russian assistant ended up replying in English.
+ */
 const LOCALE_NAMES: Record<string, string> = {
   en: "English",
   fi: "Finnish (Suomi)",
-  de: "German (Deutsch)",
   sv: "Swedish (Svenska)",
-  nl: "Dutch (Nederlands)",
-  fr: "French",
-  es: "Spanish",
-  it: "Italian",
-  pl: "Polish",
-  cs: "Czech",
-  da: "Danish",
-  no: "Norwegian",
-  et: "Estonian",
-  lv: "Latvian",
-  lt: "Lithuanian",
+  ru: "Russian (Русский)",
 }
 
 /**
@@ -168,8 +165,8 @@ const LOCALE_TONE_HINTS: Record<string, string> = {
   en: "Use a professional, friendly tone. Contractions are fine. Avoid American idioms if the user reads more British English (look at the product slug — 'tirzepatide', 'semaglutide' are universal).",
   fi: "Käytä asiallista, kohteliasta suomea. Vältä slangia ja amerikkalaisia idiomeja. Suosi passiivimuotoa, kun et korosta tekijää. Käytä desimaalipilkkua ja euro-muotoa (esim. 39,90 €). Käytä luonnollisia ilmauksia, kuten ota yhteyttä tiimiimme tai pyydä tarkistus. Vältä sanaa eskaloida ja sisäisiä työkalunimiä.",
   de: "Verwende die formelle 'Sie'-Anrede standardmäßig (nicht 'du'). Wissenschaftlich-präziser Ton, deutsche Dezimaltrennzeichen (Komma) und Tausender-Punkt. Beispiel: 39,90 €.",
-  sv: "Använd formellt 'ni'-tilltal. Saklig och exakt. Tusental med mellanslag, decimal med komma. Exempel: 39,90 kr.",
-  nl: "Gebruik de formele 'u'-vorm standaard. Professioneel, maar niet stijf. Decimaal met komma. Voorbeeld: € 39,90.",
+  sv: "Använd formellt 'ni'-tilltal. Saklig och exakt. Tusental med mellanslag, decimal med komma. Exempel: 39,90 €.",
+  ru: "Отвечай на русском языке. Тон точный, научный и профессиональный. Десятичная запятая, разделитель разрядов — пробел. Пример: 39,90 €. Сохраняй названия препаратов, SKU, номера партий и физические единицы без перевода.",
   fr: "Vouvoiement par défaut. Ton précis, scientifique. Décimale avec virgule. Exemple : 39,90 €.",
   es: "Trateo de 'usted' por defecto. Tono científico y preciso. Decimal con coma. Ejemplo: 39,90 €.",
   it: "Forma di cortesia 'Lei' come default. Tono scientifico e preciso. Decimale con la virgola. Esempio: 39,90 €.",

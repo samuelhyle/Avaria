@@ -2,6 +2,8 @@ import { CompareTable } from "@/components/product/CompareTable"
 import { Badge } from "@/components/ui/Badge"
 import { Container } from "@/components/ui/Container"
 import { getStorefrontCatalogue } from "@/lib/products/catalogue"
+import { toClientCatalogue } from "@/lib/products/client-catalogue"
+import type { Locale } from "@/lib/products/types"
 import { makePageMetadata } from "@/lib/seo/metadata"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 
@@ -11,7 +13,12 @@ export default async function ComparePage({ params }: { params: Promise<{ locale
   const { locale } = await params
   setRequestLocale(locale)
 
-  const products = await getStorefrontCatalogue()
+  // The compare table is the only browser reader of the molecular formula,
+  // the sequence and the storage temperature, so this is the one route that
+  // asks for them. Every other page leaves them out of the payload.
+  const products = toClientCatalogue(await getStorefrontCatalogue(), locale as Locale, {
+    specifications: true,
+  })
   const t = await getTranslations({ locale, namespace: "research" })
   return (
     <Container className="py-12">

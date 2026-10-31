@@ -1,5 +1,7 @@
 import { CartView } from "@/components/cart/CartView"
 import { getStorefrontCatalogue } from "@/lib/products/catalogue"
+import { toClientCatalogue } from "@/lib/products/client-catalogue"
+import type { Locale } from "@/lib/products/types"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 
 export const dynamic = "force-dynamic"
@@ -12,7 +14,11 @@ export default async function CartPage({
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: "cart" })
-  const products = await getStorefrontCatalogue()
+  // The cart replaces the layout's catalogue provider with its own, so the
+  // catalogue has to be trimmed here as well. Untrimmed, this route shipped
+  // the full catalogue — every locale's translation and every batch record —
+  // to the browser.
+  const products = toClientCatalogue(await getStorefrontCatalogue(), locale as Locale)
   return (
     <div className="mx-auto max-w-5xl">
       <header>

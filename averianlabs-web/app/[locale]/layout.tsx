@@ -149,7 +149,16 @@ export default async function LocaleLayout({
             <MotionProvider>
               <OrganizationJsonLd />
               <WebsiteJsonLd locale={locale} />
-              <NextIntlClientProvider locale={locale} messages={clientMessages}>
+              {/*
+                `formats={null}` suppresses next-intl's default
+                date-time and relative-time format table. The provider
+                serialises it into the RSC payload, and it was 30 KB on
+                every page — roughly a fifth of the home page's response.
+                No component reads `format.dateTime`, `format.relativeTime`
+                or `format.number`, so the table was dead weight in every
+                response.
+              */}
+              <NextIntlClientProvider locale={locale} messages={clientMessages} formats={null}>
                 <Chrome locale={locale}>{children}</Chrome>
                 <Suspense fallback={null}>
                   <PostHogProvider />
