@@ -4,11 +4,12 @@ Published to [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app
 
 | Item | Value |
 |---|---|
-| Published at | `2026-10-31T13:55:58.961Z` |
-| Netlify deploy | `6ae5ed9ea8249596e4ad3623` |
-| Netlify build | `6ae5ed9ea8249596e4ad3621` |
-| Deployed source tree | `ca2120cc33901e79dcee2900f516c43c9c96b729` |
-| Deployed commit on `demo` | `e3804069de2b35bf796652b467f5a40f937c0ce7` |
+| Published at | `2026-10-31T14:17:13.765Z` |
+| Netlify deploy | `6ae5f776903d2207746c6286` |
+| Netlify build | `6ae5f776903d2207746c6285` |
+| Deployed source tree | `09dde9073643090c705912c272e395df07fd1131` |
+| Deployed commit on `demo` | `074cc20` |
+| Application deploy (identical application code) | `6ae5ed9ea8249596e4ad3623` |
 | Local `main` tree | `bfcfddd65b96de767219ba5bfe207cabe1a01aed` |
 | Previous published deploy | `6ae471f231d7f9c2ea334b01` (unlocked and superseded) |
 | Deployment method | Git push to the `demo` branch; Netlify built the source with the hosted secrets |
@@ -16,6 +17,8 @@ Published to [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app
 | Schedules | `*/2 * * * *` (crypto), `*/5 * * * *` (maintenance) |
 
 The deployed tree and the local `main` tree differ only by `.github/workflows/ci.yml` and `.github/workflows/maintenance.yml`. The push credential in the local keychain carries no `workflow` scope, so GitHub refused to update those two files; they are not part of the application and do not affect the deployment. **Push them from a credential with the `workflow` scope** so the branch and the CI workflow stay in step.
+
+The `demo` branch was force-updated rather than merged. The branch's previous ten commits (16–19 September) are an earlier snapshot that `main` overtook by roughly 250,000 lines; merging them produced 128 conflicts and would have reinstated a superseded Netlify configuration, the `de`/`nl` locale set in place of the shipped `ru`, `output: "standalone"` handling that the current deployment does not use, and the `noindex` header this release removes. The comparison behind that decision is recorded in the review of the two branches.
 
 ## What changed in this release
 
