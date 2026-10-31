@@ -1,0 +1,13 @@
+# Files that must never reach a release archive.
+#
+# `git archive` honours `export-ignore`, so the paths below are left out of
+# the source ZIP that a Netlify hosted build consumes. The verification
+# evidence and the demo screenshots are large, are not part of the
+# application, and are already published through the repository's own
+# history.
+#
+# This affects archives only. The files stay in the repository and stay
+# visible to `git show`, so the evidence remains reviewable.
+averianlabs-web/docs/verification/** export-ignore
+averianlabs-web/docs/demo-screenshots-2026-10-20/** export-ignore
+averianlabs-web/reports/** export-ignore
