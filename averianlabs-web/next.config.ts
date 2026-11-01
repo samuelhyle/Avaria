@@ -171,8 +171,8 @@ const config: NextConfig = isDemoBuild
                 // start, for nothing.
                 "./node_modules/.pnpm/@swc+core-darwin-*/**",
                 "./node_modules/.pnpm/@swc+core-win32-*/**",
-                "./node_modules/.pnpm/@esbuild-darwin-*/**",
-                "./node_modules/.pnpm/@esbuild-win32-*/**",
+                "./node_modules/.pnpm/@esbuild+darwin-*/**",
+                "./node_modules/.pnpm/@esbuild+win32-*/**",
                 "./node_modules/.pnpm/@img+sharp-darwin-*/**",
                 "./node_modules/.pnpm/@img+sharp-win32-*/**",
                 "./node_modules/.pnpm/@img+sharp-libvips-darwin-*/**",
