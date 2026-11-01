@@ -1,5 +1,5 @@
 import { CHECKOUT_FIXTURE_SLUGS, CHECKOUT_TEST_SLUG } from "@/lib/checkout/test-product"
-import { storefrontProducts } from "@/lib/products/catalogue"
+import { storefrontProducts } from "@/lib/products/storefront"
 import type { Product } from "@/lib/products/types"
 import { describe, expect, it } from "vitest"
 
