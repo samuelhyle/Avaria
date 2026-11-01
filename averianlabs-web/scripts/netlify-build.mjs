@@ -5,7 +5,12 @@ import postgres from "postgres"
 function run(command, args, env = process.env) {
   const result = spawnSync(command, args, { stdio: "inherit", env })
   if (result.error) throw result.error
-  if (result.status !== 0) process.exit(result.status ?? 1)
+  if (result.status !== 0) {
+    // Name the step. Without it the hosted build reports only "exit code 2"
+    // and gives no hint which of the six steps failed.
+    console.error(`[deploy] Step failed: ${command} ${args.join(" ")}`)
+    process.exit(result.status ?? 1)
+  }
 }
 
 run("pnpm", ["env:check"])
