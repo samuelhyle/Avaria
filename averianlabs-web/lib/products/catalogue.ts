@@ -1,5 +1,5 @@
 import { batches, categories, documents, productTranslations, products, vials } from "@/db/schema"
-import { isCheckoutTestProduct } from "@/lib/checkout/test-product"
+import { CHECKOUT_FIXTURE_SLUGS, isCheckoutTestProduct } from "@/lib/checkout/test-product"
 import { db } from "@/lib/db"
 import { publicDocumentUrl } from "@/lib/documents/availability"
 import { DOCUMENT_TYPES } from "@/lib/documents/constants"
@@ -196,9 +196,19 @@ async function buildCatalogue(): Promise<Product[]> {
     for (const { product: row, category } of rows) {
       const reference = references.find((p) => p.slug === row.slug)
       const specs = row.specJson as Record<string, unknown>
-      const checkoutTest = vialRows.some(
-        (vial) => vial.productId === row.id && isCheckoutTestProduct(row, vial),
-      )
+      /**
+       * Whether this product is a payment fixture.
+       *
+       * The owner marks a fixture with `checkoutTest` in its specification,
+       * and the two fixtures in the catalogue are named in one place. The
+       * narrow predicate recognises only the card fixture — the direct-sale
+       * and shipping rules are written for that one alone — but a shopper
+       * must not be offered either.
+       */
+      const checkoutTest =
+        specs.checkoutTest === true ||
+        CHECKOUT_FIXTURE_SLUGS.has(row.slug) ||
+        vialRows.some((vial) => vial.productId === row.id && isCheckoutTestProduct(row, vial))
       const specificationsVerified =
         specs.verified === true &&
         typeof specs.evidenceRef === "string" &&
