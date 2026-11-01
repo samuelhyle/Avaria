@@ -1,6 +1,21 @@
-# Release record — 31 October 2026
+# Release record — 31 October 2026 (updated 1 November 2026)
 
 Published to [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app). The merchant release is approved and the review-site gate has been removed, so the storefront is indexable and the canonical origin, the sitemap and `robots.txt` all name the origin that actually serves the site.
+
+## Current release
+
+| Item | Value |
+|---|---|
+| Published at | `2026-11-01T01:52:04.108Z` |
+| Netlify deploy | `6ae69a64ba76c3a04c450771` |
+| Deployed commit on `demo` | `2c7060a` |
+| Deployed source tree | `0c682cf6dba56b11a855a44d360249397dafd8d6` |
+| Previous published deploy | `6ae5f776903d2207746c6286` (unlocked and superseded) |
+| Deployment method | Git push to the `demo` branch; Netlify built the source with the hosted secrets |
+| Functions deployed | `___netlify-server-handler`, `cron-crypto`, `cron-maintenance` |
+| Schedules | `*/2 * * * *` (crypto), `*/5 * * * *` (maintenance) |
+
+## The release before it
 
 | Item | Value |
 |---|---|
@@ -12,9 +27,6 @@ Published to [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app
 | Application deploy (identical application code) | `6ae5ed9ea8249596e4ad3623` |
 | Local `main` tree | `bfcfddd65b96de767219ba5bfe207cabe1a01aed` |
 | Previous published deploy | `6ae471f231d7f9c2ea334b01` (unlocked and superseded) |
-| Deployment method | Git push to the `demo` branch; Netlify built the source with the hosted secrets |
-| Functions deployed | `___netlify-server-handler`, `cron-crypto`, `cron-maintenance` |
-| Schedules | `*/2 * * * *` (crypto), `*/5 * * * *` (maintenance) |
 
 The deployed tree and the local `main` tree differ only by `.github/workflows/ci.yml` and `.github/workflows/maintenance.yml`. The push credential in the local keychain carries no `workflow` scope, so GitHub refused to update those two files; they are not part of the application and do not affect the deployment. **Push them from a credential with the `workflow` scope** so the branch and the CI workflow stay in step.
 
@@ -62,23 +74,103 @@ Webhook and Telegram routes are excluded: they authenticate by HMAC signature, n
 
 The review-site flag is removed from the build environment, the response headers, `robots.txt` and the page metadata. `averianlabs.eu` is **not registered** — EURid reports it as available and it has no name servers — so every canonical URL and sitemap entry that named it was a dead link. The origin now resolves from the deployment. Connect the domain and set `NEXT_PUBLIC_SITE_URL`, and all of them follow it.
 
+## Performance and the edge cache
+
+The catalogue pages are the same for every visitor, so they can be served
+from the edge instead of invoking the origin. They now are: the build
+declares the cacheable routes in one list, the middleware marks a request
+that qualifies, and the build's own header rule sets the lifetime.
+
+The rule cannot live in the middleware. Next.js replaces the `Cache-Control`
+a middleware sets with the one the render produced, so a header set there is
+discarded; a header in the build's configuration is applied after the render
+and survives. The path list and the session check are the same two
+conditions in both places, expressed twice because they have to be.
+
+A signed-in visitor is never cached. Their pages carry their own session,
+and a shared cache that served one visitor's page to another would be a
+leak, not a performance gain.
+
+| | Before | After |
+|---|---|---|
+| Home page, p50 | 378 ms | 52 ms |
+| Home page, p90 | — | 84 ms |
+| Home page, p97.5 | — | 135 ms |
+| Home page, p99 | — | 165 ms |
+| Home page, p95 | 7 700 ms | — |
+| Throughput, 8 connections | 7.9 req/s | 92–129 req/s |
+| First request (cold) | — | 628 ms |
+| Repeat request (warm) | — | 64 ms |
+
+The page weight fell with it. The home page's HTML went from 319 496 to
+305 322 bytes, the shop from 325 830 to 307 612, a product page from
+178 740 to 160 971 and the about page from 124 122 to 110 880. Three
+changes account for it: the client no longer receives the date-time format
+table it never reads, the browser receives only the fields it reads from
+the catalogue instead of all of it, and each page receives only the
+translations it renders — with the chrome around the page carrying the
+union, because the layout does not re-render when a visitor navigates.
+
+The function bundle fell with it. The trace carried the macOS and Windows
+builds of every native dependency — the build runs on Linux, so they can
+never be executed — and the excludes that should have dropped them were
+written with a hyphen where the package manager writes a plus. They are
+excluded now.
+
+## The load campaign found a leak, and the build found a secret
+
+Two things in this release were found by running the site rather than by
+reading it.
+
+The hosted build failed with exit code 2 on every attempt, and Netlify
+reported only the number: no step, no message. The cause was a MiniMax API
+key pasted into `.env.example` and committed. The repository is public, so
+the host's secret scanning refused to build it. The key is removed from the
+tree and from the history, and it has to be **rotated at the provider** —
+deleting it here cannot make a published credential private again.
+
+The guard that should have caught it had never run. Its job used a hook
+option that looks the script up in the wrong place, so the job failed before
+the guard executed; it excluded the very file the key was in; its pattern
+list held its own explanations as comment lines, and a comment line in that
+list is a pattern that matches every commented line in the repository; and
+its configuration was itself gitignored. All four are fixed, and the guard
+is now tracked.
+
+The load harness itself was measuring the host's edge protection rather
+than the site. A request that does not look like a browser is answered with
+a branded 403 before it reaches the application, so roughly a third of a
+run was failures that had nothing to do with the storefront. The harness
+now sends a browser's user agent and records which status codes the run saw.
+
 ## Executed verification
 
 - TypeScript passed. Biome reported zero errors.
-- 492 unit tests passed, 9 of them the new CSRF tests.
-- 84 integration tests passed against the isolated database.
-- 153 browser tests passed.
+- 496 unit tests passed, 9 of them the new CSRF tests.
+- 82 integration tests passed against the isolated database. The 3 that did not run need Stripe's webhook signing secret, which is not set in the local environment; they fail on the missing credential, not on the code.
+- 155 browser tests passed, 2 skipped.
 - 65 per-route bundle budgets passed. 12 deployment checks passed.
 - 20 accessibility routes passed axe with zero critical or serious findings.
 - 120 narrow-viewport combinations at 320px had no horizontal overflow.
 - The runtime audit walked 116 route and locale combinations: zero console errors, zero uncaught exceptions, zero failed requests, zero non-2xx responses, zero missing translations, zero uninterpolated placeholders.
 - The deploy verifier ran against the deployment's own URL and then against the published site: 22 checks, all passing. Every locale's home page, shop and product page render; the cross-origin write is refused with 403; the same-origin write reaches the handler.
+- The assistant answered in all four languages on the published site, in the language of the question, with no English left in the answer.
 - The live quote flow was exercised in a real browser: the request was submitted and the confirmation rendered, with no console errors.
 - Client-side navigation was confirmed to work without a full page load.
 
 ## Remaining release requirements
 
-The storefront is live and correct, but the catalogue is not yet sellable and this is a data question, not a code one. The hosted seed deliberately creates products with no price, no stock and no assigned released batch, because supplier evidence for them does not exist. The direct-sale rule requires an active product, an owner-approved `evidenceRef`, a positive price, and an explicitly assigned, reviewed, unexpired batch with a published COA in both the Finnish and English registries. Until that evidence exists the products are shown as "Quote only" and "Out of stock", and the quote form is the correct route to them. This is the same state the previous deployment showed; it was verified by comparing both.
+### Rotate the MiniMax API key
+
+A MiniMax API key was committed to `.env.example` and, through it, to a
+public repository. It has been removed from the tree and from the history,
+and the host's secret scanning now builds the site again — but a key that
+was public has to be treated as compromised. **Rotate it in the MiniMax
+console** and set the new value in the host's environment. The old value is
+in the commit history of anyone who cloned the repository between the leak
+and the removal.
+
+The catalogue is not yet sellable and this is a data question, not a code one. The hosted seed deliberately creates products with no price, no stock and no assigned released batch, because supplier evidence for them does not exist. The direct-sale rule requires an active product, an owner-approved `evidenceRef`, a positive price, and an explicitly assigned, reviewed, unexpired batch with a published COA in both the Finnish and English registries. Until that evidence exists the products are shown as "Quote only" and "Out of stock", and the quote form is the correct route to them. This is the same state the previous deployment showed; it was verified by comparing both.
 
 To sell directly, the owner supplies for each SKU: the real specification with its evidence reference, a reviewed and released batch with an expiry date, the original COA uploaded to the document registry, a positive price, and the stock quantity. The `verificationStatus` check constraint and the `reviewedBy`/`reviewedAt` columns enforce the review; the batch cannot be marked released without it.
 
