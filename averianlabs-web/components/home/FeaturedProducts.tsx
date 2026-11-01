@@ -16,10 +16,18 @@ export async function FeaturedProducts({
   locale,
   products,
   limit = 8,
+  buyable = true,
 }: {
   locale: string
   products: Product[]
   limit?: number
+  /**
+   * Whether anything in the catalogue can be bought today. The band says
+   * "the materials our customers order most, with live stock and current
+   * pricing" — which is a lie over a shelf of out-of-stock items, so it
+   * says something else when that is the case.
+   */
+  buyable?: boolean
 }) {
   const t = await getTranslations("home")
   const l = locale as Locale
@@ -33,10 +41,10 @@ export async function FeaturedProducts({
   return (
     <Section aria-labelledby="featured-title" tone="sunken">
       <SectionHeader
-        eyebrow={t("featuredEyebrow")}
-        title={t("featuredTitle")}
+        eyebrow={buyable ? t("featuredEyebrow") : t("featuredEyebrowAlt")}
+        title={buyable ? t("featuredTitle") : t("featuredTitleAlt")}
         titleId="featured-title"
-        subtitle={t("featuredSubtitle")}
+        subtitle={buyable ? t("featuredSubtitle") : t("featuredSubtitleAlt")}
         action={
           <Link href={`/${locale}/shop`} className={buttonClasses({ variant: "secondary" })}>
             {t("featuredCta")}

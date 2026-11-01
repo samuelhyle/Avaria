@@ -120,6 +120,63 @@ never be executed — and the excludes that should have dropped them were
 written with a hyphen where the package manager writes a plus. They are
 excluded now.
 
+## The storefront's own design system
+
+The site had three heading systems, four card shapes, nine card paddings,
+four shadow treatments, five hover behaviours and a dozen call-to-action
+styles, each written out by hand — so the storefront looked assembled
+rather than designed. It now has one definition of each.
+
+- A shared `Card`, `Section` and `SectionHeader`, so a card is a card.
+- One set of button classes, used by the interactive button and by the
+  server-rendered links that make up most of the storefront's calls to
+  action. A link does not become a client component to look like a button.
+- A heading scale of roles — display, page, section, sub, card — rather than
+  a class string repeated with small differences on thirty headings.
+- A vertical rhythm decided in one place, stepping with the viewport: a wide
+  screen gets the air a wide screen needs, which it did not before.
+- The product card was the only card in the site with a 20px corner while
+  every other card used 12px. The step cards were the same colour as the
+  band they sat on. The category grid held seven tiles in four columns and
+  left an empty corner that read as a missing tile. The questions band had
+  a column of empty page beside the answers. All four are fixed.
+- Twelve stylesheet utilities that nothing used were removed, including two
+  that were a second focus system alongside the one the stylesheet actually
+  draws.
+
+Two defects came out of the same pass. The product renders labelled their
+vials with font variables that do not exist, so every label on every product
+image fell back to the platform's default font. And the hero rendered
+"€0.00" under the store's flagship product whenever that product had no
+published price — a zero is not a price.
+
+## The payment fixtures, and what the storefront says
+
+The catalogue held two payment fixtures: one for the card path, one for the
+crypto path. Neither is merchandise — no goods, no batch, no certificate, a
+placeholder price — and between them they were the hero of the home page,
+the whole of the featured row, the shop's only available products, the first
+thing the empty cart suggested and two entries in the sitemap.
+
+They are now left out of everything that browses the catalogue. Their own
+pages still resolve, so the payment path can be tested by opening the
+fixture's address, and `CHECKOUT_FIXTURE_IN_STOREFRONT=true` puts them back
+while it is being tested. A test guards the exclusion.
+
+That left the storefront's copy claiming things it was not showing, so the
+copy was made to match the state:
+
+- The shop promised "live stock, current prices and the certificate of
+  analysis for every batch". It now promises live pricing and batch
+  certificates for the materials that are ready to ship.
+- The featured band called its contents "the materials our customers order
+  most, with live stock and current pricing" over a shelf of out-of-stock
+  items. While nothing can be ordered it says that it is the catalogue, and
+  asks for a quote.
+- The compare page's empty state was one sentence in a bare box on an
+  otherwise empty page. It now says what the page is for and offers the way
+  in.
+
 ## The load campaign found a leak, and the build found a secret
 
 Two things in this release were found by running the site rather than by
@@ -149,9 +206,14 @@ now sends a browser's user agent and records which status codes the run saw.
 ## Executed verification
 
 - TypeScript passed. Biome reported zero errors.
-- 496 unit tests passed, 9 of them the new CSRF tests.
-- 82 integration tests passed against the isolated database. The 3 that did not run need Stripe's webhook signing secret, which is not set in the local environment; they fail on the missing credential, not on the code.
-- 155 browser tests passed, 2 skipped.
+- 499 unit tests passed, 9 of them the new CSRF tests and 3 the new
+  storefront-catalogue tests.
+- 83 integration tests passed against the isolated database. The 2 that did
+  not run need Stripe's webhook signing secret, which is not set in the local
+  environment; they fail on the missing credential, not on the code.
+- 155 browser tests passed, 2 skipped. The suite passes whether or not the
+  environment is exported: two tests used to read the developer's own
+  environment instead of pinning what they depended on.
 - 65 per-route bundle budgets passed. 12 deployment checks passed.
 - 20 accessibility routes passed axe with zero critical or serious findings.
 - 120 narrow-viewport combinations at 320px had no horizontal overflow.
