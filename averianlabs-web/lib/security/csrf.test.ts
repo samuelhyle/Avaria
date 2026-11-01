@@ -13,6 +13,13 @@ afterEach(() => {
   vi.stubEnv("NEXT_PUBLIC_SITE_URL", SITE)
   vi.stubEnv("BUILD_MODE", "")
   vi.stubEnv("NEXT_PUBLIC_REVIEW_SITE", "")
+  // The check reads every configured origin the deployment serves. A
+  // developer's shell may export any of them — a local `.env.local` names
+  // `http://localhost:3000` — and an origin that happens to be allowed
+  // changes what the check answers. They are all pinned here.
+  vi.stubEnv("AUTH_URL", "")
+  vi.stubEnv("URL", "")
+  vi.stubEnv("DEPLOY_PRIME_URL", "")
 })
 
 describe("CSRF origin checks", () => {

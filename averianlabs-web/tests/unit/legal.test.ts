@@ -20,8 +20,16 @@ describe("getLegalIdentity", () => {
   })
 
   it("does not invent registered company details when configuration is missing", () => {
-    Reflect.deleteProperty(process.env, "NEXT_PUBLIC_LEGAL_COMPANY_NAME")
-    Reflect.deleteProperty(process.env, "NEXT_PUBLIC_LEGAL_BUSINESS_ID")
+    // Every identifier has to go, not just the first two: the VAT id was
+    // left in place, so the "nothing is configured" case read it from the
+    // developer's own environment and the test failed on any machine that
+    // exported a local `.env.local`.
+    for (const key of [
+      "NEXT_PUBLIC_LEGAL_COMPANY_NAME",
+      "NEXT_PUBLIC_LEGAL_BUSINESS_ID",
+      "NEXT_PUBLIC_LEGAL_VAT_ID",
+    ])
+      Reflect.deleteProperty(process.env, key)
     const identity = getLegalIdentity()
     expect(identity.companyName).toBe("AverianLabs")
     expect(identity.businessId).toBe("")
