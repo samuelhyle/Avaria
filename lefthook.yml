@@ -1,0 +1,32 @@
+# Lefthook runs the local quality gates that must pass before a commit.
+#
+# The application reads its provider credentials from the host's environment.
+# A committed value would end up in the Git history forever, so the
+# `secret-guard` job refuses the commit instead of letting it through.
+#
+# Install with `pnpm install` (the `postinstall` script runs `lefthook
+# install`), or run `lefthook install` once in the repository root.
+---
+pre-commit:
+  parallel: true
+  jobs:
+    - name: secret-guard
+      # `run:` and not `script:` — lefthook's `script:` key looks the name up
+      # in its own scripts directory and never found this file, so the guard
+      # had not been running at all.
+      run: bash averianlabs-web/scripts/secret-guard.sh
+      stage_fixed: false
+      exclude:
+        - averianlabs-web/scripts/secret-guard.sh
+
+pre-push:
+  parallel: true
+  jobs:
+    - name: typecheck
+      root: averianlabs-web
+      run: pnpm typecheck
+      stage_fixed: false
+    - name: lint
+      root: averianlabs-web
+      run: pnpm lint
+      stage_fixed: false
