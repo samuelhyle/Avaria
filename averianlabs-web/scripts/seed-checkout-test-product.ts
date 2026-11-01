@@ -12,9 +12,44 @@ import { and, eq } from "drizzle-orm"
 if (process.env.CHECKOUT_TEST_PRODUCT_ENABLED !== "true")
   throw new Error("Explicit checkout test opt-in required")
 const url = new URL(process.env.DATABASE_URL ?? "")
+
+/**
+ * Whether the deployment is the approved site.
+ *
+ * Netlify sets `URL` to the site's primary URL for a production build and
+ * to the deploy URL for a branch build, and `DEPLOY_PRIME_URL` to the
+ * deploy URL in both cases. The fixture is meant for the one site, so its
+ * own hostnames are matched rather than a single environment variable —
+ * the previous check compared `URL` against the site URL, which is false on
+ * a branch build, so the fixture threw and the whole build failed.
+ */
+function isApprovedHost(hostname: string): boolean {
+  const host = hostname.toLowerCase()
+  return (
+    host === "averianlabs-demo.netlify.app" ||
+    host === "averianlabs.eu" ||
+    host.endsWith(".averianlabs-demo.netlify.app") ||
+    host.endsWith(".averianlabs.eu")
+  )
+}
+
+// The fixture is restricted to a local database and to the approved site.
+// It is checked against the *database's* host and the deployment's own
+// hostnames, so it can never be seeded into an unrelated database.
+const deploymentHosts = [process.env.URL, process.env.DEPLOY_PRIME_URL, process.env.DEPLOY_URL]
+  .filter(Boolean)
+  .map((value) => {
+    try {
+      return new URL(value as string).hostname.toLowerCase()
+    } catch {
+      return ""
+    }
+  })
+  .filter(Boolean)
+
 if (
   !["localhost", "127.0.0.1"].includes(url.hostname) &&
-  !(process.env.NETLIFY === "true" && process.env.URL === "https://averianlabs-demo.netlify.app")
+  !(process.env.NETLIFY === "true" && deploymentHosts.some(isApprovedHost))
 )
   throw new Error("This fixture is restricted to local databases and the approved review site")
 
