@@ -7,4 +7,7 @@ node_modules/
 
 # Local Netlify folder
 .netlify
-lefthook.yml
+
+# The commit hooks are part of the repository: the secret guard they run has
+# to be the same for everyone, and a hook that only exists on one machine is
+# a hook that is skipped the day that machine is not used.

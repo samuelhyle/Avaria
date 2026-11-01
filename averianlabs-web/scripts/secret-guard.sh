@@ -14,6 +14,7 @@
 # actually uses:
 #
 #   Stripe        sk_live_...  sk_test_...  rk_live_...  whsec_...
+#   MiniMax       sk-cp_...  (the shape the provider's console shows)
 #   Resend        re_...
 #   Google        AIza...
 #   GitHub        ghp_...  gho_...  ghu_...  ghs_...  github_pat_...
@@ -29,11 +30,32 @@ set -uo pipefail
 # Load the pattern list once, up front, so the grep below is a single pass.
 # Each line is one alternative; the file is read with `grep -f` so no
 # quoting of the patterns themselves is needed.
+#
+# The file holds *only* patterns. A `#` line is not a comment to `grep -f`:
+# it is a pattern that matches every line containing a `#`, so a single
+# comment line in this list made the guard report every commented line of
+# every file — and a guard that reports everything is a guard that gets
+# turned off. The explanation of each pattern lives here instead.
+#
+#   sk_live_/sk_test_/rk_live_/whsec_   Stripe
+#   sk-cp-                              MiniMax
+#   re_                                 Resend
+#   AIza                                Google
+#   ghp_/gho_/ghu_/ghs_/github_pat_     GitHub
+#   AKIA/AROA                           AWS
+#   xox[baprs]-                          Slack
+#   PRIVATE KEY block                   any private key
+#   postgres://user:password@host      a database URL with an inline password
+#
+# The database pattern requires a host behind a real domain, so localhost
+# and the CI placeholders do not match, and a password of eight characters
+# or more, so the templates' `user:pass` example does not match either.
 PATTERN_FILE=$(mktemp)
 trap 'rm -f "$PATTERN_FILE"' EXIT
 cat >"$PATTERN_FILE" <<'PATTERNS'
 sk_live_[0-9a-zA-Z]{16,}
 sk_test_[0-9a-zA-Z]{16,}
+sk-cp-[0-9a-zA-Z]{20,}
 rk_live_[0-9a-zA-Z]{16,}
 whsec_[0-9a-zA-Z]{16,}
 re_[0-9a-zA-Z]{16,}
@@ -47,11 +69,7 @@ AKIA[0-9A-Z]{16}
 AROA[0-9A-Z]{16}
 xox[baprs]-[0-9a-zA-Z-]{10,}
 -----BEGIN [A-Z ]*PRIVATE KEY-----
-# A database URL with an inline password. Localhost and the CI placeholders
-# are excluded by requiring a host that is a real managed database: the
-# password is what matters, and every managed provider puts the host behind
-# a domain name.
-postgres(ql)?://[^:/[:space:]]+:[^[:space:]@]+@[a-z0-9][a-z0-9.-]*\.[a-z]{2,}
+postgres(ql)?://[^:/[:space:]]+:[^[:space:]@]{8,}@[a-z0-9][a-z0-9.-]*\.[a-z]{2,}
 PATTERNS
 
 # Collect the files about to be committed. The paths come from the repository
@@ -60,11 +78,16 @@ PATTERNS
 REPO_ROOT=$(git rev-parse --show-toplevel)
 cd "$REPO_ROOT" || exit 0
 
-# `*.env.example` and the documentation hold placeholders, not credentials.
-# The guard's own source holds the patterns as text and would match itself.
+# The templates are scanned like every other file. They are supposed to hold
+# placeholders, and a placeholder does not match any pattern below — so
+# exempting them bought nothing and hid a real leak: a provider key pasted
+# into `.env.example` passed the guard and reached the repository.
+#
+# Only the documentation is exempt, because it quotes example keys, and the
+# guard's own source, which holds the patterns as text and would match itself.
 STAGED_FILES=$(
   git diff --cached --name-only --diff-filter=ACMR |
-    grep -Ev '(^|/)\.env\.example$|\.example$|\.lock$|\.md$|scripts/secret-guard\.sh$' || true
+    grep -Ev '\.lock$|\.md$|scripts/secret-guard\.sh$' || true
 )
 
 if [ -z "$STAGED_FILES" ]; then
