@@ -6,6 +6,14 @@ const withNextIntl = createNextIntlPlugin("./lib/i18n/request.ts")
 
 const isDemoBuild = process.env.BUILD_MODE === "demo"
 
+/**
+ * Whether this build targets Netlify.
+ *
+ * Netlify always exports `NETLIFY=true`, so it is the reliable signal for
+ * the platform-specific build settings below.
+ */
+const isNetlifyDeploy = process.env.NETLIFY === "true"
+
 // Next.js dev mode (webpack HMR + source maps) requires `unsafe-eval`.
 // Never allow it in production.
 const isDev = process.env.NODE_ENV === "development"
@@ -142,11 +150,35 @@ const config: NextConfig = isDemoBuild
       ...(process.env.NETLIFY
         ? {
             outputFileTracingExcludes: {
-              "/*": [
+              "*": [
+                "./node_modules/.pnpm/@react-three+fiber*/**",
+                "./node_modules/.pnpm/@react-three+drei*/**",
+                "./node_modules/.pnpm/@react-three+postprocessing*/**",
+                "./node_modules/.pnpm/three*/**",
+                "./node_modules/.pnpm/postprocessing*/**",
+                "./node_modules/.pnpm/react-pdf*/**",
+                "./node_modules/.pnpm/pdfjs-dist*/**",
                 "./node_modules/.pnpm/onnxruntime-node@*/node_modules/onnxruntime-node/bin/napi-v*/darwin/**",
                 "./node_modules/.pnpm/onnxruntime-node@*/node_modules/onnxruntime-node/bin/napi-v*/win32/**",
                 "./node_modules/.pnpm/onnxruntime-node@*/node_modules/onnxruntime-node/bin/napi-v*/linux/*/libonnxruntime_providers_cuda.so",
                 "./node_modules/.pnpm/onnxruntime-node@*/node_modules/onnxruntime-node/bin/napi-v*/linux/*/libonnxruntime_providers_tensorrt.so",
+                // The native binaries for the platform the build ran on. The
+                // hosted build runs on Linux, so the macOS and Windows
+                // variants can never be executed — but the trace still
+                // carried them, because they are optional dependencies of
+                // the same package. They were 58 MiB of the 179 MiB trace:
+                // uploaded to the function and read back on every cold
+                // start, for nothing.
+                "./node_modules/.pnpm/@swc+core-darwin-*/**",
+                "./node_modules/.pnpm/@swc+core-win32-*/**",
+                "./node_modules/.pnpm/@esbuild-darwin-*/**",
+                "./node_modules/.pnpm/@esbuild-win32-*/**",
+                "./node_modules/.pnpm/@img+sharp-darwin-*/**",
+                "./node_modules/.pnpm/@img+sharp-win32-*/**",
+                "./node_modules/.pnpm/@img+sharp-libvips-darwin-*/**",
+                "./node_modules/.pnpm/@img+sharp-libvips-win32-*/**",
+                "./node_modules/.pnpm/argon2@*/node_modules/argon2/prebuilds/darwin*/**",
+                "./node_modules/.pnpm/argon2@*/node_modules/argon2/prebuilds/win32*/**",
               ],
             },
             outputFileTracingIncludes: {
@@ -182,6 +214,54 @@ const config: NextConfig = isDemoBuild
           {
             source: "/(.*)",
             headers: [...securityHeaders, cspHeader],
+          },
+          {
+            // The storefront's catalogue pages are the same for every
+            // visitor, so the CDN can serve them without invoking the
+            // origin. Before this, every request paid for a cold function
+            // start: the live site answered eight requests a second with a
+            // p95 of 7.7 seconds.
+            //
+            // `s-maxage` is the shared-cache lifetime. The catalogue itself
+            // is cached for a minute, so a page cannot be more stale than
+            // the prices it shows. `stale-while-revalidate` lets the edge
+            // keep serving the page while the origin re-renders it, so a
+            // traffic spike does not become a stampede of cold starts.
+            //
+            // The path list and the session check are the same two
+            // conditions `middleware.ts` applies, expressed here because
+            // Next.js replaces the `Cache-Control` a middleware sets with
+            // the one the render produced — a header from the config is
+            // applied after the render and survives.
+            //
+            // A signed-in visitor is never cached: their pages carry their
+            // own session.
+            source:
+              "/:locale(en|fi|sv|ru)/:page(about|blog|coa|community/rules|compare|contact|documents|faq|forgot-password|glossary|lab-tests|legal|newsletter|partner|quality|register|research-tools|reset-password|rewards|shop|support|verify-email|wishlist)/:rest*",
+            missing: [
+              { type: "cookie", key: "authjs.session-token" },
+              { type: "cookie", key: "__Secure-authjs.session-token" },
+            ],
+            headers: [
+              {
+                key: "Cache-Control",
+                value: "public, max-age=0, s-maxage=60, stale-while-revalidate=300",
+              },
+            ],
+          },
+          {
+            // The home page: the locale and nothing after it.
+            source: "/:locale(en|fi|sv|ru)",
+            missing: [
+              { type: "cookie", key: "authjs.session-token" },
+              { type: "cookie", key: "__Secure-authjs.session-token" },
+            ],
+            headers: [
+              {
+                key: "Cache-Control",
+                value: "public, max-age=0, s-maxage=60, stale-while-revalidate=300",
+              },
+            ],
           },
           {
             // Long-cache hashed assets emitted by Next/Tailwind.

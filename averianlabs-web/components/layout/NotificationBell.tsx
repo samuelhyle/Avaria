@@ -12,17 +12,28 @@ import { useEffect, useState } from "react"
  * The notifications service has claimed in its own comment that "the bell icon
  * in the header reads from this table" — there was no bell. The count is
  * fetched for the signed-in customer only, and the button links to the inbox.
+ *
+ * The bell is rendered for every visitor and decides in the browser whether to
+ * show itself. The server used to omit it for guests, which made the
+ * rendered HTML different for every visitor and stopped the page from being
+ * cached at the CDN — every request paid for a cold function start. The count
+ * itself was always fetched in the browser, so nothing is lost: the only
+ * difference is when the icon appears.
  */
 export function NotificationBell({ locale }: { locale: string }) {
   const t = useTranslations("notifications")
-  const [count, setCount] = useState<number | null>(null)
+  const [state, setState] = useState<{ count: number; authenticated: boolean } | null>(null)
 
   useEffect(() => {
     let cancelled = false
     void fetch("/api/notifications", { headers: { accept: "application/json" } })
       .then((response) => (response.ok ? response.json() : null))
-      .then((body: { unread?: number } | null) => {
-        if (!cancelled && body && typeof body.unread === "number") setCount(body.unread)
+      .then((body: { unread?: number; authenticated?: boolean } | null) => {
+        if (cancelled || !body) return
+        setState({
+          count: typeof body.unread === "number" ? body.unread : 0,
+          authenticated: body.authenticated === true,
+        })
       })
       .catch(() => undefined)
     return () => {
@@ -30,14 +41,21 @@ export function NotificationBell({ locale }: { locale: string }) {
     }
   }, [])
 
+  // Until the request answers, and for a visitor who is not signed in, the
+  // bell keeps the space it occupies so the header does not shift.
+  const visible = state?.authenticated === true
+  const count = state?.count ?? 0
+
+  if (state && !state.authenticated) return null
+
   return (
     <Link
       href={`/${locale}/account/notifications`}
       aria-label={count ? t("unreadCount", { count }) : t("title")}
-      className="relative inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius)] text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+      className="relative inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius)] text-ink-muted transition-colors hover:bg-surface-2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 focus-visible:ring-offset-bg"
     >
       <Bell className="h-4 w-4" aria-hidden />
-      {count && count > 0 ? (
+      {count > 0 ? (
         <span className="absolute -right-0.5 -top-0.5 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-accent px-1 text-[10px] font-semibold text-white">
           {count > 99 ? "99+" : count}
         </span>

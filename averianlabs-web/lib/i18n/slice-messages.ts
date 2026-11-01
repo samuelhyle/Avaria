@@ -46,6 +46,9 @@ export function sliceNamespace(namespace: string, value: unknown, route?: string
   const entry = (CLIENT_MESSAGE_SLICE as Record<string, SliceEntry>)[namespace]
   if (!entry) return value
 
+  // The shell carries the union of every route's keys, so the whole set is
+  // used. The per-route sets are still recorded, and a route's own keys are
+  // added on top for the routes that ask for them.
   const allowed = new Set(entry.shell)
   if (route) {
     // The allowlist is keyed by the route *pattern* — `/shop/[slug]` — while

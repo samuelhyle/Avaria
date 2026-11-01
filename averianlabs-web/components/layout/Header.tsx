@@ -23,11 +23,9 @@ import { useEffect, useRef } from "react"
 
 interface HeaderProps {
   locale: string
-  /** Whether somebody is signed in. The notification bell only appears then. */
-  isAuthed?: boolean
 }
 
-export function Header({ locale, isAuthed = false }: HeaderProps) {
+export function Header({ locale }: HeaderProps) {
   const products = useCatalogue()
   const pathname = usePathname()
   const e = useTranslations("experience")
@@ -109,11 +107,9 @@ export function Header({ locale, isAuthed = false }: HeaderProps) {
                 <ThemeToggle />
               </div>
 
-              {isAuthed ? (
-                <div className="hidden xl:block">
-                  <NotificationBell locale={locale} />
-                </div>
-              ) : null}
+              <div className="hidden xl:block">
+                <NotificationBell locale={locale} />
+              </div>
 
               <Link
                 href={`/${locale}/account`}

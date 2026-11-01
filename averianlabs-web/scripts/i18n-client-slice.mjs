@@ -182,7 +182,16 @@ function keysOf(file) {
   const source = read(file)
   const found = new Map()
   if (!source) return found
-  if (!/^\s*["']use client["']/m.test(source) && !/useTranslations\(/.test(source)) return found
+  // A module that publishes the keys it needs in a `*_MESSAGE_KEYS` map is
+  // read even when it looks like a server module: the map exists precisely
+  // because the call sites cannot be analysed.
+  const publishesMessageKeys = /export const \w+_MESSAGE_KEYS\s*(?::[^=]+)?=/.test(source)
+  if (
+    !/^\s*["']use client["']/m.test(source) &&
+    !/useTranslations\(/.test(source) &&
+    !publishesMessageKeys
+  )
+    return found
 
   const ast = ts.createSourceFile(
     file,
@@ -241,6 +250,24 @@ function keysOf(file) {
       found.set(namespace, entry)
     }
     return entry
+  }
+
+  // A module that hands its keys to an injected translator — the assistant's
+  // error copy is read through a function parameter, so the call site shows
+  // no key at all. Such a module publishes the keys it needs in a map, and
+  // the map is read here so they stay in the browser's message slice.
+  for (const match of source.matchAll(
+    /export const \w+_MESSAGE_KEYS\s*(?::[^=]+)?=\s*\{([\s\S]*?)\n\}/g,
+  )) {
+    // The map is `{ "namespace": ["key", …] }`. The key list is read up to
+    // the closing bracket of its own array, so a key that contains a
+    // bracket does not end it early.
+    for (const group of match[1].matchAll(/["']?([a-zA-Z]+)["']?:\s*\[([^\]]*)\]/g)) {
+      const entry = entryFor(group[1])
+      for (const key of group[2].matchAll(/"([^"]+)"/g)) {
+        entry.keys.add(key[1])
+      }
+    }
   }
 
   const collect = (node) => {
@@ -525,18 +552,29 @@ for (const namespace of SLICED_NAMESPACES) {
     unsafe: false,
   }
   const shellKeys = resolveKeys(namespace, shellEntry)
+
+  // The shell has to carry every route's keys.
+  //
+  // The App Router does not re-render a layout on a client-side navigation
+  // inside its segment, and the layout holds the `NextIntlClientProvider`.
+  // The browser's messages are therefore fixed by the first page it loaded:
+  // a visitor who lands on the cart and then navigates to the email step
+  // keeps the cart's messages, and the step's own keys are missing. The
+  // shell is the union of the shell's own keys and every route's, so the
+  // provider holds the right copy whichever route the visitor started from.
+  const union = new Set(shellKeys)
   const routeKeys = {}
   for (const [route, usage] of routeUsage) {
     const entry = usage.get(namespace)
     if (!entry) continue
     const keys = resolveKeys(namespace, entry)
     if (keys.length === 0) continue
-    // Only record a route that adds something the shell does not already
-    // carry; the shell is always sent.
-    const extra = keys.filter((key) => !shellKeys.includes(key))
-    if (extra.length) routeKeys[route] = extra
+    for (const key of keys) union.add(key)
+    // The per-route set is kept so the caller can tell which route a key
+    // belongs to.
+    routeKeys[route] = keys
   }
-  resolved[namespace] = { shell: shellKeys, routes: routeKeys }
+  resolved[namespace] = { shell: [...union].sort(), routes: routeKeys }
 }
 
 // The allowlist lives in JSON so the generator, the CI check and the

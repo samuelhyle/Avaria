@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
+import { isCacheableRoute } from "./lib/cache/cacheable-routes"
 import { defaultLocale, isLocale } from "./lib/i18n/config"
 
 const PUBLIC_FILE = /\.(.*)$/
@@ -37,6 +38,23 @@ export function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set("x-pathname", pathname)
   requestHeaders.set("x-locale", first)
+
+  const route = segments.length > 1 ? `/${segments.slice(1).join("/")}` : "/"
+
+  // A signed-in visitor gets a personal page on some routes, and the
+  // account area always does. Nothing in this branch is cached for them, so
+  // the cache never mixes one visitor's response with another's.
+  const signedIn =
+    request.cookies.has("authjs.session-token") ||
+    request.cookies.has("__Secure-authjs.session-token")
+
+  const cacheable = request.method === "GET" && !signedIn && isCacheableRoute(route)
+
+  // The cache header itself is set in `next.config.ts`: Next.js replaces the
+  // `Cache-Control` a middleware sets with the one the render produced. This
+  // header is what the config matches on.
+  if (cacheable) requestHeaders.set("x-averianlabs-cacheable", "1")
+
   return NextResponse.next({ request: { headers: requestHeaders } })
 }
 

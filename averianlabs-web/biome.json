@@ -19,7 +19,8 @@
       ".next-implementation",
       ".next-store",
       ".next-verify",
-      "lib/i18n/client-message-slice.json"
+      "lib/i18n/client-message-slice.json",
+      ".next-*"
     ]
   },
   "formatter": {
