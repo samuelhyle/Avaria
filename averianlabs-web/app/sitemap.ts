@@ -1,7 +1,8 @@
 import { listPosts } from "@/lib/blog/posts"
 import { listGlossaryTerms } from "@/lib/glossary"
 import { locales } from "@/lib/i18n/config"
-import { getStorefrontCatalogue, storefrontProducts } from "@/lib/products/catalogue"
+import { getStorefrontCatalogue } from "@/lib/products/catalogue"
+import { storefrontProducts } from "@/lib/products/storefront"
 import { siteOrigin } from "@/lib/seo/site-origin"
 import type { MetadataRoute } from "next"
 

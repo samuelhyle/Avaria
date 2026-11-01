@@ -7,6 +7,7 @@ import { isDemoBuild } from "@/lib/demo"
 import { getFooterContent } from "@/lib/layout/footer-content"
 import { getStorefrontCatalogue } from "@/lib/products/catalogue"
 import { toClientCatalogue } from "@/lib/products/client-catalogue"
+import { storefrontProducts } from "@/lib/products/storefront"
 import type { Locale } from "@/lib/products/types"
 
 /**
@@ -43,10 +44,7 @@ export async function Chrome({
    * built. The product page itself still resolves, so the payment path can
    * still be tested by opening the fixture's own address.
    */
-  const products = toClientCatalogue(
-    catalogue.filter((product) => !product.checkoutTest),
-    locale as Locale,
-  )
+  const products = toClientCatalogue(storefrontProducts(catalogue), locale as Locale)
 
   return (
     // Only the fields the browser reads are serialised. The full catalogue

@@ -1,6 +1,7 @@
 import { CartView } from "@/components/cart/CartView"
-import { getStorefrontCatalogue, storefrontProducts } from "@/lib/products/catalogue"
+import { getStorefrontCatalogue } from "@/lib/products/catalogue"
 import { toClientCatalogue } from "@/lib/products/client-catalogue"
+import { storefrontProducts } from "@/lib/products/storefront"
 import type { Locale } from "@/lib/products/types"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 

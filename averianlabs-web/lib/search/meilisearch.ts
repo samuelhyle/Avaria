@@ -1,5 +1,6 @@
-import { getStorefrontCatalogue, storefrontProducts } from "@/lib/products/catalogue"
+import { getStorefrontCatalogue } from "@/lib/products/catalogue"
 import { defaultVial } from "@/lib/products/selection"
+import { storefrontProducts } from "@/lib/products/storefront"
 import type { Locale, Product } from "@/lib/products/types"
 import { MeiliSearch } from "meilisearch"
 
