@@ -41,7 +41,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <StoreHero locale={locale} featured={featured} />
       <TrustBar />
       <CategoryTiles locale={locale} />
-      <FeaturedProducts locale={locale} products={featured} limit={8} />
+      <FeaturedProducts
+        locale={locale}
+        products={featured}
+        limit={8}
+        buyable={buyable.length > 0}
+      />
       <StoreValue />
       <StoreHowItWorks />
       <StoreQuality locale={locale} />
