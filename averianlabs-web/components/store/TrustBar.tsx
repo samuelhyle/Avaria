@@ -1,3 +1,4 @@
+import { Card } from "@/components/ui/Card"
 import { Container } from "@/components/ui/Container"
 import { cn } from "@/lib/utils/cn"
 import { BadgeCheck, FlaskConical, MessagesSquare, PackageCheck } from "lucide-react"
@@ -27,14 +28,14 @@ export function TrustBar({
     return (
       <ul className={cn("grid gap-4 sm:grid-cols-2 lg:grid-cols-4", className)}>
         {ITEMS.map(({ key, icon: Icon }) => (
-          <li key={key} className="rounded-[var(--radius-lg)] border border-line bg-surface p-5">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-soft text-accent">
-              <Icon aria-hidden className="h-5 w-5" />
-            </span>
-            <h3 className="mt-3.5 text-sm font-semibold tracking-tight text-ink">
-              {t(`${key}.title`)}
-            </h3>
-            <p className="mt-1.5 text-[13px] leading-relaxed text-ink-muted">{t(`${key}.body`)}</p>
+          <li key={key}>
+            <Card className="h-full">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-soft text-accent">
+                <Icon aria-hidden className="h-5 w-5" />
+              </span>
+              <h3 className="h-card mt-3.5">{t(`${key}.title`)}</h3>
+              <p className="card-copy">{t(`${key}.body`)}</p>
+            </Card>
           </li>
         ))}
       </ul>

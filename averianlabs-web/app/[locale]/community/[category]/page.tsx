@@ -41,7 +41,7 @@ export default async function CategoryPage({ params }: Props) {
       <header className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-2xl">
           <p className="mb-2 text-xs uppercase tracking-wider text-ink-subtle">{t("title")}</p>
-          <h1 className="text-3xl font-semibold tracking-tight text-ink md:text-4xl">{catName}</h1>
+          <h1 className="h-page">{catName}</h1>
           <p className="mt-2 text-base text-ink-muted">{catDesc}</p>
         </div>
         <Button asChild size="sm">

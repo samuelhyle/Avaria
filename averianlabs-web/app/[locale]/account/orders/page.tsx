@@ -48,7 +48,7 @@ export default async function OrdersPage({ params }: { params: Promise<{ locale:
         <Badge tone="accent" className="mb-3">
           {t("orders")}
         </Badge>
-        <h1 className="font-display text-4xl font-semibold tracking-tight">{t("orders")}</h1>
+        <h1 className="h-page">{t("orders")}</h1>
       </header>
 
       {orders.length === 0 ? (

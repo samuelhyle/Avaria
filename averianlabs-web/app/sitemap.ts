@@ -1,7 +1,7 @@
 import { listPosts } from "@/lib/blog/posts"
 import { listGlossaryTerms } from "@/lib/glossary"
 import { locales } from "@/lib/i18n/config"
-import { getStorefrontCatalogue } from "@/lib/products/catalogue"
+import { getStorefrontCatalogue, storefrontProducts } from "@/lib/products/catalogue"
 import { siteOrigin } from "@/lib/seo/site-origin"
 import type { MetadataRoute } from "next"
 
@@ -56,7 +56,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  for (const product of await getStorefrontCatalogue()) {
+  for (const product of storefrontProducts(await getStorefrontCatalogue())) {
     for (const locale of locales)
       urls.push(entry(locale, `/shop/${product.slug}`, { priority: 0.8 }))
   }

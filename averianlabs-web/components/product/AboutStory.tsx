@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/Container"
+import { buttonClasses } from "@/lib/ui/button-styles"
 import { ArrowRight, BookOpen, Eye, FlaskConical, Sparkles } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import Link from "next/link"
@@ -25,9 +26,7 @@ export async function AboutStory({ locale }: { locale: string }) {
           <p className="mb-3 font-mono text-2xs uppercase tracking-[0.18em] text-accent">
             {r("aboutTitle") || "About"}
           </p>
-          <h1 className="text-balance font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-            {t("aboutHero")}
-          </h1>
+          <h1 className="h-sub">{t("aboutHero")}</h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">{t("aboutBody")}</p>
         </div>
         <aside className="rounded-[var(--radius-lg)] border border-line bg-surface-2/50 p-6">
@@ -46,10 +45,7 @@ export async function AboutStory({ locale }: { locale: string }) {
         className="mt-16 rounded-[var(--radius-lg)] border border-line bg-surface p-6 sm:p-8 lg:p-10"
       >
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
-          <h2
-            id="about-mission"
-            className="text-balance font-display text-2xl font-semibold leading-tight tracking-tight sm:text-3xl"
-          >
+          <h2 id="about-mission" className="h-sub">
             {t("aboutMissionTitle")}
           </h2>
           <p className="text-lg leading-relaxed text-ink-muted">{t("aboutMissionBody")}</p>
@@ -58,10 +54,7 @@ export async function AboutStory({ locale }: { locale: string }) {
 
       <section aria-labelledby="about-principles" className="mt-16">
         <header className="mb-8 max-w-2xl">
-          <h2
-            id="about-principles"
-            className="text-balance font-display text-2xl font-semibold leading-tight tracking-tight sm:text-3xl"
-          >
+          <h2 id="about-principles" className="h-sub">
             {t("aboutPrincipleTitle")}
           </h2>
         </header>
@@ -87,22 +80,22 @@ export async function AboutStory({ locale }: { locale: string }) {
         </ul>
       </section>
 
-      <footer className="mt-16 flex flex-wrap gap-3 border-t border-line pt-8 text-sm">
+      <footer className="mt-14 flex flex-wrap gap-3 border-t border-line pt-8 text-sm">
         <Link
           href={`/${locale}/shop`}
-          className="inline-flex min-h-10 items-center gap-1 rounded-[var(--radius)] bg-accent px-4 font-semibold text-on-accent shadow-sm transition-colors hover:bg-accent-hover"
+          className={buttonClasses({ variant: "primary", size: "sm" })}
         >
           {r("browse")} <ArrowRight aria-hidden className="h-3.5 w-3.5" />
         </Link>
         <Link
           href={`/${locale}/documents`}
-          className="inline-flex min-h-10 items-center gap-1 rounded-[var(--radius)] border border-line bg-surface px-4 font-semibold text-ink transition-colors hover:border-accent/40 hover:text-accent"
+          className={buttonClasses({ variant: "outline", size: "sm" })}
         >
           {r("documents")} <ArrowRight aria-hidden className="h-3.5 w-3.5" />
         </Link>
         <Link
           href={`/${locale}/contact`}
-          className="inline-flex min-h-10 items-center gap-1 rounded-[var(--radius)] border border-line bg-surface px-4 font-semibold text-ink transition-colors hover:border-accent/40 hover:text-accent"
+          className={buttonClasses({ variant: "outline", size: "sm" })}
         >
           {r("contactTitle")} <ArrowRight aria-hidden className="h-3.5 w-3.5" />
         </Link>

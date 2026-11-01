@@ -61,7 +61,7 @@ export default async function DocumentPage({ params }: Props) {
       </Link>
       <header className="mt-6 mb-8">
         <p className="text-sm text-ink-muted">{t(`docLabels.${doc.type}`)}</p>
-        <h1 className="mt-2 font-display text-3xl font-semibold">{doc.title}</h1>
+        <h1 className="mt-2 h-page">{doc.title}</h1>
         <p className="mt-4 max-w-3xl text-base leading-relaxed text-ink-muted">
           {l("originalNotice")}
         </p>

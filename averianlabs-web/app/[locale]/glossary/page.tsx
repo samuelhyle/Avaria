@@ -51,9 +51,7 @@ export default async function GlossaryIndexPage({
           <BookText className="h-5 w-5" />
         </div>
         <div className="flex-1">
-          <h1 className="text-3xl font-semibold tracking-tight text-ink md:text-4xl">
-            {t("title")}
-          </h1>
+          <h1 className="h-page">{t("title")}</h1>
           <p className="mt-2 max-w-2xl text-base text-ink-muted">{t("subtitle")}</p>
           <p className="mt-2 text-xs text-ink-subtle">
             {r("glossaryCount", { count: totalCount })}

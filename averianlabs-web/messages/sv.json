@@ -223,6 +223,8 @@
     "compareUpdated": "Jämförelsen är uppdaterad",
     "removeSaved": "Ta bort från sparade produkter",
     "compareEmpty": "Välj produkter att jämföra.",
+    "compareEmptyTitle": "Inget att jämföra ännu",
+    "compareEmptyBody": "Lägg till två eller fler material, så jämför den här sidan deras specifikationer sida vid sida: molekylen, CAS-nummer, den uppmätta renheten, partiet och lagringsbetingelserna.",
     "clearCompare": "Rensa jämförelsen",
     "category": "Kategori",
     "formula": "Molekylformel",
@@ -577,8 +579,9 @@
   },
   "shop": {
     "title": "Peptidbutik",
-    "subtitle": "Lager i realtid, aktuella priser och analysrapport för varje batch.",
+    "subtitle": "Alla material vi listar, med levande priser och batchdokument för de som är redo att levereras.",
     "search": "Sök på namn, SKU eller CAS-nummer…",
+    "searchShort": "Sök på namn eller SKU…",
     "searchHint": "Tryck ⌘K",
     "filters": "Filtrera",
     "filterQuick": "Snabbfilter",
@@ -1892,6 +1895,8 @@
     },
     "faq": {
       "title": "Frågor vi ofta får",
+      "subtitle": "De frågor vi får mest, besvarade rakt ut. Fråga gärna teamet om något saknas.",
+      "cta": "Läs hela listan med vanliga frågor",
       "items": {
         "1": {
           "question": "Vad får jag egentligen?",

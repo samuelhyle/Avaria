@@ -255,7 +255,7 @@ export function ShopFilterSidebar({ initial, counts, hasPurity }: ShopFilterSide
             role="dialog"
             aria-modal="true"
             aria-label={t("filters")}
-            className="absolute inset-y-0 left-0 flex w-full max-w-sm flex-col bg-surface shadow-2xl"
+            className="absolute inset-y-0 left-0 flex w-full max-w-sm flex-col bg-surface shadow-[var(--shadow-lg)]"
           >
             <header className="flex items-center justify-between border-b border-line px-5 py-4">
               <h2 className="font-display text-lg font-semibold">{t("filters")}</h2>

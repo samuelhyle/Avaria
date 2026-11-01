@@ -21,6 +21,26 @@ const neutral = {
 /** Every locale the storefront serves. */
 const STOREFRONT_LOCALES = ["en", "fi", "sv", "ru"] as const
 
+/**
+ * The products the storefront presents.
+ *
+ * The checkout fixture is a payment test, not merchandise: no goods, no
+ * batch, no certificate, no shipment, and a €1.50 price. It is excluded
+ * everywhere the catalogue is browsed — the shop grid, the search results,
+ * the command palette, the cart's recommendations, the products a shopper
+ * is offered alongside the one they are looking at, and the front page's
+ * featured row.
+ *
+ * The fixture's own page still resolves, so the payment path can be tested
+ * by opening its address directly.
+ */
+export function storefrontProducts(products: Product[]): Product[] {
+  // The owner can put the fixture back for as long as the catalogue is
+  // being tested, without a code change.
+  if (process.env.CHECKOUT_FIXTURE_IN_STOREFRONT === "true") return products
+  return products.filter((product) => !product.checkoutTest)
+}
+
 export function referenceCatalogue(): Product[] {
   return referenceProducts.map((product) => ({
     ...product,

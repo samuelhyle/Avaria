@@ -1,4 +1,4 @@
-import { getStorefrontCatalogue } from "@/lib/products/catalogue"
+import { getStorefrontCatalogue, storefrontProducts } from "@/lib/products/catalogue"
 import { defaultVial } from "@/lib/products/selection"
 import type { Locale, Product } from "@/lib/products/types"
 import { MeiliSearch } from "meilisearch"
@@ -73,7 +73,7 @@ export async function searchProducts(
   // The small catalogue is hydrated on every request so a stale external index cannot advertise stock or batch evidence.
   const locale = ["en", "fi", "sv", "ru"].includes(options.locale ?? "") ? options.locale! : "en"
   const q = query.trim().toLocaleLowerCase(locale)
-  let rows = documents(await getStorefrontCatalogue(), locale).filter((row) =>
+  let rows = documents(storefrontProducts(await getStorefrontCatalogue()), locale).filter((row) =>
     [row.name, row.slug, row.casNumber ?? "", ...row.skus, ...row.batchCodes].some((value) =>
       value.toLocaleLowerCase(locale).includes(q),
     ),

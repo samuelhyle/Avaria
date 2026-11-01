@@ -46,7 +46,7 @@ export default async function AccountPage({
           <Badge tone="accent" className="mb-3">
             {t("title")}
           </Badge>
-          <h1 className="font-display text-4xl font-semibold tracking-tight">
+          <h1 className="h-page">
             {member ? `${t("welcome")}, ${member.name ?? ""}` : tAuth("signInTitle")}
           </h1>
           {!member ? (

@@ -53,9 +53,13 @@ function Inner({ locale }: { locale: Locale }) {
   const remainingForFree = FREE_SHIPPING_THRESHOLD_CENTS - subtotal
 
   // Cart-aware recommendations: prefer products not already in the cart.
+  //
+  // The payment fixture is left out. It is a test of the checkout path, not
+  // something to offer a shopper who is adding to a basket — and it was the
+  // first thing the empty cart suggested.
   const inCart = new Set(items.map((i) => i.productSlug))
   const suggestions = allProducts
-    .filter((p) => p.slug && !inCart.has(p.slug) && p.dataSource !== "reference")
+    .filter((p) => p.slug && !inCart.has(p.slug) && p.dataSource !== "reference" && !p.checkoutTest)
     .slice(0, 4)
 
   if (!items.length) {

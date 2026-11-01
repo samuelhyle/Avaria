@@ -28,7 +28,7 @@ export function CompareFloatingBar({ locale }: { locale: string }) {
     <div
       role="region"
       aria-label={r("compare")}
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 px-4 py-3 shadow-2xl backdrop-blur-xl"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 px-4 py-3 shadow-[var(--shadow-lg)] backdrop-blur-xl"
     >
       <div className="mx-auto flex max-w-6xl items-center gap-3">
         <div className="flex items-center gap-2">

@@ -55,7 +55,11 @@ export function ProductCard({
   return (
     <article
       className={cn(
-        "group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/35 hover:shadow-[var(--shadow-lg)]",
+        // The card the shopper looks at most used a 20px corner while every
+        // other card on the site used 12px, so the product grid did not sit
+        // in the same family as the bands around it. The storefront has one
+        // radius now.
+        "group relative flex flex-col overflow-hidden rounded-[var(--radius-lg)] border border-line bg-surface transition-[transform,box-shadow,border-color] duration-300 ease-[var(--ease-crystal)] hover:-translate-y-0.5 hover:border-accent/35 hover:shadow-[var(--shadow)]",
         variant === "list" && "sm:flex-row sm:items-stretch",
         className,
       )}

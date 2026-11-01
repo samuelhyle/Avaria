@@ -75,7 +75,7 @@ export function ChatDrawer({
             exit={{ y: 32, scale: 0.98 }}
             transition={{ type: "spring", stiffness: 280, damping: 30 }}
             className={cn(
-              "relative z-10 flex h-[100dvh] max-h-[100dvh] w-full flex-col bg-surface shadow-2xl",
+              "relative z-10 flex h-[100dvh] max-h-[100dvh] w-full flex-col bg-surface shadow-[var(--shadow-lg)]",
               "md:ml-auto md:max-w-md md:rounded-l-[var(--radius-lg)] md:border md:border-line md:border-r-0",
             )}
           >

@@ -1,9 +1,12 @@
 "use client"
 
+import { EmptyState } from "@/components/ui/EmptyState"
 import { useCompare } from "@/lib/compare/store"
 import { defaultVial } from "@/lib/products/selection"
 import type { Locale, Product } from "@/lib/products/types"
+import { buttonClasses } from "@/lib/ui/button-styles"
 import { formatNumber, formatPercent, formatSize } from "@/lib/utils/format"
+import { ArrowRight, GitCompareArrows } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
 
@@ -13,7 +16,27 @@ export function CompareTable({ products, locale }: { products: Product[]; locale
   const remove = useCompare((state) => state.toggle)
   const clear = useCompare((state) => state.clear)
   const list = products.filter((product) => selected.includes(product.slug))
-  if (!list.length) return <p className="rounded border border-line p-8">{t("compareEmpty")}</p>
+  if (!list.length)
+    // The empty state was a single sentence in a bare box, on a page that
+    // was otherwise empty — so the page read as broken rather than as a
+    // page waiting for something. It now says what the page is for and
+    // offers the way in.
+    return (
+      <EmptyState
+        icon={GitCompareArrows}
+        title={t("compareEmptyTitle")}
+        description={t("compareEmptyBody")}
+        action={
+          <Link
+            href={`/${locale}/shop`}
+            className={buttonClasses({ variant: "primary", size: "md" })}
+          >
+            {t("browse")}
+            <ArrowRight aria-hidden className="h-4 w-4" />
+          </Link>
+        }
+      />
+    )
   const rows: Array<{ label: string; render: (product: Product) => string }> = [
     { label: t("category"), render: (p) => t(`categories.${p.category}`) },
     { label: "CAS", render: (p) => p.casNumber ?? "—" },

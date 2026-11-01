@@ -74,9 +74,7 @@ export default async function AuthorPage({ params }: Props) {
             <User className="h-3 w-3" />
             {author.role}
           </Badge>
-          <h1 className="text-3xl font-semibold tracking-tight text-ink md:text-4xl">
-            {author.name}
-          </h1>
+          <h1 className="h-page">{author.name}</h1>
           <p className="mt-3 max-w-2xl text-base text-ink-muted">{author.bio}</p>
         </div>
       </header>

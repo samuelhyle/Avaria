@@ -94,7 +94,7 @@ export function MiniCartPopover({ anchorRef, locale }: MiniCartPopoverProps) {
       onMouseEnter={cancelClose}
       onMouseLeave={scheduleClose}
       className={cn(
-        "absolute right-0 top-full z-50 mt-2 w-80 overflow-hidden rounded-[var(--radius-lg)] border border-line bg-surface shadow-2xl",
+        "absolute right-0 top-full z-50 mt-2 w-80 overflow-hidden rounded-[var(--radius-lg)] border border-line bg-surface shadow-[var(--shadow-lg)]",
         "animate-in slide-in-from-top-2 fade-in-0",
       )}
     >

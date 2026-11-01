@@ -58,9 +58,7 @@ export default async function BlogPage({
         <Badge tone="accent" className="mb-4">
           {r("blog")}
         </Badge>
-        <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
-          {t("blogHeading")}
-        </h1>
+        <h1 className="h-page">{t("blogHeading")}</h1>
         <p className="mt-3 text-ink-muted">{r("aboutEvidenceBody")}</p>
       </header>
 
@@ -70,7 +68,7 @@ export default async function BlogPage({
           <Link
             key={post.slug}
             href={`/${locale}/blog/${post.slug}`}
-            className="group flex flex-col rounded-[var(--radius-lg)] border border-line bg-surface p-6 transition-all hover:-translate-y-0.5 hover:shadow-md hover:border-accent/40"
+            className="group flex flex-col rounded-[var(--radius-lg)] border border-line bg-surface p-6 transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow)] hover:border-accent/40"
           >
             <Badge tone="muted" className="self-start">
               {post.tag}

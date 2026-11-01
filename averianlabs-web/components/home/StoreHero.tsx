@@ -2,6 +2,7 @@ import { ProductVisual } from "@/components/product/ProductVisual"
 import { Container } from "@/components/ui/Container"
 import { defaultVial } from "@/lib/products/selection"
 import type { Locale, Product } from "@/lib/products/types"
+import { buttonClasses } from "@/lib/ui/button-styles"
 import { formatCurrency } from "@/lib/utils/format"
 import { ArrowRight, Search, ShieldCheck, Truck } from "lucide-react"
 import { getTranslations } from "next-intl/server"
@@ -27,6 +28,20 @@ export async function StoreHero({
 
   const spotlight = featured.slice(0, 3)
   const hero = spotlight[0]
+
+  /**
+   * The price the hero quotes.
+   *
+   * A product whose price is not published has no price — its catalogue
+   * entry carries zero, which is not the same thing. Rendering that zero
+   * would put "€0.00" under the store's flagship product, so a product
+   * without a published price says that the price is on request instead.
+   */
+  const heroVial = hero ? defaultVial(hero) : undefined
+  const heroPrice =
+    heroVial && heroVial.purchaseMode === "direct" && heroVial.priceCents > 0
+      ? formatCurrency(heroVial.priceCents, "EUR", l)
+      : null
 
   /**
    * The purity stat shows a real measured number, so it must come from a
@@ -60,14 +75,18 @@ export async function StoreHero({
         <div className="grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:py-20">
           {/* ── Copy ─────────────────────────────────────────────────── */}
           <div className="min-w-0">
-            <p className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-soft px-3 py-1 text-2xs font-semibold uppercase tracking-[0.14em] text-accent-ink">
-              <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent" />
+            {/* The dot is aligned to the first line rather than the middle of
+                the block: on a narrow screen the label wraps to two lines, and
+                a centred dot then floats between them. */}
+            <p className="inline-flex items-start gap-2 rounded-full border border-accent/20 bg-accent-soft px-3 py-1 text-2xs font-semibold uppercase tracking-[0.14em] text-accent-ink">
+              <span
+                aria-hidden
+                className="mt-[0.45em] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+              />
               {t("heroEyebrow")}
             </p>
 
-            <h1 className="mt-5 text-balance break-words hyphens-auto font-display text-[1.9rem] font-bold leading-[1.08] tracking-[-0.03em] text-ink sm:text-5xl lg:text-[3.4rem]">
-              {t("heroTitle")}
-            </h1>
+            <h1 className="h-display mt-5">{t("heroTitle")}</h1>
 
             <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-ink-muted sm:text-lg">
               {t("heroSubtitle")}
@@ -92,14 +111,11 @@ export async function StoreHero({
                   name="q"
                   type="search"
                   autoComplete="off"
-                  placeholder={ts("search")}
-                  className="h-12 w-full rounded-[var(--radius)] border border-line bg-surface pl-10 pr-3 text-sm text-ink shadow-xs outline-none transition-colors placeholder:text-ink-subtle focus:border-accent focus-visible:ring-2 focus-visible:ring-accent/30"
+                  placeholder={ts("searchShort")}
+                  className="h-12 w-full rounded-[var(--radius)] border border-line bg-surface pl-10 pr-3 text-sm text-ink shadow-xs outline-none transition-colors placeholder:text-ink-subtle focus:border-accent"
                 />
               </div>
-              <button
-                type="submit"
-                className="inline-flex h-12 shrink-0 items-center gap-1.5 rounded-[var(--radius)] bg-accent px-5 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-              >
+              <button type="submit" className={buttonClasses({ variant: "primary", size: "lg" })}>
                 {t("ctaSearch")}
                 <ArrowRight aria-hidden className="h-4 w-4" />
               </button>
@@ -109,14 +125,14 @@ export async function StoreHero({
             <div className="mt-5 flex flex-wrap items-center gap-3">
               <Link
                 href={`/${locale}/shop`}
-                className="inline-flex h-12 items-center gap-2 rounded-[var(--radius)] bg-ink px-6 text-sm font-semibold text-white transition-colors hover:bg-brand-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                className={buttonClasses({ variant: "navy", size: "lg" })}
               >
                 {t("ctaShop")}
                 <ArrowRight aria-hidden className="h-4 w-4" />
               </Link>
               <Link
                 href={`/${locale}/lab-tests`}
-                className="inline-flex h-12 items-center gap-2 rounded-[var(--radius)] border border-line bg-surface px-6 text-sm font-semibold text-ink transition-colors hover:border-accent/40 hover:text-accent"
+                className={buttonClasses({ variant: "outline", size: "lg" })}
               >
                 {t("ctaResearch")}
               </Link>
@@ -140,7 +156,10 @@ export async function StoreHero({
 
           {/* ── Product renders ──────────────────────────────────────── */}
           <div className="relative min-w-0">
-            <div className="relative mx-auto aspect-square w-full max-w-[520px]">
+            {/* The frame was a square with the renders filling its top half
+                and a price card floating in the empty bottom. It is a little
+                shorter now and the renders fill it. */}
+            <div className="relative mx-auto aspect-[5/6] w-full max-w-[520px] sm:aspect-square">
               <div
                 aria-hidden
                 className="absolute inset-[6%] rounded-[2rem] bg-gradient-to-br from-accent-soft via-surface to-ice-soft"
@@ -150,9 +169,9 @@ export async function StoreHero({
               {spotlight.map((product, index) => {
                 const vial = defaultVial(product)
                 const position = [
-                  "left-[2%] top-[16%] h-[46%] w-[34%] z-20 -rotate-6",
-                  "left-[33%] top-[4%] z-30 h-[58%] w-[42%]",
-                  "right-[2%] top-[20%] z-20 h-[42%] w-[31%] rotate-6",
+                  "left-[1%] top-[14%] h-[50%] w-[36%] z-20 -rotate-6",
+                  "left-[32%] top-[3%] z-30 h-[62%] w-[44%]",
+                  "right-[1%] top-[18%] h-[46%] w-[33%] z-20 rotate-6",
                 ][index]
                 return (
                   <Link
@@ -168,7 +187,7 @@ export async function StoreHero({
 
               {/* Price card for the spotlight product */}
               {hero ? (
-                <div className="absolute bottom-[2%] left-1/2 z-40 w-[86%] max-w-xs -translate-x-1/2 rounded-[var(--radius-lg)] border border-line bg-surface/95 p-3.5 shadow-[var(--shadow-lg)] backdrop-blur-md">
+                <div className="absolute bottom-0 left-1/2 z-40 w-[86%] max-w-xs -translate-x-1/2 rounded-[var(--radius-lg)] border border-line bg-surface/95 p-3.5 shadow-[var(--shadow-lg)] backdrop-blur-md">
                   <div className="flex items-center justify-between gap-3">
                     <div className="min-w-0">
                       <p className="truncate text-sm font-semibold tracking-tight text-ink">
@@ -179,7 +198,7 @@ export async function StoreHero({
                       </p>
                     </div>
                     <p className="shrink-0 text-base font-bold tracking-tight text-ink tabular">
-                      {formatCurrency(defaultVial(hero).priceCents, "EUR", l)}
+                      {heroPrice ?? ts("pricingOnRequest")}
                     </p>
                   </div>
                 </div>

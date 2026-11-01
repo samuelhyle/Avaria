@@ -59,7 +59,7 @@ console.log(
   "p99 ms".padStart(8),
   "KB/req".padStart(9),
 )
-console.log("  " + "-".repeat(60))
+console.log(`  ${"-".repeat(60)}`)
 
 for (const [path, label] of ROUTES) {
   const result = await measure(path)

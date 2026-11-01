@@ -86,9 +86,7 @@ export default async function BlogPostPage({
       <Badge tone="muted" className="mb-4">
         {view.tag}
       </Badge>
-      <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl text-balance">
-        {view.title}
-      </h1>
+      <h1 className="h-page">{view.title}</h1>
       <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-ink-muted">
         <span className="flex items-center gap-1">
           <Calendar className="h-3 w-3" />

@@ -9,7 +9,7 @@ export default async function WishlistPage({ params }: { params: Promise<{ local
   const t = await getTranslations("research")
   return (
     <Container className="py-12">
-      <h1 className="font-display text-4xl font-semibold">{t("wishlist")}</h1>
+      <h1 className="h-page">{t("wishlist")}</h1>
       <p className="mt-4 mb-8 text-ink-muted">{t("savedIntro")}</p>
       <WishlistView locale={locale} />
     </Container>

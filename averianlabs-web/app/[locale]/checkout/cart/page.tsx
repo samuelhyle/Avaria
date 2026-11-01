@@ -1,5 +1,5 @@
 import { CartView } from "@/components/cart/CartView"
-import { getStorefrontCatalogue } from "@/lib/products/catalogue"
+import { getStorefrontCatalogue, storefrontProducts } from "@/lib/products/catalogue"
 import { toClientCatalogue } from "@/lib/products/client-catalogue"
 import type { Locale } from "@/lib/products/types"
 import { getTranslations, setRequestLocale } from "next-intl/server"
@@ -18,7 +18,10 @@ export default async function CartPage({
   // catalogue has to be trimmed here as well. Untrimmed, this route shipped
   // the full catalogue — every locale's translation and every batch record —
   // to the browser.
-  const products = toClientCatalogue(await getStorefrontCatalogue(), locale as Locale)
+  const products = toClientCatalogue(
+    storefrontProducts(await getStorefrontCatalogue()),
+    locale as Locale,
+  )
   return (
     <div className="mx-auto max-w-5xl">
       <header>
@@ -29,9 +32,7 @@ export default async function CartPage({
         <p className="font-mono text-2xs uppercase tracking-[0.18em] text-accent">
           {t("reviewLabel")}
         </p>
-        <h1 className="mt-2 text-balance font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
-          {t("title")}
-        </h1>
+        <h1 className="mt-2 h-page">{t("title")}</h1>
         <p className="mt-2 text-base text-ink-muted">{t("subtitle")}</p>
       </header>
       <div className="mt-8">

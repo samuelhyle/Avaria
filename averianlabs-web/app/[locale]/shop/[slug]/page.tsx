@@ -12,7 +12,7 @@ import { getCurrentMember } from "@/lib/community"
 import { documentAppliesToSku } from "@/lib/documents/library"
 import { listDocumentsForProductSlug } from "@/lib/documents/service"
 import { locales } from "@/lib/i18n/config"
-import { getStorefrontCatalogue } from "@/lib/products/catalogue"
+import { getStorefrontCatalogue, storefrontProducts } from "@/lib/products/catalogue"
 import { toClientCatalogue } from "@/lib/products/client-catalogue"
 import { defaultVial } from "@/lib/products/selection"
 import type { Locale } from "@/lib/products/types"
@@ -88,7 +88,9 @@ export default async function ProductPage({
   // Related cards are client components, so they are trimmed to the fields a
   // card actually renders before they are serialised into the page payload.
   const related = toClientCatalogue(
-    catalogue.filter((p) => p.category === product.category && p.slug !== slug).slice(0, 4),
+    storefrontProducts(catalogue)
+      .filter((p) => p.category === product.category && p.slug !== slug)
+      .slice(0, 4),
     locale as Locale,
   )
 
@@ -269,9 +271,7 @@ export default async function ProductPage({
           <p className="text-2xs font-semibold uppercase tracking-[0.16em] text-accent">
             {c(`categories.${product.category}`)}
           </p>
-          <h1 className="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            {translation.name}
-          </h1>
+          <h1 className="mt-2 h-page">{translation.name}</h1>
           <p className="mt-3 text-base leading-relaxed text-ink-muted">{translation.tagline}</p>
 
           {product.dataSource === "reference" ? (
@@ -305,9 +305,7 @@ export default async function ProductPage({
 
       {related.length ? (
         <section className="mt-16">
-          <h2 className="mb-6 font-display text-2xl font-bold tracking-tight text-ink">
-            {p("relatedHeading")}
-          </h2>
+          <h2 className="mb-6 h-section">{p("relatedHeading")}</h2>
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {related.map((item) => (
               <li key={item.slug}>

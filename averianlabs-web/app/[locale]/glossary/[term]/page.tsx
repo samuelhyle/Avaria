@@ -82,9 +82,7 @@ export default async function GlossaryTermPage({ params }: Props) {
           <div className="inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius)] bg-accent-soft text-accent">
             <BookText className="h-5 w-5" />
           </div>
-          <h1 className="text-3xl font-semibold tracking-tight text-ink md:text-4xl">
-            {record.term}
-          </h1>
+          <h1 className="h-page">{record.term}</h1>
         </div>
         <p className="mt-4 text-base text-ink-muted">{record.shortDefinition}</p>
       </header>

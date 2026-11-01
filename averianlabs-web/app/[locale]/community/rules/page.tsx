@@ -35,9 +35,7 @@ export default async function RulesPage({
           <Scale className="h-5 w-5" />
         </div>
         <div>
-          <h1 className="text-3xl font-semibold tracking-tight text-ink md:text-4xl">
-            {t("rulesTitle")}
-          </h1>
+          <h1 className="h-page">{t("rulesTitle")}</h1>
           <p className="mt-2 max-w-2xl text-base text-ink-muted">{t("rulesSub")}</p>
         </div>
       </header>

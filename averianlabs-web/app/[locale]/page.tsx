@@ -7,7 +7,7 @@ import { StoreNewsletter } from "@/components/home/StoreNewsletter"
 import { StoreQuality } from "@/components/home/StoreQuality"
 import { StoreValue } from "@/components/home/StoreValue"
 import { TrustBar } from "@/components/store/TrustBar"
-import { getStorefrontCatalogue } from "@/lib/products/catalogue"
+import { getStorefrontCatalogue, storefrontProducts } from "@/lib/products/catalogue"
 import { makePageMetadata } from "@/lib/seo/metadata"
 import { setRequestLocale } from "next-intl/server"
 
@@ -18,10 +18,23 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   setRequestLocale(locale)
 
   const products = await getStorefrontCatalogue()
-  const buyable = products.filter((product) =>
+
+  // The checkout fixture is a payment test, not a product: it has no goods,
+  // no batch and no certificate, and it is the only thing in the catalogue
+  // with a price. Left in, it became the store's flagship — the hero
+  // rendered "Test vial — €1.50" and the featured row showed two test
+  // products where a shopper expects the catalogue. It stays reachable at
+  // its own address so the payment path can still be exercised, but it is
+  // never what the front page shows.
+  const sellable = storefrontProducts(products)
+  const buyable = sellable.filter((product) =>
     product.vials.some((vial) => vial.purchaseMode === "direct" && vial.stockQty > 0),
   )
-  const featured = buyable.length > 0 ? buyable : products
+  // Prefer what can be bought today. When nothing can — which is the state
+  // until the catalogue's batches carry their evidence — show the catalogue
+  // itself rather than nothing: a page that lists the real products reads
+  // as a shop, and each one says plainly that its price is on request.
+  const featured = buyable.length > 0 ? buyable : sellable
 
   return (
     <>
@@ -32,7 +45,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <StoreValue />
       <StoreHowItWorks />
       <StoreQuality locale={locale} />
-      <StoreFaq />
+      <StoreFaq locale={locale} />
       <StoreNewsletter />
     </>
   )
