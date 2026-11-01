@@ -116,7 +116,7 @@ export function CompareModal({ locale, products }: CompareModalProps) {
         role="dialog"
         aria-modal="true"
         aria-label={t("compareLabel")}
-        className="absolute inset-x-2 top-2 mx-auto flex max-h-[calc(100vh-16px)] max-w-6xl flex-col overflow-hidden rounded-[var(--radius-lg)] border border-line bg-surface shadow-2xl sm:inset-x-6 sm:top-6 lg:top-10 animate-in slide-in-from-bottom fade-in-0"
+        className="absolute inset-x-2 top-2 mx-auto flex max-h-[calc(100vh-16px)] max-w-6xl flex-col overflow-hidden rounded-[var(--radius-lg)] border border-line bg-surface shadow-[var(--shadow-lg)] sm:inset-x-6 sm:top-6 lg:top-10 animate-in slide-in-from-bottom fade-in-0"
       >
         <header className="flex shrink-0 items-center justify-between border-b border-line bg-surface-2/50 px-5 py-4">
           <div className="flex items-center gap-3">

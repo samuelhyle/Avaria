@@ -25,7 +25,7 @@ export default async function RegisterPage({ params }: Props) {
         <Badge tone="accent" className="mb-3">
           {t("register")}
         </Badge>
-        <h1 className="font-display text-3xl font-semibold tracking-tight">{t("registerTitle")}</h1>
+        <h1 className="h-page">{t("registerTitle")}</h1>
         <p className="mt-2 text-sm text-ink-muted">{t("registerSubtitle")}</p>
       </header>
       <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-6 sm:p-8">

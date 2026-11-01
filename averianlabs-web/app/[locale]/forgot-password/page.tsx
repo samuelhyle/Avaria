@@ -25,7 +25,7 @@ export default async function ForgotPasswordPage({ params }: Props) {
         <Badge tone="accent" className="mb-3">
           {t("signIn")}
         </Badge>
-        <h1 className="font-display text-3xl font-semibold tracking-tight">{t("forgotTitle")}</h1>
+        <h1 className="h-page">{t("forgotTitle")}</h1>
         <p className="mt-2 text-sm text-ink-muted">{t("forgotSubtitle")}</p>
       </header>
       <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-6 sm:p-8">

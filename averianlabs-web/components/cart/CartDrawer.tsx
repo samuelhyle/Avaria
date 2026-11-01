@@ -44,7 +44,7 @@ export function CartDrawer({ locale }: { locale: string }) {
         role="dialog"
         aria-modal="true"
         aria-label={t("drawerTitle")}
-        className="absolute right-0 top-0 flex h-full w-full max-w-md flex-col border-l border-line bg-surface shadow-2xl animate-in slide-in-from-right fade-in-0"
+        className="absolute right-0 top-0 flex h-full w-full max-w-md flex-col border-l border-line bg-surface shadow-[var(--shadow-lg)] animate-in slide-in-from-right fade-in-0"
       >
         <header className="flex items-center justify-between border-b border-line px-5 py-4">
           <h2 className="flex items-center gap-2 font-display text-lg font-semibold tracking-tight">

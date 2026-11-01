@@ -67,7 +67,7 @@ export function QuickView({ product, locale, open, onOpenChange }: QuickViewProp
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="left-1/2 top-1/2 max-w-3xl -translate-x-1/2 -translate-y-1/2 border-line bg-surface p-0 shadow-2xl">
+      <DialogContent className="left-1/2 top-1/2 max-w-3xl -translate-x-1/2 -translate-y-1/2 border-line bg-surface p-0 shadow-[var(--shadow-lg)]">
         <DialogTitle className="sr-only">{translation.name}</DialogTitle>
 
         <div className="grid gap-0 sm:grid-cols-2">

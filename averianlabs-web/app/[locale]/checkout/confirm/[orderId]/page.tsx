@@ -36,7 +36,7 @@ export default async function Page({
   if (!order || !allowed)
     return (
       <div className="py-10">
-        <h1 className="font-display text-3xl font-semibold">{t("notFound")}</h1>
+        <h1 className="h-page">{t("notFound")}</h1>
         <p className="mt-4">{t("notFoundBody")}</p>
       </div>
     )
@@ -67,7 +67,7 @@ export default async function Page({
   return (
     <div className="py-10">
       <div className="mx-auto max-w-2xl rounded-[var(--radius-lg)] border border-line bg-surface p-8">
-        <h1 className="font-display text-3xl font-semibold">{title}</h1>
+        <h1 className="h-page">{title}</h1>
         <p className="mt-4 leading-relaxed text-ink-muted">{body}</p>
         <dl className="mt-6 space-y-2">
           <div className="flex flex-wrap justify-between gap-3">

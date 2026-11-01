@@ -34,6 +34,10 @@ export function toClientCatalogue(
       hue: product.hue,
       // Read by the cart to drop the non-purchasable reference rows.
       dataSource: product.dataSource,
+      // Read by the cart to keep the payment fixture out of the
+      // recommendations. It is a payment test, not something to suggest to
+      // a shopper.
+      checkoutTest: product.checkoutTest,
       // Read by the shop filters to separate peptides from reagents and
       // supplies.
       productType: product.productType,

@@ -11,7 +11,7 @@ export default async function PartnerPage({ params }: { params: Promise<{ locale
     <Container className="py-16">
       <div className="grid gap-12 lg:grid-cols-2">
         <header>
-          <h1 className="font-display text-4xl font-semibold">{t("partnerTitle")}</h1>
+          <h1 className="h-page">{t("partnerTitle")}</h1>
           <p className="mt-4 text-ink-muted">{t("partnerIntro")}</p>
         </header>
         <section className="rounded-[var(--radius-lg)] border border-line bg-surface p-6">

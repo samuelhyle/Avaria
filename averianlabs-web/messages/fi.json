@@ -223,6 +223,8 @@
     "compareUpdated": "Vertailu päivitetty",
     "removeSaved": "Poista tallennetuista tuotteista",
     "compareEmpty": "Valitse vertailtavat tuotteet.",
+    "compareEmptyTitle": "Ei vielä mitään vertailtavaa",
+    "compareEmptyBody": "Lisää kaksi tai useampi materiaali, niin tälle sivulle vertailleaan niiden tiedot rinnakkain: molekuli, CAS-numero, mitattu puhtaus, erä ja säilytysolosuhteet.",
     "clearCompare": "Tyhjennä vertailu",
     "category": "Tuoteryhmä",
     "formula": "Molekyylikaava",
@@ -577,8 +579,9 @@
   },
   "shop": {
     "title": "Peptidikauppa",
-    "subtitle": "Reaaliaikainen varasto, päivitetyt hinnat ja analyysikertomus jokaiselle erälle.",
+    "subtitle": "Kaikki listattuamme materiaalit, ja elinäkaiset hinnat sekä eräasiakirjat niille, jotka ovat valmiina toimitettavaksi.",
     "search": "Hae nimellä, tuotekoodilla tai CAS-numerolla…",
+    "searchShort": "Hae nimellä tai tuotekoodilla…",
     "searchHint": "Paina ⌘K",
     "filters": "Rajaa",
     "filterQuick": "Pikarakenteet",
@@ -1894,6 +1897,8 @@
     },
     "faq": {
       "title": "Kysymyksiä, joita saamme",
+      "subtitle": "Kysytyimmät kysymykset, vastattu suoraan. Jos jokin jää puuttuvan, kysy tiimiltä.",
+      "cta": "Lue kaikki usein kysytyt kysymykset",
       "items": {
         "1": {
           "question": "Mitä tarkalleen saan?",

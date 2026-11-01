@@ -5,6 +5,7 @@ import {
   RecordsScopeDiagram,
 } from "@/components/media/ResearchDiagrams"
 import { Container } from "@/components/ui/Container"
+import { buttonClasses } from "@/lib/ui/button-styles"
 import { ArrowRight, Beaker, FileCheck2, FlaskConical, ShieldCheck } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import Link from "next/link"
@@ -63,9 +64,7 @@ export async function QualityStory({ locale }: { locale: string }) {
         <p className="mb-3 font-mono text-2xs uppercase tracking-[0.18em] text-accent">
           {r("quality")}
         </p>
-        <h1 className="text-balance font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-          {r("qualityTitle")}
-        </h1>
+        <h1 className="h-sub">{r("qualityTitle")}</h1>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">{t("qualityHero")}</p>
       </header>
 
@@ -132,19 +131,19 @@ export async function QualityStory({ locale }: { locale: string }) {
       <footer className="mt-10 flex flex-wrap gap-3 border-t border-line pt-6 text-sm">
         <Link
           href={`/${locale}/lab-tests`}
-          className="inline-flex min-h-10 items-center gap-1 rounded-[var(--radius)] border border-line bg-surface px-4 font-semibold text-ink transition-colors hover:border-accent/40 hover:text-accent"
+          className={buttonClasses({ variant: "outline", size: "sm" })}
         >
           {r("methodology")} <ArrowRight aria-hidden className="h-3.5 w-3.5" />
         </Link>
         <Link
           href={`/${locale}/documents`}
-          className="inline-flex min-h-10 items-center gap-1 rounded-[var(--radius)] border border-line bg-surface px-4 font-semibold text-ink transition-colors hover:border-accent/40 hover:text-accent"
+          className={buttonClasses({ variant: "outline", size: "sm" })}
         >
           {r("documents")} <ArrowRight aria-hidden className="h-3.5 w-3.5" />
         </Link>
         <Link
           href={`/${locale}/contact`}
-          className="inline-flex min-h-10 items-center gap-1 rounded-[var(--radius)] border border-line bg-surface px-4 font-semibold text-ink transition-colors hover:border-accent/40 hover:text-accent"
+          className={buttonClasses({ variant: "outline", size: "sm" })}
         >
           {r("contactTitle")} <ArrowRight aria-hidden className="h-3.5 w-3.5" />
         </Link>

@@ -71,9 +71,7 @@ export default async function PublicPlanPage({ params }: Props) {
           <Globe2 className="h-3 w-3" />
           {t("publicBadge")}
         </Badge>
-        <h1 className="text-3xl font-semibold tracking-tight text-ink md:text-4xl">
-          {plan.title || t("untitled")}
-        </h1>
+        <h1 className="h-page">{plan.title || t("untitled")}</h1>
         {plan.notes ? (
           <p className="mt-3 max-w-2xl whitespace-pre-wrap text-sm text-ink-muted">{plan.notes}</p>
         ) : null}

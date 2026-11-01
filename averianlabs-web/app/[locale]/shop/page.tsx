@@ -40,9 +40,7 @@ export default async function ShopPage({ params }: { params: Promise<{ locale: s
     <>
       <div className="border-b border-line bg-surface">
         <Container className="py-8 sm:py-10">
-          <h1 className="font-display text-balance text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            {shop("title")}
-          </h1>
+          <h1 className="h-page">{shop("title")}</h1>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-muted sm:text-base">
             {shop("subtitle")}
           </p>

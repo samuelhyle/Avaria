@@ -223,6 +223,8 @@
     "compareUpdated": "Comparison updated",
     "removeSaved": "Remove from saved products",
     "compareEmpty": "Select products to compare.",
+    "compareEmptyTitle": "Nothing to compare yet",
+    "compareEmptyBody": "Add two or more materials and this page lines up their specifications side by side: the molecule, its CAS number, the measured purity, the batch and the storage conditions.",
     "clearCompare": "Clear comparison",
     "category": "Category",
     "formula": "Molecular formula",
@@ -577,8 +579,9 @@
   },
   "shop": {
     "title": "Peptide shop",
-    "subtitle": "Live stock, current prices and the certificate of analysis for every batch.",
+    "subtitle": "Every material we list, with live pricing and batch certificates for the ones ready to ship.",
     "search": "Search by name, SKU or CAS number…",
+    "searchShort": "Search by name or SKU…",
     "searchHint": "Press ⌘K",
     "filters": "Filters",
     "filterQuick": "Quick filters",
@@ -1894,6 +1897,8 @@
     },
     "faq": {
       "title": "Questions people ask us",
+      "subtitle": "The questions we are asked most, answered plainly. Whatever is missing, ask the team.",
+      "cta": "Read the full FAQ",
       "items": {
         "1": {
           "question": "What exactly do I receive?",

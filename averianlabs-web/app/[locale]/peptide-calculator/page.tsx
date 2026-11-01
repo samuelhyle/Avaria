@@ -45,9 +45,7 @@ export default async function PeptideCalculatorPage({
         <p className="mb-2 text-xs font-medium uppercase tracking-wider text-accent">
           {t("tools")}
         </p>
-        <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-          {t("calculator")}
-        </h1>
+        <h1 className="h-page">{t("calculator")}</h1>
         <p className="mt-3 text-sm leading-relaxed text-ink-muted">{t("calculatorNotice")}</p>
       </header>
       <Calculator initial={initial} source={source} isAuthed={!!member} />

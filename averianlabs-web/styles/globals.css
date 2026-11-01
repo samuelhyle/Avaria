@@ -71,13 +71,21 @@
   --font-display: "Geist Sans", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
 
   /* Type scale — two micro steps below `text-xs` (12px) so tiny UI text stops
-     using one-off arbitrary values. Metadata uses a 12px floor; explanatory copy uses larger role-specific styles. */
-  --text-3xs: 0.75rem;
+     using one-off arbitrary values. Metadata uses a 12px floor; explanatory copy uses larger role-specific styles.
+
+     The two steps were both 12px, which is not a step: `text-2xs` and
+     `text-3xs` were the same size as `text-xs` and only differed in line
+     height, so the scale the names promised did not exist. They are now
+     11px and 10px, and `text-xs` stays at 12px as the metadata floor. */
+  --text-3xs: 0.625rem;
   --text-3xs--line-height: 0.875rem;
-  --text-2xs: 0.75rem;
+  --text-2xs: 0.6875rem;
   --text-2xs--line-height: 1rem;
 
-  /* Headline display scale — used for hero/large headings to control rhythm. */
+  /* Headline display scale — used for hero/large headings to control rhythm.
+     The hero used an arbitrary `text-[1.9rem] … lg:text-[3.4rem]` instead of
+     these, so the largest text on the site had no token and could not be
+     reasoned about. These are the steps it uses now. */
   --text-display-sm: 2.5rem;
   --text-display-sm--line-height: 3rem;
   --text-display-md: 3.5rem;
@@ -86,6 +94,12 @@
   --text-display-lg--line-height: 5rem;
   --text-display-xl: 5.5rem;
   --text-display-xl--line-height: 6rem;
+
+  /* The one display step the storefront actually uses: a phone-sized
+     headline that grows to a 54px desktop one. */
+  --text-hero: 1.9rem;
+  --text-hero--line-height: 2.05rem;
+  --text-hero--letter-spacing: -0.03em;
 
   /* Motion durations — one vocabulary for CSS transitions. */
   --duration-fast: 150ms;
@@ -252,10 +266,6 @@
   }
 
   /* Stronger focus ring defaults — overridden per-component where needed. */
-  .focus-ring {
-    outline: none;
-    box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-accent);
-  }
 }
 
 @layer utilities {
@@ -285,29 +295,12 @@
     background: linear-gradient(135deg, hsl(var(--cat-hue) 80% 97%), hsl(var(--cat-hue) 40% 99%));
   }
 
-  .hue-glow {
-    background: radial-gradient(
-      circle at 30% 50%,
-      hsl(var(--cat-hue) 80% 85% / 0.35),
-      transparent 60%
-    );
-  }
-
   .hue-radial {
     background: radial-gradient(
       80% 60% at 50% 35%,
       hsl(var(--cat-hue) 85% 96%),
       hsl(var(--cat-hue) 30% 99%) 60%
     );
-  }
-
-  .hue-ring {
-    box-shadow: inset 0 0 60px hsl(var(--cat-hue) 80% 90% / 0.3), 0 0 40px
-      hsl(var(--cat-hue) 70% 70% / 0.15);
-  }
-
-  .hue-bar {
-    background: linear-gradient(90deg, hsl(var(--cat-hue) 80% 60%), hsl(var(--cat-hue) 60% 75%));
   }
 
   .hue-dot {
@@ -323,25 +316,12 @@
     background: linear-gradient(135deg, hsl(var(--cat-hue) 40% 13%), hsl(var(--cat-hue) 30% 9%));
   }
 
-  .dark .hue-glow {
-    background: radial-gradient(
-      circle at 30% 50%,
-      hsl(var(--cat-hue) 70% 40% / 0.35),
-      transparent 60%
-    );
-  }
-
   .dark .hue-radial {
     background: radial-gradient(
       80% 60% at 50% 35%,
       hsl(var(--cat-hue) 50% 14%),
       hsl(var(--cat-hue) 30% 8%) 60%
     );
-  }
-
-  .dark .hue-ring {
-    box-shadow: inset 0 0 60px hsl(var(--cat-hue) 60% 30% / 0.35), 0 0 40px
-      hsl(var(--cat-hue) 70% 40% / 0.2);
   }
 
   .text-balance {
@@ -352,41 +332,73 @@
     text-wrap: pretty;
   }
 
-  /* Section rhythm — consistent vertical breathing room. */
+  /* ── Section rhythm ────────────────────────────────────────────────────
+     Every band on the storefront was spaced by hand — `py-12 sm:py-16` in
+     one place, `py-8 sm:py-12` in another, and nothing at all for large
+     screens, so a 1440px viewport got the same 64px of air as a phone. The
+     steps are fixed here and the bands pick one.
+
+     The scale is 48 → 64 → 80 → 96: 48px on a phone, 64px from the small
+     breakpoint, 80px from the large one, and 96px on the widest screens. */
   .section {
-    @apply py-8 sm:py-12 lg:py-16;
+    @apply py-12 sm:py-16 lg:py-20 xl:py-24;
   }
   .section-tight {
-    @apply py-6 sm:py-8 lg:py-10;
+    @apply py-9 sm:py-12 lg:py-16;
+  }
+  .section-loose {
+    @apply py-16 sm:py-20 lg:py-28;
+  }
+
+  /* ── Heading scale ─────────────────────────────────────────────────────
+     Three heading systems had grown up side by side: the storefront used
+     `font-bold`, the editorial pages `font-semibold`, and several utility
+     pages no display face at all. These are the roles, and they are used by
+     the class names rather than by repeating a class string on every
+     heading, which is how the three systems diverged in the first place.
+
+       h-display   the hero — the largest text on the site
+       h-page      the heading of a page
+       h-section   the heading of a band within a page
+       h-sub       a sub-heading inside a page
+       h-card      a card's heading
+       h-card-lg   a card's heading, one step up */
+  .h-display {
+    @apply text-balance break-words hyphens-auto font-display text-[length:var(--text-hero)] font-bold leading-[1.08] tracking-[-0.03em] text-ink sm:text-5xl lg:text-[3.4rem];
+  }
+  .h-page {
+    @apply text-balance font-display text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl;
+  }
+  .h-section {
+    @apply text-balance font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl;
+  }
+  .h-sub {
+    @apply text-balance font-display text-2xl font-semibold leading-tight tracking-tight text-ink sm:text-3xl;
+  }
+  .h-card {
+    @apply text-sm font-semibold tracking-tight text-ink;
+  }
+  .h-card-lg {
+    @apply text-base font-semibold tracking-tight text-ink;
+  }
+
+  /* The small uppercase label that introduces a band. */
+  .eyebrow {
+    @apply text-2xs font-semibold uppercase tracking-[0.16em] text-accent;
+  }
+
+  /* The body copy inside a card. */
+  .card-copy {
+    @apply mt-1.5 text-[13px] leading-relaxed text-ink-muted;
   }
 
   /* Subtle hover lift for cards. */
-  .hover-lift {
-    transition: transform var(--duration-fast) var(--ease-crystal), box-shadow var(--duration-fast)
-      var(--ease-crystal);
-  }
-  .hover-lift:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
-  }
-
   /* Inline numeric tabular alignment (prices, batch codes). */
   .tabular {
     font-variant-numeric: tabular-nums;
   }
 
   /* Section divider — subtle 1px line that fades at the edges. */
-  .divider-fade {
-    background: linear-gradient(
-      90deg,
-      transparent,
-      var(--color-line) 20%,
-      var(--color-line) 80%,
-      transparent
-    );
-    height: 1px;
-  }
-
   .gradient-radial-blue {
     background: radial-gradient(
       circle at 30% 30%,
@@ -499,27 +511,6 @@ body[data-review-site="true"] {
   padding-bottom: calc(1rem + var(--platform-bottom-inset, 0px) + env(safe-area-inset-bottom));
 }
 
-/* Research interfaces share a readable rhythm, including long localised labels. */
-@layer utilities {
-  .research-heading {
-    font-size: clamp(1.875rem, 4vw, 3rem);
-    line-height: 1.12;
-    letter-spacing: -0.035em;
-    font-weight: 650;
-  }
-  .research-intro {
-    max-width: 65ch;
-    font-size: 1rem;
-    line-height: 1.65;
-    color: var(--color-ink-muted);
-  }
-  .research-panel {
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-lg);
-    background: var(--color-surface);
-  }
-}
-
 /* ── Storefront primitives ────────────────────────────────────────────────
    Shared building blocks for the shop surfaces: the announcement strip, the
    product "stage" a render sits on, and the fine-print treatment used
@@ -596,35 +587,9 @@ body[data-review-site="true"] {
 
 @layer utilities {
   /* Hairline separator that matches the storefront surface rhythm. */
-  .store-divider {
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      var(--color-line) 12%,
-      var(--color-line) 88%,
-      transparent
-    );
-  }
-
   /* Focus ring used by the new store controls. */
-  .focus-accent {
-    outline: none;
-  }
   .focus-accent:focus-visible {
     box-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-accent);
-  }
-
-  .text-gradient-brand {
-    background: linear-gradient(
-      100deg,
-      var(--color-brand-navy) 0%,
-      var(--color-accent) 60%,
-      hsl(196 70% 42%) 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
   }
 
   .dark .text-gradient-brand {

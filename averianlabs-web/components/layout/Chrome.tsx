@@ -24,14 +24,34 @@ export async function Chrome({
   locale: string
   children: React.ReactNode
 }) {
-  const [products, footerContent] = await Promise.all([
+  const [catalogue, footerContent] = await Promise.all([
     getStorefrontCatalogue(),
     getFooterContent(locale),
   ])
+
+  /**
+   * The payment fixture is not merchandise.
+   *
+   * It exists to exercise the checkout path on the live site: no goods, no
+   * batch, no certificate, no shipment, and a €1.50 price. Left in the
+   * catalogue the browser sees, it appeared in the shop grid, in the search
+   * results, in the command palette and in the cart's recommendations — and
+   * on a catalogue whose own products are still awaiting their evidence, it
+   * was the only thing on sale.
+   *
+   * It is dropped here, once, at the one place the browser's catalogue is
+   * built. The product page itself still resolves, so the payment path can
+   * still be tested by opening the fixture's own address.
+   */
+  const products = toClientCatalogue(
+    catalogue.filter((product) => !product.checkoutTest),
+    locale as Locale,
+  )
+
   return (
     // Only the fields the browser reads are serialised. The full catalogue
     // stays on the server, where the product pages render it.
-    <CatalogueProvider products={toClientCatalogue(products, locale as Locale)}>
+    <CatalogueProvider products={products}>
       <Header locale={locale} />
       <main id="main" className="min-h-[calc(100vh-64px)]">
         {children}

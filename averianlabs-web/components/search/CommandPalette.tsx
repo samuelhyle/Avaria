@@ -76,7 +76,7 @@ export function CommandPalette({ locale, products }: CommandPaletteProps) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogPortal>
         <DialogOverlay className="bg-ink/40 backdrop-blur-sm" />
-        <DialogContent className="left-1/2 top-[12vh] max-w-2xl -translate-x-1/2 translate-y-0 border-line bg-surface/95 p-0 shadow-2xl backdrop-blur-xl">
+        <DialogContent className="left-1/2 top-[12vh] max-w-2xl -translate-x-1/2 translate-y-0 border-line bg-surface/95 p-0 shadow-[var(--shadow-lg)] backdrop-blur-xl">
           <DialogTitle className="sr-only">{nav("search")}</DialogTitle>
           <Command label={nav("search")} className="rounded-[var(--radius-lg)]">
             <div className="flex items-center gap-3 border-b border-line px-4">
