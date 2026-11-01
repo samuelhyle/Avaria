@@ -126,8 +126,15 @@ const options = {
   // numbers.
   headers: {
     "accept-encoding": "gzip, deflate, br",
-    "user-agent": "AverianLabs load test",
-    "accept-language": "en",
+    // A browser's user agent, because the host's edge protection answers
+    // anything that does not look like a browser with a branded 403 — and
+    // the number that matters is the one a visitor gets. With a tool-like
+    // agent the same run returns roughly a third 403s, which says nothing
+    // about the site.
+    "user-agent":
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "accept-language": "en-US,en;q=0.9",
   },
 }
 if (RAMP > 0) options.rampUp = RAMP
@@ -150,7 +157,15 @@ if (has("json") || has("out")) {
 const instance = autocannon(options)
 process.stdout.write(`\n${scenarioName}: ${scenario.description}\n`)
 console.log(`  target ${BASE}  ${CONNECTIONS} connections  ${DURATION}s\n`)
-instance.on("response", () => {})
+
+// Record which status codes the run actually saw. A count of "non-2xx"
+// without the codes is not actionable: the host's edge answers a request it
+// does not like with a branded 403, and the application answers a
+// cross-origin write with a 403 of its own. They are different problems.
+const statusCounts = {}
+instance.on("response", (_client, statusCode) => {
+  statusCounts[statusCode] = (statusCounts[statusCode] || 0) + 1
+})
 process.on("SIGINT", () => {
   instance.stop()
 })
@@ -180,6 +195,10 @@ function format(result, name, description) {
     `  latency       avg ${result.latency.average.toFixed(1)}ms  p50 ${result.latency.p50}ms  p90 ${result.latency.p90}ms  p97.5 ${result.latency.p97_5}ms  p99 ${p99}ms  p99.9 ${p999}ms  max ${result.latency.max}ms`,
     `  bandwidth     ${result.throughput.average.toFixed(1)} KB/s`,
     `  errors        ${result.errors} errors, ${result.timeouts} timeouts, ${non2xx} non-2xx  (${errorRate.toFixed(2)}%)`,
+    `  status codes  ${Object.entries(statusCounts)
+      .sort((a, b) => b[1] - a[1])
+      .map(([code, count]) => `${code}×${count}`)
+      .join("  ") || "(not recorded)"}`,
     `  connections   ${result.connections} (${CONNECTIONS} configured)`,
     "",
   ].join("\n")
