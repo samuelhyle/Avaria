@@ -6,14 +6,17 @@ Published to [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app
 
 | Item | Value |
 |---|---|
-| Published at | `2026-11-01T01:52:04.108Z` |
-| Netlify deploy | `6ae69a64ba76c3a04c450771` |
-| Deployed commit on `demo` | `2c7060a` |
-| Deployed source tree | `0c682cf6dba56b11a855a44d360249397dafd8d6` |
-| Previous published deploy | `6ae5f776903d2207746c6286` (unlocked and superseded) |
+| Published at | `2026-11-01T02:48:43.483Z` |
+| Netlify deploy | `6ae6a7aa192fe865cb9c1fb4` |
+| Deployed commit on `demo` | `1f69091` |
+| Previous published deploy | `6ae69a64ba76c3a04c450771` (unlocked and superseded) |
 | Deployment method | Git push to the `demo` branch; Netlify built the source with the hosted secrets |
 | Functions deployed | `___netlify-server-handler`, `cron-crypto`, `cron-maintenance` |
 | Schedules | `*/2 * * * *` (crypto), `*/5 * * * *` (maintenance) |
+
+This record was revised after that deploy was published. The revision
+changes the document only — the application it describes is the application
+the named deploy serves.
 
 ## The release before it
 
@@ -102,10 +105,10 @@ leak, not a performance gain.
 | First request (cold) | — | 628 ms |
 | Repeat request (warm) | — | 64 ms |
 
-The page weight fell with it. The home page's HTML went from 319 496 to
-305 322 bytes, the shop from 325 830 to 307 612, a product page from
-178 740 to 160 971 and the about page from 124 122 to 110 880. Three
-changes account for it: the client no longer receives the date-time format
+The page weight fell with it. Measured on the two deployments, the served
+HTML went from 233 445 to 225 921 bytes on the home page, from 300 652 to
+288 286 on the shop, from 161 720 to 149 354 on a product page and from
+117 725 to 110 292 on the about page. Three changes account for it: the client no longer receives the date-time format
 table it never reads, the browser receives only the fields it reads from
 the catalogue instead of all of it, and each page receives only the
 translations it renders — with the chrome around the page carrying the
