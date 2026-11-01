@@ -160,8 +160,30 @@ thing the empty cart suggested and two entries in the sitemap.
 
 They are now left out of everything that browses the catalogue. Their own
 pages still resolve, so the payment path can be tested by opening the
-fixture's address, and `CHECKOUT_FIXTURE_IN_STOREFRONT=true` puts them back
-while it is being tested. A test guards the exclusion.
+fixture's address.
+
+Whether they are shown is the owner's decision, and it is one environment
+variable:
+
+```
+CHECKOUT_FIXTURE_IN_STOREFRONT=true
+```
+
+Set it in Netlify → Site settings → Environment variables and rebuild.
+With it off — the default — the fixtures are absent from the shop grid, the
+search results, the sitemap, the cart's recommendations, the products
+offered beside the one a shopper is looking at, and the front page's
+featured row. With it on, they appear in all of them.
+
+It is a server-side variable, so it needs a rebuild, and it is deliberately
+not `NEXT_PUBLIC_*`: the filtering happens before the catalogue reaches the
+browser.
+
+A test guards the exclusion, and another guards that the shell's catalogue
+— which the shop, the search palette, the wishlist and the command palette
+all read — honours the same switch. It once did not: the shell filtered
+the fixtures with a predicate of its own, so the switch was honoured by the
+home page and ignored by the shop.
 
 That left the storefront's copy claiming things it was not showing, so the
 copy was made to match the state:
