@@ -335,6 +335,18 @@ database of its own and the payment provider's credentials, and two of its
 cases are expected to fail without them. It runs locally against the
 isolated database.
 
+The gate found a fault on its first run, which is what a gate is for. The
+host sets `NODE_ENV=production` for the whole build, and React's production
+build does not export `act` — the helper that renders a component and lets
+its effects settle. Ten suites import it from `react`, so under
+`NODE_ENV=production` they failed with "act is not a function" before they
+ran a single assertion. The suite now pins `NODE_ENV=test` for itself
+wherever it runs, and the hosted build passes it explicitly, so the same
+command behaves the same on a laptop and on the host that publishes the
+site. The production build is verified separately: the browser suite runs
+against a real deployment, and the build type-checks and bundles the
+production output.
+
 The purchase journey was walked in a real browser against the published
 site: the catalogue, the cart, the email, address and shipping steps and the
 payment step all render, the total is priced, and placing an order without

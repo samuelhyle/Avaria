@@ -72,7 +72,19 @@ if (process.env.CHECKOUT_TEST_PRODUCT_ENABLED === "true")
 // isolated database.
 run("pnpm", ["typecheck"])
 run("pnpm", ["lint"])
-run("pnpm", ["test"])
+// The suite runs with NODE_ENV=test whatever the host set.
+//
+// The host sets NODE_ENV=production for the whole build, and React's
+// production build does not export `act` — the test-only helper that renders
+// a component and lets its effects settle. Ten suites import it from
+// `react`, so under NODE_ENV=production they fail with "act is not a
+// function" before they run a single assertion.
+//
+// NODE_ENV=test keeps React's development build, which is the build the
+// suite was written against. The production build is verified separately:
+// the browser suite runs against a real deployment, and the build itself
+// type-checks and bundles the production output.
+run("pnpm", ["test"], { ...process.env, NODE_ENV: "test" })
 run("pnpm", ["build"])
 run("pnpm", ["check:bundle"])
 run("node", ["scripts/check-server-traces.mjs"])
