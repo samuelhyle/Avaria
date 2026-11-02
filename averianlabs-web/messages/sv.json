@@ -2001,7 +2001,7 @@
     "emptyTitle": "Inga certifikat har publicerats än",
     "emptyBody": "Ett certifikat visas här så snart ett parti frigivs och dess certifikat publiceras. Be oss om du behöver certifikatet för ett visst parti.",
     "requestOne": "Begär ett certifikat",
-    "resultCount": "{count} certifikat",
+    "resultCount": "{count, plural, one {# certifikat} other {# certifikat}}",
     "pagination": "Certifikatsidor",
     "page": "Sida {page}",
     "previous": "Föregående",

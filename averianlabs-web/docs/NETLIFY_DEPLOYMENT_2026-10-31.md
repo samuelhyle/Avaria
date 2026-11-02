@@ -1,4 +1,4 @@
-# Release record — 31 October 2026 (updated 1 November 2026)
+# Release record — 31 October 2026 (updated 2 November 2026)
 
 Published to [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app). The merchant release is approved and the review-site gate has been removed, so the storefront is indexable and the canonical origin, the sitemap and `robots.txt` all name the origin that actually serves the site.
 
@@ -6,13 +6,18 @@ Published to [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app
 
 | Item | Value |
 |---|---|
-| Published at | `2026-11-01T02:48:43.483Z` |
-| Netlify deploy | `6ae6a7aa192fe865cb9c1fb4` |
-| Deployed commit on `demo` | `1f69091` |
-| Previous published deploy | `6ae69a64ba76c3a04c450771` (unlocked and superseded) |
+| Published at | `2026-11-02T15:01:57.038Z` |
+| Netlify deploy | `6ae8a50264fb73a10deca06e` |
+| Deployed commit on `demo` | `a71b25e` |
+| Previous published deploy | `6ae77d24afb00c46c4c2177a` (unlocked and superseded) |
 | Deployment method | Git push to the `demo` branch; Netlify built the source with the hosted secrets |
 | Functions deployed | `___netlify-server-handler`, `cron-crypto`, `cron-maintenance` |
 | Schedules | `*/2 * * * *` (crypto), `*/5 * * * *` (maintenance) |
+
+Two further deploys followed it on the same day — `6ae8a92b964e1e55a0c34f62`
+(the labelling fix described below) and the deploy that carries the final
+plural correction. The deploy table is updated as each is published; the
+sections below describe the release as a whole.
 
 This record was revised after that deploy was published. The revision
 changes the document only — the application it describes is the application
@@ -228,22 +233,83 @@ now sends a browser's user agent and records which status codes the run saw.
 ## Executed verification
 
 - TypeScript passed. Biome reported zero errors.
-- 499 unit tests passed, 9 of them the new CSRF tests and 3 the new
-  storefront-catalogue tests.
+- 508 unit tests passed, 8 of them the new certificate-library tests.
 - 83 integration tests passed against the isolated database. The 2 that did
   not run need Stripe's webhook signing secret, which is not set in the local
   environment; they fail on the missing credential, not on the code.
-- 155 browser tests passed, 2 skipped. The suite passes whether or not the
-  environment is exported: two tests used to read the developer's own
-  environment instead of pinning what they depended on.
+- 167 browser tests passed, 2 skipped. Ten of them are the new
+  certificate-library suite: the lot is named, the assay is beside it, the
+  filters narrow it, the legacy `/coa` address still keeps its filters, and
+  a certificate published only in English and Finnish is not shown as
+  Swedish evidence. The suite passes whether or not the environment is
+  exported: two tests used to read the developer's own environment instead of
+  pinning what they depended on.
 - 65 per-route bundle budgets passed. 12 deployment checks passed.
 - 20 accessibility routes passed axe with zero critical or serious findings.
-- 120 narrow-viewport combinations at 320px had no horizontal overflow.
-- The runtime audit walked 116 route and locale combinations: zero console errors, zero uncaught exceptions, zero failed requests, zero non-2xx responses, zero missing translations, zero uninterpolated placeholders.
-- The deploy verifier ran against the deployment's own URL and then against the published site: 22 checks, all passing. Every locale's home page, shop and product page render; the cross-origin write is refused with 403; the same-origin write reaches the handler.
+- 124 narrow-viewport combinations at 320px had no horizontal overflow. The
+  assay was a four-column table with a minimum width, and it scrolled the
+  page sideways at 320px; it is now a table on a wide screen and a stacked
+  list on a narrow one, carrying the same four fields either way.
+- The runtime audit walked 124 route and locale combinations: zero console errors, zero uncaught exceptions, zero failed requests, zero non-2xx responses, zero missing translations, zero uninterpolated placeholders.
+- The deploy verifier ran against the deployment's own URL and then against the published site: 26 checks, all passing. Every locale's home page, shop, product page and certificate library render; the cross-origin write is refused with 403; the same-origin write reaches the handler.
 - The assistant answered in all four languages on the published site, in the language of the question, with no English left in the answer.
 - The live quote flow was exercised in a real browser: the request was submitted and the confirmation rendered, with no console errors.
 - Client-side navigation was confirmed to work without a full page load.
+
+## The batch certificate library
+
+The competitor's strongest asset is a certificate page: a grid of lots, each
+with a product, a size, a purity percentage, a batch number and a test date.
+We had the data model for something better and none of it published — the
+public library listed one seeded test fixture, and the product page showed a
+file link and no assay.
+
+The library is per lot now, at `/[locale]/certificates`. Every released batch
+with a published certificate appears with the lot code printed on the vial,
+the purity that lot measured, the endotoxin result, the mass spectrometry
+confirmation, the laboratory, the manufacturing and expiry dates, and the
+assay itself: the method, the result, the specification and whether it
+passed. It filters by product, lot code, SKU, laboratory and purity, and it
+is reachable from the header, the footer, the front page, the catalogue card
+and the product page.
+
+The front page's certificate card shows a published certificate rather than
+an illustration, and falls back to the illustration only when nothing has
+been published. The laboratory it names is the owner's to set
+(`NEXT_PUBLIC_LAB_NAME`) rather than a name the layout invented — the
+previous version put "Eurofins Biolab" on the front page of a shop that had
+no batch tested by anyone.
+
+Three rules keep the library honest:
+
+- only released, reviewed, unexpired lots appear, and only when their
+  certificate document is publicly readable;
+- a demonstration record says so, in a badge, whether it is marked by the
+  account that reviewed it or by its own title or laboratory name;
+- a product the shop does not sell has no certificate to publish, so the
+  checkout fixture's certificate follows the same switch as the fixture.
+
+The legacy `/coa` address still lands on the document library with its
+filters intact; the batch library has its own address, and the two are
+linked in both directions.
+
+### The company identity
+
+The footer used to say "Seller registration details are awaiting
+confirmation" because the identity lives in `NEXT_PUBLIC_LEGAL_*` environment
+variables and the host had none of them set. They are set now, so the footer
+names the seller: AverianLabs Oy, business ID 3124587-9, VAT FI31245879,
+Aleksanterinkatu 15 A 7, Helsinki. A Finnish company with a business
+registration and a VAT number is the local alternative to a supplier on the
+other side of the world, and the footer now says so.
+
+### What is still missing
+
+The library is ready for the supplier's certificates; the production
+database has none yet. The single entry it shows is the checkout fixture's,
+labelled as the demonstration record it is. Loading a real lot is a data
+operation: release the batch, publish its certificate document, and it
+appears in all four languages without a code change.
 
 ## Remaining release requirements
 
