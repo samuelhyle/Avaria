@@ -6,7 +6,7 @@ import {
   matchesCertificateTerm,
   readCertificateFilters,
 } from "./library"
-import { isDemonstrationBatch, isPublishableCertificate } from "./types"
+import { isDemonstrationBatch, isDemonstrationCertificate, isPublishableCertificate } from "./types"
 
 const CERTIFICATE = {
   productSlug: "ghk-cu",
@@ -83,6 +83,25 @@ describe("what may be published as a certificate", () => {
     expect(isDemonstrationBatch("Automated test fixture")).toBe(true)
     expect(isDemonstrationBatch("A. Reviewer")).toBe(false)
     expect(isDemonstrationBatch(null)).toBe(false)
+  })
+
+  it("reads the demonstration marker from the record itself, not only the reviewer", () => {
+    expect(
+      isDemonstrationCertificate({
+        reviewedBy: "operations",
+        documentTitle: "Certificate of Analysis — TEST-202610-USDC (local-test-fixture)",
+      }),
+    ).toBe(true)
+    expect(
+      isDemonstrationCertificate({ reviewedBy: "operations", lab: "Local test fixture" }),
+    ).toBe(true)
+    expect(
+      isDemonstrationCertificate({
+        reviewedBy: "operations",
+        documentTitle: "Certificate of Analysis — BPC157-10-2026-08-A",
+        lab: "Biolab GmbH",
+      }),
+    ).toBe(false)
   })
 
   it("publishes a lot only when its certificate document can actually be opened", () => {

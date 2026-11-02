@@ -60,9 +60,37 @@ export interface BatchCertificate {
  */
 export const DEMONSTRATION_REVIEWERS = ["local-demo-fixture", "Automated test fixture"] as const
 
+/**
+ * Words that mark a record as a demonstration rather than supplier evidence.
+ *
+ * A record seeded before this rule existed still says what it is in its own
+ * title or in the name of the laboratory that supposedly ran the assay. The
+ * words are read from the record itself, so a lot cannot be passed off as a
+ * supplier's certificate by being reviewed by the wrong account.
+ */
+const DEMONSTRATION_WORDS = /fixture|demonstration|demo record|sample record/i
+
 export function isDemonstrationBatch(reviewedBy: string | null | undefined): boolean {
   if (!reviewedBy) return false
-  return (DEMONSTRATION_REVIEWERS as readonly string[]).includes(reviewedBy)
+  if ((DEMONSTRATION_REVIEWERS as readonly string[]).includes(reviewedBy)) return true
+  return DEMONSTRATION_WORDS.test(reviewedBy)
+}
+
+/**
+ * Whether a certificate is a demonstration record.
+ *
+ * The reviewer, the document title and the laboratory are all checked: a
+ * record that says in any of them that it is a fixture is one.
+ */
+export function isDemonstrationCertificate(record: {
+  reviewedBy: string | null | undefined
+  documentTitle?: string | null
+  lab?: string | null
+}): boolean {
+  if (isDemonstrationBatch(record.reviewedBy)) return true
+  if (record.documentTitle && DEMONSTRATION_WORDS.test(record.documentTitle)) return true
+  if (record.lab && DEMONSTRATION_WORDS.test(record.lab)) return true
+  return false
 }
 
 /**
