@@ -237,7 +237,7 @@ const config: NextConfig = isDemoBuild
             // A signed-in visitor is never cached: their pages carry their
             // own session.
             source:
-              "/:locale(en|fi|sv|ru)/:page(about|blog|coa|community/rules|compare|contact|documents|faq|forgot-password|glossary|lab-tests|legal|newsletter|partner|quality|register|research-tools|reset-password|rewards|shop|support|verify-email|wishlist)/:rest*",
+              "/:locale(en|fi|sv|ru)/:page(about|blog|certificates|coa|community/rules|compare|contact|documents|faq|forgot-password|glossary|lab-tests|legal|newsletter|partner|quality|register|research-tools|reset-password|rewards|shop|support|verify-email|wishlist)/:rest*",
             missing: [
               { type: "cookie", key: "authjs.session-token" },
               { type: "cookie", key: "__Secure-authjs.session-token" },
