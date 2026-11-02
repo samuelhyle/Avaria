@@ -2003,7 +2003,7 @@
     "emptyTitle": "No certificates are published yet",
     "emptyBody": "A certificate appears here as soon as a lot is released and its certificate is published. If you need the certificate for a specific lot, ask and we will send it.",
     "requestOne": "Ask for a certificate",
-    "resultCount": "{count} certificates",
+    "resultCount": "{count, plural, one {# certificate} other {# certificates}}",
     "pagination": "Certificate pages",
     "page": "Page {page}",
     "previous": "Previous",

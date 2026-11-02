@@ -2003,7 +2003,7 @@
     "emptyTitle": "Todistuksia ei ole vielä julkaistu",
     "emptyBody": "Todistus ilmestyy tähän heti, kun erä hyväksytään ja sen todistus julkaistaan. Jos tarvitset tietyn erän todistuksen, pyydä se meiltä.",
     "requestOne": "Pyydä todistus",
-    "resultCount": "{count} todistusta",
+    "resultCount": "{count, plural, one {# todistus} other {# todistusta}}",
     "pagination": "Todistussivut",
     "page": "Sivu {page}",
     "previous": "Edellinen",
