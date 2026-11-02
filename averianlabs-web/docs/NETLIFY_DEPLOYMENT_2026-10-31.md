@@ -311,6 +311,49 @@ labelled as the demonstration record it is. Loading a real lot is a data
 operation: release the batch, publish its certificate document, and it
 appears in all four languages without a code change.
 
+## The repository, and where the gate moved to
+
+`main` is now pushed to the public repository and holds the whole rewritten
+history — ninety-odd commits of the release work, not the five-commit
+relic that was there before. The rewrite is the one that removed the leaked
+provider key from the history, so the public history and the deployed code
+are the same history.
+
+Two things did not move with it. The GitHub Actions workflows cannot be
+pushed from this machine: the credential carries no `workflow` scope, and
+GitHub refuses any commit that creates or updates a file under
+`.github/workflows/`. The workflows exist in the working tree and in the
+local `main`; they are not on the remote, and **they have to be pushed from
+a credential with the `workflow` scope** before continuous integration runs
+again. Until then, the release gate is the build that publishes the site.
+
+That gate is now stronger than a pull-request workflow was. Every deploy is
+type-checked, linted and unit-tested before it is built, so a commit that
+breaks the type checker, the linter or a test cannot reach the public site.
+The integration suite stays out of the hosted build: it needs a writable
+database of its own and the payment provider's credentials, and two of its
+cases are expected to fail without them. It runs locally against the
+isolated database.
+
+The gate found a fault on its first run, which is what a gate is for. The
+host sets `NODE_ENV=production` for the whole build, and React's production
+build does not export `act` — the helper that renders a component and lets
+its effects settle. Ten suites import it from `react`, so under
+`NODE_ENV=production` they failed with "act is not a function" before they
+ran a single assertion. The suite now pins `NODE_ENV=test` for itself
+wherever it runs, and the hosted build passes it explicitly, so the same
+command behaves the same on a laptop and on the host that publishes the
+site. The production build is verified separately: the browser suite runs
+against a real deployment, and the build type-checks and bundles the
+production output.
+
+The purchase journey was walked in a real browser against the published
+site: the catalogue, the cart, the email, address and shipping steps and the
+payment step all render, the total is priced, and placing an order without
+the payment provider configured fails closed with "Payment is currently
+unavailable. Please contact support." rather than a broken page. Nothing in
+the journey logged a console error.
+
 ## Remaining release requirements
 
 ### Rotate the MiniMax API key
