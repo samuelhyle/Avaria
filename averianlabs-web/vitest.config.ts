@@ -6,13 +6,6 @@ export default defineConfig({
     environment: "node",
     include: ["lib/**/*.test.ts", "scripts/**/*.test.ts", "tests/unit/**/*.test.ts"],
     globals: false,
-    // React exports `act` only from its development build. Vitest leaves
-    // NODE_ENV alone when it is already set, so a host that sets
-    // NODE_ENV=production for the whole build would take the production
-    // build — where `act` is undefined — and every suite that renders a
-    // component would fail before it ran an assertion. Pinning it here
-    // makes the suite behave the same wherever it runs.
-    env: { NODE_ENV: "test" },
     coverage: {
       provider: "v8",
       reporter: ["text", "json-summary"],
