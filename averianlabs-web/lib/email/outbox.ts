@@ -1,6 +1,6 @@
 import { emailOutbox } from "@/db/schema"
 import { db } from "@/lib/db"
-import { and, eq, isNull, lte, ne, or, sql } from "drizzle-orm"
+import { and, asc, eq, isNull, lte, ne, or, sql } from "drizzle-orm"
 import { sendEmail } from "./index"
 
 export type DbExecutor = typeof db | Parameters<Parameters<typeof db.transaction>[0]>[0]
@@ -37,6 +37,9 @@ export async function deliverEmailOutbox(limit = 10): Promise<{ sent: number; fa
           or(isNull(emailOutbox.leaseUntil), lte(emailOutbox.leaseUntil, now)),
         ),
       )
+      // The oldest overdue row goes first, so a row that can never be
+      // delivered cannot sit in front of a real one.
+      .orderBy(asc(emailOutbox.nextAttemptAt))
       .limit(limit)
       .for("update", { skipLocked: true })
     for (const row of rows)

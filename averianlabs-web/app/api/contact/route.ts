@@ -5,6 +5,7 @@ import { contactNotificationHtml } from "@/lib/email"
 import { deliverEmailOutbox, enqueueEmail } from "@/lib/email/outbox"
 import { locales } from "@/lib/i18n/config"
 import { getLegalIdentity } from "@/lib/legal"
+import { notifyOps } from "@/lib/ops/notify"
 import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { clientIp } from "@/lib/security/ip"
 import { rateLimit } from "@/lib/security/rate-limit"
@@ -59,6 +60,14 @@ export async function POST(request: Request) {
         tx,
       )
     })
+    await notifyOps({
+      event: "contact",
+      locale,
+      name,
+      email,
+      subject,
+      message,
+    }).catch(() => undefined)
     await deliverEmailOutbox().catch(() => undefined)
     return NextResponse.json({ ok: true })
   } catch {
