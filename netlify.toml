@@ -65,9 +65,6 @@
 
 # Use the official Next.js Runtime to package server and edge routes.
 [[plugins]]
-  package = "./netlify/plugins/database-release"
-
-[[plugins]]
   package = "@netlify/plugin-nextjs"
 
 # Register Telegram only after the production endpoint is published, using

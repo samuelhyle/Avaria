@@ -1,6 +1,7 @@
 // Run only in the hosted build, where Netlify supplies the actual site secrets.
 import { spawnSync } from "node:child_process"
 import postgres from "postgres"
+import { prepareDatabaseRelease } from "../netlify/plugins/database-release/index.mjs"
 
 /**
  * The exit code names the step that failed.
@@ -12,17 +13,18 @@ import postgres from "postgres"
  */
 const STEP = {
   install: 10,
-  env: 11,
-  preflight: 12,
-  migrate: 13,
-  seed: 14,
-  fixture: 15,
-  typecheck: 16,
-  lint: 17,
-  test: 18,
-  build: 19,
-  bundle: 20,
-  traces: 21,
+  backup: 11,
+  env: 12,
+  preflight: 13,
+  migrate: 14,
+  seed: 15,
+  fixture: 16,
+  typecheck: 17,
+  lint: 18,
+  test: 19,
+  build: 20,
+  bundle: 21,
+  traces: 22,
 }
 
 function run(command, args, env = process.env, code = 1) {
@@ -38,6 +40,17 @@ console.log(
   `[deploy] node ${process.version} · pnpm ${process.env.npm_config_user_agent?.split("/")[1] ?? "unknown"}`,
 )
 run("pnpm", ["install", "--frozen-lockfile"], process.env, STEP.install)
+// The pre-migration backup runs first, and before anything is migrated.
+// It is a step rather than a plugin hook so that a failure names itself.
+try {
+  await prepareDatabaseRelease()
+} catch (error) {
+  console.error(
+    "[deploy] Pre-migration backup failed:",
+    error instanceof Error ? error.message : String(error),
+  )
+  process.exit(STEP.backup)
+}
 run("pnpm", ["env:check"], process.env, STEP.env)
 if (process.env.BUILD_MODE === "demo") {
   throw new Error("The hosted site requires the full application runtime")
