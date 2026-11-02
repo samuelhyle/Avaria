@@ -5,7 +5,7 @@ import {
   isTelegramConfigured,
   sendTelegramMessage,
 } from "@/lib/telegram/client"
-import { and, eq, isNull, lte, ne, or, sql } from "drizzle-orm"
+import { and, asc, eq, isNull, lte, ne, or, sql } from "drizzle-orm"
 
 /**
  * Telegram delivery queue.
@@ -69,6 +69,11 @@ export async function deliverTelegramOutbox(
           or(isNull(telegramOutbox.leaseUntil), lte(telegramOutbox.leaseUntil, now)),
         ),
       )
+      // The oldest overdue row goes first. Without an order the queue takes
+      // whatever the database returns, and a row that can never be delivered
+      // — a chat that no longer exists — can sit in front of a real lead for
+      // every attempt it has left.
+      .orderBy(asc(telegramOutbox.nextAttemptAt))
       .limit(limit)
       .for("update", { skipLocked: true })
     for (const row of rows)

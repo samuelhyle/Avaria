@@ -3,6 +3,7 @@ import { db } from "@/lib/db"
 import { escapeHtml } from "@/lib/email/html"
 import { enqueueEmail } from "@/lib/email/outbox"
 import { locales } from "@/lib/i18n/config"
+import { notifyOps } from "@/lib/ops/notify"
 import { products } from "@/lib/products/data"
 import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { clientIp } from "@/lib/security/ip"
@@ -84,6 +85,20 @@ export async function POST(request: Request) {
       )
       return created.id
     })
+    // The lead is also written to the operations chat. The email above is
+    // only delivered when a mail provider is configured; the chat is
+    // configured independently, and a quote that nobody hears about is a
+    // quote that is lost.
+    if (result)
+      await notifyOps({
+        event: "quote",
+        locale: input.locale,
+        name: input.name,
+        email: input.email,
+        subject: input.sku,
+        organisation: input.organisation,
+        message: input.message,
+      }).catch(() => undefined)
     return result
       ? NextResponse.json({ ok: true, requestId: result }, { status: 201 })
       : NextResponse.json({ code: "idempotency_conflict" }, { status: 409 })
