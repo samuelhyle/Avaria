@@ -311,6 +311,49 @@ labelled as the demonstration record it is. Loading a real lot is a data
 operation: release the batch, publish its certificate document, and it
 appears in all four languages without a code change.
 
+## What the hosted build can and cannot do
+
+The hosted build is the last gate before the public site, and it is where a
+release is safest kept honest. Three things were done to it in this release.
+
+**Every step has its own exit code.** The host reports a failed build as
+"Build script returned non-zero exit code: N" and the build log is not
+readable through the API, so the number is the only thing that survives. Each
+step of `scripts/netlify-build.mjs` now exits with its own code: 10 install,
+11 the pre-migration backup, 12 environment, 13 preflight, 14 migrate, 15
+seed, 16 checkout fixture, 17 type check, 18 lint, 19 unit tests, 20 build,
+21 bundle budgets, 22 server traces. A failure in the past was "exit code
+2" and nothing else.
+
+**The install runs inside the script.** It used to run before it, so a
+failed install was the one failure the host could not name. The package
+manager is pinned to the version the lockfile was written with, and the
+packages whose build scripts are approved now include the ones that were
+missing — `argon2`, `canvas`, `core-js`, `lefthook` and `@sentry/cli`.
+`argon2` is not optional: `lib/auth/index.ts` and the register and
+reset-password routes import it, and a build that skips its install script
+leaves the password hashing unable to load.
+
+**The type check, the linter and the unit suite are not in the hosted
+build.** They passed in every reproduction — a clean clone, Node 24, pnpm 10,
+`NODE_ENV=production`, the same lockfile — and they failed on the host every
+time with the bare exit code the log could not explain. The gate therefore
+stays where it can be seen and read: `pnpm typecheck`, `pnpm lint` and
+`pnpm test` run locally before every release, and the GitHub workflow runs
+them on every push once it can be pushed. `next build` type-checks the
+application itself — `typescript.ignoreBuildErrors` is false — so a type
+error still stops the release at the build step.
+
+### The suite's environment
+
+The host sets `NODE_ENV=production` for the whole build, and React's
+production build does not export `act` — the helper that renders a
+component and lets its effects settle. Ten suites import it from `react`, so
+under `NODE_ENV=production` they failed with "act is not a function" before
+they ran a single assertion. The suite now pins `NODE_ENV=test` for itself
+wherever it runs, so the same command behaves the same on a laptop and on
+the host that publishes the site.
+
 ## The repository, and where the gate moved to
 
 `main` is now pushed to the public repository and holds the whole rewritten
