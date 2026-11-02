@@ -2,18 +2,38 @@
 import { spawnSync } from "node:child_process"
 import postgres from "postgres"
 
-function run(command, args, env = process.env) {
+/**
+ * The exit code names the step that failed.
+ *
+ * The host reports a failed build as "Build script returned non-zero exit
+ * code: N" and the log is not readable through the API, so the number is
+ * the only thing that survives the build. Each step therefore exits with
+ * its own code, and the table is in the release record.
+ */
+const STEP = {
+  env: 11,
+  preflight: 12,
+  migrate: 13,
+  seed: 14,
+  fixture: 15,
+  typecheck: 16,
+  lint: 17,
+  test: 18,
+  build: 19,
+  bundle: 20,
+  traces: 21,
+}
+
+function run(command, args, env = process.env, code = 1) {
   const result = spawnSync(command, args, { stdio: "inherit", env })
   if (result.error) throw result.error
   if (result.status !== 0) {
-    // Name the step. Without it the hosted build reports only "exit code 2"
-    // and gives no hint which of the six steps failed.
     console.error(`[deploy] Step failed: ${command} ${args.join(" ")}`)
-    process.exit(result.status ?? 1)
+    process.exit(code)
   }
 }
 
-run("pnpm", ["env:check"])
+run("pnpm", ["env:check"], process.env, STEP.env)
 if (process.env.BUILD_MODE === "demo") {
   throw new Error("The hosted site requires the full application runtime")
 }
@@ -47,16 +67,22 @@ try {
       console.log(`[deploy] ${table}: ${count} existing records`)
     }
   }
+} catch (error) {
+  console.error(
+    "[deploy] Database preflight failed:",
+    error instanceof Error ? error.message : error,
+  )
+  process.exit(STEP.preflight)
 } finally {
   await sql.end()
 }
 
 const migrationEnv = { ...process.env, DATABASE_URL: migrationUrl }
-run("pnpm", ["db:migrate"], migrationEnv)
+run("pnpm", ["db:migrate"], migrationEnv, STEP.migrate)
 // The seed inserts missing draft reference records and never overwrites existing records.
-run("pnpm", ["db:seed"], migrationEnv)
+run("pnpm", ["db:seed"], migrationEnv, STEP.seed)
 if (process.env.CHECKOUT_TEST_PRODUCT_ENABLED === "true")
-  run("pnpm", ["exec", "tsx", "scripts/seed-checkout-test-product.ts"], migrationEnv)
+  run("pnpm", ["exec", "tsx", "scripts/seed-checkout-test-product.ts"], migrationEnv, STEP.fixture)
 // The checks that gate the release.
 //
 // The GitHub workflow cannot be pushed from this machine — the push
@@ -70,8 +96,8 @@ if (process.env.CHECKOUT_TEST_PRODUCT_ENABLED === "true")
 // database of its own and the payment provider's credentials, and two of its
 // cases are expected to fail without them. It runs locally against the
 // isolated database.
-run("pnpm", ["typecheck"])
-run("pnpm", ["lint"])
+run("pnpm", ["typecheck"], process.env, STEP.typecheck)
+run("pnpm", ["lint"], process.env, STEP.lint)
 // The suite runs with NODE_ENV=test whatever the host set.
 //
 // The host sets NODE_ENV=production for the whole build, and React's
@@ -84,7 +110,7 @@ run("pnpm", ["lint"])
 // suite was written against. The production build is verified separately:
 // the browser suite runs against a real deployment, and the build itself
 // type-checks and bundles the production output.
-run("pnpm", ["test"], { ...process.env, NODE_ENV: "test" })
-run("pnpm", ["build"])
-run("pnpm", ["check:bundle"])
-run("node", ["scripts/check-server-traces.mjs"])
+run("pnpm", ["test"], { ...process.env, NODE_ENV: "test" }, STEP.test)
+run("pnpm", ["build"], process.env, STEP.build)
+run("pnpm", ["check:bundle"], process.env, STEP.bundle)
+run("node", ["scripts/check-server-traces.mjs"], process.env, STEP.traces)
