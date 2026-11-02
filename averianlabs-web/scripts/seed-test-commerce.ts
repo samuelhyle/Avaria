@@ -1,6 +1,14 @@
 /** Isolated database fixtures. Never import into application runtime or run on a merchant database. */
 import crypto from "node:crypto"
-import { batches, categories, coaTests, documents, productTranslations, products, vials } from "@/db/schema"
+import {
+  batches,
+  categories,
+  coaTests,
+  documents,
+  productTranslations,
+  products,
+  vials,
+} from "@/db/schema"
 import { db } from "@/lib/db"
 import { eq, inArray } from "drizzle-orm"
 

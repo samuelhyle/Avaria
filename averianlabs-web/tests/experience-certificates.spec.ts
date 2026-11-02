@@ -68,9 +68,7 @@ for (const locale of ["en", "fi"]) {
     await expect(main.getByText(t.demonstration, { exact: true }).first()).toBeVisible()
   })
 
-  test(`${locale}: the certificate library filters by lot code`, async ({
-    cleanPage: page,
-  }) => {
+  test(`${locale}: the certificate library filters by lot code`, async ({ cleanPage: page }) => {
     const batch = await qaBatch()
     await page.goto(`/${locale}/certificates?batch=${encodeURIComponent(batch.code)}`)
     const main = page.locator("main")
