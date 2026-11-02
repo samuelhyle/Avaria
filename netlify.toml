@@ -20,12 +20,20 @@
   # by the plugin). The static demo build still exists for local preview:
   #   pnpm build:demo --serve
   # but it is no longer what we publish.
-  command = "pnpm install --frozen-lockfile && node scripts/netlify-build.mjs"
+  # The install runs inside the build script, not before it, so that a
+  # failure names the step that failed: the host reports a failed build as
+  # "Build script returned non-zero exit code: N" and the log is not
+  # readable through the API.
+  command = "node scripts/netlify-build.mjs"
   publish = ".next"
 
 [build.environment]
   NODE_VERSION = "24.22.0"
-  PNPM_VERSION = "10"
+  # Pinned to the version the lockfile was written with. "10" lets the host
+  # install whatever pnpm 10.x is current, and a newer pnpm changes how
+  # dependency build scripts are treated — which turns an install into a
+  # failure that has nothing to do with the code.
+  PNPM_VERSION = "10.0.0"
   # Declared explicitly so the deploy context matches the local intent.
   NODE_ENV = "production"
   NEXT_TELEMETRY_DISABLED = "1"
