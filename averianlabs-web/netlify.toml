@@ -1,0 +1,110 @@
+# Netlify config for the AverianLabs Next.js app.
+#
+# Build pipeline:
+#   1. `pnpm install`         – restore deps
+#   2. Private database snapshot and reviewed legacy schema adoption.
+#   3. Forward migrations, non-overwriting draft seed, build and bundle checks.
+#   4. The Next.js Runtime packages Functions + Edge Functions.
+#
+# `app/api/` ships intact — route handlers run as Node Functions and read
+# secrets (`MINIMAX_API_KEY`, etc.) from Netlify env vars at invocation
+# time. Never put server-only secrets in `NEXT_PUBLIC_*`, in this file,
+# or in `.env*` committed to git; set them under
+#   Site settings → Environment variables → Production / Preview / Branch
+# and the Netlify Next.js plugin will surface them to the function runtime.
+
+[build]
+  base    = "averianlabs-web"
+  # `BUILD_MODE` is intentionally not set here so the non-demo branch of
+  # `next.config.ts` runs (`output: "standalone"` → bundled into Functions
+  # by the plugin). The static demo build still exists for local preview:
+  #   pnpm build:demo --serve
+  # but it is no longer what we publish.
+  command = "pnpm install --frozen-lockfile && node scripts/netlify-build.mjs"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "24.22.0"
+  PNPM_VERSION = "10"
+  # Declared explicitly so the deploy context matches the local intent.
+  NODE_ENV = "production"
+  NEXT_TELEMETRY_DISABLED = "1"
+  # CPU libraries are already included in the npm package. Netlify has no CUDA GPU.
+  ONNXRUNTIME_NODE_INSTALL = "skip"
+  # Next.js tracing needs more than Node's default 2 GiB heap for this app.
+  NODE_OPTIONS = "--max-old-space-size=4096"
+
+# Scheduled functions.
+#
+# The cron routes are the only things that release expired inventory holds,
+# deliver the email and Telegram outboxes, settle forum moderation and watch
+# for crypto payments. Without a schedule on the host that serves the site,
+# none of them run: the bot would never deliver an invoice and order receipts
+# would wait for a customer who happened to trigger an unrelated request.
+#
+# Each function calls its route with the CRON_SECRET bearer header, because a
+# Netlify scheduled invocation cannot carry custom headers.
+#
+# Netlify caps scheduled functions at 30 seconds; the routes are budgeted
+# below that and stop early rather than being killed mid-run.
+[functions."cron-maintenance"]
+  schedule = "*/5 * * * *"
+  timeout = 30
+
+[functions."cron-crypto"]
+  schedule = "*/2 * * * *"
+  timeout = 30
+
+# Use the official Next.js Runtime to package server and edge routes.
+[[plugins]]
+  package = "./netlify/plugins/database-release"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Register Telegram only after the production endpoint is published, using
+# the secrets inside Netlify. Previews never change the bot's webhook.
+[[plugins]]
+  package = "./netlify/plugins/telegram-webhook"
+
+# Locale-prefix redirect: the production app uses middleware to 307 → /en/...
+# when a request hits a non-locale path. With the Next.js Runtime the
+# middleware executes server-side per request, so we no longer need the
+# static-export rewrite engine that the previous demo required. Root only.
+
+# No `X-Robots-Tag: noindex` here any more: the merchant release is approved,
+# so the storefront is indexable. The review flag was removed from
+# `next.config.ts`, `app/robots.ts` and the `[build.environment]` block in the
+# same change. Leaving any one of them in place would have kept the site out
+# of the index while the others said it was public.
+
+# Long-cache hashed assets emitted by Next/Tailwind.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Long-cache OG image + favicon.
+[[headers]]
+  for = "/og-default.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/favicon.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Security headers mirroring next.config.ts. Netlify adds HSTS automatically
+# via the dashboard once HTTPS is enabled, but we keep an explicit one for
+# deploys that bypass the UI (CLI, API).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-origin"
