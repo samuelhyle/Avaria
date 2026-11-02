@@ -57,6 +57,22 @@ run("pnpm", ["db:migrate"], migrationEnv)
 run("pnpm", ["db:seed"], migrationEnv)
 if (process.env.CHECKOUT_TEST_PRODUCT_ENABLED === "true")
   run("pnpm", ["exec", "tsx", "scripts/seed-checkout-test-product.ts"], migrationEnv)
+// The checks that gate the release.
+//
+// The GitHub workflow cannot be pushed from this machine — the push
+// credential carries no `workflow` scope, so GitHub refuses any commit that
+// creates or updates a file under `.github/workflows/`. Rather than ship
+// without a gate, the gate runs in the build that publishes the site: every
+// deploy is type-checked, linted and unit-tested before it is built, so a
+// broken commit cannot reach the public site.
+//
+// The integration suite is not part of this gate. It needs a writable
+// database of its own and the payment provider's credentials, and two of its
+// cases are expected to fail without them. It runs locally against the
+// isolated database.
+run("pnpm", ["typecheck"])
+run("pnpm", ["lint"])
+run("pnpm", ["test"])
 run("pnpm", ["build"])
 run("pnpm", ["check:bundle"])
 run("node", ["scripts/check-server-traces.mjs"])
