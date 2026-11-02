@@ -7,6 +7,7 @@ import {
   products,
   vials,
 } from "@/db/schema"
+import { CHECKOUT_FIXTURE_SLUGS } from "@/lib/checkout/test-product"
 import { db } from "@/lib/db"
 import { publicDocumentUrl } from "@/lib/documents/availability"
 import { DOCUMENT_TYPES, type DocumentType } from "@/lib/documents/constants"
@@ -15,7 +16,7 @@ import { type CertificateFilters, matchesCertificateField, matchesCertificateTer
 import {
   type BatchCertificate,
   type CertificateTest,
-  isDemonstrationBatch,
+  isDemonstrationCertificate,
   isPublishableCertificate,
 } from "./types"
 
@@ -53,6 +54,7 @@ interface BatchRow {
   productType: string | null
   category: string | null
   productName: string | null
+  specJson: unknown
 }
 
 async function readBatchRows(locale: string): Promise<BatchRow[]> {
@@ -75,6 +77,7 @@ async function readBatchRows(locale: string): Promise<BatchRow[]> {
       productType: products.productType,
       category: categories.slug,
       productName: productTranslations.name,
+      specJson: products.specJson,
     })
     .from(batches)
     .innerJoin(vials, eq(batches.vialId, vials.id))
@@ -167,7 +170,17 @@ export async function listBatchCertificates(filters: CertificateFilters, locale 
   for (const row of rows) {
     const doc = documentsByBatch.get(row.batchId)
     const documentUrl = doc ? publicDocumentUrl(doc) : null
-    const demonstration = isDemonstrationBatch(row.reviewedBy)
+    // A product the shop does not sell has no certificate to publish: the
+    // checkout fixture is a payment test, and it is in the storefront only
+    // while that test is being run.
+    const specs = (row.specJson ?? {}) as Record<string, unknown>
+    const checkoutTest = specs.checkoutTest === true || CHECKOUT_FIXTURE_SLUGS.has(row.productSlug)
+    if (checkoutTest && process.env.CHECKOUT_FIXTURE_IN_STOREFRONT !== "true") continue
+    const demonstration = isDemonstrationCertificate({
+      reviewedBy: row.reviewedBy,
+      documentTitle: doc?.title,
+      lab: row.lab,
+    })
     if (!isPublishableCertificate({ documentUrl })) continue
     const certificate: BatchCertificate = {
       batchId: row.batchId,
@@ -217,7 +230,7 @@ export async function listCertificateLabs(locale = "en"): Promise<string[]> {
   const rows = await readBatchRows(locale)
   const labs = new Set<string>()
   for (const row of rows) {
-    if (isDemonstrationBatch(row.reviewedBy)) continue
+    if (isDemonstrationCertificate({ reviewedBy: row.reviewedBy, lab: row.lab })) continue
     if (row.lab) labs.add(row.lab)
   }
   return [...labs].sort((a, b) => a.localeCompare(b))

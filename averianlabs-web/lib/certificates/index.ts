@@ -15,5 +15,6 @@ export {
   type BatchCertificate,
   type CertificateTest,
   isDemonstrationBatch,
+  isDemonstrationCertificate,
   isPublishableCertificate,
 } from "./types"
