@@ -11,6 +11,7 @@ import postgres from "postgres"
  * its own code, and the table is in the release record.
  */
 const STEP = {
+  install: 10,
   env: 11,
   preflight: 12,
   migrate: 13,
@@ -33,6 +34,10 @@ function run(command, args, env = process.env, code = 1) {
   }
 }
 
+console.log(
+  `[deploy] node ${process.version} · pnpm ${process.env.npm_config_user_agent?.split("/")[1] ?? "unknown"}`,
+)
+run("pnpm", ["install", "--frozen-lockfile"], process.env, STEP.install)
 run("pnpm", ["env:check"], process.env, STEP.env)
 if (process.env.BUILD_MODE === "demo") {
   throw new Error("The hosted site requires the full application runtime")
