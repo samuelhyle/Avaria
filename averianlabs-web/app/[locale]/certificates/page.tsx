@@ -27,6 +27,7 @@ export default async function CertificatesPage({
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: "certificates" })
+  const r = await getTranslations({ locale, namespace: "research" })
   const filters = readCertificateFilters(await searchParams)
 
   const [result, labs] = await Promise.all([
@@ -216,6 +217,37 @@ export default async function CertificatesPage({
           </nav>
         </>
       )}
+
+      {/*
+        What a certificate carries. It is here so the page is worth reading
+        even before the first lot is published: the reader learns which
+        analytical questions a certificate answers, and where the method is
+        written down.
+      */}
+      <section aria-labelledby="certificate-contents" className="mt-12">
+        <h2 id="certificate-contents" className="h-section">
+          {r("labTitle")}
+        </h2>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ink-muted">{r("labIntro")}</p>
+        <dl className="mt-6 grid gap-6 sm:grid-cols-3">
+          {[
+            [r("labPurityTitle"), r("labPurityBody")],
+            [r("labIdentityTitle"), r("labIdentityBody")],
+            [r("labEndotoxinTitle"), r("labEndotoxinBody")],
+          ].map(([title, body]) => (
+            <div key={title} className="min-w-0">
+              <dt className="text-sm font-semibold text-ink">{title}</dt>
+              <dd className="mt-2 text-sm leading-relaxed text-ink-muted">{body}</dd>
+            </div>
+          ))}
+        </dl>
+        <Link
+          href={`/${locale}/lab-tests`}
+          className="mt-6 inline-flex min-h-11 items-center text-sm font-medium text-accent underline underline-offset-4"
+        >
+          {r("methodology")}
+        </Link>
+      </section>
     </Container>
   )
 }
