@@ -48,7 +48,7 @@ describe("the operations channel", () => {
   })
 
   it("writes nothing when no operations chat is configured", async () => {
-    delete config.TELEGRAM_OPS_CHAT_ID
+    config.TELEGRAM_OPS_CHAT_ID = undefined
     await notifyOps({
       event: "quote",
       locale: "en",
