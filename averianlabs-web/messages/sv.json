@@ -35,6 +35,10 @@
       "title": "Analysrapporter",
       "description": "Hitta publicerade rapporter för en produkt eller batch. En dokumentlänk är inte ett generellt PASS-bevis — bedöm metod och resultat i originalrapporten."
     },
+    "certificates": {
+      "title": "Partikcertifikat — öppna analysen bakom varje parti",
+      "description": "Bläddra certifikatet för varje frigivet parti: partikoden, HPLC-renheten, endotoxinresultatet, masspektrometribekräftelsen och laboratoriet som gjorde analysen."
+    },
     "compare": {
       "title": "Jämför peptider",
       "description": "Jämför dokumenterade specifikationer, storlekar, renhet och aktuell tillgänglighet sida vid sida."
@@ -505,6 +509,7 @@
       "researchOnly": "Endast för forskningsbruk"
     },
     "glossary": "Ordlista",
+    "certificates": "Certifikat",
     "documents": "Dokument",
     "coaLibrary": "Analysrapporter",
     "partner": "Partnerprogram",
@@ -553,7 +558,7 @@
     "labEyebrow": "Kvalitet",
     "labTitle": "Varje batch har en rapport du kan öppna",
     "labSubtitle": "Renhet är ett mätvärde, inte en marknadsförsäkran. Öppna originalrapporten för den batch du fått och läs metod, resultat och laboratoriet bakom.",
-    "labCta": "Utforska dokumentbiblioteket",
+    "labCta": "Bläddra i partikcertifikat",
     "calcTitle": "Planerar du ett protokoll?",
     "calcSubtitle": "Beräkna koncentration, lösningsvolym och antal aliquoter för valfri flaskstorlek innan du beställer.",
     "calcCta": "Öppna kalkylatorn",
@@ -578,7 +583,10 @@
     "qualityMassSpec": "Massspektrometri",
     "qualityEndotoxin": "Endotoxin",
     "qualityTestedAt": "Testat hos",
-    "certificateHeading": "Analysrapport"
+    "certificateHeading": "Analysrapport",
+    "qualityLab": "Oberoende tredjepartslaboratorium",
+    "latestCertificate": "Senast publicerade certifikat",
+    "exampleCertificate": "Certifikatets utseende"
   },
   "shop": {
     "title": "Peptidbutik",
@@ -1686,10 +1694,13 @@
     "productScope": "Produktövergripande dokument",
     "generalScope": "Allmänt dokument",
     "scope": "Dokumentets omfattning",
-    "originalNotice": "Kontrollera prov, metod och resultat i originaldokumentet. Publicering visar inte lämplighet för just ditt arbete."
+    "originalNotice": "Kontrollera prov, metod och resultat i originaldokumentet. Publicering visar inte lämplighet för just ditt arbete.",
+    "batchLibraryHint": "Söker du certifikatet för ett visst parti?",
+    "batchLibraryLink": "Öppna biblioteket med partikcertifikat"
   },
   "experience": {
     "documents": "Dokument",
+    "certificates": "Partikcertifikat",
     "showResults": "Visa resultat",
     "clearSearchHistory": "Rensa senaste sökningar",
     "heroEyebrow": "För laboratorieforskning",
@@ -1962,5 +1973,56 @@
     "viewProduct": "Visa produkten",
     "addMore": "Lägg till",
     "footerHint": "Lägg till fler från sortimentet för att jämföra upp till fyra material."
+  },
+  "certificates": {
+    "eyebrow": "Partikcertifikat",
+    "title": "Partikcertifikat",
+    "intro": "Varje certifikat hör till ett parti: partikoden på flaskan, analysen som gjordes på det, laboratoriet som gjorde den och datumet. Matcha partiet på din flaska mot listan nedan.",
+    "scope": "Endast frigivna partier med ett publicerat certifikat visas. Inget visas som en läsare inte kan öppna.",
+    "filterq": "Sök",
+    "placeholderq": "Produkt, partikod, SKU eller laboratorium",
+    "filterproduct": "Produkt",
+    "placeholderproduct": "Produktnamn",
+    "filtersku": "SKU",
+    "placeholdersku": "Katalogreferens",
+    "filterbatch": "Partikod",
+    "placeholderbatch": "Partikod",
+    "filterlab": "Laboratorium",
+    "anyLab": "Alla laboratorier",
+    "filterpurity": "Minsta renhet (%)",
+    "placeholderpurity": "t.ex. 99",
+    "search": "Sök",
+    "clear": "Rensa filter",
+    "publicScope": "Certifikat visas endast för frigivna partier.",
+    "unavailableTitle": "Certifikatbiblioteket är inte tillgängligt",
+    "unavailableBody": "Databasen kunde inte läsas, så inga certifikat listas. Försök igen om en stund.",
+    "noMatchTitle": "Inget certifikat matchar filtren",
+    "noMatchBody": "Prova ett kortare produktnamn, en del av partikoden, eller rensa filtren.",
+    "emptyTitle": "Inga certifikat har publicerats än",
+    "emptyBody": "Ett certifikat visas här så snart ett parti frigivs och dess certifikat publiceras. Be oss om du behöver certifikatet för ett visst parti.",
+    "requestOne": "Begär ett certifikat",
+    "resultCount": "{count} certifikat",
+    "pagination": "Certifikatsidor",
+    "page": "Sida {page}",
+    "previous": "Föregående",
+    "next": "Nästa",
+    "publishedCertificates": "Publicerade certifikat för produkten",
+    "browseCertificates": "Bläddra i certifikatbiblioteket",
+    "size": "Storlek",
+    "lab": "Laboratorium",
+    "tested": "Tillverkad",
+    "expires": "Gäller till",
+    "msConfirmed": "Masspektrometri bekräftad",
+    "msNotConfirmed": "Masspektrometri ej bekräftad",
+    "endotoxin": "Endotoxin",
+    "assayTable": "Analysresultat för partiet",
+    "test": "Analys",
+    "method": "Metod",
+    "result": "Resultat",
+    "spec": "Specifikation",
+    "pass": "Godkänd",
+    "fail": "Underkänd",
+    "openCertificate": "Öppna certifikatet",
+    "demonstration": "Demonstrationspost"
   }
 }

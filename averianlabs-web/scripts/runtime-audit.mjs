@@ -39,6 +39,7 @@ const ROUTES = [
   "/blog",
   "/lab-tests",
   "/documents",
+  "/certificates",
   "/research-tools",
   "/peptide-calculator",
   "/rewards",

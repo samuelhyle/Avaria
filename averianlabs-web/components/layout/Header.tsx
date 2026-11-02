@@ -39,6 +39,7 @@ export function Header({ locale }: HeaderProps) {
   // The shop is the front door. Everything else lives one level deeper so the
   // storefront still reads as a store and not as a research workspace.
   const researchLinks = [
+    { href: `/${locale}/certificates`, label: t("certificates") },
     { href: `/${locale}/documents`, label: e("documents") },
     { href: `/${locale}/research-tools`, label: t("research") },
     { href: `/${locale}/community`, label: t("community") },
@@ -73,6 +74,8 @@ export function Header({ locale }: HeaderProps) {
                   aria-current={
                     pathname?.startsWith(item.href) ||
                     (item.href.endsWith("/documents") && pathname?.startsWith(`/${locale}/coa`)) ||
+                    (item.href.endsWith("/certificates") &&
+                      pathname?.startsWith(`/${locale}/coa`)) ||
                     (item.href.endsWith("/research-tools") &&
                       /\/(assistant|peptide-calculator)(?:\/|$)/.test(pathname ?? ""))
                       ? "page"

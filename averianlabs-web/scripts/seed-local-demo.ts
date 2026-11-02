@@ -16,12 +16,30 @@
  *   DATABASE_URL=postgres://…/build pnpm db:seed-demo
  */
 import crypto from "node:crypto"
-import { batches, categories, documents, productTranslations, products, vials } from "@/db/schema"
+import {
+  batches,
+  categories,
+  coaTests,
+  documents,
+  productTranslations,
+  products,
+  vials,
+} from "@/db/schema"
 import { db } from "@/lib/db"
 import { products as referenceProducts } from "@/lib/products/data"
 import { and, eq } from "drizzle-orm"
 
 const MARKER = "local-demo-fixture"
+
+/**
+ * The laboratory a demonstration batch is attributed to.
+ *
+ * The reference catalogue carries the names of real analytical laboratories
+ * for its illustration of a batch. A seeded fixture must not put a real
+ * laboratory's name on a certificate that laboratory never issued, so the
+ * demonstration records name themselves.
+ */
+const DEMONSTRATION_LAB = "Demonstration laboratory"
 
 /** Only ever run against a local database. */
 function requireLocalDatabase() {
@@ -140,7 +158,7 @@ async function main() {
             hplcPurity: reference.latestBatch?.hplcPurity ?? 0,
             endotoxinEUPerMg: reference.latestBatch?.endotoxinEUPerMg ?? 0.2,
             msConfirmed: reference.latestBatch?.msConfirmed ?? true,
-            lab: reference.latestBatch?.lab ?? "Local demo fixture",
+            lab: DEMONSTRATION_LAB,
             verificationStatus: "released",
             reviewedBy: MARKER,
             reviewedAt: now,
@@ -157,12 +175,53 @@ async function main() {
           hplcPurity: reference.latestBatch?.hplcPurity ?? 0,
           endotoxinEUPerMg: reference.latestBatch?.endotoxinEUPerMg ?? 0.2,
           msConfirmed: reference.latestBatch?.msConfirmed ?? true,
-          lab: reference.latestBatch?.lab ?? "Local demo fixture",
+          lab: DEMONSTRATION_LAB,
           verificationStatus: "released",
           reviewedBy: MARKER,
           reviewedAt: now,
         })
       }
+
+      // The assay rows the certificate reports. A certificate without them is
+      // a number; with them it is a number a reader can check against the
+      // method that produced it.
+      const purity = reference.latestBatch?.hplcPurity ?? 0
+      const endotoxin = reference.latestBatch?.endotoxinEUPerMg ?? 0.2
+      const msConfirmed = reference.latestBatch?.msConfirmed ?? true
+      const performedAt = new Date(reference.latestBatch?.manufacturedAt ?? "2026-06-01")
+      await db.delete(coaTests).where(eq(coaTests.batchId, batchId))
+      await db.insert(coaTests).values([
+        {
+          id: crypto.randomUUID(),
+          batchId,
+          testName: "HPLC purity",
+          method: "RP-HPLC (C18, 280 nm)",
+          result: `${purity.toFixed(3)} % area`,
+          spec: "≥ 98.0 % area",
+          pass: purity >= 98,
+          performedAt,
+        },
+        {
+          id: crypto.randomUUID(),
+          batchId,
+          testName: "Endotoxin",
+          method: "LAL (USP <85>)",
+          result: `${endotoxin} EU/mg`,
+          spec: "≤ 2.4 EU/mg",
+          pass: endotoxin <= 2.4,
+          performedAt,
+        },
+        {
+          id: crypto.randomUUID(),
+          batchId,
+          testName: "Mass spectrometry",
+          method: "ESI-MS",
+          result: msConfirmed ? "Identity confirmed" : "Not confirmed",
+          spec: "Identity confirmed",
+          pass: msConfirmed,
+          performedAt,
+        },
+      ])
 
       // One public certificate per batch. Existing ones are kept so an order
       // that already points at a document does not lose it.

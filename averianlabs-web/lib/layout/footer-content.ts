@@ -30,6 +30,7 @@ export async function getFooterContent(locale: string): Promise<FooterContent> {
         title: t("research"),
         links: [
           { href: `/${locale}/shop`, label: t("shop") },
+          { href: `/${locale}/certificates`, label: e("certificates") },
           { href: `/${locale}/documents`, label: e("documents") },
           { href: `/${locale}/research-tools`, label: r("tools") },
           { href: `/${locale}/community`, label: t("community") },

@@ -9,6 +9,7 @@ type SeoKey =
   | "faq"
   | "labTests"
   | "coa"
+  | "certificates"
   | "compare"
   | "calculator"
   | "quality"
