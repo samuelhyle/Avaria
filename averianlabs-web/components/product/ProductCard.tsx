@@ -152,6 +152,16 @@ export function ProductCard({
               </span>
             </>
           ) : null}
+          {vial.batch?.code ? (
+            <>
+              <span aria-hidden className="text-line-strong">
+                ·
+              </span>
+              <span className="font-mono" title={vial.batch.code}>
+                {vial.batch.code}
+              </span>
+            </>
+          ) : null}
         </div>
 
         {/* ── Price + actions ───────────────────────────────────────── */}

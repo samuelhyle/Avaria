@@ -27,6 +27,7 @@ export function MobileMenu({ locale, productsCount }: { locale: string; products
   }
   const primary = [
     { path: "shop", label: t("allProducts") },
+    { path: "certificates", label: t("certificates") },
     { path: "documents", label: e("documents") },
     { path: "research-tools", label: r("tools") },
     { path: "community", label: t("community") },

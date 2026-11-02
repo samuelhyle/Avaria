@@ -21,6 +21,7 @@ const ROUTES = ["en", "fi"].flatMap((locale) =>
     "/community",
     "/glossary",
     "/lab-tests",
+    "/certificates",
     "/peptide-calculator",
     "/checkout/cart",
     "/contact",

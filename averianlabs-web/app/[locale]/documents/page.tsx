@@ -55,6 +55,15 @@ export default async function DocumentsIndexPage({
         >
           {r("methodology")}
         </Link>
+        <p className="mt-1 text-sm text-ink-muted">
+          {t("batchLibraryHint")}{" "}
+          <Link
+            href={`/${locale}/certificates`}
+            className="inline-flex min-h-11 items-center font-medium text-accent underline underline-offset-4"
+          >
+            {t("batchLibraryLink")}
+          </Link>
+        </p>
       </header>
       <form
         action={`/${locale}/documents`}

@@ -46,7 +46,7 @@ try {
 
 // 2. Every locale renders its home page, the shop and a product page.
 for (const locale of ["en", "fi", "sv", "ru"]) {
-  for (const path of ["", "/shop", "/shop/bpc-157"]) {
+  for (const path of ["", "/shop", "/shop/bpc-157", "/certificates"]) {
     try {
       const response = await get(`/${locale}${path}`)
       const html = await response.text()

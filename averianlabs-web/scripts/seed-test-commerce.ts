@@ -1,6 +1,6 @@
 /** Isolated database fixtures. Never import into application runtime or run on a merchant database. */
 import crypto from "node:crypto"
-import { batches, categories, documents, productTranslations, products, vials } from "@/db/schema"
+import { batches, categories, coaTests, documents, productTranslations, products, vials } from "@/db/schema"
 import { db } from "@/lib/db"
 import { eq, inArray } from "drizzle-orm"
 
@@ -83,6 +83,28 @@ try {
           .returning()
         if (!batch) throw new Error("Fixture batch failed")
         await tx.update(vials).set({ activeBatchId: batch.id }).where(eq(vials.id, vial.id))
+        // The assay rows the certificate reports, so the library can show the
+        // method and the specification beside the number.
+        await tx.insert(coaTests).values([
+          {
+            batchId: batch.id,
+            testName: "HPLC purity",
+            method: "RP-HPLC (C18, 280 nm)",
+            result: "99.000 % area",
+            spec: "≥ 98.0 % area",
+            pass: true,
+            performedAt: new Date("2026-01-01"),
+          },
+          {
+            batchId: batch.id,
+            testName: "Endotoxin",
+            method: "LAL (USP <85>)",
+            result: "0.2 EU/mg",
+            spec: "≤ 2.4 EU/mg",
+            pass: true,
+            performedAt: new Date("2026-01-01"),
+          },
+        ])
         await tx.insert(documents).values({
           productId: id,
           batchId: batch.id,

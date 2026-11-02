@@ -35,6 +35,10 @@
       "title": "Certificates of Analysis",
       "description": "Find published certificates for a product or batch. A document link is not a blanket PASS designation; assess the methods and results in the original report."
     },
+    "certificates": {
+      "title": "Batch certificates — open the assay behind every lot",
+      "description": "Browse the certificate for each released batch: the lot code, the HPLC purity, the endotoxin result, the mass spectrometry confirmation and the laboratory that ran the assay."
+    },
     "compare": {
       "title": "Compare peptides",
       "description": "Compare documented specifications, sizes, purity and current availability side by side."
@@ -505,6 +509,7 @@
       "researchOnly": "Research use only"
     },
     "glossary": "Glossary",
+    "certificates": "Certificates",
     "documents": "Documents",
     "coaLibrary": "Certificate library",
     "partner": "Partner program",
@@ -553,7 +558,7 @@
     "labEyebrow": "Quality",
     "labTitle": "Every batch has a certificate you can open",
     "labSubtitle": "Purity is a measurement, not a marketing claim. Open the original report for the batch you received and read the method, the result and the laboratory behind it.",
-    "labCta": "Browse the document library",
+    "labCta": "Browse batch certificates",
     "calcTitle": "Planning a protocol?",
     "calcSubtitle": "Calculate the concentration, the solvent volume and the number of aliquots for any vial size before you order.",
     "calcCta": "Open the calculator",
@@ -578,7 +583,10 @@
     "qualityMassSpec": "Mass spectrometry",
     "qualityEndotoxin": "Endotoxin",
     "qualityTestedAt": "Tested at",
-    "certificateHeading": "Certificate of analysis"
+    "certificateHeading": "Certificate of analysis",
+    "qualityLab": "Independent third-party laboratory",
+    "latestCertificate": "Latest published certificate",
+    "exampleCertificate": "Certificate layout"
   },
   "shop": {
     "title": "Peptide shop",
@@ -1688,10 +1696,13 @@
     "productScope": "Product-wide document",
     "generalScope": "General document",
     "scope": "Document scope",
-    "originalNotice": "Read the original document for its sample, method and result. Publication does not establish suitability for your particular work."
+    "originalNotice": "Read the original document for its sample, method and result. Publication does not establish suitability for your particular work.",
+    "batchLibraryHint": "Looking for the certificate of a specific batch?",
+    "batchLibraryLink": "Open the batch certificate library"
   },
   "experience": {
     "documents": "Documents",
+    "certificates": "Batch certificates",
     "showResults": "Show results",
     "clearSearchHistory": "Clear recent searches",
     "heroEyebrow": "For laboratory research",
@@ -1964,5 +1975,56 @@
     "viewProduct": "View product",
     "addMore": "Add more",
     "footerHint": "Add more from the catalogue to compare up to four materials."
+  },
+  "certificates": {
+    "eyebrow": "Batch certificates",
+    "title": "Batch certificates",
+    "intro": "Every certificate here belongs to one batch — the lot code printed on the vial, the assay that was run on it, the laboratory that ran it and the date. Match the lot on your vial against the list below.",
+    "scope": "Only released lots with a published certificate are listed. Nothing appears here that a reader cannot open.",
+    "filterq": "Search",
+    "placeholderq": "Product, lot code, SKU or laboratory",
+    "filterproduct": "Product",
+    "placeholderproduct": "Product name",
+    "filtersku": "SKU",
+    "placeholdersku": "Catalogue reference",
+    "filterbatch": "Batch code",
+    "placeholderbatch": "Lot code",
+    "filterlab": "Laboratory",
+    "anyLab": "Any laboratory",
+    "filterpurity": "Minimum purity (%)",
+    "placeholderpurity": "e.g. 99",
+    "search": "Search",
+    "clear": "Clear filters",
+    "publicScope": "Certificates are shown for released lots only.",
+    "unavailableTitle": "The certificate library is unavailable",
+    "unavailableBody": "The database could not be read, so no certificates are listed. Please try again in a moment.",
+    "noMatchTitle": "No certificate matches those filters",
+    "noMatchBody": "Try a shorter product name, part of a lot code, or clear the filters.",
+    "emptyTitle": "No certificates are published yet",
+    "emptyBody": "A certificate appears here as soon as a lot is released and its certificate is published. If you need the certificate for a specific lot, ask and we will send it.",
+    "requestOne": "Ask for a certificate",
+    "resultCount": "{count} certificates",
+    "pagination": "Certificate pages",
+    "page": "Page {page}",
+    "previous": "Previous",
+    "next": "Next",
+    "publishedCertificates": "Published certificates for this product",
+    "browseCertificates": "Browse the certificate library",
+    "size": "Size",
+    "lab": "Laboratory",
+    "tested": "Manufactured",
+    "expires": "Expires",
+    "msConfirmed": "Mass spectrometry confirmed",
+    "msNotConfirmed": "Mass spectrometry not confirmed",
+    "endotoxin": "Endotoxin",
+    "assayTable": "Assay results for this batch",
+    "test": "Test",
+    "method": "Method",
+    "result": "Result",
+    "spec": "Specification",
+    "pass": "Pass",
+    "fail": "Fail",
+    "openCertificate": "Open the certificate",
+    "demonstration": "Demonstration record"
   }
 }

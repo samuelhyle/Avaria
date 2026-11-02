@@ -8,9 +8,25 @@ interface EmptyStateProps {
   description?: string
   action?: ReactNode
   className?: string
+  /**
+   * The heading level of the title.
+   *
+   * An empty state is still a section of the page, so its title belongs in
+   * the document outline. A page that has no heading of its own can pass
+   * `headingLevel={3}` to sit one step below the heading above it.
+   */
+  headingLevel?: 2 | 3 | 4
 }
 
-export function EmptyState({ icon: Icon, title, description, action, className }: EmptyStateProps) {
+export function EmptyState({
+  icon: Icon,
+  title,
+  description,
+  action,
+  className,
+  headingLevel = 2,
+}: EmptyStateProps) {
+  const Heading = `h${headingLevel}` as "h2" | "h3" | "h4"
   return (
     <div
       className={cn(
@@ -23,7 +39,7 @@ export function EmptyState({ icon: Icon, title, description, action, className }
           <Icon className="h-5 w-5" aria-hidden />
         </div>
       ) : null}
-      <p className="font-display text-base font-semibold text-ink">{title}</p>
+      <Heading className="font-display text-base font-semibold text-ink">{title}</Heading>
       {description ? (
         <p className="mt-1 max-w-sm text-sm text-ink-muted text-pretty">{description}</p>
       ) : null}

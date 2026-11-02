@@ -1,3 +1,4 @@
+import { ProductCertificates } from "@/components/certificates/ProductCertificates"
 import { DocumentList } from "@/components/documents/DocumentList"
 import { DocumentState } from "@/components/documents/DocumentState"
 import { ProductCard } from "@/components/product/ProductCard"
@@ -8,6 +9,7 @@ import { ProductTabs } from "@/components/product/ProductTabs"
 import { BreadcrumbJsonLd, ProductJsonLd } from "@/components/seo/JsonLd"
 import { ResearchNotice } from "@/components/store/ResearchNotice"
 import { Container } from "@/components/ui/Container"
+import { listCertificatesForProduct } from "@/lib/certificates/service"
 import { getCurrentMember } from "@/lib/community"
 import { documentAppliesToSku } from "@/lib/documents/library"
 import { listDocumentsForProductSlug } from "@/lib/documents/service"
@@ -73,10 +75,11 @@ export default async function ProductPage({
   const product = catalogue.find((p) => p.slug === slug)
   if (!product) notFound()
 
-  const [t, p, c] = await Promise.all([
+  const [t, p, c, ce] = await Promise.all([
     getTranslations({ locale, namespace: "research" }),
     getTranslations({ locale, namespace: "product" }),
     getTranslations({ locale, namespace: "shop" }),
+    getTranslations({ locale, namespace: "certificates" }),
   ])
   const translation = product.translations?.[locale as Locale] ?? product.defaultTranslation
   const query = await searchParams
@@ -86,6 +89,7 @@ export default async function ProductPage({
   const plans = member ? await listPlansForOwner(member.id, locale).catch(() => []) : []
   const productDocs = await listDocumentsForProductSlug(slug, locale).catch(() => null)
   const selectedDocs = productDocs?.filter((doc) => documentAppliesToSku(doc, selectedSku))
+  const certificates = await listCertificatesForProduct(slug, locale).catch(() => [])
   // Related cards are client components, so they are trimmed to the fields a
   // card actually renders before they are serialised into the page payload.
   const related = toClientCatalogue(
@@ -191,6 +195,18 @@ export default async function ProductPage({
         <h2 className="text-lg font-semibold tracking-tight text-ink">{p("batchTitle")}</h2>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-muted">{p("batchBody")}</p>
       </div>
+      {certificates.length ? (
+        <>
+          <h3 className="text-sm font-semibold uppercase tracking-wider text-ink-subtle">
+            {ce("publishedCertificates")}
+          </h3>
+          <ProductCertificates
+            certificates={certificates}
+            locale={locale}
+            selectedSku={selectedSku}
+          />
+        </>
+      ) : null}
       {productDocs === null ? (
         <DocumentState locale={locale} state="unavailable" />
       ) : selectedDocs?.length ? (
@@ -198,12 +214,20 @@ export default async function ProductPage({
       ) : (
         <DocumentState locale={locale} state="empty" />
       )}
-      <Link
-        href={`/${locale}/lab-tests`}
-        className="inline-block text-sm font-medium text-accent underline underline-offset-4"
-      >
-        {t("methodology")}
-      </Link>
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
+        <Link
+          href={`/${locale}/certificates`}
+          className="inline-flex min-h-11 items-center text-sm font-medium text-accent underline underline-offset-4"
+        >
+          {ce("browseCertificates")}
+        </Link>
+        <Link
+          href={`/${locale}/lab-tests`}
+          className="inline-flex min-h-11 items-center text-sm font-medium text-accent underline underline-offset-4"
+        >
+          {t("methodology")}
+        </Link>
+      </div>
     </div>
   )
 

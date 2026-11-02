@@ -35,6 +35,10 @@
       "title": "Analyysikertomukset",
       "description": "Etsi julkaistut kertomukset tuotteelle tai erälle. Asiakirjalinkki ei ole yleinen PASS-merkintä — arvioi menetelmä ja tulokset alkuperäisestä raportista."
     },
+    "certificates": {
+      "title": "Eräkohtaiset todistukset — avaa jokaisen erän analyysi",
+      "description": "Selaa jokaisen hyväksytyn erän todistus: eräkoodi, HPLC-puhtaus, endotoksinitulos, massaspektrometrian vahvistus ja analyysin tehnyt laboratorio."
+    },
     "compare": {
       "title": "Vertaa peptidejä",
       "description": "Vertaa dokumentoituja teknisiä tietoja, kokoja, puhtautta ja saatavuutta rinnakkain."
@@ -505,6 +509,7 @@
       "researchOnly": "Vain tutkimuskäyttöön"
     },
     "glossary": "Sanasto",
+    "certificates": "Todistukset",
     "documents": "Asiakirjat",
     "coaLibrary": "Analyysikertomukset",
     "partner": "Yhteistyökumppanuus",
@@ -553,7 +558,7 @@
     "labEyebrow": "Laatu",
     "labTitle": "Jokaisella erällä on avattava analyysikertomus",
     "labSubtitle": "Puhtaus on mittaustulos, ei markkinointiväite. Avaa vastaanottamasi erän alkuperäinen raportti ja lue menetelmä, tulos ja sen tehnyt laboratorio.",
-    "labCta": "Selaa asiakirjarekisteriä",
+    "labCta": "Selaa eräkohtaiset todistukset",
     "calcTitle": "Suunnitteletko protokollaa?",
     "calcSubtitle": "Laske konsentraatio, liuostilavuus ja alikvoittien määrä mille tahansa pullekoolle ennen tilaamista.",
     "calcCta": "Avaa laskuri",
@@ -578,7 +583,10 @@
     "qualityMassSpec": "Massaspektrometria",
     "qualityEndotoxin": "Endotoksiini",
     "qualityTestedAt": "Testattu",
-    "certificateHeading": "Analyysitodistus"
+    "certificateHeading": "Analyysitodistus",
+    "qualityLab": "Riippumaton ulkoinen laboratorio",
+    "latestCertificate": "Viimeisin julkaistu todistus",
+    "exampleCertificate": "Todistuksen ulkoasu"
   },
   "shop": {
     "title": "Peptidikauppa",
@@ -1688,10 +1696,13 @@
     "productScope": "Tuotekohtainen asiakirja",
     "generalScope": "Yleinen asiakirja",
     "scope": "Asiakirjan kohde",
-    "originalNotice": "Tarkista näyte, menetelmä ja tulos alkuperäisestä asiakirjasta. Julkaiseminen ei osoita soveltuvuutta juuri sinun työhösi."
+    "originalNotice": "Tarkista näyte, menetelmä ja tulos alkuperäisestä asiakirjasta. Julkaiseminen ei osoita soveltuvuutta juuri sinun työhösi.",
+    "batchLibraryHint": "Etsitkö tietyn erän todistusta?",
+    "batchLibraryLink": "Avaa eräkohtaisten todistusten kirjasto"
   },
   "experience": {
     "documents": "Asiakirjat",
+    "certificates": "Eräkohtaiset todistukset",
     "showResults": "Näytä tulokset",
     "clearSearchHistory": "Tyhjennä viimeisimmät haut",
     "heroEyebrow": "Laboratoriotutkimukseen",
@@ -1964,5 +1975,56 @@
     "viewProduct": "Näytä tuote",
     "addMore": "Lisää",
     "footerHint": "Lisää tuotteita valikoimasta verrataksesi enintään neljää materiaalia."
+  },
+  "certificates": {
+    "eyebrow": "Eräkohtaiset todistukset",
+    "title": "Eräkohtaiset todistukset",
+    "intro": "Jokainen todistus kuuluu yhteen erään: pullon etiketissä oleva eräkoodi, sille tehty analyysi, analyysin tehnyt laboratorio ja päivämäärä. Vastaa pullosi eräkoodi luetteloon.",
+    "scope": "Listalla ovat vain hyväksytyt erät, joille on julkaistu todistus. Mitään ei näytetä, mitä lukija ei voi avata.",
+    "filterq": "Haku",
+    "placeholderq": "Tuote, eräkoodi, tuotekoodi tai laboratorio",
+    "filterproduct": "Tuote",
+    "placeholderproduct": "Tuotteen nimi",
+    "filtersku": "Tuotekoodi",
+    "placeholdersku": "Luettelon viite",
+    "filterbatch": "Eräkoodi",
+    "placeholderbatch": "Erän koodi",
+    "filterlab": "Laboratorio",
+    "anyLab": "Mikä tahansa laboratorio",
+    "filterpurity": "Vähimmäispuhtaus (%)",
+    "placeholderpurity": "esim. 99",
+    "search": "Hae",
+    "clear": "Tyhjennä rajat",
+    "publicScope": "Todistukset näytetään vain hyväksytyille erille.",
+    "unavailableTitle": "Todistuskirjasto ei ole käytettävissä",
+    "unavailableBody": "Tietokantaa ei voitu lukea, joten todistuksia ei listata. Yritä hetken kuluttua uudelleen.",
+    "noMatchTitle": "Mikään todistus ei vastaa rajauksia",
+    "noMatchBody": "Kokeile lyhyempää tuotenimeä, osaa eräkoodista tai tyhjennä rajat.",
+    "emptyTitle": "Todistuksia ei ole vielä julkaistu",
+    "emptyBody": "Todistus ilmestyy tähän heti, kun erä hyväksytään ja sen todistus julkaistaan. Jos tarvitset tietyn erän todistuksen, pyydä se meiltä.",
+    "requestOne": "Pyydä todistus",
+    "resultCount": "{count} todistusta",
+    "pagination": "Todistussivut",
+    "page": "Sivu {page}",
+    "previous": "Edellinen",
+    "next": "Seuraava",
+    "publishedCertificates": "Tämän tuotteen julkaistut todistukset",
+    "browseCertificates": "Selaa todistuskirjastoa",
+    "size": "Koko",
+    "lab": "Laboratorio",
+    "tested": "Valmistettu",
+    "expires": "Voimassa",
+    "msConfirmed": "Massaspektrometria vahvistettu",
+    "msNotConfirmed": "Massaspektrometriaa ei vahvistettu",
+    "endotoxin": "Endotoksiini",
+    "assayTable": "Erän analyysitulokset",
+    "test": "Analyysi",
+    "method": "Menetelmä",
+    "result": "Tulos",
+    "spec": "Raja-arvo",
+    "pass": "Hyväksytty",
+    "fail": "Hylätty",
+    "openCertificate": "Avaa todistus",
+    "demonstration": "Esimerkkimerkintä"
   }
 }
