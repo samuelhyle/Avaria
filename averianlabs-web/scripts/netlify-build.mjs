@@ -2,18 +2,29 @@
 import { spawnSync } from "node:child_process"
 import postgres from "postgres"
 
-function run(command, args, env = process.env) {
+const STEP = {
+  install: 10,
+  env: 11,
+  preflight: 12,
+  migrate: 13,
+  seed: 14,
+  fixture: 15,
+  build: 16,
+  bundle: 17,
+  traces: 18,
+}
+
+function run(command, args, env = process.env, code = 1) {
   const result = spawnSync(command, args, { stdio: "inherit", env })
   if (result.error) throw result.error
   if (result.status !== 0) {
-    // Name the step. Without it the hosted build reports only "exit code 2"
-    // and gives no hint which of the six steps failed.
     console.error(`[deploy] Step failed: ${command} ${args.join(" ")}`)
-    process.exit(result.status ?? 1)
+    process.exit(code)
   }
 }
 
-run("pnpm", ["env:check"])
+run("pnpm", ["install", "--frozen-lockfile"], process.env, STEP.install)
+run("pnpm", ["env:check"], process.env, STEP.env)
 if (process.env.BUILD_MODE === "demo") {
   throw new Error("The hosted site requires the full application runtime")
 }
@@ -52,11 +63,11 @@ try {
 }
 
 const migrationEnv = { ...process.env, DATABASE_URL: migrationUrl }
-run("pnpm", ["db:migrate"], migrationEnv)
+run("pnpm", ["db:migrate"], migrationEnv, STEP.migrate)
 // The seed inserts missing draft reference records and never overwrites existing records.
-run("pnpm", ["db:seed"], migrationEnv)
+run("pnpm", ["db:seed"], migrationEnv, STEP.seed)
 if (process.env.CHECKOUT_TEST_PRODUCT_ENABLED === "true")
-  run("pnpm", ["exec", "tsx", "scripts/seed-checkout-test-product.ts"], migrationEnv)
-run("pnpm", ["build"])
-run("pnpm", ["check:bundle"])
-run("node", ["scripts/check-server-traces.mjs"])
+  run("pnpm", ["exec", "tsx", "scripts/seed-checkout-test-product.ts"], migrationEnv, STEP.fixture)
+run("pnpm", ["build"], process.env, STEP.build)
+run("pnpm", ["check:bundle"], process.env, STEP.bundle)
+run("node", ["scripts/check-server-traces.mjs"], process.env, STEP.traces)

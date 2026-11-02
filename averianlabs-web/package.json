@@ -135,11 +135,16 @@
     "onlyBuiltDependencies": [
       "@biomejs/biome",
       "@parcel/watcher",
+      "@sentry/cli",
       "@swc/core",
+      "argon2",
+      "canvas",
+      "core-js",
       "esbuild",
-      "sharp",
+      "lefthook",
       "onnxruntime-node",
-      "protobufjs"
+      "protobufjs",
+      "sharp"
     ],
     "overrides": {
       "postcss": "8.5.28",
