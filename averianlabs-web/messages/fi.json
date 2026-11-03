@@ -586,7 +586,11 @@
     "certificateHeading": "Analyysitodistus",
     "qualityLab": "Riippumaton ulkoinen laboratorio",
     "latestCertificate": "Viimeisin julkaistu todistus",
-    "exampleCertificate": "Todistuksen ulkoasu"
+    "exampleCertificate": "Todistuksen ulkoasu",
+    "ledgerEyebrow": "Laboratoriopäiväkirja",
+    "ledgerTitle": "Jokainen julkaistu erä näkyvissä",
+    "ledgerSubtitle": "Uusimmat hyväksytyt erät ja niiden julkaistu analyysitodistus. Jokainen rivi avaa erän oman tiedon.",
+    "ledgerCta": "Avaa todistuskirjasto"
   },
   "shop": {
     "title": "Peptidikauppa",
@@ -721,7 +725,21 @@
     "batchPending": "Erä määritetään, kun teet tilauksen.",
     "checkoutTestNotice": "Vain kassatestiä varten. Yhteensä 1,50 €. Ei fyysisiä tuotteita eikä lähetystä. Osta erikseen.",
     "priceAvailability": "Hinta ja saatavuus",
-    "tabsLabel": "Tuotetiedot"
+    "tabsLabel": "Tuotetiedot",
+    "mediaSwitcher": "Tuotteen media",
+    "mediaStudio": "Studia",
+    "mediaLabel": "Etiketti",
+    "mediaQuality": "Laatu",
+    "mediaLabelHint": "Näin erä on etiketöity — erän omilla luvuilla.",
+    "mediaQualityHint": "Mitatut arvot suhteessa hyväksymisrajoitukseen.",
+    "researchTitle": "Mitä kirjallisuus sanoo",
+    "researchLiteratureEmpty": "Tälle yhdisteelle ei ole vielä julkaistu artikkelia. Julkaistut artikkelit käsittelevät luettelon yhdisteitä.",
+    "researchMore": "Lisää luettavaa",
+    "researchAllArticles": "Kaikki tutkimusartikkelit",
+    "researchMethodTitle": "Menetelmä lukuarvon takana",
+    "researchMethodBody": "Puhtausluku on yhtä arvokas kuin sen tuottanut menetelmä. Menetelmäkuvauksemme kertoo, mitä mittaamme, miten ja mitä tulos ei todista.",
+    "researchAskTitle": "Kysymyksiä tästä yhdisteestä",
+    "researchAskBody": "Kysy Averialta säilytyksestä, liuottamisesta, todistuksesta tai kirjallisuudesta. Se vastaa kaupan omista tiedoista."
   },
   "cart": {
     "title": "Ostoskorisi",
@@ -2025,6 +2043,7 @@
     "pass": "Hyväksytty",
     "fail": "Hylätty",
     "openCertificate": "Avaa todistus",
-    "demonstration": "Esimerkkimerkintä"
+    "demonstration": "Esimerkkimerkintä",
+    "assayLabel": "{name}: {result}, vaatimus {spec}"
   }
 }

@@ -58,11 +58,18 @@ export async function CertificateCard({
             </h3>
             <p className="mt-1 font-mono text-xs text-ink-muted">{certificate.batchCode}</p>
           </div>
-          <div className="flex shrink-0 items-center gap-2 xl:mt-3">
-            <Badge tone="success" size="md">
-              {formatPercent(certificate.hplcPurity, locale)} HPLC
-            </Badge>
-          </div>
+          {/*
+            A lot that carries no HPLC result — a solvent, a reagent — has no
+            purity to report. Printing "0 % HPLC" for it would claim a
+            measurement that was never made.
+          */}
+          {certificate.hplcPurity > 0 ? (
+            <div className="flex shrink-0 items-center gap-2 xl:mt-3">
+              <Badge tone="success" size="md">
+                {formatPercent(certificate.hplcPurity, locale)} HPLC
+              </Badge>
+            </div>
+          ) : null}
         </div>
 
         <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-line pt-4 xl:grid-cols-1 xl:gap-y-2.5">

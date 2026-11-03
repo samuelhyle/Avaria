@@ -1,6 +1,8 @@
 import { ProductCertificates } from "@/components/certificates/ProductCertificates"
 import { DocumentList } from "@/components/documents/DocumentList"
 import { DocumentState } from "@/components/documents/DocumentState"
+import { ArticleCard } from "@/components/product/ArticleCard"
+import { AskAveriaButton } from "@/components/product/AskAveriaButton"
 import { ProductCard } from "@/components/product/ProductCard"
 import { ProductDetailActions } from "@/components/product/ProductDetailActions"
 import { ProductFAQ } from "@/components/product/ProductFAQ"
@@ -9,6 +11,8 @@ import { ProductTabs } from "@/components/product/ProductTabs"
 import { BreadcrumbJsonLd, ProductJsonLd } from "@/components/seo/JsonLd"
 import { ResearchNotice } from "@/components/store/ResearchNotice"
 import { Container } from "@/components/ui/Container"
+import { listPosts } from "@/lib/blog/posts"
+import { relatedPostsFor } from "@/lib/blog/related"
 import { listCertificatesForProduct } from "@/lib/certificates/service"
 import { getCurrentMember } from "@/lib/community"
 import { documentAppliesToSku } from "@/lib/documents/library"
@@ -22,6 +26,7 @@ import type { Locale } from "@/lib/products/types"
 import { listPlansForOwner } from "@/lib/research-plans"
 import { siteOrigin } from "@/lib/seo/site-origin"
 import { formatNumber, formatSize } from "@/lib/utils/format"
+import { ArrowRight } from "lucide-react"
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import Link from "next/link"
@@ -90,6 +95,9 @@ export default async function ProductPage({
   const productDocs = await listDocumentsForProductSlug(slug, locale).catch(() => null)
   const selectedDocs = productDocs?.filter((doc) => documentAppliesToSku(doc, selectedSku))
   const certificates = await listCertificatesForProduct(slug, locale).catch(() => [])
+  // The research desk's articles are published in Sanity. A shop with no
+  // articles still shows the tab — it says so rather than hiding the gap.
+  const posts = await listPosts(locale).catch(() => [])
   // Related cards are client components, so they are trimmed to the fields a
   // card actually renders before they are serialised into the page payload.
   const related = toClientCatalogue(
@@ -231,12 +239,111 @@ export default async function ProductPage({
     </div>
   )
 
+  /* ── Research tab ────────────────────────────────────────────────── */
+  /**
+   * The literature on this compound.
+   *
+   * The research desk writes one article per compound, and its address is
+   * not the compound's address, so the article is found by the compound's
+   * own name rather than by a link the catalogue would have to maintain.
+   */
+  const { about, nearby } = relatedPostsFor(
+    product.slug,
+    translation.name,
+    posts,
+    product.category,
+    4,
+  )
+
+  const research = (
+    <div className="space-y-9">
+      <section>
+        <h2 className="text-lg font-semibold tracking-tight text-ink">{p("researchTitle")}</h2>
+        {about.length ? (
+          <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+            {about.map((post) => (
+              <li key={post.slug}>
+                <ArticleCard
+                  post={post}
+                  locale={locale}
+                  readMinutes={t("readMinutes", { count: post.readMin })}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-muted">
+            {p("researchLiteratureEmpty")}
+          </p>
+        )}
+
+        {nearby.length ? (
+          <>
+            <h3 className="mt-7 text-sm font-semibold uppercase tracking-wider text-ink-subtle">
+              {p("researchMore")}
+            </h3>
+            <ul className="mt-3 grid gap-4 sm:grid-cols-2">
+              {nearby.map((post) => (
+                <li key={post.slug}>
+                  <ArticleCard
+                    post={post}
+                    locale={locale}
+                    readMinutes={t("readMinutes", { count: post.readMin })}
+                  />
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : null}
+
+        <Link
+          href={`/${locale}/blog`}
+          className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-accent underline underline-offset-4"
+        >
+          {p("researchAllArticles")}
+          <ArrowRight aria-hidden className="h-4 w-4" />
+        </Link>
+      </section>
+
+      <section className="rounded-[var(--radius-lg)] border border-line bg-surface-2/60 p-5">
+        <h2 className="text-sm font-semibold tracking-tight text-ink">
+          {p("researchMethodTitle")}
+        </h2>
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-muted">
+          {p("researchMethodBody")}
+        </p>
+        <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1">
+          <Link
+            href={`/${locale}/lab-tests`}
+            className="inline-flex min-h-11 items-center text-sm font-medium text-accent underline underline-offset-4"
+          >
+            {t("methodology")}
+          </Link>
+          <Link
+            href={`/${locale}/certificates?product=${product.slug}`}
+            className="inline-flex min-h-11 items-center text-sm font-medium text-accent underline underline-offset-4"
+          >
+            {ce("browseCertificates")}
+          </Link>
+        </div>
+      </section>
+
+      <section>
+        <h2 className="text-lg font-semibold tracking-tight text-ink">{p("researchAskTitle")}</h2>
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-muted">
+          {p("researchAskBody")}
+        </p>
+        <AskAveriaButton productName={translation.name} />
+      </section>
+    </div>
+  )
+
   const tabs = [
     { id: "overview", label: p("tabDescription"), content: overview },
     { id: "specs", label: p("tabSpecs"), content: specs },
     { id: "lab", label: p("tabCoa"), content: labResults },
+    { id: "research", label: p("tabCitations"), content: research },
   ]
-
   /**
    * A shared link can point at one section of the product page.
    *
@@ -289,7 +396,15 @@ export default async function ProductPage({
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-12 xl:gap-16">
         <div className="lg:sticky lg:top-24 lg:self-start">
-          <ProductGallery product={product} selectedSku={selectedSku} />
+          <ProductGallery
+            product={product}
+            selectedSku={selectedSku}
+            certificate={
+              certificates.find((certificate) => certificate.sku === selectedSku) ??
+              certificates[0] ??
+              null
+            }
+          />
         </div>
 
         <div>

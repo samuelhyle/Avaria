@@ -586,7 +586,11 @@
     "certificateHeading": "Certificate of analysis",
     "qualityLab": "Independent third-party laboratory",
     "latestCertificate": "Latest published certificate",
-    "exampleCertificate": "Certificate layout"
+    "exampleCertificate": "Certificate layout",
+    "ledgerEyebrow": "Lab ledger",
+    "ledgerTitle": "Every lot we release, in the open",
+    "ledgerSubtitle": "The newest released lots, each with the certificate that was published for it. Every row opens the lot's own record.",
+    "ledgerCta": "Open the certificate library"
   },
   "shop": {
     "title": "Peptide shop",
@@ -721,7 +725,21 @@
     "batchPending": "The batch is assigned when you place the order.",
     "checkoutTestNotice": "Checkout test only. €1.50 total. No physical goods or shipment. Buy one separately.",
     "priceAvailability": "Price and availability",
-    "tabsLabel": "Product details"
+    "tabsLabel": "Product details",
+    "mediaSwitcher": "Product media",
+    "mediaStudio": "Studio",
+    "mediaLabel": "Label",
+    "mediaQuality": "Quality",
+    "mediaLabelHint": "How the lot is labelled — with this lot's own numbers.",
+    "mediaQualityHint": "Measured against the specification it was released to.",
+    "researchTitle": "What the literature says",
+    "researchLiteratureEmpty": "No article on this compound has been published yet. The articles we do publish cover the compounds in the catalogue.",
+    "researchMore": "Related reading",
+    "researchAllArticles": "All research articles",
+    "researchMethodTitle": "The method behind the number",
+    "researchMethodBody": "A purity figure is only worth as much as the method that produced it. Our method notes say what we measure, how, and what the result does and does not establish.",
+    "researchAskTitle": "Questions about this compound",
+    "researchAskBody": "Ask Averia about storage, reconstitution, the certificate or the literature. It answers from the shop's own records."
   },
   "cart": {
     "title": "Your cart",
@@ -2025,6 +2043,7 @@
     "pass": "Pass",
     "fail": "Fail",
     "openCertificate": "Open the certificate",
-    "demonstration": "Demonstration record"
+    "demonstration": "Demonstration record",
+    "assayLabel": "{name}: {result}, specification {spec}"
   }
 }

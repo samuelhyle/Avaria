@@ -3,6 +3,7 @@ import { FeaturedProducts } from "@/components/home/FeaturedProducts"
 import { StoreFaq } from "@/components/home/StoreFaq"
 import { StoreHero } from "@/components/home/StoreHero"
 import { StoreHowItWorks } from "@/components/home/StoreHowItWorks"
+import { StoreLedger } from "@/components/home/StoreLedger"
 import { StoreNewsletter } from "@/components/home/StoreNewsletter"
 import { StoreQuality } from "@/components/home/StoreQuality"
 import { StoreValue } from "@/components/home/StoreValue"
@@ -48,6 +49,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         limit={8}
         buyable={buyable.length > 0}
       />
+      <StoreLedger locale={locale} />
       <StoreValue />
       <StoreHowItWorks />
       <StoreQuality locale={locale} />
