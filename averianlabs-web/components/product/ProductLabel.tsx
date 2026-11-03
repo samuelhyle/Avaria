@@ -65,7 +65,7 @@ export function ProductLabel({
    */
   const pending = labelIsPending(rows, batch)
 
-  const rowsTop = pending ? 268 : 236
+  const rowsTop = pending ? 306 : 236
   const rowsBottom = rowsTop + rows.length * ROW
   const barcode = rowsBottom + 34
   const height = barcode + 96
@@ -153,7 +153,7 @@ export function ProductLabel({
         <>
           <text
             x="34"
-            y={rowsTop - 44}
+            y={rowsTop - 62}
             fontFamily="var(--font-sans), ui-sans-serif, sans-serif"
             fontSize="12"
             letterSpacing="1.8"
@@ -163,7 +163,7 @@ export function ProductLabel({
           </text>
           <text
             x="34"
-            y={rowsTop - 18}
+            y={rowsTop - 30}
             fontFamily="var(--font-sans), ui-sans-serif, sans-serif"
             fontSize="14"
             fill="#4d6273"
