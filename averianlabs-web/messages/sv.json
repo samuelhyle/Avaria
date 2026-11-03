@@ -739,7 +739,9 @@
     "researchMethodTitle": "Metoden bakom siffran",
     "researchMethodBody": "En renhetssiffra är bara värd så mycket som metoden bakom den. Våra metodnoter säger vad vi mäter, hur, och vad resultatet inte visar.",
     "researchAskTitle": "Frågor om den här föreningen",
-    "researchAskBody": "Fråga Averia om lagring, beredning, certifikatet eller litteraturen. Hon svarar utifrån butikens egna register."
+    "researchAskBody": "Fråga Averia om lagring, beredning, certifikatet eller litteraturen. Hon svarar utifrån butikens egna register.",
+    "mediaLabelPendingTitle": "Inget släppt parti",
+    "mediaLabelPendingBody": "Specifikationerna utfärdas med partiet, när det släpps."
   },
   "cart": {
     "title": "Din varukorg",

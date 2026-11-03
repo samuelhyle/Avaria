@@ -739,7 +739,9 @@
     "researchMethodTitle": "Menetelmä lukuarvon takana",
     "researchMethodBody": "Puhtausluku on yhtä arvokas kuin sen tuottanut menetelmä. Menetelmäkuvauksemme kertoo, mitä mittaamme, miten ja mitä tulos ei todista.",
     "researchAskTitle": "Kysymyksiä tästä yhdisteestä",
-    "researchAskBody": "Kysy Averialta säilytyksestä, liuottamisesta, todistuksesta tai kirjallisuudesta. Se vastaa kaupan omista tiedoista."
+    "researchAskBody": "Kysy Averialta säilytyksestä, liuottamisesta, todistuksesta tai kirjallisuudesta. Se vastaa kaupan omista tiedoista.",
+    "mediaLabelPendingTitle": "Ei julkaistua erää",
+    "mediaLabelPendingBody": "Tekniset tiedot annetaan erän mukana, kun se julkaistaan."
   },
   "cart": {
     "title": "Ostoskorisi",

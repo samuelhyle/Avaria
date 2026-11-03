@@ -1,6 +1,6 @@
-import type { Batch, VialSize } from "@/lib/products/types"
-import type { Locale, Product } from "@/lib/products/types"
-import { formatDate } from "@/lib/utils/format"
+import { labelIsPending, labelRows } from "@/lib/products/label-record"
+import type { Batch, Locale, Product, VialSize } from "@/lib/products/types"
+import { useTranslations } from "next-intl"
 
 /**
  * The label of a lot, at reading size.
@@ -9,10 +9,12 @@ import { formatDate } from "@/lib/utils/format"
  * ends up trusting the picture rather than the record — so the label is
  * drawn here at the size it would be read at, carrying the numbers of the
  * lot in hand: its batch code, the purity that lot was measured at, its
- * molecular weight, how it is stored and when it expires.
+ * molecular weight, the CAS number, how it is stored and when it expires.
  *
  * The artwork is a rendering of the label, not a photograph of one; the
- * numbers on it are the lot's own.
+ * numbers on it are the lot's own. A product with no released lot has no
+ * record to print, and says so rather than leaving the reader to guess
+ * whether the gaps are omissions or answers.
  */
 
 /** The printed code on the label: "BPC157-10" → "BPC". */
@@ -32,6 +34,9 @@ const BARS = [
   43.2, 45.6, 48, 50.4, 52.8, 55.2, 57.6, 60,
 ] as const
 
+/** The vertical rhythm of the label: a row is this far below the one above it. */
+const ROW = 46
+
 export function ProductLabel({
   product,
   vial,
@@ -45,35 +50,29 @@ export function ProductLabel({
   locale: Locale
   name: string
 }) {
+  const t = useTranslations("product")
   const hue = product.hue ?? 184
   const code = labelCode(vial?.sku, product.slug)
-  const purity = batch?.hplcPurity ?? product.purityPercent
-  const mw = product.molecularWeight
-  const expires = batch?.expiresAt
+  const rows = labelRows(product, vial, batch, locale)
+
   /**
-   * The record on the label.
+   * A product with no released lot.
    *
-   * A label carries what a buyer needs to identify the material without
-   * opening the paperwork: the lot, the purity, the molar mass, the CAS
-   * number, how it is stored and when it expires. A value the lot does not
-   * have is left out rather than printed as a dash — a printed dash reads
-   * as a measurement that was taken and came to nothing.
+   * The catalogue's reference entries are browsable but cannot establish
+   * availability or quality, so they carry no batch and no specifications.
+   * A label with nothing on it but a SKU would read as a record rather than
+   * as the absence of one.
    */
-  const rows = (
-    [
-      [batch ? "Lot" : "Batch", batch?.code ?? ""],
-      ["Purity", purity ? `${purity} % HPLC` : ""],
-      ["MW", mw ? `${mw} g/mol` : ""],
-      ["CAS", product.casNumber ?? ""],
-      ["Storage", product.storageTemp ?? ""],
-      ["Expiry", expires ? formatDate(expires, locale) : ""],
-      ["SKU", vial?.sku ?? ""],
-    ] as Array<[string, string]>
-  ).filter(([, value]) => value.length > 0)
+  const pending = labelIsPending(rows, batch)
+
+  const rowsTop = pending ? 268 : 236
+  const rowsBottom = rowsTop + rows.length * ROW
+  const barcode = rowsBottom + 34
+  const height = barcode + 96
 
   return (
     <svg
-      viewBox="0 0 460 660"
+      viewBox={`0 0 460 ${height}`}
       fill="none"
       role="img"
       aria-label={`Label of ${name}`}
@@ -91,8 +90,16 @@ export function ProductLabel({
       </defs>
 
       {/* the label itself */}
-      <rect x="10" y="10" width="440" height="640" rx="14" fill="url(#label-paper)" />
-      <rect x="10" y="10" width="440" height="600" rx="14" stroke="#c9d4d9" strokeWidth="1.5" />
+      <rect x="10" y="10" width="440" height={height - 20} rx="14" fill="url(#label-paper)" />
+      <rect
+        x="10"
+        y="10"
+        width="440"
+        height={height - 20}
+        rx="14"
+        stroke="#c9d4d9"
+        strokeWidth="1.5"
+      />
 
       {/* brand band */}
       <path d="M10 24a14 14 0 0 1 14-14h412a14 14 0 0 1 14 14v66H10z" fill="url(#label-band)" />
@@ -142,9 +149,33 @@ export function ProductLabel({
       </text>
       <line x1="34" y1="202" x2="426" y2="202" stroke="#d7e0e4" strokeWidth="1.5" />
 
+      {pending ? (
+        <>
+          <text
+            x="34"
+            y={rowsTop - 44}
+            fontFamily="var(--font-sans), ui-sans-serif, sans-serif"
+            fontSize="12"
+            letterSpacing="1.8"
+            fill="#8aa0ac"
+          >
+            {t("mediaLabelPendingTitle").toUpperCase()}
+          </text>
+          <text
+            x="34"
+            y={rowsTop - 18}
+            fontFamily="var(--font-sans), ui-sans-serif, sans-serif"
+            fontSize="14"
+            fill="#4d6273"
+          >
+            {t("mediaLabelPendingBody")}
+          </text>
+        </>
+      ) : null}
+
       {/* the record */}
-      {rows.map(([label, value], index) => {
-        const y = 236 + index * 46
+      {rows.map(({ label, value }, index) => {
+        const y = rowsTop + index * ROW
         return (
           <g key={label}>
             <text
@@ -177,15 +208,15 @@ export function ProductLabel({
         <path
           d={BARS.map((offset, index) =>
             index % 3 === 0
-              ? `M${44 + offset} 560h2.1v34h-2.1z`
-              : `M${44 + offset} 560h1.1v34h-1.1z`,
+              ? `M${44 + offset} ${barcode}h2.1v34h-2.1z`
+              : `M${44 + offset} ${barcode}h1.1v34h-1.1z`,
           ).join("")}
           fill="#2f4b58"
         />
       </g>
       <text
         x="44"
-        y="616"
+        y={barcode + 56}
         fontFamily="var(--font-mono), ui-monospace, monospace"
         fontSize="12"
         fill="#7d919c"
@@ -194,7 +225,7 @@ export function ProductLabel({
       </text>
       <text
         x="426"
-        y="616"
+        y={barcode + 56}
         textAnchor="end"
         fontFamily="var(--font-sans), ui-sans-serif, sans-serif"
         fontSize="12"
