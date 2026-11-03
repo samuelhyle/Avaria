@@ -9,17 +9,19 @@ Published to [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app
 | Published at | `2026-11-03T15:14:39.268Z` |
 | Netlify deploy | `6ae9f973fd93c52ad387ffca` — the application release |
 | Deployed commit on `demo` | `5a31eed` |
-| Published deploy | `6ae9fb211def505f2e07e5fb` — the same application, with this record |
 | Previous published deploy | `6ae91add76b01a1157d19b90` (unlocked and superseded) |
 | Deployment method | Git push to the `demo` branch; Netlify built the source with the hosted secrets |
 | Functions deployed | `___netlify-server-handler`, `cron-crypto`, `cron-maintenance` |
 | Schedules | `*/2 * * * *` (crypto), `*/5 * * * *` (maintenance) |
 
 Several deploys followed the first one — `6ae8a92b964e1e55a0c34f62` (the
-labelling fix described below), `6ae91add76b01a1157d19b90` (the build that
-carries the product media and the lab ledger) and the deploy that carries
-the final plural correction. The deploy table is updated as each is
-published; the sections below describe the release as a whole.
+labelling fix described below), `6ae91add76b01a1157d19b90` and
+`6ae9f973fd93c52ad387ffca` (the release that carries the product media and
+the lab ledger) and the deploy that carries the final plural correction.
+Deploys after the one named above carry this document and nothing else, so
+the deploy id in the table names the application and stays true. The deploy
+table is updated as each is published; the sections below describe the
+release as a whole.
 
 This record was revised after that deploy was published. The revision
 changes the document only — the application it describes is the application
