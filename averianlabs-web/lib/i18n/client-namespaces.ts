@@ -51,7 +51,7 @@ const ROUTE_NAMESPACES: Array<{ prefix: string; namespaces: string[] }> = [
   { prefix: "/research-tools", namespaces: ["calculator"] },
   { prefix: "/reset-password", namespaces: ["auth"] },
   { prefix: "/rewards", namespaces: ["documentLibrary"] },
-  { prefix: "/shop", namespaces: ["documentLibrary", "plans", "product"] },
+  { prefix: "/shop", namespaces: ["certificates", "documentLibrary", "plans", "product"] },
   { prefix: "/verify-email", namespaces: ["auth"] },
   { prefix: "/wishlist", namespaces: ["product"] },
 ]

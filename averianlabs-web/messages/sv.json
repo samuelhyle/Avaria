@@ -586,7 +586,11 @@
     "certificateHeading": "Analysrapport",
     "qualityLab": "Oberoende tredjepartslaboratorium",
     "latestCertificate": "Senast publicerade certifikat",
-    "exampleCertificate": "Certifikatets utseende"
+    "exampleCertificate": "Certifikatets utseende",
+    "ledgerEyebrow": "Laboratorieledg",
+    "ledgerTitle": "Varje parti vi släpper, öppet redovisat",
+    "ledgerSubtitle": "De senast släppta partierna, var och en med sitt publicerade analyscertifikat. Varje rad öppnar partiets egen post.",
+    "ledgerCta": "Öppna certifikatbiblioteket"
   },
   "shop": {
     "title": "Peptidbutik",
@@ -721,7 +725,21 @@
     "batchPending": "Batchen tilldelas när du gör beställningen.",
     "checkoutTestNotice": "Endast kassatest. Totalt 1,50 €. Inga fysiska varor och ingen leverans. Köp separat.",
     "priceAvailability": "Pris och tillgänglighet",
-    "tabsLabel": "Produktinformation"
+    "tabsLabel": "Produktinformation",
+    "mediaSwitcher": "Produktmedia",
+    "mediaStudio": "Studio",
+    "mediaLabel": "Etikett",
+    "mediaQuality": "Kvalitet",
+    "mediaLabelHint": "Så här etiketteras partiet — med partiets egna siffror.",
+    "mediaQualityHint": "Mätt mot den specifikation partiet godkänts mot.",
+    "researchTitle": "Vad litteraturen säger",
+    "researchLiteratureEmpty": "Ingen artikel om den här föreningen har publicerats än. De artiklar vi publicerar handlar om ämnena i katalogen.",
+    "researchMore": "Mer att läsa",
+    "researchAllArticles": "Alla forskningsartiklar",
+    "researchMethodTitle": "Metoden bakom siffran",
+    "researchMethodBody": "En renhetssiffra är bara värd så mycket som metoden bakom den. Våra metodnoter säger vad vi mäter, hur, och vad resultatet inte visar.",
+    "researchAskTitle": "Frågor om den här föreningen",
+    "researchAskBody": "Fråga Averia om lagring, beredning, certifikatet eller litteraturen. Hon svarar utifrån butikens egna register."
   },
   "cart": {
     "title": "Din varukorg",
@@ -2023,6 +2041,7 @@
     "pass": "Godkänd",
     "fail": "Underkänd",
     "openCertificate": "Öppna certifikatet",
-    "demonstration": "Demonstrationspost"
+    "demonstration": "Demonstrationspost",
+    "assayLabel": "{name}: {result}, specifikation {spec}"
   }
 }
