@@ -7,8 +7,9 @@ Published to [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app
 | Item | Value |
 |---|---|
 | Published at | `2026-11-03T15:14:39.268Z` |
-| Netlify deploy | `6ae9f973fd93c52ad387ffca` |
+| Netlify deploy | `6ae9f973fd93c52ad387ffca` — the application release |
 | Deployed commit on `demo` | `5a31eed` |
+| Published deploy | `6ae9fb211def505f2e07e5fb` — the same application, with this record |
 | Previous published deploy | `6ae91add76b01a1157d19b90` (unlocked and superseded) |
 | Deployment method | Git push to the `demo` branch; Netlify built the source with the hosted secrets |
 | Functions deployed | `___netlify-server-handler`, `cron-crypto`, `cron-maintenance` |
