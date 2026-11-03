@@ -739,7 +739,9 @@
     "researchMethodTitle": "The method behind the number",
     "researchMethodBody": "A purity figure is only worth as much as the method that produced it. Our method notes say what we measure, how, and what the result does and does not establish.",
     "researchAskTitle": "Questions about this compound",
-    "researchAskBody": "Ask Averia about storage, reconstitution, the certificate or the literature. It answers from the shop's own records."
+    "researchAskBody": "Ask Averia about storage, reconstitution, the certificate or the literature. It answers from the shop's own records.",
+    "mediaLabelPendingTitle": "No released lot",
+    "mediaLabelPendingBody": "Specifications are issued with the lot, when one is released."
   },
   "cart": {
     "title": "Your cart",
