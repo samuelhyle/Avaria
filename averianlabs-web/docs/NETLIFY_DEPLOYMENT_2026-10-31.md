@@ -1,4 +1,4 @@
-# Release record — 31 October 2026 (updated 2 November 2026)
+# Release record — 31 October 2026 (updated 3 November 2026)
 
 Published to [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app). The merchant release is approved and the review-site gate has been removed, so the storefront is indexable and the canonical origin, the sitemap and `robots.txt` all name the origin that actually serves the site.
 
@@ -6,18 +6,19 @@ Published to [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app
 
 | Item | Value |
 |---|---|
-| Published at | `2026-11-02T15:01:57.038Z` |
-| Netlify deploy | `6ae8a50264fb73a10deca06e` |
-| Deployed commit on `demo` | `a71b25e` |
-| Previous published deploy | `6ae77d24afb00c46c4c2177a` (unlocked and superseded) |
+| Published at | `2026-11-03T15:14:39.268Z` |
+| Netlify deploy | `6ae9f973fd93c52ad387ffca` |
+| Deployed commit on `demo` | `5a31eed` |
+| Previous published deploy | `6ae91add76b01a1157d19b90` (unlocked and superseded) |
 | Deployment method | Git push to the `demo` branch; Netlify built the source with the hosted secrets |
 | Functions deployed | `___netlify-server-handler`, `cron-crypto`, `cron-maintenance` |
 | Schedules | `*/2 * * * *` (crypto), `*/5 * * * *` (maintenance) |
 
-Two further deploys followed it on the same day — `6ae8a92b964e1e55a0c34f62`
-(the labelling fix described below) and the deploy that carries the final
-plural correction. The deploy table is updated as each is published; the
-sections below describe the release as a whole.
+Several deploys followed the first one — `6ae8a92b964e1e55a0c34f62` (the
+labelling fix described below), `6ae91add76b01a1157d19b90` (the build that
+carries the product media and the lab ledger) and the deploy that carries
+the final plural correction. The deploy table is updated as each is
+published; the sections below describe the release as a whole.
 
 This record was revised after that deploy was published. The revision
 changes the document only — the application it describes is the application
@@ -310,6 +311,41 @@ database has none yet. The single entry it shows is the checkout fixture's,
 labelled as the demonstration record it is. Loading a real lot is a data
 operation: release the batch, publish its certificate document, and it
 appears in all four languages without a code change.
+
+## The product page, and the home page
+
+Two things changed in this release, both of them about what the shop can
+show rather than about what it claims.
+
+**The product page has media.** A vial label is 20 mm wide; in a picture it
+is unreadable, and the shopper is left trusting the picture rather than the
+record. The product page now draws the label again at reading size, with the
+lot's own numbers on it — the lot code, the purity that lot was measured at,
+the molar mass, the CAS number, the storage conditions and the expiry date.
+The label artwork is a rendering; the numbers on it are the lot's.
+
+The same page draws the lot's assay results against the specification they
+were measured to: the measurement, the limit, the method, and a bar drawn
+over the range the comparison happens in. A purity of 99.4 % against a limit
+of 98 % is a bar that is nearly full — not one that is 99.4 % full — and
+the limit is marked on the bar, so the reader can see the margin rather than
+take it on trust. A lot with no HPLC result draws no purity bar and claims
+no purity: the solvent and the peptide are not the same record.
+
+**The home page has a ledger.** A shop says "our peptides are 99 % pure"; a
+ledger says which lot was measured, when, by whom, and where its certificate
+is. The home page now lists the newest released lots, each with the
+certificate published for it, and each row opens the lot's own record. It
+holds one row today, because one lot has been released. It will hold the
+others as they are.
+
+**The product page gained a research tab.** The research desk writes one
+article per compound, and its address is not the compound's address —
+BPC-157 is written up in "bpc-157-overview", GHK-Cu in "ghk-cu-copper". The
+article is found by the compound's own name, so the link stays right when
+an article is renamed, and the tab points at the method notes, the
+certificate library and the assistant whether or not an article has been
+written yet.
 
 ## What the hosted build can and cannot do
 
