@@ -209,7 +209,7 @@ export function ShopCatalog({ locale }: { locale: string }) {
                     <span className="font-mono text-ink-subtle">{unavailable.length}</span>
                   </h2>
                   <p className="mb-4 text-sm text-ink-muted">{t("unavailableHint")}</p>
-                  <div className="grid gap-3">{renderList(unavailable, false)}</div>
+                  <div className="grid gap-3">{renderList(unavailable)}</div>
                 </section>
               ) : null}
             </div>
@@ -240,7 +240,7 @@ export function ShopCatalog({ locale }: { locale: string }) {
                   </h2>
                   <p className="mb-4 text-sm text-ink-muted">{t("unavailableHint")}</p>
                   <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                    {renderGrid(unavailable, false)}
+                    {renderGrid(unavailable)}
                   </div>
                 </section>
               ) : null}

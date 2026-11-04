@@ -634,7 +634,7 @@
     },
     "availableNow": "Saatavilla nyt",
     "currentlyUnavailable": "Ei tällä hetkellä saatavilla",
-    "unavailableHint": "Nämä materiaalit ovat valikoimassa, mutta niitä ei voi tilata verkosta juuri nyt. Pyydä tarjous, niin vahvistamme saatavuuden ja toimitusajan.",
+    "unavailableHint": "Alla jokainen tuote kertoo, mikä puuttuu ennen kuin se voidaan tilata. Pyydä erää, niin vahvistamme erän, sen analyysitodistuksen ja hinnan.",
     "browseByCategory": "Selaa kategorioittain",
     "featured": "Suositellut",
     "productsCount": "{count, plural, =0 {Ei tuotteita} one {# tuote} other {# tuotetta}}",
