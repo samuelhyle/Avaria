@@ -634,7 +634,7 @@
     },
     "availableNow": "Available now",
     "currentlyUnavailable": "Currently unavailable",
-    "unavailableHint": "These materials are in the catalogue but cannot be ordered online at the moment. Ask for a quote and we will confirm availability and lead time.",
+    "unavailableHint": "Each material below states what is still missing before it can be ordered. Ask for a lot and we will confirm the batch, its certificate and the price.",
     "browseByCategory": "Browse by category",
     "featured": "Featured",
     "productsCount": "{count, plural, =0 {No products} one {# product} other {# products}}",

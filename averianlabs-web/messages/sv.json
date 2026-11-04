@@ -634,7 +634,7 @@
     },
     "availableNow": "Tillgängliga nu",
     "currentlyUnavailable": "Inte tillgängliga just nu",
-    "unavailableHint": "Dessa material finns i sortimentet men kan inte beställas online just nu. Begär en offert så bekräftar vi tillgänglighet och leveranstid.",
+    "unavailableHint": "Varje material nedan anger vad som saknas innan det kan beställas. Fråga efter en part, så bekräftar vi partiet, dess analysintyg och priset.",
     "browseByCategory": "Utforska per kategori",
     "featured": "Utvalda",
     "productsCount": "{count, plural, =0 {Inga produkter} one {# produkt} other {# produkter}}",
