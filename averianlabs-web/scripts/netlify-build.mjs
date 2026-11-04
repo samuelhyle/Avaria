@@ -1,5 +1,6 @@
 // Run only in the hosted build, where Netlify supplies the actual site secrets.
-import { spawnSync } from "node:child_process"
+import { spawn } from "node:child_process"
+import { getDeployStore } from "@netlify/blobs"
 import postgres from "postgres"
 
 const STEP = {
@@ -14,17 +15,75 @@ const STEP = {
   traces: 18,
 }
 
-function run(command, args, env = process.env, code = 1) {
-  const result = spawnSync(command, args, { stdio: "inherit", env })
-  if (result.error) throw result.error
-  if (result.status !== 0) {
-    console.error(`[deploy] Step failed: ${command} ${args.join(" ")}`)
-    process.exit(code)
+/**
+ * The build's own record of itself.
+ *
+ * A hosted build that fails says only "the build script returned a non-zero
+ * exit code", which names the step and nothing else. The log is written to
+ * private, deployment-scoped storage as the build runs, so the failing step
+ * and its output can be read afterwards without asking the log service for a
+ * log it does not keep.
+ */
+const steps = []
+let captured = ""
+const store = process.env.NETLIFY ? getDeployStore({ consistency: "strong" }) : null
+
+async function publish() {
+  if (!store) return
+  try {
+    await store.set(
+      "build-diagnostics/last-run.json",
+      JSON.stringify(
+        {
+          deployId: process.env.DEPLOY_ID ?? null,
+          commit: process.env.COMMIT_REF ?? null,
+          branch: process.env.BRANCH ?? null,
+          finishedAt: new Date().toISOString(),
+          steps,
+          log: captured.slice(-60000),
+        },
+        null,
+        2,
+      ),
+    )
+  } catch (error) {
+    console.error("[deploy] The build record could not be written:", error)
   }
 }
 
-run("pnpm", ["install", "--frozen-lockfile"], process.env, STEP.install)
-run("pnpm", ["env:check"], process.env, STEP.env)
+/**
+ * Run one step.
+ *
+ * The output is streamed as it arrives, because a build that goes quiet for
+ * too long is killed by the host, and it is captured at the same time so the
+ * record holds what the step printed.
+ */
+async function run(command, args, env = process.env, code = 1) {
+  const label = `${command} ${args.join(" ")}`
+  const child = spawn(command, args, { env, stdio: ["ignore", "pipe", "pipe"] })
+  child.stdout.on("data", (chunk) => {
+    captured += chunk
+    process.stdout.write(chunk)
+  })
+  child.stderr.on("data", (chunk) => {
+    captured += chunk
+    process.stderr.write(chunk)
+  })
+  const status = await new Promise((resolve, reject) => {
+    child.on("error", reject)
+    child.on("close", (code) => resolve(code ?? 1))
+  })
+  steps.push({ step: label, status, at: new Date().toISOString() })
+  if (status !== 0) {
+    console.error(`[deploy] Step failed: ${label}`)
+    await publish()
+    process.exit(code)
+  }
+  await publish()
+}
+
+await run("pnpm", ["install", "--frozen-lockfile"], process.env, STEP.install)
+await run("pnpm", ["env:check"], process.env, STEP.env)
 if (process.env.BUILD_MODE === "demo") {
   throw new Error("The hosted site requires the full application runtime")
 }
@@ -63,11 +122,18 @@ try {
 }
 
 const migrationEnv = { ...process.env, DATABASE_URL: migrationUrl }
-run("pnpm", ["db:migrate"], migrationEnv, STEP.migrate)
+await run("pnpm", ["db:migrate"], migrationEnv, STEP.migrate)
 // The seed inserts missing draft reference records and never overwrites existing records.
-run("pnpm", ["db:seed"], migrationEnv, STEP.seed)
+await run("pnpm", ["db:seed"], migrationEnv, STEP.seed)
 if (process.env.CHECKOUT_TEST_PRODUCT_ENABLED === "true")
-  run("pnpm", ["exec", "tsx", "scripts/seed-checkout-test-product.ts"], migrationEnv, STEP.fixture)
-run("pnpm", ["build"], process.env, STEP.build)
-run("pnpm", ["check:bundle"], process.env, STEP.bundle)
-run("node", ["scripts/check-server-traces.mjs"], process.env, STEP.traces)
+  await run(
+    "pnpm",
+    ["exec", "tsx", "scripts/seed-checkout-test-product.ts"],
+    migrationEnv,
+    STEP.fixture,
+  )
+await run("pnpm", ["build"], process.env, STEP.build)
+await run("pnpm", ["check:bundle"], process.env, STEP.bundle)
+await run("node", ["scripts/check-server-traces.mjs"], process.env, STEP.traces)
+await publish()
+console.log("[deploy] The build finished; every step passed.")

@@ -20,7 +20,12 @@
   # by the plugin). The static demo build still exists for local preview:
   #   pnpm build:demo --serve
   # but it is no longer what we publish.
-  command = "pnpm install --frozen-lockfile && node scripts/netlify-build.mjs"
+  # The build script runs the dependency installation itself, as its first
+  # step. Running it here as well meant the dependencies were installed
+  # twice: once by the host and once again by the command, and a failure in
+  # the second installation surfaced only as "the build script returned a
+  # non-zero exit code", with no indication of which step had failed.
+  command = "node scripts/netlify-build.mjs"
   publish = ".next"
 
 [build.environment]
