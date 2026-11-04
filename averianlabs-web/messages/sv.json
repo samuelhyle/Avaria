@@ -1600,6 +1600,17 @@
     },
     "inventory": "Lager",
     "inventorySub": "Lagernivåer",
+    "waitlist": "Tillgänglighetslista",
+    "waitlistSub": "Vem som väntar på en part",
+    "waitlistUi": {
+      "subtitle": "Kunder som bad att få veta när en part släpps. Underhållssvepet skickar mejlet när en batch släpps och dess analysintyg är publicerat.",
+      "counts": "{open} väntar · {notified} underrättade",
+      "empty": "Ingen väntar på en part.",
+      "sku": "SKU",
+      "product": "Produkt",
+      "email": "E-post",
+      "requested": "Begärd"
+    },
     "inventoryUi": {
       "subtitle": "SKU-er på eller under sin låga lagertröskel, samt allt som är slut i lager.",
       "empty": "Alla SKU-er ligger över sin tröskel.",

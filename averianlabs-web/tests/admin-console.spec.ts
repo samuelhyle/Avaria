@@ -108,6 +108,30 @@ test.describe("admin console", () => {
     }
   })
 
+  test("the availability list shows who is waiting for a lot", async ({ cleanPage }, testInfo) => {
+    const email = await setupAdmin(testInfo)
+    const shopper = `waitlist-${testInfo.workerIndex}-${testInfo.testId}@example.invalid`
+    const fixture = isolatedBrowserDatabase()
+    try {
+      await signIn(cleanPage, email)
+      const response = await cleanPage.request.post("/api/waitlist", {
+        headers: sameOriginHeaders(),
+        data: { sku: "AOD-5", email: shopper, locale: "en" },
+      })
+      expect(response.ok()).toBeTruthy()
+
+      await cleanPage.goto("/en/admin/waitlist")
+      await expect(
+        cleanPage.getByRole("heading", { name: /availability list/i }).first(),
+      ).toBeVisible()
+      await expect(cleanPage.getByText(shopper)).toBeVisible()
+    } finally {
+      await fixture`delete from product_waitlist where email = ${shopper}`
+      await fixture.end()
+      await teardownAdmin(email)
+    }
+  })
+
   test("the crypto routes report the configured chains", async ({ cleanPage }) => {
     const response = await cleanPage.request.get("/api/crypto/chains")
     expect(response.ok()).toBeTruthy()

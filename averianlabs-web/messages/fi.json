@@ -1192,6 +1192,17 @@
     },
     "inventory": "Varasto",
     "inventorySub": "Varastosaldot",
+    "waitlist": "Saatavuuslista",
+    "waitlistSub": "Ketkä odottavat erää",
+    "waitlistUi": {
+      "subtitle": "Ostajat, jotka pyysivät ilmoitettavan, kun erä julkaistaan. Ylläpitosweep lähettää viestin, kun erä julkaistaan ja sen analyysitodistus on julkinen.",
+      "counts": "{open} odottaa · {notified} ilmoitettu",
+      "empty": "Kukaan ei odota erää.",
+      "sku": "Tuotekoodi",
+      "product": "Tuote",
+      "email": "Sähköposti",
+      "requested": "Pyydetty"
+    },
     "inventoryUi": {
       "subtitle": "Tuotteet, joiden varastosaldo on alle hälytysrajan tai loppunut.",
       "empty": "Kaikki tuotteet ovat hälytysrajan yläpuolella.",
