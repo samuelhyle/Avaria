@@ -485,7 +485,8 @@
     "estimatedVolume": "Arvioitu pullojen määrä kuukaudessa (valinnainen)",
     "quoteSubmit": "Lähetä pyyntö",
     "quoteLabel": "Tarjouspyyntö",
-    "quoteResponseNote": "Vastaamme yleensä saman työpäivän aikana."
+    "quoteResponseNote": "Vastaamme yleensä saman työpäivän aikana.",
+    "lot": "Erä"
   },
   "nav": {
     "shop": "Kauppa",
@@ -529,20 +530,20 @@
   "home": {
     "seoTitle": "Tutkimuspeptidit laboratorioon — lähetetään Suomesta",
     "seoDescription": "Selaa tutkimuspeptidejä, joille on julkaistu HPLC-puhtaus ja analyysikertomus. Selkeät tuotekuvaukset, turvallinen maksu ja toimitus koko Suomeen.",
-    "heroEyebrow": "Tutkimuspeptidit · Lähetetään Helsingistä",
-    "heroTitle": "Tutkimuspeptidit — selkeästi selitettynä ja rehellisesti testattuna.",
-    "heroSubtitle": "Selaa valikoimaa, lue mitä kukin peptidi on ja mihin sitä käytetään laboratoriossa, tarkista analyysikertomus — ja tilaa alle kahdessa minuutissa.",
-    "ctaShop": "Selaa kaikkia peptidejä",
+    "heroEyebrow": "Jokainen erä julkaistaan · Lähetetään Helsingistä",
+    "heroTitle": "Jokainen peptidi, jokainen todistus — avoinna sinulle.",
+    "heroSubtitle": "Todistus kuuluu juuri sille erälle, jonka saat — ei parhaalle tapaukselle toiselta hyllyltä. Lue analyysi, katso luku suhteessa siihen rajaan, jolle se mitattiin, ja tilaa alle kahdessa minuutissa.",
+    "ctaShop": "Avaa valikoima",
     "ctaResearch": "Katso, miten testaamme",
     "heroStatPurity": "HPLC-puhtaus",
     "heroStatVat": "ALV sisältyy",
     "heroStatDelivery": "Toimitus Suomessa",
-    "featuredEyebrow": "Suosituimmat juuri nyt",
+    "featuredEyebrow": "Valmiina tilattavaksi",
     "featuredEyebrowAlt": "Valikoimassa",
     "featuredTitleAlt": "Kaikki listattuamme materiaalit",
     "featuredSubtitleAlt": "Tutkimuspeptidimme erittäin sekä niiden takana olevat asiakirjat. Pyydä tarjous mistä tahansa materiaalista, niin vahvistamme erän ja hinnan.",
-    "featuredTitle": "Myydyimmät tutkimuspeptidit",
-    "featuredSubtitle": "Asiakkaidemme eniten tilaamat materiaalit, reaaliaikaisella varastolla ja päivitetyillä hinnoilla.",
+    "featuredTitle": "Tutkimuspeptidit, valmiina lähtöön",
+    "featuredSubtitle": "Materiaalit, jotka voit tilata heti, reaaliaikaisella varastolla ja ajan hinnoilla.",
     "featuredCta": "Katso koko valikoima",
     "categoriesTitle": "Selaa tutkimusalueen mukaan",
     "categoriesSubtitle": "Aloita omasta alueestasi ja rajaa siitä eteenpäin.",
@@ -565,7 +566,7 @@
     "calcCta": "Avaa laskuri",
     "toolsTitle": "Tutkimustyökalut",
     "toolsSubtitle": "Kaikki, mikä helpottaa aineen arviointia, yhdessä paikassa.",
-    "newsletterTitle": "Uusia eriä, uusia tuotteita",
+    "newsletterTitle": "Tuoreelta laboratoriolta",
     "newsletterSubtitle": "Satunnaisia sähköposteja täydennysten, uusien tuotteiden ja julkaistujen mittaustulosten kera. Ei turhaa postia, peruutus yhdellä napsautuksella.",
     "blogTitle": "Laboratoriolta",
     "partnerTitle": "Ostatko laboratoriolle tai klinikalle?",
@@ -591,6 +592,7 @@
     "ledgerEyebrow": "Laboratoriopäiväkirja",
     "ledgerTitle": "Jokainen julkaistu erä näkyvissä",
     "ledgerSubtitle": "Uusimmat hyväksytyt erät ja niiden julkaistu analyysitodistus. Jokainen rivi avaa erän oman tiedon.",
+    "ledgerCount": "erää julkaistu, jokaisellaan todistus",
     "ledgerCta": "Avaa todistuskirjasto"
   },
   "shop": {
@@ -785,12 +787,13 @@
     "researchAskTitle": "Kysymyksiä tästä yhdisteestä",
     "researchAskBody": "Kysy Averialta säilytyksestä, liuottamisesta, todistuksesta tai kirjallisuudesta. Se vastaa kaupan omista tiedoista.",
     "mediaLabelPendingTitle": "Ei julkaistua erää",
-    "mediaLabelPendingBody": "Tekniset tiedot annetaan erän mukana, kun se julkaistaan."
+    "mediaLabelPendingBody": "Tekniset tiedot annetaan erän mukana, kun se julkaistaan.",
+    "dispatchNote": "Tilaa ennen klo 14.00 Helsingin aikaa, niin lähetetään samana työpäivänä. Ilmainen toimitus yli €150:n tilauksista Suomessa."
   },
   "cart": {
     "title": "Ostoskorisi",
-    "empty": "Ostoskorisi on tyhjä.",
-    "emptyCta": "Selaa valikoimaa",
+    "empty": "Ostoskorisi on tyhjä. Odotamme.",
+    "emptyCta": "Avaa valikoima",
     "subtotal": "Välisumma",
     "shipping": "Toimitus",
     "vat": "ALV",
@@ -833,7 +836,8 @@
     "dismissPreview": "Sulje esikatselu",
     "moreInCart": "+ {count} muuta ostoskorissa",
     "reviewCart": "Tarkista ostoskori",
-    "freeOver": "Ilmainen yli {amount} · toimitus Suomessa"
+    "freeOver": "Ilmainen yli {amount} · toimitus Suomessa",
+    "lot": "Erä {code}"
   },
   "checkout": {
     "email": "Sähköposti",
@@ -1655,10 +1659,10 @@
     "illustrativeBadge": "Havainnollinen renderöinti"
   },
   "notFound": {
-    "title": "Sivua ei löytynyt",
-    "body": "Sivu on saattanut siirtyä. Selaa tuoteluetteloa tai palaa etusivulle.",
+    "title": "Tätä ei ole hyllyllä",
+    "body": "Etsimme kaikkialta, myös verhoon takana. Valikoima on edelleen täällä.",
     "backHome": "Takaisin etusivulle",
-    "browseCatalog": "Selaa tuotteita",
+    "browseCatalog": "Avaa valikoima",
     "searchHint": "Hae tuotteen nimellä, SKU-tunnuksella tai erätunnuksella.",
     "code": "Virhe 404"
   },
@@ -1910,9 +1914,9 @@
   },
   "store": {
     "announce": {
-      "freeShipping": "Ilmainen toimitus yli 150 € tilauksissa Suomessa",
-      "batchTested": "HPLC-testatut erät julkaistuilla analyysituloksilla",
-      "dispatch": "Lähetetään Helsingistä 1–2 arkipäivän kuluessa",
+      "freeShipping": "Ilmainen toimitus yli €150 · Koko Suomi",
+      "batchTested": "Jokainen erä julkaistaan todistuksineen",
+      "dispatch": "Lähetys Helsingistä 1–2 päivässä",
       "vat": "Jokainen hinta sisältää Suomen ALV:n 25,5 %",
       "researchOnly": "Vain tutimuskäyttöön"
     },
@@ -2101,6 +2105,7 @@
     "fail": "Hylätty",
     "openCertificate": "Avaa todistus",
     "demonstration": "Esimerkkimerkintä",
+    "justReleased": "Juuri laboratoriolta",
     "assayLabel": "{name}: {result}, vaatimus {spec}"
   }
 }

@@ -76,10 +76,19 @@ export function CartDrawer({ locale }: { locale: string }) {
         ) : (
           <>
             <ul className="flex-1 overflow-auto divide-y divide-line">
-              {items.map((item) => {
-                const hue = products.find((p) => p.slug === item.productSlug)?.hue ?? 214
+              {items.map((item, idx) => {
+                const product = products.find((p) => p.slug === item.productSlug)
+                const hue = product?.hue ?? 214
+                // The lot you are buying. A line in a cart that names the
+                // batch behind it is a line that cannot be quietly swapped
+                // for another one.
+                const lot = product?.vials.find((vial) => vial.sku === item.sku)?.batch?.code
                 return (
-                  <li key={item.sku} className="flex gap-4 p-5">
+                  <li
+                    key={item.sku}
+                    className="store-rise flex gap-4 p-5"
+                    style={{ animationDelay: `${idx * 70}ms` }}
+                  >
                     <div
                       className="hue-tile flex h-16 w-14 shrink-0 items-end justify-center rounded-[var(--radius)]"
                       style={{ "--cat-hue": hue } as React.CSSProperties}
@@ -93,6 +102,11 @@ export function CartDrawer({ locale }: { locale: string }) {
                         <div className="min-w-0">
                           <p className="font-medium text-ink line-clamp-1">{item.name}</p>
                           <p className="font-mono text-xs text-ink-subtle">{item.sku}</p>
+                          {lot ? (
+                            <p className="mt-0.5 font-mono text-2xs text-accent-ink">
+                              {t("lot", { code: lot })}
+                            </p>
+                          ) : null}
                         </div>
                         <button
                           type="button"

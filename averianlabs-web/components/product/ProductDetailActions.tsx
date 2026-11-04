@@ -14,7 +14,18 @@ import { useCompare } from "@/lib/compare/store"
 import type { Locale, Product } from "@/lib/products/types"
 import { cn } from "@/lib/utils/cn"
 import { formatCurrency, formatPercent, formatSize } from "@/lib/utils/format"
-import { CheckCircle2, GitCompare, Info, Minus, PackageCheck, Plus, Truck } from "lucide-react"
+import {
+  ArrowRight,
+  CheckCircle2,
+  FlaskConical,
+  GitCompare,
+  Info,
+  Minus,
+  PackageCheck,
+  Plus,
+  ShieldCheck,
+  Truck,
+} from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { useState } from "react"
@@ -134,6 +145,39 @@ export function ProductDetailActions({
               availability={vial.availability}
             />
           </div>
+          {/*
+            The lot, beside the price.
+
+            The proof and the money belong in the same breath: this is the
+            batch that ships, this is what it measured, and the certificate
+            behind it opens in one click. It used to sit at the bottom of the
+            buy box, below the trust strip, where a shopper deciding whether
+            to buy had already stopped reading.
+          */}
+          {vial.batch ? (
+            <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-line pt-4 text-2xs">
+              <span className="inline-flex items-center gap-1.5 font-semibold text-ink">
+                <FlaskConical aria-hidden className="h-3.5 w-3.5 text-accent" />
+                {r("lot")}
+                <span className="font-mono font-medium" data-testid="lot-code">
+                  {vial.batch.code}
+                </span>
+              </span>
+              {product.productType !== "supplies" && vial.batch.hplcPurity > 0 ? (
+                <span className="inline-flex items-center gap-1.5 text-ink-muted">
+                  <ShieldCheck aria-hidden className="h-3.5 w-3.5 text-success" />
+                  {formatPercent(vial.batch.hplcPurity, locale)}
+                </span>
+              ) : null}
+              <a
+                href={`/${locale}/documents?sku=${encodeURIComponent(vial.sku)}&batch=${encodeURIComponent(vial.batch.code)}`}
+                className="inline-flex items-center gap-1 font-medium text-accent underline underline-offset-4"
+              >
+                {r("viewDocuments")}
+                <ArrowRight aria-hidden className="h-3 w-3" />
+              </a>
+            </div>
+          ) : null}
         </section>
 
         {/* 2. Variant selector */}
@@ -252,6 +296,18 @@ export function ProductDetailActions({
         {/* 3b. Research-use fine print */}
         <ResearchNotice />
 
+        {/*
+          When it leaves. A buyer deciding on a research peptide is usually
+          deciding on a schedule, so the dispatch cut-off belongs next to the
+          button rather than in the shipping page.
+        */}
+        {direct ? (
+          <p className="flex items-start gap-2 text-2xs text-ink-subtle">
+            <Truck aria-hidden className="mt-px h-3.5 w-3.5 shrink-0 text-accent" />
+            <span>{t("dispatchNote")}</span>
+          </p>
+        ) : null}
+
         {/* 4. Wishlist · Compare · Save-to-plan */}
         <div className="flex flex-wrap items-center gap-2">
           <WishlistButton slug={product.slug}>
@@ -321,32 +377,9 @@ export function ProductDetailActions({
             </span>
           </Link>
         )}
-        {vial.batch ? (
-          <div className="rounded-[var(--radius)] border border-line bg-surface p-4 text-sm">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <p className="text-2xs uppercase tracking-wider text-ink-subtle">{r("batch")}</p>
-                <p className="font-mono font-medium">{vial.batch.code}</p>
-              </div>
-              {product.productType !== "supplies" && vial.batch.hplcPurity > 0 ? (
-                <div className="text-right">
-                  <p className="text-2xs uppercase tracking-wider text-ink-subtle">{r("purity")}</p>
-                  <p className="font-mono font-medium">
-                    {formatPercent(vial.batch.hplcPurity, locale)}
-                  </p>
-                </div>
-              ) : null}
-            </div>
-            <a
-              href={`/${locale}/documents?sku=${encodeURIComponent(vial.sku)}&batch=${encodeURIComponent(vial.batch.code)}`}
-              className="mt-3 inline-flex items-center gap-1 text-accent underline underline-offset-4"
-            >
-              {r("viewDocuments")}
-            </a>
-          </div>
-        ) : (
-          !product.checkoutTest && <p className="text-sm text-ink-muted">{t("batchPending")}</p>
-        )}
+        {!vial.batch && !product.checkoutTest ? (
+          <p className="text-sm text-ink-muted">{t("batchPending")}</p>
+        ) : null}
       </div>
 
       {direct ? (

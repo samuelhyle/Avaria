@@ -134,7 +134,12 @@ export function Header({ locale }: HeaderProps) {
                   <ShoppingCart className="h-4 w-4" aria-hidden />
                   <span className="hidden xl:inline">{t("cart")}</span>
                   {cartCount > 0 ? (
-                    <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-ink px-1 text-xs font-semibold text-white xl:static xl:bg-white/20 xl:text-on-accent">
+                    <span
+                      // The key changes with the count, so the badge is
+                      // remounted and the acknowledgement runs again.
+                      key={cartCount}
+                      className="store-bump absolute -right-1 -top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-ink px-1 text-xs font-semibold text-white xl:static xl:bg-white/20 xl:text-on-accent"
+                    >
                       {cartCount}
                     </span>
                   ) : null}

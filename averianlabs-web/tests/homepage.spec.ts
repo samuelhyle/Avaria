@@ -92,11 +92,17 @@ test.describe("homepage", () => {
     // identified by what it is rather than by a label that moves.
     const search = page.locator('main input[type="search"]')
     await expect(search).toBeVisible()
-    await expect(page.getByRole("link", { name: /shop all peptides/i }).first()).toBeVisible()
+    await expect(page.getByRole("link", { name: /open the catalogue/i }).first()).toBeVisible()
     await expect(page.locator("main canvas")).toHaveCount(0)
     await expect(page.getByRole("heading", { name: /browse by research area/i })).toBeVisible()
+    // The featured band is headed either by what can be ordered today or by
+    // the catalogue itself, depending on whether anything is in stock. It
+    // never claims to be best-selling: the shop has no sales history to make
+    // that claim from.
     await expect(
-      page.getByRole("heading", { name: /best-selling research peptides/i }),
+      page.getByRole("heading", {
+        name: /research peptides, ready to ship|every material we list/i,
+      }),
     ).toBeVisible()
     await search.fill("BPC157-5")
     await page.locator("main form").getByRole("button", { name: "Search", exact: true }).click()

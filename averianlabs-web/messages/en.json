@@ -485,7 +485,8 @@
     "estimatedVolume": "Estimated vials per month (optional)",
     "quoteSubmit": "Send request",
     "quoteLabel": "Quote request",
-    "quoteResponseNote": "We usually reply the same working day."
+    "quoteResponseNote": "We usually reply the same working day.",
+    "lot": "Lot"
   },
   "nav": {
     "shop": "Shop",
@@ -529,20 +530,20 @@
   "home": {
     "seoTitle": "Research peptides for laboratory use — shipped from Finland",
     "seoDescription": "Browse research peptides with published HPLC purity and certificates of analysis. Clear product explanations, secure checkout and delivery across Finland.",
-    "heroEyebrow": "Research peptides · Shipped from Helsinki",
-    "heroTitle": "Research peptides, clearly explained and honestly tested.",
-    "heroSubtitle": "Browse the catalogue, read exactly what each peptide is and what it is used for in the lab, check the certificate of analysis — then order in under two minutes.",
-    "ctaShop": "Shop all peptides",
+    "heroEyebrow": "Every lot published · Shipped from Helsinki",
+    "heroTitle": "Every peptide, every certificate, open to you.",
+    "heroSubtitle": "The certificate belongs to the exact lot you receive — not a best case from another shelf. Read the assay, watch the number sit against the limit it was measured to, then order in under two minutes.",
+    "ctaShop": "Open the catalogue",
     "ctaResearch": "See how we test",
     "heroStatPurity": "HPLC purity",
     "heroStatVat": "VAT included",
     "heroStatDelivery": "Delivery in Finland",
-    "featuredEyebrow": "Popular right now",
+    "featuredEyebrow": "Ready to order",
     "featuredEyebrowAlt": "In the catalogue",
     "featuredTitleAlt": "Every material we list",
     "featuredSubtitleAlt": "Our research peptides with their specification and the documents behind them. Ask for a quote on any of them and we will confirm the batch and the price.",
-    "featuredTitle": "Best-selling research peptides",
-    "featuredSubtitle": "The materials our customers order most, with live stock and current pricing.",
+    "featuredTitle": "Research peptides, ready to ship",
+    "featuredSubtitle": "The materials you can order today, with live stock and current pricing.",
     "featuredCta": "View the full catalogue",
     "categoriesTitle": "Browse by research area",
     "categoriesSubtitle": "Start from the field you work in and narrow down from there.",
@@ -565,7 +566,7 @@
     "calcCta": "Open the calculator",
     "toolsTitle": "Research tools",
     "toolsSubtitle": "Everything that helps you evaluate a material, in one place.",
-    "newsletterTitle": "New batches, new products",
+    "newsletterTitle": "Fresh off the bench",
     "newsletterSubtitle": "Occasional email with restocks, new products and published lab results. No noise, unsubscribe in one click.",
     "blogTitle": "From the lab",
     "partnerTitle": "Buying for a lab or clinic?",
@@ -591,6 +592,7 @@
     "ledgerEyebrow": "Lab ledger",
     "ledgerTitle": "Every lot we release, in the open",
     "ledgerSubtitle": "The newest released lots, each with the certificate that was published for it. Every row opens the lot's own record.",
+    "ledgerCount": "lots published, each with its certificate",
     "ledgerCta": "Open the certificate library"
   },
   "shop": {
@@ -785,12 +787,13 @@
     "researchAskTitle": "Questions about this compound",
     "researchAskBody": "Ask Averia about storage, reconstitution, the certificate or the literature. It answers from the shop's own records.",
     "mediaLabelPendingTitle": "No released lot",
-    "mediaLabelPendingBody": "Specifications are issued with the lot, when one is released."
+    "mediaLabelPendingBody": "Specifications are issued with the lot, when one is released.",
+    "dispatchNote": "Order before 14:00 Helsinki time and it is dispatched the same working day. Free delivery on orders over €150 within Finland."
   },
   "cart": {
     "title": "Your cart",
-    "empty": "Your cart is empty.",
-    "emptyCta": "Browse the catalogue",
+    "empty": "Your cart is empty. We'll wait.",
+    "emptyCta": "Open the catalogue",
     "subtotal": "Subtotal",
     "shipping": "Delivery",
     "vat": "VAT",
@@ -833,7 +836,8 @@
     "dismissPreview": "Dismiss preview",
     "moreInCart": "+ {count} more in cart",
     "reviewCart": "Review cart",
-    "freeOver": "Free over {amount} · Finland delivery"
+    "freeOver": "Free over {amount} · Finland delivery",
+    "lot": "Lot {code}"
   },
   "checkout": {
     "email": "Email",
@@ -1655,10 +1659,10 @@
     "illustrativeBadge": "Illustrative render"
   },
   "notFound": {
-    "title": "Page not found",
-    "body": "The page may have moved. Browse the catalogue or return home.",
+    "title": "This one's not on the shelf",
+    "body": "We looked everywhere, including behind the curtain. The catalogue is still here.",
     "backHome": "Back to home",
-    "browseCatalog": "Browse products",
+    "browseCatalog": "Open the catalogue",
     "searchHint": "Search by product name, SKU or batch ID.",
     "code": "Error 404"
   },
@@ -1910,9 +1914,9 @@
   },
   "store": {
     "announce": {
-      "freeShipping": "Free delivery on orders over €150 within Finland",
-      "batchTested": "HPLC-tested batches with published certificates",
-      "dispatch": "Dispatched from Helsinki within 1–2 business days",
+      "freeShipping": "Free delivery over €150 · Finland-wide",
+      "batchTested": "Every lot published with its certificate",
+      "dispatch": "Helsinki dispatch in 1–2 days",
       "vat": "Every price includes 25.5% Finnish VAT",
       "researchOnly": "Research use only"
     },
@@ -2101,6 +2105,7 @@
     "fail": "Fail",
     "openCertificate": "Open the certificate",
     "demonstration": "Demonstration record",
+    "justReleased": "Just off the bench",
     "assayLabel": "{name}: {result}, specification {spec}"
   }
 }
