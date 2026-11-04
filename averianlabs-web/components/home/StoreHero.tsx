@@ -1,3 +1,4 @@
+import { HeroStage } from "@/components/home/HeroStage"
 import { ProductVisual } from "@/components/product/ProductVisual"
 import { Container } from "@/components/ui/Container"
 import { defaultVial } from "@/lib/products/selection"
@@ -159,7 +160,7 @@ export async function StoreHero({
             {/* The frame was a square with the renders filling its top half
                 and a price card floating in the empty bottom. It is a little
                 shorter now and the renders fill it. */}
-            <div className="relative mx-auto aspect-[5/6] w-full max-w-[520px] sm:aspect-square">
+            <HeroStage className="relative mx-auto aspect-[5/6] w-full max-w-[520px] sm:aspect-square">
               <div
                 aria-hidden
                 className="absolute inset-[6%] rounded-[2rem] bg-gradient-to-br from-accent-soft via-surface to-ice-soft"
@@ -177,7 +178,15 @@ export async function StoreHero({
                   <Link
                     key={product.slug}
                     href={`/${locale}/shop/${product.slug}`}
-                    className={`group absolute ${position} transition-transform duration-500 ease-[var(--ease-crystal)] hover:scale-105`}
+                    className={`store-rise store-stage-item group absolute ${position} transition-transform duration-500 ease-[var(--ease-crystal)] hover:scale-105`}
+                    style={
+                      {
+                        animationDelay: `${140 + index * 130}ms`,
+                        // The middle vial sits closest to the viewer and moves
+                        // least; the outer two carry the movement.
+                        "--stage-depth": index === 1 ? 0.45 : 1.15,
+                      } as React.CSSProperties
+                    }
                     aria-label={product.translations?.[l]?.name ?? product.defaultTranslation.name}
                   >
                     <ProductVisual product={product} sku={vial.sku} size="lg" />
@@ -187,7 +196,10 @@ export async function StoreHero({
 
               {/* Price card for the spotlight product */}
               {hero ? (
-                <div className="absolute bottom-0 left-1/2 z-40 w-[86%] max-w-xs -translate-x-1/2 rounded-[var(--radius-lg)] border border-line bg-surface/95 p-3.5 shadow-[var(--shadow-lg)] backdrop-blur-md">
+                <div
+                  className="store-rise absolute bottom-0 left-1/2 z-40 w-[86%] max-w-xs -translate-x-1/2 rounded-[var(--radius-lg)] border border-line bg-surface/95 p-3.5 shadow-[var(--shadow-lg)] backdrop-blur-md"
+                  style={{ animationDelay: "560ms" }}
+                >
                   <div className="flex items-center justify-between gap-3">
                     <div className="min-w-0">
                       <p className="truncate text-sm font-semibold tracking-tight text-ink">
@@ -203,7 +215,7 @@ export async function StoreHero({
                   </div>
                 </div>
               ) : null}
-            </div>
+            </HeroStage>
           </div>
         </div>
       </Container>

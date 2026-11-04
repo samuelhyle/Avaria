@@ -485,7 +485,8 @@
     "estimatedVolume": "Beräknat antal flaskor per månad (valfritt)",
     "quoteSubmit": "Skicka förfrågan",
     "quoteLabel": "Offertförfrågan",
-    "quoteResponseNote": "Vi svarar vanligtvis samma arbetsdag."
+    "quoteResponseNote": "Vi svarar vanligtvis samma arbetsdag.",
+    "lot": "Part"
   },
   "nav": {
     "shop": "Butik",
@@ -529,20 +530,20 @@
   "home": {
     "seoTitle": "Forskningspeptider för laboratoriebruk — skickas från Finland",
     "seoDescription": "Utforska forskningspeptider med publicerad HPLC-renhet och analysrapporter. Tydliga produktbeskrivningar, säker betalning och leverans i hela Finland.",
-    "heroEyebrow": "Forskningspeptider · Skickas från Helsingfors",
-    "heroTitle": "Forskningspeptider — tydligt förklarade och ärligt testade.",
-    "heroSubtitle": "Utforska sortimentet, läs vad varje peptid är och vad det används till i laboratoriet, kontrollera analysrapporten — och beställ på under två minuter.",
-    "ctaShop": "Se alla peptider",
+    "heroEyebrow": "Varje part publiceras · Skickas från Helsingfors",
+    "heroTitle": "Varje peptid, varje intyg — öppet för dig.",
+    "heroSubtitle": "Intyget hör till exakt den part du får — inte ett bästa fall från en annan hylla. Läs analysen, se talet mot gränsen det mättes mot, och beställ på under två minuter.",
+    "ctaShop": "Öppna sortimentet",
     "ctaResearch": "Se hur vi testar",
     "heroStatPurity": "HPLC-renhet",
     "heroStatVat": "Moms ingår",
     "heroStatDelivery": "Leverans i Finland",
-    "featuredEyebrow": "Populärt just nu",
+    "featuredEyebrow": "Klar att beställa",
     "featuredEyebrowAlt": "I katalogen",
     "featuredTitleAlt": "Alla material vi listar",
     "featuredSubtitleAlt": "Våra forskningspeptider med deras specifikation och dokumenten bakom dem. Be om offert på valfritt material, så bekräftar vi parti och pris.",
-    "featuredTitle": "Bästsäljande forskningspeptider",
-    "featuredSubtitle": "Det material våra kunder beställer mest, med lager i realtid och aktuella priser.",
+    "featuredTitle": "Forskningspeptider, redo att skickas",
+    "featuredSubtitle": "Materialen du kan beställa i dag, med lager i realtid och aktuella priser.",
     "featuredCta": "Visa hela sortimentet",
     "categoriesTitle": "Utforska per forskningsområde",
     "categoriesSubtitle": "Börja med ditt eget område och filtrera vidare därifrån.",
@@ -565,7 +566,7 @@
     "calcCta": "Öppna kalkylatorn",
     "toolsTitle": "Forskningsverktyg",
     "toolsSubtitle": "Allt som hjälper dig att bedöma ett material, på ett ställe.",
-    "newsletterTitle": "Nya batcher, nya produkter",
+    "newsletterTitle": "Rakt från bänken",
     "newsletterSubtitle": "Enstaka e-post om restockar, nya produkter och publicerade mätresultat. Ingen spam, avsluta med ett klick.",
     "blogTitle": "Från laboratoriet",
     "partnerTitle": "Köper du för ett labb eller en klinik?",
@@ -591,6 +592,7 @@
     "ledgerEyebrow": "Laboratorieledg",
     "ledgerTitle": "Varje parti vi släpper, öppet redovisat",
     "ledgerSubtitle": "De senast släppta partierna, var och en med sitt publicerade analyscertifikat. Varje rad öppnar partiets egen post.",
+    "ledgerCount": "partier publicerade, var och en med sitt intyg",
     "ledgerCta": "Öppna certifikatbiblioteket"
   },
   "shop": {
@@ -785,12 +787,13 @@
     "researchAskTitle": "Frågor om den här föreningen",
     "researchAskBody": "Fråga Averia om lagring, beredning, certifikatet eller litteraturen. Hon svarar utifrån butikens egna register.",
     "mediaLabelPendingTitle": "Inget släppt parti",
-    "mediaLabelPendingBody": "Specifikationerna utfärdas med partiet, när det släpps."
+    "mediaLabelPendingBody": "Specifikationerna utfärdas med partiet, när det släpps.",
+    "dispatchNote": "Beställ före 14.00 Helsingfors tid så skickas det samma arbetsdag. Fri frakt över €150 inom Finland."
   },
   "cart": {
     "title": "Din varukorg",
-    "empty": "Din varukorg är tom.",
-    "emptyCta": "Utforska sortimentet",
+    "empty": "Varukorgen är tom. Vi väntar.",
+    "emptyCta": "Öppna sortimentet",
     "subtotal": "Delsumma",
     "shipping": "Frakt",
     "vat": "Moms",
@@ -833,7 +836,8 @@
     "dismissPreview": "Stäng förhandsvisningen",
     "moreInCart": "+ {count} till i varukorgen",
     "reviewCart": "Granska varukorgen",
-    "freeOver": "Gratis över {amount} · leverans i Finland"
+    "freeOver": "Gratis över {amount} · leverans i Finland",
+    "lot": "Part {code}"
   },
   "checkout": {
     "email": "E-post",
@@ -1653,10 +1657,10 @@
     "illustrativeBadge": "Illustrativ rendering"
   },
   "notFound": {
-    "title": "Sidan hittades inte",
-    "body": "Sidan kan ha flyttats. Bläddra i sortimentet eller återvänd till startsidan.",
+    "title": "Den här finns inte på hyllan",
+    "body": "Vi letade överallt, även bakom ridån. Sortimentet finns kvar.",
     "backHome": "Tillbaka till startsidan",
-    "browseCatalog": "Bläddra bland produkter",
+    "browseCatalog": "Öppna sortimentet",
     "searchHint": "Sök på produktnamn, SKU eller batch-ID.",
     "code": "Fel 404"
   },
@@ -1908,9 +1912,9 @@
   },
   "store": {
     "announce": {
-      "freeShipping": "Fri frakt på beställningar över 150 € inom Finland",
-      "batchTested": "HPLC-testade batcher med publicerade analysresultat",
-      "dispatch": "Skickas från Helsingfors inom 1–2 arbetsdagar",
+      "freeShipping": "Fri frakt över €150 · Hela Finland",
+      "batchTested": "Varje part publiceras med sitt intyg",
+      "dispatch": "Från Helsingfors på 1–2 dagar",
       "vat": "Alla priser inkluderar finländsk moms 25,5 %",
       "researchOnly": "Endast för forskningsbruk"
     },
@@ -2099,6 +2103,7 @@
     "fail": "Underkänd",
     "openCertificate": "Öppna certifikatet",
     "demonstration": "Demonstrationspost",
+    "justReleased": "Rakt från bänken",
     "assayLabel": "{name}: {result}, specifikation {spec}"
   }
 }

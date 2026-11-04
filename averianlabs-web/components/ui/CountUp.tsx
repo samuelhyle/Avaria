@@ -22,7 +22,10 @@ export function CountUp({
   className,
 }: CountUpProps) {
   const reduced = useReducedMotion()
-  const [value, setValue] = useState(0)
+  // The server sends the finished number, so the markup a crawler reads and
+  // the markup without JavaScript both carry the real figure. The count
+  // starts when the number scrolls into view.
+  const [value, setValue] = useState(end)
   const ref = useRef<HTMLSpanElement>(null)
   const startedRef = useRef(false)
 
@@ -46,6 +49,7 @@ export function CountUp({
             if (t < 1) frame = requestAnimationFrame(tick)
             else setValue(end)
           }
+          setValue(0)
           frame = requestAnimationFrame(tick)
         }
       },

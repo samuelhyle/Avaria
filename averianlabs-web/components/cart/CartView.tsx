@@ -164,6 +164,9 @@ function Inner({ locale }: { locale: Locale }) {
           {items.map((item, idx) => {
             const product = allProducts.find((p) => p.slug === item.productSlug)
             const hue = product?.hue ?? 214
+            // The lot behind the line. The cart names the batch, so the
+            // customer can check its certificate before paying for it.
+            const lot = product?.vials.find((vial) => vial.sku === item.sku)?.batch?.code
             return (
               <li
                 key={item.sku}
@@ -202,6 +205,11 @@ function Inner({ locale }: { locale: Locale }) {
                         {item.name}
                       </Link>
                       <p className="mt-0.5 font-mono text-xs text-ink-muted">{item.sku}</p>
+                      {lot ? (
+                        <p className="mt-0.5 font-mono text-2xs text-accent-ink">
+                          {cart("lot", { code: lot })}
+                        </p>
+                      ) : null}
                       <p className="mt-1 text-sm text-ink-muted">
                         {formatCurrency(item.unitPriceCents, "EUR", locale)} ·{" "}
                         {formatSize(item, locale)}
