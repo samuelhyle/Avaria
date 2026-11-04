@@ -1,4 +1,5 @@
 import type { SizeUnit } from "@/lib/cart/store"
+import type { Availability } from "@/lib/products/types"
 import { cn } from "@/lib/utils/cn"
 import { Check, CircleAlert } from "lucide-react"
 import { useTranslations } from "next-intl"
@@ -6,6 +7,7 @@ import { useTranslations } from "next-intl"
 interface StockIndicatorProps {
   stockQty: number
   purchaseMode: "direct" | "quotation" | "unavailable"
+  availability?: Availability
   className?: string
   size?: "sm" | "md"
 }
@@ -21,37 +23,28 @@ interface StockIndicatorProps {
 export function StockIndicator({
   stockQty,
   purchaseMode,
+  availability,
   className,
   size = "md",
 }: StockIndicatorProps) {
   const t = useTranslations("product")
-  if (purchaseMode !== "direct") {
+  if (purchaseMode !== "direct" || (availability && !availability.buyable)) {
+    const blocker = availability?.blockers[0]
     return (
       <div
         role="status"
         className={cn(
-          "inline-flex items-center gap-2 text-warn",
+          "inline-flex items-center gap-2 text-ink-muted",
           size === "sm" ? "text-xs" : "text-sm",
           className,
         )}
       >
         <CircleAlert className="h-3.5 w-3.5" aria-hidden />
-        <span className="font-medium">{t("stockOut")}</span>
-      </div>
-    )
-  }
-  if (stockQty <= 0) {
-    return (
-      <div
-        role="status"
-        className={cn(
-          "inline-flex items-center gap-2 text-warn",
-          size === "sm" ? "text-xs" : "text-sm",
-          className,
-        )}
-      >
-        <CircleAlert className="h-3.5 w-3.5" aria-hidden />
-        <span className="font-medium">{t("stockOut")}</span>
+        <span className="font-medium">
+          {blocker
+            ? t(`availability.${blocker}.title` as "availability.notPublished.title")
+            : t("stockOut")}
+        </span>
       </div>
     )
   }

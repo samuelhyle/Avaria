@@ -484,7 +484,8 @@
     "country": "Maa",
     "estimatedVolume": "Arvioitu pullojen määrä kuukaudessa (valinnainen)",
     "quoteSubmit": "Lähetä pyyntö",
-    "quoteLabel": "Tarjouspyyntö"
+    "quoteLabel": "Tarjouspyyntö",
+    "quoteResponseNote": "Vastaamme yleensä saman työpäivän aikana."
   },
   "nav": {
     "shop": "Kauppa",
@@ -654,6 +655,15 @@
     "priceLabel": "Hinta",
     "pricingLabel": "Hinta",
     "pricingOnRequest": "Pyydettäessä",
+    "availabilityBadge": {
+      "notPublished": "Ei vielä avoinna",
+      "unverifiedSpecifications": "Ei varmennettu",
+      "notReleased": "Erä tulossa",
+      "noCertificate": "Todistus tulossa",
+      "noPrice": "Pyynnöstä",
+      "outOfStock": "Myyty",
+      "quotation": "Pyynnöstä"
+    },
     "coaIncluded": "Analyysikertomus mukana",
     "vatIncludedShort": "sis. ALV 25,5 %",
     "recentlyViewed": "Viimeksi katsellut",
@@ -701,6 +711,40 @@
     "lab": "Testannut {lab}",
     "notifyMe": "Ilmoita minulle, kun saatavilla",
     "notifySubmitted": "Ilmoitamme sähköpostilla.",
+    "availabilityTitle": "Saatavuus",
+    "availability": {
+      "notPublished": {
+        "title": "Ei vielä tilaustavissa",
+        "body": "Valmistelemme tuotteen ensimmäistä julkaistua erää. Pyydä meiltä, niin vahvistamme erän, sen analyysitodistuksen ja hinnan ennen tilausta."
+      },
+      "unverifiedSpecifications": {
+        "title": "Teknisiä tietoja ei ole vielä varmennettu",
+        "body": "Tuotteen teknisiä tietoja ei ole vielä varmennettu julkaistua erää vasten."
+      },
+      "notReleased": {
+        "title": "Julkaistua erää ei ole vielä",
+        "body": "Tälle pakkauskoolle ei ole vielä julkaistu erää. Jätä sähköpostiosoitteesi, niin ilmoitamme, kun sellainen on."
+      },
+      "noCertificate": {
+        "title": "Analyysitodistus ei ole vielä julkinen",
+        "body": "Nykyinen erä on olemassa, mutta sen analyysitodistusta ei ole vielä julkaistu. Ilmoitamme, kun se on."
+      },
+      "noPrice": {
+        "title": "Hinta vahvistetaan pyynnöstä",
+        "body": "Pyydä meiltä, niin vahvistamme tämän pakkauskoon hinnan."
+      },
+      "outOfStock": {
+        "title": "Loppunut varastosta",
+        "body": "Nykyinen erä on myyty loppuun. Jätä sähköpostiosoitteesi, niin ilmoitamme, kun seuraava erä julkaistaan."
+      },
+      "quotation": {
+        "title": "Myydään pyynnöstä",
+        "body": "Tätä materiaalia myydään pyynnöstä. Vahvistamme erän, analyysitodistuksen ja hinnan ennen tilausta."
+      }
+    },
+    "notifyEmailLabel": "Sähköpostiosoite",
+    "notifySending": "Tallennetaan…",
+    "notifyFailed": "Pyyntösi tallentaminen ei onnistunut. Yritä uudelleen.",
     "outOfStock": "Loppunut",
     "inStock": "Varastossa",
     "lowStock": "{count} kpl jäljellä",

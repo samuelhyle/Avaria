@@ -37,11 +37,20 @@ export function ProductCard({
 }) {
   const Heading = headingLevel === 2 ? "h2" : "h3"
   const t = useTranslations("shop")
-  const r = useTranslations("research")
   const translation = product.translations?.[locale] ?? product.defaultTranslation
   const vial = defaultVial(product)
   const canAdd = vial.purchaseMode === "direct" && vial.stockQty > 0 && vial.priceCents > 0
   const quotation = vial.purchaseMode === "quotation"
+  /**
+   * The badge names the state of the lot. When the state is "the price is on
+   * request" the price line already says exactly that, and two copies of the
+   * same sentence on one card is noise rather than information.
+   */
+  const badgeBlocker = canAdd
+    ? null
+    : (vial.availability?.blockers[0] ?? (quotation ? "quotation" : null))
+  const badgeAddsInformation =
+    badgeBlocker !== null && badgeBlocker !== "quotation" && badgeBlocker !== "noPrice"
   const documents = hasPublishedDocuments(product, locale, vial.sku)
   const compare = useCompare()
   const add = useCart((s) => s.add)
@@ -116,9 +125,11 @@ export function ProductCard({
           <span className="min-w-0 break-words hyphens-auto text-2xs font-semibold uppercase tracking-[0.08em] text-accent">
             {t(`categories.${product.category}`)}
           </span>
-          {showAvailability || quotation ? (
+          {showAvailability && (canAdd || badgeAddsInformation) ? (
             <Badge tone={canAdd ? "success" : "muted"} className="shrink-0">
-              {canAdd ? t("inStockBadge") : quotation ? r("quote") : t("outOfStockBadge")}
+              {canAdd
+                ? t("inStockBadge")
+                : t(`availabilityBadge.${badgeBlocker}` as "availabilityBadge.quotation")}
             </Badge>
           ) : null}
         </div>
@@ -189,9 +200,7 @@ export function ProductCard({
                 <p className="text-2xs uppercase tracking-wider text-ink-subtle">
                   {t("pricingLabel")}
                 </p>
-                <p className="text-lg font-bold tracking-tight text-ink">
-                  {quotation ? t("pricingOnRequest") : t("outOfStockBadge")}
-                </p>
+                <p className="text-lg font-bold tracking-tight text-ink">{t("pricingOnRequest")}</p>
               </>
             )}
           </div>

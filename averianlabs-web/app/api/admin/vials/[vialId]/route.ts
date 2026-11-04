@@ -4,6 +4,7 @@ import { logAudit } from "@/lib/audit/log"
 import { db } from "@/lib/db"
 import { assertCsrfOr403, csrfAllowsDevHosts } from "@/lib/security/csrf"
 import { eq } from "drizzle-orm"
+import { revalidateTag } from "next/cache"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -55,6 +56,10 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ vi
       lowStockThreshold: vials.lowStockThreshold,
     })
   if (!row) return NextResponse.json({ error: "Not found." }, { status: 404 })
+  // The catalogue is cached for a minute. Without this the storefront keeps
+  // selling the stock that was just withdrawn, and a lot that was just
+  // released stays invisible.
+  revalidateTag("storefront-catalogue")
   await logAudit({
     actor: member,
     action: "vial.stock",

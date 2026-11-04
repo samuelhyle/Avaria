@@ -1,5 +1,6 @@
 "use client"
 
+import { ProductAvailability } from "@/components/product/ProductAvailability"
 import { QuoteForm } from "@/components/product/QuoteForm"
 import { StickyDesktopAtc } from "@/components/product/StickyDesktopAtc"
 import { StickyMobileAtc } from "@/components/product/StickyMobileAtc"
@@ -127,7 +128,11 @@ export function ProductDetailActions({
                 <p className="mt-1.5 text-sm text-ink-muted">{r("quoteDescription")}</p>
               </div>
             )}
-            <StockIndicator stockQty={vial.stockQty} purchaseMode={vial.purchaseMode} />
+            <StockIndicator
+              stockQty={vial.stockQty}
+              purchaseMode={vial.purchaseMode}
+              availability={vial.availability}
+            />
           </div>
         </section>
 
@@ -230,6 +235,14 @@ export function ProductDetailActions({
               </Button>
             </div>
           </div>
+        ) : vial.availability ? (
+          <ProductAvailability
+            availability={vial.availability}
+            sku={vial.sku}
+            productName={name}
+            sizeLabel={formatSize(vial, locale)}
+            locale={locale}
+          />
         ) : (
           <div className="rounded-[var(--radius-lg)] border border-line bg-surface p-4">
             <QuoteForm sku={vial.sku} locale={locale} />

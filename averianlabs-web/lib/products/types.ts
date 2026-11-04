@@ -15,6 +15,35 @@ export type SizeUnit = "mg" | "g" | "mcg" | "mL" | "uL" | "vial"
 /** Mirrors the `vials.purchase_mode` DB CHECK constraint. */
 export type PurchaseMode = "direct" | "quotation" | "unavailable"
 
+/**
+ * Why a variant cannot be ordered right now.
+ *
+ * The blockers form the release pipeline in the order it has to be satisfied:
+ * the product is published, its specification is verified against a lot, a lot
+ * is released, that lot's certificate is published, and only then is it
+ * priced and stocked.
+ */
+export type AvailabilityBlocker =
+  | "notPublished"
+  | "unverifiedSpecifications"
+  | "notReleased"
+  | "noCertificate"
+  | "noPrice"
+  | "outOfStock"
+  | "quotation"
+
+/** The one thing the shopper can usefully do about the current state. */
+export type AvailabilityAction = "addToCart" | "requestLot" | "notifyMe"
+
+export interface Availability {
+  /** The variant can be added to the cart right now. */
+  buyable: boolean
+  /** Every reason it is not buyable, in pipeline order. */
+  blockers: AvailabilityBlocker[]
+  /** The action the storefront offers for this state. */
+  action: AvailabilityAction
+}
+
 export interface VialSize {
   /**
    * Legacy mass-only field kept for backward compat with consumers that
@@ -38,6 +67,8 @@ export interface VialSize {
   lowStockThreshold: number | null
   purchaseMode: PurchaseMode
   contactOnly?: boolean
+  /** Why this variant can or cannot be ordered. Computed on the server. */
+  availability?: Availability
   batch?: Batch
   documentLocales?: string[]
 }
