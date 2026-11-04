@@ -1192,6 +1192,17 @@
     },
     "inventory": "Inventory",
     "inventorySub": "Stock levels",
+    "waitlist": "Availability list",
+    "waitlistSub": "Who is waiting for a lot",
+    "waitlistUi": {
+      "subtitle": "Shoppers who asked to be told when a lot was released. The maintenance sweep sends the mail when a batch is released and its certificate is published.",
+      "counts": "{open} waiting · {notified} notified",
+      "empty": "Nobody is waiting for a lot.",
+      "sku": "SKU",
+      "product": "Product",
+      "email": "Email",
+      "requested": "Requested"
+    },
     "inventoryUi": {
       "subtitle": "SKUs at or below their low-stock threshold, and anything out of stock.",
       "empty": "Every SKU is above its threshold.",

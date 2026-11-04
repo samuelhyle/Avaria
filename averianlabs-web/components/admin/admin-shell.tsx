@@ -5,6 +5,7 @@ import type { AdminMember } from "@/lib/admin"
 import { cn } from "@/lib/utils/cn"
 import {
   Activity,
+  Bell,
   Boxes,
   ChevronRight,
   FileText,
@@ -66,6 +67,12 @@ export function AdminShell({ member, children }: AdminShellProps) {
       label: t("inventory"),
       icon: Boxes,
       description: t("inventorySub"),
+    },
+    {
+      href: adminPath("/admin/waitlist"),
+      label: t("waitlist"),
+      icon: Bell,
+      description: t("waitlistSub"),
     },
     {
       href: adminPath("/admin/documents"),
