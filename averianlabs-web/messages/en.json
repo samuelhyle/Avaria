@@ -484,7 +484,8 @@
     "country": "Country",
     "estimatedVolume": "Estimated vials per month (optional)",
     "quoteSubmit": "Send request",
-    "quoteLabel": "Quote request"
+    "quoteLabel": "Quote request",
+    "quoteResponseNote": "We usually reply the same working day."
   },
   "nav": {
     "shop": "Shop",
@@ -654,6 +655,15 @@
     "priceLabel": "Price",
     "pricingLabel": "Pricing",
     "pricingOnRequest": "On request",
+    "availabilityBadge": {
+      "notPublished": "Not yet open",
+      "unverifiedSpecifications": "Not verified",
+      "notReleased": "Lot pending",
+      "noCertificate": "Certificate pending",
+      "noPrice": "On request",
+      "outOfStock": "Sold out",
+      "quotation": "On request"
+    },
     "coaIncluded": "Certificate of analysis included",
     "vatIncludedShort": "incl. 25.5% VAT",
     "recentlyViewed": "Recently viewed",
@@ -701,6 +711,40 @@
     "lab": "Tested at {lab}",
     "notifyMe": "Notify me when available",
     "notifySubmitted": "We will email you.",
+    "availabilityTitle": "Availability",
+    "availability": {
+      "notPublished": {
+        "title": "Not open for ordering yet",
+        "body": "We are preparing the first released lot of this product. Ask us and we will confirm the lot, its certificate and the price before you order."
+      },
+      "unverifiedSpecifications": {
+        "title": "Specification not yet verified",
+        "body": "The specification for this product has not yet been verified against a released batch."
+      },
+      "notReleased": {
+        "title": "No released lot yet",
+        "body": "No lot has been released for this size yet. Leave your address and we will email you when one is."
+      },
+      "noCertificate": {
+        "title": "Certificate not published yet",
+        "body": "The current lot exists, but its certificate of analysis is not published yet. We will email you when it is."
+      },
+      "noPrice": {
+        "title": "Price confirmed on request",
+        "body": "Ask us and we will confirm the price for this size."
+      },
+      "outOfStock": {
+        "title": "Out of stock",
+        "body": "The current lot is sold out. Leave your address and we will email you when the next one is released."
+      },
+      "quotation": {
+        "title": "Sold on request",
+        "body": "This material is sold on request. We confirm the lot, the certificate and the price before you order."
+      }
+    },
+    "notifyEmailLabel": "Email address",
+    "notifySending": "Recording…",
+    "notifyFailed": "Your request could not be recorded. Please try again.",
     "outOfStock": "Out of stock",
     "inStock": "In stock",
     "lowStock": "{count} remaining",

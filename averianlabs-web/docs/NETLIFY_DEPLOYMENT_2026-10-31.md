@@ -350,6 +350,44 @@ an article is renamed, and the tab points at the method notes, the
 certificate library and the assistant whether or not an article has been
 written yet.
 
+## The storefront says why, and the promise is kept
+
+A product that cannot be ordered used to read "currently unavailable" with no
+reason, and the stock badge claimed the lot was sold out even when no lot had
+ever been released. Every product in the catalogue carried that badge, because
+no product in the catalogue could be ordered: the hosted seed writes products
+as drafts, and the only script that promoted them to sellable refused to run
+against anything but a local database.
+
+**The state is now named.** The server decides why a variant cannot be
+ordered and says so in one sentence. The reasons form the release pipeline:
+the product is published, its specification is verified against a lot, a lot
+is released, that lot's certificate is published, and only then is it priced
+and stocked. A shopper is told the first thing that is actually missing
+rather than a generic apology, and the catalogue badge carries the same
+state — "lot pending", "certificate pending", "not verified" — instead of a
+false "sold out".
+
+**The state has one action.** When the team has to confirm something, the
+page offers a request, with the product, the size and the SKU on it. When
+the only thing missing is time, the page offers a notification, and the
+address is kept.
+
+**The notification is kept.** The storefront has always said "notify me"; it
+had no way to be notified. The address is now recorded against the SKU in a
+`product_waitlist` table, and the maintenance sweep sends the mail when a
+batch is released and its certificate is published. A lot without an openable
+certificate does not count: the promise the shopper was given is the one the
+storefront can keep.
+
+**A withdrawn lot reaches the storefront.** The catalogue is cached for a
+minute, and the admin stock adjustment did not clear that cache, so the
+shopfront kept selling stock that had just been withdrawn. The adjustment now
+revalidates the catalogue.
+
+The wider plan for the store — the competitive teardown, the pricing
+position and the roadmap — is in `docs/STORE_PLAN_2026-11-04.md`.
+
 ## What the hosted build can and cannot do
 
 The hosted build is the last gate before the public site, and it is where a

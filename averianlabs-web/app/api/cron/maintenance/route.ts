@@ -4,6 +4,7 @@ import { expireStaleSessions } from "@/lib/crypto/watcher"
 import { deliverEmailOutbox } from "@/lib/email/outbox"
 import { purgeDeletedUsers } from "@/lib/gdpr/service"
 import { sendNotificationDigests } from "@/lib/notifications/digest"
+import { notifyReleasedBatches } from "@/lib/notifications/waitlist"
 import { releaseExpiredReservations } from "@/lib/orders"
 import { isAuthorizedCronRequest } from "@/lib/security/cron"
 import { deliverTelegramOutbox } from "@/lib/telegram/outbox"
@@ -33,6 +34,8 @@ export async function GET(request: Request) {
     sent: 0,
   }))
   const moderation = await processModerationJobs()
+  // A shopper who asked to be told when a lot was released is told now.
+  const waitlist = await notifyReleasedBatches().catch(() => ({ batches: 0, notified: 0 }))
   const index = await syncCatalogueIndex()
   return NextResponse.json({
     released,
@@ -42,6 +45,7 @@ export async function GET(request: Request) {
     telegram,
     digest,
     moderation,
+    waitlist,
     index,
     durationMs: Date.now() - startedAt,
   })

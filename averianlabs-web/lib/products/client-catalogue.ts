@@ -83,6 +83,9 @@ export function toClientCatalogue(
         // Required by the type, read by nothing in the browser.
         lowStockThreshold: null,
         purchaseMode: vial.purchaseMode,
+        // Read by the product card and the buy box, which tell the shopper
+        // exactly which step of the release pipeline is still open.
+        availability: vial.availability,
         documentLocales: vial.documentLocales,
         // Only the batch code reaches the browser: the search index looks it
         // up, and the document link is built from it. The measured purity,

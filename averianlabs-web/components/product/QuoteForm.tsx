@@ -7,15 +7,32 @@ import { useTranslations } from "next-intl"
 import { useRef, useState } from "react"
 import { toast } from "sonner"
 
-export function QuoteForm({ sku, locale }: { sku: string; locale: string }) {
+export function QuoteForm({
+  sku,
+  locale,
+  compact = false,
+}: {
+  sku: string
+  locale: string
+  compact?: boolean
+}) {
   const t = useTranslations("research")
   const [pending, setPending] = useState(false)
   const [received, setReceived] = useState(false)
   const attempt = useRef<{ fingerprint: string; key: string } | null>(null)
   return (
-    <section className="mt-6 rounded-[var(--radius-lg)] border border-line bg-surface-2 p-5">
-      <h3 className="font-display text-lg font-semibold">{t("quoteLabel")}</h3>
-      <p className="mt-2 text-sm text-ink-muted">{t("quoteDescription")}</p>
+    <section
+      className={
+        compact ? "" : "mt-6 rounded-[var(--radius-lg)] border border-line bg-surface-2 p-5"
+      }
+      aria-label={t("quoteLabel")}
+    >
+      {compact ? null : (
+        <>
+          <h3 className="font-display text-lg font-semibold">{t("quoteLabel")}</h3>
+          <p className="mt-2 text-sm text-ink-muted">{t("quoteDescription")}</p>
+        </>
+      )}
       {received ? (
         <p role="status" className="mt-4 text-sm">
           {t("quoteReceivedDescription")}

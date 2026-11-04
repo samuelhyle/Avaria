@@ -9,6 +9,7 @@ import { unstable_cache } from "next/cache"
 import { cache } from "react"
 import { products as referenceProducts } from "./data"
 import { defaultVial } from "./selection"
+import { describeAvailability } from "./sellability"
 import type { Batch, Locale, Product, PurchaseMode, SizeUnit } from "./types"
 
 const neutral = {
@@ -64,6 +65,11 @@ export function referenceCatalogue(): Product[] {
       compareAtCents: undefined,
       purchaseMode: "quotation",
       contactOnly: true,
+      availability: {
+        buyable: false,
+        blockers: ["quotation"],
+        action: "requestLot",
+      },
     })),
   }))
 }
@@ -206,14 +212,15 @@ async function buildCatalogue(): Promise<Product[]> {
         // and then by size so a product always reads smallest first.
         .sort(compareVials)
         .map((vial) => {
-          const batch = batchRows
+          const releasedBatch = batchRows
             .filter(
-              (b) =>
-                b.id === (vial.activeBatchId ?? row.activeBatchId) &&
-                b.vialId === vial.id &&
-                reportRows.some((doc) => doc.batchId === b.id && publicDocumentUrl(doc)),
+              (b) => b.id === (vial.activeBatchId ?? row.activeBatchId) && b.vialId === vial.id,
             )
             .sort((a, b) => b.manufacturedAt.getTime() - a.manufacturedAt.getTime())[0]
+          const hasPublicCertificate =
+            !!releasedBatch &&
+            reportRows.some((doc) => doc.batchId === releasedBatch.id && publicDocumentUrl(doc))
+          const batch = hasPublicCertificate ? releasedBatch : undefined
           const batchRecord: Batch | undefined = batch
             ? {
                 id: batch.id,
@@ -235,6 +242,15 @@ async function buildCatalogue(): Promise<Product[]> {
                   vial.priceCents > 0
                 ? (vial.purchaseMode as PurchaseMode)
                 : "unavailable"
+          const availability = describeAvailability({
+            purchaseMode: mode,
+            productPublished: row.status === "active",
+            specificationsVerified,
+            hasReleasedBatch: !!releasedBatch,
+            hasPublicCertificate,
+            priceCents: vial.priceCents ?? 0,
+            stockQty: vial.stockQty,
+          })
           return {
             mg: vial.sizeMg ?? vial.sizeValue,
             sizeValue: vial.sizeValue,
@@ -245,6 +261,7 @@ async function buildCatalogue(): Promise<Product[]> {
             lowStockThreshold: vial.lowStockThreshold,
             purchaseMode: mode,
             contactOnly: mode === "quotation",
+            availability,
             batch: batchRecord,
             documentLocales: [
               ...new Set(

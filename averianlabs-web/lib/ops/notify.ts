@@ -17,7 +17,7 @@ import { enqueueTelegramMessage } from "@/lib/telegram/outbox"
  * the other.
  */
 
-export type OpsEvent = "quote" | "contact" | "partner"
+export type OpsEvent = "quote" | "contact" | "partner" | "waitlist"
 
 /** The heading for each kind of event, in the language the visitor wrote in. */
 const HEADINGS: Record<OpsEvent, { en: string; fi: string; sv: string; ru: string }> = {
@@ -38,6 +38,12 @@ const HEADINGS: Record<OpsEvent, { en: string; fi: string; sv: string; ru: strin
     fi: "Kumppanuushakemus",
     sv: "Partneransökan",
     ru: "Заявка на партнёрство",
+  },
+  waitlist: {
+    en: "Availability notification",
+    fi: "Saatavuusilmoitus",
+    sv: "Tillgänglighetsavisering",
+    ru: "Уведомление о наличии",
   },
 }
 

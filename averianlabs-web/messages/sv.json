@@ -484,7 +484,8 @@
     "country": "Land",
     "estimatedVolume": "Beräknat antal flaskor per månad (valfritt)",
     "quoteSubmit": "Skicka förfrågan",
-    "quoteLabel": "Offertförfrågan"
+    "quoteLabel": "Offertförfrågan",
+    "quoteResponseNote": "Vi svarar vanligtvis samma arbetsdag."
   },
   "nav": {
     "shop": "Butik",
@@ -654,6 +655,15 @@
     "priceLabel": "Pris",
     "pricingLabel": "Pris",
     "pricingOnRequest": "På begäran",
+    "availabilityBadge": {
+      "notPublished": "Inte öppet än",
+      "unverifiedSpecifications": "Ej verifierad",
+      "notReleased": "Part väntar",
+      "noCertificate": "Analysintyg väntar",
+      "noPrice": "På begäran",
+      "outOfStock": "Slut i lager",
+      "quotation": "På begäran"
+    },
     "coaIncluded": "Analysrapport ingår",
     "vatIncludedShort": "inkl. moms 25,5 %",
     "recentlyViewed": "Senast tittade",
@@ -701,6 +711,40 @@
     "lab": "Testat av {lab}",
     "notifyMe": "Meddel mig när finns i lager",
     "notifySubmitted": "Vi mejlar dig.",
+    "availabilityTitle": "Tillgänglighet",
+    "availability": {
+      "notPublished": {
+        "title": "Öppet för beställning snart",
+        "body": "Vi förbereder den första släppta partiet av den här produkten. Fråga oss, så bekräftar vi partiet, dess analysintyg och priset innan du beställer."
+      },
+      "unverifiedSpecifications": {
+        "title": "Specifikationen är inte verifierad än",
+        "body": "Produktens specifikation har inte verifierats mot en släppt part."
+      },
+      "notReleased": {
+        "title": "Ingen släppt part än",
+        "body": "Ingen part har släppts för den här storleken än. Lämna din e-postadress så hör vi av oss när det finns."
+      },
+      "noCertificate": {
+        "title": "Analysintyget är inte publicerat än",
+        "body": "Den aktuella parten finns, men dess analysintyg är inte publicerat än. Vi hör av oss när det är."
+      },
+      "noPrice": {
+        "title": "Priset bekräftas på begäran",
+        "body": "Fråga oss, så bekräftar vi priset för den här storleken."
+      },
+      "outOfStock": {
+        "title": "Slut i lager",
+        "body": "Den aktuella parten är slut. Lämna din e-postadress så hör vi av oss när nästa part släpps."
+      },
+      "quotation": {
+        "title": "Säljs på begäran",
+        "body": "Det här materialet säljs på begäran. Vi bekräftar partiet, analysintyget och priset innan du beställer."
+      }
+    },
+    "notifyEmailLabel": "E-postadress",
+    "notifySending": "Sparar…",
+    "notifyFailed": "Din förfrågan kunde inte sparas. Försök igen.",
     "outOfStock": "Slut i lager",
     "inStock": "I lager",
     "lowStock": "{count} kvar",

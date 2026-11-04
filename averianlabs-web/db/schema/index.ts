@@ -1056,6 +1056,32 @@ export const newsletterSubscribers = pgTable(
   (t) => [index("newsletter_status_idx").on(t.status, t.createdAt)],
 )
 
+/**
+ * Availability notifications.
+ *
+ * A shopper who cannot order a variant leaves an address and is told when a
+ * lot is released for it. The storefront has to be able to keep that
+ * promise, so the list is a table and the release sweep sends the mail.
+ */
+export const productWaitlist = pgTable(
+  "product_waitlist",
+  {
+    id: text("id").primaryKey().default(sql`gen_random_uuid()`),
+    sku: text("sku").notNull(),
+    email: text("email").notNull(),
+    name: text("name"),
+    locale: text("locale").notNull().default("en"),
+    status: text("status").notNull().default("open"), // open | notified
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    notifiedAt: timestamp("notified_at", { withTimezone: true }),
+  },
+  (t) => [
+    uniqueIndex("product_waitlist_sku_email_idx").on(t.sku, t.email),
+    index("product_waitlist_status_idx").on(t.status),
+    index("product_waitlist_sku_idx").on(t.sku),
+  ],
+)
+
 // Re-export AI schema
 export {
   EMBEDDING_DIM,
