@@ -1,4 +1,4 @@
-# Release record — 31 October 2026 (updated 3 November 2026)
+# Release record — 31 October 2026 (updated 4 November 2026)
 
 Published to [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app). The merchant release is approved and the review-site gate has been removed, so the storefront is indexable and the canonical origin, the sitemap and `robots.txt` all name the origin that actually serves the site.
 
@@ -6,26 +6,27 @@ Published to [averianlabs-demo.netlify.app](https://averianlabs-demo.netlify.app
 
 | Item | Value |
 |---|---|
-| Published at | `2026-11-03T15:14:39.268Z` |
-| Netlify deploy | `6ae9f973fd93c52ad387ffca` — the application release |
-| Deployed commit on `demo` | `5a31eed` |
-| Previous published deploy | `6ae91add76b01a1157d19b90` (unlocked and superseded) |
+| Published at | `2026-11-04T15:44:05.655Z` |
+| Netlify deploy | `6aeb51e38d88c298bca81bee` — the published release |
+| Deployed commit on `demo` | `7ad7f2e` |
+| Application release | `6aeb48d5acbae7097c94a62c` (the storefront wording and the availability list) |
+| Previous published deploy | `6aeb4e4830b959d912ff8ae5` (unlocked and superseded) |
 | Deployment method | Git push to the `demo` branch; Netlify built the source with the hosted secrets |
 | Functions deployed | `___netlify-server-handler`, `cron-crypto`, `cron-maintenance` |
 | Schedules | `*/2 * * * *` (crypto), `*/5 * * * *` (maintenance) |
 
-Several deploys followed the first one — `6ae8a92b964e1e55a0c34f62` (the
-labelling fix described below), `6ae91add76b01a1157d19b90` and
-`6ae9f973fd93c52ad387ffca` (the release that carries the product media and
-the lab ledger) and the deploy that carries the final plural correction.
-Deploys after the one named above carry this document and nothing else, so
-the deploy id in the table names the application and stays true. The deploy
-table is updated as each is published; the sections below describe the
-release as a whole.
+Three deploys carried this release. `6aeb48d5acbae7097c94a62c` (4 November,
+15:05Z) carries the storefront that names why a material cannot be ordered
+and the availability list the team reads. `6aeb4e4830b959d912ff8ae5`
+(15:29Z) adds the admin view of that list. `6aeb51e38d88c298bca81bee`
+(15:44Z) carries the last correction: the catalogue's unavailable group was
+rendering its cards with the availability badge switched off, so the precise
+state the server computes never reached the shopper.
 
-This record was revised after that deploy was published. The revision
-changes the document only — the application it describes is the application
-the named deploy serves.
+The deploy before them, `6aea0530c77c4d2bdeb295fd` (3 November, 16:05Z),
+carries the product media, the lab ledger and the research tab. The
+`6ae9f973fd93c52ad387ffca` id named in earlier revisions of this document
+is that release's application deploy and stays true as such.
 
 ## The release before it
 
@@ -235,6 +236,14 @@ run was failures that had nothing to do with the storefront. The harness
 now sends a browser's user agent and records which status codes the run saw.
 
 ## Executed verification
+
+The figures below are the ones that held for the release this record
+describes. The 4 November release added to them: 565 unit tests passed (24
+of them the new availability and card-badge tests), 178 browser tests passed
+(7 of them the new availability, availability-list and card-badge tests),
+Biome at its 53-warning baseline with zero errors, the accessibility smoke
+and the 320px overflow assay unchanged, and the deploy verifier at 26 checks
+against the published site.
 
 - TypeScript passed. Biome reported zero errors.
 - 508 unit tests passed, 8 of them the new certificate-library tests.
